@@ -1,0 +1,461 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Remote Endpoints &mdash; Singularity container 3.5 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/js/ga.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Cloud Library" href="cloud_library.html" />
+    <link rel="prev" title="Encrypted Containers" href="encryption.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Singularity container
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.5
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Singularity and Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Remote Endpoints</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#public-sylabs-cloud">Public Sylabs Cloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#managing-remote-endpoints">Managing Remote Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#list-and-login-to-remotes">List and Login to Remotes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-remove-remotes">Add &amp; Remove Remotes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-the-default-remote">Set the Default Remote</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_library.html">Cloud Library</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Singularity container</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Remote Endpoints</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/sylabs/singularity-userdocs/blob/master/endpoint.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="remote-endpoints">
+<h1>Remote Endpoints<a class="headerlink" href="#remote-endpoints" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Sylabs introduced the online <a class="reference external" href="https://cloud.sylabs.io/home">Sylabs Cloud</a> to enable users to <a class="reference external" href="https://cloud.sylabs.io/builder">Create</a>, <a class="reference external" href="https://cloud.sylabs.io/keystore?sign=true">Secure</a>, and <a class="reference external" href="https://cloud.sylabs.io/library/guide#create">Share</a> their container
+images with others.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group in Singularity allows you to login to an
+account on the public Sylabs Cloud, or configure Singularity to point
+to a local installation of Singularity Enterprise, which provides an
+on-premise private Container Library, Remote Builder and Key Store.</p>
+<p>Users can setup and switch between multiple remote endpoints, which
+are stored in their <code class="docutils literal notranslate"><span class="pre">~/.singularity/remote.yaml</span></code>
+file. Alternatively, remote endpoints can be set system-wide by an
+administrator.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group configures Singularity to use
+and authenticate to the public Sylabs Cloud, a private installation
+of Singularity Enterprise, or community-developed services that are
+API compatible.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group <em>cannot be used</em> to e.g. configure
+singularity to store credentials for access to a docker
+registry. See the <a class="reference internal" href="singularity_and_docker.html#singularity-and-docker"><span class="std std-ref">Support for Docker and OCI</span></a>
+guide for information about authenticating to various docker
+registries.</p>
+</div>
+</div>
+<div class="section" id="public-sylabs-cloud">
+<h2>Public Sylabs Cloud<a class="headerlink" href="#public-sylabs-cloud" title="Permalink to this headline">¶</a></h2>
+<p>A fresh, default installation of Singularity is configured to connect
+to the public <a class="reference external" href="https://cloud.sylabs.io">cloud.sylabs.io</a>
+services. If you only want to use the public services you just need to
+obtain an authentication token, and then <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span></code>:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Go to: <a class="reference external" href="https://cloud.sylabs.io/">https://cloud.sylabs.io/</a></p></li>
+<li><p>Click “Sign in to Sylabs” and follow the sign in steps.</p></li>
+<li><p>Click on your login id (same and updated button as the Sign in one).</p></li>
+<li><p>Select “Access Tokens” from the drop down menu.</p></li>
+<li><p>Enter a name for your new access token, such as “test token”</p></li>
+<li><p>Click the “Create a New Access Token” button.</p></li>
+<li><p>Click “Copy token to Clipboard” from the “New API Token” page.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span></code> and paste the access token at the prompt.</p></li>
+</ol>
+</div></blockquote>
+<p>Once your token is stored, you can check that you are able to connect
+to the services with the <code class="docutils literal notranslate"><span class="pre">status</span></code> subcommand:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity remote status
+INFO:    Checking status of default remote.
+SERVICE           STATUS  VERSION
+Builder Service   OK      v1.1.4-0-g3ef2555
+Consent Service   OK      v1.0.2-0-g2a24b4a
+Keystore Service  OK      v1.9.0-0-g112eb0e-dirty
+Library Service   OK      v1.0.4-0-g24d3b74
+Token Service     OK      v1.0.2-0-g2a24b4a
+</pre></div>
+</div>
+<p>If you see any errors you may need to check if your system requires
+proxy environment variables to be set, or if a firewall is blocking
+access to <code class="docutils literal notranslate"><span class="pre">*.sylabs.io</span></code>. Talk to your system adminitrator.</p>
+<p>You can interact with the public Sylabs Cloud using various Singularity commands:</p>
+<p><a class="reference external" href="https://www.sylabs.io/guides/3.5/user-guide/cli/singularity_pull.html">pull</a>,
+<a class="reference external" href="https://www.sylabs.io/guides/3.5/user-guide/cli/singularity_push.html">push</a>,
+<a class="reference external" href="https://www.sylabs.io/guides/3.5/user-guide/cli/singularity_build.html#options">build –remote</a>,
+<a class="reference external" href="https://www.sylabs.io/guides/3.5/user-guide/cli/singularity_key.html">key</a>,
+<a class="reference external" href="https://www.sylabs.io/guides/3.5/user-guide/cli/singularity_search.html">search</a>,
+<a class="reference external" href="https://www.sylabs.io/guides/3.5/user-guide/cli/singularity_verify.html">verify</a>,
+<a class="reference external" href="https://www.sylabs.io/guides/3.5/user-guide/cli/singularity_exec.html">exec</a>,
+<a class="reference external" href="https://www.sylabs.io/guides/3.5/user-guide/cli/singularity_shell.html">shell</a>,
+<a class="reference external" href="https://www.sylabs.io/guides/3.5/user-guide/cli/singularity_run.html">run</a>,
+<a class="reference external" href="https://www.sylabs.io/guides/3.5/user-guide/cli/singularity_instance.html">instance</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, <code class="docutils literal notranslate"><span class="pre">oras://</span></code> and <code class="docutils literal notranslate"><span class="pre">shub://</span></code> URIs with these commands
+does not interact with the Sylabs Cloud.</p>
+</div>
+</div>
+<div class="section" id="managing-remote-endpoints">
+<h2>Managing Remote Endpoints<a class="headerlink" href="#managing-remote-endpoints" title="Permalink to this headline">¶</a></h2>
+<p>Generally, users and administrators should manage remote endpoints
+using the <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span></code> command, and avoid editing
+<code class="docutils literal notranslate"><span class="pre">remote.yaml</span></code> configuration files directly.</p>
+<div class="section" id="list-and-login-to-remotes">
+<h3>List and Login to Remotes<a class="headerlink" href="#list-and-login-to-remotes" title="Permalink to this headline">¶</a></h3>
+<p>To <code class="docutils literal notranslate"><span class="pre">list</span></code> existing remote endpoints, run this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity remote list
+
+NAME           URI              GLOBAL
+[SylabsCloud]  cloud.sylabs.io  YES
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">[...]</span></code> brackets around the name <code class="docutils literal notranslate"><span class="pre">SylabsCloud</span></code> show that this
+is the current default remote endpoint.</p>
+<p>To <code class="docutils literal notranslate"><span class="pre">login</span></code> to a remote, for the first time or if your token expires
+or was revoked:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Login to the default remote endpoint
+$ singularity remote login
+
+# Login to another remote endpoint
+$ singularity remote login &lt;remote_name&gt;
+
+# example...
+$ singularity remote login SylabsCloud
+singularity remote login SylabsCloud
+INFO:    Authenticating with remote: SylabsCloud
+Generate an API Key at https://cloud.sylabs.io/auth/tokens, and paste here:
+API Key:
+INFO:    API Key Verified!
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-remove-remotes">
+<h3>Add &amp; Remove Remotes<a class="headerlink" href="#add-remove-remotes" title="Permalink to this headline">¶</a></h3>
+<p>To <code class="docutils literal notranslate"><span class="pre">add</span></code> a remote endpoint (for the current user only):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity remote add &lt;remote_name&gt; &lt;remote_uri&gt;
+</pre></div>
+</div>
+<p>For example, if you have an installation of Singularity enterprise
+hosted at enterprise.example.com:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity remote add myremote https://enterprise.example.com
+
+INFO:    Remote &quot;myremote&quot; added.
+INFO:    Authenticating with remote: myremote
+Generate an API Key at https://enterprise.example.com/auth/tokens, and paste here:
+API Key:
+</pre></div>
+</div>
+<p>You will be prompted to setup an API key as the remote is added. The
+web address needed to do this will always be given.</p>
+<p>To <code class="docutils literal notranslate"><span class="pre">add</span></code> a global remote endpoint (available to all users on the
+system) an administrative user should run:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity remote add --global &lt;remote_name&gt; &lt;remote_uri&gt;
+
+# example..
+
+$ sudo singularity remote add --global company-remote https://enterprise.example.com
+[sudo] password for dave:
+INFO:    Remote &quot;company-remote&quot; added.
+INFO:    Global option detected. Will not automatically log into remote.
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Global remote configurations can only be modified by the
+root user and are stored in the <code class="docutils literal notranslate"><span class="pre">etc/singularity/remote.yaml</span></code>
+file, at the Singularity installation location.</p>
+</div>
+<p>Conversely, to <code class="docutils literal notranslate"><span class="pre">remove</span></code> an endpoint:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity remote remove &lt;remote_name&gt;
+</pre></div>
+</div>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">--global</span></code> option as the root user to remove a global
+endpoint:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity remote remove --global &lt;remote_name&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-the-default-remote">
+<h3>Set the Default Remote<a class="headerlink" href="#set-the-default-remote" title="Permalink to this headline">¶</a></h3>
+<p>A remote endpoint can be set as the default to use with commands such
+as <code class="docutils literal notranslate"><span class="pre">push</span></code>, <code class="docutils literal notranslate"><span class="pre">pull</span></code> etc. via <code class="docutils literal notranslate"><span class="pre">remote</span> <span class="pre">use</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity remote use &lt;remote_name&gt;
+</pre></div>
+</div>
+<p>The default remote shows up in <code class="docutils literal notranslate"><span class="pre">[...]</span></code> square brackets in the output of <code class="docutils literal notranslate"><span class="pre">remote</span> <span class="pre">list</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity remote list
+NAME            URI                     GLOBAL
+[SylabsCloud]   cloud.sylabs.io         YES
+company-remote  enterprise.example.com  YES
+myremote        enterprise.example.com  NO
+
+$ singularity remote use myremote
+INFO:    Remote &quot;myremote&quot; now in use.
+
+$ singularity remote list
+NAME            URI                     GLOBAL
+SylabsCloud     cloud.sylabs.io         YES
+company-remote  enterprise.example.com  YES
+[myremote]      enterprise.example.com  NO
+</pre></div>
+</div>
+<p>If you do not want to switch remote with <code class="docutils literal notranslate"><span class="pre">remote</span> <span class="pre">use</span></code> you can:</p>
+<ul class="simple">
+<li><p>Make <code class="docutils literal notranslate"><span class="pre">push</span></code> and <code class="docutils literal notranslate"><span class="pre">pull</span></code> use an alternative library server with
+the <code class="docutils literal notranslate"><span class="pre">--library</span></code> option.</p></li>
+<li><p>Make <code class="docutils literal notranslate"><span class="pre">build</span> <span class="pre">--remote</span></code> use an alternative remote builder with the
+<code class="docutils literal notranslate"><span class="pre">--builder</span></code> option.</p></li>
+<li><p>Make <code class="docutils literal notranslate"><span class="pre">keys</span></code> use an alternative keyserver with the <code class="docutils literal notranslate"><span class="pre">-url</span></code> option.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="cloud_library.html" class="btn btn-neutral float-right" title="Cloud Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="encryption.html" class="btn btn-neutral float-left" title="Encrypted Containers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017-2019, Sylabs Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
