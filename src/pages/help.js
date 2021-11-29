@@ -84,7 +84,7 @@ const HelpPage = () => (
             </p>
           </div>
           <Link
-            to="https://github.com/hpcng/singularity"
+            to="https://github.com/apptainer/apptainer"
             aria-label="GitHub Repository"
             className="inline-flex items-center font-semibold transition-colors duration-200 text-blue-900 hover:text-blue-700"
           >

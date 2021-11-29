@@ -100,7 +100,7 @@ const Header = ({ siteTitle }) => {
         <ul className="flex items-center hidden space-x-8 lg:flex">
           <li>
             <Link
-              to="https://github.com/hpcng/Apptainer"
+              to="https://github.com/apptainer/apptainer"
               aria-label="GitHub"
               title="GitHub"
               className="text-gray-700 hover:text-blue-900 transition-colors duration-200"
