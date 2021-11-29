@@ -19,19 +19,19 @@ const SecurityPolicy = () => (
           <a href="https://sylabs.io/security-policy">Sylabs security policy</a>.
           <h2><strong>Apptainer Security</strong></h2>
           <p>
-              HPCng has delegated the responsibility of managing the security of Apptainer to a few of us from the Apptainer community who are collectively known as the Apptainer Security team, and this web page documents the security policy we follow.
+              The Linux Foundation has delegated the responsibility of managing the security of Apptainer to the Apptainer Technical Steering Committee (TSC), and this web page documents the security policy we follow.
           </p>
           <h3><b>Do you think you found a vulnerability?</b></h3>
           <p>
-              If you believe you have discovered a vulnerability in Apptainer, please let us know. You can notify our team by email at <a href="mailto:security@apptainer.org">security@apptainer.org</a>.
+              If you believe you have discovered a vulnerability in Apptainer, please let us know. You can notify the TSC by email at <a href="mailto:security@apptainer.org">security@apptainer.org</a>.
           </p>
           <p>
-              We encourage people who contact the Apptainer Security team to use email encryption. <a href="/singularity-security.pub">Get our PGP public key</a> and verify the fingerprint:
+              We encourage people who contact the TSC on a security matter to use email encryption. <a href="/apptainer-security.pub">Get our PGP public key</a> and verify the fingerprint:
           </p>
           <p>F642 B2B2 5989 AA44 D987  225C 6F21 6032 31A3 462A</p>
           <h3><b>The goals of a standardized security response procedure</b></h3>
           <p>
-            Before we cover the procedure that the Apptainer Security team takes to mitigate newly discovered vulnerabilities, let's talk about the goals we're trying to achieve. 
+            Before we cover the procedure that the TSC takes to mitigate newly discovered vulnerabilities, let's talk about the goals we're trying to achieve. 
           </p>
           <ul>
               <li>
@@ -54,7 +54,7 @@ const SecurityPolicy = () => (
           <ul>
               <li>
                   <strong><b>Transparency: </b></strong>
-                  The open-source community must know exactly what the Apptainer Security team intends to do
+                  The open-source community must know exactly what the TSC intends to do
                   about vulnerabilities and how we are are carrying out our commitment
                   to security. Vulnerabilities are documented using the Common
                   Vulnerabilities and Exposures (CVE) system to provide a permanent
@@ -67,7 +67,7 @@ const SecurityPolicy = () => (
               <li>
                   <strong><b>Enable stakeholders over malicious actors: </b></strong>
                   When a new vulnerability is publicly announced, a race begins between
-                  system administrators and those with nefarious intent. HPCng
+                  system administrators and those with nefarious intent. Apptainer
                   collaborators that distribute Apptainer only in binary form are provided security patches prior to security
                   announcements.  They then distribute patched binaries to their stakeholders as a head start in the security race. Although
                   patched binaries are made available to Apptainer stakeholders first, they
@@ -79,7 +79,7 @@ const SecurityPolicy = () => (
           </ul>
           <h3><b>Apptainer vulnerability procedure</b></h3>
           <p>
-              When a vulnerability is discovered, the Apptainer Security team takes the following
+              When a vulnerability is discovered, the TSC takes the following
               steps:
           </p>
           <ol>
@@ -109,16 +109,16 @@ const SecurityPolicy = () => (
                   &nbsp;which keeps them hidden until ready for public disclosure.
               </li>
               <li>
-                  The GitHub Security Advisory is shared with HPCng collaborators that distribute binary versions of Apptainer.
+                  The GitHub Security Advisory is shared with Apptainer collaborators that distribute binary versions of Apptainer.
               </li>
               <li>
-                  The HPCng collaborators then prepare their binaries and notify their stakeholders only with a standard notification that
+                  The Apptainer collaborators then prepare their binaries and notify their stakeholders only with a standard notification that
                   there is a new binary and they should
                   upgrade. This notice will NOT contain any sensitive information
                   and will NOT disclose the presence of a security-related patch.
               </li>
               <li>
-                  The stakeholders of HPCng collaborators are given a reasonable amount of time to
+                  The stakeholders of Apptainer collaborators are given a reasonable amount of time to
                   upgrade their installations so that when details of the exploit are
                   revealed they are already protected.
               </li>

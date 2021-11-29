@@ -38,7 +38,7 @@
   "license": "0BSD",
   "scripts": {
     "build": "gatsby build",
-    "deploy": "gh-pages -t -d public -r git@github.com:hpcng/singularity-web.git",
+    "deploy": "gh-pages -t -d public -r git@github.com:apptainer/apptainer.org.git",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",

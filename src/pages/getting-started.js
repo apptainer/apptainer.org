@@ -9,7 +9,7 @@ import Seo from "../components/seo"
 const gettingStartedLinks = [
     {
         name: 'GitHub Project',
-        href: 'https://github.com/hpcng/singularity',
+        href: 'https://github.com/apptainer/apptainer',
         description:
             'Grab the latest stable release of Apptainer, submit issues, and contribute to the project at the official GitHub repository.',
         icon: DownloadIcon,
@@ -17,7 +17,7 @@ const gettingStartedLinks = [
     },
     {
         name: 'Quick Start Guide',
-        href: 'https://singularity.hpcng.org/user-docs/master/quick_start.html',
+        href: 'https://apptainer.org/user-docs/master/quick_start.html',
         description:
             'Check out the quick start documentation to get Apptainer installed and set up in a hurry.',
         icon: NewspaperIcon,
