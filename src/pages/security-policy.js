@@ -19,7 +19,7 @@ const SecurityPolicy = () => (
           <a href="https://sylabs.io/security-policy">Sylabs security policy</a>.
           <h2><strong>Apptainer Security</strong></h2>
           <p>
-              The Linux Foundation has delegated the responsibility of managing the security of Apptainer to the Apptainer Technical Steering Committee (TSC), and this web page documents the security policy we follow.
+              The Apptainer Technical Steering Committee (TSC) is responsible for managing the security of Apptainer, and this web page documents the security policy we follow.
           </p>
           <h3><b>Do you think you found a vulnerability?</b></h3>
           <p>
