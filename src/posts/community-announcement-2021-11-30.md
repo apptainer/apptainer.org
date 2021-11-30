@@ -44,7 +44,7 @@ When Sylabs forked the Singularity project, they chose not to rename their fork.
 
 ### Will there be continual alignment between Sylabs' Singularity and Apptainer?
 
-Initially, we anticipate yes, but over time we anticipate that the paths of the projects will diverge as both projects continue to mature. For Apptainer, there is significant interest in better alignment with LF and CNCF capabilities like Sigstore, ORAS, and CI/CD rather than commercial features.
+Initially, we anticipate yes, but over time we anticipate that the paths of the projects will diverge as both projects continue to mature. For Apptainer, there is significant interest in better alignment with LF and CNCF capabilities like Sigstore, ORAS, and CI/CD.
 
 ### What immediate changes will be implemented?
 
