@@ -24,7 +24,7 @@ Apptainer has a new Slack [here](https://join.slack.com/t/apptainer/shared_invit
 
 ### What is the management structure?
 
-As a Linux Foundation project, the primary management structure is the Technical Steering Committee (TSC) which is composed of the primary stakeholders and individuals responsible for commit access to the project. Currently this is Gregory Kurtzer, Cedric Clerget, Dave Dykstra, Ian Kaneshiro, and Krishna Muiriki.
+As a Linux Foundation project, the primary management structure is the Technical Steering Committee (TSC) which is composed of the primary stakeholders and individuals responsible for commit access to the project. Currently this is Cedric Clerget, Dave Dykstra, Gregory Kurtzer, Ian Kaneshiro, and Krishna Muiriki. The TSC will follow the policies defined in the Technical Charter.
 
 ### Does this mean that Kurtzer is no longer the project lead?
 
@@ -44,8 +44,12 @@ When Sylabs forked the Singularity project, they chose not to rename their fork.
 
 ### Will there be continual alignment between Sylabs' Singularity and Apptainer?
 
-Initially, we anticipate yes, but only temporarily. Immediately, and as part of the transition, we must remove all APIs that are not community standardized and/or out of our control. This means, we are removing the library and rebuild builder support and replacing it with community standard interfaces (e.g. OCI registries, Sigstore, CI/CD integration). This is why the first major release of Apptainer will be 1.0.
+Initially, we anticipate yes, but only temporarily. Immediately, and as part of the transition, we must remove all APIs that are not community standardized and/or out of our control. This means, we are removing remote builder support and the library interface and retaining only community standard interfaces (e.g. OCI registries, Sigstore, CI/CD integration). This is why the first major release of Apptainer will be 1.0.  However, we intend to retain core command line usage compatibility, including a "singularity" command and configuration based on the singularity name.
 
 ### Will Sylabs rejoin the Apptainer project?
 
-We certainly hope so, but it is up to them. They, like any other organization, are welcome to submit PRs to Apptainer and over time they may be considered for the TSC. Ideally, Sylabs would consider Apptainer to be their upstream source, contributing PRs to thsi community, and then take snapshots of this project for their own commercial products and add their own value adds back in (e.g. Library, remote builder, etc.).
+We certainly hope so, but it is up to them. They, like any other organization, are welcome to submit PRs to Apptainer and over time they may be considered for the TSC. Ideally, Sylabs would consider Apptainer to be their upstream source, contributing PRs to thsi community, and then take snapshots of this project for their own commercial products and add their own value-adds (e.g. Library, remote builder, etc..) on the Apptainer base.
+
+### Will contributors need to sign a CLA?
+
+No, we will not be requiring a Contributor License Agreement, but the Linux Foundation recommends using the simpler Developer Certificate of Origin (DCO) and we plan to use that.  [This article](https://drewdevault.com/2021/04/12/DCO.html) explains why a DCO is better and how it works.
