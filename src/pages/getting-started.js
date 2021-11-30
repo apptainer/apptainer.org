@@ -40,9 +40,12 @@ const GettingStartedPage = () => (
             <div className="relative pb-32">
                 <div className="px-4 pt-8 pb-24 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-10 lg:pb-20">
                     <div className="max-w-xl md:mx-auto sm:text-center lg:max-w-2xl">
-                        <h2 className="max-w-xl font-sans text-4xl font-extrabold leading-none tracking-tight text-gray-900 sm:text-5xl md:mx-auto">
+                        <h2 className="mb-6 max-w-xl font-sans text-4xl font-extrabold leading-none tracking-tight text-gray-900 sm:text-5xl md:mx-auto">
                             Getting Started
                         </h2>
+                        <p className="text-base text-gray-700 md:text-lg">
+                            Until the release of Apptainer-1.0, these links will point to the current Singularity repo and releases. Stay tuned for the official first release of Apptainer!
+                        </p>
                     </div>
                 </div>
             </div>
