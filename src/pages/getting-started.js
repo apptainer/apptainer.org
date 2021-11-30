@@ -9,7 +9,7 @@ import Seo from "../components/seo"
 const gettingStartedLinks = [
     {
         name: 'GitHub Project',
-        href: 'https://github.com/apptainer/apptainer',
+        href: 'https://github.com/apptainer/singularity',
         description:
             'Grab the latest stable release of Apptainer, submit issues, and contribute to the project at the official GitHub repository.',
         icon: DownloadIcon,
@@ -27,7 +27,7 @@ const gettingStartedLinks = [
         name: 'Supported Binary Packages',
         href: 'https://repo.ctrliq.com',
         description:
-            'CIQ is gratiously providing binary packages for non-production use; you can also find them in EPEL for RHEL dervitives.',
+            'CIQ is freely providing binary packages for non-production use; you can also find them in EPEL for RHEL dervitives.',
         icon: SupportIcon,
         button: 'Repos'
     },
