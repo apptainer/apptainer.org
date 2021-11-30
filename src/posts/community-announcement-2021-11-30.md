@@ -56,7 +56,7 @@ Apptainer will provide `singularity` as a command line link and will maintain as
 
 ### Will Sylabs rejoin the Apptainer project?
 
-We certainly hope so, but it is up to them. They, like any other organization, are welcome to submit PRs to Apptainer and over time they may be considered for the TSC. Ideally, Sylabs would consider Apptainer to be their upstream source, contributing PRs to thsi community, and then take snapshots of this project for their own commercial products and add their own value-adds (e.g. Library, remote builder, etc..) on the Apptainer base.
+We certainly hope so, but it is up to them. They, like any other organization, are welcome to submit PRs to Apptainer and over time they may be considered for the TSC. Ideally, Sylabs would consider Apptainer to be their upstream source, contributing PRs to this community, and then take snapshots of this project for their own commercial products and add their own value-adds (e.g. Library, remote builder, etc..) on the Apptainer base.
 
 ### Will contributors need to sign a CLA?
 
