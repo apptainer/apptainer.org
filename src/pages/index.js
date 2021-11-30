@@ -5,6 +5,7 @@ import { NewspaperIcon, DownloadIcon, SupportIcon, ArrowsExpandIcon, LockClosedI
 
 import Layout from "../components/layout"
 import logo from "../images/logo.png"
+import heroImage from "../images/hero.png"
 import Seo from "../components/seo"
 
 const features = [
@@ -64,7 +65,7 @@ const IndexPage = () => (
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
           <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
             <h2 className="max-w-lg mb-6 font-sans text-4xl font-extrabold leading-none tracking-tight text-gray-900 sm:text-6xl md:mx-auto">
-              <img src={logo} className="w-48 mb-5 inline-flex justify-center" /><br />
+              <img src={heroImage} className="h-32 mb-5 inline-flex justify-center" /><br />
                 Apptainer
               </h2>
             <h3 className="text-base text-gray-800 md:text-lg mb-10 font-semibold">
