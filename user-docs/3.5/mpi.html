@@ -1,0 +1,569 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Singularity and MPI applications &mdash; Singularity container 3.5 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/js/ga.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GPU Support (NVIDIA CUDA &amp; AMD ROCm)" href="gpu.html" />
+    <link rel="prev" title="Limiting container resources with cgroups" href="cgroups.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Singularity container
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.5
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Singularity and Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_library.html">Cloud Library</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Singularity and MPI applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hybrid-model">Hybrid model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bind-model">Bind model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#execution">Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Singularity container</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Singularity and MPI applications</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/sylabs/singularity-userdocs/blob/master/mpi.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="singularity-and-mpi-applications">
+<span id="mpi"></span><h1>Singularity and MPI applications<a class="headerlink" href="#singularity-and-mpi-applications" title="Permalink to this headline">¶</a></h1>
+<p id="sec-mpi">The <a class="reference external" href="https://mpi-forum.org">Message Passing Interface (MPI)</a>
+is a standard extensively used by HPC applications to implement various communication
+across compute nodes of a single system or across compute platforms.
+There are two main open-source implementations of MPI at the
+moment - <a class="reference external" href="https://www.open-mpi.org/">OpenMPI</a> and <a class="reference external" href="https://www.mpich.org/">MPICH</a>,
+both of which are supported by Singularity. The goal of this page is to
+demonstrate the development and running of MPI programs using Singularity containers.</p>
+<p>There are several ways of carrying this out, the most popular way of
+executing MPI applications installed in a Sigularity container is to rely on the
+MPI implementation available on the host. This is called the <em>Host MPI</em> or
+the <em>Hybrid</em> model since both the MPI implementations provided by system
+administrators (on the host) and in the containers will be used.</p>
+<p>Another approach is to only use the MPI implementation available on the host and
+not include any MPI in the container. This is called the <em>Bind</em> model since it
+requires to bind/mount the MPI version available on the host into the container.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <em>bind</em> model requires to mount storage volumes into the container to use the host
+MPI from the containers. This file system sharing between the host and containers
+is sometimes not an option on high-performance computing platforms. This restriction on some
+HPC systems is due to the fact that mounting a storage volume would either
+require the execution of privileged operations, potentially compromise the
+access restrictions to other users’ data or go against mount options of the parallel/distributed
+file system where MPI is installed.</p>
+</div>
+<div class="section" id="hybrid-model">
+<h2>Hybrid model<a class="headerlink" href="#hybrid-model" title="Permalink to this headline">¶</a></h2>
+<p>The basic idea behind the <em>Hybrid Approach</em> is when you execute a Singularity
+container with MPI code, you will call <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> or a similar launcher on the
+<code class="docutils literal notranslate"><span class="pre">singularity</span></code> command itself. The MPI process outside of the container will
+then work in tandem with MPI inside the container and the containerized MPI code
+to instantiate the job.</p>
+<p>The Open MPI/Singularity workflow in detail:</p>
+<ol class="arabic simple">
+<li><p>The MPI launcher (e.g., <code class="docutils literal notranslate"><span class="pre">mpirun</span></code>, <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code>) is called by the resource manager or the user directly from a shell.</p></li>
+<li><p>Open MPI then calls the process management daemon (ORTED).</p></li>
+<li><p>The ORTED process launches the Singularity container requested by the launcher command.</p></li>
+<li><p>Singularity instantiates the container and namespace environment.</p></li>
+<li><p>Singularity then launches the MPI application within the container.</p></li>
+<li><p>The MPI application launches and loads the Open MPI libraries.</p></li>
+<li><p>The Open MPI libraries connect back to the ORTED process via the Process Management Interface (PMI).</p></li>
+</ol>
+<p>At this point the processes within the container run as they would normally directly on the host.</p>
+<dl class="simple">
+<dt>The advantages of this approach are:</dt><dd><ul class="simple">
+<li><p>Integration with resource managers such as Slurm.</p></li>
+<li><p>Simplicity since similar to natively running MPI applications.</p></li>
+</ul>
+</dd>
+<dt>The drawbacks are:</dt><dd><ul class="simple">
+<li><p>The MPI in the container must be compatible with the version of MPI
+available on the host.</p></li>
+<li><p>The configuration of the MPI implementation in the container must be
+configured for optimal use of the hardware if performance is critical.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Since the MPI implementation in the container must be compliant with the version
+available on the system, a standard approach is to build your own MPI container,
+including the target MPI implementation.</p>
+<p>To illustrate how Singularity can be used to execute MPI applications, we will
+assume for a moment that the application is <cite>mpitest.c</cite>, a simple Hello World:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;mpi.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">rc</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">myrank</span><span class="p">;</span>
+
+        <span class="n">rc</span> <span class="o">=</span> <span class="n">MPI_Init</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">rc</span> <span class="o">!=</span> <span class="n">MPI_SUCCESS</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">fprintf</span> <span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;MPI_Init() failed&quot;</span><span class="p">);</span>
+                <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">rc</span> <span class="o">=</span> <span class="n">MPI_Comm_size</span> <span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">rc</span> <span class="o">!=</span> <span class="n">MPI_SUCCESS</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">fprintf</span> <span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;MPI_Comm_size() failed&quot;</span><span class="p">);</span>
+                <span class="k">goto</span> <span class="n">exit_with_error</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">rc</span> <span class="o">=</span> <span class="n">MPI_Comm_rank</span> <span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">myrank</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">rc</span> <span class="o">!=</span> <span class="n">MPI_SUCCESS</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">fprintf</span> <span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;MPI_Comm_rank() failed&quot;</span><span class="p">);</span>
+                <span class="k">goto</span> <span class="n">exit_with_error</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">fprintf</span> <span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">&quot;Hello, I am rank %d/%d&quot;</span><span class="p">,</span> <span class="n">myrank</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+
+        <span class="n">MPI_Finalize</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+
+ <span class="nl">exit_with_error</span><span class="p">:</span>
+        <span class="n">MPI_Finalize</span><span class="p">();</span>
+        <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MPI is an interface to a library, so it consists of function calls and
+libraries that can be used my many programming languages. It comes with
+standardized bindings for Fortran and C. However, it can support
+applications in many languages like Python, R, etc.</p>
+</div>
+<p>The next step is to build the definition file which will depend on the MPI
+implementation available on the host.</p>
+<p>If the host MPI is MPICH, a definition file such as the following example can be used:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
+From: ubuntu:latest
+
+%files
+    mpitest.c /opt
+
+%environment
+    export MPICH_DIR=/opt/mpich-3.3
+    export SINGULARITY_MPICH_DIR=$MPICH_DIR
+    export SINGULARITYENV_APPEND_PATH=$MPICH_DIR/bin
+    export SINGULAIRTYENV_APPEND_LD_LIBRARY_PATH=$MPICH_DIR/lib
+
+%post
+    echo &quot;Installing required packages...&quot;
+    apt-get update &amp;&amp; apt-get install -y wget git bash gcc gfortran g++ make
+
+    # Information about the version of MPICH to use
+    export MPICH_VERSION=3.3
+    export MPICH_URL=&quot;http://www.mpich.org/static/downloads/$MPICH_VERSION/mpich-$MPICH_VERSION.tar.gz&quot;
+    export MPICH_DIR=/opt/mpich
+
+    echo &quot;Installing MPICH...&quot;
+    mkdir -p /tmp/mpich
+    mkdir -p /opt
+    # Download
+    cd /tmp/mpich &amp;&amp; wget -O mpich-$MPICH_VERSION.tar.gz $MPICH_URL &amp;&amp; tar xzf mpich-$MPICH_VERSION.tar.gz
+    # Compile and install
+    cd /tmp/mpich/mpich-$MPICH_VERSION &amp;&amp; ./configure --prefix=$MPICH_DIR &amp;&amp; make install
+    # Set env variables so we can compile our application
+    export PATH=$MPICH_DIR/bin:$PATH
+    export LD_LIBRARY_PATH=$MPICH_DIR/lib:$LD_LIBRARY_PATH
+    export MANPATH=$MPICH_DIR/share/man:$MANPATH
+
+    echo &quot;Compiling the MPI application...&quot;
+    cd /opt &amp;&amp; mpicc -o mpitest mpitest.c
+</pre></div>
+</div>
+<p>If the host MPI is Open MPI, the definition file looks like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
+From: ubuntu:latest
+
+%files
+    mpitest.c /opt
+
+%environment
+    export OMPI_DIR=/opt/ompi
+    export SINGULARITY_OMPI_DIR=$OMPI_DIR
+    export SINGULARITYENV_APPEND_PATH=$OMPI_DIR/bin
+    export SINGULAIRTYENV_APPEND_LD_LIBRARY_PATH=$OMPI_DIR/lib
+
+%post
+    echo &quot;Installing required packages...&quot;
+    apt-get update &amp;&amp; apt-get install -y wget git bash gcc gfortran g++ make file
+
+    echo &quot;Installing Open MPI&quot;
+    export OMPI_DIR=/opt/ompi
+    export OMPI_VERSION=4.0.1
+    export OMPI_URL=&quot;https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-$OMPI_VERSION.tar.bz2&quot;
+    mkdir -p /tmp/ompi
+    mkdir -p /opt
+    # Download
+    cd /tmp/ompi &amp;&amp; wget -O openmpi-$OMPI_VERSION.tar.bz2 $OMPI_URL &amp;&amp; tar -xjf openmpi-$OMPI_VERSION.tar.bz2
+    # Compile and install
+    cd /tmp/ompi/openmpi-$OMPI_VERSION &amp;&amp; ./configure --prefix=$OMPI_DIR &amp;&amp; make install
+    # Set env variables so we can compile our application
+    export PATH=$OMPI_DIR/bin:$PATH
+    export LD_LIBRARY_PATH=$OMPI_DIR/lib:$LD_LIBRARY_PATH
+    export MANPATH=$OMPI_DIR/share/man:$MANPATH
+
+    echo &quot;Compiling the MPI application...&quot;
+    cd /opt &amp;&amp; mpicc -o mpitest mpitest.c
+</pre></div>
+</div>
+</div>
+<div class="section" id="bind-model">
+<h2>Bind model<a class="headerlink" href="#bind-model" title="Permalink to this headline">¶</a></h2>
+<p>Similarily to the <em>Hybrid Approach</em>, the basic idea behind <em>Bind Approach</em> is to start the MPI
+application by calling the MPI launcher (e.g., <cite>mpirun</cite>) from the host. The main difference between
+the hybrid and bind approach is the fact that with the bind approach, the container usually does
+not include any MPI implementation. This means that Singularity needs to mount/bind the MPI
+available on the host into the container.</p>
+<p>Technically this requires two steps:</p>
+<ol class="arabic simple">
+<li><p>Know where the MPI implementation on the host is installed.</p></li>
+<li><p>Mount/bind it into the container in a location where the system will be able to find libraries and binaries.</p></li>
+</ol>
+<dl class="simple">
+<dt>The advantages of this approach are:</dt><dd><ul class="simple">
+<li><p>Integration with resource managers such as Slurm.</p></li>
+<li><p>Container images are smaller since there is no need to add an MPI in the containers.</p></li>
+</ul>
+</dd>
+<dt>The drawbacks are:</dt><dd><ul class="simple">
+<li><p>The MPI used to compile the application in the container must be compatible with
+the version of MPI available on the host.</p></li>
+<li><p>The user must know where the host MPI is installed.</p></li>
+<li><p>The user must ensure that binding the directory where the host MPI is installed is
+possible.</p></li>
+<li><p>The user must ensure that the host MPI is compatible with the MPI used to compile
+and install the application in the container.</p></li>
+</ul>
+</dd>
+</dl>
+<p>The creation of a Singularity container based on the bind model is based on the following steps:</p>
+<ol class="arabic simple">
+<li><p>Compile your application on a system with the target MPI implementation, as you would do
+to install your application on any system.</p></li>
+<li><p>Create a definition file that includes the copy of the application from the host to the container
+image, as well as all required dependencies.</p></li>
+<li><p>Generate the container image.</p></li>
+</ol>
+<p>As already mentioned, the compilation of the application on the host is not different from
+the installation of your application on any system. Just make sure that the MPI on the system
+where you create your container is compatible with the MPI available on the platform(s) where
+you want to run your containers. For example, a container where the application has been compiled
+with MPICH will not be able to run on a system where only Open MPI is available, even if you mount
+the directory where Open MPI is installed.</p>
+<p>A definition file for a container in bind mode is fairly straight forward. The following example
+shows the definition file for NetPIPE-5.1.4 compiled on the host in <code class="docutils literal notranslate"><span class="pre">/tmp/NetPIPE-5.1.4</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
+From: ubuntu:disco
+
+%files
+      /tmp/NetPIPE-5.1.4/NPmpi /opt
+
+%environment
+      MPI_DIR=/opt/mpi
+      export MPI_DIR
+      export SINGULARITY_MPI_DIR=$MPI_DIR
+      export SINGULARITYENV_APPEND_PATH=$MPI_DIR/bin
+      export SINGULARITYENV_APPEND_LD_LIBRARY_PATH=$MPI_DIR/lib
+
+%post
+      apt-get update &amp;&amp; apt-get install -y wget git bash gcc gfortran g++ make file
+      mkdir -p /opt/mpi
+      apt-get clean
+</pre></div>
+</div>
+<p>In this example, the application, NetPIPE-5.1.4, is copied into <code class="docutils literal notranslate"><span class="pre">/opt</span></code>, as a result, the path to
+the executable to use on the <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> command is <code class="docutils literal notranslate"><span class="pre">/opt/NPmpi</span></code>. Also, this definition file prepares
+the environment to have the host MPI mounted in <code class="docutils literal notranslate"><span class="pre">/opt/mpi</span></code>; it sets all the required environment
+variables (PATH and LD_LIBRARY_PATH) for the system to find all MPI binaries and libraries at run-time.</p>
+</div>
+<div class="section" id="execution">
+<h2>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h2>
+<p>The standard way to execute MPI applications with hybrid Singularity containers is to
+run the native <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> command from the host, which will start Singularity
+containers and ultimately MPI ranks within the containers.</p>
+<p>Assuming your container with MPI and your application is already build,
+the <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> command to start your application looks like when your container
+has been built based on the hybrid model:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ mpirun -n &lt;NUMBER_OF_RANKS&gt; singularity exec &lt;PATH/TO/MY/IMAGE&gt; &lt;/PATH/TO/BINARY/WITHIN/CONTAINER&gt;
+</pre></div>
+</div>
+<p>Practically, this command will first start a process instantiating <code class="docutils literal notranslate"><span class="pre">mpirun</span></code>
+and then Singularity containers on compute nodes. Finally, when the containers
+start, the MPI binary is executed.</p>
+<p>For containers built based on the bind model, the command simply needs to include
+the appropriate bind option:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ mpirun -n &lt;NUMBER_OF_RANKS&gt; singularity exec --bind &lt;PATH/TO/HOST/MPI/DIRECTORY&gt;:&lt;PATH/IN/CONTAINER&gt; &lt;PATH/TO/MY/IMAGE&gt; &lt;/PATH/TO/BINARY/WITHIN/CONTAINER&gt;
+</pre></div>
+</div>
+<p>Based on the example presented in the previous sub-section, and assuming MPI is installed in <code class="docutils literal notranslate"><span class="pre">/opt/openmpi</span></code>
+on the host, the command will look like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ mpirun -n &lt;NUMBER_OF_RANKS&gt; singularity exec --bind /opt/openmpi:/opt/mpi &lt;PATH/TO/MY/IMAGE&gt; /opt/NPmpi
+</pre></div>
+</div>
+<p>If your target system is setup with a batch system such as SLURM, a standard
+way to execute MPI applications is through a batch script. The following
+example illustrates the context of a batch script for Slurm that aims at
+starting a Singularity container on each node allocated to the execution of
+the job. It can easily be adapted for all major batch systems available.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cat my_job.sh
+#!/bin/bash
+#SBATCH --job-name singularity-mpi
+#SBATCH -N $NNODES # total number of nodes
+#SBATCH --time=00:05:00 # Max execution time
+
+mpirun -n $NP singularity exec /var/nfsshare/gvallee/mpich.sif /opt/mpitest
+</pre></div>
+</div>
+<p>In fact, the example describes a job that requests the number of nodes specified
+by the <code class="docutils literal notranslate"><span class="pre">NNODES</span></code> environment variable and a total number of MPI processes specified
+by the <code class="docutils literal notranslate"><span class="pre">NP</span></code> environment variable. The example is also assuming that the container
+is based on the hybrid model; if it is based on the bind model, please add the
+appropriate bind options.</p>
+<p>A user can then submit a job by executing the following SLURM command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sbatch my_job.sh
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="gpu.html" class="btn btn-neutral float-right" title="GPU Support (NVIDIA CUDA &amp; AMD ROCm)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cgroups.html" class="btn btn-neutral float-left" title="Limiting container resources with cgroups" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017-2019, Sylabs Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

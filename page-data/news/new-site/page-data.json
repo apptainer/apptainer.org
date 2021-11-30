@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-markdown-remark-frontmatter-slug-js",
+    "path": "/news/new-site/",
+    "result": {"data":{"markdownRemark":{"html":"<h2>We have a brand new site!</h2>\n<p>A big thank you to Michael Kinder (<a href=\"https://dotslash.studio/\">https://dotslash.studio/</a>) for developing the new Singularity website!</p>\n<p>This website is hosted in GitHub (<a href=\"http://www.github.com/hpcng/singularity-web\">http://www.github.com/hpcng/singularity-web</a>), and we encourage updates and involvement from the community.</p>","frontmatter":{"date":"May 28, 2021","slug":"/news/new-site","title":"New site is live!"}}},"pageContext":{"id":"23ff0989-e942-5ba4-9359-7ef6e326ede8","frontmatter__slug":"/news/new-site","__params":{"frontmatter__slug":"news"}}},
+    "staticQueryHashes": ["3649515864","63159454"]}
