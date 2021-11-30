@@ -15,9 +15,6 @@ const SecurityPolicy = () => (
         </h2>
       </div>
       <div className="prose max-w-full">
-          Note: this policy has been adapted from the&nbsp;
-          <a href="https://sylabs.io/security-policy">Sylabs security policy</a>.
-          <h2><strong>Apptainer Security</strong></h2>
           <p>
               The Apptainer Technical Steering Committee (TSC) is responsible for managing the security of Apptainer, and this web page documents the security policy we follow.
           </p>
