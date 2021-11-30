@@ -24,7 +24,7 @@ Apptainer has a new Slack [here](https://join.slack.com/t/apptainer/shared_invit
 
 ### What is the management structure?
 
-As a Linux Foundation project, the primary management structure is the Technical Steering Committee (TSC) which is composed of the primary stakeholders and individuals responsible for commit access to the project. Currently this is Cedric Clerget, Dave Dykstra, Gregory Kurtzer, Ian Kaneshiro, and Krishna Muiriki. The TSC will follow the policies defined in the Technical Charter.
+As a Linux Foundation project, the primary management structure is the Technical Steering Committee (TSC) which is composed of the primary stakeholders and individuals responsible for commit access to the project. Currently this is Cedric Clerget, Dave Dykstra, Gregory Kurtzer, Ian Kaneshiro, and Krishna Muiriki. The TSC will follow the policies defined in the [Technical Charter](https://apptainer.org/technical-charter).
 
 ### Does this mean that Kurtzer is no longer the project lead?
 
