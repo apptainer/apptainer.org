@@ -44,7 +44,15 @@ When Sylabs forked the Singularity project, they chose not to rename their fork.
 
 ### Will there be continual alignment between Sylabs' Singularity and Apptainer?
 
-Initially, we anticipate yes, but only temporarily. Immediately, and as part of the transition, we must remove all APIs that are not community standardized and/or out of our control. This means, we are removing remote builder support and the library interface and retaining only community standard interfaces (e.g. OCI registries, Sigstore, CI/CD integration). This is why the first major release of Apptainer will be 1.0.  However, we intend to retain core command line usage compatibility, including a "singularity" command and configuration based on the singularity name.
+Initially, we anticipate yes, but over time we anticipate that the paths of the projects will diverge as both projects continue to mature. For Apptainer, there is significant interest in better alignment with LF and CNCF capabilities like Sigstore, ORAS, and CI/CD rather than commercial features.
+
+### What immediate changes will be implemented?
+
+As part of this transition, only open community standard interfaces will be supported. As of right now, this will include removing the "Library" and "Remote Builder" support. However it would be preferable if these become open community maintained standards (not corporate controlled) so we can leave them intact and/or re-add them at a later date.
+
+### What about backwards compatibility?
+
+Apptainer will provide `singularity` as a command line link and will maintain as much of the CLI and environment functionality as possible. From the user's perspective, very little, if anything, will change.
 
 ### Will Sylabs rejoin the Apptainer project?
 
