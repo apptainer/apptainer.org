@@ -36,7 +36,7 @@ No, Singularity IS Apptainer and Apptainer has a LONG life ahead!
 
 ### What will the first version be?
 
-The first release of Apptainer will be 1.0.
+The first release of Apptainer will be 1.0 which will exist in a new repository at [https://github.com/apptainer/apptainer](https://github.com/apptainer/apptainer). The Singularity repository has been moved repository has been moved to [https://github.com/apptainer/singularity](https://github.com/apptainer/singularity) which will persist as an archive and be set to read-only after the first release of Apptainer.
 
 ### But Sylabs still has a Singularity, how does Apptainer relate to that?
 
