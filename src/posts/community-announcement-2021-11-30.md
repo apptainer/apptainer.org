@@ -6,7 +6,7 @@ title: "Community Announcement"
 
 The Singularity project has had a fantastic journey so far. It is the intention of myself (the project lead) as well as all current code committers, that this project must stay in the community interest, free from control of a single company. Singularity has already become a mature open source project as we've surpassed all of the original design goals of the project. It is time to take the project to the next level of maturity.
 
-It is with great pleasure that I share with you that the Singularity project is officially moving into the Linux Foundation effective immediately. As part of this move, and to differentiate from the commercially controlled fork, we will be renaming the project to "Apptainer".
+It is with great pleasure that I share with you that the Singularity project is officially [moving into the Linux Foundation](https://www.linuxfoundation.org/press-release/new-linux-foundation-project-accelerates-collaboration-on-container-systems-between-enterprise-and-high-performance-computing-environments/) effective immediately. As part of this move, and to differentiate from the commercially controlled fork, we will be renaming the project to "Apptainer".
 
 ## Frequently Asked Questions
 
