@@ -5,7 +5,17 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 const docsVersions = [
-    { version: 'master' },
+    { version: '3.8' },
+    { version: '3.7' },
+    { version: '3.6' },
+    { version: '3.5' },
+    { version: '3.4' },
+    { version: '3.3' },
+    { version: '3.2' },
+    { version: '3.1' },
+    { version: '3.0' },
+    { version: '2.6' },
+    { version: '2.5' },
 ]
 
 const DocsPage = () => (
@@ -13,12 +23,9 @@ const DocsPage = () => (
         <Seo title="Documentation" />
         <div className="px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-10">
             <div className="max-w-xl md:mx-auto sm:text-center lg:max-w-2xl">
-                <h2 className="mb-6 max-w-xl font-sans text-4xl font-extrabold leading-none tracking-tight text-gray-900 sm:text-5xl md:mx-auto">
-                    Documentation
+                <h2 className="max-w-xl font-sans text-4xl font-extrabold leading-none tracking-tight text-gray-900 sm:text-5xl md:mx-auto">
+                    Singularity Documentation
                 </h2>
-                <p className="text-base text-gray-700 md:text-lg">
-                    Looking for Singularity documentation? <Link className="text-blue-900" to="/docs-legacy">Click here!</Link>
-                </p>
             </div>
         </div>
         <div className="max-w-lg mb-10 md:mx-auto sm:text-center lg:max-w-xl md:mb-12">
