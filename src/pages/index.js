@@ -11,7 +11,7 @@ const features = [
   {
     name: 'Absolute Trust and Security',
     description:
-      'Apptainer is the only container system that supports public/private key signing, providing trust and guarantees of immutability.',
+      'Apptainer/Singularity is the only container system that supports public/private key signing, providing trust and guarantees of immutability.',
   },
   {
     name: 'Compatibility',
@@ -46,7 +46,7 @@ const features = [
   {
     name: 'Community',
     description:
-      'Apptainer is by far the most utilized container system for performance-intensive computing!',
+      'Apptainer/Singularity is by far the most utilized container system for performance-intensive computing!',
   },
   {
     name: 'Support',
@@ -71,7 +71,7 @@ const IndexPage = () => (
               THE CONTAINER SYSTEM FOR SECURE HIGH PERFORMANCE COMPUTING
             </h3>
             <p className="text-base mb-10 text-gray-700 md:text-lg">
-              Apptainer is the most widely used container system for HPC. It is designed to execute applications at bare-metal performance while being secure, portable, and 100% reproducible. Apptainer is an open-source project with a friendly community of developers and users. The user base continues to expand, with Apptainer now used across industry and academia in many areas of work.
+              Apptainer/Singularity is the most widely used container system for HPC. It is designed to execute applications at bare-metal performance while being secure, portable, and 100% reproducible. Apptainer is an open-source project with a friendly community of developers and users. The user base continues to expand, with Apptainer/Singularity now used across industry and academia in many areas of work.
             </p>
           </div>
 
@@ -147,7 +147,7 @@ const IndexPage = () => (
         <div className="md:mx-auto sm:text-center lg:max-w-2xl">
           <iframe width="100%" height="400" src="https://www.youtube-nocookie.com/embed/UbxCwcreJqU?controls=1&&amp;rel=0" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           <p className="mt-4 text-base text-gray-500">
-            Apptainer video tutorial, recorded by Ian Kanesherio @ CIQ.
+            Singularity video tutorial, recorded by Ian Kaneshiro @ CIQ.
           </p>
         </div>
       </div>
