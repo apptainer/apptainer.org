@@ -110,7 +110,7 @@ const HelpPage = () => (
         </p>
 
         <Link
-          to="https://ctrliq.com/singularity-support/"
+          to="https://ciq.co"
           class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-blue-900 hover:bg-blue-800 focus:shadow-outline focus:outline-none"
           aria-label="Apptainer Support"
           title="Apptainer Support"
