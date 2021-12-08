@@ -1,82 +1,39 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>User Namespaces &amp; Fakeroot &mdash; Singularity Admin Guide 3.8 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-
-  
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.png"/>
-  
-
-  
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Security in Singularity Containers" href="security.html" />
     <link rel="prev" title="Singularity Configuration Files" href="configfiles.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> Singularity Admin Guide
-          
-
-          
-            
             <img src="_static/logo.png" class="logo" alt="Logo"/>
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 3.8
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -84,18 +41,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="admin_quickstart.html">Admin Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Singularity</a></li>
@@ -127,75 +73,32 @@
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Singularity Admin Guide</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>User Namespaces &amp; Fakeroot</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            
               <a href="https://github.com/hpcng/singularity-admindocs/blob/master/user_namespace.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="user-namespaces-fakeroot">
-<span id="userns"></span><h1>User Namespaces &amp; Fakeroot<a class="headerlink" href="#user-namespaces-fakeroot" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="user-namespaces-fakeroot">
+<span id="userns"></span><h1>User Namespaces &amp; Fakeroot<a class="headerlink" href="#user-namespaces-fakeroot" title="Permalink to this headline"></a></h1>
 <p>User namespaces are an isolation feature that allow processes to run
 with different user identifiers and/or privileges inside that
 namespace than are permitted outside. A user may have a <code class="docutils literal notranslate"><span class="pre">uid</span></code> of
@@ -216,8 +119,8 @@ installed without root.</p></li>
 building or running a container.</p></li>
 </ul>
 </div></blockquote>
-<div class="section" id="user-namespace-requirements">
-<span id="userns-requirements"></span><h2>User Namespace Requirements<a class="headerlink" href="#user-namespace-requirements" title="Permalink to this headline">¶</a></h2>
+<section id="user-namespace-requirements">
+<span id="userns-requirements"></span><h2>User Namespace Requirements<a class="headerlink" href="#user-namespace-requirements" title="Permalink to this headline"></a></h2>
 <p>To allow unprivileged creation of user namespaces a kernel &gt;=3.8 is
 required, with &gt;=3.18 being recommended due to security fixes for user
 namespaces (3.18 also adds OverlayFS support which is used by Singularity).</p>
@@ -226,26 +129,26 @@ namespace creation is enabled using a <code class="docutils literal notranslate"
 line parameter. Please consult your distribution documentation or
 vendor to confirm the steps necessary to ‘enable unprivileged user
 namespace creation’.</p>
-<div class="section" id="debian">
-<h3>Debian<a class="headerlink" href="#debian" title="Permalink to this headline">¶</a></h3>
+<section id="debian">
+<h3>Debian<a class="headerlink" href="#debian" title="Permalink to this headline"></a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo sh -c &#39;echo kernel.unprivileged_userns_clone=1 \
     &gt;/etc/sysctl.d/90-unprivileged_userns.conf&#39;
 sudo sysctl -p /etc/sysctl.d /etc/sysctl.d/90-unprivileged_userns.conf
 </pre></div>
 </div>
-</div>
-<div class="section" id="rhel-centos-7">
-<h3>RHEL/CentOS 7<a class="headerlink" href="#rhel-centos-7" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="rhel-centos-7">
+<h3>RHEL/CentOS 7<a class="headerlink" href="#rhel-centos-7" title="Permalink to this headline"></a></h3>
 <p>From 7.4, kernel support is included but must be enabled with:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo sh -c &#39;echo user.max_user_namespaces=15000 \
     &gt;/etc/sysctl.d/90-max_net_namespaces.conf&#39;
 sudo sysctl -p /etc/sysctl.d /etc/sysctl.d/90-max_net_namespaces.conf
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="unprivileged-installations">
-<span id="userns-limitations"></span><h2>Unprivileged Installations<a class="headerlink" href="#unprivileged-installations" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="unprivileged-installations">
+<span id="userns-limitations"></span><h2>Unprivileged Installations<a class="headerlink" href="#unprivileged-installations" title="Permalink to this headline"></a></h2>
 <p>As detailed in the <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">non-setuid installation</span></a>
 section, Singularity can be compiled or configured with the <code class="docutils literal notranslate"><span class="pre">allow</span>
 <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> option in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> to not perform privileged
@@ -270,17 +173,17 @@ is not extracted to disk. This requires the setuid workflow.</p></li>
 the distribution.</p></li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="userns-option">
-<h2>–userns option<a class="headerlink" href="#userns-option" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="userns-option">
+<h2>–userns option<a class="headerlink" href="#userns-option" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--userns</span></code> option to <cite>singularity run/exec/shell</cite> will start a
 container using a user namespace, avoiding the setuid privileged
 workflow for container setup even if Singularity was compiled and
 configured to use setuid by default.</p>
 <p>The same limitations apply as in an unprivileged installation.</p>
-</div>
-<div class="section" id="fakeroot-feature">
-<span id="fakeroot"></span><h2>Fakeroot feature<a class="headerlink" href="#fakeroot-feature" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="fakeroot-feature">
+<span id="fakeroot"></span><h2>Fakeroot feature<a class="headerlink" href="#fakeroot-feature" title="Permalink to this headline"></a></h2>
 <p>Fakeroot (or commonly referred as rootless mode) allows an
 unprivileged user to run a container as a <strong>“fake root”</strong> user by
 leveraging user namespaces with <a class="reference external" href="http://man7.org/linux/man-pages/man7/user_namespaces.7.html">user namespace UID/GID mapping</a>.</p>
@@ -290,8 +193,8 @@ a configured range of UIDs/GIDs in the container, which map back to
 (generally) unprivileged user UIDs/GIDs on the host. This allows a
 user to be <code class="docutils literal notranslate"><span class="pre">root</span> <span class="pre">(uid</span> <span class="pre">0)</span></code> in a container, install packages etc., but
 have no privilege on the host.</p>
-<div class="section" id="requirements">
-<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
+<section id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h3>
 <p>In addition to user namespace support, Singularity must manipulate
 <code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code> maps for the user namepsace it creates. By
 default this happens transparently in the setuid workflow. With
@@ -299,9 +202,9 @@ unprivileged installations of Singularity or where <code class="docutils literal
 <span class="pre">no</span></code> is set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>, Singularity attempts to use
 external setuid binaries <code class="docutils literal notranslate"><span class="pre">newuidmap</span></code> and <code class="docutils literal notranslate"><span class="pre">newgidmap</span></code>, so you
 need to install those binaries on your system.</p>
-</div>
-<div class="section" id="basics">
-<h3>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="basics">
+<h3>Basics<a class="headerlink" href="#basics" title="Permalink to this headline"></a></h3>
 <p>Fakeroot relies on <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> files to find
 configured mappings from real user and group IDs, to a range of
 otherwise vacant IDs for each user on the host system that can be
@@ -387,9 +290,9 @@ this case it is recommended to use UIDs instead of login
 names. Benchmarks have shown speed-ups up to 20x.</p>
 </div></blockquote>
 </div>
-</div>
-<div class="section" id="filesystem-considerations">
-<h3>Filesystem considerations<a class="headerlink" href="#filesystem-considerations" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="filesystem-considerations">
+<h3>Filesystem considerations<a class="headerlink" href="#filesystem-considerations" title="Permalink to this headline"></a></h3>
 <p>Based on the above range, here we can see what happens when the user
 <code class="docutils literal notranslate"><span class="pre">foo</span></code> create files with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> feature:</p>
 <table class="docutils align-default">
@@ -418,9 +321,9 @@ names. Benchmarks have shown speed-ups up to 20x.</p>
 directories and files created with a subuid, as they do not match with
 the user’s UID on the host. The user can remove these files by using a
 container shell running with fakeroot.</p>
-</div>
-<div class="section" id="network-configuration">
-<h3>Network configuration<a class="headerlink" href="#network-configuration" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="network-configuration">
+<h3>Network configuration<a class="headerlink" href="#network-configuration" title="Permalink to this headline"></a></h3>
 <p>With fakeroot, users can request a container network named
 <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code>, other networks are restricted and can only be used by
 the real host root user. By default the <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code> network is
@@ -437,9 +340,9 @@ considering the security implications.</p>
 network as it requires privilege during container creation to setup
 the network.</p>
 </div>
-</div>
-<div class="section" id="configuration-with-config-fakeroot">
-<span id="config-fakeroot"></span><h3>Configuration with <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code><a class="headerlink" href="#configuration-with-config-fakeroot" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="configuration-with-config-fakeroot">
+<span id="config-fakeroot"></span><h3>Configuration with <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code><a class="headerlink" href="#configuration-with-config-fakeroot" title="Permalink to this headline"></a></h3>
 <p>Singularity 3.5 and above provides a <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> command that
 can be used by a root user to administer local system <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code>
 and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> files in a simple manner. This allows users to be
@@ -462,8 +365,8 @@ mapping files to all nodes.</p>
 support subuid or subgid mappings, so they cannot be definied in a
 central directory such as LDAP.</p>
 </div>
-<div class="section" id="adding-a-fakeroot-mapping">
-<h4>Adding a fakeroot mapping<a class="headerlink" href="#adding-a-fakeroot-mapping" title="Permalink to this headline">¶</a></h4>
+<section id="adding-a-fakeroot-mapping">
+<h4>Adding a fakeroot mapping<a class="headerlink" href="#adding-a-fakeroot-mapping" title="Permalink to this headline"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">-a/--add</span> <span class="pre">&lt;user&gt;</span></code> option to <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> to create new
 mapping entries so that <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> can use the fakeroot feature of Singularity:</p>
 <blockquote>
@@ -491,9 +394,9 @@ format for faster lookups when configuring a large number of
 mappings, and the command can be used to manipulate these by
 username.</p>
 </div>
-</div>
-<div class="section" id="deleting-disabling-enabling-mappings">
-<h4>Deleting, disabling, enabling mappings<a class="headerlink" href="#deleting-disabling-enabling-mappings" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="deleting-disabling-enabling-mappings">
+<h4>Deleting, disabling, enabling mappings<a class="headerlink" href="#deleting-disabling-enabling-mappings" title="Permalink to this headline"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">-r/--remove</span> <span class="pre">&lt;user&gt;</span></code> option to <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> to
 completely remove mapping entries. The <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> will no longer be
 able to use the fakeroot feature of Singularity:</p>
@@ -528,57 +431,40 @@ $ cat /etc/subuid
 1000:4294836224:65536
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="security.html" class="btn btn-neutral float-right" title="Security in Singularity Containers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="configfiles.html" class="btn btn-neutral float-left" title="Singularity Configuration Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="security.html" class="btn btn-neutral float-right" title="Security in Singularity Containers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2017-2020, Sylabs Inc.
-
-    </p>
+    <p>&#169; Copyright 2017-2020, Sylabs Inc.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
