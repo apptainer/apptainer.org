@@ -3,7 +3,7 @@
 singularity remote login
 ------------------------
 
-Log into a singularity remote endpoint, an OCI/Docker registry or a keyserver using credentials
+Login to a singularity remote endpoint, an OCI/Docker registry or a keyserver using credentials
 
 Synopsis
 ~~~~~~~~
@@ -11,9 +11,10 @@ Synopsis
 
 
   The 'remote login' command allows you to set credentials for a specific endpoint,
-  an OCI/Docker registry or a keyserver. This command can produce a link directing you to
-  the token service you can use to generate a valid token. If no endpoint or registry is
-  specified, it will try the default remote endpoint (SylabsCloud).
+  an OCI/Docker registry or a keyserver.
+
+  If no endpoint or registry is specified, the command will login to the currently
+  active remote endpoint. This is cloud.sylabs.io by default.
 
 ::
 
@@ -29,7 +30,14 @@ Examples
     $ singularity remote login SylabsCloud
 
     To login in to a docker/OCI registry:
-    $ singularity remote login --username foo --password bar docker://docker.io
+    $ singularity remote login --username foo docker://docker.io
+    $ singularity remote login --username foo oras://myregistry.example.com
+
+    Note that many cloud OCI registries use token based authentication. The token
+    should be specified as the password for login. A username is still required. E.g.
+    when using a standard Azure identity and token to login to an ACR registry the
+    username '00000000-0000-0000-0000-000000000000' is required. Consult your provider
+    documentation for detail of their login requirements.
 
 Options
 ~~~~~~~
@@ -38,10 +46,10 @@ Options
 
   -h, --help               help for login
   -i, --insecure           allow insecure login
-  -p, --password string    password to authenticate with
+  -p, --password string    password / token to authenticate with
       --password-stdin     take password from standard input
-      --tokenfile string   path to the file holding token
-  -u, --username string    username to authenticate with (leave it empty for token authentication)
+      --tokenfile string   path to the file holding auth token for login (remote endpoints only)
+  -u, --username string    username to authenticate with (required for Docker/OCI registry login)
 
 SEE ALSO
 ~~~~~~~~

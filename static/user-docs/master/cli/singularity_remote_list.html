@@ -205,12 +205,14 @@
              
   <section id="singularity-remote-list">
 <span id="id1"></span><h1>singularity remote list<a class="headerlink" href="#singularity-remote-list" title="Permalink to this headline"></a></h1>
-<p>List all singularity remote endpoints and services that are configured</p>
+<p>List all singularity remote endpoints, keyservers, and OCI credentials that are configured</p>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline"></a></h2>
 <blockquote>
-<div><p>The ‘remote list’ command lists all remote endpoints configured for use. If a remote
-is in use, its name will be encompassed by brackets.</p>
+<div><p>The ‘remote list’ command lists all remote endpoints, keyservers, and OCI registry
+credentials configured for use.</p>
+<p>The current remote is indicated by ‘YES’ in the ‘ACTIVE’ column and can be changed
+with the ‘remote use’ command.</p>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">remote</span> <span class="nb">list</span>
 </pre></div>

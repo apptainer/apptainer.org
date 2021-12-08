@@ -161,7 +161,7 @@ INFO:    Build complete: busybox_latest.sif
 </pre></div>
 </div>
 <p>This is one way to bootstrap creation of this image in SIF that <em>retains</em> a local copy - i.e., a local copy of the SIF file <em>and</em> a cached copy of the OCI blobs. Additional approaches and details can be found in the section <a class="reference internal" href="singularity_and_docker.html#singularity-and-docker"><span class="std std-ref">Support for Docker and OCI</span></a>).</p>
-<p>For the purpose of boostrapping the creation of an OCI compliant container, this SIF file can be mounted as follows:</p>
+<p>For the purpose of bootstrapping the creation of an OCI compliant container, this SIF file can be mounted as follows:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity oci mount ./busybox_latest.sif /var/tmp/busybox
 </pre></div>
 </div>

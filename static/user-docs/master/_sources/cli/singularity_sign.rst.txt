@@ -14,7 +14,7 @@ Synopsis
   image. By default, one digital signature is added for each object group in
   the file.
   
-  To generate a keypair, see 'singularity help key newpair'
+  To generate a key pair, see 'singularity help key newpair'
 
 ::
 

@@ -98,7 +98,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#working-locally-from-the-singularity-command-line-oci-archive-bootstrap-agent">Working Locally from the Singularity Command Line: <code class="docutils literal notranslate"><span class="pre">oci-archive</span></code> Bootstrap Agent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#working-from-the-singularity-command-line-with-remotely-hosted-images">Working from the Singularity Command Line with Remotely Hosted Images</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#working-with-definition-files-mandatory-header-keywords">Working with Definition Files: Mandatory Header Keywords</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#working-with-definition-files-additonal-considerations">Working with Definition Files: Additonal Considerations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#working-with-definition-files-additional-considerations">Working with Definition Files: Additional Considerations</a></li>
 </ul>
 </li>
 </ul>
@@ -349,7 +349,7 @@ complete contents of that image.</p>
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">pull</span></code> is a one-time-only operation that builds a SIF file corresponding to the image retrieved from Docker Hub. Updates to the image on Docker Hub will <em>not</em> be reflected in the <em>local</em> copy.</p>
 </div>
-<p>In our example <code class="docutils literal notranslate"><span class="pre">docker://sylabsio/lolcow</span></code>, <code class="docutils literal notranslate"><span class="pre">sylabsio</span></code> specifies a Docker Hub user, whereas <code class="docutils literal notranslate"><span class="pre">lolcow</span></code> is the name of the repository. Adding the option to specifiy an image tag, the generic version of the URI is <code class="docutils literal notranslate"><span class="pre">docker://&lt;user&gt;/&lt;repo-name&gt;[:&lt;tag&gt;]</span></code>. <a class="reference external" href="https://docs.docker.com/docker-hub/repos/">Repositories on Docker Hub</a> provides additional details.</p>
+<p>In our example <code class="docutils literal notranslate"><span class="pre">docker://sylabsio/lolcow</span></code>, <code class="docutils literal notranslate"><span class="pre">sylabsio</span></code> specifies a Docker Hub user, whereas <code class="docutils literal notranslate"><span class="pre">lolcow</span></code> is the name of the repository. Adding the option to specify an image tag, the generic version of the URI is <code class="docutils literal notranslate"><span class="pre">docker://&lt;user&gt;/&lt;repo-name&gt;[:&lt;tag&gt;]</span></code>. <a class="reference external" href="https://docs.docker.com/docker-hub/repos/">Repositories on Docker Hub</a> provides additional details.</p>
 </section>
 <section id="making-use-of-private-images-from-docker-hub">
 <span id="sec-using-prebuilt-private-images"></span><h2>Making use of private images from Docker Hub<a class="headerlink" href="#making-use-of-private-images-from-docker-hub" title="Permalink to this headline"></a></h2>
@@ -408,7 +408,7 @@ export SINGULARITY_DOCKER_PASSWORD=&lt;redacted&gt;
 <p>Based upon these exports, <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">singularity</span> <span class="pre">pull</span> <span class="pre">docker://sylabsio/private</span></code> allows for the retrieval of this private image.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This approach for authentication supports both interactive and non-interactive sessions. However, the requirement for a plain-text password assigned to an envrionment variable, is the security compromise for this flexibility.</p>
+<p>This approach for authentication supports both interactive and non-interactive sessions. However, the requirement for a plain-text password assigned to an environment variable, is the security compromise for this flexibility.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -475,7 +475,7 @@ INFO:    Creating SIF file...
 INFO:    Build complete: pytorch_18.11-py3.sif
 </pre></div>
 </div>
-<p>Authentication aside, the outcome of the <code class="docutils literal notranslate"><span class="pre">pull</span></code> command is the Singularity container <code class="docutils literal notranslate"><span class="pre">pytorch_18.11-py3.sif</span></code> - i.e., a locally stored copy, that has been coverted to SIF.</p>
+<p>Authentication aside, the outcome of the <code class="docutils literal notranslate"><span class="pre">pull</span></code> command is the Singularity container <code class="docutils literal notranslate"><span class="pre">pytorch_18.11-py3.sif</span></code> - i.e., a locally stored copy, that has been converted to SIF.</p>
 </section>
 <section id="building-images-for-singularity-from-docker-registries">
 <h2>Building images for Singularity from Docker Registries<a class="headerlink" href="#building-images-for-singularity-from-docker-registries" title="Permalink to this headline"></a></h2>
@@ -742,7 +742,7 @@ INFO:    Setting tag latest
 <p>enables authenticated use of the private image.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">-E</span></code> option is required to preserve the user’s existing environment variables upon <code class="docutils literal notranslate"><span class="pre">sudo</span></code> invocation - a priviledge escalation <em>required</em> to create Singularity containers via the <code class="docutils literal notranslate"><span class="pre">build</span></code> command.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-E</span></code> option is required to preserve the user’s existing environment variables upon <code class="docutils literal notranslate"><span class="pre">sudo</span></code> invocation - a privilege escalation <em>required</em> to create Singularity containers via the <code class="docutils literal notranslate"><span class="pre">build</span></code> command.</p>
 </div>
 </section>
 <section id="remotely-bootstrapped-and-built-containers">
@@ -785,7 +785,7 @@ INFO:    Build complete: lolcow_rb_def.sif
 <img alt="_images/mysylabslibrary.png" src="_images/mysylabslibrary.png" />
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The Sylabs Cloud is currently available as an Alpha Preview. In addition to the Singularity Library and Remote Builder, a Keystore service is also available. All three services make use of a <em>freemium</em> pricing model in supporting Singularity Community Edition. In contrast, all three services are included in SingularityPRO - an enterprise grade subscription for Singularity that is offered for a fee from Sylabs. For addtional details regarding the different offerings available for Singularity, please <a class="reference external" href="https://www.sylabs.io/singularity/">consult the Sylabs website</a>.</p>
+<p>The Sylabs Cloud is currently available as an Alpha Preview. In addition to the Singularity Library and Remote Builder, a Keystore service is also available. All three services make use of a <em>freemium</em> pricing model in supporting Singularity Community Edition. In contrast, all three services are included in SingularityPRO - an enterprise grade subscription for Singularity that is offered for a fee from Sylabs. For additional details regarding the different offerings available for Singularity, please <a class="reference external" href="https://www.sylabs.io/singularity/">consult the Sylabs website</a>.</p>
 </div>
 </section>
 <section id="mandatory-header-keywords-locally-bootstrapped">
@@ -940,7 +940,7 @@ ______________________________
     date
 </pre></div>
 </div>
-<p>After conversion to SIF via the Singularity <code class="docutils literal notranslate"><span class="pre">build</span></code> command, exection of the resulting container produces the output:</p>
+<p>After conversion to SIF via the Singularity <code class="docutils literal notranslate"><span class="pre">build</span></code> command, execution of the resulting container produces the output:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./lolcow.sif
 Mon Aug 16 13:39:20 CDT 2021
 </pre></div>
@@ -1326,7 +1326,7 @@ INFO:    Build complete: /home/vagrant/lolcow_oci_cache.sif
 blobs  index.json  oci-layout
 </pre></div>
 </div>
-<p>In other words, it is the <code class="docutils literal notranslate"><span class="pre">$OCI_BUNDLE_DIR</span></code> containing the data and metadata that collectively comprise the image layed out in accordance with the OCI Image Layout Specification <a class="reference internal" href="#misc-oci-image-layout-specification"><span class="std std-ref">as discussed previously</span></a> - the same data and metadata that are assembled into a single SIF file through the <code class="docutils literal notranslate"><span class="pre">build</span></code> process. However,</p>
+<p>In other words, it is the <code class="docutils literal notranslate"><span class="pre">$OCI_BUNDLE_DIR</span></code> containing the data and metadata that collectively comprise the image laid out in accordance with the OCI Image Layout Specification <a class="reference internal" href="#misc-oci-image-layout-specification"><span class="std std-ref">as discussed previously</span></a> - the same data and metadata that are assembled into a single SIF file through the <code class="docutils literal notranslate"><span class="pre">build</span></code> process. However,</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build ~/lolcow_oci_cache.sif oci://$HOME/.singularity/cache/oci
 INFO:    Starting build...
 FATAL:   While performing build: conveyor failed to get: more than one image in oci, choose an image
@@ -1394,7 +1394,7 @@ INFO:    Build complete: lolcow_oci_tarfile.sif
 </pre></div>
 </div>
 <p>Thus <code class="docutils literal notranslate"><span class="pre">https</span></code> (and <code class="docutils literal notranslate"><span class="pre">http</span></code>) are additional bootstrap agents available to seed development of containers for Singularity.</p>
-<p>It is worth noting that the OCI image specfication compliant contents of this archive are:</p>
+<p>It is worth noting that the OCI image specification compliant contents of this archive are:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ tar tvf alpine-oci-archive.tar
 drwxr-xr-x 1000/1000         0 2018-06-25 14:45 blobs/
 drwxr-xr-x 1000/1000         0 2018-06-25 14:45 blobs/sha256/
@@ -1506,8 +1506,8 @@ INFO:    Build complete: lolcow_oci_tarfile.sif
 </div>
 <p>results in the SIF container <code class="docutils literal notranslate"><span class="pre">lolcow_oci_tarfile.sif</span></code>.</p>
 </section>
-<section id="working-with-definition-files-additonal-considerations">
-<h4>Working with Definition Files: Additonal Considerations<a class="headerlink" href="#working-with-definition-files-additonal-considerations" title="Permalink to this headline"></a></h4>
+<section id="working-with-definition-files-additional-considerations">
+<h4>Working with Definition Files: Additional Considerations<a class="headerlink" href="#working-with-definition-files-additional-considerations" title="Permalink to this headline"></a></h4>
 <p>In working with definition files, the following additional considerations arise:</p>
 <blockquote>
 <div><ul class="simple">
@@ -1561,7 +1561,7 @@ Removing /home/dave/.singularity/cache/oras
 <li><p>Accounting for trust</p></li>
 </ol>
 <p>Docker containers <em>allow for</em> privilege escalation. In a <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>, for example, the <code class="docutils literal notranslate"><span class="pre">USER</span></code> instruction allows for user and/or group settings to be made in the Linux operating environment. The trust model in Singularity is completely different: Singularity allows untrusted users to run untrusted containers in a trusted way. Because Singularity containers embodied as SIF files execute in <em>user</em> space, there is no possibility for privilege escalation. In other words, those familiar with Docker, should <em>not</em> expect access to elevated user permissions; and as a corollary, use of the <code class="docutils literal notranslate"><span class="pre">USER</span></code> instruction must be <em>avoided</em>.</p>
-<p>Singularity does, however, allow for fine-grained control over the permissions that containers require for execution. Given that Singularilty executes in user space, it is not surprising that permissions need to be externally established <em>for</em> the container through use of the <code class="docutils literal notranslate"><span class="pre">capability</span></code> command. <a class="reference internal" href="security_options.html#security-options"><span class="std std-ref">Detailed elsewhere in this documentation</span></a>, Singularity allows users and/or groups to be granted/revoked authorized capabilties. Owing to Singularity’s trust model, this fundamental best practice can be stated as follows:</p>
+<p>Singularity does, however, allow for fine-grained control over the permissions that containers require for execution. Given that Singularilty executes in user space, it is not surprising that permissions need to be externally established <em>for</em> the container through use of the <code class="docutils literal notranslate"><span class="pre">capability</span></code> command. <a class="reference internal" href="security_options.html#security-options"><span class="std std-ref">Detailed elsewhere in this documentation</span></a>, Singularity allows users and/or groups to be granted/revoked authorized capabilities. Owing to Singularity’s trust model, this fundamental best practice can be stated as follows:</p>
 <blockquote>
 <div><p>“Employ <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">capability</span></code> to manage execution privileges for containers”</p>
 </div></blockquote>
@@ -1610,7 +1610,7 @@ Removing /home/dave/.singularity/cache/oras
 <ol class="arabic simple" start="8">
 <li><p>Use of plain-text passwords for authentication</p></li>
 </ol>
-<p>For obvious reasons, it is desireable to completely <em>avoid</em> use of plain-text passwords. Therefore, for interactive sessions requiring authentication, use of the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> option for Singularity’s <code class="docutils literal notranslate"><span class="pre">pull</span></code> and <code class="docutils literal notranslate"><span class="pre">build</span></code> commands is <em>recommended</em>. At the present time, the <em>only</em> option available for non-interactive use is to <a class="reference internal" href="#sec-authentication-via-environment-variables"><span class="std std-ref">embed plain-text passwords into environment variables</span></a>. Because the Sylabs Cloud Singularity Library employs <a class="reference external" href="https://cloud.sylabs.io/auth">time-limited API tokens for authentication</a>, use of SIF containers hosted through this service provides a more secure means for both interactive <em>and</em> non-interactive use. This best practice is:</p>
+<p>For obvious reasons, it is desirable to completely <em>avoid</em> use of plain-text passwords. Therefore, for interactive sessions requiring authentication, use of the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> option for Singularity’s <code class="docutils literal notranslate"><span class="pre">pull</span></code> and <code class="docutils literal notranslate"><span class="pre">build</span></code> commands is <em>recommended</em>. At the present time, the <em>only</em> option available for non-interactive use is to <a class="reference internal" href="#sec-authentication-via-environment-variables"><span class="std std-ref">embed plain-text passwords into environment variables</span></a>. Because the Sylabs Cloud Singularity Library employs <a class="reference external" href="https://cloud.sylabs.io/auth">time-limited API tokens for authentication</a>, use of SIF containers hosted through this service provides a more secure means for both interactive <em>and</em> non-interactive use. This best practice is:</p>
 <blockquote>
 <div><p>“Avoid use of plain-text passwords”</p>
 </div></blockquote>

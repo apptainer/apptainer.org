@@ -246,8 +246,9 @@ found at:
     --allow-setuid           allow setuid binaries in container (root only)
     --app string             set an application to run inside a container
     --apply-cgroups string   apply cgroups from file for container processes (root only)
--B, --bind strings           a user-bind path specification.  spec has the format src[:dest[:opts]], where src and dest are outside and inside paths.  If dest is not given, it is set equal to src.  Mount options (&#39;opts&#39;) may be specified as &#39;ro&#39; (read-only) or &#39;rw&#39; (read/write, which is the default). Multiple bind paths can be given by a comma separated list.
+-B, --bind stringArray       a user-bind path specification.  spec has the format src[:dest[:opts]], where src and dest are outside and inside paths.  If dest is not given, it is set equal to src.  Mount options (&#39;opts&#39;) may be specified as &#39;ro&#39; (read-only) or &#39;rw&#39; (read/write, which is the default). Multiple bind paths can be given by a comma separated list.
 -e, --cleanenv               clean environment before running container
+    --compat                 apply settings for increased OCI/Docker compatibility. Infers --containall, --no-init, --no-umask, --writable-tmpfs.
 -c, --contain                use minimal /dev and empty other directories (e.g. /tmp and $HOME) instead of sharing filesystems from your host
 -C, --containall             contain not only file systems, but also PID, IPC, and environment
     --disable-cache          dont use cache, and dont create cache
@@ -263,20 +264,21 @@ found at:
     --hostname string        set container hostname
 -i, --ipc                    run container in a new IPC namespace
     --keep-privs             let root user keep privileges in container (root only)
+    --mount stringArray      a mount specification e.g. &#39;type=bind,source=/opt,destination=/hostopt&#39;.
 -n, --net                    run container in a new network namespace (sets up a bridge network interface by default)
     --network string         specify desired network type separated by commas, each network will bring up a dedicated interface inside container (default &quot;bridge&quot;)
     --network-args strings   specify network arguments to pass to CNI plugins
     --no-home                do NOT mount users home directory if /home is not the current working directory
+    --no-https               use http instead of https for docker:// oras:// and library://&lt;hostname&gt;/... URIs
     --no-init                do NOT start shim process with --pid
     --no-mount strings       disable one or more mount xxx options set in singularity.conf
     --no-privs               drop all privileges from root user in container)
     --no-umask               do not propagate umask to the container, set default 0022 umask
-    --nohttps                do NOT use HTTPS with the docker:// transport (useful for local docker registries without a certificate)
-    --nonet                  disable VM network handling
-    --nv                     enable experimental Nvidia support
+    --nv                     enable Nvidia support
+    --nvccli                 use nvidia-container-cli for GPU setup (experimental)
 -o, --overlay strings        use an overlayFS image for persistent data storage or as read-only layer of container
     --passphrase             prompt for an encryption passphrase
-    --pem-path string        enter an path to a PEM formated RSA key for an encrypted container
+    --pem-path string        enter an path to a PEM formatted RSA key for an encrypted container
 -p, --pid                    run container in a new PID namespace
     --pwd string             initial working directory for payload process inside the container
     --rocm                   enable experimental Rocm support
