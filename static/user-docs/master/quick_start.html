@@ -345,12 +345,12 @@ matters). Global options affecting the behavior of all commands follow the main
 and arguments.</p>
 <p>For example, to pass the <code class="docutils literal notranslate"><span class="pre">--debug</span></code> option to the main <code class="docutils literal notranslate"><span class="pre">singularity</span></code> command
 and run Singularity with debugging messages on:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity --debug run library://sylabsed/examples/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity --debug run library://lolcow
 </pre></div>
 </div>
 <p>To pass the <code class="docutils literal notranslate"><span class="pre">--containall</span></code> option to the <code class="docutils literal notranslate"><span class="pre">run</span></code> command and run a
 Singularity image in an isolated manner:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run --containall library://sylabsed/examples/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run --containall library://lolcow
 </pre></div>
 </div>
 <p>Singularity 2.4 introduced the concept of command groups. For instance, to list
@@ -413,7 +413,7 @@ simply downloads the image file to your system.</p>
 served from a registry. In this case <code class="docutils literal notranslate"><span class="pre">pull</span></code> does not just download an image
 file. Docker images are stored in layers, so <code class="docutils literal notranslate"><span class="pre">pull</span></code> must also combine those
 layers into a usable Singularity file.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://godlovedc/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://sylabsio/lolcow
 </pre></div>
 </div>
 <p>Pulling Docker images reduces reproducibility. If you were to pull a Docker
@@ -426,7 +426,7 @@ external resource. When using <code class="docutils literal notranslate"><span c
 container like so:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build ubuntu.sif library://ubuntu
 
-$ singularity build lolcow.sif docker://godlovedc/lolcow
+$ singularity build lolcow.sif docker://sylabsio/lolcow
 </pre></div>
 </div>
 <p>Unlike <code class="docutils literal notranslate"><span class="pre">pull</span></code>, <code class="docutils literal notranslate"><span class="pre">build</span></code> will convert your image to the latest Singularity
@@ -444,7 +444,7 @@ please see: <a class="reference internal" href="singularity_and_docker.html#sec-
 in addition to a local image path.</p>
 <p>For demonstration, we will use a <code class="docutils literal notranslate"><span class="pre">lolcow_latest.sif</span></code> image that can be pulled
 from the Container Library:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull library://sylabsed/examples/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull library://lolcow
 </pre></div>
 </div>
 <section id="shell">
@@ -471,7 +471,7 @@ uid=1000(david) gid=1000(david) groups=1000(david),4(adm),24(cdrom),27(sudo),30(
 <p><code class="docutils literal notranslate"><span class="pre">shell</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">library://</span></code>, <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, and <code class="docutils literal notranslate"><span class="pre">shub://</span></code>
 URIs. This creates an ephemeral container that disappears when the shell is
 exited.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity shell library://sylabsed/examples/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity shell library://lolcow
 </pre></div>
 </div>
 </section>
@@ -495,7 +495,7 @@ the image file. For instance, to execute the <code class="docutils literal notra
 <p><code class="docutils literal notranslate"><span class="pre">exec</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">library://</span></code>, <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, and <code class="docutils literal notranslate"><span class="pre">shub://</span></code>
 URIs. This creates an ephemeral container that executes a command and
 disappears.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity exec library://sylabsed/examples/lolcow cowsay &quot;Fresh from the library!&quot;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity exec library://lolcow cowsay &quot;Fresh from the library!&quot;
  _________________________
 &lt; Fresh from the library! &gt;
  -------------------------
@@ -514,10 +514,9 @@ defined scripts that define the actions a container should perform when someone
 runs it. The runscript can be triggered with the <a class="reference external" href="cli/singularity_run.html">run</a>
 command, or simply by calling the container as though it were an executable.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run lolcow_latest.sif
- _____________________________________
-/ You have been selected for a secret \
-\ mission.                            /
- -------------------------------------
+______________________________
+&lt; Mon Aug 16 13:01:55 CDT 2021 &gt;
+ ------------------------------
         \   ^__^
          \  (oo)\_______
             (__)\       )\/\
@@ -525,10 +524,9 @@ command, or simply by calling the container as though it were an executable.</p>
                 ||     ||
 
 $ ./lolcow_latest.sif
- ____________________________________
-/ Q: What is orange and goes &quot;click, \
-\ click?&quot; A: A ball point carrot.    /
- ------------------------------------
+______________________________
+&lt; Mon Aug 16 13:12:50 CDT 2021 &gt;
+ ------------------------------
         \   ^__^
          \  (oo)\_______
             (__)\       )\/\
@@ -538,11 +536,10 @@ $ ./lolcow_latest.sif
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">run</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">library://</span></code>, <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, and <code class="docutils literal notranslate"><span class="pre">shub://</span></code> URIs.
 This creates an ephemeral container that runs and then disappears.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run library://sylabsed/examples/lolcow
- ____________________________________
-/ Is that really YOU that is reading \
-\ this?                              /
- ------------------------------------
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run library://lolcow
+______________________________
+&lt; Mon Aug 16 13:12:33 CDT 2021 &gt;
+ ------------------------------
         \   ^__^
          \  (oo)\_______
             (__)\       )\/\
@@ -648,17 +645,17 @@ into the container from host system, etc.</p>
 
 <span class="gh">%post</span>
     apt-get -y update
-    apt-get -y install fortune cowsay lolcat
+    apt-get -y install date cowsay lolcat
 
 <span class="gh">%environment</span>
     <span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>C
     <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/usr/games:<span class="nv">$PATH</span>
 
 <span class="gh">%runscript</span>
-    fortune <span class="p">|</span> cowsay <span class="p">|</span> lolcat
+    date <span class="p">|</span> cowsay <span class="p">|</span> lolcat
 
 <span class="gh">%labels</span>
-    Author GodloveD
+    Author Sylabs
 </pre></div>
 </div>
 <p>To build a container from this definition file (assuming it is a file

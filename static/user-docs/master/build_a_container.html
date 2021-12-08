@@ -180,11 +180,11 @@ one format to another.</p>
 <h2>Downloading an existing container from the Container Library<a class="headerlink" href="#downloading-an-existing-container-from-the-container-library" title="Permalink to this headline"></a></h2>
 <p>You can use the build command to download a container from the Container
 Library.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build lolcow.sif library://sylabs-jms/testing/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build lolcow.sif library://lolcow
 </pre></div>
 </div>
 <p>The first argument (<code class="docutils literal notranslate"><span class="pre">lolcow.sif</span></code>) specifies a path and name for your
-container. The second argument (<code class="docutils literal notranslate"><span class="pre">library://sylabs-jms/testing/lolcow</span></code>) gives
+container. The second argument (<code class="docutils literal notranslate"><span class="pre">library://lolcow</span></code>) gives
 the Container Library URI from which to download. By default the container will
 be converted to a compressed, read-only SIF. If you want your container in a
 writable format use the <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> option.</p>
@@ -193,7 +193,7 @@ writable format use the <code class="docutils literal notranslate"><span class="
 <h2>Downloading an existing container from Docker Hub<a class="headerlink" href="#downloading-an-existing-container-from-docker-hub" title="Permalink to this headline"></a></h2>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">build</span></code> to download layers from Docker Hub and assemble them into
 Singularity containers.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build lolcow.sif docker://godlovedc/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build lolcow.sif docker://sylabsio/lolcow
 </pre></div>
 </div>
 </section>
@@ -203,7 +203,7 @@ Singularity containers.</p>
 sandbox) you can do so with the <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> option. It’s possible to create a
 sandbox without root privileges, but to ensure proper file permissions it is
 recommended to do so as root.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build --sandbox lolcow/ library://sylabs-jms/testing/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build --sandbox lolcow/ library://lolcow
 </pre></div>
 </div>
 <p>The resulting directory operates just like a container in a SIF file. To make
@@ -241,14 +241,14 @@ and you want to use it to build a SIF container.</p>
 
 <span class="gh">%post</span>
     apt-get -y update
-    apt-get -y install fortune cowsay lolcat
+    apt-get -y install cowsay lolcat
 
 <span class="gh">%environment</span>
     <span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>C
     <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/usr/games:<span class="nv">$PATH</span>
 
 <span class="gh">%runscript</span>
-    fortune <span class="p">|</span> cowsay <span class="p">|</span> lolcat
+    date <span class="p">|</span> cowsay <span class="p">|</span> lolcat
 </pre></div>
 </div>
 <p>You can do so with the following command.</p>
