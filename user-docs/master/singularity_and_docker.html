@@ -193,54 +193,37 @@
 </section>
 <section id="running-action-commands-on-public-images-from-docker-hub">
 <span id="sec-action-commands-prebuilt-public-docker-images"></span><h2>Running action commands on public images from Docker Hub<a class="headerlink" href="#running-action-commands-on-public-images-from-docker-hub" title="Permalink to this headline"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">godlovedc/lolcow</span></code> is a whimsical example of a publicly accessible image hosted via <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>. Singularity can execute this image as follows:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run docker://godlovedc/lolcow
+<p><code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow</span></code> is a whimsical example of a publicly accessible image hosted via <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>. Singularity can execute this image as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run docker://sylabsio/lolcow
 INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
 Getting image source signatures
-Copying blob sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118
- 45.33 MiB / 45.33 MiB [====================================================] 1s
-Copying blob sha256:3b61febd4aefe982e0cb9c696d415137384d1a01052b50a85aae46439e15e49a
- 848 B / 848 B [============================================================] 0s
-Copying blob sha256:9d99b9777eb02b8943c0e72d7a7baec5c782f8fd976825c9d3fb48b3101aacc2
- 621 B / 621 B [============================================================] 0s
-Copying blob sha256:d010c8cf75d7eb5d2504d5ffa0d19696e8d745a457dd8d28ec6dd41d3763617e
- 853 B / 853 B [============================================================] 0s
-Copying blob sha256:7fac07fb303e0589b9c23e6f49d5dc1ff9d6f3c8c88cabe768b430bdb47f03a9
- 169 B / 169 B [============================================================] 0s
-Copying blob sha256:8e860504ff1ee5dc7953672d128ce1e4aa4d8e3716eb39fe710b849c64b20945
- 53.75 MiB / 53.75 MiB [====================================================] 2s
-Copying config sha256:73d5b1025fbfa138f2cacf45bbf3f61f7de891559fa25b28ab365c7d9c3cbd82
- 3.33 KiB / 3.33 KiB [======================================================] 0s
+Copying blob 16ec32c2132b done
+Copying blob 5ca731fc36c2 done
+Copying config fd0daa4d89 done
 Writing manifest to image destination
 Storing signatures
+2021/08/16 13:17:01  info unpack layer: sha256:16ec32c2132b43494832a05f2b02f7a822479f8250c173d0ab27b3de78b2f058
+2021/08/16 13:17:02  info unpack layer: sha256:5ca731fc36c28789c5ddc3216563e8bfca2ab3ea10347e07554ebba1c953242e
 INFO:    Creating SIF file...
-INFO:    Build complete: /home/vagrant/.singularity/cache/oci-tmp/a692b57abc43035b197b10390ea2c12855d21649f2ea2cc28094d18b93360eeb/lolcow_latest.sif
-INFO:    Image cached as SIF at /home/vagrant/.singularity/cache/oci-tmp/a692b57abc43035b197b10390ea2c12855d21649f2ea2cc28094d18b93360eeb/lolcow_latest.sif
- ___________________________________
-/ Repartee is something we think of \
-| twenty-four hours too late.       |
-|                                   |
-\ -- Mark Twain                     /
- -----------------------------------
+______________________________
+&lt; Mon Aug 16 13:17:11 CDT 2021 &gt;
+------------------------------
         \   ^__^
-         \  (oo)\_______
+        \  (oo)\_______
             (__)\       )\/\
                 ||----w |
                 ||     ||
 </pre></div>
 </div>
 <p>Here <code class="docutils literal notranslate"><span class="pre">docker</span></code> is prepended to ensure that the <code class="docutils literal notranslate"><span class="pre">run</span></code> command of Singularity is instructed to bootstrap container creation based upon this Docker image, thus creating a complete URI for Singularity. Singularity subsequently downloads <a class="reference internal" href="#sec-oci-overview"><span class="std std-ref">all the OCI blobs that comprise this image</span></a>, and converts them into a <em>single</em> SIF file - the native format for Singularity containers. Because this image from Docker Hub is cached locally in the <code class="docutils literal notranslate"><span class="pre">$HOME/.singularity/cache/oci-tmp/&lt;org.opencontainers.image.ref.name&gt;/lolcow_latest.sif</span></code> directory, where <code class="docutils literal notranslate"><span class="pre">&lt;org.opencontainers.image.ref.name&gt;</span></code> will be replaced by the appropriate hash for the container, the image does not need to be downloaded again (from Docker Hub) the next time a Singularity <code class="docutils literal notranslate"><span class="pre">run</span></code> is executed. In other words, the cached copy is sensibly reused:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run docker://godlovedc/lolcow
- _________________________________________
-/ Soap and education are not as sudden as \
-| a massacre, but they are more deadly in |
-| the long run.                           |
-|                                         |
-\ -- Mark Twain                           /
- -----------------------------------------
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run docker://sylabsio/lolcow
+INFO:    Using cached SIF image
+______________________________
+&lt; Mon Aug 16 13:17:47 CDT 2021 &gt;
+------------------------------
         \   ^__^
-         \  (oo)\_______
+        \  (oo)\_______
             (__)\       )\/\
                 ||----w |
                 ||     ||
@@ -260,15 +243,11 @@ INFO:    Image cached as SIF at /home/vagrant/.singularity/cache/oci-tmp/a692b57
 </div>
 <p>and then execute the SIF file directly:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./lolcow_latest.sif
- _______________________________________
-/ The secret source of humor is not joy \
-| but sorrow; there is no humor in      |
-| Heaven.                               |
-|                                       |
-\ -- Mark Twain                         /
- ---------------------------------------
+______________________________
+&lt; Mon Aug 16 13:17:47 CDT 2021 &gt;
+------------------------------
         \   ^__^
-         \  (oo)\_______
+        \  (oo)\_______
             (__)\       )\/\
                 ||----w |
                 ||     ||
@@ -278,11 +257,10 @@ INFO:    Image cached as SIF at /home/vagrant/.singularity/cache/oci-tmp/a692b57
 <p class="admonition-title">Note</p>
 <p>SIF files abstract Singularity containers as a single file. As with any executable, a SIF file can be executed directly.</p>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">fortune</span> <span class="pre">|</span> <span class="pre">cowsay</span> <span class="pre">|</span> <span class="pre">lolcat</span></code> is executed by <em>default</em> when this container is <code class="docutils literal notranslate"><span class="pre">run</span></code> by Singularity. Singularity’s <code class="docutils literal notranslate"><span class="pre">exec</span></code> command allows a different command to be executed; for example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity exec docker://godlovedc/lolcow fortune
-Don&#39;t go around saying the world owes you a living.  The world owes you
-nothing.  It was here first.
-        -- Mark Twain
+<p><code class="docutils literal notranslate"><span class="pre">date</span> <span class="pre">|</span> <span class="pre">cowsay</span> <span class="pre">|</span> <span class="pre">lolcat</span></code> is executed by <em>default</em> when this container is <code class="docutils literal notranslate"><span class="pre">run</span></code> by Singularity. Singularity’s <code class="docutils literal notranslate"><span class="pre">exec</span></code> command allows a different command to be executed; for example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity exec docker://sylabsio/lolcow date
+INFO:    Using cached SIF image
+Mon Aug 16 13:20:11 CDT 2
 </pre></div>
 </div>
 <div class="admonition note">
@@ -294,53 +272,46 @@ nothing.  It was here first.
 <p>Execution defaults are documented below - see <a class="reference internal" href="#sec-def-files-execution"><span class="std std-ref">Directing Execution</span></a> and <a class="reference internal" href="#sec-inspect-container-metadata"><span class="std std-ref">Container Metadata</span></a>.</p>
 </div>
 <p>In addition to non-interactive execution of an image from Docker Hub, Singularity provides support for an <em>interactive</em> <code class="docutils literal notranslate"><span class="pre">shell</span></code> session:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity shell docker://godlovedc/lolcow
-Singularity lolcow_latest.sif:~&gt; cat /etc/os-release
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity shell docker://sylabsio/lolcow
+INFO:    Using cached SIF image
+Singularity&gt; cat /etc/os-release
 NAME=&quot;Ubuntu&quot;
-VERSION=&quot;16.04.3 LTS (Xenial Xerus)&quot;
+VERSION=&quot;20.04.2 LTS (Focal Fossa)&quot;
 ID=ubuntu
 ID_LIKE=debian
-PRETTY_NAME=&quot;Ubuntu 16.04.3 LTS&quot;
-VERSION_ID=&quot;16.04&quot;
-HOME_URL=&quot;http://www.ubuntu.com/&quot;
-SUPPORT_URL=&quot;http://help.ubuntu.com/&quot;
-BUG_REPORT_URL=&quot;http://bugs.launchpad.net/ubuntu/&quot;
-VERSION_CODENAME=xenial
-UBUNTU_CODENAME=xenial
-Singularity lolcow_latest.sif:~&gt;
+PRETTY_NAME=&quot;Ubuntu 20.04.2 LTS&quot;
+VERSION_ID=&quot;20.04&quot;
+HOME_URL=&quot;https://www.ubuntu.com/&quot;
+SUPPORT_URL=&quot;https://help.ubuntu.com/&quot;
+BUG_REPORT_URL=&quot;https://bugs.launchpad.net/ubuntu/&quot;
+PRIVACY_POLICY_URL=&quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&quot;
+VERSION_CODENAME=focal
+UBUNTU_CODENAME=focal
+Singularity&gt;
 </pre></div>
 </div>
-<p>From this it is evident that use is being made of Ubuntu 16.04 <em>within</em> this container, whereas the shell <em>external</em> to the container is running a more recent release of Ubuntu (not illustrated here).</p>
+<p>From this it is evident that use is being made of Ubuntu 20.04 <em>within</em> this container, whereas the shell <em>external</em> to the container is running a more recent release of Ubuntu (not illustrated here).</p>
 <p><code class="docutils literal notranslate"><span class="pre">inspect</span></code> reveals the metadata for a Singularity container encapsulated via SIF; <a class="reference internal" href="#sec-inspect-container-metadata"><span class="std std-ref">Container Metadata</span></a> is documented below.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">search</span> <span class="pre">[search</span> <span class="pre">options...]</span> <span class="pre">&lt;search</span> <span class="pre">query&gt;</span></code> does <em>not</em> support Docker registries like <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>. Use the search box at Docker Hub to locate Docker images. Docker <code class="docutils literal notranslate"><span class="pre">pull</span></code> commands, e.g., <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">godlovedc/lolcow</span></code>, can be easily translated into the corresponding command for Singularity. The Docker <code class="docutils literal notranslate"><span class="pre">pull</span></code> command is available under “DETAILS” for a given image on Docker Hub.</p>
+<p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">search</span> <span class="pre">[search</span> <span class="pre">options...]</span> <span class="pre">&lt;search</span> <span class="pre">query&gt;</span></code> does <em>not</em> support Docker registries like <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>. Use the search box at Docker Hub to locate Docker images. Docker <code class="docutils literal notranslate"><span class="pre">pull</span></code> commands, e.g., <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">sylabsio/lolcow</span></code>, can be easily translated into the corresponding command for Singularity. The Docker <code class="docutils literal notranslate"><span class="pre">pull</span></code> command is available under “DETAILS” for a given image on Docker Hub.</p>
 </div>
 </section>
 <section id="making-use-of-public-images-from-docker-hub">
 <span id="sec-use-prebuilt-public-docker-images"></span><h2>Making use of public images from Docker Hub<a class="headerlink" href="#making-use-of-public-images-from-docker-hub" title="Permalink to this headline"></a></h2>
 <p>Singularity can make use of public images available from the <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>. By specifying the <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI for an image that has already been located, Singularity can <code class="docutils literal notranslate"><span class="pre">pull</span></code>  it - e.g.:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://godlovedc/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://sylabsio/lolcow
+INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
 Getting image source signatures
-Copying blob sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118
- 45.33 MiB / 45.33 MiB [====================================================] 2s
-Copying blob sha256:3b61febd4aefe982e0cb9c696d415137384d1a01052b50a85aae46439e15e49a
- 848 B / 848 B [============================================================] 0s
-Copying blob sha256:9d99b9777eb02b8943c0e72d7a7baec5c782f8fd976825c9d3fb48b3101aacc2
- 621 B / 621 B [============================================================] 0s
-Copying blob sha256:d010c8cf75d7eb5d2504d5ffa0d19696e8d745a457dd8d28ec6dd41d3763617e
- 853 B / 853 B [============================================================] 0s
-Copying blob sha256:7fac07fb303e0589b9c23e6f49d5dc1ff9d6f3c8c88cabe768b430bdb47f03a9
- 169 B / 169 B [============================================================] 0s
-Copying blob sha256:8e860504ff1ee5dc7953672d128ce1e4aa4d8e3716eb39fe710b849c64b20945
- 53.75 MiB / 53.75 MiB [====================================================] 3s
-Copying config sha256:73d5b1025fbfa138f2cacf45bbf3f61f7de891559fa25b28ab365c7d9c3cbd82
- 3.33 KiB / 3.33 KiB [======================================================] 0s
+Copying blob 16ec32c2132b done
+Copying blob 5ca731fc36c2 done
+Copying config fd0daa4d89 done
 Writing manifest to image destination
 Storing signatures
-INFO:    Creating SIF file...
-INFO:    Build complete: lolcow_latest.sif
+2021/08/16 13:22:26  info unpack layer: sha256:16ec32c2132b43494832a05f2b02f7a822479f8250c173d0ab27b3de78b2f058
+2021/08/16 13:22:27  info unpack layer: sha256:5ca731fc36c28789c5ddc3216563e8bfca2ab3ea10347e07554ebba1c953242e
+INFO:    Creating SIF file
 </pre></div>
 </div>
 <p>This <code class="docutils literal notranslate"><span class="pre">pull</span></code> results in a <em>local</em> copy of the Docker image in SIF, the Singularity Image Format:</p>
@@ -351,14 +322,12 @@ lolcow_latest.sif: a /usr/bin/env run-singularity script executable (binary data
 <p>In converting to SIF, individual layers of the Docker image have been <em>combined</em> into a single, native file for use by Singularity; there is no need to subsequently <code class="docutils literal notranslate"><span class="pre">build</span></code> the image for Singularity. For example, you can now <code class="docutils literal notranslate"><span class="pre">exec</span></code>, <code class="docutils literal notranslate"><span class="pre">run</span></code> or <code class="docutils literal notranslate"><span class="pre">shell</span></code> into the SIF version via Singularity, <a class="reference internal" href="#sec-action-commands-prebuilt-public-docker-images"><span class="std std-ref">as described above</span></a>.</p>
 <p id="sec-use-prebuilt-public-docker-images-sub-inspect"><code class="docutils literal notranslate"><span class="pre">inspect</span></code> reveals metadata for the container encapsulated via SIF:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity inspect lolcow_latest.sif
-
-{
-    &quot;org.label-schema.build-date&quot;: &quot;Thursday_6_December_2018_17:29:48_UTC&quot;,
-    &quot;org.label-schema.schema-version&quot;: &quot;1.0&quot;,
-    &quot;org.label-schema.usage.singularity.deffile.bootstrap&quot;: &quot;docker&quot;,
-    &quot;org.label-schema.usage.singularity.deffile.from&quot;: &quot;godlovedc/lolcow&quot;,
-    &quot;org.label-schema.usage.singularity.version&quot;: &quot;3.0.1-40.g84083b4f&quot;
-}
+org.label-schema.build-arch: amd64
+org.label-schema.build-date: Monday_16_August_2021_13:22:28_CDT
+org.label-schema.schema-version: 1.0
+org.label-schema.usage.singularity.deffile.bootstrap: docker
+org.label-schema.usage.singularity.deffile.from: sylabsio/lolcow
+org.label-schema.usage.singularity.version: 3.8.1
 </pre></div>
 </div>
 <div class="admonition note">
@@ -368,7 +337,7 @@ lolcow_latest.sif: a /usr/bin/env run-singularity script executable (binary data
 <p>SIF files built from Docker images are <em>not</em> crytographically signed:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity verify lolcow_latest.sif
 Verifying image: lolcow_latest.sif
-ERROR:   verification failed: error while searching for signature blocks: no signatures found for system partition
+FATAL:   Failed to verify container: integrity: signature not found for object group 1
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">sign</span></code> command allows a cryptographic signature to be added. Refer to
@@ -380,19 +349,18 @@ complete contents of that image.</p>
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">pull</span></code> is a one-time-only operation that builds a SIF file corresponding to the image retrieved from Docker Hub. Updates to the image on Docker Hub will <em>not</em> be reflected in the <em>local</em> copy.</p>
 </div>
-<p>In our example <code class="docutils literal notranslate"><span class="pre">docker://godlovedc/lolcow</span></code>, <code class="docutils literal notranslate"><span class="pre">godlovedc</span></code> specifies a Docker Hub user, whereas <code class="docutils literal notranslate"><span class="pre">lolcow</span></code> is the name of the repository. Adding the option to specifiy an image tag, the generic version of the URI is <code class="docutils literal notranslate"><span class="pre">docker://&lt;user&gt;/&lt;repo-name&gt;[:&lt;tag&gt;]</span></code>. <a class="reference external" href="https://docs.docker.com/docker-hub/repos/">Repositories on Docker Hub</a> provides additional details.</p>
+<p>In our example <code class="docutils literal notranslate"><span class="pre">docker://sylabsio/lolcow</span></code>, <code class="docutils literal notranslate"><span class="pre">sylabsio</span></code> specifies a Docker Hub user, whereas <code class="docutils literal notranslate"><span class="pre">lolcow</span></code> is the name of the repository. Adding the option to specifiy an image tag, the generic version of the URI is <code class="docutils literal notranslate"><span class="pre">docker://&lt;user&gt;/&lt;repo-name&gt;[:&lt;tag&gt;]</span></code>. <a class="reference external" href="https://docs.docker.com/docker-hub/repos/">Repositories on Docker Hub</a> provides additional details.</p>
 </section>
 <section id="making-use-of-private-images-from-docker-hub">
 <span id="sec-using-prebuilt-private-images"></span><h2>Making use of private images from Docker Hub<a class="headerlink" href="#making-use-of-private-images-from-docker-hub" title="Permalink to this headline"></a></h2>
 <p>After successful authentication, Singularity can also make use of <em>private</em> images available from the <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>. The three means available for authentication follow here. Before describing these means, it is instructive to illustrate the error generated when attempting access a private image <em>without</em> credentials:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://ilumb/mylolcow
-INFO:    Starting build...
-FATAL:   Unable to pull docker://ilumb/mylolcow: conveyor failed to get: Error reading manifest latest in docker.io/ilumb/mylolcow: errors:
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://sylabsio/private
+FATAL:   While making image from oci registry: error fetching image to cache: failed to get checksum for docker://sylabsio/private: Error reading manifest latest in docker.io/sylabsio/private: errors:
 denied: requested access to the resource is denied
-unauthorized: authentication required
+unauthorized: authentication require
 </pre></div>
 </div>
-<p>In this case, the <code class="docutils literal notranslate"><span class="pre">mylolcow</span></code> repository of user <code class="docutils literal notranslate"><span class="pre">ilumb</span></code> <strong>requires</strong> authentication through specification of a valid username and password.</p>
+<p>In this case, the <code class="docutils literal notranslate"><span class="pre">private</span></code> repository of user <code class="docutils literal notranslate"><span class="pre">sylabsio</span></code> <strong>requires</strong> authentication through specification of a valid username and password.</p>
 <section id="authentication-via-remote-login">
 <h3>Authentication via Remote Login<a class="headerlink" href="#authentication-via-remote-login" title="Permalink to this headline"></a></h3>
 <p>Singularity 3.7 introduces the ability for users to supply credentials on a per
@@ -405,8 +373,8 @@ or flags described below.</p>
 <section id="authentication-via-interactive-login">
 <span id="sec-authentication-via-docker-login"></span><h3>Authentication via Interactive Login<a class="headerlink" href="#authentication-via-interactive-login" title="Permalink to this headline"></a></h3>
 <p>Interactive login is the first of two means provided for authentication with Docker Hub. It is enabled through use of the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> option of Singularity’s <code class="docutils literal notranslate"><span class="pre">pull</span></code> command; for example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull --docker-login docker://ilumb/mylolcow
-Enter Docker Username: ilumb
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull --docker-login docker://sylabsio/private
+Enter Docker Username: sylabsio
 Enter Docker Password:
 INFO:    Starting build...
 Getting image source signatures
@@ -420,7 +388,7 @@ Copying config sha256:8a8f815257182b770d32dffff7f185013b4041d076e065893f9dd1e89a
 Writing manifest to image destination
 Storing signatures
 INFO:    Creating SIF file...
-INFO:    Build complete: mylolcow_latest.sif
+INFO:    Build complete: private_latest.sif
 </pre></div>
 </div>
 <p>After successful authentication, the private Docker image is pulled and converted to SIF as described above.</p>
@@ -432,12 +400,12 @@ INFO:    Build complete: mylolcow_latest.sif
 <section id="authentication-via-environment-variables">
 <span id="sec-authentication-via-environment-variables"></span><h3>Authentication via Environment Variables<a class="headerlink" href="#authentication-via-environment-variables" title="Permalink to this headline"></a></h3>
 <p>Environment variables offer an alternative means for authentication with Docker Hub. The <strong>required</strong> exports are as follows:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>export SINGULARITY_DOCKER_USERNAME=ilumb
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>export SINGULARITY_DOCKER_USERNAME=sylabsio
 export SINGULARITY_DOCKER_PASSWORD=&lt;redacted&gt;
 </pre></div>
 </div>
 <p>Of course, the <code class="docutils literal notranslate"><span class="pre">&lt;redacted&gt;</span></code> plain-text password needs to be replaced by a valid one to be of practical use.</p>
-<p>Based upon these exports, <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">singularity</span> <span class="pre">pull</span> <span class="pre">docker://ilumb/mylolcow</span></code> allows for the retrieval of this private image.</p>
+<p>Based upon these exports, <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">singularity</span> <span class="pre">pull</span> <span class="pre">docker://sylabsio/private</span></code> allows for the retrieval of this private image.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This approach for authentication supports both interactive and non-interactive sessions. However, the requirement for a plain-text password assigned to an envrionment variable, is the security compromise for this flexibility.</p>
@@ -456,11 +424,11 @@ export SINGULARITY_DOCKER_PASSWORD=&lt;redacted&gt;
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">registry</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">index.docker.io</span></code>. In other words,</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://godlovedc/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://sylabsio/lolcow
 </pre></div>
 </div>
 <p>is functionally equivalent to</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://index.docker.io/godlovedc/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://index.docker.io/sylabsio/lolcow
 </pre></div>
 </div>
 <p>From the above example, it is evident that</p>
@@ -517,19 +485,16 @@ INFO:    Build complete: pytorch_18.11-py3.sif
 <section id="remotely-hosted-images">
 <h4>Remotely Hosted Images<a class="headerlink" href="#remotely-hosted-images" title="Permalink to this headline"></a></h4>
 <p>In the simplest case, <code class="docutils literal notranslate"><span class="pre">build</span></code> is functionally equivalent to <code class="docutils literal notranslate"><span class="pre">pull</span></code>:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build mylolcow_latest.sif docker://godlovedc/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build mylolcow_latest.sif docker://sylabsio/lolcow
 INFO:    Starting build...
 Getting image source signatures
-Skipping fetch of repeat blob sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118
-Skipping fetch of repeat blob sha256:3b61febd4aefe982e0cb9c696d415137384d1a01052b50a85aae46439e15e49a
-Skipping fetch of repeat blob sha256:9d99b9777eb02b8943c0e72d7a7baec5c782f8fd976825c9d3fb48b3101aacc2
-Skipping fetch of repeat blob sha256:d010c8cf75d7eb5d2504d5ffa0d19696e8d745a457dd8d28ec6dd41d3763617e
-Skipping fetch of repeat blob sha256:7fac07fb303e0589b9c23e6f49d5dc1ff9d6f3c8c88cabe768b430bdb47f03a9
-Skipping fetch of repeat blob sha256:8e860504ff1ee5dc7953672d128ce1e4aa4d8e3716eb39fe710b849c64b20945
-Copying config sha256:73d5b1025fbfa138f2cacf45bbf3f61f7de891559fa25b28ab365c7d9c3cbd82
- 3.33 KiB / 3.33 KiB [======================================================] 0s
+Copying blob 16ec32c2132b skipped: already exists
+Copying blob 5ca731fc36c2 [--------------------------------------] 0.0b / 0.0b
+Copying config fd0daa4d89 done
 Writing manifest to image destination
 Storing signatures
+2021/08/16 13:26:42  info unpack layer: sha256:16ec32c2132b43494832a05f2b02f7a822479f8250c173d0ab27b3de78b2f058
+2021/08/16 13:26:43  info unpack layer: sha256:5ca731fc36c28789c5ddc3216563e8bfca2ab3ea10347e07554ebba1c953242e
 INFO:    Creating SIF file...
 INFO:    Build complete: mylolcow_latest.sif
 </pre></div>
@@ -537,22 +502,19 @@ INFO:    Build complete: mylolcow_latest.sif
 <p>This <code class="docutils literal notranslate"><span class="pre">build</span></code> results in a <em>local</em> copy of the Docker image in SIF, as did <code class="docutils literal notranslate"><span class="pre">pull</span></code> <a class="reference internal" href="#sec-use-prebuilt-public-docker-images"><span class="std std-ref">above</span></a>. Here, <code class="docutils literal notranslate"><span class="pre">build</span></code> has named the Singularity container <code class="docutils literal notranslate"><span class="pre">mylolcow_latest.sif</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">docker://godlovedc/lolcow</span></code> is the <strong>target</strong> provided as input for <code class="docutils literal notranslate"><span class="pre">build</span></code>. Armed with this target, <code class="docutils literal notranslate"><span class="pre">build</span></code> applies the appropriate bootstrap agent to create the container - in this case, one appropriate for Docker Hub.</p>
+<p><code class="docutils literal notranslate"><span class="pre">docker://sylabsio/lolcow</span></code> is the <strong>target</strong> provided as input for <code class="docutils literal notranslate"><span class="pre">build</span></code>. Armed with this target, <code class="docutils literal notranslate"><span class="pre">build</span></code> applies the appropriate bootstrap agent to create the container - in this case, one appropriate for Docker Hub.</p>
 </div>
 <p>In addition to a read-only container image in SIF (<strong>default</strong>), <code class="docutils literal notranslate"><span class="pre">build</span></code> allows for the creation of a writable (ch)root <em>directory</em> called a <strong>sandbox</strong> for interactive development via the <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> option:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build --sandbox mylolcow_latest_sandbox docker://godlovedc/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build --sandbox mylolcow_latest_sandbox docker://sylabsio/lolcow
 INFO:    Starting build...
 Getting image source signatures
-Skipping fetch of repeat blob sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118
-Skipping fetch of repeat blob sha256:3b61febd4aefe982e0cb9c696d415137384d1a01052b50a85aae46439e15e49a
-Skipping fetch of repeat blob sha256:9d99b9777eb02b8943c0e72d7a7baec5c782f8fd976825c9d3fb48b3101aacc2
-Skipping fetch of repeat blob sha256:d010c8cf75d7eb5d2504d5ffa0d19696e8d745a457dd8d28ec6dd41d3763617e
-Skipping fetch of repeat blob sha256:7fac07fb303e0589b9c23e6f49d5dc1ff9d6f3c8c88cabe768b430bdb47f03a9
-Skipping fetch of repeat blob sha256:8e860504ff1ee5dc7953672d128ce1e4aa4d8e3716eb39fe710b849c64b20945
-Copying config sha256:73d5b1025fbfa138f2cacf45bbf3f61f7de891559fa25b28ab365c7d9c3cbd82
- 3.33 KiB / 3.33 KiB [======================================================] 0s
+Copying blob 16ec32c2132b skipped: already exists
+Copying blob 5ca731fc36c2 [--------------------------------------] 0.0b / 0.0b
+Copying config fd0daa4d89 done
 Writing manifest to image destination
 Storing signatures
+2021/08/16 13:27:37  info unpack layer: sha256:16ec32c2132b43494832a05f2b02f7a822479f8250c173d0ab27b3de78b2f058
+2021/08/16 13:27:38  info unpack layer: sha256:5ca731fc36c28789c5ddc3216563e8bfca2ab3ea10347e07554ebba1c953242e
 INFO:    Creating sandbox directory...
 INFO:    Build complete: mylolcow_latest_sandbox
 </pre></div>
@@ -563,41 +525,46 @@ INFO:    Build complete: mylolcow_latest_sandbox
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">build</span></code> command of Singularity allows (e.g., development) sandbox containers to be converted into (e.g., production) read-only SIF containers, and vice-versa. Consult the <a class="reference internal" href="build_a_container.html#build-a-container"><span class="std std-ref">Build a container</span></a> documentation for the details.</p>
 <p>Implicit in the above command-line interactions is use of public images from Docker Hub. To make use of <strong>private</strong> images from Docker Hub, authentication is required. Available means for authentication were described above. Use of environment variables is functionally equivalent for Singularity <code class="docutils literal notranslate"><span class="pre">build</span></code> as it is for <code class="docutils literal notranslate"><span class="pre">pull</span></code>; see <a class="reference internal" href="#sec-authentication-via-environment-variables"><span class="std std-ref">Authentication via Environment Variables</span></a> above. For purely interactive use, authentication can be added to the <code class="docutils literal notranslate"><span class="pre">build</span></code> command as follows:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>singularity build --docker-login mylolcow_latest_il.sif docker://ilumb/mylolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>singularity build --docker-login my_private.sif docker://sylabsio/private
 </pre></div>
 </div>
-<p>(Recall that <code class="docutils literal notranslate"><span class="pre">docker://ilumb/mylolcow</span></code> is a private image available via Docker Hub.) See <a class="reference internal" href="#sec-authentication-via-docker-login"><span class="std std-ref">Authentication via Interactive Login</span></a> above regarding use of <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code>.</p>
+<p>(Recall that <code class="docutils literal notranslate"><span class="pre">docker://sylabsio/private</span></code> is a private image available via Docker Hub.) See <a class="reference internal" href="#sec-authentication-via-docker-login"><span class="std std-ref">Authentication via Interactive Login</span></a> above regarding use of <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code>.</p>
 </section>
 <section id="building-containers-remotely">
 <h4>Building Containers Remotely<a class="headerlink" href="#building-containers-remotely" title="Permalink to this headline"></a></h4>
 <p>By making use of the <a class="reference external" href="https://cloud.sylabs.io/builder">Sylabs Cloud Remote Builder</a>, it is possible to build SIF containers <em>remotely</em> from images hosted at Docker Hub. The Sylabs Cloud Remote Builder is a <strong>service</strong> that can be used from the Singularity command line or via its Web interface. Here use of the Singularity CLI is emphasized.</p>
 <p>Once you have an account for Sylabs Cloud, and have logged in to the portal, select <a class="reference external" href="https://cloud.sylabs.io/builder">Remote Builder</a>. The right-hand side of this page is devoted to use of the Singularity CLI. Self-generated API tokens are used to enable authenticated access to the Remote Builder. To create a token, follow the <a class="reference external" href="https://cloud.sylabs.io/auth/tokens">instructions provided</a>. Once the token has been created, run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span></code> and paste it at the prompt.</p>
 <p>The above token provides <em>authenticated</em> use of the Sylabs Cloud Remote Builder when <code class="docutils literal notranslate"><span class="pre">--remote</span></code> is <em>appended</em> to the Singularity <code class="docutils literal notranslate"><span class="pre">build</span></code> command. For example, for remotely hosted images:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build --remote lolcow_rb.sif docker://godlovedc/lolcow
-searching for available build agent.........INFO:    Starting build...
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build --remote lolcow_rb.sif docker://sylabsio/lolcow
+INFO:    Remote &quot;default&quot; added.
+INFO:    Access Token Verified!
+INFO:    Token stored in /root/.singularity/remote.yaml
+INFO:    Remote &quot;default&quot; now in use.
+INFO:    Starting build...
 Getting image source signatures
 Copying blob sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118
- 45.33 MiB / 45.33 MiB  0s
 Copying blob sha256:3b61febd4aefe982e0cb9c696d415137384d1a01052b50a85aae46439e15e49a
- 848 B / 848 B  0s
 Copying blob sha256:9d99b9777eb02b8943c0e72d7a7baec5c782f8fd976825c9d3fb48b3101aacc2
- 621 B / 621 B  0s
 Copying blob sha256:d010c8cf75d7eb5d2504d5ffa0d19696e8d745a457dd8d28ec6dd41d3763617e
- 853 B / 853 B  0s
 Copying blob sha256:7fac07fb303e0589b9c23e6f49d5dc1ff9d6f3c8c88cabe768b430bdb47f03a9
- 169 B / 169 B  0s
 Copying blob sha256:8e860504ff1ee5dc7953672d128ce1e4aa4d8e3716eb39fe710b849c64b20945
- 53.75 MiB / 53.75 MiB  0s
 Copying config sha256:73d5b1025fbfa138f2cacf45bbf3f61f7de891559fa25b28ab365c7d9c3cbd82
- 3.33 KiB / 3.33 KiB  0s
 Writing manifest to image destination
 Storing signatures
+2021/08/16 18:28:54  info unpack layer: sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118
+2021/08/16 18:28:56  info unpack layer: sha256:3b61febd4aefe982e0cb9c696d415137384d1a01052b50a85aae46439e15e49a
+2021/08/16 18:28:56  info unpack layer: sha256:9d99b9777eb02b8943c0e72d7a7baec5c782f8fd976825c9d3fb48b3101aacc2
+2021/08/16 18:28:56  info unpack layer: sha256:d010c8cf75d7eb5d2504d5ffa0d19696e8d745a457dd8d28ec6dd41d3763617e
+2021/08/16 18:28:56  info unpack layer: sha256:7fac07fb303e0589b9c23e6f49d5dc1ff9d6f3c8c88cabe768b430bdb47f03a9
+2021/08/16 18:28:56  info unpack layer: sha256:8e860504ff1ee5dc7953672d128ce1e4aa4d8e3716eb39fe710b849c64b20945
 INFO:    Creating SIF file...
-INFO:    Build complete: /tmp/image-341891107
-INFO:    Now uploading /tmp/image-341891107 to the library
- 87.94 MiB / 87.94 MiB  100.00% 38.96 MiB/s 2s
-INFO:    Setting tag latest
- 87.94 MiB / 87.94 MiB [===============================================================================] 100.00% 17.23 MiB/s 5s
+INFO:    Build complete: /tmp/image-990604230
+WARNING: Skipping container verification
+88.0MiB / 88.0MiB [========================================] 100 % 65.8 MiB/s 0s
+
+Library storage: using 136.43 MiB out of unlimited quota
+Container URL: https://cloud.sylabs.io/library/dtrudg-sylabs-2/remote-builds/rb-611aae5f596e300e6bbdda64
+INFO:    Build complete: lolcow_rb.sif
 </pre></div>
 </div>
 <div class="admonition note">
@@ -610,13 +577,13 @@ INFO:    Setting tag latest
 <section id="locally-available-images-cached-by-docker">
 <span id="sec-mandatory-headers-docker-locally-bootstrapped-cli"></span><h4>Locally Available Images: Cached by Docker<a class="headerlink" href="#locally-available-images-cached-by-docker" title="Permalink to this headline"></a></h4>
 <p>Singularity containers can be built at the command line from images cached <em>locally</em> by Docker. Suppose, for example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo docker images
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-godlovedc/lolcow    latest              577c1fe8e6d8        16 months ago       241MB
+sylabsio/lolcow     latest              5a15b484bc65        2 hours ago         188MB
 </pre></div>
 </div>
-<p>This indicates that <code class="docutils literal notranslate"><span class="pre">godlovedc/lolcow:latest</span></code> has been cached locally by Docker. Then</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build lolcow_from_docker_cache.sif docker-daemon://godlovedc/lolcow:latest
+<p>This indicates that <code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow:latest</span></code> has been cached locally by Docker. Then</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build lolcow_from_docker_cache.sif docker-daemon://sylabsio/lolcow:latest
 INFO:    Starting build...
 Getting image source signatures
 Copying blob sha256:a2022691bf950a72f9d2d84d557183cb9eee07c065a76485f1695784855c5193
@@ -661,45 +628,29 @@ INFO:    Build complete: lolcow_from_docker_cache.sif
 <p>The <code class="docutils literal notranslate"><span class="pre">lolcow.tar</span></code> file employed below in this example can be produced by making use of an environment in which Docker is available as follows:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Obtain a local copy of the image from Docker Hub via <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">godlovedc/lolcow</span></code>. Issuing the following command confirms that a copy of the desired image is available locally:</p></li>
+<li><p>Obtain a local copy of the image from Docker Hub via <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">sylabsio/lolcow</span></code>. Issuing the following command confirms that a copy of the desired image is available locally:</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-godlovedc/lolcow    latest              577c1fe8e6d8        17 months ago       241MB
+REPOSITORY                        TAG               IMAGE ID       CREATED          SIZE
+sylabsio/lolcow                   latest            5a15b484bc65   2 hours ago      188MB
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>Noting that the image identifier above is <code class="docutils literal notranslate"><span class="pre">577c1fe8e6d8</span></code>, the required archive can be created by <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">save</span> <span class="pre">577c1fe8e6d8</span> <span class="pre">-o</span> <span class="pre">lolcow.tar</span></code>.</p></li>
+<li><p>Noting that the image identifier above is <code class="docutils literal notranslate"><span class="pre">577c1fe8e6d8</span></code>, the required archive can be created by <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">save</span> <span class="pre">5a15b484bc65</span> <span class="pre">-o</span> <span class="pre">lolcow.tar</span></code>.</p></li>
 </ol>
 </div></blockquote>
 <p>Thus <code class="docutils literal notranslate"><span class="pre">lolcow.tar</span></code> is a locally stored archive in the <em>current</em> working directory with contents:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo tar tvf lolcow.tar
-drwxr-xr-x 0/0               0 2017-09-21 19:37 02aefa059d08482d344293d0ad27182a0a9d330ebc73abd92a1f9744844f91e9/
--rw-r--r-- 0/0               3 2017-09-21 19:37 02aefa059d08482d344293d0ad27182a0a9d330ebc73abd92a1f9744844f91e9/VERSION
--rw-r--r-- 0/0            1417 2017-09-21 19:37 02aefa059d08482d344293d0ad27182a0a9d330ebc73abd92a1f9744844f91e9/json
--rw-r--r-- 0/0       122219008 2017-09-21 19:37 02aefa059d08482d344293d0ad27182a0a9d330ebc73abd92a1f9744844f91e9/layer.tar
-drwxr-xr-x 0/0               0 2017-09-21 19:37 3762e087ebbb895fd9c38981c1f7bfc76c9879fd3fdadef64df49e92721bb527/
--rw-r--r-- 0/0               3 2017-09-21 19:37 3762e087ebbb895fd9c38981c1f7bfc76c9879fd3fdadef64df49e92721bb527/VERSION
--rw-r--r-- 0/0             482 2017-09-21 19:37 3762e087ebbb895fd9c38981c1f7bfc76c9879fd3fdadef64df49e92721bb527/json
--rw-r--r-- 0/0           14848 2017-09-21 19:37 3762e087ebbb895fd9c38981c1f7bfc76c9879fd3fdadef64df49e92721bb527/layer.tar
--rw-r--r-- 0/0            4432 2017-09-21 19:37 577c1fe8e6d84360932b51767b65567550141af0801ff6d24ad10963e40472c5.json
-drwxr-xr-x 0/0               0 2017-09-21 19:37 5bad884501c0e760bc0c9ca3ae3dca3f12c4abeb7d18194c364fec522b91b4f9/
--rw-r--r-- 0/0               3 2017-09-21 19:37 5bad884501c0e760bc0c9ca3ae3dca3f12c4abeb7d18194c364fec522b91b4f9/VERSION
--rw-r--r-- 0/0             482 2017-09-21 19:37 5bad884501c0e760bc0c9ca3ae3dca3f12c4abeb7d18194c364fec522b91b4f9/json
--rw-r--r-- 0/0            3072 2017-09-21 19:37 5bad884501c0e760bc0c9ca3ae3dca3f12c4abeb7d18194c364fec522b91b4f9/layer.tar
-drwxr-xr-x 0/0               0 2017-09-21 19:37 81ce2fd011bc8241ae72eaee9146116b7c289e941467ff276397720171e6c576/
--rw-r--r-- 0/0               3 2017-09-21 19:37 81ce2fd011bc8241ae72eaee9146116b7c289e941467ff276397720171e6c576/VERSION
--rw-r--r-- 0/0             406 2017-09-21 19:37 81ce2fd011bc8241ae72eaee9146116b7c289e941467ff276397720171e6c576/json
--rw-r--r-- 0/0       125649920 2017-09-21 19:37 81ce2fd011bc8241ae72eaee9146116b7c289e941467ff276397720171e6c576/layer.tar
-drwxr-xr-x 0/0               0 2017-09-21 19:37 a10239905b060fd8b17ab31f37957bd126774f52f5280767d3b2639692913499/
--rw-r--r-- 0/0               3 2017-09-21 19:37 a10239905b060fd8b17ab31f37957bd126774f52f5280767d3b2639692913499/VERSION
--rw-r--r-- 0/0             482 2017-09-21 19:37 a10239905b060fd8b17ab31f37957bd126774f52f5280767d3b2639692913499/json
--rw-r--r-- 0/0           15872 2017-09-21 19:37 a10239905b060fd8b17ab31f37957bd126774f52f5280767d3b2639692913499/layer.tar
-drwxr-xr-x 0/0               0 2017-09-21 19:37 ab6e1ca3392b2f4dbb60157cf99434b6975f37a767f530e293704a7348407634/
--rw-r--r-- 0/0               3 2017-09-21 19:37 ab6e1ca3392b2f4dbb60157cf99434b6975f37a767f530e293704a7348407634/VERSION
--rw-r--r-- 0/0             482 2017-09-21 19:37 ab6e1ca3392b2f4dbb60157cf99434b6975f37a767f530e293704a7348407634/json
--rw-r--r-- 0/0            5632 2017-09-21 19:37 ab6e1ca3392b2f4dbb60157cf99434b6975f37a767f530e293704a7348407634/layer.tar
--rw-r--r-- 0/0             574 1970-01-01 01:00 manifest.json
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ tar tvf lolcow.tar
+drwxr-xr-x  0 0      0           0 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/
+-rw-r--r--  0 0      0           3 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/VERSION
+-rw-r--r--  0 0      0         401 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/json
+-rw-r--r--  0 0      0    75156480 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/layer.tar
+-rw-r--r--  0 0      0        1499 Aug 16 11:22 5a15b484bc657d2b418f2c20628c29945ec19f1a0c019d004eaf0ca1db9f952b.json
+drwxr-xr-x  0 0      0           0 Aug 16 11:22 af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab/
+-rw-r--r--  0 0      0           3 Aug 16 11:22 af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab/VERSION
+-rw-r--r--  0 0      0         946 Aug 16 11:22 af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab/json
+-rw-r--r--  0 0      0   118356480 Aug 16 11:22 af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab/layer.tar
+-rw-r--r--  0 0      0         266 Dec 31  1969 manifest.json
 </pre></div>
 </div>
 <p>In other words, it is evident that this ‘tarball’ is a Docker-format image comprised of multiple layers along with metadata in a JSON manifest.</p>
@@ -707,19 +658,11 @@ drwxr-xr-x 0/0               0 2017-09-21 19:37 ab6e1ca3392b2f4dbb60157cf99434b6
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build lolcow_tar.sif docker-archive://lolcow.tar
 INFO:    Starting build...
 Getting image source signatures
-Copying blob sha256:a2022691bf950a72f9d2d84d557183cb9eee07c065a76485f1695784855c5193
+Copying blob sha256:2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171
  119.83 MiB / 119.83 MiB [==================================================] 6s
-Copying blob sha256:ae620432889d2553535199dbdd8ba5a264ce85fcdcd5a430974d81fc27c02b45
+Copying blob sha256:af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab
  15.50 KiB / 15.50 KiB [====================================================] 0s
-Copying blob sha256:c561538251751e3685c7c6e7479d488745455ad7f84e842019dcb452c7b6fecc
- 14.50 KiB / 14.50 KiB [====================================================] 0s
-Copying blob sha256:f96e6b25195f1b36ad02598b5d4381e41997c93ce6170cab1b81d9c68c514db0
- 5.50 KiB / 5.50 KiB [======================================================] 0s
-Copying blob sha256:7f7a065d245a6501a782bf674f4d7e9d0a62fa6bd212edbf1f17bad0d5cd0bfc
- 3.00 KiB / 3.00 KiB [======================================================] 0s
-Copying blob sha256:70ca7d49f8e9c44705431e3dade0636a2156300ae646ff4f09c904c138728839
- 116.56 MiB / 116.56 MiB [==================================================] 6s
-Copying config sha256:73d5b1025fbfa138f2cacf45bbf3f61f7de891559fa25b28ab365c7d9c3cbd82
+Copying config sha256:5a15b484bc657d2b418f2c20628c29945ec19f1a0c019d004eaf0ca1db9f952b
  3.33 KiB / 3.33 KiB [======================================================] 0s
 Writing manifest to image destination
 Storing signatures
@@ -773,14 +716,14 @@ INFO:    Setting tag latest
 <p>Singularity definition files are comprised of two parts - a <strong>header</strong> plus <strong>sections</strong>.</p>
 <p>When working with repositories such as Docker Hub, <code class="docutils literal notranslate"><span class="pre">Bootstrap</span></code> and <code class="docutils literal notranslate"><span class="pre">From</span></code> are <strong>mandatory</strong> keywords within the header; for example, if the file <code class="docutils literal notranslate"><span class="pre">lolcow.def</span></code> has contents</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
-<span class="k">From</span>: godlovedc/lolcow
+<span class="k">From</span>: sylabsio/lolcow
 </pre></div>
 </div>
 <p>then</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo singularity build lolcow.sif lolcow.def
 </pre></div>
 </div>
-<p>creates a Singularity container in SIF by bootstrapping from the public <code class="docutils literal notranslate"><span class="pre">godlovedc/lolcow</span></code> image from Docker Hub.</p>
+<p>creates a Singularity container in SIF by bootstrapping from the public <code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow</span></code> image from Docker Hub.</p>
 <p>In the above definition file, <code class="docutils literal notranslate"><span class="pre">docker</span></code> is one of numerous, possible bootstrap agents; this, and other bootstrap agents receive attention <a class="reference internal" href="appendix.html#build-docker-module"><span class="std std-ref">in the appendix</span></a>.</p>
 <p>Through <a class="reference internal" href="#sec-using-prebuilt-private-images"><span class="std std-ref">the means for authentication described above</span></a>, definition files permit use of private images hosted via Docker Hub. For example, if the file <code class="docutils literal notranslate"><span class="pre">mylolcow.def</span></code> has contents</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
@@ -806,35 +749,31 @@ INFO:    Setting tag latest
 <h4>Remotely Bootstrapped and Built Containers<a class="headerlink" href="#remotely-bootstrapped-and-built-containers" title="Permalink to this headline"></a></h4>
 <p>Consider again <a class="reference internal" href="#sec-def-file-mandatory-headers-remotely-bootstrapped"><span class="std std-ref">the definition file used the outset of the section above</span></a>:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
-<span class="k">From</span>: godlovedc/lolcow
+<span class="k">From</span>: sylabsio/lolcow
 </pre></div>
 </div>
 <p>With two small adjustments to the Singularity <code class="docutils literal notranslate"><span class="pre">build</span></code> command, the Sylabs Cloud Remote Builder can be utilized:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build --remote lolcow_rb_def.sif lolcow.def
-searching for available build agent......INFO:    Starting build...
+INFO:    Access Token Verified!
+INFO:    Token stored in /root/.singularity/remote.yaml
+INFO:    Remote &quot;default&quot; now in use.
+INFO:    Starting build...
 Getting image source signatures
-Copying blob sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118
- 45.33 MiB / 45.33 MiB  0s
-Copying blob sha256:3b61febd4aefe982e0cb9c696d415137384d1a01052b50a85aae46439e15e49a
- 848 B / 848 B  0s
-Copying blob sha256:9d99b9777eb02b8943c0e72d7a7baec5c782f8fd976825c9d3fb48b3101aacc2
- 621 B / 621 B  0s
-Copying blob sha256:d010c8cf75d7eb5d2504d5ffa0d19696e8d745a457dd8d28ec6dd41d3763617e
- 853 B / 853 B  0s
-Copying blob sha256:7fac07fb303e0589b9c23e6f49d5dc1ff9d6f3c8c88cabe768b430bdb47f03a9
- 169 B / 169 B  0s
-Copying blob sha256:8e860504ff1ee5dc7953672d128ce1e4aa4d8e3716eb39fe710b849c64b20945
- 53.75 MiB / 53.75 MiB  0s
-Copying config sha256:73d5b1025fbfa138f2cacf45bbf3f61f7de891559fa25b28ab365c7d9c3cbd82
- 3.33 KiB / 3.33 KiB  0s
+Copying blob sha256:16ec32c2132b43494832a05f2b02f7a822479f8250c173d0ab27b3de78b2f058
+Copying blob sha256:5ca731fc36c28789c5ddc3216563e8bfca2ab3ea10347e07554ebba1c953242e
+Copying config sha256:fd0daa4d897cbb381c3bad481073f53ee667a2216cc24961ca4d661e83e56b4b
 Writing manifest to image destination
 Storing signatures
+2021/08/16 18:34:41  info unpack layer: sha256:16ec32c2132b43494832a05f2b02f7a822479f8250c173d0ab27b3de78b2f058
+2021/08/16 18:34:42  info unpack layer: sha256:5ca731fc36c28789c5ddc3216563e8bfca2ab3ea10347e07554ebba1c953242e
 INFO:    Creating SIF file...
-INFO:    Build complete: /tmp/image-994007654
-INFO:    Now uploading /tmp/image-994007654 to the library
- 87.94 MiB / 87.94 MiB  100.00% 41.76 MiB/s 2s
-INFO:    Setting tag latest
- 87.94 MiB / 87.94 MiB [===============================================================================] 100.00% 19.08 MiB/s 4s
+INFO:    Build complete: /tmp/image-014136319
+WARNING: Skipping container verification
+71.5MiB / 71.5MiB [========================================] 100 % 50.9 MiB/s 0s
+
+Library storage: using 207.95 MiB out of unlimited quota
+Container URL: https://cloud.sylabs.io/library/dtrudg-sylabs-2/remote-builds/rb-611aafbcd78bf1ce9c2123c4
+INFO:    Build complete: lolcow_rb_def.sif
 </pre></div>
 </div>
 <p>In the above, <code class="docutils literal notranslate"><span class="pre">--remote</span></code> has been added as the <code class="docutils literal notranslate"><span class="pre">build</span></code> option that causes use of the Remote Builder service. A much more subtle change, however, is the <em>absence</em> of <code class="docutils literal notranslate"><span class="pre">sudo</span></code> ahead of <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">build</span></code>. Though subtle here, this absence is notable, as users can build containers via the Remote Builder with <em>escalated privileges</em>; in other words, steps in container creation that <em>require</em> <code class="docutils literal notranslate"><span class="pre">root</span></code> access <em>are</em> enabled via the Remote Builder even for (DevOps) users <em>without</em> admninistrative privileges locally.</p>
@@ -853,7 +792,7 @@ INFO:    Setting tag latest
 <span id="sec-mandatory-headers-docker-locally-bootstrapped-def-file"></span><h4>Mandatory Header Keywords: Locally Bootstrapped<a class="headerlink" href="#mandatory-header-keywords-locally-bootstrapped" title="Permalink to this headline"></a></h4>
 <p>When <code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> is the bootstrap agent in a Singularity definition file, SIF containers can be created from images cached locally by Docker. Suppose the definition file <code class="docutils literal notranslate"><span class="pre">lolcow-d.def</span></code> has contents:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker-daemon
-<span class="k">From</span>: godlovedc/lolcow:latest
+<span class="k">From</span>: sylabsio/lolcow:latest
 </pre></div>
 </div>
 <div class="admonition note">
@@ -925,7 +864,7 @@ INFO:    Build complete: lolcow_tar_def.sif
 <span id="sec-optional-headers-def-files"></span><h4>Optional Header Keywords<a class="headerlink" href="#optional-header-keywords" title="Permalink to this headline"></a></h4>
 <p>In the two-previous examples, the <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword specifies <em>both</em> the <code class="docutils literal notranslate"><span class="pre">user</span></code> and <code class="docutils literal notranslate"><span class="pre">repo-name</span></code> in making use of Docker Hub. <em>Optional</em> use of <code class="docutils literal notranslate"><span class="pre">Namespace</span></code> permits the more-granular split across two keywords:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
-<span class="k">Namespace</span>: godlovedc
+<span class="k">Namespace</span>: sylabsio
 <span class="k">From</span>: lolcow
 </pre></div>
 </div>
@@ -967,24 +906,22 @@ INFO:    Build complete: mypytorch.sif
 </section>
 <section id="directing-execution">
 <span id="sec-def-files-execution"></span><h4>Directing Execution<a class="headerlink" href="#directing-execution" title="Permalink to this headline"></a></h4>
-<p>The <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> corresponding to <code class="docutils literal notranslate"><span class="pre">godlovedc/lolcow</span></code> (and <a class="reference external" href="https://hub.docker.com/r/godlovedc/lolcow/dockerfile">available here</a>) is as follows:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>FROM ubuntu:16.04
+<p>The <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> corresponding to <code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow</span></code> is as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>FROM ubuntu:20.04
 
-RUN apt-get update &amp;&amp; apt-get install -y fortune cowsay lolcat
+RUN apt-get update &amp;&amp; apt-get install -y cowsay lolcat
 
 ENV PATH /usr/games:${PATH}
 ENV LC_ALL=C
 
-ENTRYPOINT fortune | cowsay | lolcat
+ENTRYPOINT date | cowsay | lolcat
 </pre></div>
 </div>
-<p>The execution-specific part of this <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> is the <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> - “… an optional definition for the first part of the command to be run …” according to <a class="reference external" href="https://docs.docker.com/search/?q=ENTRYPOINT">the available documentation</a>. After conversion to SIF, execution of <code class="docutils literal notranslate"><span class="pre">fortune</span> <span class="pre">|</span> <span class="pre">cowsay</span> <span class="pre">|</span> <span class="pre">lolcat</span></code> <em>within</em> the container produces the output:</p>
+<p>The execution-specific part of this <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> is the <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> - “… an optional definition for the first part of the command to be run …” according to <a class="reference external" href="https://docs.docker.com/search/?q=ENTRYPOINT">the available documentation</a>. After conversion to SIF, execution of <code class="docutils literal notranslate"><span class="pre">date</span> <span class="pre">|</span> <span class="pre">cowsay</span> <span class="pre">|</span> <span class="pre">lolcat</span></code> <em>within</em> the container produces the output:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./mylolcow.sif
- ______________________________________
-/ Q: How did you get into artificial   \
-| intelligence? A: Seemed logical -- I |
-\ didn&#39;t have any real intelligence.   /
- --------------------------------------
+______________________________
+&lt; Mon Aug 16 13:38:45 CDT 2021 &gt;
+ ------------------------------
         \   ^__^
          \  (oo)\_______
             (__)\       )\/\
@@ -995,24 +932,23 @@ ENTRYPOINT fortune | cowsay | lolcat
 <p>In addition, <code class="docutils literal notranslate"><span class="pre">CMD</span></code> allows an arbitrary string to be <em>appended</em> to the <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>. Thus, multiple commands or flags can be passed together through combined use.</p>
 <p>Suppose now that a Singularity <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> <strong>section</strong> is added to the definition file as follows:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
-<span class="k">Namespace</span>: godlovedc
+<span class="k">Namespace</span>: sylabsio
 <span class="k">From</span>: lolcow
 
 <span class="gh">%runscript</span>
 
-    fortune
+    date
 </pre></div>
 </div>
 <p>After conversion to SIF via the Singularity <code class="docutils literal notranslate"><span class="pre">build</span></code> command, exection of the resulting container produces the output:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./lolcow.sif
-This was the most unkindest cut of all.
-        -- William Shakespeare, &quot;Julius Caesar&quot;
+Mon Aug 16 13:39:20 CDT 2021
 </pre></div>
 </div>
 <p>In other words, introduction of a <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> section into the Singularity definition file causes the <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> of the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> to be <em>bypassed</em>. The presence of the <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> section would also bypass a <code class="docutils literal notranslate"><span class="pre">CMD</span></code> entry in the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>.</p>
 <p>To <em>preserve</em> use of <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> and/or <code class="docutils literal notranslate"><span class="pre">CMD</span></code> as defined in the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>, the <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> section must be <em>absent</em> from the Singularity definition. In this case, and to favor execution of <code class="docutils literal notranslate"><span class="pre">CMD</span></code> <em>over</em> <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>, a non-empty assignment of the <em>optional</em> <code class="docutils literal notranslate"><span class="pre">IncludeCmd</span></code> should be included in the header section of the Singularity definition file as follows:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
-<span class="k">Namespace</span>: godlovedc
+<span class="k">Namespace</span>: sylabsio
 <span class="k">From</span>: lolcow
 <span class="k">IncludeCmd</span>: yes
 </pre></div>
@@ -1040,24 +976,32 @@ This was the most unkindest cut of all.
 
 from: lolcow
 bootstrap: docker
-namespace: godlovedc
+namespace: sylabsio
 </pre></div>
 </div>
 <p>The runscript ‘inherited’ from the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> is:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity inspect --runscript lolcow.sif
-
-#!/bin/sh
-OCI_ENTRYPOINT=&#39;&quot;/bin/sh&quot; &quot;-c&quot; &quot;fortune | cowsay | lolcat&quot;&#39;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/sh
+OCI_ENTRYPOINT=&#39;&quot;/bin/sh&quot; &quot;-c&quot; &quot;date | cowsay | lolcat&quot;&#39;
 OCI_CMD=&#39;&#39;
+CMDLINE_ARGS=&quot;&quot;
+# prepare command line arguments for evaluation
+for arg in &quot;$@&quot;; do
+    CMDLINE_ARGS=&quot;${CMDLINE_ARGS} \&quot;$arg\&quot;&quot;
+done
+
 # ENTRYPOINT only - run entrypoint plus args
 if [ -z &quot;$OCI_CMD&quot; ] &amp;&amp; [ -n &quot;$OCI_ENTRYPOINT&quot; ]; then
-    SINGULARITY_OCI_RUN=&quot;${OCI_ENTRYPOINT} $@&quot;
+    if [ $# -gt 0 ]; then
+        SINGULARITY_OCI_RUN=&quot;${OCI_ENTRYPOINT} ${CMDLINE_ARGS}&quot;
+    else
+        SINGULARITY_OCI_RUN=&quot;${OCI_ENTRYPOINT}&quot;
+    fi
 fi
 
 # CMD only - run CMD or override with args
 if [ -n &quot;$OCI_CMD&quot; ] &amp;&amp; [ -z &quot;$OCI_ENTRYPOINT&quot; ]; then
     if [ $# -gt 0 ]; then
-        SINGULARITY_OCI_RUN=&quot;$@&quot;
+        SINGULARITY_OCI_RUN=&quot;${CMDLINE_ARGS}&quot;
     else
         SINGULARITY_OCI_RUN=&quot;${OCI_CMD}&quot;
     fi
@@ -1066,12 +1010,15 @@ fi
 # ENTRYPOINT and CMD - run ENTRYPOINT with CMD as default args
 # override with user provided args
 if [ $# -gt 0 ]; then
-    SINGULARITY_OCI_RUN=&quot;${OCI_ENTRYPOINT} $@&quot;
+    SINGULARITY_OCI_RUN=&quot;${OCI_ENTRYPOINT} ${CMDLINE_ARGS}&quot;
 else
     SINGULARITY_OCI_RUN=&quot;${OCI_ENTRYPOINT} ${OCI_CMD}&quot;
 fi
 
-eval ${SINGULARITY_OCI_RUN}
+# Evaluate shell expressions first and set arguments accordingly,
+# then execute final command as first container process
+eval &quot;set ${SINGULARITY_OCI_RUN}&quot;
+exec &quot;$@&quot;
 </pre></div>
 </div>
 <p>From this Bourne shell script, it is evident that only an <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> is detailed in the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>; thus the <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span> <span class="pre">only</span> <span class="pre">-</span> <span class="pre">run</span> <span class="pre">entrypoint</span> <span class="pre">plus</span> <span class="pre">args</span></code> conditional block is executed. In this case then, <a class="reference internal" href="#sec-def-files-execution-sub-execution-precedence"><span class="std std-ref">the third case of execution precedence</span></a> has been illustrated.</p>
@@ -1098,7 +1045,7 @@ eval ${SINGULARITY_OCI_RUN}
 <section id="image-pulls-revisited">
 <h4>Image Pulls Revisited<a class="headerlink" href="#image-pulls-revisited" title="Permalink to this headline"></a></h4>
 <p>After describing various <a class="reference internal" href="#sec-action-commands-prebuilt-public-docker-images"><span class="std std-ref">action commands that could be applied to images hosted remotely via Docker Hub</span></a>, the notion of having <a class="reference internal" href="#sec-use-prebuilt-public-docker-images"><span class="std std-ref">a local copy in Singularity’s native format for containerization (SIF)</span></a> was introduced:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://godlovedc/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://sylabsio/lolcow
 INFO:    Starting build...
 Getting image source signatures
 Copying blob sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118
@@ -1126,7 +1073,7 @@ INFO:    Build complete: lolcow_latest.sif
 <section id="image-caching-in-singularity">
 <h4>Image Caching in Singularity<a class="headerlink" href="#image-caching-in-singularity" title="Permalink to this headline"></a></h4>
 <p>If the <em>same</em> <code class="docutils literal notranslate"><span class="pre">pull</span></code> command is issued a <em>second</em> time, the output is different:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://godlovedc/lolcow
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://sylabsio/lolcow
 INFO:    Starting build...
 Getting image source signatures
 Skipping fetch of repeat blob sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118
@@ -1222,7 +1169,7 @@ INFO:    Build complete: lolcow_latest.sif
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">digest</span></code> blob in this index file includes the details for all of the blobs that collectively comprise the <code class="docutils literal notranslate"><span class="pre">godlovedc/lolcow</span></code> image:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">digest</span></code> blob in this index file includes the details for all of the blobs that collectively comprise the <code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow</span></code> image:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">$</span> <span class="nx">cat</span>  <span class="p">.</span><span class="o">/</span><span class="nx">blobs</span><span class="o">/</span><span class="nx">sha256</span><span class="o">/</span><span class="nx">f2a852991b0a36a9f3d6b2a33b98a461e9ede8393482f0deb5287afcbae2ce10</span> <span class="o">|</span> <span class="nx">jq</span>
 <span class="p">{</span>
   <span class="s2">&quot;schemaVersion&quot;</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
@@ -1394,8 +1341,8 @@ FATAL:   While performing build: conveyor failed to get: more than one image in 
 <section id="working-locally-from-the-singularity-command-line-oci-archive-bootstrap-agent">
 <span id="cli-oci-archive-bootstrap-agent"></span><h4>Working Locally from the Singularity Command Line: <code class="docutils literal notranslate"><span class="pre">oci-archive</span></code> Bootstrap Agent<a class="headerlink" href="#working-locally-from-the-singularity-command-line-oci-archive-bootstrap-agent" title="Permalink to this headline"></a></h4>
 <p>OCI archives, i.e., <code class="docutils literal notranslate"><span class="pre">tar</span></code> files obeying the OCI Image Layout Specification <a class="reference internal" href="#misc-oci-image-layout-specification"><span class="std std-ref">as discussed previously</span></a>, can seed creation of a container for Singularity. In this case, use is made of the <code class="docutils literal notranslate"><span class="pre">oci-archive</span></code> bootstrap agent.</p>
-<p>To illustrate this agent, it is convenient to build the archive from the Singularity cache. After a single <code class="docutils literal notranslate"><span class="pre">pull</span></code> of the <code class="docutils literal notranslate"><span class="pre">godlovedc/lolcow</span></code> image from Docker Hub, a <code class="docutils literal notranslate"><span class="pre">tar</span></code> format archive can be generated from the <code class="docutils literal notranslate"><span class="pre">$HOME/.singularity/cache/oci</span></code> directory as follows:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ tar cvf $HOME/godlovedc_lolcow.tar *
+<p>To illustrate this agent, it is convenient to build the archive from the Singularity cache. After a single <code class="docutils literal notranslate"><span class="pre">pull</span></code> of the <code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow</span></code> image from Docker Hub, a <code class="docutils literal notranslate"><span class="pre">tar</span></code> format archive can be generated from the <code class="docutils literal notranslate"><span class="pre">$HOME/.singularity/cache/oci</span></code> directory as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ tar cvf $HOME/sylabsio.tar *
 blobs/
 blobs/sha256/
 blobs/sha256/73d5b1025fbfa138f2cacf45bbf3f61f7de891559fa25b28ab365c7d9c3cbd82
@@ -1411,7 +1358,7 @@ oci-layout
 </pre></div>
 </div>
 <p>The native container <code class="docutils literal notranslate"><span class="pre">lolcow_oci_tarfile.sif</span></code> for use by Singularity can be created by issuing the <code class="docutils literal notranslate"><span class="pre">build</span></code> command as follows:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build lolcow_oci_tarfile.sif oci-archive://godlovedc_lolcow.tar
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build lolcow_oci_tarfile.sif oci-archive://sylabsio.tar
 Build target already exists. Do you want to overwrite? [N/y] y
 INFO:    Starting build...
 Getting image source signatures
@@ -1535,7 +1482,7 @@ INFO:    Build complete: /home/vagrant/lolcow_oci_cache.sif
 <p>Required use of <code class="docutils literal notranslate"><span class="pre">sudo</span></code> allows Singularity to <code class="docutils literal notranslate"><span class="pre">build</span></code> the SIF container <code class="docutils literal notranslate"><span class="pre">lolcow_oci_cache.sif</span></code>.</p>
 <p>When it comes to OCI archives, the definition file, <code class="docutils literal notranslate"><span class="pre">lolcow-ocia.def</span></code> corresponding to the command-line invocation above is:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: oci-archive
-<span class="k">From</span>: godlovedc_lolcow.tar
+<span class="k">From</span>: sylabsio.tar
 </pre></div>
 </div>
 <p>Applying <code class="docutils literal notranslate"><span class="pre">build</span></code> as follows</p>
@@ -1575,7 +1522,7 @@ INFO:    Build complete: lolcow_oci_tarfile.sif
   <span class="s2">&quot;org.label-schema.build-date&quot;</span><span class="o">:</span> <span class="s2">&quot;Sunday_27_January_2019_0:5:29_UTC&quot;</span><span class="p">,</span>
   <span class="s2">&quot;org.label-schema.schema-version&quot;</span><span class="o">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
   <span class="s2">&quot;org.label-schema.usage.singularity.deffile.bootstrap&quot;</span><span class="o">:</span> <span class="s2">&quot;oci-archive&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;org.label-schema.usage.singularity.deffile.from&quot;</span><span class="o">:</span> <span class="s2">&quot;godlovedc_lolcow.tar&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;org.label-schema.usage.singularity.deffile.from&quot;</span><span class="o">:</span> <span class="s2">&quot;sylabsio.tar&quot;</span><span class="p">,</span>
   <span class="s2">&quot;org.label-schema.usage.singularity.version&quot;</span><span class="o">:</span> <span class="s2">&quot;3.0.3-1&quot;</span>
 <span class="p">}</span>
 </pre></div>
@@ -1641,7 +1588,7 @@ Removing /home/dave/.singularity/cache/oras
 <ol class="arabic simple" start="5">
 <li><p>Read-only <code class="docutils literal notranslate"><span class="pre">/</span></code> filesystem</p></li>
 </ol>
-<p>Singularity mounts a container’s <code class="docutils literal notranslate"><span class="pre">/</span></code> filesystem in read-only mode. To ensure a Docker container meets Singularity’s requirements, it may prove useful to execute <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">--read-only</span> <span class="pre">--tmpfs</span> <span class="pre">/run</span> <span class="pre">--tmpfs</span> <span class="pre">/tmp</span> <span class="pre">godlovedc/lolcow</span></code>. The best practioce here is:</p>
+<p>Singularity mounts a container’s <code class="docutils literal notranslate"><span class="pre">/</span></code> filesystem in read-only mode. To ensure a Docker container meets Singularity’s requirements, it may prove useful to execute <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">--read-only</span> <span class="pre">--tmpfs</span> <span class="pre">/run</span> <span class="pre">--tmpfs</span> <span class="pre">/tmp</span> <span class="pre">sylabsio/lolcow</span></code>. The best practice here is:</p>
 <blockquote>
 <div><p>“Ensure Docker containers meet Singularity’s read-only <code class="docutils literal notranslate"><span class="pre">/</span></code> filesystem requirement”</p>
 </div></blockquote>
@@ -1674,7 +1621,7 @@ Removing /home/dave/.singularity/cache/oras
 <blockquote>
 <div><p>“Employ Singularity’s <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> by default to avoid execution ambiguity”</p>
 </div></blockquote>
-<p>Note that the <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> can be bypassed completely, e.g., <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-i</span> <span class="pre">-t</span> <span class="pre">--entrypoint</span> <span class="pre">/bin/bash</span> <span class="pre">godlovedc/lolcow</span></code>. This allows for an interactive session within the container, that may prove useful in validating the built runtime.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> can be bypassed completely, e.g., <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-i</span> <span class="pre">-t</span> <span class="pre">--entrypoint</span> <span class="pre">/bin/bash</span> <span class="pre">sylabsio/lolcow</span></code>. This allows for an interactive session within the container, that may prove useful in validating the built runtime.</p>
 </div></blockquote>
 <p>Best practices emerge from experience. Contributions that allow additional experiences to be shared as best practices are always encouraged. Please refer to <a class="reference internal" href="contributing.html#contributing"><span class="std std-ref">Contributing</span></a> for additional details.</p>
 </section>
