@@ -98,7 +98,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#r-runscript"><code class="docutils literal notranslate"><span class="pre">-r</span></code> / <code class="docutils literal notranslate"><span class="pre">--runscript</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#t-test"><code class="docutils literal notranslate"><span class="pre">-t</span></code> / <code class="docutils literal notranslate"><span class="pre">--test</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#e-environment"><code class="docutils literal notranslate"><span class="pre">-e</span></code> / <code class="docutils literal notranslate"><span class="pre">--environment</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#h-helpfile"><code class="docutils literal notranslate"><span class="pre">-h</span></code> / <code class="docutils literal notranslate"><span class="pre">--helpfile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#h-helpfile"><code class="docutils literal notranslate"><span class="pre">-H</span></code> / <code class="docutils literal notranslate"><span class="pre">--helpfile</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#j-json"><code class="docutils literal notranslate"><span class="pre">-j</span></code> / <code class="docutils literal notranslate"><span class="pre">--json</span></code></a></li>
 </ul>
 </li>
@@ -398,7 +398,7 @@ Overridden
 <h3>Manipulating <code class="docutils literal notranslate"><span class="pre">PATH</span></code><a class="headerlink" href="#manipulating-path" title="Permalink to this headline"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">PATH</span></code> is a special environment variable that tells a system where
 to look for programs that can be run. <code class="docutils literal notranslate"><span class="pre">PATH</span></code> contains multiple
-filesytem locations (paths) separated by colons. When you ask to run a
+filesystem locations (paths) separated by colons. When you ask to run a
 program <code class="docutils literal notranslate"><span class="pre">myprog</span></code>, the system looks through these locations one by
 one, until it finds <code class="docutils literal notranslate"><span class="pre">myprog</span></code>.</p>
 <p>To ensure containers work correctly, when a host <code class="docutils literal notranslate"><span class="pre">PATH</span></code> might
@@ -700,8 +700,8 @@ one or more environment files, depending on how the container was built.</p>
 </div>
 </section>
 <section id="h-helpfile">
-<h4><code class="docutils literal notranslate"><span class="pre">-h</span></code> / <code class="docutils literal notranslate"><span class="pre">--helpfile</span></code><a class="headerlink" href="#h-helpfile" title="Permalink to this headline"></a></h4>
-<p>The <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">-helpfile</span></code> flag will show the container’s description
+<h4><code class="docutils literal notranslate"><span class="pre">-H</span></code> / <code class="docutils literal notranslate"><span class="pre">--helpfile</span></code><a class="headerlink" href="#h-helpfile" title="Permalink to this headline"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">-H</span></code> or <code class="docutils literal notranslate"><span class="pre">-helpfile</span></code> flag will show the container’s description
 in the <code class="docutils literal notranslate"><span class="pre">%help</span></code> section of its definition file.</p>
 <p>You can call it this way:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity inspect --helpfile jupyter.sif
@@ -783,7 +783,7 @@ carry out the action commands. (e.g. <code class="docutils literal notranslate">
 later versions of Singularity, these files may be dynamically written at
 runtime, <em>and should not be modified</em> in the container.</p></li>
 <li><p><strong>env</strong>: All <code class="docutils literal notranslate"><span class="pre">*.sh</span></code> files in this directory are sourced in
-alpha-numeric order when the container is started. For legacy
+alphanumeric order when the container is started. For legacy
 purposes there is a symbolic link called <code class="docutils literal notranslate"><span class="pre">/environment</span></code> that
 points to <code class="docutils literal notranslate"><span class="pre">/.singularity.d/env/90-environment.sh</span></code>. Whenever
 possible, avoid modifying or creating environment files manually to

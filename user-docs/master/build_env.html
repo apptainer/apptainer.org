@@ -54,7 +54,10 @@
 <li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Build Environment</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cache-folders">Cache Folders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cache-folders">Cache Folders</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#boltdb-corruption-errors">BoltDB Corruption Errors</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#cache-commands">Cache commands</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#listing-cache">Listing Cache</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cleaning-the-cache">Cleaning the Cache</a></li>
@@ -147,12 +150,18 @@ sources, and any OCI/docker layers used to create them. The cache is
 created at <code class="docutils literal notranslate"><span class="pre">$HOME/.singularity/cache</span></code> by default. The location of
 the cache can be changed by setting the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code>
 environment variable.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
 <p>When you run builds as root, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, images will be cached
 in root’s home at <code class="docutils literal notranslate"><span class="pre">/root</span></code> and not your user’s home. Use the
-<code class="docutils literal notranslate"><span class="pre">-E</span></code> option to sudo to pass through a <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code>
-environment variable.</p>
+<code class="docutils literal notranslate"><span class="pre">-E</span></code> option to sudo to pass through the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code>
+environment variable, if you set it.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export SINGULARITY_CACHEDIR=/tmp/user/temporary-cache
+
+# Running a build under your user account
+$ singularity build --fakeroot myimage.sif mydef.def
+
+# Running a build with sudo, must use -E to pass env var
+$ sudo -E singularity build myimage.sif mydef.def
+</pre></div>
 </div>
 <p>If you change the value of <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code> be sure to choose
 a location that is:</p>
@@ -169,7 +178,7 @@ container images anticipated.</p></li>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If you are not certain that your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> or
-<code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code> filesytems support atomic rename, do not
+<code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code> filesystems support atomic rename, do not
 run Singularity in parallel using remote container URLs. Instead
 use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> to create a local SIF image, and then run
 this SIF image in a parallel step. An alternative is to use the
@@ -193,6 +202,18 @@ needed in future runs.</p>
 as this may cause checksum / integrity errors when you run or build
 containers. If you experience problems use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">cache</span> <span class="pre">clean</span></code>
 to reset the cache to a clean, empty state.</p>
+<section id="boltdb-corruption-errors">
+<h3>BoltDB Corruption Errors<a class="headerlink" href="#boltdb-corruption-errors" title="Permalink to this headline"></a></h3>
+<p>The library that Singularity uses to retrieve and cache Docker/OCI layers
+keeps track of them using a single file database. If your home directory is on a
+network filesystem which experiences interruptions, or you run out of storage,
+it is possible for this database to become inconsistent.</p>
+<p>If you observe error messages when trying to run Singularity that mention
+<cite>github.com/etcd-io/bbolt</cite> then you should remove the database file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">~/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">containers</span><span class="o">/</span><span class="n">cache</span><span class="o">/</span><span class="n">blob</span><span class="o">-</span><span class="n">info</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">boltdb</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="cache-commands">
 <h2>Cache commands<a class="headerlink" href="#cache-commands" title="Permalink to this headline"></a></h2>

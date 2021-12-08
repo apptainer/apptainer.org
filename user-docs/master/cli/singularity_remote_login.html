@@ -205,14 +205,14 @@
              
   <section id="singularity-remote-login">
 <span id="id1"></span><h1>singularity remote login<a class="headerlink" href="#singularity-remote-login" title="Permalink to this headline"></a></h1>
-<p>Log into a singularity remote endpoint, an OCI/Docker registry or a keyserver using credentials</p>
+<p>Login to a singularity remote endpoint, an OCI/Docker registry or a keyserver using credentials</p>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>The ‘remote login’ command allows you to set credentials for a specific endpoint,
-an OCI/Docker registry or a keyserver. This command can produce a link directing you to
-the token service you can use to generate a valid token. If no endpoint or registry is
-specified, it will try the default remote endpoint (SylabsCloud).</p>
+an OCI/Docker registry or a keyserver.</p>
+<p>If no endpoint or registry is specified, the command will login to the currently
+active remote endpoint. This is cloud.sylabs.io by default.</p>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">remote</span> <span class="n">login</span> <span class="p">[</span><span class="n">login</span> <span class="n">options</span><span class="o">...</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">remote_name</span><span class="o">|</span><span class="n">registry_uri</span><span class="o">&gt;</span>
 </pre></div>
@@ -224,7 +224,14 @@ specified, it will try the default remote endpoint (SylabsCloud).</p>
 $ singularity remote login SylabsCloud
 
 To login in to a docker/OCI registry:
-$ singularity remote login --username foo --password bar docker://docker.io
+$ singularity remote login --username foo docker://docker.io
+$ singularity remote login --username foo oras://myregistry.example.com
+
+Note that many cloud OCI registries use token based authentication. The token
+should be specified as the password for login. A username is still required. E.g.
+when using a standard Azure identity and token to login to an ACR registry the
+username &#39;00000000-0000-0000-0000-000000000000&#39; is required. Consult your provider
+documentation for detail of their login requirements.
 </pre></div>
 </div>
 </section>
@@ -232,10 +239,10 @@ $ singularity remote login --username foo --password bar docker://docker.io
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>               <span class="n">help</span> <span class="k">for</span> <span class="n">login</span>
 <span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">--</span><span class="n">insecure</span>           <span class="n">allow</span> <span class="n">insecure</span> <span class="n">login</span>
-<span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="o">--</span><span class="n">password</span> <span class="n">string</span>    <span class="n">password</span> <span class="n">to</span> <span class="n">authenticate</span> <span class="k">with</span>
+<span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="o">--</span><span class="n">password</span> <span class="n">string</span>    <span class="n">password</span> <span class="o">/</span> <span class="n">token</span> <span class="n">to</span> <span class="n">authenticate</span> <span class="k">with</span>
     <span class="o">--</span><span class="n">password</span><span class="o">-</span><span class="n">stdin</span>     <span class="n">take</span> <span class="n">password</span> <span class="kn">from</span> <span class="nn">standard</span> <span class="nb">input</span>
-    <span class="o">--</span><span class="n">tokenfile</span> <span class="n">string</span>   <span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">file</span> <span class="n">holding</span> <span class="n">token</span>
-<span class="o">-</span><span class="n">u</span><span class="p">,</span> <span class="o">--</span><span class="n">username</span> <span class="n">string</span>    <span class="n">username</span> <span class="n">to</span> <span class="n">authenticate</span> <span class="k">with</span> <span class="p">(</span><span class="n">leave</span> <span class="n">it</span> <span class="n">empty</span> <span class="k">for</span> <span class="n">token</span> <span class="n">authentication</span><span class="p">)</span>
+    <span class="o">--</span><span class="n">tokenfile</span> <span class="n">string</span>   <span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">file</span> <span class="n">holding</span> <span class="n">auth</span> <span class="n">token</span> <span class="k">for</span> <span class="n">login</span> <span class="p">(</span><span class="n">remote</span> <span class="n">endpoints</span> <span class="n">only</span><span class="p">)</span>
+<span class="o">-</span><span class="n">u</span><span class="p">,</span> <span class="o">--</span><span class="n">username</span> <span class="n">string</span>    <span class="n">username</span> <span class="n">to</span> <span class="n">authenticate</span> <span class="k">with</span> <span class="p">(</span><span class="n">required</span> <span class="k">for</span> <span class="n">Docker</span><span class="o">/</span><span class="n">OCI</span> <span class="n">registry</span> <span class="n">login</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>

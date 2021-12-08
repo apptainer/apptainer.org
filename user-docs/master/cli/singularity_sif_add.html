@@ -157,6 +157,7 @@
 <li class="toctree-l2"><a class="reference internal" href="singularity_sif.html">singularity sif</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">singularity sif add</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#see-also">SEE ALSO</a></li>
 </ul>
@@ -204,11 +205,19 @@
              
   <section id="singularity-sif-add">
 <span id="id1"></span><h1>singularity sif add<a class="headerlink" href="#singularity-sif-add" title="Permalink to this headline"></a></h1>
-<p>Add a data object to a SIF file</p>
+<p>Add data object</p>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline"></a></h2>
-<p>Add a data object to a SIF file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">sif</span> <span class="n">add</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">containerfile</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">dataobjectfile</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">flags</span><span class="p">]</span>
+<p>Add a data object to a SIF image.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">sif</span> <span class="n">add</span> <span class="o">&lt;</span><span class="n">sif_path</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">object_path</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">flags</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sif</span> <span class="n">add</span> <span class="n">image</span><span class="o">.</span><span class="n">sif</span> <span class="n">recipe</span><span class="o">.</span><span class="k">def</span> <span class="o">-</span><span class="n">datatype</span> <span class="mi">1</span>
+<span class="n">sif</span> <span class="n">add</span> <span class="n">image</span><span class="o">.</span><span class="n">sif</span> <span class="n">rootfs</span><span class="o">.</span><span class="n">squashfs</span> <span class="o">--</span><span class="n">datatype</span> <span class="mi">4</span> <span class="o">--</span><span class="n">parttype</span> <span class="mi">1</span> <span class="o">--</span><span class="n">partfs</span> <span class="mi">1</span> <span class="o">----</span><span class="n">partarch</span> <span class="mi">2</span>
+<span class="n">sif</span> <span class="n">add</span> <span class="n">image</span><span class="o">.</span><span class="n">sif</span> <span class="n">signature</span><span class="o">.</span><span class="n">bin</span> <span class="o">-</span><span class="n">datatype</span> <span class="mi">5</span> <span class="o">--</span><span class="n">signentity</span> <span class="mi">433</span><span class="n">FE984155206BD962725E20E8713472A879943</span> <span class="o">--</span><span class="n">signhash</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </section>
@@ -218,39 +227,40 @@
     <span class="o">--</span><span class="n">datatype</span> <span class="nb">int</span>        <span class="n">the</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">data</span> <span class="n">to</span> <span class="n">add</span>
                           <span class="p">[</span><span class="n">NEEDED</span><span class="p">,</span> <span class="n">no</span> <span class="n">default</span><span class="p">]:</span>
                             <span class="mi">1</span><span class="o">-</span><span class="n">Deffile</span><span class="p">,</span>   <span class="mi">2</span><span class="o">-</span><span class="n">EnvVar</span><span class="p">,</span>    <span class="mi">3</span><span class="o">-</span><span class="n">Labels</span><span class="p">,</span>
-                            <span class="mi">4</span><span class="o">-</span><span class="n">Partition</span><span class="p">,</span> <span class="mi">5</span><span class="o">-</span><span class="n">Signature</span><span class="p">,</span> <span class="mi">6</span><span class="o">-</span><span class="n">GenericJSON</span>
+                            <span class="mi">4</span><span class="o">-</span><span class="n">Partition</span><span class="p">,</span> <span class="mi">5</span><span class="o">-</span><span class="n">Signature</span><span class="p">,</span> <span class="mi">6</span><span class="o">-</span><span class="n">GenericJSON</span><span class="p">,</span>
+                            <span class="mi">7</span><span class="o">-</span><span class="n">Generic</span><span class="p">,</span>   <span class="mi">8</span><span class="o">-</span><span class="n">CryptoMessage</span>
     <span class="o">--</span><span class="n">filename</span> <span class="n">string</span>     <span class="nb">set</span> <span class="n">logical</span> <span class="n">filename</span><span class="o">/</span><span class="n">handle</span> <span class="p">[</span><span class="n">default</span><span class="p">:</span> <span class="nb">input</span> <span class="n">filename</span><span class="p">]</span>
-    <span class="o">--</span><span class="n">groupid</span> <span class="nb">int</span>         <span class="nb">set</span> <span class="n">groupid</span> <span class="p">[</span><span class="n">default</span><span class="p">:</span> <span class="n">DescrUnusedGroup</span><span class="p">]</span>
+    <span class="o">--</span><span class="n">groupid</span> <span class="n">uint32</span>      <span class="nb">set</span> <span class="n">groupid</span> <span class="p">[</span><span class="n">default</span><span class="p">:</span> <span class="mi">0</span><span class="p">]</span>
 <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>                <span class="n">help</span> <span class="k">for</span> <span class="n">add</span>
-    <span class="o">--</span><span class="n">link</span> <span class="nb">int</span>            <span class="nb">set</span> <span class="n">link</span> <span class="n">pointer</span> <span class="p">[</span><span class="n">default</span><span class="p">:</span> <span class="n">DescrUnusedLink</span><span class="p">]</span>
-    <span class="o">--</span><span class="n">partarch</span> <span class="nb">int</span>        <span class="n">the</span> <span class="n">main</span> <span class="n">architecture</span> <span class="n">used</span> <span class="p">(</span><span class="k">with</span> <span class="o">-</span><span class="n">datatype</span> <span class="mi">4</span><span class="o">-</span><span class="n">Partition</span><span class="p">)</span>
+    <span class="o">--</span><span class="n">link</span> <span class="n">uint32</span>         <span class="nb">set</span> <span class="n">link</span> <span class="n">pointer</span> <span class="p">[</span><span class="n">default</span><span class="p">:</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="o">--</span><span class="n">partarch</span> <span class="n">int32</span>      <span class="n">the</span> <span class="n">main</span> <span class="n">architecture</span> <span class="n">used</span> <span class="p">(</span><span class="k">with</span> <span class="o">-</span><span class="n">datatype</span> <span class="mi">4</span><span class="o">-</span><span class="n">Partition</span><span class="p">)</span>
                           <span class="p">[</span><span class="n">NEEDED</span><span class="p">,</span> <span class="n">no</span> <span class="n">default</span><span class="p">]:</span>
                             <span class="mi">1</span><span class="o">-</span><span class="mi">386</span><span class="p">,</span>       <span class="mi">2</span><span class="o">-</span><span class="n">amd64</span><span class="p">,</span>     <span class="mi">3</span><span class="o">-</span><span class="n">arm</span><span class="p">,</span>
                             <span class="mi">4</span><span class="o">-</span><span class="n">arm64</span><span class="p">,</span>     <span class="mi">5</span><span class="o">-</span><span class="n">ppc64</span><span class="p">,</span>     <span class="mi">6</span><span class="o">-</span><span class="n">ppc64le</span><span class="p">,</span>
                             <span class="mi">7</span><span class="o">-</span><span class="n">mips</span><span class="p">,</span>      <span class="mi">8</span><span class="o">-</span><span class="n">mipsle</span><span class="p">,</span>    <span class="mi">9</span><span class="o">-</span><span class="n">mips64</span><span class="p">,</span>
                             <span class="mi">10</span><span class="o">-</span><span class="n">mips64le</span><span class="p">,</span> <span class="mi">11</span><span class="o">-</span><span class="n">s390x</span>
-    <span class="o">--</span><span class="n">partfs</span> <span class="nb">int</span>          <span class="n">the</span> <span class="n">filesystem</span> <span class="n">used</span> <span class="p">(</span><span class="k">with</span> <span class="o">-</span><span class="n">datatype</span> <span class="mi">4</span><span class="o">-</span><span class="n">Partition</span><span class="p">)</span>
+    <span class="o">--</span><span class="n">partfs</span> <span class="n">int32</span>        <span class="n">the</span> <span class="n">filesystem</span> <span class="n">used</span> <span class="p">(</span><span class="k">with</span> <span class="o">-</span><span class="n">datatype</span> <span class="mi">4</span><span class="o">-</span><span class="n">Partition</span><span class="p">)</span>
                           <span class="p">[</span><span class="n">NEEDED</span><span class="p">,</span> <span class="n">no</span> <span class="n">default</span><span class="p">]:</span>
                             <span class="mi">1</span><span class="o">-</span><span class="n">Squash</span><span class="p">,</span>    <span class="mi">2</span><span class="o">-</span><span class="n">Ext3</span><span class="p">,</span>      <span class="mi">3</span><span class="o">-</span><span class="n">ImmuObj</span><span class="p">,</span>
                             <span class="mi">4</span><span class="o">-</span><span class="n">Raw</span>
-    <span class="o">--</span><span class="n">parttype</span> <span class="nb">int</span>        <span class="n">the</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">partition</span> <span class="p">(</span><span class="k">with</span> <span class="o">-</span><span class="n">datatype</span> <span class="mi">4</span><span class="o">-</span><span class="n">Partition</span><span class="p">)</span>
+    <span class="o">--</span><span class="n">parttype</span> <span class="n">int32</span>      <span class="n">the</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">partition</span> <span class="p">(</span><span class="k">with</span> <span class="o">-</span><span class="n">datatype</span> <span class="mi">4</span><span class="o">-</span><span class="n">Partition</span><span class="p">)</span>
                           <span class="p">[</span><span class="n">NEEDED</span><span class="p">,</span> <span class="n">no</span> <span class="n">default</span><span class="p">]:</span>
                             <span class="mi">1</span><span class="o">-</span><span class="n">System</span><span class="p">,</span>    <span class="mi">2</span><span class="o">-</span><span class="n">PrimSys</span><span class="p">,</span>   <span class="mi">3</span><span class="o">-</span><span class="n">Data</span><span class="p">,</span>
                             <span class="mi">4</span><span class="o">-</span><span class="n">Overlay</span>
     <span class="o">--</span><span class="n">signentity</span> <span class="n">string</span>   <span class="n">the</span> <span class="n">entity</span> <span class="n">that</span> <span class="n">signs</span> <span class="p">(</span><span class="k">with</span> <span class="o">-</span><span class="n">datatype</span> <span class="mi">5</span><span class="o">-</span><span class="n">Signature</span><span class="p">)</span>
                           <span class="p">[</span><span class="n">NEEDED</span><span class="p">,</span> <span class="n">no</span> <span class="n">default</span><span class="p">]:</span>
                             <span class="n">example</span><span class="p">:</span> <span class="mi">433</span><span class="n">FE984155206BD962725E20E8713472A879943</span>
-    <span class="o">--</span><span class="n">signhash</span> <span class="nb">int</span>        <span class="n">the</span> <span class="n">signature</span> <span class="nb">hash</span> <span class="n">used</span> <span class="p">(</span><span class="k">with</span> <span class="o">-</span><span class="n">datatype</span> <span class="mi">5</span><span class="o">-</span><span class="n">Signature</span><span class="p">)</span>
+    <span class="o">--</span><span class="n">signhash</span> <span class="n">int32</span>      <span class="n">the</span> <span class="n">signature</span> <span class="nb">hash</span> <span class="n">used</span> <span class="p">(</span><span class="k">with</span> <span class="o">-</span><span class="n">datatype</span> <span class="mi">5</span><span class="o">-</span><span class="n">Signature</span><span class="p">)</span>
                           <span class="p">[</span><span class="n">NEEDED</span><span class="p">,</span> <span class="n">no</span> <span class="n">default</span><span class="p">]:</span>
-                            <span class="mi">1</span><span class="o">-</span><span class="n">SHA256</span><span class="p">,</span>    <span class="mi">2</span><span class="o">-</span><span class="n">SHA384</span><span class="p">,</span>    <span class="mi">3</span><span class="o">-</span><span class="n">SHA512</span><span class="p">,</span>
-                            <span class="mi">4</span><span class="o">-</span><span class="n">BLAKE2S</span><span class="p">,</span>   <span class="mi">5</span><span class="o">-</span><span class="n">BLAKE2B</span>
+                            <span class="mi">1</span><span class="o">-</span><span class="n">SHA256</span><span class="p">,</span>      <span class="mi">2</span><span class="o">-</span><span class="n">SHA384</span><span class="p">,</span>      <span class="mi">3</span><span class="o">-</span><span class="n">SHA512</span><span class="p">,</span>
+                            <span class="mi">4</span><span class="o">-</span><span class="n">BLAKE2s_256</span><span class="p">,</span> <span class="mi">5</span><span class="o">-</span><span class="n">BLAKE2b_256</span>
 </pre></div>
 </div>
 </section>
 <section id="see-also">
 <h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this headline"></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="singularity_sif.html#singularity-sif"><span class="std std-ref">singularity sif</span></a>       - siftool is a program for Singularity Image Format (SIF) file manipulation</p></li>
+<li><p><a class="reference internal" href="singularity_sif.html#singularity-sif"><span class="std std-ref">singularity sif</span></a>       - Manipulate Singularity Image Format (SIF) images</p></li>
 </ul>
 <p><em>Auto generated by spf13/cobra on 8-Dec-2021</em></p>
 </section>

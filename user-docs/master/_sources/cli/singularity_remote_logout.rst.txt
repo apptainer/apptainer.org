@@ -12,7 +12,8 @@ Synopsis
 
   The 'remote logout' command allows you to log out from a singularity specific endpoint,
   an OCI/Docker registry or a keyserver. If no endpoint or service is specified, it will
-  try the default remote endpoint (SylabsCloud).
+  logout from the current active remote endpoint.
+  
 
 ::
 

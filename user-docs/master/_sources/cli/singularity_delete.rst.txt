@@ -33,6 +33,7 @@ Options
   -F, --force            delete image without confirmation
   -h, --help             help for delete
       --library string   delete images from the provided library
+      --no-https         use http instead of https for docker:// oras:// and library://<hostname>/... URIs
 
 SEE ALSO
 ~~~~~~~~

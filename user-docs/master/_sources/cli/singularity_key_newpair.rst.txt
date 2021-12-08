@@ -38,7 +38,7 @@ Options
   -h, --help              help for newpair
   -N, --name string       key owner name
   -P, --password string   key password
-  -U, --push              specify to push the public key to the remote keystore (default true)
+  -U, --push              specify to push the public key to the remote keystore
 
 SEE ALSO
 ~~~~~~~~

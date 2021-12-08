@@ -3,15 +3,18 @@
 singularity remote list
 -----------------------
 
-List all singularity remote endpoints and services that are configured
+List all singularity remote endpoints, keyservers, and OCI credentials that are configured
 
 Synopsis
 ~~~~~~~~
 
 
 
-  The 'remote list' command lists all remote endpoints configured for use. If a remote
-  is in use, its name will be encompassed by brackets.
+  The 'remote list' command lists all remote endpoints, keyservers, and OCI registry
+  credentials configured for use.
+
+  The current remote is indicated by 'YES' in the 'ACTIVE' column and can be changed
+  with the 'remote use' command.
 
 ::
 

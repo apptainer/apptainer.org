@@ -66,7 +66,7 @@ SEE ALSO
 * :ref:`singularity run-help <singularity_run-help>` 	 - Show the user-defined help for an image
 * :ref:`singularity search <singularity_search>` 	 - Search a Container Library for images
 * :ref:`singularity shell <singularity_shell>` 	 - Run a shell within a container
-* :ref:`singularity sif <singularity_sif>` 	 - siftool is a program for Singularity Image Format (SIF) file manipulation
+* :ref:`singularity sif <singularity_sif>` 	 - Manipulate Singularity Image Format (SIF) images
 * :ref:`singularity sign <singularity_sign>` 	 - Attach digital signature(s) to an image
 * :ref:`singularity test <singularity_test>` 	 - Run the user-defined tests within a container
 * :ref:`singularity verify <singularity_verify>` 	 - Verify cryptographic signatures attached to an image
