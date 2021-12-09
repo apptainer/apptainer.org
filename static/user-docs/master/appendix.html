@@ -96,7 +96,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#j"><code class="docutils literal notranslate"><span class="pre">J</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#k"><code class="docutils literal notranslate"><span class="pre">K</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#l"><code class="docutils literal notranslate"><span class="pre">L</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#m"><code class="docutils literal notranslate"><span class="pre">M</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#n"><code class="docutils literal notranslate"><span class="pre">N</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#o"><code class="docutils literal notranslate"><span class="pre">O</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#p"><code class="docutils literal notranslate"><span class="pre">P</span></code></a></li>
@@ -251,14 +250,7 @@ You can see them listed alphabetically below with their respective functionality
 <li><p><strong>SINGULARITY_DOCKER_LOGIN</strong>: To specify the interactive prompt for docker authentication.</p></li>
 <li><p><strong>SINGULARITY_DOCKER_USERNAME</strong>: To specify a username for docker authentication.</p></li>
 <li><p><strong>SINGULARITY_DOCKER_PASSWORD</strong>: To specify the password for docker authentication.</p></li>
-<li><p><strong>SINGULARITY_DOWNLOAD_CONCURRENCY</strong>: To specify how many concurrent streams
-when downloading (pulling) an image from cloud library.</p></li>
-<li><p><strong>SINGULARITY_DOWNLOAD_PART_SIZE</strong>: To specify the size of each part (bytes)
-when concurrent downloads are enabled.</p></li>
-<li><p><strong>SINGULARITY_DOWNLOAD_BUFFER_SIZE</strong>: To specify the transfer buffer size
-(bytes) when concurrent downloads are enabled.</p></li>
-<li><p><strong>SINGULARITY_DROP_CAPS</strong>: To specify a list (comma separated string)
-of capabilities to be dropped. Default is an empty string.</p></li>
+<li><p><strong>SINGULARITY_DROP_CAPS</strong>: To specify a list (comma separated string) of capabilities to be dropped. Default is an empty string.</p></li>
 </ol>
 </section>
 <section id="e">
@@ -319,14 +311,6 @@ of capabilities to be dropped. Default is an empty string.</p></li>
 <li><p><strong>SINGULARITY_LIBRARY</strong>: Specifies the library to pull from. Default is set to our Cloud Library.</p></li>
 </ol>
 </section>
-<section id="m">
-<h3><code class="docutils literal notranslate"><span class="pre">M</span></code><a class="headerlink" href="#m" title="Permalink to this headline"></a></h3>
-<ol class="arabic simple">
-<li><p><strong>SINGULARITY_MOUNT</strong>: To specify host to container mounts, using the
-syntax understood by the <code class="docutils literal notranslate"><span class="pre">--mount</span></code> flag. Multiple mounts should be
-separated by newline characters.</p></li>
-</ol>
-</section>
 <section id="n">
 <h3><code class="docutils literal notranslate"><span class="pre">N</span></code><a class="headerlink" href="#n" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
@@ -339,10 +323,7 @@ separated by newline characters.</p></li>
 <li><p><strong>SINGULARITY_NO_INIT</strong> and <strong>SINGULARITY_NOSHIMINIT</strong>: Considers not starting the <code class="docutils literal notranslate"><span class="pre">shim</span></code> process with <code class="docutils literal notranslate"><span class="pre">--pid</span></code>.</p></li>
 <li><p><strong>SINGULARITY_NO_NV</strong>: Flag to disable Nvidia support. Opposite of <code class="docutils literal notranslate"><span class="pre">SINGULARITY_NV</span></code>.</p></li>
 <li><p><strong>SINGULARITY_NO_PRIVS</strong>: To drop all the privileges from root user in the container. Default is set to false.</p></li>
-<li><p><strong>SINGULARITY_NV</strong>: To enable Nvidia GPU support. Default is
-set to false.</p></li>
-<li><p><strong>SINGULARITY_NVCCLI</strong>: To use nvidia-container-cli for container GPU setup
-(experimental, only unprivileged).</p></li>
+<li><p><strong>SINGULARITY_NV</strong>: To enable experimental Nvidia support. Default is set to false.</p></li>
 </ol>
 </section>
 <section id="o">
