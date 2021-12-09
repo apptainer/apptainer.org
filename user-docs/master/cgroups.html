@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Limiting container resources with cgroups &mdash; Singularity User Guide 3.8 documentation</title>
+  <title>Limiting Container Resources with Cgroups &mdash; Singularity User Guide 3.8 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -75,17 +75,17 @@
 <li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Cgroups Support</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#limiting-memory">Limiting memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#limiting-cpu">Limiting CPU</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#shares">shares</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#quota-period">quota/period</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cpus-mems">cpus/mems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-singularity-inside-a-cgroup">Running Singularity Inside a Cgroup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#systemd-run">systemd-run</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#limiting-io">Limiting IO</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#limiting-device-access">Limiting device access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-singularity-to-create-a-cgroup">Using Singularity to Create a Cgroup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#limiting-memory">Limiting Memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limiting-cpu">Limiting CPU</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limiting-io">Limiting IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limiting-device-access">Limiting Device Access</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-limits">Other limits</a></li>
 </ul>
 </li>
 </ul>
@@ -118,7 +118,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Limiting container resources with cgroups</li>
+      <li>Limiting Container Resources with Cgroups</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/hpcng/singularity-userdocs/blob/master/cgroups.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -129,60 +129,117 @@
            <div itemprop="articleBody">
              
   <section id="limiting-container-resources-with-cgroups">
-<span id="cgroups"></span><h1>Limiting container resources with cgroups<a class="headerlink" href="#limiting-container-resources-with-cgroups" title="Permalink to this headline"></a></h1>
-<p>Starting in Singularity 3.0, users have the ability to limit container resources
-using cgroups.</p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
-<p>Singularity cgroups support can be configured and utilized via a TOML file. An
-example file is typically installed at
-<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity/cgroups/cgroups.toml</span></code> (but may also be installed
-in other locations such as <code class="docutils literal notranslate"><span class="pre">/etc/singularity/cgroups/cgroups.toml</span></code> depending
-on your installation method).  You can copy and edit this file to suit your
-needs.  Then when you need to limit your container resources, apply the settings
-in the TOML file by using the path as an argument to the <code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code>
-option like so:</p>
+<span id="cgroups"></span><h1>Limiting Container Resources with Cgroups<a class="headerlink" href="#limiting-container-resources-with-cgroups" title="Permalink to this headline"></a></h1>
+<p>The cgroups (control groups) functionality of the Linux kernel allows you to
+limit and meter the resources used by a process, or group of processes. Using
+cgroups you can limit memory and CPU usage. You can also rate limit block IO,
+network IO, and control access to device nodes.</p>
+<p>There are two versions of cgroups in common use. Cgroups v1 sets resource limits
+for a process within separate hierarchies per resource class. Cgroups v2, the
+default in newer Linux distributions, implements a unified hierarchy,
+simplifying the structure of resource limits on processes.</p>
+<ul class="simple">
+<li><p>v1 documentation: <a class="reference external" href="https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt">https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt</a></p></li>
+<li><p>v2 documentation: <a class="reference external" href="https://www.kernel.org/doc/Documentation/cgroup-v2.txt">https://www.kernel.org/doc/Documentation/cgroup-v2.txt</a></p></li>
+</ul>
+<section id="running-singularity-inside-a-cgroup">
+<h2>Running Singularity Inside a Cgroup<a class="headerlink" href="#running-singularity-inside-a-cgroup" title="Permalink to this headline"></a></h2>
+<p>Because Singularity starts a container as a simple process, rather than using
+a daemon, you can limit resource usage by running the <code class="docutils literal notranslate"><span class="pre">singularity</span></code> command
+inside an existing cgroup. This is convenient where, for example, a job
+scheduler uses cgroups to control job limits. By running <code class="docutils literal notranslate"><span class="pre">singularity</span></code> inside
+your batch script, your container will respect the limits set by the scheduler
+on the job’s cgroup.</p>
+<section id="systemd-run">
+<h3>systemd-run<a class="headerlink" href="#systemd-run" title="Permalink to this headline"></a></h3>
+<p>As well as schedulers you can use tools such as <code class="docutils literal notranslate"><span class="pre">systemd-run</span></code> to create a
+cgroup, and run Singularity inside of it. This is convenient on modern cgroups
+v2 systems, where the creation of cgroups can be delegated to users through
+systemd. Without this delegation <code class="docutils literal notranslate"><span class="pre">root</span></code> privileges are required to create a
+cgroup.</p>
+<p>For example, assuming your system is configured correctly for unprivileged
+cgroup creation via systemd, you can limit the number of CPUs a container run is
+allowed to use:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ systemd-run --user --scope -p AllowedCPUs=1,2 -- singularity run mycontainer.sif
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--user</span></code> instructs systemd that we want to run as our own user account.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--scope</span></code> will run our command in an interactive scope that inherits from our
+environment. By default the command would run as a service, in the background.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">AllowedCPUs=1,2</span></code> sets a property on our scope, so that in this case
+systemd will then setup a cgroup limiting our command to using CPU 1 and 2 only.</p></li>
+<li><p>The double hyphen <code class="docutils literal notranslate"><span class="pre">--</span></code> separates options for <code class="docutils literal notranslate"><span class="pre">systemd-run</span></code> from the actual
+command we wish to execute. This is important so that <code class="docutils literal notranslate"><span class="pre">systemd-run</span></code> doesn’t
+capture any flags we might need to pass to <code class="docutils literal notranslate"><span class="pre">singularity</span></code>.</p></li>
+</ul>
+<p>You can read more about how systemd can control resources uses at the link
+below, which details the properties you can set using <code class="docutils literal notranslate"><span class="pre">systemd-run</span></code>.</p>
+<p><a class="reference external" href="https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html">https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html</a></p>
+</section>
+</section>
+<section id="using-singularity-to-create-a-cgroup">
+<h2>Using Singularity to Create a Cgroup<a class="headerlink" href="#using-singularity-to-create-a-cgroup" title="Permalink to this headline"></a></h2>
+<p>Singularity 3.9 and above can directly apply resource limitations to systems
+configured for both cgroups v1 and the v2 unified hierarchy. Resource limits are
+specified using a TOML file that represents the <cite>resources</cite> section of the OCI
+runtime-spec:
+<a class="reference external" href="https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md#control-groups">https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md#control-groups</a></p>
+<p>On a cgroups v1 system the resources configuration is applied directly. On a
+cgroups v2 system the configuration is translated and applied to the unified
+hierarchy.</p>
+<p>Under cgroups v1, access restrictions for device nodes are managed directly.
+Under cgroups v2, the restrictions are applied by attaching eBPF programs that
+implement the requested access controls.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Singularity does not currently support applying native cgroups v2
+<code class="docutils literal notranslate"><span class="pre">unified</span></code> resource limit specifications. Use the cgroups v1 limits, which
+will be translated to v2 format when applied on a cgroups v2 system.</p>
+</div>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h3>
+<p>To apply resource limits to a container, use the <code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code> flag, which
+takes a path to a TOML file specifying the cgroups configuration to be applied:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity shell --apply-cgroups /path/to/cgroups.toml my_container.sif
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code> option can only be used with root privileges.</p>
-</section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+</div>
 <section id="limiting-memory">
-<h3>Limiting memory<a class="headerlink" href="#limiting-memory" title="Permalink to this headline"></a></h3>
+<h4>Limiting Memory<a class="headerlink" href="#limiting-memory" title="Permalink to this headline"></a></h4>
 <p>To limit the amount of memory that your container uses to 500MB (524288000
-bytes), follow this example.  First, create a <code class="docutils literal notranslate"><span class="pre">cgroups.toml</span></code> file like this
-and save it in your home directory.</p>
+bytes), set a <code class="docutils literal notranslate"><span class="pre">limit</span></code> value inside the <code class="docutils literal notranslate"><span class="pre">[memory]</span></code> section of your cgroups
+TOML file:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[memory]
     limit = 524288000
 </pre></div>
 </div>
-<p>Start your container like so:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity instance start --apply-cgroups /home/$USER/cgroups.toml \
-    my_container.sif instance1
+<p>Start your container, applying the toml file, e.g.:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity run --apply-cgroups path/to/cgroups.toml library://alpine
 </pre></div>
 </div>
 <p>After that, you can verify that the container is only using 500MB of memory.
-(This example assumes that <code class="docutils literal notranslate"><span class="pre">instance1</span></code> is the only running instance.)</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cat /sys/fs/cgroup/memory/singularity/*/memory.limit_in_bytes
+This example assumes that there is only one running container. If you are
+running multiple containers you will find multiple cgroups trees under the
+<code class="docutils literal notranslate"><span class="pre">singularity</span></code> directory.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># cgroups v1
+$ cat /sys/fs/cgroup/memory/singularity/*/memory.limit_in_bytes
+  524288000
+
+# cgroups v2 - note translation of memory.limit_in_bytes -&gt; memory.max
+$ cat /sys/fs/cgroup/singularity/*/memory.max
 524288000
 </pre></div>
 </div>
-<p>After you are finished with this example, be sure to cleanup your instance with
-the following command.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity instance stop instance1
-</pre></div>
-</div>
-<p>Similarly, the remaining examples can be tested by starting instances and
-examining the contents of the appropriate subdirectories of <code class="docutils literal notranslate"><span class="pre">/sys/fs/cgroup/</span></code>.</p>
 </section>
 <section id="limiting-cpu">
-<h3>Limiting CPU<a class="headerlink" href="#limiting-cpu" title="Permalink to this headline"></a></h3>
-<p>Limit CPU resources using one of the following strategies. The <code class="docutils literal notranslate"><span class="pre">cpu</span></code> section
-of the configuration file can limit memory with the following:</p>
-<section id="shares">
-<h4>shares<a class="headerlink" href="#shares" title="Permalink to this headline"></a></h4>
+<h4>Limiting CPU<a class="headerlink" href="#limiting-cpu" title="Permalink to this headline"></a></h4>
+<p>CPU usage can be limited using different strategies, with limits specified in
+the <code class="docutils literal notranslate"><span class="pre">[cpu]</span></code> section of the TOML file.</p>
+<p><strong>shares</strong></p>
 <p>This corresponds to a ratio versus other cgroups with cpu shares. Usually the
 default value is <code class="docutils literal notranslate"><span class="pre">1024</span></code>. That means if you want to allow to use 50% of a
 single CPU, you will set <code class="docutils literal notranslate"><span class="pre">512</span></code> as value.</p>
@@ -195,47 +252,35 @@ available in the system, due to the work conserving nature of the scheduler, so
 a contained process can consume all CPU cycles even with a ratio of 50%. The
 ratio is only applied when two or more processes conflicts with their needs of
 CPU cycles.</p>
-</section>
-<section id="quota-period">
-<h4>quota/period<a class="headerlink" href="#quota-period" title="Permalink to this headline"></a></h4>
-<p>You can enforce hard limits on the CPU cycles a cgroup can consume, so
-contained processes can’t use more than the amount of CPU time set for the
-cgroup. <code class="docutils literal notranslate"><span class="pre">quota</span></code> allows you to configure the amount of CPU time that a cgroup
-can use per period. The default is 100ms (100000us). So if you want to limit
-amount of CPU time to 20ms during period of 100ms:</p>
+<p><strong>quota/period</strong></p>
+<p>You can enforce hard limits on the CPU cycles a cgroup can consume, so contained
+processes can’t use more than the amount of CPU time set for the cgroup.
+<code class="docutils literal notranslate"><span class="pre">quota</span></code> allows you to configure the amount of CPU time that a cgroup can use
+per period. The default is 100ms (100000us). So if you want to limit amount of
+CPU time to 20ms during period of 100ms:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[cpu]
     period = 100000
     quota = 20000
 </pre></div>
 </div>
-</section>
-<section id="cpus-mems">
-<h4>cpus/mems<a class="headerlink" href="#cpus-mems" title="Permalink to this headline"></a></h4>
-<p>You can also restrict access to specific CPUs and associated memory nodes by
-using <code class="docutils literal notranslate"><span class="pre">cpus/mems</span></code> fields:</p>
+<p><strong>cpus/mems</strong></p>
+<p>You can also restrict access to specific CPUs (cores) and associated memory
+nodes by using <code class="docutils literal notranslate"><span class="pre">cpus/mems</span></code> fields:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[cpu]
     cpus = &quot;0-1&quot;
     mems = &quot;0-1&quot;
 </pre></div>
 </div>
-<p>Where container has limited access to CPU 0 and CPU 1.</p>
+<p>Where the container has limited access to CPU 0 and CPU 1.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>It’s important to set identical values for both <code class="docutils literal notranslate"><span class="pre">cpus</span></code> and <code class="docutils literal notranslate"><span class="pre">mems</span></code>.</p>
 </div>
-<p>For more information about limiting CPU with cgroups, see the following external
-links:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/sec-cpu/">Red Hat resource management guide section 3.2 CPU</a></p></li>
-<li><p><a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/sec-cpuset">Red Hat resource management guide section 3.4 CPUSET</a></p></li>
-<li><p><a class="reference external" href="https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt">Kernel scheduler documentation</a></p></li>
-</ul>
-</section>
 </section>
 <section id="limiting-io">
-<h3>Limiting IO<a class="headerlink" href="#limiting-io" title="Permalink to this headline"></a></h3>
-<p>You can limit and monitor access to I/O for block devices.  Use the
-<code class="docutils literal notranslate"><span class="pre">[blockIO]</span></code> section of the configuration file to do this like so:</p>
+<h4>Limiting IO<a class="headerlink" href="#limiting-io" title="Permalink to this headline"></a></h4>
+<p>To control block device I/O, applying limits to competing container, use the
+<code class="docutils literal notranslate"><span class="pre">[blockIO]</span></code> section of the TOML file:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[blockIO]
     weight = 1000
     leafWeight = 1000
@@ -246,8 +291,10 @@ links:</p>
 unless overridden by a per device rule.</p>
 <p><code class="docutils literal notranslate"><span class="pre">leafWeight</span></code> relates to weight for the purpose of deciding how heavily to
 weigh tasks in the given cgroup while competing with the cgroup’s child cgroups.</p>
-<p>To override <code class="docutils literal notranslate"><span class="pre">weight/leafWeight</span></code> for <code class="docutils literal notranslate"><span class="pre">/dev/loop0</span></code> and <code class="docutils literal notranslate"><span class="pre">/dev/loop1</span></code> block
-devices you would do something like this:</p>
+<p>To apply limits to specific block devices, you must set configuration for
+specific device major/minor numbers. For example, to override
+<code class="docutils literal notranslate"><span class="pre">weight/leafWeight</span></code> for <code class="docutils literal notranslate"><span class="pre">/dev/loop0</span></code> and <code class="docutils literal notranslate"><span class="pre">/dev/loop1</span></code> block devices, set
+limits for device major 7, minor 0 and 1:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[blockIO]
     [[blockIO.weightDevice]]
         major = 7
@@ -261,9 +308,9 @@ devices you would do something like this:</p>
         leafWeight = 50
 </pre></div>
 </div>
-<p>You could limit the IO read/write rate to 16MB per second for the <code class="docutils literal notranslate"><span class="pre">/dev/loop0</span></code>
-block device with the following configuration.  The rate is specified in bytes
-per second.</p>
+<p>You can also limit the IO read/write rate to a specific absolute value, e.g.
+16MB per second for the <code class="docutils literal notranslate"><span class="pre">/dev/loop0</span></code> block device. The <code class="docutils literal notranslate"><span class="pre">rate</span></code> is specified
+in bytes per second.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[blockIO]
     [[blockIO.throttleReadBpsDevice]]
         major = 7
@@ -275,29 +322,14 @@ per second.</p>
         rate = 16777216
 </pre></div>
 </div>
-<p>To limit the IO read/write rate to 1000 IO per second (IOPS) on <code class="docutils literal notranslate"><span class="pre">/dev/loop0</span></code>
-block device, you can do the following. The rate is specified in IOPS.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[blockIO]
-    [[blockIO.throttleReadIOPSDevice]]
-        major = 7
-        minor = 0
-        rate = 1000
-    [[blockIO.throttleWriteIOPSDevice]]
-        major = 7
-        minor = 0
-        rate = 1000
-</pre></div>
-</div>
-<p>For more information about limiting IO, see the following external links:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/ch-subsystems_and_tunable_parameters#sec-blkio">Red Hat resource management guide section 3.1 blkio</a></p></li>
-<li><p><a class="reference external" href="https://www.kernel.org/doc/Documentation/cgroup-v1/blkio-controller.txt">Kernel block IO controller documentation</a></p></li>
-<li><p><a class="reference external" href="https://www.kernel.org/doc/Documentation/block/cfq-iosched.txt">Kernel CFQ scheduler documentation</a></p></li>
-</ul>
+</section>
 <section id="limiting-device-access">
-<h4>Limiting device access<a class="headerlink" href="#limiting-device-access" title="Permalink to this headline"></a></h4>
-<p>You can limit read, write, or creation of devices. In this example, a container
-is configured to only be able to read from or write to <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>.</p>
+<h4>Limiting Device Access<a class="headerlink" href="#limiting-device-access" title="Permalink to this headline"></a></h4>
+<p>You can limit read (<code class="docutils literal notranslate"><span class="pre">r</span></code>), write (<code class="docutils literal notranslate"><span class="pre">w</span></code>), or creation (<code class="docutils literal notranslate"><span class="pre">c</span></code>) of devices by a
+container. Like applying I/O limits to devices, you must use device node major
+and minor numbers to create rules for specific devices or classes of device.</p>
+<p>In this example, a container is configured to only be able to read from or write
+to <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[devices]]
     access = &quot;rwm&quot;
     allow = false
@@ -309,8 +341,17 @@ is configured to only be able to read from or write to <code class="docutils lit
     type = &quot;c&quot;
 </pre></div>
 </div>
-<p>For more information on limiting access to devices the <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/sec-devices">Red Hat resource
-management guide section 3.5 DEVICES</a>.</p>
+</section>
+<section id="other-limits">
+<h4>Other limits<a class="headerlink" href="#other-limits" title="Permalink to this headline"></a></h4>
+<p>Singularity can apply all resource limits that are valid in the OCI
+runtime-spec <code class="docutils literal notranslate"><span class="pre">resources</span></code> section, <strong>except</strong> native <code class="docutils literal notranslate"><span class="pre">unified</span></code>
+cgroups v2 constraints. Use the cgroups v1 limits, which will be
+translated to v2 format when applied on a cgroups v1 system.</p>
+<p>See
+<a class="reference external" href="https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md#control-groups">https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md#control-groups</a>
+for information about the available limits. Note that Singularity uses TOML
+format for the confiuration file, rather than JSON.</p>
 </section>
 </section>
 </section>

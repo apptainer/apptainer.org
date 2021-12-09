@@ -73,8 +73,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#user-defined-bind-paths">User-defined bind paths</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#specifying-bind-paths">Specifying bind paths</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#a-note-on-using-bind-with-the-writable-flag">A note on using <code class="docutils literal notranslate"><span class="pre">--bind</span></code> with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bind-examples"><code class="docutils literal notranslate"><span class="pre">--bind</span></code> Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mount-examples"><code class="docutils literal notranslate"><span class="pre">--mount</span></code> Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-bind-or-mount-with-the-writable-flag">Using <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">-mount</span></code> with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-no-home-and-containall-flags">Using <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> and <code class="docutils literal notranslate"><span class="pre">--containall</span></code> flags</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#no-home"><code class="docutils literal notranslate"><span class="pre">--no-home</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#containall"><code class="docutils literal notranslate"><span class="pre">--containall</span></code></a></li>
@@ -142,17 +143,19 @@
              
   <section id="bind-paths-and-mounts">
 <span id="id1"></span><h1>Bind Paths and Mounts<a class="headerlink" href="#bind-paths-and-mounts" title="Permalink to this headline"></a></h1>
-<p id="sec-bindpaths">If <a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/configfiles.html#bind-mount-management">not disabled by the system administrator</a>,
+<p id="sec-bindpaths">Unless <a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/configfiles.html#bind-mount-management">disabled by the system administrator</a>,
 Singularity allows you to map directories on your host system to directories
 within your container using bind mounts. This allows you to read and write data
 on the host system with ease.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
-<p>When Singularity ‘swaps’ the host operating system for the one inside your
-container, the host file systems becomes inaccessible. But you may want to read
-and write files on the host system from within the container. To enable this
-functionality, Singularity will bind directories back into the container via two
-primary methods: system-defined bind paths and user-defined bind paths.</p>
+<p>When Singularity ‘swaps’ the host operating system for the one
+inside your container, the host file systems becomes
+inaccessible. However, you may want to read and write files on the
+host system from within the container. To enable this functionality,
+Singularity will bind directories back into the container via two
+primary methods: system-defined bind paths and user-defined bind
+paths.</p>
 </section>
 <section id="system-defined-bind-paths">
 <h2>System-defined bind paths<a class="headerlink" href="#system-defined-bind-paths" title="Permalink to this headline"></a></h2>
@@ -186,7 +189,7 @@ commas:</p>
 </section>
 <section id="user-defined-bind-paths">
 <span id="id2"></span><h2>User-defined bind paths<a class="headerlink" href="#user-defined-bind-paths" title="Permalink to this headline"></a></h2>
-<p>If the system administrator has <a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/configfiles.html#bind-mount-management">not disabled user control of binds</a>,
+<p>Unless the system administrator has <a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/configfiles.html#bind-mount-management">disabled user control of binds</a>,
 you will be able to request your own bind paths within your container.</p>
 <p>The Singularity action commands (<code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code>, <code class="docutils literal notranslate"><span class="pre">shell</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code>) will accept the <code class="docutils literal notranslate"><span class="pre">--bind/-B</span></code> command-line option to specify
@@ -199,8 +202,13 @@ of the container respectively. If <code class="docutils literal notranslate"><sp
 <code class="docutils literal notranslate"><span class="pre">rw</span></code> (read/write, which is the default). The <code class="docutils literal notranslate"><span class="pre">--bind/-B</span></code> option can be
 specified multiple times, or a comma-delimited string of bind path
 specifications can be used.</p>
-<section id="specifying-bind-paths">
-<h3>Specifying bind paths<a class="headerlink" href="#specifying-bind-paths" title="Permalink to this headline"></a></h3>
+<p>Singularity 3.9 adds an additional <code class="docutils literal notranslate"><span class="pre">--mount</span></code> flag, which provides
+a longer-form method of specifying binds in <code class="docutils literal notranslate"><span class="pre">--mount</span>
+<span class="pre">type=bind,src=&lt;source&gt;,dst=&lt;destination&gt;[,&lt;option&gt;]...</span></code> format. This is
+compatible with the <code class="docutils literal notranslate"><span class="pre">--mount</span></code> syntax for binds in Docker and other
+OCI runtimes.</p>
+<section id="bind-examples">
+<h3><code class="docutils literal notranslate"><span class="pre">--bind</span></code> Examples<a class="headerlink" href="#bind-examples" title="Permalink to this headline"></a></h3>
 <p>Here’s an example of using the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option and binding <code class="docutils literal notranslate"><span class="pre">/data</span></code> on the
 host to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> in the container (<code class="docutils literal notranslate"><span class="pre">/mnt</span></code> does not need to already exist in
 the container):</p>
@@ -230,8 +238,59 @@ you bind many directories into your Singularity containers and they don’t
 change, you could even benefit by setting this variable in your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>
 file.</p>
 </section>
-<section id="a-note-on-using-bind-with-the-writable-flag">
-<h3>A note on using <code class="docutils literal notranslate"><span class="pre">--bind</span></code> with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag<a class="headerlink" href="#a-note-on-using-bind-with-the-writable-flag" title="Permalink to this headline"></a></h3>
+<section id="mount-examples">
+<h3><code class="docutils literal notranslate"><span class="pre">--mount</span></code> Examples<a class="headerlink" href="#mount-examples" title="Permalink to this headline"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">--mount</span></code> flag takes a mount specification in the format
+<code class="docutils literal notranslate"><span class="pre">type=bind,src=&lt;source&gt;,dst=&lt;dest&gt;</span></code>. Additional options can be
+specified, comma delimited.</p>
+<p>Singularity only supports the <code class="docutils literal notranslate"><span class="pre">bind</span></code> type for <code class="docutils literal notranslate"><span class="pre">--mount</span></code>, and
+will infer <code class="docutils literal notranslate"><span class="pre">type=bind</span></code> if it is not provided.</p>
+<p><code class="docutils literal notranslate"><span class="pre">src</span></code> or <code class="docutils literal notranslate"><span class="pre">source</span></code> can be used interchangeably. <code class="docutils literal notranslate"><span class="pre">dst</span></code>,
+<code class="docutils literal notranslate"><span class="pre">destination</span></code>, or <code class="docutils literal notranslate"><span class="pre">target</span></code> are also equivalent.</p>
+<p>To mount <code class="docutils literal notranslate"><span class="pre">data</span></code> on the host to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> inside the container:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity exec \
+    --mount type=bind,src=/data,dst=/mnt \
+    my_container.sif ls /mnt
+bar  foo
+</pre></div>
+</div>
+<p>To mount the same directory read-only in the container, add the <code class="docutils literal notranslate"><span class="pre">ro</span></code> option:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity exec \
+    --mount type=bind,source=/data,dest=/mnt,ro \
+    my_container.sif touch /mnt/test
+touch: cannot touch &#39;/mnt/test&#39;: Permission denied
+</pre></div>
+</div>
+<p>You can bind multiple directories in a single command with multiple
+<code class="docutils literal notranslate"><span class="pre">--mount</span></code> flags:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity shell --mount type=bind,src=/opt,dst=/opt \
+                    --mount type=bind,src=/data,dst=/data \
+                    my_container.sif
+</pre></div>
+</div>
+<p>This will bind <code class="docutils literal notranslate"><span class="pre">/opt</span></code> on the host to <code class="docutils literal notranslate"><span class="pre">/opt</span></code> in the container and <code class="docutils literal notranslate"><span class="pre">/data</span></code>
+on the host to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> in the container.</p>
+<p>The mount string can be quoted and escaped according to CSV rules,
+wrapping each field in double quotes if necessary
+characters. <code class="docutils literal notranslate"><span class="pre">--mount</span></code> allows bind mounting paths that are not
+possible with the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> flag. For example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Mount a path containing &#39;:&#39; (not possible with --bind)
+$ singularity run \
+    --mount type=bind,src=/my:path,dst=/mnt \
+    mycontainer.sif
+
+# Mount a path containing a &#39;,&#39;
+$ singularity run \
+    --mount type=bind,&quot;src=/comma,dir&quot;,dst=/mnt \
+    mycontainer.sif
+</pre></div>
+</div>
+<p>Mount specifications are also read from then environment variable
+<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_MOUNT</span></code>. Multiple bind mounts set via this environment
+variable should be separated by newlines (<code class="docutils literal notranslate"><span class="pre">\n</span></code>).</p>
+</section>
+<section id="using-bind-or-mount-with-the-writable-flag">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">-mount</span></code> with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag<a class="headerlink" href="#using-bind-or-mount-with-the-writable-flag" title="Permalink to this headline"></a></h3>
 <p>To mount a bind path inside the container, a <em>bind point</em> must be defined
 within the container. The bind point is a directory within the container that
 Singularity can use as a destination to bind a directory on the host system.</p>
@@ -374,8 +433,13 @@ and specify the bind in the format:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>-B &lt;image-file&gt;:&lt;dest&gt;:image-src=&lt;source&gt;
 </pre></div>
 </div>
-<p>This will bind the <code class="docutils literal notranslate"><span class="pre">&lt;source&gt;</span></code> inside <code class="docutils literal notranslate"><span class="pre">&lt;image-file&gt;</span></code> to <code class="docutils literal notranslate"><span class="pre">&lt;dest&gt;</span></code>
-in the container.</p>
+<p>Alternatively use the <code class="docutils literal notranslate"><span class="pre">--mount</span></code> option, and specify the bind in the
+format:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--mount type=bind,src=&lt;image-file&gt;,dst=&lt;dest&gt;,image-src=&lt;source&gt;
+</pre></div>
+</div>
+<p>This will bind the <code class="docutils literal notranslate"><span class="pre">&lt;source&gt;</span></code> path inside <code class="docutils literal notranslate"><span class="pre">&lt;image-file&gt;</span></code> to
+<code class="docutils literal notranslate"><span class="pre">&lt;dest&gt;</span></code> in the container.</p>
 <p>If you do not add <code class="docutils literal notranslate"><span class="pre">:image-src=&lt;source&gt;</span></code> to your bind specification,
 then the <code class="docutils literal notranslate"><span class="pre">&lt;image-file&gt;</span></code> itself will be bound to <code class="docutils literal notranslate"><span class="pre">&lt;dest&gt;</span></code> instead.</p>
 <section id="ext3-image-files">
@@ -404,6 +468,11 @@ $ singularity run -B inputs.img:/input-data:image-src<span class="o">=</span>/ m
 Singularity&gt; ls /input-data
 <span class="m">1</span>           <span class="m">3</span>           <span class="m">5</span>           <span class="m">7</span>           <span class="m">9</span>
 <span class="m">2</span>           <span class="m">4</span>           <span class="m">6</span>           <span class="m">8</span>           lost+found
+
+<span class="c1"># Or with --mount instead of -B</span>
+$ singularity run <span class="se">\</span>
+    --mount <span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>inputs.img,dst<span class="o">=</span>/input-data,image-src<span class="o">=</span>/ <span class="se">\</span>
+    mycontainer.sif
 </pre></div>
 </div>
 </section>
@@ -424,6 +493,11 @@ Creating <span class="m">4</span>.0 filesystem on inputs.squashfs, block size <s
 $ singularity run -B inputs.squashfs:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
 Singularity&gt; ls /input-data/
 <span class="m">1</span>  <span class="m">2</span>  <span class="m">3</span>  <span class="m">4</span>  <span class="m">5</span>  <span class="m">6</span>  <span class="m">7</span>  <span class="m">8</span>  <span class="m">9</span>
+
+<span class="c1"># Or with --mount instead of -B</span>
+$ singularity run <span class="se">\</span>
+    --mount <span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>src-inputs.squashfs,dst<span class="o">=</span>/input-data,image-src<span class="o">=</span>/ <span class="se">\</span>
+    mycontainer.sif
 </pre></div>
 </div>
 </section>
@@ -443,12 +517,17 @@ overlays instructions</span></a>:</p>
 <span class="gp">$ </span>singularity run -B inputs.sif:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
 <span class="go">Singularity&gt; ls /input-data</span>
 <span class="go">1  2  3  4  5  6  7  8  9</span>
+
+<span class="gp"># </span>Or with --mount instead of -B
+<span class="gp">$ </span>singularity run <span class="se">\</span>
+    --mount <span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>inputs.sif,dst<span class="o">=</span>/input-data,image-src<span class="o">=</span>/ <span class="se">\</span>
+    mycontainer.sif
 </pre></div>
 </div>
-<p>If your bind source is a SIF then Singularity will bind from
-the first data partition in the SIF, or you may specify an
-alternative descriptor by ID with the additional bind option
-<code class="docutils literal notranslate"><span class="pre">:id=n</span></code>, where n is the descriptor ID.</p>
+<p>If your bind source is a SIF then Singularity will bind from the
+first data partition in the SIF, or you may specify an alternative
+descriptor by ID with the additional option <code class="docutils literal notranslate"><span class="pre">id=n</span></code>, where n is the
+descriptor ID.</p>
 </section>
 </section>
 </section>
