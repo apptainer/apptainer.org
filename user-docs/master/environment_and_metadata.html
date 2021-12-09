@@ -90,6 +90,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#umask-default-file-permissions">Umask / Default File Permissions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#container-metadata">Container Metadata</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#inherited-labels">Inherited Labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#custom-labels">Custom Labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dynamic-build-time-labels">Dynamic Build Time Labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#inspecting-metadata">Inspecting Metadata</a><ul>
@@ -510,8 +511,30 @@ information set automatically or explicitly when the container is
 built.</p>
 <p>For containers that are generated with Singularity version 3.0 and
 later, default labels are represented using the <a class="reference external" href="http://label-schema.org/rc1/">rc1 Label Schema</a>.</p>
+<section id="inherited-labels">
+<span id="sec-labels"></span><h3>Inherited Labels<a class="headerlink" href="#inherited-labels" title="Permalink to this headline"></a></h3>
+<p>When building a container from an existing image, either directly from a URI or
+with a definition file, your container will inherit the labels that are set in
+that base image. For example the <code class="docutils literal notranslate"><span class="pre">LABEL</span></code> a Docker container sets in its
+<code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>, or a SIF container that sets labels in its definition file as
+described below.</p>
+<p>Inherited labels can only be overwritten during a build when the build is
+performed using the <code class="docutils literal notranslate"><span class="pre">--force</span></code> option. Singularity will warn that it is not
+modifying an existing label when <code class="docutils literal notranslate"><span class="pre">--force</span></code> is not used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity build test2.sif test2.def
+...
+INFO:    Adding labels
+WARNING: Label: OWNER already exists and force option is false, not overwriting
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Singularity 3.0 through 3.8 did not inherit labels from Docker/OCI images
+during a build.</p>
+</div>
+</section>
 <section id="custom-labels">
-<span id="sec-labels"></span><h3>Custom Labels<a class="headerlink" href="#custom-labels" title="Permalink to this headline"></a></h3>
+<h3>Custom Labels<a class="headerlink" href="#custom-labels" title="Permalink to this headline"></a></h3>
 <p>You can add custom labels to your container using the <code class="docutils literal notranslate"><span class="pre">%labels</span></code>
 section in a definition file:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
