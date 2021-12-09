@@ -76,6 +76,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#nv"><code class="docutils literal notranslate"><span class="pre">--nv</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rocm"><code class="docutils literal notranslate"><span class="pre">--rocm</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bind"><code class="docutils literal notranslate"><span class="pre">--bind</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writable-tmpfs"><code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#more-build-topics">More Build topics</a></li>
@@ -413,6 +414,13 @@ workaround that by adding a <code class="docutils literal notranslate"><span cla
 distribution images and is intended for that purpose, you could avoid the directory creation
 in the definition file.</p>
 </div>
+</section>
+<section id="writable-tmpfs">
+<h3><code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code><a class="headerlink" href="#writable-tmpfs" title="Permalink to this headline"></a></h3>
+<p>This flag will run the <code class="docutils literal notranslate"><span class="pre">%test</span></code> section of the build with a writable
+tmpfs overlay filesystem in place. This allows the tests to create
+files, which will be discarded at the end of the build. Other portions
+of the build do not use this temporary filesystem.</p>
 </section>
 </section>
 <section id="more-build-topics">
