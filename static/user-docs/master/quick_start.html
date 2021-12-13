@@ -205,7 +205,7 @@ files, which have been removed or replaced in newer versions.</p>
 archive suitable to the environment you are in. Once the Download is complete,
 extract the archive to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> (or use other instructions on go installation
 page). Alternatively, follow the commands here:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.14.12 OS=linux ARCH=amd64 &amp;&amp; \  # Replace the values as needed
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.17.2 OS=linux ARCH=amd64 &amp;&amp; \  # Replace the values as needed
   wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \ # Downloads the required Go package
   sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \ # Extracts the archive
   rm go$VERSION.$OS-$ARCH.tar.gz    # Deletes the ``tar`` file
@@ -223,7 +223,7 @@ page). Alternatively, follow the commands here:</p>
 <a class="reference external" href="https://github.com/hpcng/singularity/releases">the GitHub release page</a>.
 After deciding on a release to install, you can run the following commands to
 proceed with the installation.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=3.8.0 &amp;&amp; # adjust this as necessary \
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=3.8.5 &amp;&amp; # adjust this as necessary \
     wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &amp;&amp; \
     tar -xzf singularity-${VERSION}.tar.gz &amp;&amp; \
     cd singularity-${VERSION}
