@@ -196,16 +196,12 @@ does not interact with the Sylabs Cloud.</p>
 are stored in their <code class="docutils literal notranslate"><span class="pre">~/.singularity/remote.yaml</span></code>
 file. Alternatively, remote endpoints can be set system-wide by an
 administrator.</p>
+<p>A remote endpoint may be the public Sylabs Cloud, a private
+installation of Singularity Enterprise, or community-developed service
+that are API compatible.</p>
 <p>Generally, users and administrators should manage remote endpoints
 using the <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span></code> command, and avoid editing
 <code class="docutils literal notranslate"><span class="pre">remote.yaml</span></code> configuration files directly.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The following commands in this section configures Singularity to use
-and authenticate to the public Sylabs Cloud, a private installation
-of Singularity Enterprise, or community-developed services that are
-API compatible.</p>
-</div>
 <section id="list-and-login-to-remotes">
 <h3>List and Login to Remotes<a class="headerlink" href="#list-and-login-to-remotes" title="Permalink to this headline"></a></h3>
 <p>To <code class="docutils literal notranslate"><span class="pre">list</span></code> existing remote endpoints, run this:</p>
@@ -288,7 +284,6 @@ system) an administrative user should run:</p>
 # example..
 
 $ sudo singularity remote add --global company-remote https://enterprise.example.com
-[sudo] password for dave:
 INFO:    Remote &quot;company-remote&quot; added.
 INFO:    Global option detected. Will not automatically log into remote.
 </pre></div>
