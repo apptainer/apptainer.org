@@ -21,8 +21,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Fakeroot feature" href="fakeroot.html" />
-    <link rel="prev" title="Build Environment" href="build_env.html" /> 
+    <link rel="next" title="OCI Runtime Support" href="oci_runtime.html" />
+    <link rel="prev" title="Limiting Container Resources with Cgroups" href="cgroups.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,10 +49,32 @@
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
 </ul>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
 <li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
 <li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_library.html">Sylabs Cloud Library</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
+</ul>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Singularity and Docker</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#running-action-commands-on-public-images-from-docker-hub">Running action commands on public images from Docker Hub</a></li>
@@ -109,27 +131,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#singularity-definition-file-vs-dockerfile">Singularity Definition file vs. Dockerfile</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
-<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
-<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cloud_library.html">Cloud Library</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
-<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
@@ -138,6 +140,8 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
@@ -1884,8 +1888,8 @@ Removing /home/dave/.singularity/cache/oras
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="build_env.html" class="btn btn-neutral float-left" title="Build Environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="fakeroot.html" class="btn btn-neutral float-right" title="Fakeroot feature" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cgroups.html" class="btn btn-neutral float-left" title="Limiting Container Resources with Cgroups" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="oci_runtime.html" class="btn btn-neutral float-right" title="OCI Runtime Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
