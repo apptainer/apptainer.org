@@ -75,7 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Singularity and Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
@@ -496,19 +496,6 @@ info on using Docker registries.</p>
 </pre></div>
 </div>
 <p>The Namespace keyword is optional. It will default to <code class="docutils literal notranslate"><span class="pre">library</span></code>.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">IncludeCmd</span>: yes
-</pre></div>
-</div>
-<p>The IncludeCmd keyword is optional. If included, and if a <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> is not
-specified, a Docker <code class="docutils literal notranslate"><span class="pre">CMD</span></code> will take precedence over <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> and will be
-used as a runscript. Note that the <code class="docutils literal notranslate"><span class="pre">IncludeCmd</span></code> keyword is considered valid if
-it is not empty! This means that <code class="docutils literal notranslate"><span class="pre">IncludeCmd:</span> <span class="pre">yes</span></code> and <code class="docutils literal notranslate"><span class="pre">IncludeCmd:</span> <span class="pre">no</span></code> are
-identical. In both cases the <code class="docutils literal notranslate"><span class="pre">IncludeCmd</span></code> keyword is not empty, so the Docker
-<code class="docutils literal notranslate"><span class="pre">CMD</span></code> will take precedence over an <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>.</p>
-<blockquote>
-<div><p>See <a class="reference internal" href="singularity_and_docker.html#singularity-and-docker"><span class="std std-ref">Singularity and Docker</span></a> for more info on
-order of operations for determining a runscript.</p>
-</div></blockquote>
 </section>
 <section id="notes">
 <h4>Notes<a class="headerlink" href="#notes" title="Permalink to this headline"></a></h4>
