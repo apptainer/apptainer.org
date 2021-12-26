@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Singularity and MPI applications" href="mpi.html" />
-    <link rel="prev" title="Support for Docker and OCI" href="singularity_and_docker.html" /> 
+    <link rel="prev" title="Support for Docker and OCI Containers" href="singularity_and_docker.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -75,7 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Singularity and Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">OCI Runtime Support</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mounted-oci-filesystem-bundles">Mounted OCI Filesystem Bundles</a><ul>
@@ -130,7 +130,7 @@
 <h1>OCI Runtime Support<a class="headerlink" href="#oci-runtime-support" title="Permalink to this headline"></a></h1>
 <section id="overview">
 <span id="sec-oci-runtime-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
-<p>OCI is an acronym for the <a class="reference external" href="https://www.opencontainers.org/">Open Containers Initiative</a> - an independent organization whose mandate is to develop open standards relating to containerization. To date, standardization efforts have focused on container formats and runtimes. Singularity’s compliance with respect to the OCI Image Specification is considered in detail <a class="reference internal" href="singularity_and_docker.html#sec-oci-overview"><span class="std std-ref">elsewhere</span></a>. It is Singularity’s compliance with the OCI Runtime Specification that is of concern here.</p>
+<p>OCI is an acronym for the <a class="reference external" href="https://www.opencontainers.org/">Open Containers Initiative</a> - an independent organization whose mandate is to develop open standards relating to containerization. To date, standardization efforts have focused on container formats and runtimes. Singularity’s compliance with respect to the OCI Image Specification is considered in detail <span class="xref std std-ref">elsewhere</span>. It is Singularity’s compliance with the OCI Runtime Specification that is of concern here.</p>
 <p>Briefly, compliance with respect to the OCI Runtime Specification is addressed in Singularity through the introduction of the <code class="docutils literal notranslate"><span class="pre">oci</span></code> command group. Although this command group can, in principle, be used to provide a runtime that supports end users, in this initial documentation effort, emphasis is placed upon interoperability with Kubernetes; more specifically, interoperability with Kubernetes via the <a class="reference external" href="https://www.sylabs.io/guides/cri/1.0/user-guide/index.html">Singularity Container Runtime Interface</a>.</p>
 <p>Owing to this restricted focus, a subset of the Singularity <code class="docutils literal notranslate"><span class="pre">oci</span></code> command group receives attention here; specifically:</p>
 <blockquote>
@@ -820,7 +820,7 @@ bin  dev  environment  etc  home  proc  root  singularity  sys  tmp  usr  var
 <span class="p">]</span>
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">run</span></code> equates to the <a class="reference internal" href="singularity_and_docker.html#sec-inspect-container-metadata"><span class="std std-ref">familiar runscript</span></a> for this container. If image creation is bootstrapped via a Docker or OCI agent, Singularity will make use of <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> or <code class="docutils literal notranslate"><span class="pre">CMD</span></code> (from the OCI image) to populate <code class="docutils literal notranslate"><span class="pre">args</span></code>; for additional discussion, please refer to <a class="reference internal" href="singularity_and_docker.html#sec-def-files-execution"><span class="std std-ref">Directing Execution</span></a> in the section <a class="reference internal" href="singularity_and_docker.html#singularity-and-docker"><span class="std std-ref">Support for Docker and OCI</span></a>.</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">run</span></code> equates to the <span class="xref std std-ref">familiar runscript</span> for this container. If image creation is bootstrapped via a Docker or OCI agent, Singularity will make use of <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> or <code class="docutils literal notranslate"><span class="pre">CMD</span></code> (from the OCI image) to populate <code class="docutils literal notranslate"><span class="pre">args</span></code>; for additional discussion, please refer to <span class="xref std std-ref">Directing Execution</span> in the section <a class="reference internal" href="singularity_and_docker.html#singularity-and-docker"><span class="std std-ref">Support for Docker and OCI</span></a>.</p>
 </div></blockquote>
 <p>For a comprehensive discussion of all the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file properties, refer to the <a class="reference external" href="https://github.com/opencontainers/runtime-spec/blob/master/config.md">implementation guide</a>.</p>
 <p>Technically, the <code class="docutils literal notranslate"><span class="pre">overlay</span></code> directory was <em>not</em> content expected of an OCI compliant filesystem bundle. As detailed in the section dedicated to <a class="reference external" href="persistent_overlays.html">Persistent Overlays</a>, these directories allow for the introduction of
@@ -895,7 +895,7 @@ a writable file system on an otherwise immutable read-only container; thus they 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="singularity_and_docker.html" class="btn btn-neutral float-left" title="Support for Docker and OCI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="singularity_and_docker.html" class="btn btn-neutral float-left" title="Support for Docker and OCI Containers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="mpi.html" class="btn btn-neutral float-right" title="Singularity and MPI applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
