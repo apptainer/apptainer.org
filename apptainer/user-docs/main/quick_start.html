@@ -162,28 +162,21 @@ Linux installation options are discussed in the <a class="reference external" hr
 admin guide</a>.</p>
 <section id="install-system-dependencies">
 <h3>Install system dependencies<a class="headerlink" href="#install-system-dependencies" title="Permalink to this headline"></a></h3>
-<p>You must first install development libraries to your host. Assuming Ubuntu
-(apply similar to RHEL derivatives):</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get update &amp;&amp; sudo apt-get install -y \
-    build-essential \
-    libssl-dev \
-    uuid-dev \
-    libgpgme11-dev \
-    squashfs-tools \
-    libseccomp-dev \
-    wget \
-    pkg-config \
-    git \
-    cryptsetup
+<p>You must first install development tools and libraries to your host.</p>
+<p>On Debian-based systems, including Ubuntu:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure repositories are up-to-date</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="c1"># Install debian packages for dependencies</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> \
+   <span class="n">build</span><span class="o">-</span><span class="n">essential</span> \
+   <span class="n">libseccomp</span><span class="o">-</span><span class="n">dev</span> \
+   <span class="n">pkg</span><span class="o">-</span><span class="n">config</span> \
+   <span class="n">squashfs</span><span class="o">-</span><span class="n">tools</span> \
+   <span class="n">cryptsetup</span> \
+   <span class="n">curl</span> <span class="n">wget</span> <span class="n">git</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">squashfs-tools</span></code> is only a dependency for commands that build
-images. The <code class="docutils literal notranslate"><span class="pre">build</span></code> command obviously relies on <code class="docutils literal notranslate"><span class="pre">squashfs-tools</span></code>, but
-other commands may do so as well if they are ran using container images
-from Docker Hub for instance.</p>
-</div>
+<p>On CentOS/RHEL:</p>
 <p>There are 3 broad steps to installing Singularity:</p>
 <ol class="arabic simple">
 <li><p><a class="reference internal" href="#install"><span class="std std-ref">Installing Go</span></a></p></li>
@@ -193,9 +186,22 @@ from Docker Hub for instance.</p>
 </section>
 <section id="install-go">
 <span id="install"></span><h3>Install Go<a class="headerlink" href="#install-go" title="Permalink to this headline"></a></h3>
-<p>Singularity v3 and above is written primarily in Go, so you will need Go
-installed to compile it from source.</p>
-<p>This is one of several ways to <a class="reference external" href="https://golang.org/doc/install">install and configure Go</a>.</p>
+<p>Singularity is written in Go, and may require a newer version of Go than is
+available in the repositories of your distribution. We recommend installing the
+latest version of Go from the [official binaries](<a class="reference external" href="https://golang.org/dl/">https://golang.org/dl/</a>).</p>
+<p>Singularity aims to maintain support for the two most recent stable versions
+of Go. This corresponds to the Go Release Maintenance Policy and Security
+Policy, ensuring critical bug fixes and security patches are available for all
+supported language versions.</p>
+<p>If you are building rpm or debian packages using the packaging supplied
+in the <code class="docutils literal notranslate"><span class="pre">dist</span></code> directory, and the operating system distribution of Go
+is below the minimum required by Singularity, the packages can make
+use of the native Go to compile a newer version of Go whose source
+tarball is included with the package source.  That capability is
+supplied so packages can be built on systems with no access to the
+internet.  If you are not building a package or don’t want to incur the
+overhead of compiling the Go toolchain from source, install a local
+binary copy of Go as follows.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have previously installed Go from a download, rather than an
@@ -209,7 +215,7 @@ files, which have been removed or replaced in newer versions.</p>
 archive suitable to the environment you are in. Once the Download is complete,
 extract the archive to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> (or use other instructions on go installation
 page). Alternatively, follow the commands here:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.17.2 OS=linux ARCH=amd64 &amp;&amp; \  # Replace the values as needed
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.17.5 OS=linux ARCH=amd64 &amp;&amp; \  # Replace the values as needed
   wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \ # Downloads the required Go package
   sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \ # Extracts the archive
   rm go$VERSION.$OS-$ARCH.tar.gz    # Deletes the ``tar`` file
