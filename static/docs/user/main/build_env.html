@@ -142,23 +142,23 @@
 <span id="id1"></span><h1>Build Environment<a class="headerlink" href="#build-environment" title="Permalink to this headline"></a></h1>
 <section id="overview">
 <span id="sec-buildenv"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
-<p>You may wish to customize your build
-environment by doing things such as specifying a custom cache directory for images or
-sending your Docker Credentials to the registry endpoint. Here we will discuss these and other topics
-related to the build environment.</p>
+<p>You may wish to customize your build environment by doing things such as
+specifying a custom cache directory for images or sending your Docker
+Credentials to the registry endpoint. Here we will discuss these and
+other topics related to the build environment.</p>
 </section>
 <section id="cache-folders">
 <span id="sec-cache"></span><h2>Cache Folders<a class="headerlink" href="#cache-folders" title="Permalink to this headline"></a></h2>
 <p>Singularity will cache SIF container images generated from remote
 sources, and any OCI/docker layers used to create them. The cache is
-created at <code class="docutils literal notranslate"><span class="pre">$HOME/.singularity/cache</span></code> by default. The location of
-the cache can be changed by setting the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code>
-environment variable.</p>
-<p>When you run builds as root, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, images will be cached
-in root’s home at <code class="docutils literal notranslate"><span class="pre">/root</span></code> and not your user’s home. Use the
-<code class="docutils literal notranslate"><span class="pre">-E</span></code> option to sudo to pass through the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code>
-environment variable, if you set it.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export SINGULARITY_CACHEDIR=/tmp/user/temporary-cache
+created at <code class="docutils literal notranslate"><span class="pre">$HOME/.singularity/cache</span></code> by default. The location of the
+cache can be changed by setting the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code> environment
+variable.</p>
+<p>When you run builds as root, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, images will be cached in
+root’s home at <code class="docutils literal notranslate"><span class="pre">/root</span></code> and not your user’s home. Use the <code class="docutils literal notranslate"><span class="pre">-E</span></code> option
+to sudo to pass through the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code> environment
+variable, if you set it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export SINGULARITY_CACHEDIR=/tmp/user/temporary-cache
 
 # Running a build under your user account
 $ singularity build --fakeroot myimage.sif mydef.def
@@ -167,15 +167,15 @@ $ singularity build --fakeroot myimage.sif mydef.def
 $ sudo -E singularity build myimage.sif mydef.def
 </pre></div>
 </div>
-<p>If you change the value of <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code> be sure to choose
-a location that is:</p>
+<p>If you change the value of <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code> be sure to choose a
+location that is:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Unique to you. Permissions are set on the cache so that private
 images cached for one user are not exposed to another. This means
 that <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code> cannot be shared.</p></li>
-<li><p>Located on a filesystem with sufficient space for the number and size of
-container images anticipated.</p></li>
+<li><p>Located on a filesystem with sufficient space for the number and
+size of container images anticipated.</p></li>
 <li><p>Located on a filesystem that supports atomic rename, if possible.</p></li>
 </ul>
 </div></blockquote>
@@ -192,28 +192,30 @@ remote source, into a temporary location.</p>
 </div>
 <p>Inside the cache location you will find separate directories for the
 different kinds of data that are cached:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$HOME/.singularity/cache/blob
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$HOME/.singularity/cache/blob
 $HOME/.singularity/cache/library
 $HOME/.singularity/cache/net
 $HOME/.singularity/cache/oci-tmp
 $HOME/.singularity/cache/shub
 </pre></div>
 </div>
-<p>You can safely delete these directories, or content within
-them. Singularity will re-create any directories and data that are
-needed in future runs.</p>
+<p>You can safely delete these directories, or content within them.
+Singularity will re-create any directories and data that are needed in
+future runs.</p>
 <p>You should not add any additional files, or modify files in the cache,
 as this may cause checksum / integrity errors when you run or build
 containers. If you experience problems use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">cache</span> <span class="pre">clean</span></code>
 to reset the cache to a clean, empty state.</p>
 <section id="boltdb-corruption-errors">
 <h3>BoltDB Corruption Errors<a class="headerlink" href="#boltdb-corruption-errors" title="Permalink to this headline"></a></h3>
-<p>The library that Singularity uses to retrieve and cache Docker/OCI layers
-keeps track of them using a single file database. If your home directory is on a
-network filesystem which experiences interruptions, or you run out of storage,
-it is possible for this database to become inconsistent.</p>
-<p>If you observe error messages when trying to run Singularity that mention
-<cite>github.com/etcd-io/bbolt</cite> then you should remove the database file:</p>
+<p>The library that Singularity uses to retrieve and cache Docker/OCI
+layers keeps track of them using a single file database. If your home
+directory is on a network filesystem which experiences interruptions, or
+you run out of storage, it is possible for this database to become
+inconsistent.</p>
+<p>If you observe error messages when trying to run Singularity that
+mention <cite>github.com/etcd-io/bbolt</cite> then you should remove the database
+file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">~/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">containers</span><span class="o">/</span><span class="n">cache</span><span class="o">/</span><span class="n">blob</span><span class="o">-</span><span class="n">info</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">boltdb</span>
 </pre></div>
 </div>
@@ -225,21 +227,21 @@ it is possible for this database to become inconsistent.</p>
 your cache, without manually inspecting the cache directories.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you have built images as root, directly or via <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, the
-cache location for those builds is <code class="docutils literal notranslate"><span class="pre">/root/.singularity</span></code>. You
-will need to use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> when running <code class="docutils literal notranslate"><span class="pre">cache</span> <span class="pre">clean</span></code> or <code class="docutils literal notranslate"><span class="pre">cache</span>
-<span class="pre">list</span></code> to manage these cache entries.</p>
+<p>If you have built images as root, directly or via <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, the cache
+location for those builds is <code class="docutils literal notranslate"><span class="pre">/root/.singularity</span></code>. You will need to
+use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> when running <code class="docutils literal notranslate"><span class="pre">cache</span> <span class="pre">clean</span></code> or <code class="docutils literal notranslate"><span class="pre">cache</span> <span class="pre">list</span></code> to manage
+these cache entries.</p>
 </div>
 <section id="listing-cache">
 <h3>Listing Cache<a class="headerlink" href="#listing-cache" title="Permalink to this headline"></a></h3>
 <p>To view a summary of cache usage, use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">cache</span> <span class="pre">list</span></code>:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity cache list
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity cache list
 There are 4 container file(s) using 59.45 MB and 23 oci blob file(s) using 379.10 MB of space
 Total space used: 438.55 MB
 </pre></div>
 </div>
 <p>To view detailed information, use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">cache</span> <span class="pre">list</span> <span class="pre">-v</span></code>:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity cache list -v
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity cache list -v
 NAME                     DATE CREATED           SIZE             TYPE
 0ed5a98249068fe0592edb   2020-05-27 12:57:22    192.21 MB        blob
 1d9cd1b99a7eca56d8f2be   2020-05-28 15:19:07    0.35 kB          blob
@@ -274,14 +276,13 @@ Total space used: 438.55 MB
 </pre></div>
 </div>
 <p>All cache entries are named using a content hash, so that identical
-layers or images that are pulled from different URIs do not consume
-more space than needed.</p>
+layers or images that are pulled from different URIs do not consume more
+space than needed.</p>
 <p>Entries marked <code class="docutils literal notranslate"><span class="pre">blob</span></code> are OCI/docker layers and manifests, that are
-used to create SIF format images in the <code class="docutils literal notranslate"><span class="pre">oci-tmp</span></code> cache. Other
-caches are named for the source of the image e.g. <code class="docutils literal notranslate"><span class="pre">library</span></code> and
-<code class="docutils literal notranslate"><span class="pre">oras</span></code>.</p>
-<p>You can limit the cache list to a specific cache type with the
-<code class="docutils literal notranslate"><span class="pre">-type</span></code> / <code class="docutils literal notranslate"><span class="pre">-t</span></code> option.</p>
+used to create SIF format images in the <code class="docutils literal notranslate"><span class="pre">oci-tmp</span></code> cache. Other caches
+are named for the source of the image e.g. <code class="docutils literal notranslate"><span class="pre">library</span></code> and <code class="docutils literal notranslate"><span class="pre">oras</span></code>.</p>
+<p>You can limit the cache list to a specific cache type with the <code class="docutils literal notranslate"><span class="pre">-type</span></code>
+/ <code class="docutils literal notranslate"><span class="pre">-t</span></code> option.</p>
 </section>
 <section id="cleaning-the-cache">
 <h3>Cleaning the Cache<a class="headerlink" href="#cleaning-the-cache" title="Permalink to this headline"></a></h3>
@@ -289,24 +290,24 @@ caches are named for the source of the image e.g. <code class="docutils literal 
 <span class="pre">cache</span> <span class="pre">clean</span></code>.</p>
 <p>By default <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">cache</span> <span class="pre">clean</span></code> will remove all cache entries,
 after asking you to confirm:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity cache clean
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity cache clean
 This will delete everything in your cache (containers from all sources and OCI blobs).
 Hint: You can see exactly what would be deleted by canceling and using the --dry-run option.
 Do you want to continue? [N/y] n
 </pre></div>
 </div>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> / <code class="docutils literal notranslate"><span class="pre">-n</span></code> option to see the files that would be
-deleted, or the <code class="docutils literal notranslate"><span class="pre">--force</span></code> / <code class="docutils literal notranslate"><span class="pre">-f</span></code> option to clean without asking
-for confirmation.</p>
-<p>If you want to leave your most recent cached images in place, but
-remove images that were cached longer ago, you can use the <code class="docutils literal notranslate"><span class="pre">--days</span></code>
-/ <code class="docutils literal notranslate"><span class="pre">-d</span></code> option. E.g. to clean cache entries older than 30 days:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity cache clean --days 30
+deleted, or the <code class="docutils literal notranslate"><span class="pre">--force</span></code> / <code class="docutils literal notranslate"><span class="pre">-f</span></code> option to clean without asking for
+confirmation.</p>
+<p>If you want to leave your most recent cached images in place, but remove
+images that were cached longer ago, you can use the <code class="docutils literal notranslate"><span class="pre">--days</span></code> / <code class="docutils literal notranslate"><span class="pre">-d</span></code>
+option. E.g. to clean cache entries older than 30 days:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity cache clean --days 30
 </pre></div>
 </div>
-<p>To remove only a specific kind of cache entry, e.g. only library
-images, use the <code class="docutils literal notranslate"><span class="pre">type</span></code> / <code class="docutils literal notranslate"><span class="pre">-T</span></code> option:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity cache clean --type library
+<p>To remove only a specific kind of cache entry, e.g. only library images,
+use the <code class="docutils literal notranslate"><span class="pre">type</span></code> / <code class="docutils literal notranslate"><span class="pre">-T</span></code> option:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity cache clean --type library
 </pre></div>
 </div>
 </section>
@@ -317,45 +318,47 @@ images, use the <code class="docutils literal notranslate"><span class="pre">typ
 from a Docker/OCI source, a temporary working space is required. The
 container is constructed in this temporary space before being packaged
 into a Singularity SIF image. Temporary space is also used when
-running containers in unprivileged mode, and performing some
-operations on filesystems that do not fully support <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
-<p>The location for temporary directories defaults to
-<code class="docutils literal notranslate"><span class="pre">/tmp</span></code>. Singularity will also respect the environment variable
-<code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>, and both of these locations can be overridden by setting
-the environment variable <code class="docutils literal notranslate"><span class="pre">SINGULARITY_TMPDIR</span></code>.</p>
-<p>The temporary directory used during a build must be on a filesystem
-that has enough space to hold the entire container image,
-uncompressed, including any temporary files that are created and later
-removed during the build. You may need to set <code class="docutils literal notranslate"><span class="pre">SINGULARITY_TMPDIR</span></code>
-when building a large container on a system which has a small <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>
-filesystem.</p>
+running containers in unprivileged mode, and performing some operations
+on filesystems that do not fully support <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
+<p>The location for temporary directories defaults to <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>.
+Singularity will also respect the environment variable <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>, and
+both of these locations can be overridden by setting the environment
+variable <code class="docutils literal notranslate"><span class="pre">SINGULARITY_TMPDIR</span></code>.</p>
+<p>The temporary directory used during a build must be on a filesystem that
+has enough space to hold the entire container image, uncompressed,
+including any temporary files that are created and later removed during
+the build. You may need to set <code class="docutils literal notranslate"><span class="pre">SINGULARITY_TMPDIR</span></code> when building a
+large container on a system which has a small <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> filesystem.</p>
 <p>Remember to use <code class="docutils literal notranslate"><span class="pre">-E</span></code> option to pass the value of
 <code class="docutils literal notranslate"><span class="pre">SINGULARITY_TMPDIR</span></code> to root’s environment when executing the
 <code class="docutils literal notranslate"><span class="pre">build</span></code> command with <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Many modern Linux distributions use an in-memory <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code>
-filesystem for <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> when installed on a computer with a
-sufficient amount of RAM. This may limit the size of container you
-can build, as temporary directories under <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> share RAM with
-runniing programs etc. A <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> also uses default mount options
-that can interfere with some container builds.</p>
+<p>Many modern Linux distributions use an in-memory <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> filesystem
+for <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> when installed on a computer with a sufficient amount of
+RAM. This may limit the size of container you can build, as temporary
+directories under <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> share RAM with runniing programs etc. A
+<code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> also uses default mount options that can interfere with
+some container builds.</p>
 <p>Set <code class="docutils literal notranslate"><span class="pre">SINGULARITY_TMPDIR</span></code> to a disk location, or disable the
-<code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> mount on your system if you experience
-problems.</p>
+<code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> mount on your system if you experience problems.</p>
 </div>
 </section>
 <section id="encrypted-containers">
 <h2>Encrypted Containers<a class="headerlink" href="#encrypted-containers" title="Permalink to this headline"></a></h2>
-<p>Beginning in Singularity 3.4.0 it is possible to build and run encrypted
-containers.  The containers are decrypted at runtime entirely in kernel space,
-meaning that no intermediate decrypted data is ever present on disk or in
-memory.  See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
+<p>With Singularity it is possible to build and run
+encrypted containers. The containers are decrypted at runtime entirely
+in kernel space, meaning that no intermediate decrypted data is ever
+present on disk or in memory. See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
 </section>
 <section id="environment-variables">
 <h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline"></a></h2>
 <ol class="arabic simple">
-<li><p>If a flag is represented by both a CLI option and an environment variable, and both are set, the CLI option will always take precedence. This is true for all environment variables except for <code class="docutils literal notranslate"><span class="pre">SINGULARITY_BIND</span></code> and <code class="docutils literal notranslate"><span class="pre">SINGULARITY_BINDPATH</span></code> which is combined with the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option, argument pair if both are present.</p></li>
+<li><p>If a flag is represented by both a CLI option and an environment
+variable, and both are set, the CLI option will always take
+precedence. This is true for all environment variables except for
+<code class="docutils literal notranslate"><span class="pre">SINGULARITY_BIND</span></code> and <code class="docutils literal notranslate"><span class="pre">SINGULARITY_BINDPATH</span></code> which is combined
+with the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option, argument pair if both are present.</p></li>
 <li><p>Environment variables overwrite default values in the CLI code</p></li>
 <li><p>Any defaults in the CLI code are applied.</p></li>
 </ol>
@@ -365,29 +368,37 @@ memory.  See <a class="reference internal" href="encryption.html#encryption"><sp
 environment variables at runtime.</p>
 <section id="docker">
 <h4>Docker<a class="headerlink" href="#docker" title="Permalink to this headline"></a></h4>
-<p><strong>SINGULARITY_DOCKER_LOGIN</strong> Used for the interactive login for Docker Hub.</p>
+<p><strong>SINGULARITY_DOCKER_LOGIN</strong> Used for the interactive login for Docker
+Hub.</p>
 <p><strong>SINGULARITY_DOCKER_USERNAME</strong> Your Docker username.</p>
 <p><strong>SINGULARITY_DOCKER_PASSWORD</strong> Your Docker password.</p>
 <p><strong>RUNSCRIPT_COMMAND</strong> Is not obtained from the environment, but is a
 hard coded default (“/bin/bash”). This is the fallback command used in
 the case that the docker image does not have a CMD or ENTRYPOINT.
 <strong>TAG</strong> Is the default tag, <code class="docutils literal notranslate"><span class="pre">latest</span></code>.</p>
-<p><strong>SINGULARITY_NOHTTPS</strong> This is relevant if you want to use a
-registry that doesn’t have https, and it speaks for itself. If you
-export the variable <code class="docutils literal notranslate"><span class="pre">SINGULARITY_NOHTTPS</span></code> you can force the software to not use https when
-interacting with a Docker registry. This use case is typically for use
-of a local registry.</p>
+<p><strong>SINGULARITY_NOHTTPS</strong> This is relevant if you want to use a registry
+that doesn’t have https, and it speaks for itself. If you export the
+variable <code class="docutils literal notranslate"><span class="pre">SINGULARITY_NOHTTPS</span></code> you can force the software to not use
+https when interacting with a Docker registry. This use case is
+typically for use of a local registry.</p>
 </section>
 <section id="library">
 <h4>Library<a class="headerlink" href="#library" title="Permalink to this headline"></a></h4>
-<p><strong>SINGULARITY_BUILDER</strong> Used to specify the remote builder service URL. The default value is our remote builder.</p>
-<p><strong>SINGULARITY_LIBRARY</strong> Used to specify the library to pull from. Default is set to our Cloud Library.</p>
-<p><strong>SINGULARITY_REMOTE</strong> Used to build an image remotely (This does not require root). The default is set to false.</p>
+<p><strong>SINGULARITY_BUILDER</strong> Used to specify the remote builder service URL.
+The default value is our remote builder.</p>
+<p><strong>SINGULARITY_LIBRARY</strong> Used to specify the library to pull from.
+Default is set to our Cloud Library.</p>
+<p><strong>SINGULARITY_REMOTE</strong> Used to build an image remotely (This does not
+require root). The default is set to false.</p>
 </section>
 <section id="encryption">
 <h4>Encryption<a class="headerlink" href="#encryption" title="Permalink to this headline"></a></h4>
-<p><strong>SINGULARITY_ENCRYPTION_PASSPHRASE</strong> Used to pass a plaintext passphrase to encrypt a container file system (with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag). The default is empty.</p>
-<p><strong>SINGULARITY_ENCRYPTION_PEM_PATH</strong> Used to specify the location of a public key to use for container encryption (with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag). The default is empty.</p>
+<p><strong>SINGULARITY_ENCRYPTION_PASSPHRASE</strong> Used to pass a plaintext
+passphrase to encrypt a container file system (with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code>
+flag). The default is empty.</p>
+<p><strong>SINGULARITY_ENCRYPTION_PEM_PATH</strong> Used to specify the location of a
+public key to use for container encryption (with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code>
+flag). The default is empty.</p>
 </section>
 </section>
 </section>
