@@ -173,8 +173,8 @@
              
   <section id="support-for-docker-and-oci-containers">
 <span id="singularity-and-docker"></span><h1>Support for Docker and OCI Containers<a class="headerlink" href="#support-for-docker-and-oci-containers" title="Permalink to this headline"></a></h1>
-<p>The Open Containers Initiative (OCI) container format, which grew out
-of Docker, is the dominant standard for cloud-focused containerized
+<p>The Open Containers Initiative (OCI) container format, which grew out of
+Docker, is the dominant standard for cloud-focused containerized
 deployments of software. Although Singularity’s own container format
 has many unique advantages, it’s likely you will need to work with
 Docker/OCI containers at some point.</p>
@@ -187,12 +187,12 @@ and especially in HPC environments.</p>
 changes.</p></li>
 <li><p>Pull, run, and build from containers hosted on other registries,
 including private registries deployed on premise, or in the cloud.</p></li>
-<li><p>Pull and build from OCI containers in archive formats, or cached in
-a local Docker daemon.</p></li>
+<li><p>Pull and build from OCI containers in archive formats, or cached in a
+local Docker daemon.</p></li>
 </ul>
-<p>This section will highlight these workflows, and discuss the
-limitations and best practices to keep in mind when creating
-containers targeting both Docker and Singularity.</p>
+<p>This section will highlight these workflows, and discuss the limitations
+and best practices to keep in mind when creating containers targeting
+both Docker and Singularity.</p>
 <section id="containers-from-docker-hub">
 <h2>Containers From Docker Hub<a class="headerlink" href="#containers-from-docker-hub" title="Permalink to this headline"></a></h2>
 <p>Docker Hub is the most common place that projects publish public
@@ -200,11 +200,10 @@ container images. At some point, it’s likely that you will want to run
 or build from containers that are hosted there.</p>
 <section id="public-containers">
 <h3>Public Containers<a class="headerlink" href="#public-containers" title="Permalink to this headline"></a></h3>
-<p>It’s easy to run a public Docker Hub container with
-Singularity. Just put <code class="docutils literal notranslate"><span class="pre">docker://</span></code> in front of the container
-repository and tag. To run the container that’s called
-<code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow:latest</span></code>:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run docker://sylabsio/lolcow:latest
+<p>It’s easy to run a public Docker Hub container with Singularity. Just
+put <code class="docutils literal notranslate"><span class="pre">docker://</span></code> in front of the container repository and tag. To run
+the container that’s called <code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow:latest</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run docker://sylabsio/lolcow:latest
 INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
 Getting image source signatures
@@ -229,13 +228,11 @@ INFO:    Creating SIF file...
 <p>Note that Singularity retrieves blobs and configuration data from
 Docker Hub, extracts the layers that make up the Docker container, and
 creates a SIF file from them. This SIF file is kept in your
-Singularity <a class="reference internal" href="build_env.html#sec-cache"><span class="std std-ref">cache directory</span></a>, so if you run the
-same Docker container again the downloads and conversion aren’t
-required.</p>
+Singularity <a class="reference internal" href="build_env.html#sec-cache"><span class="std std-ref">cache directory</span></a>, so if you run the same
+Docker container again the downloads and conversion aren’t required.</p>
 <p>To obtain the Docker container as a SIF file in a specific location,
-which you can move, share, and keep for later, <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code>
-it:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://sylabsio/lolcow
+which you can move, share, and keep for later, <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://sylabsio/lolcow
 INFO:    Using cached SIF image
 
 $ ls -l lolcow_latest.sif
@@ -250,31 +247,31 @@ from the cache.</p>
 <p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> of a Docker container actually runs a
 <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">build</span></code> behind the scenes, since we are translating
 from OCI to SIF. If you <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> a Docker container
-twice, the output file isn’t identical because metadata such as
-dates from the conversion will vary. This differs from pulling a
-SIF container (e.g. from a <code class="docutils literal notranslate"><span class="pre">library://</span></code> URI), which always give
-you an exact copy of the image.</p>
+twice, the output file isn’t identical because metadata such as dates
+from the conversion will vary. This differs from pulling a SIF
+container (e.g. from a <code class="docutils literal notranslate"><span class="pre">library://</span></code> URI), which always give you an
+exact copy of the image.</p>
 </div>
 </section>
 <section id="docker-hub-limits">
 <h3>Docker Hub Limits<a class="headerlink" href="#docker-hub-limits" title="Permalink to this headline"></a></h3>
-<p>Docker Hub introduced limits on anonymous access to its API in
-November 2020. Every time you use a <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI to run, pull
-etc. a container Singularity will make requests to Docker Hub in
-order to check whether the container has been modified there. On
-shared systems, and when running containers in parallel, this can
-quickly exhaust the Docker Hub API limits.</p>
+<p>Docker Hub introduced limits on anonymous access to its API in November
+2020. Every time you use a <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI to run, pull etc. a
+container Singularity will make requests to Docker Hub in order to
+check whether the container has been modified there. On shared systems,
+and when running containers in parallel, this can quickly exhaust the
+Docker Hub API limits.</p>
 <p>We recommend that you <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> a Docker image to a local
 SIF, and then always run from the SIF file, rather than using
 <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">run</span> <span class="pre">docker://...</span></code> repeatedly.</p>
-<p>Alternatively, if you have signed up for a Docker Hub account, make
-sure that you authenticate before using <code class="docutils literal notranslate"><span class="pre">docker://</span></code> container URIs.</p>
+<p>Alternatively, if you have signed up for a Docker Hub account, make sure
+that you authenticate before using <code class="docutils literal notranslate"><span class="pre">docker://</span></code> container URIs.</p>
 </section>
 <section id="authentication-private-containers">
 <h3>Authentication / Private Containers<a class="headerlink" href="#authentication-private-containers" title="Permalink to this headline"></a></h3>
 <p>To make use of the API limits under a Docker Hub account, or to access
-private containers, you’ll need to authenticate to Docker Hub. There
-are a number of ways to do this with Singularity.</p>
+private containers, you’ll need to authenticate to Docker Hub. There are
+a number of ways to do this with Singularity.</p>
 <section id="singularity-cli-remote-command">
 <h4>Singularity CLI Remote Command<a class="headerlink" href="#singularity-cli-remote-command" title="Permalink to this headline"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span></code> command supports logging into Docker
@@ -301,10 +298,10 @@ INFO:    Logout succeeded
 <section id="docker-cli-authentication">
 <h4>Docker CLI Authentication<a class="headerlink" href="#docker-cli-authentication" title="Permalink to this headline"></a></h4>
 <p>If you have the <code class="docutils literal notranslate"><span class="pre">docker</span></code> CLI installed on your machine, you can
-<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span></code> to your account. This stores authentication
-information in <code class="docutils literal notranslate"><span class="pre">~/.docker/config.json</span></code>. The process that
-Singularity uses to retrieve Docker / OCI containers will attempt to
-use this information to login.</p>
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span></code> to your account. This stores authentication information
+in <code class="docutils literal notranslate"><span class="pre">~/.docker/config.json</span></code>. The process that Singularity uses to
+retrieve Docker / OCI containers will attempt to use this information to
+login.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Singularity can only read credentials stored directly in
@@ -324,10 +321,10 @@ Enter Docker Password:
 </section>
 <section id="environment-variables">
 <h4>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline"></a></h4>
-<p>When calling Singularity in a CI/CD workflow, or other
-non-interactive scenario, it may be useful to specify Docker Hub login
-credentials using environment variables. These are often the default
-way of passing secrets into jobs within CI pipelines.</p>
+<p>When calling Singularity in a CI/CD workflow, or other non-interactive
+scenario, it may be useful to specify Docker Hub login credentials using
+environment variables. These are often the default way of passing
+secrets into jobs within CI pipelines.</p>
 <p>Singularity accepts a username, and password / token, as
 <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code>
 respectively. These environment variables will override any stored
@@ -343,20 +340,20 @@ $ singularity pull docker://sylabsio/private
 <section id="containers-from-other-registries">
 <h2>Containers From Other Registries<a class="headerlink" href="#containers-from-other-registries" title="Permalink to this headline"></a></h2>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URIs with Singularity to pull and run
-containers from OCI registries other than Docker Hub. To do this,
-you’ll need to include the hostname or IP address of the registry in
-your <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI. Authentication with other registries is
-carried out in the same basic manner, but sometimes you’ll need to
-retrieve your credentials using a specific tool, especially when
-working with Cloud Service Provider environments.</p>
+containers from OCI registries other than Docker Hub. To do this, you’ll
+need to include the hostname or IP address of the registry in your
+<code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI. Authentication with other registries is carried out
+in the same basic manner, but sometimes you’ll need to retrieve your
+credentials using a specific tool, especially when working with Cloud
+Service Provider environments.</p>
 <p>Below are specific examples for some common registries. Most other
 registries follow a similar pattern for pulling public images, and
 authenticating to access private images.</p>
 <section id="quay-io">
 <h3>Quay.io<a class="headerlink" href="#quay-io" title="Permalink to this headline"></a></h3>
 <p>Quay is an OCI container registry used by a large number of projects,
-and hosted at <code class="docutils literal notranslate"><span class="pre">https://quay.io</span></code>. To pull public containers from
-Quay, just include the <code class="docutils literal notranslate"><span class="pre">quay.io</span></code> hostname in your <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI:</p>
+and hosted at <code class="docutils literal notranslate"><span class="pre">https://quay.io</span></code>. To pull public containers from Quay,
+just include the <code class="docutils literal notranslate"><span class="pre">quay.io</span></code> hostname in your <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://quay.io/bitnami/python:3.7
 INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
@@ -369,8 +366,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 &gt;&gt;&gt;
 </pre></div>
 </div>
-<p>To pull containers from private repositories you will need to generate
-a CLI token in the Quay web interface, then use it to login with
+<p>To pull containers from private repositories you will need to generate a
+CLI token in the Quay web interface, then use it to login with
 Singularity. Use the same methods as described for Docker Hub above:</p>
 <ul class="simple">
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">docker://quay.io</span></code>
@@ -396,8 +393,8 @@ INFO:    Starting build...
 </pre></div>
 </div>
 <p>If you do need to pull containers using an NVIDIA account, e.g. if you
-have access to an NGC Private Registry, you will need to generate an
-API key in the web interface in order to authenticate.</p>
+have access to an NGC Private Registry, you will need to generate an API
+key in the web interface in order to authenticate.</p>
 <p>Use one of the following authentication methods (detailed above for
 Docker Hub), with the username <code class="docutils literal notranslate"><span class="pre">$oauthtoken</span></code> and the password set to
 your NGC API key.</p>
@@ -409,14 +406,14 @@ your NGC API key.</p>
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME=&quot;\$oauthtoken&quot;</span></code> and
 <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code> environment variables.</p></li>
 </ul>
-<p>See also: <a class="reference external" href="https://docs.nvidia.com/ngc/ngc-private-registry-user-guide/index.html">https://docs.nvidia.com/ngc/ngc-private-registry-user-guide/index.html</a></p>
+<p>See also:
+<a class="reference external" href="https://docs.nvidia.com/ngc/ngc-private-registry-user-guide/index.html">https://docs.nvidia.com/ngc/ngc-private-registry-user-guide/index.html</a></p>
 </section>
 <section id="github-container-registry">
 <h3>GitHub Container Registry<a class="headerlink" href="#github-container-registry" title="Permalink to this headline"></a></h3>
 <p>GitHub Container Registry is increasingly used to provide Docker
-containers alongside the source code of hosted projects. You can pull
-a public container from GitHub Container Registry using a <code class="docutils literal notranslate"><span class="pre">ghcr.io</span></code>
-URI:</p>
+containers alongside the source code of hosted projects. You can pull a
+public container from GitHub Container Registry using a <code class="docutils literal notranslate"><span class="pre">ghcr.io</span></code> URI:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://ghcr.io/containerd/alpine:latest
 INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
@@ -424,13 +421,13 @@ INFO:    Starting build...
 </div>
 <p>To pull private containers from GHCR you will need to generate a
 personal access token in the GitHub web interface in order to
-authenticate. This token must have required scopes. See
-<a class="reference external" href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">the GitHub documentation here.</a></p>
+authenticate. This token must have required scopes. See <a class="reference external" href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">the GitHub
+documentation here.</a></p>
 <p>Use one of the following authentication methods (detailed above for
 Docker Hub), with your username and personal access token:</p>
 <ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">docker://ghcr.io</span></code> to store your
-credentials for Singularity.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">docker://ghcr.io</span></code>
+to store your credentials for Singularity.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">ghcr.io</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME</span></code> and
@@ -440,9 +437,8 @@ credentials for Singularity.</p></li>
 <section id="aws-ecr">
 <h3>AWS ECR<a class="headerlink" href="#aws-ecr" title="Permalink to this headline"></a></h3>
 <p>To work with an AWS hosted Elastic Container Registry (ECR) generally
-requires authentication. There are various ways to generate
-credentials. You should follow one of the approaches in
-<a class="reference external" href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html">the ECR guide</a>
+requires authentication. There are various ways to generate credentials.
+You should follow one of the approaches in <a class="reference external" href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html">the ECR guide</a>
 in order to obtain a username and password.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -451,11 +447,11 @@ does not currently support external credential helpers used with
 Docker, only reading credentials stored directly in the
 <code class="docutils literal notranslate"><span class="pre">.docker/config.json</span></code> file.</p>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">get-login-password</span></code> approach is the most straightforward. It
-uses the AWS CLI to request a password, which can then be used to
+<p>The <code class="docutils literal notranslate"><span class="pre">get-login-password</span></code> approach is the most straightforward. It uses
+the AWS CLI to request a password, which can then be used to
 authenticate to an ECR private registry in the specified region. The
 username used in conjunction with this password is always <code class="docutils literal notranslate"><span class="pre">AWS</span></code>.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ aws ecr get-login-password --region region
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ aws ecr get-login-password --region region
 </pre></div>
 </div>
 <p>Then login using one of the following methods:</p>
@@ -464,8 +460,8 @@ username used in conjunction with this password is always <code class="docutils 
 <span class="pre">docker://&lt;accountid&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com</span></code> to store your
 credentials for Singularity.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">AWS</span>
-<span class="pre">&lt;accountid&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on
-your machine.</p></li>
+<span class="pre">&lt;accountid&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your
+machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME=AWS</span></code> and
 <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code> environment variables.</p></li>
@@ -478,15 +474,13 @@ your machine.</p></li>
 <p>An Azure hosted Azure Container Registry (ACR) will generally hold
 private images and require authentication to pull from. There are
 several ways to authenticate to ACR, depending on the account type you
-use in Azure. See the
-<a class="reference external" href="https://docs.microsoft.com/en-us/azure/container-registry/container-registry-authentication?tabs=azure-cli">ACR documentation</a>
+use in Azure. See the <a class="reference external" href="https://docs.microsoft.com/en-us/azure/container-registry/container-registry-authentication?tabs=azure-cli">ACR documentation</a>
 for more information on these options.</p>
-<p>Generally, for identities, using <code class="docutils literal notranslate"><span class="pre">az</span> <span class="pre">acr</span> <span class="pre">login</span></code> from the Azure
-CLI will add credentials to <code class="docutils literal notranslate"><span class="pre">.docker/config.json</span></code> which can be read
-by Singularity.</p>
-<p>Service Principle accounts will have an explicit username and
-password, and you should authenticate using one of the following
-methods:</p>
+<p>Generally, for identities, using <code class="docutils literal notranslate"><span class="pre">az</span> <span class="pre">acr</span> <span class="pre">login</span></code> from the Azure CLI
+will add credentials to <code class="docutils literal notranslate"><span class="pre">.docker/config.json</span></code> which can be read by
+Singularity.</p>
+<p>Service Principle accounts will have an explicit username and password,
+and you should authenticate using one of the following methods:</p>
 <ul class="simple">
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span>
 <span class="pre">docker://myregistry.azurecr.io</span></code> to store your credentials for
@@ -498,33 +492,32 @@ Singularity.</p></li>
 <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code> environment variables.</p></li>
 </ul>
 <p>The recent repository-scoped access token preview may be more
-convenient. See the
-<a class="reference external" href="https://docs.microsoft.com/en-us/azure/container-registry/container-registry-repository-scoped-permissions">preview documentation</a>
-which details how to use <code class="docutils literal notranslate"><span class="pre">az</span> <span class="pre">acr</span> <span class="pre">token</span> <span class="pre">create</span></code> to obtain a token
-name and password pair that can be used to authenticate with the above
+convenient. See the <a class="reference external" href="https://docs.microsoft.com/en-us/azure/container-registry/container-registry-repository-scoped-permissions">preview documentation</a>
+which details how to use <code class="docutils literal notranslate"><span class="pre">az</span> <span class="pre">acr</span> <span class="pre">token</span> <span class="pre">create</span></code> to obtain a token name
+and password pair that can be used to authenticate with the above
 methods.</p>
 </section>
 </section>
 <section id="building-from-docker-oci-containers">
 <h2>Building From Docker / OCI Containers<a class="headerlink" href="#building-from-docker-oci-containers" title="Permalink to this headline"></a></h2>
-<p>If you wish to use an existing Docker or OCI container as the basis
-for a new container, you will need to specifiy it as the <em>bootstrap</em>
-source in a Singularity definition file.</p>
-<p>Just as you can run or pull containers from different registries using
-a <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI, you can use different headers in a definition file
-to instruct Singularity where to find the container you want to use
-as the starting point for your build.</p>
+<p>If you wish to use an existing Docker or OCI container as the basis for
+a new container, you will need to specifiy it as the <em>bootstrap</em> source
+in a Singularity definition file.</p>
+<p>Just as you can run or pull containers from different registries using a
+<code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI, you can use different headers in a definition file to
+instruct Singularity where to find the container you want to use as
+the starting point for your build.</p>
 <section id="registries-in-definition-files">
 <h3>Registries In Definition Files<a class="headerlink" href="#registries-in-definition-files" title="Permalink to this headline"></a></h3>
-<p>When you wish to build from a Docker or OCI container that’s hosted in
-a registry, such as Docker Hub, your definition file should begin with
+<p>When you wish to build from a Docker or OCI container that’s hosted in a
+registry, such as Docker Hub, your definition file should begin with
 <code class="docutils literal notranslate"><span class="pre">Bootstrap:</span> <span class="pre">docker</span></code>, followed with a <code class="docutils literal notranslate"><span class="pre">From:</span></code> line which specifies
 the location of the container you wish to pull.</p>
 <section id="docker-hub">
 <h4>Docker Hub<a class="headerlink" href="#docker-hub" title="Permalink to this headline"></a></h4>
-<p>Docker Hub is the default registry, so when building from Docker Hub
-the <code class="docutils literal notranslate"><span class="pre">From:</span></code> header only needs to specify the container respository
-and tag:</p>
+<p>Docker Hub is the default registry, so when building from Docker Hub the
+<code class="docutils literal notranslate"><span class="pre">From:</span></code> header only needs to specify the container respository and
+tag:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">From</span>: ubuntu:<span class="m">20.04</span>
 </pre></div>
@@ -550,17 +543,17 @@ header. The following two examples are equivalent:</p>
 </section>
 <section id="authentication-during-a-build">
 <h4>Authentication During a Build<a class="headerlink" href="#authentication-during-a-build" title="Permalink to this headline"></a></h4>
-<p>If you are building from an image in a private registry you will need
-to ensure that the credentials needed to access the image are
-available to Singularity.</p>
+<p>If you are building from an image in a private registry you will need to
+ensure that the credentials needed to access the image are available to
+Singularity.</p>
 <p>A build might be run as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user, e.g. via <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, or under
 your own account with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
 <p>If you are running the build as <code class="docutils literal notranslate"><span class="pre">root</span></code>, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, then any
 stored credentials or environment variables must be available to the
 <code class="docutils literal notranslate"><span class="pre">root</span></code> user:</p>
 <ul class="simple">
-<li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive
-login. I.E. run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">singularity</span> <span class="pre">build</span> <span class="pre">--docker-login</span> <span class="pre">myimage.sif</span>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.
+I.E. run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">singularity</span> <span class="pre">build</span> <span class="pre">--docker-login</span> <span class="pre">myimage.sif</span>
 <span class="pre">Singularity</span></code>.</p></li>
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME</span></code> and
 <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code> environment variables. Pass the
@@ -569,27 +562,25 @@ running <code class="docutils literal notranslate"><span class="pre">sudo</span>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">...</span></code> to store your credentials
 for the <code class="docutils literal notranslate"><span class="pre">root</span></code> user on your system. This is separate from storing
 the credentials under your own account.</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">login</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your
-machine. This is separate from storing the credentials under your
-own account.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">login</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine. This is
+separate from storing the credentials under your own account.</p></li>
 </ul>
 <p>If you are running the build under your account via the <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>
-feature you do not need to specially set credentials for the root
-user.</p>
+feature you do not need to specially set credentials for the root user.</p>
 </section>
 </section>
 <section id="archives-docker-daemon">
 <h3>Archives &amp; Docker Daemon<a class="headerlink" href="#archives-docker-daemon" title="Permalink to this headline"></a></h3>
-<p>As well as being hosted in a registry, Docker / OCI containers might
-be found inside a running Docker daemon, or saved as an
-archive. Singularity can build from these locations by using
-specialised bootstrap agents.</p>
+<p>As well as being hosted in a registry, Docker / OCI containers might be
+found inside a running Docker daemon, or saved as an archive.
+Singularity can build from these locations by using specialised
+bootstrap agents.</p>
 <section id="containers-cached-by-the-docker-daemon">
 <h4>Containers Cached by the Docker Daemon<a class="headerlink" href="#containers-cached-by-the-docker-daemon" title="Permalink to this headline"></a></h4>
-<p>If you have pulled or run a container on your machine under
-<code class="docutils literal notranslate"><span class="pre">docker</span></code>, it will be cached locally by the Docker daemon. The
-<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code> command will list containers that are available:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ docker images
+<p>If you have pulled or run a container on your machine under <code class="docutils literal notranslate"><span class="pre">docker</span></code>,
+it will be cached locally by the Docker daemon. The <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code>
+command will list containers that are available:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 sylabsio/lolcow     latest              5a15b484bc65        2 hours ago         188MB
 </pre></div>
@@ -598,7 +589,7 @@ sylabsio/lolcow     latest              5a15b484bc65        2 hours ago         
 by Docker. You can directly build it into a SIF file using a
 <code class="docutils literal notranslate"><span class="pre">docker-daemon://</span></code> URI specifying the <code class="docutils literal notranslate"><span class="pre">REPOSITORY:TAG</span></code> container
 name:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build lolcow_from_docker_cache.sif docker-daemon://sylabsio/lolcow:latest
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity build lolcow_from_docker_cache.sif docker-daemon://sylabsio/lolcow:latest
 INFO:    Starting build...
 Getting image source signatures
 Copying blob sha256:a2022691bf950a72f9d2d84d557183cb9eee07c065a76485f1695784855c5193
@@ -626,16 +617,14 @@ registry, the <code class="docutils literal notranslate"><span class="pre">docke
 <code class="docutils literal notranslate"><span class="pre">latest</span></code> tag automatically.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In the example above, the build was performed without
-<code class="docutils literal notranslate"><span class="pre">sudo</span></code>. This is possible only when the user is part of the
-<code class="docutils literal notranslate"><span class="pre">docker</span></code> group on the host, since Singularity must contact the
-Docker daemon through its socket. If you are not part of the
-<code class="docutils literal notranslate"><span class="pre">docker</span></code> group you will need to use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> for the build to
-complete successfully.</p>
+<p>In the example above, the build was performed without <code class="docutils literal notranslate"><span class="pre">sudo</span></code>. This
+is possible only when the user is part of the <code class="docutils literal notranslate"><span class="pre">docker</span></code> group on the
+host, since Singularity must contact the Docker daemon through its
+socket. If you are not part of the <code class="docutils literal notranslate"><span class="pre">docker</span></code> group you will need to
+use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> for the build to complete successfully.</p>
 </div>
-<p>To build from an image cached by the Docker daemon in a definition
-file use <code class="docutils literal notranslate"><span class="pre">Bootstrap:</span> <span class="pre">docker-daemon</span></code>, and a <code class="docutils literal notranslate"><span class="pre">From:</span>
-<span class="pre">&lt;REPOSITORY&gt;:TAG</span></code> line:</p>
+<p>To build from an image cached by the Docker daemon in a definition file
+use <code class="docutils literal notranslate"><span class="pre">Bootstrap:</span> <span class="pre">docker-daemon</span></code>, and a <code class="docutils literal notranslate"><span class="pre">From:</span> <span class="pre">&lt;REPOSITORY&gt;:TAG</span></code> line:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker-daemon
 <span class="k">From</span>: sylabsio/lolcow:latest
 </pre></div>
@@ -643,14 +632,14 @@ file use <code class="docutils literal notranslate"><span class="pre">Bootstrap:
 </section>
 <section id="containers-in-docker-archive-files">
 <h4>Containers in Docker Archive Files<a class="headerlink" href="#containers-in-docker-archive-files" title="Permalink to this headline"></a></h4>
-<p>Docker allows containers to be exported into single file tar
-archives. These cannot be run directly, but are intended to be
-imported into Docker to run at a later date, or another
-location. Singularity can build from (or run) these archive files,
-by extracting them as part of the build process.</p>
+<p>Docker allows containers to be exported into single file tar archives.
+These cannot be run directly, but are intended to be imported into
+Docker to run at a later date, or another location. Singularity can
+build from (or run) these archive files, by extracting them as part of
+the build process.</p>
 <p>If an image is listed by the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code> command, then we can
 create a tar archive file using <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">save</span></code> and the image ID:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo docker images
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo docker images
 REPOSITORY                        TAG               IMAGE ID       CREATED          SIZE
 sylabsio/lolcow                   latest            5a15b484bc65   2 hours ago      188MB
 
@@ -659,7 +648,7 @@ $ docker save 5a15b484bc65 -o lolcow.tar
 </div>
 <p>If we examine the contents of the tar file we can see that it contains
 the layers and metadata that make up a Docker container:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ tar tvf lolcow.tar
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tar tvf lolcow.tar
 drwxr-xr-x  0 0      0           0 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/
 -rw-r--r--  0 0      0           3 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/VERSION
 -rw-r--r--  0 0      0         401 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/json
@@ -674,10 +663,9 @@ drwxr-xr-x  0 0      0           0 Aug 16 11:22 af7e389ea6636873dbc5adc17826e840
 </div>
 <p>We can convert this tar file into a singularity container using the
 <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent. Because the agent accesses a file,
-rather than an object hosted by a service, it uses <code class="docutils literal notranslate"><span class="pre">:&lt;filename&gt;</span></code>,
-not <code class="docutils literal notranslate"><span class="pre">://&lt;location&gt;</span></code>. To build a tar archive directly to a SIF
-container:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity build lolcow_tar.sif docker-archive:lolcow.tar
+rather than an object hosted by a service, it uses <code class="docutils literal notranslate"><span class="pre">:&lt;filename&gt;</span></code>, not
+<code class="docutils literal notranslate"><span class="pre">://&lt;location&gt;</span></code>. To build a tar archive directly to a SIF container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity build lolcow_tar.sif docker-archive:lolcow.tar
 INFO:    Starting build...
 Getting image source signatures
 Copying blob sha256:2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171
@@ -697,9 +685,9 @@ INFO:    Build complete: lolcow_tar.sif
 <p>The <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent can also handle gzipped Docker
 archives (<code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> or <code class="docutils literal notranslate"><span class="pre">.tgz</span></code> files).</p>
 </div>
-<p>To build an image using a definition file, which starts from a
-container in a Docker archive, use <code class="docutils literal notranslate"><span class="pre">Bootstrap:</span> <span class="pre">docker-archive</span></code> and
-specify the filename in the <code class="docutils literal notranslate"><span class="pre">From:</span></code> line:</p>
+<p>To build an image using a definition file, which starts from a container
+in a Docker archive, use <code class="docutils literal notranslate"><span class="pre">Bootstrap:</span> <span class="pre">docker-archive</span></code> and specify the
+filename in the <code class="docutils literal notranslate"><span class="pre">From:</span></code> line:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker-archive
 <span class="k">From</span>: lolcow.tar
 </pre></div>
@@ -709,67 +697,66 @@ specify the filename in the <code class="docutils literal notranslate"><span cla
 </section>
 <section id="differences-and-limitations-vs-docker">
 <span id="sec-optional-headers-def-files"></span><h2>Differences and Limitations vs Docker<a class="headerlink" href="#differences-and-limitations-vs-docker" title="Permalink to this headline"></a></h2>
-<p>Though Docker / OCI container compatibility is a goal of
-Singularity, there are some differences and limitations due to the
-way Singularity was designed to work well on shared systems and HPC
-clusters. If you are having difficulty running a specific Docker
-container, check through the list of differences below. There are
-workarounds for many of the issues that you are most likely to face.</p>
+<p>Though Docker / OCI container compatibility is a goal of Singularity,
+there are some differences and limitations due to the way Singularity
+was designed to work well on shared systems and HPC clusters. If you are
+having difficulty running a specific Docker container, check through the
+list of differences below. There are workarounds for many of the issues
+that you are most likely to face.</p>
 <section id="read-only-by-default">
 <h3>Read-only by Default<a class="headerlink" href="#read-only-by-default" title="Permalink to this headline"></a></h3>
-<p>Singularity’s container image format (SIF) is generally
-read-only. This permits containers to be run in parallel from a shared
-location on a network filesystem, support in-built signing and
-verification, and offer encryption. A container’s filesystem is
-mounted directly from the SIF, as SquashFS, so cannot be written to by
-default.</p>
+<p>Singularity’s container image format (SIF) is generally read-only.
+This permits containers to be run in parallel from a shared location on
+a network filesystem, support in-built signing and verification, and
+offer encryption. A container’s filesystem is mounted directly from the
+SIF, as SquashFS, so cannot be written to by default.</p>
 <p>When a container is run using Docker its layers are extracted, and the
 resulting container filesystem can be written to and modified by
-default. If a Docker container expects to write files, you will need
-to follow one of the following methods to allow it to run under
+default. If a Docker container expects to write files, you will need to
+follow one of the following methods to allow it to run under
 Singularity.</p>
 <ul class="simple">
 <li><p>A directory from the host can be passed into the container with the
 <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> flags. It needs to be mounted inside the
 container at the location where files will be written.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> flag can be used to allow files to be
-created in a special temporary overlay. Any changes are lost when
-the container exits. The SIF file is never modified.</p></li>
+created in a special temporary overlay. Any changes are lost when the
+container exits. The SIF file is never modified.</p></li>
 <li><p>The container can be converted to a sandbox directory, and executed
 with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag, which allows modification of the
 sandbox content.</p></li>
-<li><p>A writable overlay partition can be added to the SIF file, and the container
-executed with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag. Any changes made are kept
-permanently in the overlay partition.</p></li>
+<li><p>A writable overlay partition can be added to the SIF file, and the
+container executed with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag. Any changes made are
+kept permanently in the overlay partition.</p></li>
 </ul>
 <p>Of these methods, only <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> is always safe to run in
 parallel. Each time the container is executed, a separate temporary
 overlay is used and then discarded.</p>
-<p>Binding a directory into a container, or running a writable sandbox
-may or may not be safe, depending on the program executed. The program
-must use, and the filesystem support, some type of locking in order
-that the parallel runs do not interfere.</p>
-<p>A writable overlay file in a SIF partition cannot be used in
-parallel. Singularity will refuse to run concurrently using the same
-SIF writable overlay partition.</p>
+<p>Binding a directory into a container, or running a writable sandbox may
+or may not be safe, depending on the program executed. The program must
+use, and the filesystem support, some type of locking in order that the
+parallel runs do not interfere.</p>
+<p>A writable overlay file in a SIF partition cannot be used in parallel.
+Singularity will refuse to run concurrently using the same SIF
+writable overlay partition.</p>
 </section>
 <section id="dockerfile-user">
 <h3>Dockerfile <code class="docutils literal notranslate"><span class="pre">USER</span></code><a class="headerlink" href="#dockerfile-user" title="Permalink to this headline"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> used to build a Docker container may contain a
-<code class="docutils literal notranslate"><span class="pre">USER</span></code> statement. This tells the container runtime that it should
-run the container under the specified user account.</p>
+<code class="docutils literal notranslate"><span class="pre">USER</span></code> statement. This tells the container runtime that it should run
+the container under the specified user account.</p>
 <p>Because Singularity is designed to provide easy and safe access to
-data on the host system, work under batch schedulers, etc., it does
-not permit changing the user account the container is run as.</p>
+data on the host system, work under batch schedulers, etc., it does not
+permit changing the user account the container is run as.</p>
 <p>Any <code class="docutils literal notranslate"><span class="pre">USER</span></code> statement in a <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> will be ignored by
 Singularity when the container is run. In practice, this often does
-not affect the execution of the software in the container. Software
-that is written in a way that requires execution under a specific user
+not affect the execution of the software in the container. Software that
+is written in a way that requires execution under a specific user
 account will generally require modification for use with Singularity.</p>
 <p>Singularity’s <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> mode will start a container as a fake
 <code class="docutils literal notranslate"><span class="pre">root</span></code> user, mapped to the user’s real account outside of the
-container. Inside the container it is possible to change to another
-user account, which is mapped to a configured range of sub-uids / gids
+container. Inside the container it is possible to change to another user
+account, which is mapped to a configured range of sub-uids / gids
 belonging to the original user. It may be possible to execute software
 expecting a fixed user account manually inside a <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> shell,
 if your adminstrator has configured the system for <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
@@ -783,14 +770,14 @@ project directories to automatically bind mount. Docker does not mount
 host directories into the container by default.</p>
 <p>The home directory mount is the most likely to cause problems when
 running Docker containers. Various software will look for packages,
-plugins, and configuration files in <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>. If you have, for
-example, installed packages for Python into your home directory (<code class="docutils literal notranslate"><span class="pre">pip</span>
-<span class="pre">install</span> <span class="pre">--user</span></code>) then a Python container may find and attempt to use
-them. This can cause conflicts and unexpected behaviour.</p>
+plugins, and configuration files in <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>. If you have, for example,
+installed packages for Python into your home directory (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span>
+<span class="pre">--user</span></code>) then a Python container may find and attempt to use them. This
+can cause conflicts and unexpected behaviour.</p>
 <p>If you experience issues, use the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> option to stop
-Singularity automatically binding directories into the
-container. You may need to use <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> to then add
-back e.g. an HPC project directory that you need access to.</p>
+Singularity automatically binding directories into the container. You
+may need to use <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> to then add back e.g. an HPC
+project directory that you need access to.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Without --contain, python in the container finds packages
 # in your $HOME directory.
 $ singularity exec docker://python:3.9 pip list
@@ -814,15 +801,15 @@ wheel      0.37.0
 </section>
 <section id="environment-propagation">
 <h3>Environment Propagation<a class="headerlink" href="#environment-propagation" title="Permalink to this headline"></a></h3>
-<p>Singularity propagates most environment variables set on the host
-into the container, by default. Docker does not propagate any host
+<p>Singularity propagates most environment variables set on the host into
+the container, by default. Docker does not propagate any host
 environment variables into the container. Environment variables may
 change the behaviour of software.</p>
 <p>To disable automatic propagation of environment variables, the
-<code class="docutils literal notranslate"><span class="pre">--cleanenv</span> <span class="pre">/</span> <span class="pre">-e</span></code> flag can be specified. When <code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code> is
-used, only variables on the host that are prefixed with
-<code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> are set in the container:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Set a host variable
+<code class="docutils literal notranslate"><span class="pre">--cleanenv</span> <span class="pre">/</span> <span class="pre">-e</span></code> flag can be specified. When <code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code> is used,
+only variables on the host that are prefixed with <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code>
+are set in the container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Set a host variable
 $ export HOST_VAR=123
 # Set a singularity container environment variable
 $ export &quot;SINGULARITYENV_FORCE_VAR=&quot;123&quot;
@@ -841,52 +828,49 @@ will be available when the container is run with Singularity.</p>
 <section id="namespace-device-isolation">
 <h3>Namespace &amp; Device Isolation<a class="headerlink" href="#namespace-device-isolation" title="Permalink to this headline"></a></h3>
 <p>Because Singularity favors an integration over isolation approach it
-does not, by default, use all the methods through which a container
-can be isolated from the host system. This makes it much easier to run
-a Singularity container like any other program, while the unique
+does not, by default, use all the methods through which a container can
+be isolated from the host system. This makes it much easier to run a
+Singularity container like any other program, while the unique
 security model ensures safety. You can access the host’s network, GPUs,
-and other devices directly. Processes in the container are not
-numbered separately from host processes. Hostnames are not changed,
-etc.</p>
-<p>Most containers are not impacted by the differences in isolation. If
-you require more isolation, than Singularity provides by default, you
-can enable some of the extra namespaces that Docker uses, with flags:</p>
+and other devices directly. Processes in the container are not numbered
+separately from host processes. Hostnames are not changed, etc.</p>
+<p>Most containers are not impacted by the differences in isolation. If you
+require more isolation, than Singularity provides by default, you can
+enable some of the extra namespaces that Docker uses, with flags:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--ipc</span> <span class="pre">/</span> <span class="pre">-i</span></code> creates a separate IPC (inter process communication)
 namespace, for SystemV IPC objects and POSIX message queues.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--net</span> <span class="pre">/</span> <span class="pre">-n</span></code> creates a new network namespace, abstracting the container
-networking from the host.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--net</span> <span class="pre">/</span> <span class="pre">-n</span></code> creates a new network namespace, abstracting the
+container networking from the host.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--userns</span> <span class="pre">/</span> <span class="pre">-u</span></code> runs the container unprivileged, inside a user
-namespace and avoiding setuid setup code. This prevents executing
-SIF images directly. They will be extracted to a directory sandbox.</p></li>
+namespace and avoiding setuid setup code. This prevents executing SIF
+images directly. They will be extracted to a directory sandbox.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--uts</span></code> creates a new UTS namespace, which allows a different
 hostname and/or NIS domain for the container.</p></li>
 </ul>
 <p>To limit presentation of devices from the host into the container, use
 the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> flag. As well as preventing automatic binds of host
-directories into the container, <code class="docutils literal notranslate"><span class="pre">--contain</span></code> sets up a minimal
-<code class="docutils literal notranslate"><span class="pre">/dev</span></code> directory, rather than binding in the entire host <code class="docutils literal notranslate"><span class="pre">/dev</span></code>
-tree.</p>
+directories into the container, <code class="docutils literal notranslate"><span class="pre">--contain</span></code> sets up a minimal <code class="docutils literal notranslate"><span class="pre">/dev</span></code>
+directory, rather than binding in the entire host <code class="docutils literal notranslate"><span class="pre">/dev</span></code> tree.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When using the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> or <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> flags, GPU devices are
-present in the container even when <code class="docutils literal notranslate"><span class="pre">--contain</span></code> is used.</p>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> or <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> flags, GPU devices are present
+in the container even when <code class="docutils literal notranslate"><span class="pre">--contain</span></code> is used.</p>
 </div>
 </section>
 <section id="init-shim-process">
 <h3>Init Shim Process<a class="headerlink" href="#init-shim-process" title="Permalink to this headline"></a></h3>
-<p>When a Singularity container is run using the <code class="docutils literal notranslate"><span class="pre">--pid</span> <span class="pre">/</span> <span class="pre">p</span></code> option,
-or started as an instance (which implies <code class="docutils literal notranslate"><span class="pre">--pid</span></code>), a shim init
-process is executed that will run the container payload itself.</p>
+<p>When a Singularity container is run using the <code class="docutils literal notranslate"><span class="pre">--pid</span> <span class="pre">/</span> <span class="pre">p</span></code> option, or
+started as an instance (which implies <code class="docutils literal notranslate"><span class="pre">--pid</span></code>), a shim init process is
+executed that will run the container payload itself.</p>
 <p>The shim process helps to ensure signals are propagated correctly from
-the terminal, or batch schedulers etc. when containers are not
-designed for interactive use. Because Docker does not provide an init
-process by default, some containers have been designed to run their
-own init process, which cannot operate under the control of
-Singularity’s shim.</p>
+the terminal, or batch schedulers etc. when containers are not designed
+for interactive use. Because Docker does not provide an init process by
+default, some containers have been designed to run their own init
+process, which cannot operate under the control of Singularity’s shim.</p>
 <p>For example, a container using the <code class="docutils literal notranslate"><span class="pre">tini</span></code> init process will produce
-warnings when started as an instance, or if run with <code class="docutils literal notranslate"><span class="pre">--pid</span></code>. To
-work around this, use the <code class="docutils literal notranslate"><span class="pre">--no-init</span></code> flag to disable the shim:</p>
+warnings when started as an instance, or if run with <code class="docutils literal notranslate"><span class="pre">--pid</span></code>. To work
+around this, use the <code class="docutils literal notranslate"><span class="pre">--no-init</span></code> flag to disable the shim:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run --pid tini_example.sif
 [WARN  tini (2690)] Tini is not running as PID 1 .
 Zombie processes will not be re-parented to Tini, so zombie reaping won&#39;t work.
@@ -901,9 +885,9 @@ $ singularity run --pid --no-init tini_example.sif
 </section>
 <section id="docker-like-compat-flag">
 <h2>Docker-like <code class="docutils literal notranslate"><span class="pre">--compat</span></code> Flag<a class="headerlink" href="#docker-like-compat-flag" title="Permalink to this headline"></a></h2>
-<p>If Docker-like behavior is important, Singularity can be started
-with the <code class="docutils literal notranslate"><span class="pre">--compat</span></code> flag. This flag is a convenient short-hand
-alternative to using all of:</p>
+<p>If Docker-like behavior is important, Singularity can be started with
+the <code class="docutils literal notranslate"><span class="pre">--compat</span></code> flag. This flag is a convenient short-hand alternative
+to using all of:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--containall</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--no-init</span></code></p></li>
@@ -918,8 +902,8 @@ are discarded at container exit.</p></li>
 host into the container.</p></li>
 <li><p>Empty temporary <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> and <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> directories, the contents of
 which will be discarded at container exit.</p></li>
-<li><p>A minimal <code class="docutils literal notranslate"><span class="pre">/dev</span></code> tree, that does not expose host devices inside
-the container (except GPUs when used with <code class="docutils literal notranslate"><span class="pre">--nv</span></code> or <code class="docutils literal notranslate"><span class="pre">--rocm</span></code>).</p></li>
+<li><p>A minimal <code class="docutils literal notranslate"><span class="pre">/dev</span></code> tree, that does not expose host devices inside the
+container (except GPUs when used with <code class="docutils literal notranslate"><span class="pre">--nv</span></code> or <code class="docutils literal notranslate"><span class="pre">--rocm</span></code>).</p></li>
 <li><p>An clean environment, not including environment variables set on the
 host.</p></li>
 <li><p>Its own PID and IPC namespaces.</p></li>
@@ -933,18 +917,18 @@ access to high performance cluster networks.</p>
 <section id="cmd-entrypoint-behaviour">
 <h2>CMD / ENTRYPOINT Behaviour<a class="headerlink" href="#cmd-entrypoint-behaviour" title="Permalink to this headline"></a></h2>
 <p>When a container is run using <code class="docutils literal notranslate"><span class="pre">docker</span></code>, its default behavior depends
-on the <code class="docutils literal notranslate"><span class="pre">CMD</span></code> and/or <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> set in the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> that
-was used to build it, along with any arguments on the command
-line. The <code class="docutils literal notranslate"><span class="pre">CMD</span></code> and <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> can also be overridden by flags.</p>
+on the <code class="docutils literal notranslate"><span class="pre">CMD</span></code> and/or <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> set in the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> that was
+used to build it, along with any arguments on the command line. The
+<code class="docutils literal notranslate"><span class="pre">CMD</span></code> and <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> can also be overridden by flags.</p>
 <p>A Singularity container has the concept of a <em>runscript</em>, which is a
 single shell script defining what happens when you <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">run</span></code>
 the container. Because there is no internal concept of <code class="docutils literal notranslate"><span class="pre">CMD</span></code> and
 <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>, Singularity must create a runscript from the <code class="docutils literal notranslate"><span class="pre">CMD</span></code>
 and <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> when converting a Docker container. The behavior of
 this script mirrors Docker as closely as possible.</p>
-<p>If the Docker container only has an <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> - that
-<code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> is run, with any arguments appended:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># ENTRYPOINT=&quot;date&quot;
+<p>If the Docker container only has an <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> - that <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>
+is run, with any arguments appended:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># ENTRYPOINT=&quot;date&quot;
 
 # Runs &#39;date&#39;
 $ singularity run mycontainer.sif
@@ -957,7 +941,7 @@ Wed 06 Oct 2021 07:44:27 PM UTC
 </div>
 <p>If the Docker container only has a <code class="docutils literal notranslate"><span class="pre">CMD</span></code> - the <code class="docutils literal notranslate"><span class="pre">CMD</span></code> is run, or is
 <em>replaced</em> with any arguments:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># CMD=&quot;date&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># CMD=&quot;date&quot;
 
 # Runs &#39;date&#39;
 $ singularity run mycontainer.sif
@@ -968,10 +952,10 @@ $ singularity run mycontainer.sif echo hello
 hello
 </pre></div>
 </div>
-<p>If the Docker container has a <code class="docutils literal notranslate"><span class="pre">CMD</span></code> <em>and</em> <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>, then we
-run <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> with either <code class="docutils literal notranslate"><span class="pre">CMD</span></code> as default arguments, or
-replaced with any user supplied arguments:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># ENTRYPOINT=&quot;date&quot;
+<p>If the Docker container has a <code class="docutils literal notranslate"><span class="pre">CMD</span></code> <em>and</em> <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>, then we run
+<code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> with either <code class="docutils literal notranslate"><span class="pre">CMD</span></code> as default arguments, or replaced
+with any user supplied arguments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># ENTRYPOINT=&quot;date&quot;
 # CMD=&quot;--utc&quot;
 
 # Runs &#39;date --utc&#39;
@@ -984,8 +968,8 @@ Wed, 06 Oct 2021 14:49:07 -0500
 </pre></div>
 </div>
 <p>There is no flag to override an <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> set for a Docker
-container. Instead, use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">exec</span></code> to run an arbitrary
-program inside a container.</p>
+container. Instead, use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">exec</span></code> to run an arbitrary program
+inside a container.</p>
 </section>
 <section id="best-practices-for-docker-singularity-compatibility">
 <span id="sec-best-practices"></span><h2>Best Practices for Docker &amp; Singularity Compatibility<a class="headerlink" href="#best-practices-for-docker-singularity-compatibility" title="Permalink to this headline"></a></h2>
@@ -1006,42 +990,41 @@ container so that it can be run by any user.</p>
 directory</strong></p></li>
 </ol>
 <p>Because a Docker container builds and runs as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user by
-default, it’s tempting to install software into root’s home
-directory (<code class="docutils literal notranslate"><span class="pre">/root</span></code>). Permissions on <code class="docutils literal notranslate"><span class="pre">/root</span></code> are usually set so
-that it is inaccessible to non-root users. When the container is
-run as another user the software may be inaccessible.</p>
-<p>Software inside another user’s home directory,
-e.g. <code class="docutils literal notranslate"><span class="pre">/home/myapp</span></code>, may be obscured by Singularity’s automatic
-mounts onto <code class="docutils literal notranslate"><span class="pre">/home</span></code>.</p>
-<p>Install software into system-wide locations in the container,
-such as under <code class="docutils literal notranslate"><span class="pre">/usr</span></code> or <code class="docutils literal notranslate"><span class="pre">/opt</span></code> to avoid these issues.</p>
+default, it’s tempting to install software into root’s home directory
+(<code class="docutils literal notranslate"><span class="pre">/root</span></code>). Permissions on <code class="docutils literal notranslate"><span class="pre">/root</span></code> are usually set so that it is
+inaccessible to non-root users. When the container is run as another
+user the software may be inaccessible.</p>
+<p>Software inside another user’s home directory, e.g. <code class="docutils literal notranslate"><span class="pre">/home/myapp</span></code>,
+may be obscured by Singularity’s automatic mounts onto <code class="docutils literal notranslate"><span class="pre">/home</span></code>.</p>
+<p>Install software into system-wide locations in the container, such as
+under <code class="docutils literal notranslate"><span class="pre">/usr</span></code> or <code class="docutils literal notranslate"><span class="pre">/opt</span></code> to avoid these issues.</p>
 <ol class="arabic simple" start="3">
 <li><p><strong>Support a read-only filesystem</strong></p></li>
 </ol>
 <p>Because of the immutable nature of the SIF format, a container run
 with Singularity is read-only by default.</p>
-<p>Try to ensure your container will run with a read-only
-filesystem. If this is not possible, document exactly where the
-container needs to write, so that a user can bind in a writable
-location, or use <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> as appropriate.</p>
-<p>You can test read-only execution with Docker using <code class="docutils literal notranslate"><span class="pre">docker</span>
-<span class="pre">run</span> <span class="pre">--read-only</span> <span class="pre">--tmpfs</span> <span class="pre">/run</span> <span class="pre">--tmpfs</span> <span class="pre">/tmp</span> <span class="pre">sylabsio/lolcow</span></code>.</p>
+<p>Try to ensure your container will run with a read-only filesystem. If
+this is not possible, document exactly where the container needs to
+write, so that a user can bind in a writable location, or use
+<code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> as appropriate.</p>
+<p>You can test read-only execution with Docker using <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span>
+<span class="pre">--read-only</span> <span class="pre">--tmpfs</span> <span class="pre">/run</span> <span class="pre">--tmpfs</span> <span class="pre">/tmp</span> <span class="pre">sylabsio/lolcow</span></code>.</p>
 <ol class="arabic simple" start="4">
 <li><p><strong>Be careful writing to /tmp</strong></p></li>
 </ol>
 <p>Singularity mounts the <em>host</em> <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> into the container, by
 default. This means you must be be careful when writing sensitive
-information to <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, and should ensure your container cleans
-up files it writes there.</p>
+information to <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, and should ensure your container cleans up
+files it writes there.</p>
 <ol class="arabic simple" start="5">
 <li><p><strong>Consider library caches / ldconfig</strong></p></li>
 </ol>
 <p>If your <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> adds libraries and / or manipulates the ld
-search path in the container (<code class="docutils literal notranslate"><span class="pre">ld.so.conf</span></code> / <code class="docutils literal notranslate"><span class="pre">ld.so.conf.d</span></code>),
-you should ensure the library cache is updated during the build.</p>
-<p>Because Singularity runs containers read-only by default, the
-cache and any missing library symlinks may not be able to be
-updated / created at execution time.</p>
+search path in the container (<code class="docutils literal notranslate"><span class="pre">ld.so.conf</span></code> / <code class="docutils literal notranslate"><span class="pre">ld.so.conf.d</span></code>), you
+should ensure the library cache is updated during the build.</p>
+<p>Because Singularity runs containers read-only by default, the cache
+and any missing library symlinks may not be able to be updated /
+created at execution time.</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> toward the <em>end</em> of your <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> to ensure
 symbolic links and the the <code class="docutils literal notranslate"><span class="pre">ld.so.cache</span></code> are up-to-date.</p>
 </div></blockquote>
@@ -1051,16 +1034,16 @@ symbolic links and the the <code class="docutils literal notranslate"><span clas
 <section id="registry-authentication-issues">
 <h3>Registry Authentication Issues<a class="headerlink" href="#registry-authentication-issues" title="Permalink to this headline"></a></h3>
 <p>If you experience problems pulling containers from a private registry,
-check your credentials carefully. You can <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> with
-the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag to perform an interactive login. This may
-be useful if you are unsure whether you have stored credentials
-properly via <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span></code> or <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span></code>.</p>
-<p>OCI registries expect different values for username and password
-fields. Some require a token to be generated and used instead of your
-account password. Some take a generic username, and rely only on the
-token to identify you. Consult the documentation for your registry
-carefully. Look for instructions that detail how to login via <code class="docutils literal notranslate"><span class="pre">docker</span>
-<span class="pre">login</span></code> without external helper programs, if possible.</p>
+check your credentials carefully. You can <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> with the
+<code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag to perform an interactive login. This may be
+useful if you are unsure whether you have stored credentials properly
+via <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span></code> or <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span></code>.</p>
+<p>OCI registries expect different values for username and password fields.
+Some require a token to be generated and used instead of your account
+password. Some take a generic username, and rely only on the token to
+identify you. Consult the documentation for your registry carefully.
+Look for instructions that detail how to login via <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span></code>
+without external helper programs, if possible.</p>
 </section>
 <section id="container-doesn-t-start">
 <h3>Container Doesn’t Start<a class="headerlink" href="#container-doesn-t-start" title="Permalink to this headline"></a></h3>
@@ -1080,27 +1063,28 @@ needed files, which will appear in the directory you bind in.</p>
 likely cause is the different level of isolation that Singularity
 provides vs Docker.</p>
 <p>Try running the container with the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> option, or the
-<code class="docutils literal notranslate"><span class="pre">--compat</span></code> option (which is more strict). This disables the
-automatic mount of your home directory, which is a common source of
-issues where software in the container loads configuration or packages
-that may be present there.</p>
+<code class="docutils literal notranslate"><span class="pre">--compat</span></code> option (which is more strict). This disables the automatic
+mount of your home directory, which is a common source of issues where
+software in the container loads configuration or packages that may be
+present there.</p>
 </section>
 <section id="getting-help">
 <h3>Getting Help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h3>
 <p>The community Slack channels and mailing list are excellent places to
 ask for help with running a specific Docker container. Other users may
-have already had success running the same container or
-software. Please don’t report issues with specific Docker containers
-on GitHub, unless you believe they are due to a bug in Singularity.</p>
+have already had success running the same container or software. Please
+don’t report issues with specific Docker containers on GitHub, unless
+you believe they are due to a bug in Singularity.</p>
 </section>
 </section>
 <section id="singularity-definition-file-vs-dockerfile">
 <span id="sec-deffile-vs-dockerfile"></span><h2>Singularity Definition file vs. Dockerfile<a class="headerlink" href="#singularity-definition-file-vs-dockerfile" title="Permalink to this headline"></a></h2>
 <p>An alternative to running Docker containers with Singularity is to
-re-write the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> as a definition file, and build a native
-SIF image.</p>
+re-write the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> as a definition file, and build a native SIF
+image.</p>
 <p>The table below gives a quick reference comparing Dockerfile and
-Singularity definition files. For more detail please see <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">Definition Files</span></a>.</p>
+Singularity definition files. For more detail please see
+<a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">Definition Files</span></a>.</p>
 </section>
 </section>
 

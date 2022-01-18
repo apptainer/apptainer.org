@@ -127,38 +127,41 @@
              
   <section id="signing-and-verifying-containers">
 <span id="signnverify"></span><h1>Signing and Verifying Containers<a class="headerlink" href="#signing-and-verifying-containers" title="Permalink to this headline"></a></h1>
-<p id="sec-signnverify">Singularity 3.0 introduced the ability to create and manage PGP keys and use
-them to sign and verify containers. This provides a trusted method for
-Singularity users to share containers. It ensures a bit-for-bit reproduction
-of the original container as the author intended it.</p>
+<p id="sec-signnverify">Singularity has the ability to create and manage PGP keys
+and use them to sign and verify containers. This provides a trusted
+method for Singularity users to share containers. It ensures a
+bit-for-bit reproduction of the original container as the author
+intended it.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Singularity 3.6.0 uses a new signature format. Containers signed
-by 3.6.0 cannot be verifed by older versions of Singularity.</p>
-<p>To verify containers signed with older versions of Singularity using 3.6.0
-the <code class="docutils literal notranslate"><span class="pre">--legacy-insecure</span></code> flag must be provided to the <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">verify</span></code> command.</p>
+<p>To verify containers signed with Singularity versions older than
+3.6.0 the <code class="docutils literal notranslate"><span class="pre">--legacy-insecure</span></code> flag must be provided to the
+<code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">verify</span></code> command.</p>
 </div>
 <section id="verifying-containers-from-the-container-library">
 <span id="verify-container-from-library"></span><h2>Verifying containers from the Container Library<a class="headerlink" href="#verifying-containers-from-the-container-library" title="Permalink to this headline"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">verify</span></code> command will allow you to verify that a container has been
-signed using a PGP key. To use this feature with images that you pull from the
-container library, you must first generate an access token to the Sylabs Cloud.
-If you don’t already have a valid access token, follow these steps:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">verify</span></code> command will allow you to verify that a container has
+been signed using a PGP key. To use this feature with images that you
+pull from the container library, you must first generate an access token
+to the Sylabs Cloud. If you don’t already have a valid access token,
+follow these steps:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>Go to: <a class="reference external" href="https://cloud.sylabs.io/">https://cloud.sylabs.io/</a></p></li>
 <li><p>Click “Sign In” and follow the sign in steps.</p></li>
-<li><p>Click on your login id (same and updated button as the Sign in one).</p></li>
+<li><p>Click on your login id (same and updated button as the Sign in
+one).</p></li>
 <li><p>Select “Access Tokens” from the drop down menu.</p></li>
 <li><p>Enter a name for your new access token, such as “test token”</p></li>
 <li><p>Click the “Create a New Access Token” button.</p></li>
 <li><p>Click “Copy token to Clipboard” from the “New API Token” page.</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span></code> and paste the access token at the prompt.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span></code> and paste the access token at the
+prompt.</p></li>
 </ol>
 </div></blockquote>
-<p>Now you can verify containers that you pull from the library, ensuring they are
-bit-for-bit reproductions of the original image.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity verify alpine_latest.sif
+<p>Now you can verify containers that you pull from the library, ensuring
+they are bit-for-bit reproductions of the original image.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity verify alpine_latest.sif
 
 Container is signed by 1 key(s):
 
@@ -170,7 +173,8 @@ Verifying partition: FS:
 INFO:    Container verified: alpine_latest.sif
 </pre></div>
 </div>
-<p>In this example you can see that <strong>Sylabs Admin</strong> has signed the container.</p>
+<p>In this example you can see that <strong>Sylabs Admin</strong> has signed the
+container.</p>
 </section>
 <section id="signing-your-own-containers">
 <span id="sign-your-own-containers"></span><h2>Signing your own containers<a class="headerlink" href="#signing-your-own-containers" title="Permalink to this headline"></a></h2>
@@ -178,10 +182,10 @@ INFO:    Container verified: alpine_latest.sif
 <h3>Generating and managing PGP keys<a class="headerlink" href="#generating-and-managing-pgp-keys" title="Permalink to this headline"></a></h3>
 <p>To sign your own containers you first need to generate one or more keys.</p>
 <p>If you attempt to sign a container before you have generated any keys,
-Singularity will guide you through the interactive process of creating a new
-key. Or you can use the <code class="docutils literal notranslate"><span class="pre">newpair</span></code> subcommand in the <code class="docutils literal notranslate"><span class="pre">key</span></code> command group
-like so:.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity key newpair
+Singularity will guide you through the interactive process of creating
+a new key. Or you can use the <code class="docutils literal notranslate"><span class="pre">newpair</span></code> subcommand in the <code class="docutils literal notranslate"><span class="pre">key</span></code>
+command group like so:.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity key newpair
 
 Enter your name (e.g., John Doe) : David Trudgian
 Enter your email address (e.g., john.doe@example.com) : david.trudgian@sylabs.io
@@ -197,11 +201,10 @@ Key successfully pushed to: https://keys.sylabs.io
 keystore. This will push my public key to whichever keystore has been
 configured by the <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span></code> command, so that it can be
 retrieved by other users running <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">verify</span></code>. If you do not
-wish to push your public key, say <code class="docutils literal notranslate"><span class="pre">n</span></code> during the <code class="docutils literal notranslate"><span class="pre">newpair</span></code>
-process.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> subcommand will show you all of the keys you have created or saved
-locally.`</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity key list
+wish to push your public key, say <code class="docutils literal notranslate"><span class="pre">n</span></code> during the <code class="docutils literal notranslate"><span class="pre">newpair</span></code> process.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> subcommand will show you all of the keys you have created
+or saved locally.`</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity key list
 
 Public key listing (/home/dave/.singularity/sypgp/pgp-public):
 
@@ -222,15 +225,17 @@ for the following:</p>
 <li><p>L: Key length</p></li>
 </ul>
 </div></blockquote>
-<p>If you chose not to push your key to the keystore during the <code class="docutils literal notranslate"><span class="pre">newpair</span></code> process, but later wish to, you can push it to a keystore configured using <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span></code> like so:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity key push E5F780B2C22F59DF748524B435C3844412EE233B
+<p>If you chose not to push your key to the keystore during the <code class="docutils literal notranslate"><span class="pre">newpair</span></code>
+process, but later wish to, you can push it to a keystore configured
+using <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span></code> like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity key push E5F780B2C22F59DF748524B435C3844412EE233B
 
 public key `E5F780B2C22F59DF748524B435C3844412EE233B` pushed to server successfully
 </pre></div>
 </div>
-<p>If you delete your local public PGP key, you can always locate and download it
-again like so.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity key search Trudgian
+<p>If you delete your local public PGP key, you can always locate and
+download it again like so.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity key search Trudgian
 
 Showing 1 results
 
@@ -242,15 +247,17 @@ $ singularity key pull 12EE233B
 1 key(s) added to keyring of trust /home/dave/.singularity/sypgp/pgp-public
 </pre></div>
 </div>
-<p>But note that this only restores the <em>public</em> key (used for verifying) to your
-local machine and does not restore the <em>private</em> key (used for signing).</p>
+<p>But note that this only restores the <em>public</em> key (used for verifying)
+to your local machine and does not restore the <em>private</em> key (used for
+signing).</p>
 </section>
 <section id="searching-for-keys">
 <span id="id1"></span><h3>Searching for keys<a class="headerlink" href="#searching-for-keys" title="Permalink to this headline"></a></h3>
-<p>Singularity allows you to search the keystore for public keys. You can search for names,
-emails, and fingerprints (key IDs). When searching for a fingerprint, you need to use <code class="docutils literal notranslate"><span class="pre">0x</span></code>
-before the fingerprint, check the example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># search for key ID:
+<p>Singularity allows you to search the keystore for public keys. You can
+search for names, emails, and fingerprints (key IDs). When searching for
+a fingerprint, you need to use <code class="docutils literal notranslate"><span class="pre">0x</span></code> before the fingerprint, check the
+example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># search for key ID:
 $ singularity key search 0x8883491F4268F173C6E5DC49EDECE4F3F38D871E
 
 # search for the sort ID:
@@ -266,17 +273,18 @@ $ singularity key search @gmail.com
 </section>
 <section id="signing-and-validating-your-own-containers">
 <h3>Signing and validating your own containers<a class="headerlink" href="#signing-and-validating-your-own-containers" title="Permalink to this headline"></a></h3>
-<p>Now that you have a key generated, you can use it to sign images like so:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity sign my_container.sif
+<p>Now that you have a key generated, you can use it to sign images like
+so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity sign my_container.sif
 
 Signing image: my_container.sif
 Enter key passphrase :
 Signature created and applied to my_container.sif
 </pre></div>
 </div>
-<p>Because your public PGP key is saved locally you can verify the image without
-needing to contact the Keystore.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity verify my_container.sif
+<p>Because your public PGP key is saved locally you can verify the image
+without needing to contact the Keystore.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity verify my_container.sif
 Verifying image: my_container.sif
 [LOCAL]   Signing entity: David Trudgian (Demo keys) &lt;david.trudgian@sylabs.io&gt;
 [LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
@@ -289,11 +297,11 @@ ID  |GROUP   |LINK    |TYPE
 Container verified: my_container.sif
 </pre></div>
 </div>
-<p>If you’ve pushed your key to the Keystore you can also verify this
-image in the absence of a local public key.  To demonstrate this,
-first <code class="docutils literal notranslate"><span class="pre">remove</span></code> your local public key, and then try to use the
-<code class="docutils literal notranslate"><span class="pre">verify</span></code> command again.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity key remove E5F780B2C22F59DF748524B435C3844412EE233B
+<p>If you’ve pushed your key to the Keystore you can also verify this image
+in the absence of a local public key. To demonstrate this, first
+<code class="docutils literal notranslate"><span class="pre">remove</span></code> your local public key, and then try to use the <code class="docutils literal notranslate"><span class="pre">verify</span></code>
+command again.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity key remove E5F780B2C22F59DF748524B435C3844412EE233B
 
 $ singularity verify my_container.sif
 Verifying image: my_container.sif
@@ -312,7 +320,7 @@ Container verified: my_container.sif
 was obtained from the keystore, and is not present on your local
 computer. You can retrieve it, so that you can verify even if you are
 offline with <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">pull</span></code></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity key pull E5F780B2C22F59DF748524B435C3844412EE233B
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity key pull E5F780B2C22F59DF748524B435C3844412EE233B
 
 1 key(s) added to keyring of trust /home/dave/.singularity/sypgp/pgp-public
 </pre></div>
@@ -320,12 +328,11 @@ offline with <code class="docutils literal notranslate"><span class="pre">singul
 </section>
 <section id="advanced-signing-sif-ids-and-groups">
 <h3>Advanced Signing - SIF IDs and Groups<a class="headerlink" href="#advanced-signing-sif-ids-and-groups" title="Permalink to this headline"></a></h3>
-<p>As well as the default behaviour, which signs all objects,
-fine-grained control of signing is possible.</p>
-<p>If you <code class="docutils literal notranslate"><span class="pre">sif</span> <span class="pre">list</span></code> a SIF file you will see it is comprised of a
-number of objects. Each object has an <code class="docutils literal notranslate"><span class="pre">ID</span></code>, and belongs to a
-<code class="docutils literal notranslate"><span class="pre">GROUP</span></code>.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity sif list my_container.sif
+<p>As well as the default behaviour, which signs all objects, fine-grained
+control of signing is possible.</p>
+<p>If you <code class="docutils literal notranslate"><span class="pre">sif</span> <span class="pre">list</span></code> a SIF file you will see it is comprised of a number
+of objects. Each object has an <code class="docutils literal notranslate"><span class="pre">ID</span></code>, and belongs to a <code class="docutils literal notranslate"><span class="pre">GROUP</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity sif list my_container.sif
 
 Container id: e455d2ae-7f0b-4c79-b3ef-315a4913d76a
 Created on:   2019-11-15 10:11:58 -0600 CST
@@ -339,9 +346,9 @@ ID   |GROUP   |LINK    |SIF POSITION (start-end)  |TYPE
 3    |1       |NONE    |40960-25890816            |FS (Squashfs/*System/amd64)
 </pre></div>
 </div>
-<p>I can choose to sign and verify a specific object with the <code class="docutils literal notranslate"><span class="pre">--sif-id</span></code> option
-to <code class="docutils literal notranslate"><span class="pre">sign</span></code> and <code class="docutils literal notranslate"><span class="pre">verify</span></code>.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity sign --sif-id 1 my_container.sif
+<p>I can choose to sign and verify a specific object with the <code class="docutils literal notranslate"><span class="pre">--sif-id</span></code>
+option to <code class="docutils literal notranslate"><span class="pre">sign</span></code> and <code class="docutils literal notranslate"><span class="pre">verify</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity sign --sif-id 1 my_container.sif
 Signing image: my_container.sif
 Enter key passphrase :
 Signature created and applied to my_container.sif
@@ -357,10 +364,11 @@ ID  |GROUP   |LINK    |TYPE
 Container verified: my_container.sif
 </pre></div>
 </div>
-<p>Note that running the <code class="docutils literal notranslate"><span class="pre">verify</span></code> command without specifying the specific sif-id
-gives a fatal error. The container is not considered verified as whole because
-other objects could have been changed without my knowledge.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity verify my_container.sif
+<p>Note that running the <code class="docutils literal notranslate"><span class="pre">verify</span></code> command without specifying the specific
+sif-id gives a fatal error. The container is not considered verified as
+whole because other objects could have been changed without my
+knowledge.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity verify my_container.sif
 Verifying image: my_container.sif
 [LOCAL]   Signing entity: David Trudgian (Demo keys) &lt;david.trudgian@sylabs.io&gt;
 [LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
@@ -369,17 +377,18 @@ Error encountered during signature verification: object 2: object not signed
 FATAL:   Failed to verify container: integrity: object 2: object not signed
 </pre></div>
 </div>
-<p>I can sign a group of objects with the <code class="docutils literal notranslate"><span class="pre">--group-id</span></code> option to <code class="docutils literal notranslate"><span class="pre">sign</span></code>.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity sign --groupid 1 my_container.sif
+<p>I can sign a group of objects with the <code class="docutils literal notranslate"><span class="pre">--group-id</span></code> option to
+<code class="docutils literal notranslate"><span class="pre">sign</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity sign --groupid 1 my_container.sif
 Signing image: my_container.sif
 Enter key passphrase :
 Signature created and applied to my_container.sif
 </pre></div>
 </div>
-<p>This creates one signature over all objects in the
-group. I can verify that nothing in the group has been modified by
-running <code class="docutils literal notranslate"><span class="pre">verify</span></code> with the same <code class="docutils literal notranslate"><span class="pre">--group-id</span></code> option.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity verify --group-id 1 my_container.sif
+<p>This creates one signature over all objects in the group. I can verify
+that nothing in the group has been modified by running <code class="docutils literal notranslate"><span class="pre">verify</span></code> with
+the same <code class="docutils literal notranslate"><span class="pre">--group-id</span></code> option.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity verify --group-id 1 my_container.sif
 Verifying image: my_container.sif
 [LOCAL]   Signing entity: David Trudgian (Demo keys) &lt;david.trudgian@sylabs.io&gt;
 [LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
@@ -392,10 +401,10 @@ ID  |GROUP   |LINK    |TYPE
 Container verified: my_container.sif
 </pre></div>
 </div>
-<p>Because every object in the SIF file is within the signed group 1 the entire
-container is signed, and the default <code class="docutils literal notranslate"><span class="pre">verify</span></code> behavior without specifying
-<code class="docutils literal notranslate"><span class="pre">--group-id</span></code> can also verify the container:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity verify my_container.sif
+<p>Because every object in the SIF file is within the signed group 1 the
+entire container is signed, and the default <code class="docutils literal notranslate"><span class="pre">verify</span></code> behavior without
+specifying <code class="docutils literal notranslate"><span class="pre">--group-id</span></code> can also verify the container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity verify my_container.sif
 Verifying image: my_container.sif
 [LOCAL]   Signing entity: David Trudgian (Demo keys) &lt;david.trudgian@sylabs.io&gt;
 [LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448

@@ -58,7 +58,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Key management commands</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#changes-in-singularity-3-7">Changes in Singularity 3.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#global-keyring">Global keyring</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#key-import-command">Key import command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#key-export-command">Key export command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#key-remove-command">Key remove command</a></li>
@@ -123,121 +123,155 @@
              
   <section id="key-commands">
 <span id="id1"></span><h1>Key commands<a class="headerlink" href="#key-commands" title="Permalink to this headline"></a></h1>
-<p id="sec-key-commands">Singularity 3.2 introduces the abilities to import, export and remove PGP keys following the OpenPGP standard via <a class="reference external" href="https://www.gnupg.org/gph/en/manual.html">GnuPGP (GPG)</a>.
-These commands only modify the local keyring and are not related to the cloud keystore.</p>
-<section id="changes-in-singularity-3-7">
-<span id="key-import"></span><h2>Changes in Singularity 3.7<a class="headerlink" href="#changes-in-singularity-3-7" title="Permalink to this headline"></a></h2>
-<p>Singularity 3.7 introduces a global keyring which can be managed by administrators with the new <code class="docutils literal notranslate"><span class="pre">--global</span></code> option.
-This global keyring is used by ECL (<a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/configfiles.html#ecl-toml">https://singularity.hpcng.org/admin-docs/3.8/configfiles.html#ecl-toml</a>)
-and allows administrators to manage public keys used during ECL image verification.</p>
+<p id="sec-key-commands">Singularity has the ability to import, export and remove
+PGP keys following the OpenPGP standard via <a class="reference external" href="https://www.gnupg.org/gph/en/manual.html">GnuPGP (GPG)</a>. These commands only modify
+the local keyring and are not related to the cloud keystore.</p>
+<section id="global-keyring">
+<span id="key-import"></span><h2>Global keyring<a class="headerlink" href="#global-keyring" title="Permalink to this headline"></a></h2>
+<p>Singularity has a global keyring which can be managed by
+administrators with the <code class="docutils literal notranslate"><span class="pre">--global</span></code> option. This global keyring is
+used by ECL
+(<a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/configfiles.html#ecl-toml">https://singularity.hpcng.org/admin-docs/3.8/configfiles.html#ecl-toml</a>)
+and allows administrators to manage public keys used during ECL image
+verification.</p>
 </section>
 <section id="key-import-command">
 <h2>Key import command<a class="headerlink" href="#key-import-command" title="Permalink to this headline"></a></h2>
-<p>Singularity 3.2 allows you import keys reading either from binary or armored key format and automatically detect if it is a private or public key and add it to the correspondent local keystore.</p>
-<p>To give a quick view on how it works, we will first consider the case in which a user wants to import a secret (private) key to the local keystore.</p>
-<p>First we will check what’s the status of the local keystore (which keys are stored by the moment before importing a new key).</p>
-<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>singularity<span class="w"> </span>key<span class="w"> </span>list<span class="w"> </span>--secret
+<p>Singularity allows you to import keys reading either from binary or
+armored key format and automatically detect if it is a private or public
+key and add it to the correspondent local keystore.</p>
+<p>To give a quick view on how it works, we will first consider the case in
+which a user wants to import a secret (private) key to the local
+keystore.</p>
+<p>First we will check what’s the status of the local keystore (which keys
+are stored by the moment before importing a new key).</p>
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key list --secret
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Remember that using <code class="docutils literal notranslate"><span class="pre">--secret</span></code> flag or <code class="docutils literal notranslate"><span class="pre">-s</span></code> flag will return the secret or private local keyring as output.</p>
+<p>Remember that using <code class="docutils literal notranslate"><span class="pre">--secret</span></code> flag or <code class="docutils literal notranslate"><span class="pre">-s</span></code> flag will return the
+secret or private local keyring as output.</p>
 </div>
 <p>The output will look as it follows:</p>
-<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>Private<span class="w"> </span>key<span class="w"> </span>listing<span class="w"> </span>(/home/joana/.singularity/sypgp/pgp-secret):
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span>Private key listing (/home/joana/.singularity/sypgp/pgp-secret):
 
-<span class="m">0</span>)<span class="w"> </span>U:<span class="w"> </span>Johnny<span class="w"> </span>Cash<span class="w"> </span>(none)<span class="w"> </span>&lt;cash@sylabs.io&gt;
-C:<span class="w"> </span><span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span><span class="w"> </span><span class="m">22</span>:<span class="m">22</span>:<span class="m">28</span><span class="w"> </span>+<span class="m">0200</span><span class="w"> </span>CEST
-F:<span class="w"> </span>47282BDC661F58FA4BEBEF47CA576CBD8EF1A2B4
-L:<span class="w"> </span><span class="m">3072</span>
+<span class="m">0</span>) U: Johnny Cash (none) &lt;cash@sylabs.io&gt;
+C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">22</span>:<span class="m">22</span>:<span class="m">28</span> +<span class="m">0200</span> CEST
+F: 47282BDC661F58FA4BEBEF47CA576CBD8EF1A2B4
+L: <span class="m">3072</span>
 --------
-<span class="m">1</span>)<span class="w"> </span>U:<span class="w"> </span>John<span class="w"> </span>Green<span class="w"> </span>(none)<span class="w"> </span>&lt;john@sylabs.io&gt;
-C:<span class="w"> </span><span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span><span class="w"> </span><span class="m">13</span>:<span class="m">08</span>:<span class="m">45</span><span class="w"> </span>+<span class="m">0200</span><span class="w"> </span>CEST
-F:<span class="w"> </span>5720799FE7B048CF36FAB8445EE1E2BD7B6342C5
-L:<span class="w"> </span><span class="m">1024</span>
+<span class="m">1</span>) U: John Green (none) &lt;john@sylabs.io&gt;
+C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">13</span>:<span class="m">08</span>:<span class="m">45</span> +<span class="m">0200</span> CEST
+F: 5720799FE7B048CF36FAB8445EE1E2BD7B6342C5
+L: <span class="m">1024</span>
 --------
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Remember that running that same command but with sudo privilege, will give you a totally different list since it will be the correspondent keystore from user <code class="docutils literal notranslate"><span class="pre">root</span></code></p>
+<p>Remember that running that same command but with sudo privilege, will
+give you a totally different list since it will be the correspondent
+keystore from user <code class="docutils literal notranslate"><span class="pre">root</span></code></p>
 </div>
-<p>After this, you can simply import the key you need by adding the exact location to the file, let’s say you own a gpg key file named <code class="docutils literal notranslate"><span class="pre">pinkie-pie.asc</span></code> which is a secret GPG key you want to import.
-Then you will just need to run the following command to import your key:</p>
-<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>singularity<span class="w"> </span>key<span class="w"> </span>import<span class="w"> </span>$HOME/pinkie-pie.asc
+<p>After this, you can simply import the key you need by adding the exact
+location to the file, let’s say you own a gpg key file named
+<code class="docutils literal notranslate"><span class="pre">pinkie-pie.asc</span></code> which is a secret GPG key you want to import. Then
+you will just need to run the following command to import your key:</p>
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key import $HOME/pinkie-pie.asc
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This location is considering your key was located on the <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory. You can specify any location to the file.</p>
+<p>This location is considering your key was located on the <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>
+directory. You can specify any location to the file.</p>
 </div>
-<p>Since you’re importing a private (secret) key, you will need to specify the passphrase related to it and then a new passphrase to be added on your local keystore.</p>
-<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>Enter<span class="w"> </span>your<span class="w"> </span>old<span class="w"> </span>password<span class="w"> </span>:
-Enter<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>password<span class="w"> </span>for<span class="w"> </span>this<span class="w"> </span>key<span class="w"> </span>:
-Retype<span class="w"> </span>your<span class="w"> </span>passphrase<span class="w"> </span>:
-Key<span class="w"> </span>with<span class="w"> </span>fingerprint<span class="w"> </span>8C10B902F438E4D504C3ACF689FCFFAED5F34A77<span class="w"> </span>successfully<span class="w"> </span>added<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>keyring
+<p>Since you’re importing a private (secret) key, you will need to specify
+the passphrase related to it and then a new passphrase to be added on
+your local keystore.</p>
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span>Enter your old password :
+Enter a new password for this key :
+Retype your passphrase :
+Key with fingerprint 8C10B902F438E4D504C3ACF689FCFFAED5F34A77 successfully added to the keyring
 </pre></div>
 </div>
-<p>After this you can see if that key was correctly added to your local keystore by running <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">list</span> <span class="pre">-s</span></code> command:</p>
-<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>Private<span class="w"> </span>key<span class="w"> </span>listing<span class="w"> </span>(/home/joana/.singularity/sypgp/pgp-secret):
+<p>After this you can see if that key was correctly added to your local
+keystore by running <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">list</span> <span class="pre">-s</span></code> command:</p>
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span>Private key listing (/home/joana/.singularity/sypgp/pgp-secret):
 
-<span class="w">  </span><span class="m">0</span>)<span class="w"> </span>U:<span class="w"> </span>Johnny<span class="w"> </span>Cash<span class="w"> </span>(none)<span class="w"> </span>&lt;cash@sylabs.io&gt;
-<span class="w">  </span>C:<span class="w"> </span><span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span><span class="w"> </span><span class="m">22</span>:<span class="m">22</span>:<span class="m">28</span><span class="w"> </span>+<span class="m">0200</span><span class="w"> </span>CEST
-<span class="w">  </span>F:<span class="w"> </span>47282BDC661F58FA4BEBEF47CA576CBD8EF1A2B4
-<span class="w">  </span>L:<span class="w"> </span><span class="m">3072</span>
-<span class="w">  </span>--------
-<span class="w">  </span><span class="m">1</span>)<span class="w"> </span>U:<span class="w"> </span>John<span class="w"> </span>Green<span class="w"> </span>(none)<span class="w"> </span>&lt;john@sylabs.io&gt;
-<span class="w">  </span>C:<span class="w"> </span><span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span><span class="w"> </span><span class="m">13</span>:<span class="m">08</span>:<span class="m">45</span><span class="w"> </span>+<span class="m">0200</span><span class="w"> </span>CEST
-<span class="w">  </span>F:<span class="w"> </span>5720799FE7B048CF36FAB8445EE1E2BD7B6342C5
-<span class="w">  </span>L:<span class="w"> </span><span class="m">1024</span>
-<span class="w">  </span>--------
-<span class="w">  </span><span class="m">3</span>)<span class="w"> </span>U:<span class="w"> </span>Pinkie<span class="w"> </span>Pie<span class="w"> </span>(Eternal<span class="w"> </span>chaos<span class="w"> </span>comes<span class="w"> </span>with<span class="w"> </span>chocolate<span class="w"> </span>rain!)<span class="w"> </span>&lt;balloons@sylabs.io&gt;
-<span class="w">  </span>C:<span class="w"> </span><span class="m">2019</span>-<span class="m">04</span>-<span class="m">26</span><span class="w"> </span><span class="m">12</span>:<span class="m">07</span>:<span class="m">07</span><span class="w"> </span>+<span class="m">0200</span><span class="w"> </span>CEST
-<span class="w">  </span>F:<span class="w"> </span>8C10B902F438E4D504C3ACF689FCFFAED5F34A77
-<span class="w">  </span>L:<span class="w"> </span><span class="m">1024</span>
-<span class="w">  </span>--------
+  <span class="m">0</span>) U: Johnny Cash (none) &lt;cash@sylabs.io&gt;
+  C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">22</span>:<span class="m">22</span>:<span class="m">28</span> +<span class="m">0200</span> CEST
+  F: 47282BDC661F58FA4BEBEF47CA576CBD8EF1A2B4
+  L: <span class="m">3072</span>
+  --------
+  <span class="m">1</span>) U: John Green (none) &lt;john@sylabs.io&gt;
+  C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">13</span>:<span class="m">08</span>:<span class="m">45</span> +<span class="m">0200</span> CEST
+  F: 5720799FE7B048CF36FAB8445EE1E2BD7B6342C5
+  L: <span class="m">1024</span>
+  --------
+  <span class="m">3</span>) U: Pinkie Pie (Eternal chaos comes with chocolate rain!) &lt;balloons@sylabs.io&gt;
+  C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">26</span> <span class="m">12</span>:<span class="m">07</span>:<span class="m">07</span> +<span class="m">0200</span> CEST
+  F: 8C10B902F438E4D504C3ACF689FCFFAED5F34A77
+  L: <span class="m">1024</span>
+  --------
 </pre></div>
 </div>
-<p>You will see the imported key at the bottom of the list. Remember you can also import an <code class="docutils literal notranslate"><span class="pre">ascii</span></code> armored key and this will be automatically detected by the <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">import</span></code> command (no need to specify the format).</p>
+<p>You will see the imported key at the bottom of the list. Remember you
+can also import an <code class="docutils literal notranslate"><span class="pre">ascii</span></code> armored key and this will be automatically
+detected by the <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">import</span></code> command (no need to specify the format).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In case you would like to import a public key the process remains the same, as the import command will automatically detect whether this key to be imported is either public or private.</p>
+<p>In case you would like to import a public key the process remains the
+same, as the import command will automatically detect whether this
+key to be imported is either public or private.</p>
 </div>
 </section>
 <section id="key-export-command">
 <span id="key-export"></span><h2>Key export command<a class="headerlink" href="#key-export-command" title="Permalink to this headline"></a></h2>
-<p>The key export command allows you to export a key that is on your local keystore. This key could be either private or public, and the key can be exported on <code class="docutils literal notranslate"><span class="pre">ASCII</span></code> armored format or on binary format.
-Of course to identify the keystore and the format the syntax varies from the <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">import</span></code> command.</p>
+<p>The key export command allows you to export a key that is on your local
+keystore. This key could be either private or public, and the key can be
+exported on <code class="docutils literal notranslate"><span class="pre">ASCII</span></code> armored format or on binary format. Of course to
+identify the keystore and the format the syntax varies from the <code class="docutils literal notranslate"><span class="pre">key</span>
+<span class="pre">import</span></code> command.</p>
 <p>For example to export a public key in binary format you can run:</p>
-<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>singularity<span class="w"> </span>key<span class="w"> </span>export<span class="w"> </span>8C10B902F438E4D504C3ACF689FCFFAED5F34A77<span class="w"> </span>$HOME/mykey.asc
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key export 8C10B902F438E4D504C3ACF689FCFFAED5F34A77 $HOME/mykey.asc
 </pre></div>
 </div>
-<p>This will export a public binary key named <code class="docutils literal notranslate"><span class="pre">mykey.asc</span></code> and will save it under the home folder. If you would like to export the same public key but in an <code class="docutils literal notranslate"><span class="pre">ASCII</span></code> armored format, you would need to run the following command:</p>
-<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>singularity<span class="w"> </span>key<span class="w"> </span>export<span class="w"> </span>--armor<span class="w"> </span>8C10B902F438E4D504C3ACF689FCFFAED5F34A77<span class="w"> </span>$HOME/mykey.asc
+<p>This will export a public binary key named <code class="docutils literal notranslate"><span class="pre">mykey.asc</span></code> and will save
+it under the home folder. If you would like to export the same public
+key but in an <code class="docutils literal notranslate"><span class="pre">ASCII</span></code> armored format, you would need to run the
+following command:</p>
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key export --armor 8C10B902F438E4D504C3ACF689FCFFAED5F34A77 $HOME/mykey.asc
 </pre></div>
 </div>
-<p>And in the case in which you may need to export a secret key on <code class="docutils literal notranslate"><span class="pre">ASCII</span></code> armored format, you would need to specify from where to find the key, since the fingerprint is the same.</p>
-<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>singularity<span class="w"> </span>key<span class="w"> </span>export<span class="w"> </span>--armor<span class="w"> </span>--secret<span class="w"> </span>8C10B902F438E4D504C3ACF689FCFFAED5F34A77<span class="w"> </span>$HOME/mykey.asc
+<p>And in the case in which you may need to export a secret key on
+<code class="docutils literal notranslate"><span class="pre">ASCII</span></code> armored format, you would need to specify from where to find
+the key, since the fingerprint is the same.</p>
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key export --armor --secret 8C10B902F438E4D504C3ACF689FCFFAED5F34A77 $HOME/mykey.asc
 </pre></div>
 </div>
 <p>and on binary format instead:</p>
-<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>singularity<span class="w"> </span>key<span class="w"> </span>export<span class="w"> </span>--secret<span class="w"> </span>8C10B902F438E4D504C3ACF689FCFFAED5F34A77<span class="w"> </span>$HOME/mykey.asc
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key export --secret 8C10B902F438E4D504C3ACF689FCFFAED5F34A77 $HOME/mykey.asc
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Exporting keys will not change the status of your local keystore or keyring. This will just obtain the content of the keys and save it on a local file on your host.</p>
+<p>Exporting keys will not change the status of your local keystore or
+keyring. This will just obtain the content of the keys and save it on
+a local file on your host.</p>
 </div>
 </section>
 <section id="key-remove-command">
 <span id="key-remove"></span><h2>Key remove command<a class="headerlink" href="#key-remove-command" title="Permalink to this headline"></a></h2>
-<p>In case you would want to remove a public key from your public local keystore, you can do so by running the following command:</p>
-<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>singularity<span class="w"> </span>key<span class="w"> </span>remove<span class="w"> </span>8C10B902F438E4D504C3ACF689FCFFAED5F34A77
+<p>In case you would want to remove a public key from your public local
+keystore, you can do so by running the following command:</p>
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key remove 8C10B902F438E4D504C3ACF689FCFFAED5F34A77
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Remember that this will only delete the public key and not the private one with the same matching fingerprint.</p>
+<p>Remember that this will only delete the public key and not the
+private one with the same matching fingerprint.</p>
 </div>
 </section>
 </section>

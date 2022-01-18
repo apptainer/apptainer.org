@@ -138,20 +138,24 @@
 <span id="fakeroot"></span><h1>Fakeroot feature<a class="headerlink" href="#fakeroot-feature" title="Permalink to this headline"></a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
-<p>The fakeroot feature (commonly referred as rootless mode) allows an unprivileged user
-to run a container as a <strong>“fake root”</strong> user by leveraging
-<a class="reference external" href="http://man7.org/linux/man-pages/man7/user_namespaces.7.html">user namespace UID/GID mapping</a>.</p>
+<p>The fakeroot feature (commonly referred as rootless mode) allows an
+unprivileged user to run a container as a <strong>“fake root”</strong> user by
+leveraging <a class="reference external" href="http://man7.org/linux/man-pages/man7/user_namespaces.7.html">user namespace UID/GID mapping</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This feature requires a Linux kernel &gt;= 3.8, but the recommended version is &gt;= 3.18</p>
+<p>This feature requires a Linux kernel &gt;= 3.8, but the recommended
+version is &gt;= 3.18</p>
 </div>
-<p>A <strong>“fake root”</strong> user has almost the same administrative rights as root but only <strong>inside the container</strong>
-and the <strong>requested namespaces</strong>, which means that this user:</p>
+<p>A <strong>“fake root”</strong> user has almost the same administrative rights as root
+but only <strong>inside the container</strong> and the <strong>requested namespaces</strong>,
+which means that this user:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>can set different user/group ownership for files or directories they own</p></li>
+<li><p>can set different user/group ownership for files or directories
+they own</p></li>
 <li><p>can change user/group identity with su/sudo commands</p></li>
-<li><p>has full privileges inside the requested namespaces (network, ipc, uts)</p></li>
+<li><p>has full privileges inside the requested namespaces (network, ipc,
+uts)</p></li>
 </ul>
 </div></blockquote>
 </section>
@@ -159,13 +163,15 @@ and the <strong>requested namespaces</strong>, which means that this user:</p>
 <h2>Restrictions/security<a class="headerlink" href="#restrictions-security" title="Permalink to this headline"></a></h2>
 <section id="filesystem">
 <h3>Filesystem<a class="headerlink" href="#filesystem" title="Permalink to this headline"></a></h3>
-<p>A <strong>“fake root”</strong> user can’t access or modify files and directories for which they don’t
-already have access or rights on the host filesystem, so a <strong>“fake root”</strong> user won’t be able
-to access root-only host files like <code class="docutils literal notranslate"><span class="pre">/etc/shadow</span></code> or the host <code class="docutils literal notranslate"><span class="pre">/root</span></code> directory.</p>
-<p>Additionally, all files or directories created by the <strong>“fake root”</strong> user are owned by
-<code class="docutils literal notranslate"><span class="pre">root:root</span></code> inside container but as <code class="docutils literal notranslate"><span class="pre">user:group</span></code> outside of the container.
-Let’s consider the following example, in this case “user” is authorized to use the fakeroot feature
-and can use 65536 UIDs starting at 131072 (same thing for GIDs).</p>
+<p>A <strong>“fake root”</strong> user can’t access or modify files and directories for
+which they don’t already have access or rights on the host filesystem,
+so a <strong>“fake root”</strong> user won’t be able to access root-only host files
+like <code class="docutils literal notranslate"><span class="pre">/etc/shadow</span></code> or the host <code class="docutils literal notranslate"><span class="pre">/root</span></code> directory.</p>
+<p>Additionally, all files or directories created by the <strong>“fake root”</strong>
+user are owned by <code class="docutils literal notranslate"><span class="pre">root:root</span></code> inside container but as <code class="docutils literal notranslate"><span class="pre">user:group</span></code>
+outside of the container. Let’s consider the following example, in this
+case “user” is authorized to use the fakeroot feature and can use 65536
+UIDs starting at 131072 (same thing for GIDs).</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 49%" />
@@ -194,45 +200,55 @@ and can use 65536 UIDs starting at 131072 (same thing for GIDs).</p>
 </tr>
 </tbody>
 </table>
-<p>Which means if the <strong>“fake root”</strong> user creates a file under a <code class="docutils literal notranslate"><span class="pre">bin</span></code> user in the container, this file will
-be owned by <code class="docutils literal notranslate"><span class="pre">131073:131073</span></code> outside of container. The responsibility relies on the administrator
-to ensure that there is no overlap with the current user’s UID/GID on the system.</p>
+<p>Which means if the <strong>“fake root”</strong> user creates a file under a <code class="docutils literal notranslate"><span class="pre">bin</span></code>
+user in the container, this file will be owned by <code class="docutils literal notranslate"><span class="pre">131073:131073</span></code>
+outside of container. The responsibility relies on the administrator to
+ensure that there is no overlap with the current user’s UID/GID on the
+system.</p>
 </section>
 <section id="network">
 <h3>Network<a class="headerlink" href="#network" title="Permalink to this headline"></a></h3>
-<p>Restrictions are also applied to networking, if <code class="docutils literal notranslate"><span class="pre">singularity</span></code> is executed without the <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag,
-the <strong>“fake root”</strong> user won’t be able to use <code class="docutils literal notranslate"><span class="pre">ping</span></code> or bind a container service to a port below
-1024.</p>
-<p>With <code class="docutils literal notranslate"><span class="pre">--net</span></code> the <strong>“fake root”</strong> user has full privileges in a dedicated container network. Inside
-the container network they can bind on privileged ports below 1024, use ping, manage firewall rules,
-listen to traffic, etc. Anything done in this dedicated network won’t affect the host network.</p>
+<p>Restrictions are also applied to networking, if <code class="docutils literal notranslate"><span class="pre">singularity</span></code> is
+executed without the <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag, the <strong>“fake root”</strong> user won’t be
+able to use <code class="docutils literal notranslate"><span class="pre">ping</span></code> or bind a container service to a port below 1024.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">--net</span></code> the <strong>“fake root”</strong> user has full privileges in a
+dedicated container network. Inside the container network they can bind
+on privileged ports below 1024, use ping, manage firewall rules, listen
+to traffic, etc. Anything done in this dedicated network won’t affect
+the host network.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Of course an unprivileged user could not map host ports below than 1024 by using:
-<code class="docutils literal notranslate"><span class="pre">--network-args=&quot;portmap=80:80/tcp&quot;</span></code></p>
+<p>Of course an unprivileged user could not map host ports below than
+1024 by using: <code class="docutils literal notranslate"><span class="pre">--network-args=&quot;portmap=80:80/tcp&quot;</span></code></p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>For unprivileged installation of Singularity or if <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> is set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>
-users won’t be able to use a <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code> network.</p>
+<p>For unprivileged installation of Singularity or if <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span>
+<span class="pre">no</span></code> is set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> users won’t be able to use a
+<code class="docutils literal notranslate"><span class="pre">fakeroot</span></code> network.</p>
 </div>
 </section>
 </section>
 <section id="requirements-configuration">
 <h2>Requirements / Configuration<a class="headerlink" href="#requirements-configuration" title="Permalink to this headline"></a></h2>
-<p>Fakeroot depends on user mappings set in <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and group mappings in <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>, so your username
-needs to be listed in those files with a valid mapping (see the admin-guide for details), if you can’t edit
-the files ask an administrator.</p>
-<p>In Singularity <code class="docutils literal notranslate"><span class="pre">3.5</span></code> a <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">config</span> <span class="pre">fakeroot</span></code> command has been added to allow configuration
-of the <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> mappings from the Singularity command line. You must be a root
-user or run with <code class="docutils literal notranslate"><span class="pre">sudo</span></code> to use <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code>, as the mapping files are security sensitive. See the
-admin-guide for more details.</p>
+<p>Fakeroot depends on user mappings set in <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and group
+mappings in <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>, so your username needs to be listed in
+those files with a valid mapping (see the admin-guide for details), if
+you can’t edit the files ask an administrator.</p>
+<p>Singularity provides a <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">config</span> <span class="pre">fakeroot</span></code> command
+to allow configuration of the <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and
+<code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> mappings from the Singularity command line. You must
+be a root user or run with <code class="docutils literal notranslate"><span class="pre">sudo</span></code> to use <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code>, as the
+mapping files are security sensitive. See the admin-guide for more
+details.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
-<p>If your user account is configured with valid <code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code> mappings you work as a fake root user
-inside a container by using the <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> or <code class="docutils literal notranslate"><span class="pre">-f</span></code> option.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option is available with the following singularity commands:</p>
+<p>If your user account is configured with valid <code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code>
+mappings you work as a fake root user inside a container by using the
+<code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> or <code class="docutils literal notranslate"><span class="pre">-f</span></code> option.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option is available with the following singularity
+commands:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">shell</span></code></p></li>
@@ -244,28 +260,31 @@ inside a container by using the <code class="docutils literal notranslate"><span
 </div></blockquote>
 <section id="build">
 <h3>Build<a class="headerlink" href="#build" title="Permalink to this headline"></a></h3>
-<p>With fakeroot an unprivileged user can now build an image from a definition file with few restrictions. Some bootstrap
-methods that require creation of block devices (like <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>) may not always work correctly with <strong>“fake root”</strong>,
-Singularity uses seccomp filters to give programs the illusion that block device creation succeeded. This appears to
-work with <code class="docutils literal notranslate"><span class="pre">yum</span></code> bootstraps and <em>may</em> work with other bootstrap methods, although <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> is known to not work.</p>
+<p>With fakeroot an unprivileged user can now build an image from a
+definition file with few restrictions. Some bootstrap methods that
+require creation of block devices (like <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>) may not always
+work correctly with <strong>“fake root”</strong>, Singularity uses seccomp filters
+to give programs the illusion that block device creation succeeded. This
+appears to work with <code class="docutils literal notranslate"><span class="pre">yum</span></code> bootstraps and <em>may</em> work with other
+bootstrap methods, although <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> is known to not work.</p>
 </section>
 <section id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h3>
 <section id="build-from-a-definition-file">
 <h4>Build from a definition file:<a class="headerlink" href="#build-from-a-definition-file" title="Permalink to this headline"></a></h4>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>singularity build --fakeroot /tmp/test.sif /tmp/test.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">build</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="k">def</span>
 </pre></div>
 </div>
 </section>
 <section id="ping-from-container">
 <h4>Ping from container:<a class="headerlink" href="#ping-from-container" title="Permalink to this headline"></a></h4>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>singularity exec --fakeroot --net docker://alpine ping -c1 8.8.8.8
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">alpine</span> <span class="n">ping</span> <span class="o">-</span><span class="n">c1</span> <span class="mf">8.8.8.8</span>
 </pre></div>
 </div>
 </section>
 <section id="http-server">
 <h4>HTTP server:<a class="headerlink" href="#http-server" title="Permalink to this headline"></a></h4>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>singularity run --fakeroot --net --network-args=&quot;portmap=8080:80/tcp&quot; -w docker://nginx
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="o">--</span><span class="n">network</span><span class="o">-</span><span class="n">args</span><span class="o">=</span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span> <span class="o">-</span><span class="n">w</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">nginx</span>
 </pre></div>
 </div>
 </section>

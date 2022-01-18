@@ -128,10 +128,10 @@
 <section id="security-policy">
 <h2>Security Policy<a class="headerlink" href="#security-policy" title="Permalink to this headline"></a></h2>
 <p>If you suspect you have found a vulnerability in Singularity we want
-to work with you so that it can be investigated, fixed, and disclosed
-in a responsible manner. Please follow the steps in our published
-<a class="reference external" href="https://singularity.hpcng.org/security-policy/">Security Policy</a>, which begins
-with contacting us privately via singularity‑<a class="reference external" href="mailto:security&#37;&#52;&#48;hpcng&#46;org">security<span>&#64;</span>hpcng<span>&#46;</span>org</a></p>
+to work with you so that it can be investigated, fixed, and disclosed in
+a responsible manner. Please follow the steps in our published <a class="reference external" href="https://singularity.hpcng.org/security-policy/">Security
+Policy</a>, which begins with
+contacting us privately via singularity‑<a class="reference external" href="mailto:security&#37;&#52;&#48;hpcng&#46;org">security<span>&#64;</span>hpcng<span>&#46;</span>org</a></p>
 <p>We disclose vulnerabilities found in Singularity through public
 CVE reports, and notifications on our community channels. We encourage
 all users to monitor new releases of Singularity for security
@@ -152,36 +152,36 @@ the Linux user namespace, only a privileged user could perform the
 operations which are needed to run a container. A default Docker
 installation uses a root-owned daemon to start containers. Users can
 request that the daemon starts a container on their behalf. However,
-co-ordinating a daemon with other schedulers is difficult and, since
-the daemon is privileged, users can ask it to carry out actions that
-they wouldn’t normally have permission to do.</p>
+co-ordinating a daemon with other schedulers is difficult and, since the
+daemon is privileged, users can ask it to carry out actions that they
+wouldn’t normally have permission to do.</p>
 <p>When a user runs a container with Singularity, it is started as a
 normal process running under the user’s account. Standard file
-permissions and other security controls based on user accounts,
-groups, and processes apply. In a default installation Singularity
-uses a setuid starter binary to perform only the specific tasks needed
-to setup the container.</p>
+permissions and other security controls based on user accounts, groups,
+and processes apply. In a default installation Singularity uses a
+setuid starter binary to perform only the specific tasks needed to setup
+the container.</p>
 </section>
 <section id="setuid-user-namespaces">
 <h2>Setuid &amp; User Namespaces<a class="headerlink" href="#setuid-user-namespaces" title="Permalink to this headline"></a></h2>
-<p>Using a setuid binary to run container setup operations is essential
-to support containers on older Linux distributions, such as CentOS 6,
-that were previously common in HPC and enterprise. Newer distributions
-have support for ‘unprivileged user namespace creation’. This means a
-normal user can create a user namespace, in which most setup operations
-needed to run a container can be run, unprivileged.</p>
+<p>Using a setuid binary to run container setup operations is essential to
+support containers on older Linux distributions, such as CentOS 6, that
+were previously common in HPC and enterprise. Newer distributions have
+support for ‘unprivileged user namespace creation’. This means a normal
+user can create a user namespace, in which most setup operations needed
+to run a container can be run, unprivileged.</p>
 <p>Singularity supports running containers without setuid, using user
-namespaces. It can be compiled with the <code class="docutils literal notranslate"><span class="pre">--without-setuid</span></code> option,
-or <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> can be set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> to enable
-this. In this mode <em>all</em> operations run as the user who starts the
+namespaces. It can be compiled with the <code class="docutils literal notranslate"><span class="pre">--without-setuid</span></code> option, or
+<code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> can be set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> to enable this.
+In this mode <em>all</em> operations run as the user who starts the
 <code class="docutils literal notranslate"><span class="pre">singularity</span></code> program. However, there are some disadvantages:</p>
 <ul class="simple">
 <li><p>SIF and other single file container images cannot be mounted
 directly. The container image must be extracted to a directory on
 disk to run. This impact the speed of execution. Workloads accessing
 large numbers of small files (such as python application startup) do
-not benefit from the reduced metadata load on the filesystem an
-image file provides.</p></li>
+not benefit from the reduced metadata load on the filesystem an image
+file provides.</p></li>
 <li><p>Replacing direct kernel mounts with a FUSE approach is likely to
 cause a significant reduction in perfomance.</p></li>
 <li><p>The effectiveness of signing and verifying container images is
@@ -210,54 +210,52 @@ Singularity has adopted an alternative security model:</p>
 <li><p>Containers should be run as an unprivileged user.</p></li>
 <li><p>The user should never be able to elevate their privileges inside the
 container to gain control over the host.</p></li>
-<li><p>All permission restrictions on the user outside of a container
-should apply inside the container.</p></li>
+<li><p>All permission restrictions on the user outside of a container should
+apply inside the container.</p></li>
 <li><p>Favor integration over isolation. Allow a user to use host resources
-such as GPUs, network filesystems, high speed interconnects
-easily. The process ID space, network etc. are not isolated in
-separate namespaces by default.</p></li>
+such as GPUs, network filesystems, high speed interconnects easily.
+The process ID space, network etc. are not isolated in separate
+namespaces by default.</p></li>
 </ul>
 <p>To accomplish this, Singularity uses a number of Linux kernel
 features. The container file system is mounted using the <code class="docutils literal notranslate"><span class="pre">nosuid</span></code>
-option, and processes are started with the <code class="docutils literal notranslate"><span class="pre">PR_NO_NEW_PRIVS</span></code> flag
-set. This means that even if you run <code class="docutils literal notranslate"><span class="pre">sudo</span></code> inside your container,
-you won’t be able to change to another user, or gain root privileges
-by other means.</p>
-<p>If you do require the additional isolation of the network, devices,
-PIDs etc. provided by other runtimes, Singularity can make use of
+option, and processes are started with the <code class="docutils literal notranslate"><span class="pre">PR_NO_NEW_PRIVS</span></code> flag set.
+This means that even if you run <code class="docutils literal notranslate"><span class="pre">sudo</span></code> inside your container, you
+won’t be able to change to another user, or gain root privileges by
+other means.</p>
+<p>If you do require the additional isolation of the network, devices, PIDs
+etc. provided by other runtimes, Singularity can make use of
 additional namespaces and functionality such as seccomp and cgroups.</p>
 </section>
 <section id="singularity-image-format-sif">
 <h2>Singularity Image Format (SIF)<a class="headerlink" href="#singularity-image-format-sif" title="Permalink to this headline"></a></h2>
-<p>Singularity uses SIF as its default container format. A SIF
-container is a single file, which makes it easy to manage and
-distribute. Inside the SIF file, the container filesystem is held in a
-SquashFS object. By default, we mount the container filesystem
-directly using SquashFS. On a network filesytem this means that reads
-from the container are data-only. Metadata operations happen locally,
-speeding up workloads with many small files.</p>
-<p>Holding the container image in a single file also enable unique
-security features. The container filesystem is immutable, and can be
-signed. The signature travels in the SIF image itself so that it is
-always possible to verify that the image has not been tampered with or
-corrupted.</p>
-<p>We use private PGP keys to create a container signature, and the
-public key in order to verify the container. Verification of signed
-containers happens automatically in <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> commands
-against the Sylabs Cloud Container Library. A Keystore in the Sylabs
-Cloud makes it easier to share and obtain public keys for container
-verification.</p>
-<p>A container may be signed once, by a trusted individual who approves
-its use. It could also be signed with multiple keys to signify it has
-passed each step in a CI/CD QA &amp; Security process. Singularity can
-be configured with an execution control list (ECL), which requires the
-presence of one or more valid signatures, to limit execution to
-approved containers.</p>
+<p>Singularity uses SIF as its default container format. A SIF container
+is a single file, which makes it easy to manage and distribute. Inside
+the SIF file, the container filesystem is held in a SquashFS object. By
+default, we mount the container filesystem directly using SquashFS. On a
+network filesytem this means that reads from the container are
+data-only. Metadata operations happen locally, speeding up workloads
+with many small files.</p>
+<p>Holding the container image in a single file also enable unique security
+features. The container filesystem is immutable, and can be signed. The
+signature travels in the SIF image itself so that it is always possible
+to verify that the image has not been tampered with or corrupted.</p>
+<p>We use private PGP keys to create a container signature, and the public
+key in order to verify the container. Verification of signed containers
+happens automatically in <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> commands against the
+Sylabs Cloud Container Library. A Keystore in the Sylabs Cloud makes it
+easier to share and obtain public keys for container verification.</p>
+<p>A container may be signed once, by a trusted individual who approves its
+use. It could also be signed with multiple keys to signify it has passed
+each step in a CI/CD QA &amp; Security process. Singularity can be
+configured with an execution control list (ECL), which requires the
+presence of one or more valid signatures, to limit execution to approved
+containers.</p>
 <p>In Singularity 3.4 and above, the root filesystem of a container
-(stored in the squashFS partition of SIF) can be encrypted. As a
-result, everything inside the container becomes inaccessible without
-the correct key or passphrase. The content of the container is
-private, even if the SIF file is shared in public.</p>
+(stored in the squashFS partition of SIF) can be encrypted. As a result,
+everything inside the container becomes inaccessible without the correct
+key or passphrase. The content of the container is private, even if the
+SIF file is shared in public.</p>
 <p>Encryption and decryption are performed using the Linux kernel’s LUKS2
 feature. This is the same technology routinely used for full disk
 encryption. The encrypted container is mounted directly through the
@@ -273,9 +271,9 @@ capabilities, manage resources and authorize containers etc.</p>
 file allows blacklisting and whitelisting of containers.</p>
 <p>Configuration files and their parameters are documented for
 administrators documented <a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/configfiles.html">here</a>.</p>
-<p>When running a container as root, Singularity can apply hardening
-rules using cgroups, seccomp, apparmor. See <a class="reference internal" href="security_options.html#security-options"><span class="std std-ref">details of these
-options here</span></a>.</p>
+<p>When running a container as root, Singularity can apply hardening rules
+using cgroups, seccomp, apparmor. See <a class="reference internal" href="security_options.html#security-options"><span class="std std-ref">details of these options
+here</span></a>.</p>
 </section>
 </section>
 
