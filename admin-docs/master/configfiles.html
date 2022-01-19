@@ -80,7 +80,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#gpu-library-configuration">GPU Library Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#nvidia-gpus-cuda">NVIDIA GPUs / CUDA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nvidia-gpus-cuda">NVIDIA GPUs / CUDA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#experimental-nvidia-container-cli-support">Experimental nvidia-container-cli Support</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#amd-radeon-gpus-rocm">AMD Radeon GPUs / ROCm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gpu-liblist-format">GPU liblist format</a></li>
 </ul>
@@ -745,25 +748,57 @@ usage information is discussed in the <cite>GPU Support</cite> section of the
 <a class="reference external" href="https://singularity.hpcng.org/user-docs/3.8">user guide</a></p>
 <section id="nvidia-gpus-cuda">
 <h3>NVIDIA GPUs / CUDA<a class="headerlink" href="#nvidia-gpus-cuda" title="Permalink to this headline"></a></h3>
-<p>If the <a class="reference external" href="https://github.com/NVIDIA/libnvidia-container">nvidia-container-cli</a> tool is installed on
-the host system, it will be used to locate any Nvidia libraries and
-binaries on the host system.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> is not present, the <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code>
-file is used to specify libraries and executables that need to be
-injected into the container when running Singularity with the <code class="docutils literal notranslate"><span class="pre">--nv</span></code>
-Nvidia GPU support option. The default <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> is suitable
-for CUDA 10.1, but may need to be modified if you need to include
-additional libraries, or further libraries are added to newer versions
-of the Nvidia driver/CUDA distribution.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> configuration file is used to
+specify libraries and executables that need to be injected into the
+container when running Singularity with the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> Nvidia GPU
+support option. The provided <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> is suitable for CUDA
+11, but may need to be modified if you need to include additional
+libraries, or further libraries are added to newer versions of the
+Nvidia driver/CUDA distribution.</p>
+<p>When adding new entries to <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> use the bare filename of
+executables, and the <code class="docutils literal notranslate"><span class="pre">xxxx.so</span></code> form of libraries. Libraries are
+resolved via <code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">-p</span></code>, and exectuables are found by searching
+<code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p>
+<section id="experimental-nvidia-container-cli-support">
+<h4>Experimental nvidia-container-cli Support<a class="headerlink" href="#experimental-nvidia-container-cli-support" title="Permalink to this headline"></a></h4>
+<p>The <a class="reference external" href="https://github.com/NVIDIA/libnvidia-container">nvidia-container-cli</a> tool is Nvidia’s
+officially support method for configuring containers to use a GPU. It
+is targeted at OCI container runtimes.</p>
+<p>Singularity 3.9 introduces an experimental <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option,
+which will call out to <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> for container GPU
+setup, rather than use the <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> approach.</p>
+<p>To use <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> a <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> binary must
+be present on the host. The binary that is run is controlled by the
+<code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> directive in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>. During
+installation of Singularity, the <code class="docutils literal notranslate"><span class="pre">./mconfig</span></code> step will set the
+correct value in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> if <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> is
+found on the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>. If the value of <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span> <span class="pre">path</span></code> is
+empty, Singularity will look for the binary on <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> at runtime.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To prevent use of <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> via the <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code>
+flag, you may set <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span> <span class="pre">path</span></code> to <code class="docutils literal notranslate"><span class="pre">/bin/false</span></code>
+in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>.</p>
+</div>
+<p>For security reasons, <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> cannot be used with privileged mode
+in a setuid installation of Singularity, it can only be used unprivileged.  The
+operations performed by <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> are broadly similar
+to those which Singularity carries out when setting up a GPU
+container from <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code>.</p>
+</section>
 </section>
 <section id="amd-radeon-gpus-rocm">
 <h3>AMD Radeon GPUs / ROCm<a class="headerlink" href="#amd-radeon-gpus-rocm" title="Permalink to this headline"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">rocmliblist.conf</span></code> file is used to specify libraries and
 executables that need to be injected into the container when running
-Singularity with the <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> Radeon GPU support option. The default
-<code class="docutils literal notranslate"><span class="pre">rocmliblist.conf</span></code> is suitable for ROCm 2.10, but may need to modified
+Singularity with the <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> Radeon GPU support option. The provided
+<code class="docutils literal notranslate"><span class="pre">rocmliblist.conf</span></code> is suitable for ROCm 4.0, but may need to modified
 if you need to include additional libraries, or further libraries are
 added to newer versions of the ROCm distribution.</p>
+<p>When adding new entries to <code class="docutils literal notranslate"><span class="pre">rocmlist.conf</span></code> use the bare filename of
+executables, and the <code class="docutils literal notranslate"><span class="pre">xxxx.so</span></code> form of libraries. Libraries are
+resolved via <code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">-p</span></code>, and exectuables are found by searching
+<code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p>
 </section>
 <section id="gpu-liblist-format">
 <h3>GPU liblist format<a class="headerlink" href="#gpu-liblist-format" title="Permalink to this headline"></a></h3>
