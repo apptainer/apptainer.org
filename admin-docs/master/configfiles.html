@@ -615,9 +615,17 @@ per second.</p>
 </section>
 <section id="ecl-toml">
 <span id="execution-control-list"></span><h2>ecl.toml<a class="headerlink" href="#ecl-toml" title="Permalink to this headline"></a></h2>
-<p>The execution control list is defined here. You can authorize the containers by
-validating both the location of the SIF file in the filesystem and by
-checking against a list of signing entities.</p>
+<p>The execution control list that can be used to restrict the execution
+of SIF files by signing key is defined here. You can authorize the
+containers by validating both the location of the SIF file in the
+filesystem and by checking against a list of signing entities.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The ECL configuration applies to SIF container images only. To lock
+down execution fully you should disable execution of other
+container types (squashfs/extfs/dir) via the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>
+file <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span></code> settings.</p>
+</div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[execgroup]]
   tagname = &quot;group2&quot;
   mode = &quot;whitelist&quot;
