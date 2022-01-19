@@ -83,7 +83,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#installation-on-windows-or-mac">Installation on Windows or Mac</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#singularity-vagrant-box">Singularity Vagrant Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#singularity-docker-image">Singularity Docker Image</a></li>
 </ul>
 </li>
 </ul>
@@ -683,6 +685,16 @@ source tools. The current versions can be found under the <a class="reference ex
 </ul>
 </div></blockquote>
 </section>
+<section id="mac">
+<h3>Mac<a class="headerlink" href="#mac" title="Permalink to this headline"></a></h3>
+<p>Singularity is available via Vagrant (installable with
+<a class="reference external" href="https://brew.sh">Homebrew</a> or manually)</p>
+<p>To use Vagrant via Homebrew:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+$ brew install --cask virtualbox vagrant vagrant-manager
+</pre></div>
+</div>
+</section>
 <section id="singularity-vagrant-box">
 <h3>Singularity Vagrant Box<a class="headerlink" href="#singularity-vagrant-box" title="Permalink to this headline"></a></h3>
 <p>Run Git Bash (Windows) or open a terminal (Mac) and create and enter a
@@ -712,6 +724,28 @@ different value for the <code class="docutils literal notranslate"><span class="
 </div>
 <p>Of course, you can also start with a plain OS Vagrant box as a base and then
 install Singularity using one of the above methods for Linux.</p>
+</section>
+<section id="singularity-docker-image">
+<h3>Singularity Docker Image<a class="headerlink" href="#singularity-docker-image" title="Permalink to this headline"></a></h3>
+<p>It is possible to use a Dockerized Singularity,
+here is a sample <code class="docutils literal notranslate"><span class="pre">compose.yaml</span></code> (Singularity version 3.7.4) for use with Docker Compose:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>services:
+  singularity:
+    image: quay.io/singularity/singularity:v3.7.4-slim
+    stdin_open: true
+    tty: true
+    privileged: true
+    volumes:
+      - .:/root
+    entrypoint: [&quot;/bin/sh&quot;]
+</pre></div>
+</div>
+<p>Singularity in Docker can have various disadvantages,
+but basic container operations will work.
+Currently, the intended use case is continuous integration,
+meaning that you should be able to build a Singularity container using this Docker Compose file.
+For more information see <a class="reference external" href="https://github.com/sylabs/singularity-admindocs/issues/5#issuecomment-852307931">issue#5</a>
+and the image’s source <a class="reference external" href="https://github.com/singularityhub/singularity-docker#use-cases">repo</a></p>
 </section>
 </section>
 </section>
