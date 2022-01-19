@@ -48,6 +48,13 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing Singularity</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation-on-linux">Installation on Linux</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#system-requirements">System Requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#external-binaries">External Binaries</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#configurable-paths">Configurable Paths</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#searching-path">Searching $PATH</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#bootstrap-utilities">Bootstrap Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#non-standard-ldconfig-nix-guix-environments">Non-standard ldconfig / Nix &amp; Guix Environments</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#filesystem-support-limitations">Filesystem support / limitations</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#overlay-support">Overlay support</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#fakeroot-sub-uid-gid-mapping">Fakeroot / (sub)uid/gid mapping</a></li>
@@ -152,6 +159,81 @@ privilege.</p></li>
 </div></blockquote>
 <p>RHEL &amp; CentOS 6 do not support these features, but Singularity can be
 used with some limitations.</p>
+<section id="external-binaries">
+<h4>External Binaries<a class="headerlink" href="#external-binaries" title="Permalink to this headline"></a></h4>
+<p>Singularity depends on a number of external binaries for full
+functionality. From Singularity 3.9, the methods that are used to
+find these binaries have been standardized as below.</p>
+<section id="configurable-paths">
+<h5>Configurable Paths<a class="headerlink" href="#configurable-paths" title="Permalink to this headline"></a></h5>
+<p>The following binaries are found on <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> during build time when
+<code class="docutils literal notranslate"><span class="pre">./mconfig</span></code> is run, and their location is added to the
+<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> configuration file. At runtime this configured
+location is used. To specify an alternate executable, change the
+relevant path entry in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>. If the
+<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> entry is left blank, then <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> will be
+searched at runtime.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cryptsetup</span></code> version 2 with kernel LUKS2 support is required for
+building or executing encrypted containers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">go</span></code> is required to compile plugins, and must be an identical
+version as that used to build Singularity.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> is used to resolve library locations / symlinks when
+using the <code class="docutils literal notranslate"><span class="pre">-nv</span></code> or <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> GPU support.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mksquashfs</span></code> from squashfs-tools 4.3+ is used to create the
+squashfs container filesystem that is embedded into SIF container
+images. The <code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">procs</span></code> and <code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">mem</span></code> directives
+in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> can be used to control its resource usage.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unsquashfs</span></code> from squashfs-tools 4.3+ is used to extract the
+squashfs container filesystem from a SIF file when necessary.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> is used to configure a container for Nvidia
+GPU / CUDA support when running with the experimental <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code>
+option.</p></li>
+</ul>
+</section>
+<section id="searching-path">
+<h5>Searching $PATH<a class="headerlink" href="#searching-path" title="Permalink to this headline"></a></h5>
+<p>The following standard utilities are always found by searching
+<code class="docutils literal notranslate"><span class="pre">$PATH</span></code> at runtime:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mkfs.ext3</span></code> is used to create overlay images.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cp</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dd</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">newuidmap</span></code> and <code class="docutils literal notranslate"><span class="pre">newgidmap</span></code> are distribution provided setuid
+binaries used to configure subuid/gid mappings forr <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>
+in non-setuid installs.</p></li>
+</ul>
+</section>
+<section id="bootstrap-utilities">
+<h5>Bootstrap Utilities<a class="headerlink" href="#bootstrap-utilities" title="Permalink to this headline"></a></h5>
+<p>The following utilities are required to bootstrap containerized
+distributions using their native tooling:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mount</span></code>, <code class="docutils literal notranslate"><span class="pre">umount</span></code>, <code class="docutils literal notranslate"><span class="pre">pacstrap</span></code> for Arch Linux.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mount</span></code>, <code class="docutils literal notranslate"><span class="pre">umount</span></code>, <code class="docutils literal notranslate"><span class="pre">mknod</span></code>, <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> for Debian based
+distributions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dnf</span></code> or <code class="docutils literal notranslate"><span class="pre">yum</span></code>, <code class="docutils literal notranslate"><span class="pre">rpm</span></code>, <code class="docutils literal notranslate"><span class="pre">curl</span></code> for EL derived RPM based
+distributions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">uname</span></code>, <code class="docutils literal notranslate"><span class="pre">zypper</span></code>, <code class="docutils literal notranslate"><span class="pre">SUSEConnect</span></code> for SLES derived RPM based
+distributions.</p></li>
+</ul>
+</section>
+</section>
+<section id="non-standard-ldconfig-nix-guix-environments">
+<h4>Non-standard ldconfig / Nix &amp; Guix Environments<a class="headerlink" href="#non-standard-ldconfig-nix-guix-environments" title="Permalink to this headline"></a></h4>
+<p>If Singularity is installed under a package manager such as Nix or
+Guix, but on top of a standard Linux distribution (e.g. CentOS or
+Debian), it may be unable to correctly find the libraries for <code class="docutils literal notranslate"><span class="pre">--nv</span></code>
+and <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> GPU support. This issue occurs as the package manager
+supplies an alternative <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code>, which does not identify GPU
+libraries installed from host packages.</p>
+<p>To allow Singularity to locate the host (i.e. CentOS / Debian) GPU
+libraries correctly, set <code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">path</span></code> in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> to
+point to the host <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code>. I.E. it should be set to
+<code class="docutils literal notranslate"><span class="pre">/sbin/ldconfig</span></code> or <code class="docutils literal notranslate"><span class="pre">/sbin/ldconfig.real</span></code> rather than a Nix or
+Guix related path.</p>
+</section>
 <section id="filesystem-support-limitations">
 <h4>Filesystem support / limitations<a class="headerlink" href="#filesystem-support-limitations" title="Permalink to this headline"></a></h4>
 <p>Singularity supports most filesystems, but there are some limitations

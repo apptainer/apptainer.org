@@ -58,7 +58,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#networking-options">Networking Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gpu-options">GPU Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#supplemental-filesystems">Supplemental Filesystems</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#external-tooling-paths">External Tooling Paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cni-configuration-and-plugins">CNI Configuration and Plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#external-binaries">External Binaries</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#updating-configuration-options">Updating Configuration Options</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
 </ul>
@@ -411,11 +412,8 @@ using an underlay. This is suitable for systems where overlay is not possible
 or not working. If the overlay option is available and working, it will be
 used instead.</p>
 </section>
-<section id="external-tooling-paths">
-<h3>External Tooling Paths<a class="headerlink" href="#external-tooling-paths" title="Permalink to this headline"></a></h3>
-<p>Internally, Singularity leverages several pieces of tooling in order to provide
-a wide breadth of features for users. Locations for these tools can be
-customized by system admins and referenced with the options below:</p>
+<section id="cni-configuration-and-plugins">
+<h3>CNI Configuration and Plugins<a class="headerlink" href="#cni-configuration-and-plugins" title="Permalink to this headline"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">CNI</span> <span class="pre">CONFIGURATION</span> <span class="pre">PATH</span></code>:
 This option allows admins to specify a custom path for the CNI configuration
 that Singularity will use for <a class="reference external" href="https://singularity.hpcng.org/user-docs/3.8/networking.html">Network Virtualization</a>.</p>
@@ -423,15 +421,40 @@ that Singularity will use for <a class="reference external" href="https://singul
 This option allows admins to specify a custom path for Singularity to access
 CNI plugin executables. Check out the <a class="reference external" href="https://singularity.hpcng.org/user-docs/3.8/networking.html">Network Virtualization</a>
 section of the user guide for more information.</p>
-<p><code class="docutils literal notranslate"><span class="pre">MKSQUASHFS</span> <span class="pre">PATH</span></code>:
-This allows an admin to specify the location of <code class="docutils literal notranslate"><span class="pre">mksquashfs</span></code> if it is not
-installed in a standard location. If set, <code class="docutils literal notranslate"><span class="pre">mksquashfs</span></code> at this path will be
-used instead of a <code class="docutils literal notranslate"><span class="pre">mksquashfs</span></code> found in <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">CRYPTSETUP</span> <span class="pre">PATH</span></code>:
-The location for <code class="docutils literal notranslate"><span class="pre">cryptsetup</span></code> is recorded by Singularity at build time and
-will use that value if this is undefined. This option allows an admin to set
-the path of <code class="docutils literal notranslate"><span class="pre">cryptsetup</span></code> if it is located in a custom location and will
-override the value recorded at build time.</p>
+</section>
+<section id="external-binaries">
+<h3>External Binaries<a class="headerlink" href="#external-binaries" title="Permalink to this headline"></a></h3>
+<p>Singularity calls a number of external binaries for full
+functionality. The paths for certain critical binaries can be set in
+<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>. At build time, <code class="docutils literal notranslate"><span class="pre">mconfig</span></code> will set initial
+values for these, by searching on the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> environment
+variable. You can override which external binaries are called by
+changing the value in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>. If left unset, <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>
+will be searched at runtime.</p>
+<p><code class="docutils literal notranslate"><span class="pre">CRYPTSETUP</span> <span class="pre">PATH</span></code>: Path to the cryptsetup executable, used to work
+with encrypted containers. NOTE - cryptsetup is called as root, and is
+<em>required</em> to be owned by the root user for security reasons.</p>
+<p><code class="docutils literal notranslate"><span class="pre">GO</span> <span class="pre">PATH</span></code>: Path to the go executable, used to compile plugins.</p>
+<p><code class="docutils literal notranslate"><span class="pre">LDCONFIG</span> <span class="pre">PATH</span></code>: Path to the ldconfig executable, used to find GPU
+libraries.</p>
+<p><code class="docutils literal notranslate"><span class="pre">MKSQUASHFS</span> <span class="pre">PATH</span></code>: Path to the mksquashfs executable, used to create
+SIF and SquashFS containers.</p>
+<p><code class="docutils literal notranslate"><span class="pre">MKSQUASHFS</span> <span class="pre">PROCS</span></code>: Allows the administrator to specify the number
+of CPUs that mksquashfs may use when building an image.  The fewer
+processors the longer it takes.  To use all available CPU’s set this
+to 0.</p>
+<p><code class="docutils literal notranslate"><span class="pre">MKSQUASHFS</span> <span class="pre">MEM</span></code>: Allows the administrator to set the maximum amount
+of memory that mksquashfs nay use when building an image.  e.g. 1G for
+1gb or 500M for 500mb. Restricting memory can have a major impact on
+the time it takes mksquashfs to create the image.  NOTE: This
+fuctionality did not exist in squashfs-tools prior to version 4.3.  If
+using an earlier version you should not set this.</p>
+<p><code class="docutils literal notranslate"><span class="pre">NVIDIA-CONTAINER-CLI</span> <span class="pre">PATH</span></code>: Path to the nvidia-container-cli
+executable, used to find GPU libraries and configure the container
+when running with the <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option. Required to be owned by
+root, and is called as root in setuid installations.</p>
+<p><code class="docutils literal notranslate"><span class="pre">UNSQUASHFS</span> <span class="pre">PATH</span></code>: Path to the unsquashfs executable, used to
+extract SIF and SquashFS containers.</p>
 </section>
 <section id="updating-configuration-options">
 <h3>Updating Configuration Options<a class="headerlink" href="#updating-configuration-options" title="Permalink to this headline"></a></h3>
