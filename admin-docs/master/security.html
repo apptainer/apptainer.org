@@ -98,7 +98,7 @@
              
   <section id="security-in-singularity-containers">
 <span id="security"></span><h1>Security in Singularity Containers<a class="headerlink" href="#security-in-singularity-containers" title="Permalink to this headline"></a></h1>
-<p>Containers are all the rage today for many good reasons. They are light weight, easy to spin-up and require reduced IT management resources as compared to hardware VM environments. More importantly, container technology facilitates advanced research computing by granting the ability to package software in highly portable and reproducible environments encapsulating all dependencies, including the operating system. But there are still some challenges to container security.</p>
+<p>Containers are all the rage today for many good reasons. They are lightweight, easy to spin-up and require reduced IT management resources as compared to hardware VM environments. More importantly, container technology facilitates advanced research computing by granting the ability to package software in highly portable and reproducible environments encapsulating all dependencies, including the operating system. But there are still some challenges to container security.</p>
 <p>Singularity, which is a container paradigm created by necessity for scientific and application driven workloads, addresses some
 core missions of containers : Mobility of Compute, Reproducibility, HPC support, and <strong>Security</strong>. This document intends to inform
 admins of different security features supported by Singularity.</p>
@@ -112,7 +112,7 @@ to prevent users from escalating privileges once they are inside of a container.
 <code class="docutils literal notranslate"><span class="pre">nosuid</span></code> option, and processes are spawned with the <code class="docutils literal notranslate"><span class="pre">PR_NO_NEW_PRIVS</span></code> flag. Taken together, this approach provides a secure way
 for users to run containers and greatly simplifies things like reading and writing data to the host system with appropriate
 ownership.</p>
-<p>It is also important to note that the philosophy of Singularity is <em>Integration</em> over <em>Isolation</em>. Most container run times strive
+<p>It is also important to note that the philosophy of Singularity is <em>Integration</em> over <em>Isolation</em>. Most container runtimes strive
 to isolate your container from the host system and other containers as much as possible. Singularity, on the
 other hand, assumes that the user’s primary goals are portability, reproducibility, and ease of use and that isolation is often a
 tertiary concern. Therefore, Singularity only isolates the mount namespace by default, and will also bind mount several host
@@ -188,12 +188,13 @@ which allows blacklisting and whitelisting of containers. You can find all the c
 documented <a class="reference external" href="configfiles.html">here</a>.</p>
 <section id="cgroups-support">
 <h3>cgroups support<a class="headerlink" href="#cgroups-support" title="Permalink to this headline"></a></h3>
-<p>Starting v3.0, Singularity added native support for <code class="docutils literal notranslate"><span class="pre">cgroups</span></code>, allowing users to limit the resources their containers consume
-without the help of a separate program like a batch scheduling system. This feature helps in preventing  DoS attacks where one
+<p>Singularity provides native support for <code class="docutils literal notranslate"><span class="pre">cgroups</span></code>, allowing users to limit the resources their containers consume
+without the help of a separate program like a batch scheduling system. This feature helps in preventing DoS attacks where one
 container seizes control of all available system resources in order to stop other containers from operating properly.
 To utilize this feature, a user first creates a configuration file. An example configuration file is installed by default with
 Singularity to provide a guide. At runtime, the <code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code> option is used to specify the location of the configuration
 file and cgroups are configured accordingly. More about cgroups support <a class="reference external" href="configfiles.html#cgroups-toml">here</a>.</p>
+<p>Applying cgroups resource limits on systems using the v2 unified hierarchy is supported under Singularity v3.9 and above.</p>
 </section>
 <section id="security-options">
 <h3><code class="docutils literal notranslate"><span class="pre">--security</span></code> options<a class="headerlink" href="#security-options" title="Permalink to this headline"></a></h3>
@@ -204,7 +205,7 @@ grained control of security. Details about them are documented <a class="referen
 </section>
 <section id="security-in-scs">
 <h2>Security in SCS<a class="headerlink" href="#security-in-scs" title="Permalink to this headline"></a></h2>
-<p><a class="reference external" href="https://cloud.sylabs.io/home">Singularity Container Services (SCS)</a> consist of a Remote Builder, a Container Library, and a
+<p><cite>Singularity Container Services (SCS) &lt;https://cloud.sylabs.io&gt;</cite> consist of a Remote Builder, a Container Library, and a
 Keystore. Taken together, the Singularity Container Services provide an end-to-end solution for packaging and distributing
 applications in secure and trusted containers.</p>
 <section id="remote-builder">
