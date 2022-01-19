@@ -66,6 +66,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#checkout-code-from-git">Checkout Code from Git</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#compile-singularity">Compile Singularity</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#unprivileged-non-setuid-installation">Unprivileged (non-setuid) Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#relocatable-installation">Relocatable Installation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#source-bash-completion-file">Source bash completion file</a></li>
 </ul>
 </li>
@@ -482,6 +483,16 @@ a user namespace. This requires support from your operating system
 kernel, and imposes some limitations on functionality. You should
 review the <a class="reference internal" href="user_namespace.html#userns-requirements"><span class="std std-ref">requirements</span></a> and
 <a class="reference internal" href="user_namespace.html#userns-limitations"><span class="std std-ref">limitations</span></a> in the <a class="reference internal" href="user_namespace.html#userns"><span class="std std-ref">user namespace</span></a> section of this guide.</p>
+</section>
+<section id="relocatable-installation">
+<h4>Relocatable Installation<a class="headerlink" href="#relocatable-installation" title="Permalink to this headline"></a></h4>
+<p>Since Singularity 3.8, an unprivileged (non-setuid) installation is
+relocatable. As long as the structure inside the installation
+directory (<code class="docutils literal notranslate"><span class="pre">--prefix</span></code>) is maintained, it can be moved to a different
+location and Singularity will continue to run normally.</p>
+<p>Relocation of a default setuid installation is not supported, as
+restricted location / ownership of configuration files is important to
+security.</p>
 </section>
 <section id="source-bash-completion-file">
 <h4>Source bash completion file<a class="headerlink" href="#source-bash-completion-file" title="Permalink to this headline"></a></h4>
