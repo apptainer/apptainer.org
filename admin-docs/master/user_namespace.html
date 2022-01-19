@@ -7,6 +7,7 @@
   <title>User Namespaces &amp; Fakeroot &mdash; Singularity Admin Guide 3.8 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -153,7 +154,7 @@ sudo sysctl -p /etc/sysctl.d /etc/sysctl.d/90-max_net_namespaces.conf
 section, Singularity can be compiled or configured with the <code class="docutils literal notranslate"><span class="pre">allow</span>
 <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> option in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> to not perform privileged
 operations using the <code class="docutils literal notranslate"><span class="pre">starter-setuid</span></code> binary.</p>
-<p>When singularity does not use <code class="docutils literal notranslate"><span class="pre">setuid</span></code> all container execution will
+<p>When Singularity does not use <code class="docutils literal notranslate"><span class="pre">setuid</span></code> all container execution will
 use a user namespace. In this mode of operation, some features are not
 available, and there are impacts to the security/integrity guarantees
 when running SIF container images:</p>

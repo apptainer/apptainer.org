@@ -7,6 +7,7 @@
   <title>Installing Singularity &mdash; Singularity Admin Guide 3.8 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -73,10 +74,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#remove-an-old-version">Remove an old version</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#distribution-packages-of-singularity">Distribution packages of Singularity</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#install-the-centos-rhel-package-using-yum">Install the CentOS/RHEL package using yum</a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-checking-the-build-configuration">Testing &amp; Checking the Build Configuration</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#singularity-buildcfg">singularity buildcfg</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#test-suite">Test Suite</a></li>
@@ -86,7 +83,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#installation-on-windows-or-mac">Installation on Windows or Mac</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#singularity-vagrant-box">Singularity Vagrant Box</a></li>
 </ul>
 </li>
@@ -126,7 +122,7 @@
   <section id="installing-singularity">
 <span id="installation"></span><h1>Installing Singularity<a class="headerlink" href="#installing-singularity" title="Permalink to this headline"></a></h1>
 <p>This section will guide you through the process of installing
-Singularity 3.8.0 via several different methods. (For
+Singularity 3.8.5 via several different methods. (For
 instructions on installing earlier versions of Singularity please see
 <a class="reference external" href="https://singularity.hpcng.org/docs/">earlier versions of the docs</a>.)</p>
 <section id="installation-on-linux">
@@ -251,7 +247,7 @@ atomic rename of files only on a single MDT. Rename on NFS is only
 atomic to a single client, not across systems accessing the same NFS
 share.</p>
 <p>If you are not certain that your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> or <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code>
-filesytems support atomic rename, do not run Singularity in parallel
+filesytems support atomic rename, do not run <code class="docutils literal notranslate"><span class="pre">singularity</span></code> in parallel
 using remote container URLs. Instead use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> to
 create a local SIF image, and then run this SIF image in a parallel
 step. An alternative is to use the <code class="docutils literal notranslate"><span class="pre">--disable-cache</span></code> option, but
@@ -384,7 +380,7 @@ page).</p>
 list, visit <a class="reference external" href="https://github.com/hpcng/singularity/releases">the GitHub release page</a>.  After deciding on
 a release to install, you can run the following commands to proceed
 with the installation.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=3.8.0 &amp;&amp; # adjust this as necessary \
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=3.8.5 &amp;&amp; # adjust this as necessary \
     wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &amp;&amp; \
     tar -xzf singularity-${VERSION}.tar.gz &amp;&amp; \
     cd singularity
@@ -394,7 +390,7 @@ with the installation.</p>
 <section id="checkout-code-from-git">
 <h4>Checkout Code from Git<a class="headerlink" href="#checkout-code-from-git" title="Permalink to this headline"></a></h4>
 <p>The following commands will install Singularity from the <a class="reference external" href="https://github.com/hpcng/singularity">GitHub repo</a> to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>. This
-method will work for &gt;=v3.8.0. To install an older
+method will work for &gt;=v3.8.5. To install an older
 tagged release see <a class="reference external" href="https://singularity.hpcng.org/docs/">older versions of the docs</a>.</p>
 <p>When installing from source, you can decide to install from either a
 <strong>tag</strong>, a <strong>release branch</strong>, or from the <strong>master branch</strong>.</p>
@@ -418,7 +414,7 @@ and may be unstable.</p></li>
 appropriate directory use these commands.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/hpcng/singularity.git &amp;&amp; \
     cd singularity &amp;&amp; \
-    git checkout v3.8.0
+    git checkout v3.8.5
 </pre></div>
 </div>
 </section>
@@ -469,7 +465,7 @@ each individual node.</p></li>
 <span id="install-nonsetuid"></span><h4>Unprivileged (non-setuid) Installation<a class="headerlink" href="#unprivileged-non-setuid-installation" title="Permalink to this headline"></a></h4>
 <p>If you need to install Singularity as a non-root user, or do not wish
 to allow the use of a setuid root binary, you can configure
-singularity with the <code class="docutils literal notranslate"><span class="pre">--without-suid</span></code> option to mconfig:</p>
+Singularity with the <code class="docutils literal notranslate"><span class="pre">--without-suid</span></code> option to mconfig:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./mconfig --without-suid --prefix=/home/dave/singularity &amp;&amp; \
     make -C ./builddir &amp;&amp; \
     make -C ./builddir install
@@ -479,7 +475,7 @@ singularity with the <code class="docutils literal notranslate"><span class="pre
 flow by setting the option <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> in
 <code class="docutils literal notranslate"><span class="pre">etc/singularity/singularity.conf</span></code> within your installation
 directory.</p>
-<p>When singularity does not use setuid all container execution will use
+<p>When Singularity does not use setuid all container execution will use
 a user namespace. This requires support from your operating system
 kernel, and imposes some limitations on functionality. You should
 review the <a class="reference internal" href="user_namespace.html#userns-requirements"><span class="std std-ref">requirements</span></a> and
@@ -512,7 +508,7 @@ should be named <cite>singularity-&lt;version&gt;.tar.gz</cite>.</p>
 <p>After installing the <a class="reference internal" href="#install-dependencies"><span class="std std-ref">dependencies</span></a> and
 installing <a class="reference internal" href="#install-go"><span class="std std-ref">Go</span></a> as detailed above, you are ready to
 download the tarball and build and install the RPM.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=3.8.0 &amp;&amp; # adjust this as necessary \
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=3.8.5 &amp;&amp; # adjust this as necessary \
     wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &amp;&amp; \
     rpmbuild -tb singularity-${VERSION}.tar.gz &amp;&amp; \
     sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/singularity-$VERSION-1.el7.x86_64.rpm &amp;&amp; \
@@ -545,7 +541,7 @@ can clone the repository, directly <code class="docutils literal notranslate"><s
 Singularity:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./mconfig &amp;&amp; \
 make -C builddir rpm &amp;&amp; \
-sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/singularity-3.8.0.el7.x86_64.rpm # or whatever version you built
+sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/singularity-3.8.5.el7.x86_64.rpm # or whatever version you built
 </pre></div>
 </div>
 <p>To build an rpm with an alternative install prefix set <code class="docutils literal notranslate"><span class="pre">RPMPREFIX</span></code>
@@ -580,31 +576,6 @@ deleting the parent directory. Or it may be useful to install
 Singularity <a class="reference internal" href="#install-rpm"><span class="std std-ref">using a package manager</span></a> so that it
 can be updated and/or uninstalled with ease in the future.</p>
 </section>
-<section id="distribution-packages-of-singularity">
-<h3>Distribution packages of Singularity<a class="headerlink" href="#distribution-packages-of-singularity" title="Permalink to this headline"></a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Packaged versions of Singularity in Linux distribution repos are
-maintained by community members. They may be older releases of
-Singularity, as it can take time to package and distribute new
-versions. For the latest upstream versions of Singularity it is
-recommended that you build from source using one of the methods
-detailed above.</p>
-</div>
-<section id="install-the-centos-rhel-package-using-yum">
-<h4>Install the CentOS/RHEL package using yum<a class="headerlink" href="#install-the-centos-rhel-package-using-yum" title="Permalink to this headline"></a></h4>
-<p>The EPEL (Extra Packages for Enterprise Linux) repos contain
-Singularity rpms that are regularly updated. To install Singularity
-from the epel repos, first install the epel-release package and then
-install Singularity.  For instance, on CentOS 6/7/8 do the following:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo yum update -y &amp;&amp; \
-    sudo yum install -y epel-release &amp;&amp; \
-    sudo yum update -y &amp;&amp; \
-    sudo yum install -y singularity
-</pre></div>
-</div>
-</section>
-</section>
 <section id="testing-checking-the-build-configuration">
 <h3>Testing &amp; Checking the Build Configuration<a class="headerlink" href="#testing-checking-the-build-configuration" title="Permalink to this headline"></a></h3>
 <p>After installation you can perform a basic test of Singularity
@@ -625,7 +596,7 @@ correctly for your installation, and troubleshoot any ‘not-found’
 errors at runtime.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity buildcfg
 PACKAGE_NAME=singularity
-PACKAGE_VERSION=3.8.0
+PACKAGE_VERSION=3.8.5
 BUILDDIR=/home/dtrudg/Sylabs/Git/singularity/builddir
 PREFIX=/usr/local
 EXECPREFIX=/usr/local
@@ -666,7 +637,7 @@ targets from the <code class="docutils literal notranslate"><span class="pre">bu
 <li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">unit-test</span></code> runs basic unit tests</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">integration-test</span></code> runs integration tests</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">e2e-test</span></code> runs end-to-end tests, which exercise a large
-number of operations by calling the singularity CLI with different
+number of operations by calling the Singularity CLI with different
 execution profiles.</p></li>
 </ul>
 </div></blockquote>
@@ -700,9 +671,6 @@ from BSD.)</p>
 Boxes via <a class="reference external" href="https://www.vagrantup.com/">Vagrant Cloud</a>, one of
 <a class="reference external" href="https://www.hashicorp.com/#open-source-tools">Hashicorp’s</a> open
 source tools. The current versions can be found under the <a class="reference external" href="https://app.vagrantup.com/sylabs">sylabs</a> organization.</p>
-<p>Sylabs has also developed a beta version of Singularity Desktop for
-Mac, which runs Singularity in a lightweight virtual machine, in a
-transparent manner.</p>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline"></a></h3>
 <p>Install the following programs:</p>
@@ -714,21 +682,6 @@ transparent manner.</p>
 <li><p><a class="reference external" href="http://vagrantmanager.com/downloads/">Vagrant Manager for Windows</a></p></li>
 </ul>
 </div></blockquote>
-</section>
-<section id="mac">
-<h3>Mac<a class="headerlink" href="#mac" title="Permalink to this headline"></a></h3>
-<p>To use Singularity Desktop for macOS (Beta Preview):</p>
-<p>Download a Mac installer package <a class="reference external" href="https://www.sylabs.io/singularity-desktop-macos/">here</a>.</p>
-<p>Singularity is also available via Vagrant (installable with
-<a class="reference external" href="https://brew.sh">Homebrew</a> or manually) or with the Singularity Desktop for
-macOS (Alpha Preview).</p>
-<p>To use Vagrant via Homebrew:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-$ brew install --cask virtualbox &amp;&amp; \
-    brew install --cask vagrant &amp;&amp; \
-    brew install --cask vagrant-manager
-</pre></div>
-</div>
 </section>
 <section id="singularity-vagrant-box">
 <h3>Singularity Vagrant Box<a class="headerlink" href="#singularity-vagrant-box" title="Permalink to this headline"></a></h3>
@@ -746,7 +699,7 @@ to destroy the VM and delete the Vagrantfile.</p>
 </div>
 <p>Then issue the following commands to bring up the Virtual Machine. (Substitute a
 different value for the <code class="docutils literal notranslate"><span class="pre">$VM</span></code> variable if you like.)</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VM=sylabs/singularity-3.7-ubuntu-bionic64 &amp;&amp; \
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VM=sylabs/singularity-3.8-ubuntu-bionic64 &amp;&amp; \
     vagrant init $VM &amp;&amp; \
     vagrant up &amp;&amp; \
     vagrant ssh
@@ -754,7 +707,7 @@ different value for the <code class="docutils literal notranslate"><span class="
 </div>
 <p>You can check the installed version of Singularity with the following:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>vagrant@vagrant:~$ singularity version
-3.8.0
+3.8.5
 </pre></div>
 </div>
 <p>Of course, you can also start with a plain OS Vagrant box as a base and then

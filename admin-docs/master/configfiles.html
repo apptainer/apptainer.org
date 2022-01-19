@@ -7,6 +7,7 @@
   <title>Singularity Configuration Files &mdash; Singularity Admin Guide 3.8 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -146,7 +147,7 @@ Options are grouped together based on relevance, the order of options within
 <h3>Setuid and Capabilities<a class="headerlink" href="#setuid-and-capabilities" title="Permalink to this headline"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">ALLOW</span> <span class="pre">SETUID</span></code>:
 To use all features of Singularity containers, Singularity will need to have
-access to some privileged system calls. One way singularity achieves this is by
+access to some privileged system calls. One way Singularity achieves this is by
 using binaries with the <code class="docutils literal notranslate"><span class="pre">setuid</span></code> bit enabled. This variable lets you
 enable/disable users ability to utilize these binaries within Singularity. By
 default, it is set to “yes”, but when disabled, various Singularity features
