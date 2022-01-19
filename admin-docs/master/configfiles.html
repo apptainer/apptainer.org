@@ -88,7 +88,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#capability-json">capability.json</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#seccomp-profiles">seccomp-profiles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#remote-yaml">remote.yaml</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#remote-endpoints">Remote Endpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#remote-endpoints">Remote Endpoints</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#exclusive-endpoint">Exclusive Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#insecure-http-endpoints">Insecure (HTTP) Endpoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-information">Additional Information</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#keyserver-configuration">Keyserver Configuration</a></li>
 </ul>
 </li>
@@ -904,30 +909,36 @@ services.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group with the <code class="docutils literal notranslate"><span class="pre">--global</span></code> flag to create a
 system-wide remote endpoint:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity remote add --global company-remote https://enterprise.example.com
-[sudo] password for dave:
 INFO:    Remote &quot;company-remote&quot; added.
 INFO:    Global option detected. Will not automatically log into remote.
 </pre></div>
 </div>
 <p>Conversely, to remove a system-wide endpoint:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity remote remove --global company-remote
-[sudo] password for dave:
 INFO:    Remote &quot;company-remote&quot; removed.
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once users log in to a system wide endpoint, a copy of the endpoint will be listed in
+a their <code class="docutils literal notranslate"><span class="pre">~/.singularity/remote.yaml</span></code> file. This means modifications or removal of
+the system-wide endpoint will not be reflected in the users configuration unless they
+remove the endpoint themselves.</p>
+</div>
+<section id="exclusive-endpoint">
+<h4>Exclusive Endpoint<a class="headerlink" href="#exclusive-endpoint" title="Permalink to this headline"></a></h4>
 <p>Singularity 3.7 introduces the ability for an administrator to make a remote
 the only usable remote for the system by using the <code class="docutils literal notranslate"><span class="pre">--exclusive</span></code> flag:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity remote use --exclusive company-remote
-[sudo] password for dave:
 INFO:    Remote &quot;company-remote&quot; now in use.
 $ singularity remote list
 Cloud Services Endpoints
 ========================
 
-NAME            URI                     ACTIVE  GLOBAL  EXCLUSIVE
-SylabsCloud     cloud.sylabs.io         NO      YES     NO
-company-remote  enterprise.example.com  YES     YES     YES
-myremote        enterprise.example.com  NO      NO      NO
+NAME            URI                     ACTIVE  GLOBAL  EXCLUSIVE  INSECURE
+SylabsCloud     cloud.sylabs.io         NO      YES     NO         NO
+company-remote  enterprise.example.com  YES     YES     YES        NO
+myremote        enterprise.example.com  NO      NO      NO         NO
 
 Keyservers
 ==========
@@ -938,15 +949,26 @@ https://keys.example.com  YES     NO        1*
 * Active cloud services keyserver
 </pre></div>
 </div>
-<p>For more details on the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group and managing remote endpoints,
-please check the <a class="reference external" href="https://singularity.hpcng.org/user-docs/3.8/endpoint.html">Remote Userdocs</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Once users login to a system wide endpoint, a copy of the endpoint will be listed in
-a their <code class="docutils literal notranslate"><span class="pre">~/.singularity/remote.yaml</span></code> file. This means modifications or removal of
-the system-wide endpoint will not be reflected in the users configuration unless they
-remove the endpoint themselves.</p>
+</section>
+<section id="insecure-http-endpoints">
+<h4>Insecure (HTTP) Endpoints<a class="headerlink" href="#insecure-http-endpoints" title="Permalink to this headline"></a></h4>
+<p>From Singularity 3.9, if you are using a endpoint that exposes its
+service discovery file over an insecure HTTP connection only, it can
+be added by specifying the <code class="docutils literal notranslate"><span class="pre">--insecure</span></code> flag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity remote add --global --insecure test http://test.example.com
+INFO:    Remote &quot;test&quot; added.
+INFO:    Global option detected. Will not automatically log into remote.
+</pre></div>
 </div>
+<p>This flag controls HTTP vs HTTPS for service discovery only. The
+protocol used to access individual library, build and keyservice URLs is
+set by the service discovery file.</p>
+</section>
+<section id="additional-information">
+<h4>Additional Information<a class="headerlink" href="#additional-information" title="Permalink to this headline"></a></h4>
+<p>For more details on the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group and managing remote
+endpoints, please check the <a class="reference external" href="https://singularity.hpcng.org/user-docs/3.8/endpoint.html">Remote Userdocs</a>.</p>
+</section>
 </section>
 <section id="keyserver-configuration">
 <h3>Keyserver Configuration<a class="headerlink" href="#keyserver-configuration" title="Permalink to this headline"></a></h3>
