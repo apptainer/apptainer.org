@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -124,7 +125,8 @@ building or running a container.</p></li>
 <span id="userns-requirements"></span><h2>User Namespace Requirements<a class="headerlink" href="#user-namespace-requirements" title="Permalink to this headline"></a></h2>
 <p>To allow unprivileged creation of user namespaces a kernel &gt;=3.8 is
 required, with &gt;=3.18 being recommended due to security fixes for user
-namespaces (3.18 also adds OverlayFS support which is used by Singularity).</p>
+namespaces (3.18 also adds OverlayFS support which is used by
+Singularity).</p>
 <p>Additionally, some Linux distributions require that unprivileged user
 namespace creation is enabled using a <code class="docutils literal notranslate"><span class="pre">sysctl</span></code> or kernel command
 line parameter. Please consult your distribution documentation or
@@ -154,10 +156,10 @@ sudo sysctl -p /etc/sysctl.d /etc/sysctl.d/90-max_net_namespaces.conf
 section, Singularity can be compiled or configured with the <code class="docutils literal notranslate"><span class="pre">allow</span>
 <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> option in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> to not perform privileged
 operations using the <code class="docutils literal notranslate"><span class="pre">starter-setuid</span></code> binary.</p>
-<p>When Singularity does not use <code class="docutils literal notranslate"><span class="pre">setuid</span></code> all container execution will
-use a user namespace. In this mode of operation, some features are not
-available, and there are impacts to the security/integrity guarantees
-when running SIF container images:</p>
+<p>When Singularity does not use <code class="docutils literal notranslate"><span class="pre">setuid</span></code> all container execution
+will use a user namespace. In this mode of operation, some features
+are not available, and there are impacts to the security/integrity
+guarantees when running SIF container images:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>All containers must be run from sandbox directories. SIF images are
@@ -201,8 +203,8 @@ have no privilege on the host.</p>
 default this happens transparently in the setuid workflow. With
 unprivileged installations of Singularity or where <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span>
 <span class="pre">no</span></code> is set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>, Singularity attempts to use
-external setuid binaries <code class="docutils literal notranslate"><span class="pre">newuidmap</span></code> and <code class="docutils literal notranslate"><span class="pre">newgidmap</span></code>, so you
-need to install those binaries on your system.</p>
+external setuid binaries <code class="docutils literal notranslate"><span class="pre">newuidmap</span></code> and <code class="docutils literal notranslate"><span class="pre">newgidmap</span></code>, so you need
+to install those binaries on your system.</p>
 </section>
 <section id="basics">
 <h3>Basics<a class="headerlink" href="#basics" title="Permalink to this headline"></a></h3>
@@ -237,8 +239,8 @@ mapping files direct to systems where fakeroot will be used.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Singularity requires that a range of at least <code class="docutils literal notranslate"><span class="pre">65536</span></code> IDs is used
-for each mapping. Larger ranges may be defined without error.</p>
+<p>Singularity requires that a range of at least <code class="docutils literal notranslate"><span class="pre">65536</span></code> IDs is
+used for each mapping. Larger ranges may be defined without error.</p>
 <p>It is also important to ensure that the subuid and subgid ranges
 defined in these files don’t overlap with eachother, or any real
 UIDs and GIDs on the host system.</p>
@@ -344,13 +346,13 @@ the network.</p>
 </section>
 <section id="configuration-with-config-fakeroot">
 <span id="config-fakeroot"></span><h3>Configuration with <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code><a class="headerlink" href="#configuration-with-config-fakeroot" title="Permalink to this headline"></a></h3>
-<p>Singularity 3.5 and above provides a <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> command that
-can be used by a root user to administer local system <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code>
-and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> files in a simple manner. This allows users to be
-granted the ability to use Singularity’s fakeroot functionality
-without editing the files manually. The <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> command
-will automatically ensure that generated subuid/subgid ranges are an
-approriate size, and do not overlap.</p>
+<p>Singularity 3.5 and above provides a <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> command
+that can be used by a root user to administer local system
+<code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> files in a simple manner. This
+allows users to be granted the ability to use Singularity’s fakeroot
+functionality without editing the files manually. The <code class="docutils literal notranslate"><span class="pre">config</span>
+<span class="pre">fakeroot</span></code> command will automatically ensure that generated
+subuid/subgid ranges are an approriate size, and do not overlap.</p>
 <p><code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> must be run as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user, or via <code class="docutils literal notranslate"><span class="pre">sudo</span>
 <span class="pre">singularity</span> <span class="pre">config</span> <span class="pre">fakeroot</span></code> as the <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and
 <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> files form part of the system configuration, and are
@@ -368,8 +370,9 @@ central directory such as LDAP.</p>
 </div>
 <section id="adding-a-fakeroot-mapping">
 <h4>Adding a fakeroot mapping<a class="headerlink" href="#adding-a-fakeroot-mapping" title="Permalink to this headline"></a></h4>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">-a/--add</span> <span class="pre">&lt;user&gt;</span></code> option to <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> to create new
-mapping entries so that <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> can use the fakeroot feature of Singularity:</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">-a/--add</span> <span class="pre">&lt;user&gt;</span></code> option to <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> to create
+new mapping entries so that <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> can use the fakeroot feature of
+Singularity:</p>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity config fakeroot --add dave
 

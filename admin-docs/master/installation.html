@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -132,9 +133,9 @@
   <section id="installing-singularity">
 <span id="installation"></span><h1>Installing Singularity<a class="headerlink" href="#installing-singularity" title="Permalink to this headline"></a></h1>
 <p>This section will guide you through the process of installing
-Singularity 3.8.5 via several different methods. (For
-instructions on installing earlier versions of Singularity please see
-<a class="reference external" href="https://singularity.hpcng.org/docs/">earlier versions of the docs</a>.)</p>
+Singularity 3.8.5 via several different
+methods. (For instructions on installing earlier versions of
+Singularity please see <a class="reference external" href="https://singularity.hpcng.org/docs/">earlier versions of the docs</a>.)</p>
 <section id="installation-on-linux">
 <h2>Installation on Linux<a class="headerlink" href="#installation-on-linux" title="Permalink to this headline"></a></h2>
 <p>Singularity can be installed on any modern Linux distribution, on
@@ -314,8 +315,8 @@ environment variable.</p>
 <li><p>A unique location for each user. Permissions are set on the cache
 so that private images cached for one user are not exposed to
 another. This means that <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code> cannot be shared.</p></li>
-<li><p>Located on a filesystem with sufficient space for the number and size of
-container images anticipated.</p></li>
+<li><p>Located on a filesystem with sufficient space for the number and
+size of container images anticipated.</p></li>
 <li><p>Located on a filesystem that supports atomic rename, if possible.</p></li>
 </ul>
 </div></blockquote>
@@ -330,17 +331,17 @@ atomic rename of files only on a single MDT. Rename on NFS is only
 atomic to a single client, not across systems accessing the same NFS
 share.</p>
 <p>If you are not certain that your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> or <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code>
-filesytems support atomic rename, do not run <code class="docutils literal notranslate"><span class="pre">singularity</span></code> in parallel
-using remote container URLs. Instead use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> to
-create a local SIF image, and then run this SIF image in a parallel
+filesytems support atomic rename, do not run <code class="docutils literal notranslate"><span class="pre">singularity</span></code> in
+parallel using remote container URLs. Instead use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code>
+to create a local SIF image, and then run this SIF image in a parallel
 step. An alternative is to use the <code class="docutils literal notranslate"><span class="pre">--disable-cache</span></code> option, but
 this will result in each Singularity instance independently fetching
 the container from the remote source, into a temporary location.</p>
 </section>
 <section id="nfs">
 <h5>NFS<a class="headerlink" href="#nfs" title="Permalink to this headline"></a></h5>
-<p>NFS filesystems support overlay mounts as a <code class="docutils literal notranslate"><span class="pre">lowerdir</span></code> only, and do not
-support user-namespace (sub)uid/gid mapping.</p>
+<p>NFS filesystems support overlay mounts as a <code class="docutils literal notranslate"><span class="pre">lowerdir</span></code> only, and do
+not support user-namespace (sub)uid/gid mapping.</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Containers run from SIF files located on an NFS filesystem do not
@@ -389,12 +390,13 @@ dependencies and install <a class="reference external" href="https://golang.org/
 </section>
 <section id="install-from-source">
 <span id="install-dependencies"></span><h3>Install from Source<a class="headerlink" href="#install-from-source" title="Permalink to this headline"></a></h3>
-<p>To use the latest version of Singularity from GitHub you will need to
-build and install it from source. This may sound daunting, but the
+<p>To use the latest version of Singularity from GitHub you will need
+to build and install it from source. This may sound daunting, but the
 process is straightforward, and detailed below:</p>
 <section id="id1">
 <h4>Install Dependencies<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h4>
-<p>On Red Hat Enterprise Linux or CentOS install the following dependencies:</p>
+<p>On Red Hat Enterprise Linux or CentOS install the following
+dependencies:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo yum update -y <span class="o">&amp;&amp;</span> <span class="se">\</span>
      sudo yum groupinstall -y <span class="s1">&#39;Development Tools&#39;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
      sudo yum install -y <span class="se">\</span>
@@ -421,8 +423,9 @@ process is straightforward, and detailed below:</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You can build Singularity (3.5+) without <code class="docutils literal notranslate"><span class="pre">cryptsetup</span></code> available, but will
-not be able to use encrypted containers without it installed on your system.</p>
+<p>You can build Singularity (3.5+) without <code class="docutils literal notranslate"><span class="pre">cryptsetup</span></code>
+available, but will not be able to use encrypted containers without
+it installed on your system.</p>
 </div>
 </section>
 <section id="install-go">
@@ -440,11 +443,11 @@ installation can lead to errors when building Go programs, as it
 may leave old files, which have been removed or replaced in newer
 versions.</p>
 </div>
-<p>Visit the <a class="reference external" href="https://golang.org/dl/">Go download page</a> and pick a package
-archive to download. Copy the link address and download with wget.  Then extract
-the archive to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> (or use other instructions on go installation
-page).</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.14.12 OS=linux ARCH=amd64 &amp;&amp; \
+<p>Visit the <a class="reference external" href="https://golang.org/dl/">Go download page</a> and pick a
+package archive to download. Copy the link address and download with
+wget.  Then extract the archive to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> (or use other
+instructions on go installation page).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.17.1 OS=linux ARCH=amd64 &amp;&amp; \
     wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \
     sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \
     rm go$VERSION.$OS-$ARCH.tar.gz
@@ -472,7 +475,8 @@ with the installation.</p>
 </section>
 <section id="checkout-code-from-git">
 <h4>Checkout Code from Git<a class="headerlink" href="#checkout-code-from-git" title="Permalink to this headline"></a></h4>
-<p>The following commands will install Singularity from the <a class="reference external" href="https://github.com/hpcng/singularity">GitHub repo</a> to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>. This
+<p>The following commands will install Singularity from the <a class="reference external" href="https://github.com/hpcng/singularity">GitHub
+repo</a> to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>. This
 method will work for &gt;=v3.8.5. To install an older
 tagged release see <a class="reference external" href="https://singularity.hpcng.org/docs/">older versions of the docs</a>.</p>
 <p>When installing from source, you can decide to install from either a
@@ -546,8 +550,8 @@ each individual node.</p></li>
 </section>
 <section id="unprivileged-non-setuid-installation">
 <span id="install-nonsetuid"></span><h4>Unprivileged (non-setuid) Installation<a class="headerlink" href="#unprivileged-non-setuid-installation" title="Permalink to this headline"></a></h4>
-<p>If you need to install Singularity as a non-root user, or do not wish
-to allow the use of a setuid root binary, you can configure
+<p>If you need to install Singularity as a non-root user, or do not
+wish to allow the use of a setuid root binary, you can configure
 Singularity with the <code class="docutils literal notranslate"><span class="pre">--without-suid</span></code> option to mconfig:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./mconfig --without-suid --prefix=/home/dave/singularity &amp;&amp; \
     make -C ./builddir &amp;&amp; \
@@ -558,8 +562,8 @@ Singularity with the <code class="docutils literal notranslate"><span class="pre
 flow by setting the option <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> in
 <code class="docutils literal notranslate"><span class="pre">etc/singularity/singularity.conf</span></code> within your installation
 directory.</p>
-<p>When Singularity does not use setuid all container execution will use
-a user namespace. This requires support from your operating system
+<p>When Singularity does not use setuid all container execution will
+use a user namespace. This requires support from your operating system
 kernel, and imposes some limitations on functionality. You should
 review the <a class="reference internal" href="user_namespace.html#userns-requirements"><span class="std std-ref">requirements</span></a> and
 <a class="reference internal" href="user_namespace.html#userns-limitations"><span class="std std-ref">limitations</span></a> in the <a class="reference internal" href="user_namespace.html#userns"><span class="std std-ref">user namespace</span></a> section of this guide.</p>
@@ -576,14 +580,14 @@ security.</p>
 </section>
 <section id="source-bash-completion-file">
 <h4>Source bash completion file<a class="headerlink" href="#source-bash-completion-file" title="Permalink to this headline"></a></h4>
-<p>To enjoy bash shell completion with Singularity commands and options,
-source the bash completion file:</p>
+<p>To enjoy bash shell completion with Singularity commands and
+options, source the bash completion file:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ . /usr/local/etc/bash_completion.d/singularity
 </pre></div>
 </div>
 <p>Add this command to your <cite>~/.bashrc</cite> file so that bash completion
-continues to work in new shells.  (Adjust the path if you
-installed Singularity to a different location.)</p>
+continues to work in new shells.  (Adjust the path if you installed
+Singularity to a different location.)</p>
 </section>
 </section>
 <section id="build-and-install-an-rpm">
@@ -630,8 +634,8 @@ system.</p>
 <section id="build-an-rpm-from-git-source">
 <h4>Build an RPM from Git source<a class="headerlink" href="#build-an-rpm-from-git-source" title="Permalink to this headline"></a></h4>
 <p>Alternatively, to build an RPM from a branch of the Git repository you
-can clone the repository, directly <code class="docutils literal notranslate"><span class="pre">make</span></code> an rpm, and use it to install
-Singularity:</p>
+can clone the repository, directly <code class="docutils literal notranslate"><span class="pre">make</span></code> an rpm, and use it to
+install Singularity:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./mconfig &amp;&amp; \
 make -C builddir rpm &amp;&amp; \
 sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/singularity-3.8.5.el7.x86_64.rpm # or whatever version you built
@@ -662,8 +666,8 @@ directories to completely remove Singularity.</p>
     /usr/local/etc/bash_completion.d/singularity
 </pre></div>
 </div>
-<p>If you anticipate needing to remove Singularity, it might be easier to
-install it in a custom directory using the <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> option to
+<p>If you anticipate needing to remove Singularity, it might be easier
+to install it in a custom directory using the <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> option to
 <code class="docutils literal notranslate"><span class="pre">mconfig</span></code>.  In that case Singularity can be uninstalled simply by
 deleting the parent directory. Or it may be useful to install
 Singularity <a class="reference internal" href="#install-rpm"><span class="std std-ref">using a package manager</span></a> so that it
@@ -739,16 +743,15 @@ execution profiles.</p></li>
 <p>Running the full test suite requires a <code class="docutils literal notranslate"><span class="pre">docker</span></code> installation,
 and <code class="docutils literal notranslate"><span class="pre">nc</span></code> in order to test docker and instance/networking
 functionality.</p>
-<p>Singularity must be installed in order to run the full
-test suite, as it must run the CLI with setuid privilege for the
+<p>Singularity must be installed in order to run the full test
+suite, as it must run the CLI with setuid privilege for the
 <code class="docutils literal notranslate"><span class="pre">starter-suid</span></code> binary.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span></code> privilege is required to run the full tests, and you
 should not run the tests on a production system. We recommend
-running the tests in an isolated development or build
-environment.</p>
+running the tests in an isolated development or build environment.</p>
 </div>
 </section>
 </section>
@@ -758,11 +761,11 @@ environment.</p>
 <p>Linux container runtimes like Singularity cannot run natively on
 Windows or Mac because of basic incompatibilities with the host
 kernel. (Contrary to a popular misconception, MacOS does not run on a
-Linux kernel. It runs on a kernel called Darwin originally forked
-from BSD.)</p>
-<p>For this reason, the Singularity community maintains a set of Vagrant
-Boxes via <a class="reference external" href="https://www.vagrantup.com/">Vagrant Cloud</a>, one of
-<a class="reference external" href="https://www.hashicorp.com/#open-source-tools">Hashicorp’s</a> open
+Linux kernel. It runs on a kernel called Darwin originally forked from
+BSD.)</p>
+<p>For this reason, the Singularity community maintains a set of
+Vagrant Boxes via <a class="reference external" href="https://www.vagrantup.com/">Vagrant Cloud</a>, one
+of <a class="reference external" href="https://www.hashicorp.com/#open-source-tools">Hashicorp’s</a> open
 source tools. The current versions can be found under the <a class="reference external" href="https://app.vagrantup.com/sylabs">sylabs</a> organization.</p>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline"></a></h3>
@@ -778,8 +781,7 @@ source tools. The current versions can be found under the <a class="reference ex
 </section>
 <section id="mac">
 <h3>Mac<a class="headerlink" href="#mac" title="Permalink to this headline"></a></h3>
-<p>Singularity is available via Vagrant (installable with
-<a class="reference external" href="https://brew.sh">Homebrew</a> or manually)</p>
+<p>Singularity is available via Vagrant (installable with <a class="reference external" href="https://brew.sh">Homebrew</a> or manually)</p>
 <p>To use Vagrant via Homebrew:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
 $ brew install --cask virtualbox vagrant vagrant-manager
@@ -794,32 +796,36 @@ directory to be used with your Vagrant VM.</p>
     cd vm-singularity
 </pre></div>
 </div>
-<p>If you have already created and used this folder for another VM, you will need
-to destroy the VM and delete the Vagrantfile.</p>
+<p>If you have already created and used this folder for another VM, you
+will need to destroy the VM and delete the Vagrantfile.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ vagrant destroy &amp;&amp; \
     rm Vagrantfile
 </pre></div>
 </div>
-<p>Then issue the following commands to bring up the Virtual Machine. (Substitute a
-different value for the <code class="docutils literal notranslate"><span class="pre">$VM</span></code> variable if you like.)</p>
+<p>Then issue the following commands to bring up the Virtual
+Machine. (Substitute a different value for the <code class="docutils literal notranslate"><span class="pre">$VM</span></code> variable if you
+like.)</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VM=sylabs/singularity-3.8-ubuntu-bionic64 &amp;&amp; \
     vagrant init $VM &amp;&amp; \
     vagrant up &amp;&amp; \
     vagrant ssh
 </pre></div>
 </div>
-<p>You can check the installed version of Singularity with the following:</p>
+<p>You can check the installed version of Singularity with the
+following:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>vagrant@vagrant:~$ singularity version
 3.8.5
 </pre></div>
 </div>
-<p>Of course, you can also start with a plain OS Vagrant box as a base and then
-install Singularity using one of the above methods for Linux.</p>
+<p>Of course, you can also start with a plain OS Vagrant box as a base
+and then install Singularity using one of the above methods for
+Linux.</p>
 </section>
 <section id="singularity-docker-image">
 <h3>Singularity Docker Image<a class="headerlink" href="#singularity-docker-image" title="Permalink to this headline"></a></h3>
-<p>It is possible to use a Dockerized Singularity,
-here is a sample <code class="docutils literal notranslate"><span class="pre">compose.yaml</span></code> (Singularity version 3.7.4) for use with Docker Compose:</p>
+<p>It is possible to use a Dockerized Singularity, here is a sample
+<code class="docutils literal notranslate"><span class="pre">compose.yaml</span></code> (Singularity version 3.7.4) for use with Docker
+Compose:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>services:
   singularity:
     image: quay.io/singularity/singularity:v3.7.4-slim
@@ -831,11 +837,11 @@ here is a sample <code class="docutils literal notranslate"><span class="pre">co
     entrypoint: [&quot;/bin/sh&quot;]
 </pre></div>
 </div>
-<p>Singularity in Docker can have various disadvantages,
-but basic container operations will work.
-Currently, the intended use case is continuous integration,
-meaning that you should be able to build a Singularity container using this Docker Compose file.
-For more information see <a class="reference external" href="https://github.com/sylabs/singularity-admindocs/issues/5#issuecomment-852307931">issue#5</a>
+<p>Singularity in Docker can have various disadvantages, but basic
+container operations will work.  Currently, the intended use case is
+continuous integration, meaning that you should be able to build a
+Singularity container using this Docker Compose file.  For more
+information see <a class="reference external" href="https://github.com/sylabs/singularity-admindocs/issues/5#issuecomment-852307931">issue#5</a>
 and the image’s source <a class="reference external" href="https://github.com/singularityhub/singularity-docker#use-cases">repo</a></p>
 </section>
 </section>
