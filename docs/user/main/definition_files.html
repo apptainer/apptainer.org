@@ -441,6 +441,9 @@ this, the <code class="docutils literal notranslate"><span class="pre">$SINGULAR
 text to this variable will cause it to be written to a file called
 <code class="docutils literal notranslate"><span class="pre">/.singularity.d/env/91-environment.sh</span></code> that will be sourced at
 runtime.</p>
+<p>Variables set in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section through
+<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> take precedence over those added via
+<code class="docutils literal notranslate"><span class="pre">%environment</span></code>.</p>
 </section>
 <section id="test">
 <h3>%test<a class="headerlink" href="#test" title="Permalink to this headline"></a></h3>
@@ -536,16 +539,19 @@ LISTEN_PORT=12345
 LC_ALL=C
 </pre></div>
 </div>
-<p>In the special case of variables generated at build time, you can also
-add environment variables to your container in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section.</p>
-<p>At build time, the content of the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section is written to
-a file called <code class="docutils literal notranslate"><span class="pre">/.singularity.d/env/90-environment.sh</span></code> inside of the
-container. Text redirected to the <code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> variable
-during <code class="docutils literal notranslate"><span class="pre">%post</span></code> is added to a file called
-<code class="docutils literal notranslate"><span class="pre">/.singularity.d/env/91-environment.sh</span></code>.</p>
-<p>At runtime, scripts in <code class="docutils literal notranslate"><span class="pre">/.singularity/env</span></code> are sourced in order. This
-means that variables in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section take precedence over those
-added via <code class="docutils literal notranslate"><span class="pre">%environment</span></code>.</p>
+<p>To set a default value for a variable in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section,
+but adopt the value of a host environment variable if it is set, use
+the following syntax:</p>
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%environment</span>
+      <span class="nv">FOO</span><span class="o">=</span><span class="si">${</span><span class="nv">FOO</span><span class="k">:-</span><span class="s1">&#39;default&#39;</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">FOO</span></code> in the container will take the value of <code class="docutils literal notranslate"><span class="pre">FOO</span></code>
+on the host, or <code class="docutils literal notranslate"><span class="pre">default</span></code> if <code class="docutils literal notranslate"><span class="pre">FOO</span></code> is not set on the host or
+<code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code> / <code class="docutils literal notranslate"><span class="pre">--containall</span></code> have been specified.</p>
+<p>Note that variables added to the <code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> file in
+<code class="docutils literal notranslate"><span class="pre">%post</span></code> will take precedence over variables set in the
+<code class="docutils literal notranslate"><span class="pre">%environment</span></code> section.</p>
 <p>See <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">Environment and Metadata</span></a> for more
 information about the Singularity container environment.</p>
 </section>

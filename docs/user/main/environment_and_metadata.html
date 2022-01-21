@@ -71,7 +71,11 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Environment and Metadata</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#environment-overview">Environment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#environment-from-a-base-image">Environment from a base image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#environment-from-a-definition-file">Environment from a definition file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-from-a-definition-file">Environment from a definition file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-values">Default values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-time-variables-in-post">Build time variables in <code class="docutils literal notranslate"><span class="pre">%post</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#environment-from-the-host">Environment from the host</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#environment-from-the-singularity-runtime">Environment from the Singularity runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overriding-environment-variables">Overriding environment variables</a><ul>
@@ -79,7 +83,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#env-file-option"><code class="docutils literal notranslate"><span class="pre">--env-file</span></code> option</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#singularityenv-prefix"><code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> prefix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#manipulating-path">Manipulating <code class="docutils literal notranslate"><span class="pre">PATH</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#evaluating-container-variables">Evaluating container variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#escaping-and-evaluation-of-environment-variables">Escaping and evaluation of environment variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-host-variables">Using host variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-container-variables">Using Container Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quoting-avoiding-evaluation">Quoting / Avoiding Evaluation</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#environment-variable-precedence">Environment Variable Precedence</a></li>
 </ul>
 </li>
@@ -244,11 +253,37 @@ Hello
 <p>Singularity uses an embedded shell interpreter to evaluate and
 setup container environments, therefore all commands executed from
 the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section have an execution timeout of <strong>1 minute</strong>.
-While it is fine to source a script from there, it
+While it is possible to source a script from there, it
 is not recommended to use this section to run potentially long
 initialization tasks because this would impact users running the
 image and the execution could abort due to timeout.</p>
 </div>
+<section id="default-values">
+<h3>Default values<a class="headerlink" href="#default-values" title="Permalink to this headline"></a></h3>
+<p>To set a default value for a variable in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section,
+but adopt the value of a host environment variable if it is set, use
+the following syntax:</p>
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%environment</span>
+    <span class="nv">FOO</span><span class="o">=</span><span class="si">${</span><span class="nv">FOO</span><span class="k">:-</span><span class="s1">&#39;default&#39;</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">FOO</span></code> in the container will take the value of <code class="docutils literal notranslate"><span class="pre">FOO</span></code>
+on the host, or <code class="docutils literal notranslate"><span class="pre">default</span></code> if <code class="docutils literal notranslate"><span class="pre">FOO</span></code> is not set on the host or
+<code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code> / <code class="docutils literal notranslate"><span class="pre">--containall</span></code> have been specified.</p>
+</section>
+<section id="build-time-variables-in-post">
+<h3>Build time variables in <code class="docutils literal notranslate"><span class="pre">%post</span></code><a class="headerlink" href="#build-time-variables-in-post" title="Permalink to this headline"></a></h3>
+<p>In some circumstances the value that needs to be assigned to an
+environment variable may only be known after e.g. software
+installation, in <code class="docutils literal notranslate"><span class="pre">%post</span></code>. For situations like this, the
+<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> variable is provided. Redirecting text to
+this variable will cause it to be written to a file called
+<code class="docutils literal notranslate"><span class="pre">/.singularity.d/env/91-environment.sh</span></code> that will be sourced at
+runtime.</p>
+<p>Variables set in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section through
+<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> take precedence over those added via
+<code class="docutils literal notranslate"><span class="pre">%environment</span></code>.</p>
+</section>
 </section>
 <section id="environment-from-the-host">
 <h2>Environment from the host<a class="headerlink" href="#environment-from-the-host" title="Permalink to this headline"></a></h2>
@@ -257,6 +292,10 @@ host, then by default they will be available inside the container.
 Except that:</p>
 <blockquote>
 <div><ul class="simple">
+<li><p>An environment variable set on the host will be overriden by a
+variable of the same name that has been set inside the container
+image, via <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> environment variables, or the
+<code class="docutils literal notranslate"><span class="pre">--env</span></code> and <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> flags.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">PS1</span></code> shell prompt is reset for a container specific prompt.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable will be modified to contain
 default values.</p></li>
@@ -265,8 +304,6 @@ default values.</p></li>
 libraries if applicable.</p></li>
 </ul>
 </div></blockquote>
-<p>Also, an environment variable set on the host <em>will not</em> override a
-variable of the same name that has been set inside the container image.</p>
 <p>If you <em>do not want</em> the host environment variables to pass into the
 container you can use the <code class="docutils literal notranslate"><span class="pre">-e</span></code> or <code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code> option. This gives a
 clean environment inside the container, with a minimal set of
@@ -413,13 +450,76 @@ $ singularity exec env.sif sh -c &#39;echo $PATH&#39;
 <p>Alternatively you could use the <code class="docutils literal notranslate"><span class="pre">--env</span></code> option to set a
 <code class="docutils literal notranslate"><span class="pre">PREPEND_PATH</span></code> variable, e.g. <code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">PREPEND_PATH=/startpath</span></code>.</p>
 </section>
-<section id="evaluating-container-variables">
-<h3>Evaluating container variables<a class="headerlink" href="#evaluating-container-variables" title="Permalink to this headline"></a></h3>
-<p>When setting environment variables with <code class="docutils literal notranslate"><span class="pre">--env</span></code> etc. you can specify
-an escaped variable name, e.g. <code class="docutils literal notranslate"><span class="pre">\$PATH</span></code> to evaluate the value of that
-variable in the container.</p>
-<p>For example, <code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">PATH=&quot;\$PATH:/endpath&quot;</span></code> would have the same effect
-as <code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">APPEND_PATH=&quot;/endpath&quot;</span></code>.</p>
+<section id="escaping-and-evaluation-of-environment-variables">
+<h3>Escaping and evaluation of environment variables<a class="headerlink" href="#escaping-and-evaluation-of-environment-variables" title="Permalink to this headline"></a></h3>
+<p>Singularity uses an embedded shell interpreter to process the
+container startup scripts and environment. When this processing is
+performed, a single step of shell evaluation happens in the container
+context. The shell from which you are running Singularity may also
+evaluate variables on your command line before passing them to
+Singularity.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This behaviour differs from Docker/OCI handling of environment
+variables / <code class="docutils literal notranslate"><span class="pre">ENV</span></code> directives. You may need additional quoting and
+escaping to replicate behavior. See below.</p>
+</div>
+<section id="using-host-variables">
+<h4>Using host variables<a class="headerlink" href="#using-host-variables" title="Permalink to this headline"></a></h4>
+<p>To set a container environment variable to the value of a variable on
+the host, use double quotes around the variable, so that it is
+processed by the host shell before the value is passed to
+Singularity. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> <span class="o">--</span><span class="n">env</span> <span class="s2">&quot;MYHOST=$HOSTNAME&quot;</span> <span class="n">mycontainer</span><span class="o">.</span><span class="n">sif</span>
+</pre></div>
+</div>
+<p>This will set the <code class="docutils literal notranslate"><span class="pre">MYHOST</span></code> environment variable inside the container
+to the value of the <code class="docutils literal notranslate"><span class="pre">HOSTNAME</span></code> on the host system. <code class="docutils literal notranslate"><span class="pre">$HOSTNAME</span></code> is
+substituted before the host shell runs <code class="docutils literal notranslate"><span class="pre">singularity</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can often use no quotes, but it is good practice to use quotes
+consistently so that variables containing e.g. spaces are handled
+correctly.</p>
+</div>
+</section>
+<section id="using-container-variables">
+<h4>Using Container Variables<a class="headerlink" href="#using-container-variables" title="Permalink to this headline"></a></h4>
+<p>To set an environment variable to a value that references another
+variable inside the container, you should escape the <code class="docutils literal notranslate"><span class="pre">$</span></code> sign to
+<code class="docutils literal notranslate"><span class="pre">\$</span></code>. This prevents the host shell from substituting the
+value. Instead it will be substituted inside the container.</p>
+<p>For example, to create an environment variable <code class="docutils literal notranslate"><span class="pre">MYPATH</span></code>, with the
+same value as <code class="docutils literal notranslate"><span class="pre">PATH</span></code> in the container (not the host’s <code class="docutils literal notranslate"><span class="pre">PATH</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> <span class="o">--</span><span class="n">env</span> <span class="s2">&quot;MYPATH=\$PATH&quot;</span> <span class="n">mycontainer</span><span class="o">.</span><span class="n">sif</span>
+</pre></div>
+</div>
+<p>You can also use this approach to append or prepend to variables that
+are already set in the container. For example, <code class="docutils literal notranslate"><span class="pre">--env</span>
+<span class="pre">PATH=&quot;\$PATH:/endpath&quot;</span></code> would have the same effect as <code class="docutils literal notranslate"><span class="pre">--env</span>
+<span class="pre">APPEND_PATH=&quot;/endpath&quot;</span></code>, which uses the special <code class="docutils literal notranslate"><span class="pre">APPEND/PREPEND</span></code>
+handling for <code class="docutils literal notranslate"><span class="pre">PATH</span></code> discussed above.</p>
+</section>
+<section id="quoting-avoiding-evaluation">
+<h4>Quoting / Avoiding Evaluation<a class="headerlink" href="#quoting-avoiding-evaluation" title="Permalink to this headline"></a></h4>
+<p>If you need to pass an environment variable into the container
+verbatim, it must be quoted and escaped appropriately. For example, if
+you need to set a path containing a literal <code class="docutils literal notranslate"><span class="pre">$LIB</span></code> for the
+<code class="docutils literal notranslate"><span class="pre">LD_PRELOAD</span></code> environment variable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> <span class="o">--</span><span class="n">env</span><span class="o">=</span><span class="s2">&quot;LD_PRELOAD=/foo/bar/</span><span class="se">\\</span><span class="s2">\$LIB/baz.so&quot;</span> <span class="n">mycontainer</span><span class="o">.</span><span class="n">sif</span>
+</pre></div>
+</div>
+<p>This will result in <code class="docutils literal notranslate"><span class="pre">LD_PRELOAD</span></code> having the value
+<code class="docutils literal notranslate"><span class="pre">/foo/bar/$LIB/baz.so</span></code> inside the container.</p>
+<p>The host shell consumes the double <code class="docutils literal notranslate"><span class="pre">\\</span></code>, and then environment
+processing within Singularity will consume the third <code class="docutils literal notranslate"><span class="pre">\</span></code> that
+escapes the literal <code class="docutils literal notranslate"><span class="pre">$</span></code>.</p>
+<p>You can also use single quotes on the command line, to avoid one
+level of escaping:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> <span class="o">--</span><span class="n">env</span><span class="o">=</span><span class="s1">&#39;LD_PRELOAD=/foo/bar/\$LIB/baz.so&#39;</span> <span class="n">mycontainer</span><span class="o">.</span><span class="n">sif</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="environment-variable-precedence">
 <h3>Environment Variable Precedence<a class="headerlink" href="#environment-variable-precedence" title="Permalink to this headline"></a></h3>
@@ -429,22 +529,44 @@ environment is constructed in the following order:</p>
 <div><ul class="simple">
 <li><p>Clear the environment, keeping just <code class="docutils literal notranslate"><span class="pre">HOME</span></code> and
 <code class="docutils literal notranslate"><span class="pre">SINGULARITY_APPNAME</span></code>.</p></li>
-<li><p>Take Docker defined environment variables, where Docker was the
-base image source.</p></li>
+<li><p>Set Docker/OCI defined environment variables, where a Docker or
+OCI image was used as the base for the container build.</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">PATH</span></code> is not defined set the Singularity default <code class="docutils literal notranslate"><span class="pre">PATH</span></code>
 <em>or</em></p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">PATH</span></code> is defined, add any missing path parts from
 Singularity defaults</p></li>
-<li><p>Take environment variables defined explicitly in the image
-(<code class="docutils literal notranslate"><span class="pre">%environment</span></code>). These can override any previously set values.</p></li>
+<li><p>Set environment variables defined explicitly in the
+<code class="docutils literal notranslate"><span class="pre">%environment</span></code> section of the definition file. These can
+override any previously set values, and may reference host
+variables.</p></li>
+<li><p>Set environment variables that were defined in the <code class="docutils literal notranslate"><span class="pre">%post</span></code>
+section of the build, by addition to the
+<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> file.</p></li>
 <li><p>Set SCIF (<code class="docutils literal notranslate"><span class="pre">--app</span></code>) environment variables</p></li>
 <li><p>Set base environment essential vars (<code class="docutils literal notranslate"><span class="pre">PS1</span></code> and
 <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code>)</p></li>
 <li><p>Inject <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> / <code class="docutils literal notranslate"><span class="pre">--env</span></code> / <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> variables
-so they can override or modify any previous values:</p></li>
-<li><p>Source any remaining scripts from <code class="docutils literal notranslate"><span class="pre">/singularity.d/env</span></code></p></li>
+so they can override or modify any previous values.</p></li>
+<li><p>Apply special <code class="docutils literal notranslate"><span class="pre">APPEND_PATH</span></code> / <code class="docutils literal notranslate"><span class="pre">PREPEND_PATH</span></code> handling.</p></li>
+<li><p>Restore environment variables from the host, if they have not
+already been set in the container, and the <code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code> /
+<code class="docutils literal notranslate"><span class="pre">--containall</span></code> options were not specified.</p></li>
 </ul>
 </div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>While Singularity will process additional scripts found under
+<code class="docutils literal notranslate"><span class="pre">/.singularity.d/env</span></code> inside the container, it is strongly
+recommended to avoid manipulating the container environment by
+directly adding or modifying scripts in this directory. Please use
+the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section of the definition file, and the
+<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> file from <code class="docutils literal notranslate"><span class="pre">%post</span></code> if required.</p>
+<p>A future version of Singularity may move container scripts,
+environment, and metadata outside of the container’s root
+filesystem. This will permit further reproducibility and
+compatibility improvements, but will preclude environment
+manipulation via arbitrary scripts.</p>
+</div>
 </section>
 </section>
 <section id="umask-default-file-permissions">
