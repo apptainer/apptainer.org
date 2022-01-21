@@ -120,7 +120,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#docker-like-compat-flag">Docker-like <code class="docutils literal notranslate"><span class="pre">--compat</span></code> Flag</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cmd-entrypoint-behaviour">CMD / ENTRYPOINT Behaviour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cmd-entrypoint-behaviour">CMD / ENTRYPOINT Behaviour</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#argument-handling">Argument Handling</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#best-practices-for-docker-singularity-compatibility">Best Practices for Docker &amp; Singularity Compatibility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#registry-authentication-issues">Registry Authentication Issues</a></li>
@@ -970,6 +973,27 @@ Wed, 06 Oct 2021 14:49:07 -0500
 <p>There is no flag to override an <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> set for a Docker
 container. Instead, use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">exec</span></code> to run an arbitrary program
 inside a container.</p>
+<section id="argument-handling">
+<h3>Argument Handling<a class="headerlink" href="#argument-handling" title="Permalink to this headline"></a></h3>
+<p>Because Singularity runscripts are evaluated shell scripts
+arguments can behave slightly differently than in Docker/OCI
+runtimes, if they contain shell code that may be evaluated. To
+replicate Docker/OCI behaviour you may need additional escaping or
+quoting of arguments.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker run -it --rm alpine echo &quot;\$HOSTNAME&quot;
+$HOSTNAME
+
+$ singularity run docker://alpine echo &quot;\$HOSTNAME&quot;
+p700
+
+$ singularity run docker://alpine echo &quot;\\\$HOSTNAME&quot;
+$HOSTNAME
+</pre></div>
+</div>
+<p>If you are running a binary inside a <code class="docutils literal notranslate"><span class="pre">docker://</span></code> container directly,
+using the <code class="docutils literal notranslate"><span class="pre">exec</span></code> command the argument handling mirrors Docker/OCI
+runtimes as there is no evaluated runscript.</p>
+</section>
 </section>
 <section id="best-practices-for-docker-singularity-compatibility">
 <span id="sec-best-practices"></span><h2>Best Practices for Docker &amp; Singularity Compatibility<a class="headerlink" href="#best-practices-for-docker-singularity-compatibility" title="Permalink to this headline"></a></h2>

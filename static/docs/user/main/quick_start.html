@@ -59,7 +59,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#interact-with-images">Interact with images</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#shell">Shell</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#executing-commands">Executing Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#running-a-container">Running a container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-a-container">Running a container</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#arguments-to-run">Arguments to <code class="docutils literal notranslate"><span class="pre">run</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#working-with-files">Working with Files</a></li>
@@ -177,6 +180,18 @@ the admin guide</a>.</p>
 </pre></div>
 </div>
 <p>On CentOS/RHEL:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install basic tools for compiling</span>
+<span class="n">sudo</span> <span class="n">yum</span> <span class="n">groupinstall</span> <span class="o">-</span><span class="n">y</span> <span class="s1">&#39;Development Tools&#39;</span>
+<span class="c1"># Ensure EPEL repository is available</span>
+<span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">epel</span><span class="o">-</span><span class="n">release</span>
+<span class="c1"># Install RPM packages for dependencies</span>
+<span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> \
+   <span class="n">libseccomp</span><span class="o">-</span><span class="n">devel</span> \
+   <span class="n">squashfs</span><span class="o">-</span><span class="n">tools</span> \
+   <span class="n">cryptsetup</span> \
+   <span class="n">wget</span> <span class="n">git</span>
+</pre></div>
+</div>
 <p>There are 3 broad steps to installing Singularity:</p>
 <ol class="arabic simple">
 <li><p><a class="reference internal" href="#install"><span class="std std-ref">Installing Go</span></a></p></li>
@@ -564,6 +579,35 @@ ______________________________
                 ||     ||
 </pre></div>
 </div>
+<section id="arguments-to-run">
+<h4>Arguments to <code class="docutils literal notranslate"><span class="pre">run</span></code><a class="headerlink" href="#arguments-to-run" title="Permalink to this headline"></a></h4>
+<p>You can pass arguments to the runscript of a container, if it accepts
+them. For example, the default runscript of the <code class="docutils literal notranslate"><span class="pre">library://alpine</span></code>
+container passes any arguments to a shell. We can ask the container
+to run <code class="docutils literal notranslate"><span class="pre">echo</span></code> command in this shell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run library://alpine echo &quot;hello&quot;
+
+hello
+</pre></div>
+</div>
+<p>Because Singularity runscripts are evaluated shell scripts
+arguments can behave slightly differently than in Docker/OCI
+runtimes, if they contain shell code that may be evaluated. To
+replicate Docker/OCI behaviour you may need additional escaping or
+quoting of arguments.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker run -it --rm alpine echo &quot;\$HOSTNAME&quot;
+$HOSTNAME
+
+$ singularity run docker://alpine echo &quot;\$HOSTNAME&quot;
+p700
+
+$ singularity run docker://alpine echo &quot;\\\$HOSTNAME&quot;
+$HOSTNAME
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">exec</span></code> command replicates the Docker/OCI behavior as it calls
+the specified executable directly.</p>
+</section>
 </section>
 </section>
 <section id="working-with-files">
