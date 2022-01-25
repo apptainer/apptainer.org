@@ -147,12 +147,12 @@ accounts, groups, and standard file permissions limit their access to
 data, devices, and prevent them from disrupting or accessing others’
 work.</p>
 <p>To provide security in these environments a container needs to run as
-the user who starts it on the system. Before the widepread adoption of
+the user who starts it on the system. Before the widespread adoption of
 the Linux user namespace, only a privileged user could perform the
 operations which are needed to run a container. A default Docker
 installation uses a root-owned daemon to start containers. Users can
 request that the daemon starts a container on their behalf. However,
-co-ordinating a daemon with other schedulers is difficult and, since the
+coordinating a daemon with other schedulers is difficult and, since the
 daemon is privileged, users can ask it to carry out actions that they
 wouldn’t normally have permission to do.</p>
 <p>When a user runs a container with Singularity, it is started as a
@@ -183,7 +183,7 @@ large numbers of small files (such as python application startup) do
 not benefit from the reduced metadata load on the filesystem an image
 file provides.</p></li>
 <li><p>Replacing direct kernel mounts with a FUSE approach is likely to
-cause a significant reduction in perfomance.</p></li>
+cause a significant reduction in performance.</p></li>
 <li><p>The effectiveness of signing and verifying container images is
 reduced as, when extracted to a directory, modification is possible
 and verification of the image’s original signature cannot be
@@ -233,7 +233,7 @@ additional namespaces and functionality such as seccomp and cgroups.</p>
 is a single file, which makes it easy to manage and distribute. Inside
 the SIF file, the container filesystem is held in a SquashFS object. By
 default, we mount the container filesystem directly using SquashFS. On a
-network filesytem this means that reads from the container are
+network filesystem this means that reads from the container are
 data-only. Metadata operations happen locally, speeding up workloads
 with many small files.</p>
 <p>Holding the container image in a single file also enable unique security

@@ -292,7 +292,7 @@ host, then by default they will be available inside the container.
 Except that:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>An environment variable set on the host will be overriden by a
+<li><p>An environment variable set on the host will be overridden by a
 variable of the same name that has been set inside the container
 image, via <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> environment variables, or the
 <code class="docutils literal notranslate"><span class="pre">--env</span></code> and <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> flags.</p></li>
@@ -460,7 +460,7 @@ evaluate variables on your command line before passing them to
 Singularity.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This behaviour differs from Docker/OCI handling of environment
+<p>This behavior differs from Docker/OCI handling of environment
 variables / <code class="docutils literal notranslate"><span class="pre">ENV</span></code> directives. You may need additional quoting and
 escaping to replicate behavior. See below.</p>
 </div>
