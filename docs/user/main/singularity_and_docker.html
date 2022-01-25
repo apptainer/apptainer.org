@@ -504,7 +504,7 @@ methods.</p>
 <section id="building-from-docker-oci-containers">
 <h2>Building From Docker / OCI Containers<a class="headerlink" href="#building-from-docker-oci-containers" title="Permalink to this headline"></a></h2>
 <p>If you wish to use an existing Docker or OCI container as the basis for
-a new container, you will need to specifiy it as the <em>bootstrap</em> source
+a new container, you will need to specify it as the <em>bootstrap</em> source
 in a Singularity definition file.</p>
 <p>Just as you can run or pull containers from different registries using a
 <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI, you can use different headers in a definition file to
@@ -519,7 +519,7 @@ the location of the container you wish to pull.</p>
 <section id="docker-hub">
 <h4>Docker Hub<a class="headerlink" href="#docker-hub" title="Permalink to this headline"></a></h4>
 <p>Docker Hub is the default registry, so when building from Docker Hub the
-<code class="docutils literal notranslate"><span class="pre">From:</span></code> header only needs to specify the container respository and
+<code class="docutils literal notranslate"><span class="pre">From:</span></code> header only needs to specify the container repository and
 tag:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">From</span>: ubuntu:<span class="m">20.04</span>
@@ -576,7 +576,7 @@ feature you do not need to specially set credentials for the root user.</p>
 <h3>Archives &amp; Docker Daemon<a class="headerlink" href="#archives-docker-daemon" title="Permalink to this headline"></a></h3>
 <p>As well as being hosted in a registry, Docker / OCI containers might be
 found inside a running Docker daemon, or saved as an archive.
-Singularity can build from these locations by using specialised
+Singularity can build from these locations by using specialized
 bootstrap agents.</p>
 <section id="containers-cached-by-the-docker-daemon">
 <h4>Containers Cached by the Docker Daemon<a class="headerlink" href="#containers-cached-by-the-docker-daemon" title="Permalink to this headline"></a></h4>
@@ -776,7 +776,7 @@ running Docker containers. Various software will look for packages,
 plugins, and configuration files in <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>. If you have, for example,
 installed packages for Python into your home directory (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span>
 <span class="pre">--user</span></code>) then a Python container may find and attempt to use them. This
-can cause conflicts and unexpected behaviour.</p>
+can cause conflicts and unexpected behavior.</p>
 <p>If you experience issues, use the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> option to stop
 Singularity automatically binding directories into the container. You
 may need to use <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> to then add back e.g. an HPC
@@ -978,7 +978,7 @@ inside a container.</p>
 <p>Because Singularity runscripts are evaluated shell scripts
 arguments can behave slightly differently than in Docker/OCI
 runtimes, if they contain shell code that may be evaluated. To
-replicate Docker/OCI behaviour you may need additional escaping or
+replicate Docker/OCI behavior you may need additional escaping or
 quoting of arguments.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker run -it --rm alpine echo &quot;\$HOSTNAME&quot;
 $HOSTNAME
