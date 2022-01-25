@@ -133,8 +133,8 @@
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group allows users to manage the service
 endpoints Singularity will interact with for many common command
-flows. This includes managing credentials for image storage services,
-remote builders, and key servers used to locate public keys for SIF
+flows. This includes managing credentials for image storage services
+and key servers used to locate public keys for SIF
 image verification. Currently, there are three main types of remote
 endpoints managed by this command group: the public Sylabs Cloud (or
 local Singularity Enterprise installation), OCI registries and
@@ -142,7 +142,7 @@ keyservers.</p>
 </section>
 <section id="public-sylabs-cloud">
 <h2>Public Sylabs Cloud<a class="headerlink" href="#public-sylabs-cloud" title="Permalink to this headline"></a></h2>
-<p>Sylabs introduced the online <a class="reference external" href="https://cloud.sylabs.io/home">Sylabs Cloud</a> to enable users to <a class="reference external" href="https://cloud.sylabs.io/builder">Create</a>, <a class="reference external" href="https://cloud.sylabs.io/keystore?sign=true">Secure</a>, and <a class="reference external" href="https://cloud.sylabs.io/library">Share</a> their container images with others.</p>
+<p>Sylabs introduced the online <a class="reference external" href="https://cloud.sylabs.io/home">Sylabs Cloud</a> to enable users to <a class="reference external" href="https://cloud.sylabs.io/keystore?sign=true">Secure</a>, and <a class="reference external" href="https://cloud.sylabs.io/library">Share</a> their container images with others.</p>
 <p>A fresh, default installation of Singularity is configured to connect
 to the public <a class="reference external" href="https://cloud.sylabs.io">cloud.sylabs.io</a> services. If
 you only want to use the public services you just need to obtain an
@@ -390,8 +390,6 @@ FATAL:   could not use myremote: remote company-remote has been set exclusive by
 <ul class="simple">
 <li><p>Make <code class="docutils literal notranslate"><span class="pre">push</span></code> and <code class="docutils literal notranslate"><span class="pre">pull</span></code> use an alternative library server with the
 <code class="docutils literal notranslate"><span class="pre">--library</span></code> option.</p></li>
-<li><p>Make <code class="docutils literal notranslate"><span class="pre">build</span> <span class="pre">--remote</span></code> use an alternative remote builder with the
-<code class="docutils literal notranslate"><span class="pre">--builder</span></code> option.</p></li>
 <li><p>Make <code class="docutils literal notranslate"><span class="pre">keys</span></code> use an alternative keyserver with the <code class="docutils literal notranslate"><span class="pre">-url</span></code> option.</p></li>
 </ul>
 </section>
