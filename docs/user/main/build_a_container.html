@@ -59,8 +59,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#building-containers-from-singularity-definition-files">Building containers from Singularity definition files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-encrypted-containers">Building encrypted containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#build-options">Build options</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#builder"><code class="docutils literal notranslate"><span class="pre">--builder</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#detached"><code class="docutils literal notranslate"><span class="pre">--detached</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#encrypt"><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fakeroot"><code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#force"><code class="docutils literal notranslate"><span class="pre">--force</span></code></a></li>
@@ -69,7 +67,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#notest"><code class="docutils literal notranslate"><span class="pre">--notest</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#passphrase"><code class="docutils literal notranslate"><span class="pre">--passphrase</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pem-path"><code class="docutils literal notranslate"><span class="pre">--pem-path</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#remote"><code class="docutils literal notranslate"><span class="pre">--remote</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sandbox"><code class="docutils literal notranslate"><span class="pre">--sandbox</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#section"><code class="docutils literal notranslate"><span class="pre">--section</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#update"><code class="docutils literal notranslate"><span class="pre">--update</span></code></a></li>
@@ -284,21 +281,6 @@ present on disk or in memory. See <a class="reference internal" href="encryption
 </section>
 <section id="build-options">
 <h2>Build options<a class="headerlink" href="#build-options" title="Permalink to this headline"></a></h2>
-<section id="builder">
-<h3><code class="docutils literal notranslate"><span class="pre">--builder</span></code><a class="headerlink" href="#builder" title="Permalink to this headline"></a></h3>
-<p>Singularity gives the option to perform a remote build. The
-<code class="docutils literal notranslate"><span class="pre">--builder</span></code> option allows you to specify a URL to a different build
-service. For instance, you may need to specify a URL to build to an on
-premises installation of the remote builder. This option must be used in
-conjunction with <code class="docutils literal notranslate"><span class="pre">--remote</span></code>.</p>
-</section>
-<section id="detached">
-<h3><code class="docutils literal notranslate"><span class="pre">--detached</span></code><a class="headerlink" href="#detached" title="Permalink to this headline"></a></h3>
-<p>When used in combination with the <code class="docutils literal notranslate"><span class="pre">--remote</span></code> option, the
-<code class="docutils literal notranslate"><span class="pre">--detached</span></code> option will detach the build from your terminal and allow
-it to build in the background without echoing any output to your
-terminal.</p>
-</section>
 <section id="encrypt">
 <h3><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code><a class="headerlink" href="#encrypt" title="Permalink to this headline"></a></h3>
 <p>Specifies that Singularity should use a secret saved in either the
@@ -346,12 +328,6 @@ container file system at build time. See <a class="reference internal" href="enc
 <h3><code class="docutils literal notranslate"><span class="pre">--pem-path</span></code><a class="headerlink" href="#pem-path" title="Permalink to this headline"></a></h3>
 <p>This flag allows you to pass the location of a public key to encrypt the
 container file system at build time. See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
-</section>
-<section id="remote">
-<h3><code class="docutils literal notranslate"><span class="pre">--remote</span></code><a class="headerlink" href="#remote" title="Permalink to this headline"></a></h3>
-<p>Singularity includes the ability to build a container on an
-external resource running a remote builder. (The default remote builder
-is located at “<a class="reference external" href="https://cloud.sylabs.io/builder">https://cloud.sylabs.io/builder</a>”.)</p>
 </section>
 <section id="sandbox">
 <h3><code class="docutils literal notranslate"><span class="pre">--sandbox</span></code><a class="headerlink" href="#sandbox" title="Permalink to this headline"></a></h3>
@@ -447,9 +423,6 @@ are downloaded on your system), specify Docker credentials, or any
 custom tweaks to your build environment, see <a class="reference internal" href="build_env.html#build-environment"><span class="std std-ref">build environment</span></a>.</p></li>
 <li><p>If you want to make internally <strong>modular containers</strong>, check out the
 getting started guide <a class="reference external" href="https://sci-f.github.io/tutorials">here</a></p></li>
-<li><p>If you want to <strong>build your containers</strong> on the Remote Builder,
-(because you don’t have root access on a Linux machine or want to
-host your container on the cloud) check out <a class="reference external" href="https://cloud.sylabs.io/builder">this site</a></p></li>
 <li><p>If you want to <strong>build a container with an encrypted file system</strong>
 look <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">here</span></a>.</p></li>
 </ul>

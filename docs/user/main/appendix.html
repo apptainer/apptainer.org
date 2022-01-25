@@ -188,8 +188,6 @@ string <code class="docutils literal notranslate"><span class="pre">source:&lt;d
 the container.</p></li>
 <li><p><strong>SINGULARITY_BOOT</strong>: Set to false by default, considers if executing
 <code class="docutils literal notranslate"><span class="pre">/sbin/init</span></code> when container boots (root only).</p></li>
-<li><p><strong>SINGULARITY_BUILDER</strong>: To specify the remote builder service URL.
-Defaults to our remote builder.</p></li>
 </ol>
 </section>
 <section id="c">
@@ -215,9 +213,6 @@ directory.</p></li>
 <li><p><strong>SINGULARITY_DEFFILE</strong>: Shows the Singularity recipe that was used
 to generate the image.</p></li>
 <li><p><strong>SINGULARITY_DESC</strong>: Contains a description of the capabilities.</p></li>
-<li><p><strong>SINGULARITY_DETACHED</strong>: To submit a build job and print the build
-ID (no real-time logs and also requires <code class="docutils literal notranslate"><span class="pre">--remote</span></code>). Default is set
-to false.</p></li>
 <li><p><strong>SINGULARITY_DISABLE_CACHE</strong>: To disable all caching of docker/oci,
 library, oras, etc. downloads and built SIFs. Default is set to
 false.</p></li>
@@ -378,8 +373,6 @@ working directory for payload process inside the container.</p></li>
 <section id="r">
 <h3><code class="docutils literal notranslate"><span class="pre">R</span></code><a class="headerlink" href="#r" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_REMOTE</strong>: To build an image remotely. (Does not require
-root) Default is set to false.</p></li>
 <li><p><strong>SINGULARITY_ROOTFS</strong>: To reference the system file location.</p></li>
 <li><p><strong>SINGULARITY_RUNSCRIPT</strong>: Specifies the runscript of the image.</p></li>
 </ol>
