@@ -93,34 +93,32 @@
              
   <section id="admin-quick-start">
 <h1>Admin Quick Start<a class="headerlink" href="#admin-quick-start" title="Permalink to this headline"></a></h1>
-<p>This quick start gives an overview of installation of Singularity
-from source, a description of the architecture of Singularity, and
-pointers to configuration files. More information, including alternate
+<p>This quick start gives an overview of installation of Singularity from
+source, a description of the architecture of Singularity, and pointers
+to configuration files. More information, including alternate
 installation options and detailed configuration options can be found
 later in this guide.</p>
 <section id="architecture-of-singularity">
 <span id="singularity-architecture"></span><h2>Architecture of Singularity<a class="headerlink" href="#architecture-of-singularity" title="Permalink to this headline"></a></h2>
-<p>Singularity is designed to allow containers to be executed as if
-they were native programs or scripts on a host system. No daemon is
-required to build or run containers, and the security model is
-compatible with shared systems.</p>
-<p>As a result, integration with clusters and schedulers such as Univa
-Grid Engine, Torque, SLURM, SGE, and many others is as simple as
-running any other command. All standard input, output, errors, pipes,
-IPC, and other communication pathways used by locally running programs
-are synchronized with the applications running locally within the
-container.</p>
+<p>Singularity is designed to allow containers to be executed as if they
+were native programs or scripts on a host system. No daemon is required
+to build or run containers, and the security model is compatible with
+shared systems.</p>
+<p>As a result, integration with clusters and schedulers such as Univa Grid
+Engine, Torque, SLURM, SGE, and many others is as simple as running any
+other command. All standard input, output, errors, pipes, IPC, and other
+communication pathways used by locally running programs are synchronized
+with the applications running locally within the container.</p>
 <p>Singularity favors an ‘integration over isolation’ approach to
 containers. By default only the mount namespace is isolated for
 containers, so that they have their own filesystem view. Access to
 hardware such as GPUs, high speed networks, and shared filesystems is
-easy and does not require special configuration. User home
-directories, <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> space, and installation specific mounts make it
-simple for users to benefit from the reproducibility of containerized
-applications without major changs to their existing workflows. Where
-more complete isolation is important, Singularity can use additional
-Linux namespaces and other security and resource limits to accomplish
-this.</p>
+easy and does not require special configuration. User home directories,
+<code class="docutils literal notranslate"><span class="pre">/tmp</span></code> space, and installation specific mounts make it simple for
+users to benefit from the reproducibility of containerized applications
+without major changs to their existing workflows. Where more complete
+isolation is important, Singularity can use additional Linux
+namespaces and other security and resource limits to accomplish this.</p>
 </section>
 <section id="singularity-security">
 <span id="id1"></span><h2>Singularity Security<a class="headerlink" href="#singularity-security" title="Permalink to this headline"></a></h2>
@@ -137,15 +135,16 @@ applications run with the <code class="docutils literal notranslate"><span class
 that applications in a container cannot gain additional
 privileges. A regular user cannot <code class="docutils literal notranslate"><span class="pre">sudo</span></code> or otherwise gain root
 privilege on the host via a container.</p></li>
-<li><p>The Singularity Image Format (SIF) supports encryption of containers,
-as well as cryptographic signing and verification of their content.</p></li>
+<li><p>The Singularity Image Format (SIF) supports encryption of
+containers, as well as cryptographic signing and verification of
+their content.</p></li>
 <li><p>SIF containers are immutable and their payload is run directly,
 without extraction to disk. This means that the container can
 always be verified, even at runtime, and encrypted content is not
 exposed on disk.</p></li>
 <li><p>Restrictions can be configured to limit the ownership, location,
-and cryptographic signatures of containers that are permitted to be
-run.</p></li>
+and cryptographic signatures of containers that are permitted to
+be run.</p></li>
 </ul>
 </div></blockquote>
 <p>To support the SIF image format, automated networking setup etc., and
@@ -159,10 +158,9 @@ but <a class="reference internal" href="installation.html#install-nonsetuid"><sp
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Running Singularity in non-setuid mode requires unprivileged user
-namespace support in the operating system kernel and does not
-support all features, most notably direct mounts of SIF
-images. This impacts integrity/security guarantees of containers at
-runtime.</p>
+namespace support in the operating system kernel and does not support
+all features, most notably direct mounts of SIF images. This impacts
+integrity/security guarantees of containers at runtime.</p>
 <p>See the <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">non-setuid installation section</span></a>
 for further detail on how to install Singularity to run in
 non-setuid mode.</p>
@@ -178,11 +176,11 @@ upstream version on GitHub.</p>
 below. Other methods are discussed in the <a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installation</span></a> section.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This quick-start that you will install as <code class="docutils literal notranslate"><span class="pre">root</span></code> using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>,
-so that Singularity uses the default <code class="docutils literal notranslate"><span class="pre">setuid</span></code> workflow, and
-all features are available. See the <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">non-setuid installation</span></a> section of this guide for detail of how to
-install as a non-root user, and how this affects the functionality
-of Singularity.</p>
+<p>This quick-start that you will install as <code class="docutils literal notranslate"><span class="pre">root</span></code> using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, so
+that Singularity uses the default <code class="docutils literal notranslate"><span class="pre">setuid</span></code> workflow, and all
+features are available. See the <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">non-setuid installation</span></a> section of this guide for detail of how to
+install as a non-root user, and how this affects the functionality of
+Singularity.</p>
 </div>
 <section id="install-dependencies">
 <h3>Install Dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this headline"></a></h3>
@@ -216,31 +214,30 @@ dependencies:</p>
 <section id="install-go">
 <h3>Install Go<a class="headerlink" href="#install-go" title="Permalink to this headline"></a></h3>
 <p>Singularity v3 is written primarily in Go, and you will need Go 1.13
-or above installed to compile it from source. Versions of Go packaged
-by your distribution may not be new enough to build Singularity.</p>
+or above installed to compile it from source. Versions of Go packaged by
+your distribution may not be new enough to build Singularity.</p>
 <p>The method below is one of several ways to <a class="reference external" href="https://golang.org/doc/install">install and configure Go</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have previously installed Go from a download, rather than an
 operating system package, you should remove your <code class="docutils literal notranslate"><span class="pre">go</span></code> directory,
-e.g. <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">/usr/local/go</span></code> before installing a newer
-version. Extracting a new version of Go over an existing
-installation can lead to errors when building Go programs, as it
-may leave old files, which have been removed or replaced in newer
-versions.</p>
+e.g. <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">/usr/local/go</span></code> before installing a newer version.
+Extracting a new version of Go over an existing installation can lead
+to errors when building Go programs, as it may leave old files, which
+have been removed or replaced in newer versions.</p>
 </div>
 <p>Visit the <a class="reference external" href="https://golang.org/dl/">Go download page</a> and pick a
 package archive to download. Copy the link address and download with
-wget.  Then extract the archive to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> (or use other
+wget. Then extract the archive to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> (or use other
 instructions on go installation page).</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.17.1 OS=linux ARCH=amd64 &amp;&amp; \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.17.1 OS=linux ARCH=amd64 &amp;&amp; \
     wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \
     sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \
     rm go$VERSION.$OS-$ARCH.tar.gz
 </pre></div>
 </div>
 <p>Then, set up your environment for Go.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ echo &#39;export GOPATH=${HOME}/go&#39; &gt;&gt; ~/.bashrc &amp;&amp; \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &#39;export GOPATH=${HOME}/go&#39; &gt;&gt; ~/.bashrc &amp;&amp; \
     echo &#39;export PATH=/usr/local/go/bin:${PATH}:${GOPATH}/bin&#39; &gt;&gt; ~/.bashrc &amp;&amp; \
     source ~/.bashrc
 </pre></div>
@@ -249,10 +246,10 @@ instructions on go installation page).</p>
 <section id="download-singularity-from-a-github-release">
 <h3>Download Singularity from a GitHub release<a class="headerlink" href="#download-singularity-from-a-github-release" title="Permalink to this headline"></a></h3>
 <p>You can download Singularity from one of the releases. To see a full
-list, visit <a class="reference external" href="https://github.com/hpcng/singularity/releases">the GitHub release page</a>.  After deciding on
-a release to install, you can run the following commands to proceed
-with the installation.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=3.8.5 &amp;&amp; # adjust this as necessary \
+list, visit <a class="reference external" href="https://github.com/hpcng/singularity/releases">the GitHub release page</a>.  After deciding on a
+release to install, you can run the following commands to proceed with
+the installation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=3.8.5 &amp;&amp; # adjust this as necessary \
     wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &amp;&amp; \
     tar -xzf singularity-${VERSION}.tar.gz &amp;&amp; \
     cd singularity
@@ -261,10 +258,10 @@ with the installation.</p>
 </section>
 <section id="compile-install-singularity">
 <h3>Compile &amp; Install Singularity<a class="headerlink" href="#compile-install-singularity" title="Permalink to this headline"></a></h3>
-<p>Singularity uses a custom build system called <code class="docutils literal notranslate"><span class="pre">makeit</span></code>.
-<code class="docutils literal notranslate"><span class="pre">mconfig</span></code> is called to generate a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> and then <code class="docutils literal notranslate"><span class="pre">make</span></code> is
-used to compile and install.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./mconfig &amp;&amp; \
+<p>Singularity uses a custom build system called <code class="docutils literal notranslate"><span class="pre">makeit</span></code>. <code class="docutils literal notranslate"><span class="pre">mconfig</span></code>
+is called to generate a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> and then <code class="docutils literal notranslate"><span class="pre">make</span></code> is used to
+compile and install.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mconfig &amp;&amp; \
     make -C ./builddir &amp;&amp; \
     sudo make -C ./builddir install
 </pre></div>
@@ -272,23 +269,23 @@ used to compile and install.</p>
 <p>By default Singularity will be installed in the <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>
 directory hierarchy. You can specify a custom directory with the
 <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> option, to <code class="docutils literal notranslate"><span class="pre">mconfig</span></code>:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./mconfig --prefix=/opt/singularity
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mconfig --prefix=/opt/singularity
 </pre></div>
 </div>
 <p>This option can be useful if you want to install multiple versions of
 Singularity, install a personal version of Singularity on a shared
 system, or if you want to remove Singularity easily after installing
 it.</p>
-<p>For a full list of <code class="docutils literal notranslate"><span class="pre">mconfig</span></code> options, run <code class="docutils literal notranslate"><span class="pre">mconfig</span> <span class="pre">--help</span></code>.  Here
-are some of the most common options that you may need to use when
-building Singularity from source.</p>
+<p>For a full list of <code class="docutils literal notranslate"><span class="pre">mconfig</span></code> options, run <code class="docutils literal notranslate"><span class="pre">mconfig</span> <span class="pre">--help</span></code>. Here are
+some of the most common options that you may need to use when building
+Singularity from source.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--sysconfdir</span></code>: Install read-only config files in sysconfdir.
-This option is important if you need the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> file
-or other configuration files in a custom location.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--sysconfdir</span></code>: Install read-only config files in sysconfdir. This
+option is important if you need the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> file or
+other configuration files in a custom location.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code>: Set the state directory where containers are
 mounted. This is a particularly important option for administrators
-installing Singularity on a shared file system.  The
+installing Singularity on a shared file system. The
 <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> should be set to a directory that is present on
 each individual node.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-b</span></code>: Build Singularity in a given directory. By default this is
@@ -315,7 +312,7 @@ files and configuration options are discussed.</p>
 <h2>Test Singularity<a class="headerlink" href="#test-singularity" title="Permalink to this headline"></a></h2>
 <p>You can run a quick test of Singularity using a container in the
 Sylabs Container Library:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity exec library://alpine cat /etc/alpine-release
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec library://alpine cat /etc/alpine-release
 3.9.2
 </pre></div>
 </div>
