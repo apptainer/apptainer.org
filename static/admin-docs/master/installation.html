@@ -169,24 +169,26 @@ these binaries have been standardized as below.</p>
 <code class="docutils literal notranslate"><span class="pre">./mconfig</span></code> is run, and their location is added to the
 <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> configuration file. At runtime this configured
 location is used. To specify an alternate executable, change the
-relevant path entry in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>. If the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>
-entry is left blank, then <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> will be searched at runtime.</p>
+relevant path entry in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">cryptsetup</span></code> version 2 with kernel LUKS2 support is required for
 building or executing encrypted containers.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">go</span></code> is required to compile plugins, and must be an identical
-version as that used to build Singularity.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> is used to resolve library locations / symlinks when
 using the <code class="docutils literal notranslate"><span class="pre">-nv</span></code> or <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> GPU support.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> is used to configure a container for Nvidia
+GPU / CUDA support when running with the experimental <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option.</p></li>
+</ul>
+<p>For the following additional binaries, if the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>
+entry is left blank, then <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> will be searched at runtime.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">go</span></code> is required to compile plugins, and must be an identical
+version as that used to build Singularity.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mksquashfs</span></code> from squashfs-tools 4.3+ is used to create the
 squashfs container filesystem that is embedded into SIF container
 images. The <code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">procs</span></code> and <code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">mem</span></code> directives in
 <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> can be used to control its resource usage.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">unsquashfs</span></code> from squashfs-tools 4.3+ is used to extract the
 squashfs container filesystem from a SIF file when necessary.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> is used to configure a container for Nvidia
-GPU / CUDA support when running with the experimental <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code>
-option.</p></li>
 </ul>
 </section>
 <section id="searching-path">
