@@ -106,7 +106,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="user_namespace.html">User Namespaces &amp; Fakeroot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Container Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
@@ -537,7 +537,7 @@ bind paths of the system.</p>
 </section>
 </section>
 <section id="cgroups-toml">
-<h2>cgroups.toml<a class="headerlink" href="#cgroups-toml" title="Permalink to this headline"></a></h2>
+<span id="id3"></span><h2>cgroups.toml<a class="headerlink" href="#cgroups-toml" title="Permalink to this headline"></a></h2>
 <p>The cgroups (control groups) functionality of the Linux kernel allows
 you to limit and meter the resources used by a process, or group of
 processes. Using cgroups you can limit memory and CPU usage. You can
@@ -771,7 +771,7 @@ stored in the file <code class="docutils literal notranslate"><span class="pre">
 </section>
 </section>
 <section id="gpu-library-configuration">
-<span id="id3"></span><h2>GPU Library Configuration<a class="headerlink" href="#gpu-library-configuration" title="Permalink to this headline"></a></h2>
+<span id="id4"></span><h2>GPU Library Configuration<a class="headerlink" href="#gpu-library-configuration" title="Permalink to this headline"></a></h2>
 <p>When a container includes a GPU enabled application, Singularity (with
 the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> or <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> options) can properly inject the required
 Nvidia or AMD GPU driver libraries into the container, to match the
