@@ -66,7 +66,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#before-you-begin">Before you begin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#install-from-source">Install from Source</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Install Dependencies</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#install-go">Install Go</a></li>
@@ -150,7 +149,7 @@ of RAM is recommended when building from source.</p>
 <p>Full functionality of Singularity requires that the kernel supports:</p>
 <ul class="simple">
 <li><p><strong>OverlayFS mounts</strong> - (minimum kernel &gt;=3.18) Required for full
-flexiblity in bind mounts to containers, and to support persistent
+flexibility in bind mounts to containers, and to support persistent
 overlays for writable containers.</p></li>
 <li><p><strong>Unprivileged user namespaces</strong> - (minimum kernel &gt;=3.8, &gt;=3.18
 recommended) Required to run containers without root or setuid
@@ -200,7 +199,7 @@ at runtime:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">cp</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">dd</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">newuidmap</span></code> and <code class="docutils literal notranslate"><span class="pre">newgidmap</span></code> are distribution provided setuid
-binaries used to configure subuid/gid mappings forr <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> in
+binaries used to configure subuid/gid mappings for <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> in
 non-setuid installs.</p></li>
 </ul>
 </section>
@@ -253,7 +252,7 @@ wherever possible.</p></li>
 <p>Set the <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> location by by providing
 <code class="docutils literal notranslate"><span class="pre">--localstatedir</span> <span class="pre">my/dir</span></code> as an option when you configure your
 Singularity build with <code class="docutils literal notranslate"><span class="pre">./mconfig</span></code>.</p>
-<p>Disk usage at the <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> location is neglible (&lt;1MiB).
+<p>Disk usage at the <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> location is negligible (&lt;1MiB).
 The directory is used as a location to mount the container root
 filesystem, overlays, bind mounts etc. that construct the runtime
 view of a container. You will not see these mounts from a host shell,
@@ -289,7 +288,7 @@ overlay.</p>
 <h5>Fakeroot / (sub)uid/gid mapping<a class="headerlink" href="#fakeroot-sub-uid-gid-mapping" title="Permalink to this headline"></a></h5>
 <p>When Singularity is run using the <a class="reference internal" href="user_namespace.html#fakeroot"><span class="std std-ref">fakeroot</span></a> option it
 creates a user namespace for the container, and UIDs / GIDs in that user
-namepace are mapped to different host UID / GIDs.</p>
+namespace are mapped to different host UID / GIDs.</p>
 <p>Most local filesystems (ext4/xfs etc.) support this uid/gid mapping in a
 user namespace.</p>
 <p>Most network filesystems (NFS/Lustre/GPFS etc.) <em>do not</em> support this
@@ -325,7 +324,7 @@ atomic rename of files only on a single MDT. Rename on NFS is only
 atomic to a single client, not across systems accessing the same NFS
 share.</p>
 <p>If you are not certain that your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> or <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code>
-filesytems support atomic rename, do not run <code class="docutils literal notranslate"><span class="pre">singularity</span></code> in parallel
+filesystems support atomic rename, do not run <code class="docutils literal notranslate"><span class="pre">singularity</span></code> in parallel
 using remote container URLs. Instead use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> to create
 a local SIF image, and then run this SIF image in a parallel step. An
 alternative is to use the <code class="docutils literal notranslate"><span class="pre">--disable-cache</span></code> option, but this will
@@ -370,18 +369,15 @@ Lustre or GPFS location.</p></li>
 </section>
 </section>
 </section>
-<section id="before-you-begin">
-<h3>Before you begin<a class="headerlink" href="#before-you-begin" title="Permalink to this headline"></a></h3>
-<p>If you have an earlier version of Singularity installed, you should
-<a class="reference internal" href="#remove-an-old-version"><span class="std std-ref">remove it</span></a> before executing the
-installation commands. You will also need to install some dependencies
-and install <a class="reference external" href="https://golang.org/">Go</a>.</p>
-</section>
 <section id="install-from-source">
 <span id="install-dependencies"></span><h3>Install from Source<a class="headerlink" href="#install-from-source" title="Permalink to this headline"></a></h3>
 <p>To use the latest version of Singularity from GitHub you will need to
 build and install it from source. This may sound daunting, but the
-process is straightforward, and detailed below:</p>
+process is straightforward, and detailed below.</p>
+<p>If you have an earlier version of Singularity installed, you should
+<a class="reference internal" href="#remove-an-old-version"><span class="std std-ref">remove it</span></a> before executing the
+installation commands. You will also need to install some dependencies
+and install <a class="reference external" href="https://golang.org/">Go</a>.</p>
 <section id="id1">
 <h4>Install Dependencies<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h4>
 <p>On Red Hat Enterprise Linux or CentOS install the following
@@ -419,7 +415,7 @@ on your system.</p>
 </section>
 <section id="install-go">
 <span id="id2"></span><h4>Install Go<a class="headerlink" href="#install-go" title="Permalink to this headline"></a></h4>
-<p>Singularity v3 is written primarily in Go, and you will need Go 1.13
+<p>Singularity v3 is written primarily in Go, and you will need Go 1.16
 or above installed to compile it from source.</p>
 <p>This is one of several ways to <a class="reference external" href="https://golang.org/doc/install">install and configure Go</a>.</p>
 <div class="admonition note">
@@ -435,7 +431,7 @@ have been removed or replaced in newer versions.</p>
 package archive to download. Copy the link address and download with
 wget. Then extract the archive to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> (or use other
 instructions on go installation page).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.17.1 OS=linux ARCH=amd64 &amp;&amp; \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.17.6 OS=linux ARCH=amd64 &amp;&amp; \
     wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \
     sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \
     rm go$VERSION.$OS-$ARCH.tar.gz
