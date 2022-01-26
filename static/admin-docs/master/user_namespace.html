@@ -111,15 +111,13 @@ container without privileged operations, and so that a normal user can
 act as root inside a container to perform administrative tasks, without
 being root on the host outside.</p>
 <p>Singularity uses user namespaces in 3 situations:</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><p>When the <code class="docutils literal notranslate"><span class="pre">setuid</span></code> workflow is disabled or Singularity was
 installed without root.</p></li>
 <li><p>When a container is run with the <code class="docutils literal notranslate"><span class="pre">--userns</span></code> option.</p></li>
-<li><p>When <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> is used to impersonate a root user when
-building or running a container.</p></li>
+<li><p>When <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> is used to impersonate a root user when building
+or running a container.</p></li>
 </ul>
-</div></blockquote>
 <section id="user-namespace-requirements">
 <span id="userns-requirements"></span><h2>User Namespace Requirements<a class="headerlink" href="#user-namespace-requirements" title="Permalink to this headline"></a></h2>
 <p>To allow unprivileged creation of user namespaces a kernel &gt;=3.8 is
@@ -159,27 +157,24 @@ operations using the <code class="docutils literal notranslate"><span class="pre
 use a user namespace. In this mode of operation, some features are not
 available, and there are impacts to the security/integrity guarantees
 when running SIF container images:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>All containers must be run from sandbox directories. SIF images
-are extracted to a sandbox directory on the fly, preventing
-verification at runtime, and potentially allowing external
-modification of the container at runtime.</p></li>
+<ul class="simple">
+<li><p>All containers must be run from sandbox directories. SIF images are
+extracted to a sandbox directory on the fly, preventing verification
+at runtime, and potentially allowing external modification of the
+container at runtime.</p></li>
 <li><p>Filesystem image, and SIF-embedded persistent overlays cannot be
 used.</p></li>
-<li><p>Encrypted containers cannot be used. Singularity mounts
-encrypted containers directly through the kernel, so that
-encrypted content is not extracted to disk. This requires the
-setuid workflow.</p></li>
+<li><p>Encrypted containers cannot be used. Singularity mounts encrypted
+containers directly through the kernel, so that encrypted content is
+not extracted to disk. This requires the setuid workflow.</p></li>
 <li><p>Fakeroot functionality will rely on external setuid root
-<code class="docutils literal notranslate"><span class="pre">newuidmap</span></code> and <code class="docutils literal notranslate"><span class="pre">newgidmap</span></code> binaries which may be provided by
-the distribution.</p></li>
+<code class="docutils literal notranslate"><span class="pre">newuidmap</span></code> and <code class="docutils literal notranslate"><span class="pre">newgidmap</span></code> binaries which may be provided by the
+distribution.</p></li>
 </ul>
-</div></blockquote>
 </section>
 <section id="userns-option">
 <h2>–userns option<a class="headerlink" href="#userns-option" title="Permalink to this headline"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">--userns</span></code> option to <cite>singularity run/exec/shell</cite> will start a
+<p>The <code class="docutils literal notranslate"><span class="pre">--userns</span></code> option to <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">run/exec/shell</span></code> will start a
 container using a user namespace, avoiding the setuid privileged
 workflow for container setup even if Singularity was compiled and
 configured to use setuid by default.</p>
@@ -285,12 +280,10 @@ will have different IDs inside and outside of the container.</p>
 <p>If you are managing large numbers of fakeroot mappings you may wish
 to specify users by UID rather than username in the <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code>
 and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> files. The man page for <code class="docutils literal notranslate"><span class="pre">subuid</span></code> advises:</p>
-<blockquote>
-<div><p>When large number of entries (10000-100000 or more) are defined in
-/etc/subuid, parsing performance penalty will become noticeable.
-In this case it is recommended to use UIDs instead of login names.
-Benchmarks have shown speed-ups up to 20x.</p>
-</div></blockquote>
+<p>“When large number of entries (10000-100000 or more) are defined in
+/etc/subuid, parsing performance penalty will become noticeable. In
+this case it is recommended to use UIDs instead of login names.
+Benchmarks have shown speed-ups up to 20x.”</p>
 </div>
 </section>
 <section id="filesystem-considerations">
@@ -371,8 +364,7 @@ central directory such as LDAP.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">-a/--add</span> <span class="pre">&lt;user&gt;</span></code> option to <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> to create new
 mapping entries so that <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> can use the fakeroot feature of
 Singularity:</p>
-<blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity config fakeroot --add dave
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity config fakeroot --add dave
 
 # Show generated `/etc/subuid`
 $ cat /etc/subuid
@@ -387,7 +379,6 @@ $ cat /etc/subgid
 space. Subsequent subuid ranges for additional users will be created
 working down from this value. This minimizes the change of overlap
 with real UIDs on most systems.</p>
-</div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> command generates mappings specified using

@@ -156,15 +156,16 @@ utilize. As a security measure, for <code class="docutils literal notranslate"><
 Singularity it must be owned by root and must not be writable by users
 or Singularity will refuse to run. This is not the case for
 <code class="docutils literal notranslate"><span class="pre">non-setuid</span></code> installations that will only ever execute with user
-priviledge and thus do not require such limitations. The options for
-this configuration are listed below. Options are grouped together based
-on relevance, the order of options within <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> differs.</p>
+privilege and thus do not require such limitations.</p>
+<p>The options set via <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> are listed below. Options are
+grouped together based on relevance. The actual order of options within
+<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> may differ.</p>
 <section id="setuid-and-capabilities">
 <h3>Setuid and Capabilities<a class="headerlink" href="#setuid-and-capabilities" title="Permalink to this headline"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span></code>: To use all features of Singularity containers,
 Singularity will need to have access to some privileged system calls.
-One way Singularity achieves this is by using binaries with the
-<code class="docutils literal notranslate"><span class="pre">setuid</span></code> bit enabled. This variable lets you enable/disable users
+Singularity achieves this by using a helper binary with the <code class="docutils literal notranslate"><span class="pre">setuid</span></code>
+bit enabled. The <code class="docutils literal notranslate"><span class="pre">allow-setuid</span></code> option lets you enable/disable users
 ability to utilize these binaries within Singularity. By default, it
 is set to “yes”, but when disabled, various Singularity features will
 not function. Please see <a class="reference internal" href="user_namespace.html#userns-limitations"><span class="std std-ref">Unprivileged Installations</span></a> for more information about running Singularity
@@ -191,7 +192,7 @@ in the user guide for more information.</p>
 <section id="loop-devices">
 <h3>Loop Devices<a class="headerlink" href="#loop-devices" title="Permalink to this headline"></a></h3>
 <p>Singularity uses loop devices to facilitate the mounting of container
-filesystems from SIF images.</p>
+filesystems from SIF and other images.</p>
 <p><code class="docutils literal notranslate"><span class="pre">max</span> <span class="pre">loop</span> <span class="pre">devices</span></code>: This option allows an admin to limit the total
 number of loop devices Singularity will consume at a given time.</p>
 <p><code class="docutils literal notranslate"><span class="pre">shared</span> <span class="pre">loop</span> <span class="pre">devices</span></code>: This allows containers running the same image
@@ -205,19 +206,18 @@ particularly useful for MPI jobs.</p>
 namespace when running their containers through the <code class="docutils literal notranslate"><span class="pre">--pid</span></code> flag.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For some HPC systems, using the PID namespace has the potential of
-confusing some resource managers as well as some MPI implementations.</p>
+<p>Using the PID namespace can confuse the process tracking of some
+resource managers, as well as some MPI implementations.</p>
 </div>
 </section>
 <section id="configuration-files">
 <h3>Configuration Files<a class="headerlink" href="#configuration-files" title="Permalink to this headline"></a></h3>
-<p>Singularity allows for the automatic configuration of several system
-configuration files within containers to ease usage across systems.</p>
+<p>Singularity can automatically create or modify several system files
+within containers to ease usage.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>These options will do nothing unless the file or directory path
-exists within the container or Singularity has either overlay or
-underlay support enabled.</p>
+<p>These options will have no effect if the file does not exist within
+the container, or overlay or underlay support are enabled.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">passwd</span></code>: This option determines if Singularity should
 automatically append an entry to <code class="docutils literal notranslate"><span class="pre">/etc/passwd</span></code> for the user running
@@ -226,25 +226,26 @@ the container.</p>
 automatically append the calling user’s group entries to the containers
 <code class="docutils literal notranslate"><span class="pre">/etc/group</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">resolv_conf</span></code>: This option determines if Singularity should
-automatically bind the host’s <code class="docutils literal notranslate"><span class="pre">/etc/resolv/conf</span></code> within the container.</p>
+automatically bind the host’s <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> within the container.</p>
 </section>
 <section id="session-directory-and-system-mounts">
 <h3>Session Directory and System Mounts<a class="headerlink" href="#session-directory-and-system-mounts" title="Permalink to this headline"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">sessiondir</span> <span class="pre">max</span> <span class="pre">size</span></code>: In order for the Singularity runtime to
-create a container it needs to create a <code class="docutils literal notranslate"><span class="pre">sessiondir</span></code> to manage various
-components of the container, including mounting filesystems over the
-base image filesystem. This option specifies how large the default
-<code class="docutils literal notranslate"><span class="pre">sessiondir</span></code> should be (in MB) and will only affect users who use the
-<code class="docutils literal notranslate"><span class="pre">--contain</span></code> options without also specifying a location to perform
-default read/writes to via the <code class="docutils literal notranslate"><span class="pre">--workdir</span></code> or <code class="docutils literal notranslate"><span class="pre">--home</span></code> options.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sessiondir</span> <span class="pre">max</span> <span class="pre">size</span></code>: In order for the Singularity runtime to run a
+container it needs to create a temporary in-memory <code class="docutils literal notranslate"><span class="pre">sessiondir</span></code> as a
+location to assemble various components of the container, including
+mounting filesystems over the base image. This option specifies how
+large the default <code class="docutils literal notranslate"><span class="pre">sessiondir</span></code> should be (in MB). It should be set
+large enough to accommodate files that will be created in a
+<code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code>, or the empty <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> and other paths provided
+when <code class="docutils literal notranslate"><span class="pre">--contain</span></code> is used.</p>
 <p><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">proc</span></code>: This option determines if Singularity should
 automatically bind mount <code class="docutils literal notranslate"><span class="pre">/proc</span></code> within the container.</p>
 <p><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">sys</span></code>: This option determines if Singularity should
 automatically bind mount <code class="docutils literal notranslate"><span class="pre">/sys</span></code> within the container.</p>
 <p><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">dev</span></code>: Should be set to “YES”, if you want Singularity to
-automatically bind mount <cite>/dev</cite> within the container. If set to
-‘minimal’, then only ‘null’, ‘zero’, ‘random’, ‘urandom’, and ‘shm’ will
-be included.</p>
+automatically bind mount a complete <code class="docutils literal notranslate"><span class="pre">/dev</span></code> tree within the container.
+If set to <code class="docutils literal notranslate"><span class="pre">minimal</span></code>, then only <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>, <code class="docutils literal notranslate"><span class="pre">/dev/zero</span></code>,
+<code class="docutils literal notranslate"><span class="pre">/dev/random</span></code>, <code class="docutils literal notranslate"><span class="pre">/dev/urandom</span></code>, and <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> will be included.</p>
 <p><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">devpts</span></code>: This option determines if Singularity will mount a
 new instance of <code class="docutils literal notranslate"><span class="pre">devpts</span></code> when there is a <code class="docutils literal notranslate"><span class="pre">minimal</span></code> <code class="docutils literal notranslate"><span class="pre">/dev</span></code>
 directory as explained above, or when the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> option is
@@ -271,8 +272,8 @@ if filesystem changes on the host should automatically be propogated to
 those directories in the container.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This should be set to <code class="docutils literal notranslate"><span class="pre">yes</span></code> when autofs mounts in the system should
-show up in the container.</p>
+<p>This should be set to <code class="docutils literal notranslate"><span class="pre">yes</span></code> when autofs mounts occuring on the host
+system should be reflected up in the container.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">memory</span> <span class="pre">fs</span> <span class="pre">type</span></code>: This option allows admins to choose the temporary
 filesystem used by Singularity. Temporary filesystems are primarily
@@ -282,16 +283,16 @@ is not mounted within the container.</p>
 <p class="admonition-title">Note</p>
 <p>For Cray CLE 5 and 6, up to CLE 6.0.UP05, there is an issue (kernel
 panic) when Singularity uses tmpfs, so on affected systems it’s
-recommended to set this value to ramfs to avoid a kernel panic</p>
+recommended to set this value to <code class="docutils literal notranslate"><span class="pre">ramfs</span></code> to avoid a kernel panic.</p>
 </div>
 </section>
 <section id="bind-mount-management">
 <h3>Bind Mount Management<a class="headerlink" href="#bind-mount-management" title="Permalink to this headline"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">path</span></code>: This option is used for defining a list of files or
+<p><code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">path</span></code>: This option is used to define a list of files or
 directories to automatically be made available when Singularity runs a
 container. In order to successfully mount listed paths the file or
-directory path must exist within the container, or Singularity has
-either overlay or underlay support enabled.</p>
+directory must exist within the container, or Singularity must be
+configured with either overlay or underlay support enabled.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This option is ignored when containers are invoked with the
@@ -316,25 +317,25 @@ means users can specify bind points, scratch and tmp locations.</p>
 below. If stricter controls are required, check out the <a class="reference internal" href="#execution-control-list"><span class="std std-ref">Execution
 Control List</span></a>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">limit</span> <span class="pre">container</span> <span class="pre">owners</span></code>: This restricts container execution to only
-allow conatiners that are owned by the specified user.</p>
+allow containers that are owned by the specified user.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This feature will only apply when Singularity is running in SUID
-mode and the user is non-root. By default this is set to <cite>NULL</cite>.</p>
+mode and the user is non-root. By default this is set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">limit</span> <span class="pre">container</span> <span class="pre">groups</span></code>: This restricts container execution to only
-allow conatiners that are owned by the specified group.</p>
+allow containers that are owned by the specified group.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This feature will only apply when Singularity is running in SUID
-mode and the user is non-root. By default this is set to <cite>NULL</cite>.</p>
+mode and the user is non-root. By default this is set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">limit</span> <span class="pre">container</span> <span class="pre">paths</span></code>: This restricts container execution to only
 allow containers that are located within the specified path prefix.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This feature will only apply when Singularity is running in SUID
-mode and the user is non-root. By default this is set to <cite>NULL</cite>.</p>
+mode and the user is non-root. By default this is set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">${type}</span></code>: This option allows admins to limit the
 types of image formats that can be leveraged by users with
@@ -342,20 +343,21 @@ Singularity.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">sif</span></code> permits / denies execution of unencrypted SIF
 containers.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">encrypted</span></code> permits / denies execution of SIF containers with
-an encrypted root filesystem.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">squashfs</span></code> permits / denies execution of bare SquashFS image
-files. E.g. Singularity 2.x images.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">extfs</span></code> permits / denies execution of bare EXT image files.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">dir</span></code> permits / denies execution of sandbox directory
-containers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">encrypted</span></code> permits / denies execution of SIF
+containers with an encrypted root filesystem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">squashfs</span></code> permits / denies execution of bare
+SquashFS image files. E.g. Singularity 2.x images.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">extfs</span></code> permits / denies execution of bare EXT
+image files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">dir</span></code> permits / denies execution of sandbox
+directory containers.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>These limitations do not apply to the root user.</p>
-<p>This behavior differes from Singularity versions before 3.9, where the
-<cite>allow container squashfs/extfs</cite> directives also applied to the filesystem
-embedded in a SIF image.</p>
+<p>This behavior differes from Singularity versions before 3.9, where
+the <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">squashfs/extfs</span></code> directives also applied to the
+filesystem embedded in a SIF image.</p>
 </div>
 </section>
 <section id="networking-options">
@@ -431,15 +433,15 @@ functionality. The paths for certain critical binaries can be set in
 for these, by searching on the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> environment variable. You can
 override which external binaries are called by changing the value in
 <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">cryptsetup</span> <span class="pre">path</span></code>: Path to the cryptsetup executable, used to work with
-encrypted containers. Must be owned by root for security reasons.</p>
-<p><code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">path</span></code>: Path to the ldconfig executable, used to find GPU libraries.
-Must be owned by root for security reasons.</p>
-<p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span> <span class="pre">path</span></code>: Path to the nvidia-container-cli executable, used
-to find GPU libraries and configure the container when running with the
-<code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option.</p>
-<p>For the following additional binaries, if the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> entry is left
-blank, then <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> will be searched at runtime.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cryptsetup</span> <span class="pre">path</span></code>: Path to the cryptsetup executable, used to work
+with encrypted containers. Must be owned by root for security reasons.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">path</span></code>: Path to the ldconfig executable, used to find GPU
+libraries. Must be owned by root for security reasons.</p>
+<p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span> <span class="pre">path</span></code>: Path to the nvidia-container-cli
+executable, used to find GPU libraries and configure the container when
+running with the <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option.</p>
+<p>For the following additional binaries, if the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> entry
+is left blank, then <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> will be searched at runtime.</p>
 <p><code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">path</span></code>: Path to the go executable, used to compile plugins.</p>
 <p><code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">path</span></code>: Path to the mksquashfs executable, used to create
 SIF and SquashFS containers.</p>
@@ -458,17 +460,17 @@ SIF and SquashFS containers.</p>
 </section>
 <section id="concurrent-downloads">
 <h3>Concurrent Downloads<a class="headerlink" href="#concurrent-downloads" title="Permalink to this headline"></a></h3>
-<p>Singularity 3.9 and above will pull <code class="docutils literal notranslate"><span class="pre">library://</span></code> container images using
-multiple concurrent downloads of parts of the image. This speeds up downloads vs
-using a single stream. The defaults are generally appropriate for the Sylabs
-Cloud, but may be tuned for your network conditions, or if you are pulling from
-a different library server.</p>
-<p><code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">concurrency</span></code>: specifies how many concurrent streams when downloading
-(pulling) an image from cloud library.</p>
-<p><code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">part</span> <span class="pre">size</span></code>: specifies the size of each part (bytes) when concurrent
-downloads are enabled.</p>
-<p><code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">buffer</span> <span class="pre">size</span></code>: specifies the transfer buffer size (bytes) when
+<p>Singularity 3.9 and above will pull <code class="docutils literal notranslate"><span class="pre">library://</span></code> container images
+using multiple concurrent downloads of parts of the image. This speeds
+up downloads vs using a single stream. The defaults are generally
+appropriate for the Sylabs Cloud, but may be tuned for your network
+conditions, or if you are pulling from a different library server.</p>
+<p><code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">concurrency</span></code>: specifies how many concurrent streams when
+downloading (pulling) an image from cloud library.</p>
+<p><code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">part</span> <span class="pre">size</span></code>: specifies the size of each part (bytes) when
 concurrent downloads are enabled.</p>
+<p><code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">buffer</span> <span class="pre">size</span></code>: specifies the transfer buffer size (bytes)
+when concurrent downloads are enabled.</p>
 </section>
 <section id="updating-configuration-options">
 <h3>Updating Configuration Options<a class="headerlink" href="#updating-configuration-options" title="Permalink to this headline"></a></h3>
@@ -556,7 +558,7 @@ processes.</p>
 </ul>
 <p>Singularity 3.9 and above can apply resource limitations to systems
 configured for both cgroups v1 and the v2 unified hierarchy. Resource
-limits are specified using a TOML file that represents the <cite>resources</cite>
+limits are specified using a TOML file that represents the <code class="docutils literal notranslate"><span class="pre">resources</span></code>
 section of the OCI runtime-spec:
 <a class="reference external" href="https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md#control-groups">https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md#control-groups</a></p>
 <p>On a cgroups v1 system the resources configuration is applied directly.
@@ -753,8 +755,8 @@ Singularity Singularity will not pass ECL checks.</p>
 <section id="managing-ecl-public-keys">
 <h3>Managing ECL public keys<a class="headerlink" href="#managing-ecl-public-keys" title="Permalink to this headline"></a></h3>
 <p>Since Singularity 3.7.0 a global keyring is used for ECL signature
-verification. This keyring can be administered using the <code class="docutils literal notranslate"><span class="pre">--global</span></code> flag for
-the following commands:</p>
+verification. This keyring can be administered using the <code class="docutils literal notranslate"><span class="pre">--global</span></code>
+flag for the following commands:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">import</span></code> (root user only)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">pull</span></code> (root user only)</p></li>
@@ -781,7 +783,7 @@ restrict the in-container device tree.</p>
 <p>Compatibility between containerized CUDA/ROCm/OpenCL applications and
 host drivers/libraries is dependent on the versions of the GPU compute
 frameworks that were used to build the applications. Compatibility and
-usage information is discussed in the <cite>GPU Support</cite> section of the <a class="reference external" href="https://singularity.hpcng.org/user-docs/3.8">user
+usage information is discussed in the ‘GPU Support’ section of the <a class="reference external" href="https://singularity.hpcng.org/user-docs/3.8">user
 guide</a></p>
 <section id="nvidia-gpus-cuda">
 <h3>NVIDIA GPUs / CUDA<a class="headerlink" href="#nvidia-gpus-cuda" title="Permalink to this headline"></a></h3>
