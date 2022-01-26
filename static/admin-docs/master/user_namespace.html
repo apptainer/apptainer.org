@@ -194,7 +194,7 @@ no privilege on the host.</p>
 <section id="requirements">
 <h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h3>
 <p>In addition to user namespace support, Singularity must manipulate
-<code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code> maps for the user namepsace it creates. By
+<code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code> maps for the user namespace it creates. By
 default this happens transparently in the setuid workflow. With
 unprivileged installations of Singularity or where <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span>
 <span class="pre">no</span></code> is set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>, Singularity attempts to use
@@ -206,7 +206,7 @@ install those binaries on your system.</p>
 <p>Fakeroot relies on <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> files to find
 configured mappings from real user and group IDs, to a range of
 otherwise vacant IDs for each user on the host system that can be
-remapped in the usernamespace. A user must have an entry in these system
+remapped in the user namespace. A user must have an entry in these system
 configuration files to use the fakeroot feature. Singularity provides
 a <a class="reference internal" href="#config-fakeroot"><span class="std std-ref">config fakeroot</span></a> command to assist in managing
 these files, but it is important to understand how they work.</p>
@@ -236,7 +236,7 @@ files direct to systems where fakeroot will be used.</p>
 <p>Singularity requires that a range of at least <code class="docutils literal notranslate"><span class="pre">65536</span></code> IDs is used
 for each mapping. Larger ranges may be defined without error.</p>
 <p>It is also important to ensure that the subuid and subgid ranges
-defined in these files don’t overlap with eachother, or any real UIDs
+defined in these files don’t overlap with each other, or any real UIDs
 and GIDs on the host system.</p>
 </div>
 <p>So if you want to add another user <code class="docutils literal notranslate"><span class="pre">bar</span></code>, <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and
@@ -344,7 +344,7 @@ and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</sp
 granted the ability to use Singularity’s fakeroot functionality without
 editing the files manually. The <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> command will
 automatically ensure that generated subuid/subgid ranges are an
-approriate size, and do not overlap.</p>
+appropriate size, and do not overlap.</p>
 <p><code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> must be run as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user, or via <code class="docutils literal notranslate"><span class="pre">sudo</span>
 <span class="pre">singularity</span> <span class="pre">config</span> <span class="pre">fakeroot</span></code> as the <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>
 files form part of the system configuration, and are security sensitive.
@@ -356,7 +356,7 @@ also <code class="docutils literal notranslate"><span class="pre">--enable</span
 arrangements to synchronize <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>
 mapping files to all nodes.</p>
 <p>At this time, the glibc name service switch functionality does not
-support subuid or subgid mappings, so they cannot be definied in a
+support subuid or subgid mappings, so they cannot be defined in a
 central directory such as LDAP.</p>
 </div>
 <section id="adding-a-fakeroot-mapping">

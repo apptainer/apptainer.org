@@ -139,22 +139,24 @@
 <span id="singularity-configfiles"></span><h1>Singularity Configuration Files<a class="headerlink" href="#singularity-configuration-files" title="Permalink to this headline"></a></h1>
 <p>As a Singularity Administrator, you will have access to various
 configuration files, that will let you manage container resources, set
-security restrictions and configure network options etc, when installing
-Singularity across the system. All these files can be found in
-<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity</span></code> by default (though its location will
-obviously differ based on options passed during the installation). This
-page will describe the following configuration files and the various
-parameters contained by them. They are usually self documenting but here
-are several things to pay special attention to:</p>
+security restrictions and configure network options etc, when
+installing Singularity across the system. All of these files can be
+found in <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity</span></code> by default for installations
+from source (though the location may differ based on options passed
+during the installation). For installations from RPM or Deb packages
+you will find the configuration files in <code class="docutils literal notranslate"><span class="pre">/etc/singularity</span></code>. This
+section will describe the configuration files and the various
+parameters contained by them.</p>
 <section id="singularity-conf">
 <h2>singularity.conf<a class="headerlink" href="#singularity-conf" title="Permalink to this headline"></a></h2>
 <p>Most of the configuration options are set using the file
 <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> that defines the global configuration for
 Singularity across the entire system. Using this file, system
-administrators can have direct say as to what functions the users can
-utilize. As a security measure, for <code class="docutils literal notranslate"><span class="pre">setuid</span></code> installations of
-Singularity it must be owned by root and must not be writable by users
-or Singularity will refuse to run. This is not the case for
+administrators can influence the behavior of Singularity and
+restrict the functionality that users can access. As a security
+measure, for <code class="docutils literal notranslate"><span class="pre">setuid</span></code> installations of Singularity,
+<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> must be owned by root and must not be writable by
+users or Singularity will refuse to run. This is not the case for
 <code class="docutils literal notranslate"><span class="pre">non-setuid</span></code> installations that will only ever execute with user
 privilege and thus do not require such limitations.</p>
 <p>The options set via <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> are listed below. Options are
@@ -191,8 +193,7 @@ in the user guide for more information.</p>
 </section>
 <section id="loop-devices">
 <h3>Loop Devices<a class="headerlink" href="#loop-devices" title="Permalink to this headline"></a></h3>
-<p>Singularity uses loop devices to facilitate the mounting of container
-filesystems from SIF and other images.</p>
+<p>Singularity uses loop devices to facilitate the mounting of container file systems from SIF and other images.</p>
 <p><code class="docutils literal notranslate"><span class="pre">max</span> <span class="pre">loop</span> <span class="pre">devices</span></code>: This option allows an admin to limit the total
 number of loop devices Singularity will consume at a given time.</p>
 <p><code class="docutils literal notranslate"><span class="pre">shared</span> <span class="pre">loop</span> <span class="pre">devices</span></code>: This allows containers running the same image
@@ -268,11 +269,11 @@ specified by the <code class="docutils literal notranslate"><span class="pre">--
 for all mounted filesystems and bind those into containers at runtime.</p>
 <p><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">slave</span></code>: Singularity automatically mounts a handful host
 system directories to the container by default. This option determines
-if filesystem changes on the host should automatically be propogated to
+if filesystem changes on the host should automatically be propagated to
 those directories in the container.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This should be set to <code class="docutils literal notranslate"><span class="pre">yes</span></code> when autofs mounts occuring on the host
+<p>This should be set to <code class="docutils literal notranslate"><span class="pre">yes</span></code> when autofs mounts occurring on the host
 system should be reflected up in the container.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">memory</span> <span class="pre">fs</span> <span class="pre">type</span></code>: This option allows admins to choose the temporary
@@ -355,7 +356,7 @@ directory containers.</p></li>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>These limitations do not apply to the root user.</p>
-<p>This behavior differes from Singularity versions before 3.9, where
+<p>This behavior differs from Singularity versions before 3.9, where
 the <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">squashfs/extfs</span></code> directives also applied to the
 filesystem embedded in a SIF image.</p>
 </div>
@@ -368,7 +369,7 @@ virtualization</a>.
 Unrestricted use of CNI network configurations requires root privilege,
 as certain configurations may disrupt the host networking environment.</p>
 <p>Singularity 3.8 allows specific users or groups to be granted the
-ability to run containers with adminstrator specified CNI
+ability to run containers with administrator specified CNI
 configurations.</p>
 <p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">net</span> <span class="pre">users</span></code>: Allow specified root administered CNI network
 configurations to be used by the specified list of users. By default
@@ -452,7 +453,7 @@ processors the longer it takes. To use all available CPU’s set this to
 <p><code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">mem</span></code>: Allows the administrator to set the maximum amount
 of memory that mksquashfs nay use when building an image. e.g. 1G for
 1gb or 500M for 500mb. Restricting memory can have a major impact on the
-time it takes mksquashfs to create the image. NOTE: This fuctionality
+time it takes mksquashfs to create the image. NOTE: This functionality
 did not exist in squashfs-tools prior to version 4.3. If using an
 earlier version you should not set this.</p>
 <p><code class="docutils literal notranslate"><span class="pre">unsquashfs</span> <span class="pre">path</span></code>: Path to the unsquashfs executable, used to extract
@@ -477,7 +478,7 @@ when concurrent downloads are enabled.</p>
 <p>In order to manage this configuration file, Singularity has a <code class="docutils literal notranslate"><span class="pre">config</span>
 <span class="pre">global</span></code> command group that allows you to get, set, reset, and unset
 values through the CLI. It’s important to note that these commands must
-be run with elevated priveledges because the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> can
+be run with elevated privileges because the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> can
 only be modified by an administrator.</p>
 <section id="example">
 <h4>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h4>
@@ -712,7 +713,7 @@ translated to v2 format when applied on a cgroups v1 system.</p>
 <p>See
 <a class="reference external" href="https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md#control-groups">https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md#control-groups</a>
 for information about the available limits. Note that Singularity uses
-TOML format for the confiuration file, rather than JSON.</p>
+TOML format for the configuration file, rather than JSON.</p>
 </section>
 </section>
 </section>
@@ -974,7 +975,7 @@ managed by administrators with the <code class="docutils literal notranslate"><s
 <p>Sylabs introduced the online <a class="reference external" href="https://cloud.sylabs.io/home">Sylabs Cloud</a> to enable users to <a class="reference external" href="https://cloud.sylabs.io/builder">Create</a>, <a class="reference external" href="https://cloud.sylabs.io/keystore?sign=true">Secure</a>, and <a class="reference external" href="https://cloud.sylabs.io/library/guide#create">Share</a> their container images
 with others.</p>
 <p>Singularity allows users to login to an account on the Sylabs Cloud,
-or configure Singularity to use an API compatable container service
+or configure Singularity to use an API compatible container service
 such as a local installation of Singularity Enterprise, which provides
 an on-premise private Container Library, Remote Builder and Key Store.</p>
 <div class="admonition note">
@@ -1041,7 +1042,7 @@ INFO:    Global option detected. Will not automatically log into remote.
 </pre></div>
 </div>
 <p>This flag controls HTTP vs HTTPS for service discovery only. The
-protocol used to access individual library, build and keyservice URLs is
+protocol used to access individual library, build and keyserver URLs is
 set by the service discovery file.</p>
 </section>
 <section id="additional-information">
