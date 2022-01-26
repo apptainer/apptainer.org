@@ -419,14 +419,17 @@ functionality. The paths for certain critical binaries can be set in
 <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>. At build time, <code class="docutils literal notranslate"><span class="pre">mconfig</span></code> will set initial values
 for these, by searching on the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> environment variable. You can
 override which external binaries are called by changing the value in
-<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>. If left unset, <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> will be searched at
-runtime.</p>
-<p><code class="docutils literal notranslate"><span class="pre">cryptsetup</span> <span class="pre">path</span></code>: Path to the cryptsetup executable, used to work
-with encrypted containers. NOTE - cryptsetup is called as root, and is
-<em>required</em> to be owned by the root user for security reasons.</p>
+<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cryptsetup</span> <span class="pre">path</span></code>: Path to the cryptsetup executable, used to work with
+encrypted containers. Must be owned by root for security reasons.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">path</span></code>: Path to the ldconfig executable, used to find GPU libraries.
+Must be owned by root for security reasons.</p>
+<p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span> <span class="pre">path</span></code>: Path to the nvidia-container-cli executable, used
+to find GPU libraries and configure the container when running with the
+<code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option.</p>
+<p>For the following additional binaries, if the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> entry is left
+blank, then <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> will be searched at runtime.</p>
 <p><code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">path</span></code>: Path to the go executable, used to compile plugins.</p>
-<p><code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">path</span></code>: Path to the ldconfig executable, used to find GPU
-libraries.</p>
 <p><code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">path</span></code>: Path to the mksquashfs executable, used to create
 SIF and SquashFS containers.</p>
 <p><code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">procs</span></code>: Allows the administrator to specify the number of
@@ -439,10 +442,6 @@ of memory that mksquashfs nay use when building an image. e.g. 1G for
 time it takes mksquashfs to create the image. NOTE: This fuctionality
 did not exist in squashfs-tools prior to version 4.3. If using an
 earlier version you should not set this.</p>
-<p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span> <span class="pre">path</span></code>: Path to the nvidia-container-cli
-executable, used to find GPU libraries and configure the container when
-running with the <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option. Required to be owned by root, and
-is called as root in setuid installations.</p>
 <p><code class="docutils literal notranslate"><span class="pre">unsquashfs</span> <span class="pre">path</span></code>: Path to the unsquashfs executable, used to extract
 SIF and SquashFS containers.</p>
 </section>
