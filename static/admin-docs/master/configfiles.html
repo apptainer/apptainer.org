@@ -61,6 +61,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#supplemental-filesystems">Supplemental Filesystems</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cni-configuration-and-plugins">CNI Configuration and Plugins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#external-binaries">External Binaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#concurrent-downloads">Concurrent Downloads</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#updating-configuration-options">Updating Configuration Options</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
 </ul>
@@ -337,14 +338,24 @@ mode and the user is non-root. By default this is set to <cite>NULL</cite>.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">${type}</span></code>: This option allows admins to limit the
 types of image formats that can be leveraged by users with
-Singularity. Formats include <code class="docutils literal notranslate"><span class="pre">squashfs</span></code> which is used by SIF and
-v2.x Singularity images, <code class="docutils literal notranslate"><span class="pre">extfs</span></code> which is used for writable overlays
-and some legacy Singularity images, <code class="docutils literal notranslate"><span class="pre">dir</span></code> which is used by sandbox
-images and <code class="docutils literal notranslate"><span class="pre">encrypted</span></code> which is only used by SIF images to encrypt
-filesystem contents.</p>
+Singularity.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">sif</span></code> permits / denies execution of unencrypted SIF
+containers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">encrypted</span></code> permits / denies execution of SIF containers with
+an encrypted root filesystem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">squashfs</span></code> permits / denies execution of bare SquashFS image
+files. E.g. Singularity 2.x images.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">extfs</span></code> permits / denies execution of bare EXT image files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">dir</span></code> permits / denies execution of sandbox directory
+containers.</p></li>
+</ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>These limitations do not apply to the root user.</p>
+<p>This behavior differes from Singularity versions before 3.9, where the
+<cite>allow container squashfs/extfs</cite> directives also applied to the filesystem
+embedded in a SIF image.</p>
 </div>
 </section>
 <section id="networking-options">
@@ -444,6 +455,20 @@ did not exist in squashfs-tools prior to version 4.3. If using an
 earlier version you should not set this.</p>
 <p><code class="docutils literal notranslate"><span class="pre">unsquashfs</span> <span class="pre">path</span></code>: Path to the unsquashfs executable, used to extract
 SIF and SquashFS containers.</p>
+</section>
+<section id="concurrent-downloads">
+<h3>Concurrent Downloads<a class="headerlink" href="#concurrent-downloads" title="Permalink to this headline"></a></h3>
+<p>Singularity 3.9 and above will pull <code class="docutils literal notranslate"><span class="pre">library://</span></code> container images using
+multiple concurrent downloads of parts of the image. This speeds up downloads vs
+using a single stream. The defaults are generally appropriate for the Sylabs
+Cloud, but may be tuned for your network conditions, or if you are pulling from
+a different library server.</p>
+<p><code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">concurrency</span></code>: specifies how many concurrent streams when downloading
+(pulling) an image from cloud library.</p>
+<p><code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">part</span> <span class="pre">size</span></code>: specifies the size of each part (bytes) when concurrent
+downloads are enabled.</p>
+<p><code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">buffer</span> <span class="pre">size</span></code>: specifies the transfer buffer size (bytes) when
+concurrent downloads are enabled.</p>
 </section>
 <section id="updating-configuration-options">
 <h3>Updating Configuration Options<a class="headerlink" href="#updating-configuration-options" title="Permalink to this headline"></a></h3>
@@ -712,10 +737,7 @@ types (squashfs/extfs/dir) via the <code class="docutils literal notranslate"><s
 <p>Only the containers running from and signed with above-mentioned path
 and keys will be authorized to run.</p>
 <p>Three possible list modes you can choose from:</p>
-<dl class="simple">
-<dt><strong>Whitestrict</strong>: The SIF must be signed by <em>ALL</em> of the keys</dt><dd><p>mentioned.</p>
-</dd>
-</dl>
+<p><strong>Whitestrict</strong>: The SIF must be signed by all of the keys mentioned.</p>
 <p><strong>Whitelist</strong>: As long as the SIF is signed by one or more of the keys,
 the container is allowed to run.</p>
 <p><strong>Blacklist</strong>: Only the containers whose keys are not mentioned in the
@@ -730,21 +752,16 @@ Singularity Singularity will not pass ECL checks.</p>
 </div>
 <section id="managing-ecl-public-keys">
 <h3>Managing ECL public keys<a class="headerlink" href="#managing-ecl-public-keys" title="Permalink to this headline"></a></h3>
-<p>In Singularity 3.6, public keys associated with fingerprints specified
-in ECL rules were required to be present in user’s local keyring which
-is not very convenient. Singularity 3.7.0 provides a mechanism to
-administrators for managing a global keyring that ECL uses during
-signature verification, for that purpose a <code class="docutils literal notranslate"><span class="pre">--global</span></code> option was added
-for:</p>
-<blockquote>
-<div><ul class="simple">
+<p>Since Singularity 3.7.0 a global keyring is used for ECL signature
+verification. This keyring can be administered using the <code class="docutils literal notranslate"><span class="pre">--global</span></code> flag for
+the following commands:</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">import</span></code> (root user only)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">pull</span></code> (root user only)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">remove</span></code> (root user only)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">export</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">list</span></code></p></li>
 </ul>
-</div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For security reasons, it is not possible to import private keys into
