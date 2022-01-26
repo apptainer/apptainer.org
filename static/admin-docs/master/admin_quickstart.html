@@ -62,7 +62,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Singularity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configfiles.html">Configuration files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_namespace.html">User Namespaces &amp; Fakeroot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Container Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
@@ -122,6 +122,11 @@ namespaces and other security and resource limits to accomplish this.</p>
 </section>
 <section id="singularity-security">
 <span id="id1"></span><h2>Singularity Security<a class="headerlink" href="#singularity-security" title="Permalink to this headline"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See also the <a class="reference internal" href="security.html#security"><span class="std std-ref">security section</span></a> of this guide, for more
+detail.</p>
+</div>
 <p>Singularity uses a number of strategies to provide safety and
 ease-of-use on both single-user and shared systems. Notable security
 features include:</p>
@@ -131,7 +136,7 @@ features include:</p>
 container. This means access to files and devices from the
 container is easily controlled with standard POSIX permissions.</p></li>
 <li><p>Container filesystems are mounted <code class="docutils literal notranslate"><span class="pre">nosuid</span></code> and container
-applications run with the <code class="docutils literal notranslate"><span class="pre">PR_NO_NEW_PRIVS</span></code> flag set. This means
+applications run with the <code class="docutils literal notranslate"><span class="pre">PR_SET_NO_NEW_PRIVS</span></code> flag. This means
 that applications in a container cannot gain additional
 privileges. A regular user cannot <code class="docutils literal notranslate"><span class="pre">sudo</span></code> or otherwise gain root
 privilege on the host via a container.</p></li>
