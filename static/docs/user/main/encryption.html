@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -106,7 +106,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -150,7 +150,7 @@
 encrypting the root file system.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
-<p>Singularity provides a feature to build and run encrypted
+<p>Apptainer provides a feature to build and run encrypted
 containers to allow users to encrypt the file system
 image within a SIF. This encryption can be performed using either a
 passphrase or asymmetrically via an RSA key pair in Privacy Enhanced
@@ -252,7 +252,7 @@ Starting build...
 </section>
 <section id="pem-file-encryption">
 <h3>PEM File Encryption<a class="headerlink" href="#pem-file-encryption" title="Permalink to this headline"></a></h3>
-<p>Singularity currently supports RSA encryption using a public/private
+<p>Apptainer currently supports RSA encryption using a public/private
 key-pair. Keys are supplied in PEM format. The public key is used to
 encrypt containers that can be decrypted on a host that has access to
 the secret private key.</p>

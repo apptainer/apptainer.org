@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -82,7 +82,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -124,12 +124,12 @@
 <span id="id1"></span><h1>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline"></a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
-<p>A Singularity plugin is a package that can be dynamically loaded by
-the Singularity runtime, augmenting Singularity with experimental,
+<p>A Apptainer plugin is a package that can be dynamically loaded by
+the Apptainer runtime, augmenting Apptainer with experimental,
 non-standard and/or vendor-specific functionality. Currently, plugins
-are able to add commands and flags to Singularity. In the future,
+are able to add commands and flags to Apptainer. In the future,
 plugins will also be able to interface with more complex subsystems of
-the Singularity runtime.</p>
+the Apptainer runtime.</p>
 </section>
 <section id="using-plugins">
 <h2>Using Plugins<a class="headerlink" href="#using-plugins" title="Permalink to this headline"></a></h2>
@@ -142,7 +142,7 @@ There are no plugins installed.
 versatile Singularity Image Format (SIF). However, plugin authors may
 also distribute the source code of their plugins. A plugin can be
 compiled from its source code with the <code class="docutils literal notranslate"><span class="pre">compile</span></code> command. A sample
-plugin <code class="docutils literal notranslate"><span class="pre">test-plugin</span></code> is included with the Singularity source code.</p>
+plugin <code class="docutils literal notranslate"><span class="pre">test-plugin</span></code> is included with the Apptainer source code.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity plugin compile examples/plugins/test-plugin/
 </pre></div>
 </div>
@@ -154,19 +154,19 @@ test-plugin.sif
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Currently, <strong>all</strong> plugins must be compiled from the Singularity
+<p>Currently, <strong>all</strong> plugins must be compiled from the Apptainer
 source code tree.</p>
-<p>Also, the plugins mechanism for the Go language that Singularity is
+<p>Also, the plugins mechanism for the Go language that Apptainer is
 written in is quite restrictive - it requires extremely close version
 matching of packages used in a plugin to the ones used in the program
-the plugin is built for. Additionally Singularity is using build
+the plugin is built for. Additionally Apptainer is using build
 time config to get the source tree location for <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">plugin</span>
 <span class="pre">compile</span></code> so that you don’t need to export environment variables etc,
 and there isn’t mismatch between package path information that Go
 uses. This means that at present you must:</p>
 <ul class="simple">
 <li><p>Build plugins using the exact same version of the source code, in
-the same location, as was used to build the Singularity
+the same location, as was used to build the Apptainer
 executable.</p></li>
 <li><p>Use the exact same version of Go that was used to build the
 executable when compiling a plugin for it.</p></li>
@@ -177,7 +177,7 @@ author, the plugin’s version, etc. To view this information about a
 plugin, use the <code class="docutils literal notranslate"><span class="pre">inspect</span></code> command.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity plugin inspect examples/plugins/test-plugin/test-plugin.sif
 Name: sylabs.io/test-plugin
-Description: This is a short test plugin for Singularity
+Description: This is a short test plugin for Apptainer
 Author: Michael Bauer
 Version: 0.0.1
 </pre></div>
@@ -215,7 +215,7 @@ There are no plugins installed.
 </section>
 <section id="writing-a-plugin">
 <h2>Writing a Plugin<a class="headerlink" href="#writing-a-plugin" title="Permalink to this headline"></a></h2>
-<p>Developers interested in writing Singularity plugins can get started
+<p>Developers interested in writing Apptainer plugins can get started
 by reading the <a class="reference external" href="https://godoc.org/github.com/sylabs/singularity/pkg/plugin">Go documentation</a> for the
 plugin package. Furthermore, reading through the <a class="reference external" href="https://github.com/hpcng/singularity/tree/master/examples/plugins">source code</a>
 for the example plugins will prove valuable. More detailed plugin

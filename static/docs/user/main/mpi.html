@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Singularity and MPI applications &mdash; Apptainer User Guide 3.8 documentation</title>
+  <title>Apptainer and MPI applications &mdash; Apptainer User Guide 3.8 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -77,7 +77,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Singularity and MPI applications</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Apptainer and MPI applications</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#hybrid-model">Hybrid model</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#test-application">Test Application</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mpich-hybrid-container">MPICH Hybrid Container</a></li>
@@ -123,7 +123,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Singularity and MPI applications</li>
+      <li>Apptainer and MPI applications</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/hpcng/singularity-userdocs/blob/master/mpi.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -133,17 +133,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="singularity-and-mpi-applications">
-<span id="mpi"></span><h1>Singularity and MPI applications<a class="headerlink" href="#singularity-and-mpi-applications" title="Permalink to this headline"></a></h1>
+  <section id="apptainer-and-mpi-applications">
+<span id="mpi"></span><h1>Apptainer and MPI applications<a class="headerlink" href="#apptainer-and-mpi-applications" title="Permalink to this headline"></a></h1>
 <p id="sec-mpi">The <a class="reference external" href="https://mpi-forum.org">Message Passing Interface (MPI)</a> is a
 standard extensively used by HPC applications to implement various
 communication across compute nodes of a single system or across compute
 platforms. There are two main open-source implementations of MPI at the
 moment - <a class="reference external" href="https://www.open-mpi.org/">OpenMPI</a> and <a class="reference external" href="https://www.mpich.org/">MPICH</a>, both of which are supported by
-Singularity. The goal of this page is to demonstrate the development
-and running of MPI programs using Singularity containers.</p>
+Apptainer. The goal of this page is to demonstrate the development
+and running of MPI programs using Apptainer containers.</p>
 <p>There are several ways of carrying this out, the most popular way of
-executing MPI applications installed in a Singularity container is to
+executing MPI applications installed in a Apptainer container is to
 rely on the MPI implementation available on the host. This is called the
 <em>Host MPI</em> or the <em>Hybrid</em> model since both the MPI implementations
 provided by system administrators (on the host) and in the containers
@@ -162,19 +162,19 @@ the case on your system please follow the <em>hybrid</em> approach.</p>
 <section id="hybrid-model">
 <h2>Hybrid model<a class="headerlink" href="#hybrid-model" title="Permalink to this headline"></a></h2>
 <p>The basic idea behind the <em>Hybrid Approach</em> is when you execute a
-Singularity container with MPI code, you will call <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> or a
+Apptainer container with MPI code, you will call <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> or a
 similar launcher on the <code class="docutils literal notranslate"><span class="pre">singularity</span></code> command itself. The MPI process
 outside of the container will then work in tandem with MPI inside the
 container and the containerized MPI code to instantiate the job.</p>
-<p>The Open MPI/Singularity workflow in detail:</p>
+<p>The Open MPI/Apptainer workflow in detail:</p>
 <ol class="arabic simple">
 <li><p>The MPI launcher (e.g., <code class="docutils literal notranslate"><span class="pre">mpirun</span></code>, <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code>) is called by the
 resource manager or the user directly from a shell.</p></li>
 <li><p>Open MPI then calls the process management daemon (ORTED).</p></li>
-<li><p>The ORTED process launches the Singularity container requested by
+<li><p>The ORTED process launches the Apptainer container requested by
 the launcher command.</p></li>
-<li><p>Singularity instantiates the container and namespace environment.</p></li>
-<li><p>Singularity then launches the MPI application within the container.</p></li>
+<li><p>Apptainer instantiates the container and namespace environment.</p></li>
+<li><p>Apptainer then launches the MPI application within the container.</p></li>
 <li><p>The MPI application launches and loads the Open MPI libraries.</p></li>
 <li><p>The Open MPI libraries connect back to the ORTED process via the
 Process Management Interface (PMI).</p></li>
@@ -202,7 +202,7 @@ your own MPI container, including building the same MPI framework
 installed on the host from source.</p>
 <section id="test-application">
 <h3>Test Application<a class="headerlink" href="#test-application" title="Permalink to this headline"></a></h3>
-<p>To illustrate how Singularity can be used to execute MPI applications,
+<p>To illustrate how Apptainer can be used to execute MPI applications,
 we will assume for a moment that the application is <code class="docutils literal notranslate"><span class="pre">mpitest.c</span></code>, a
 simple Hello World:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span><span class="cp"></span>
@@ -361,9 +361,9 @@ details.</p>
 </section>
 <section id="running-an-mpi-application">
 <h3>Running an MPI Application<a class="headerlink" href="#running-an-mpi-application" title="Permalink to this headline"></a></h3>
-<p>The standard way to execute MPI applications with hybrid Singularity
+<p>The standard way to execute MPI applications with hybrid Apptainer
 containers is to run the native <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> command from the host, which
-will start Singularity containers and ultimately MPI ranks within the
+will start Apptainer containers and ultimately MPI ranks within the
 containers.</p>
 <p>Assuming your container with MPI and your application is already built,
 the <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> command to start your application looks like when your
@@ -372,7 +372,7 @@ container has been built based on the hybrid model:</p>
 </pre></div>
 </div>
 <p>Practically, this command will first start a process instantiating
-<code class="docutils literal notranslate"><span class="pre">mpirun</span></code> and then Singularity containers on compute nodes. Finally,
+<code class="docutils literal notranslate"><span class="pre">mpirun</span></code> and then Apptainer containers on compute nodes. Finally,
 when the containers start, the MPI binary is executed:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mpirun -n 8 singularity run hybrid-mpich.sif /opt/mpitest
 Hello, I am rank 3/8
@@ -394,7 +394,7 @@ Approach</em> is to start the MPI application by calling the MPI launcher
 (e.g., <cite>mpirun</cite>) from the host. The main difference between the hybrid
 and bind approach is the fact that with the bind approach, the container
 usually does not include any MPI implementation. This means that
-Singularity needs to mount/bind the MPI available on the host into the
+Apptainer needs to mount/bind the MPI available on the host into the
 container.</p>
 <p>Technically this requires two steps:</p>
 <ol class="arabic simple">
@@ -420,7 +420,7 @@ used to compile and install the application in the container.</p></li>
 </ul>
 </dd>
 </dl>
-<p>The creation of a Singularity container for the bind model is based on
+<p>The creation of a Apptainer container for the bind model is based on
 the following steps:</p>
 <ol class="arabic simple">
 <li><p>Compile your application on a system with the target MPI
@@ -498,7 +498,7 @@ Hello, I am rank 6/8
 <p>If your target system is setup with a batch system such as SLURM, a
 standard way to execute MPI applications is through a batch script. The
 following example illustrates the context of a batch script for Slurm
-that aims at starting a Singularity container on each node allocated
+that aims at starting a Apptainer container on each node allocated
 to the execution of the job. It can easily be adapted for all major
 batch systems available.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat my_job.sh
@@ -524,7 +524,7 @@ is based on the bind model, please add the appropriate bind options.</p>
 <h2>Alternative Launchers<a class="headerlink" href="#alternative-launchers" title="Permalink to this headline"></a></h2>
 <p>On many systems it is common to use an alternative launcher to start MPI
 applications, e.g. Slurm’s <code class="docutils literal notranslate"><span class="pre">srun</span></code> rather than the <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> provided
-by the MPI installation. This approach is supported with Singularity
+by the MPI installation. This approach is supported with Apptainer
 as long as the container MPI version supports the same process
 management interface (e.g. PMI2 / PMIx) and version as is used by the
 launcher.</p>
@@ -537,7 +537,7 @@ interact correctly with the same launchers as it does on the host.</p>
 that MPI implementations are built to support them. You may need to
 install or bind Infiniband/Omnipath libraries into your containers when
 using these interconnects.</p>
-<p>By default Singularity exposes every device in <code class="docutils literal notranslate"><span class="pre">/dev</span></code> to the
+<p>By default Apptainer exposes every device in <code class="docutils literal notranslate"><span class="pre">/dev</span></code> to the
 container. If you run a container using the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> or
 <code class="docutils literal notranslate"><span class="pre">--containall</span></code> flags a minimal <code class="docutils literal notranslate"><span class="pre">/dev</span></code> is used instead. You may need
 to bind in additional <code class="docutils literal notranslate"><span class="pre">/dev/</span></code> entries manually to support the
@@ -568,7 +568,7 @@ communications errors there may also be a version incompatibility, or
 interconnect libraries may not be available or configured properly with
 the MPI stack in the container.</p>
 <p>Please check the following things carefully before asking questions in
-the Singularity community:</p>
+the Apptainer community:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>For the hybrid mode, is the MPI version on the host compatible
@@ -586,10 +586,10 @@ container? Is the MPI stack in the container configured correctly
 to use them?</p></li>
 </ul>
 </div></blockquote>
-<p>We recommend using the Singularity Google Group or Slack Channel to
-ask for MPI advice from the Singularity community. HPC cluster
+<p>We recommend using the Apptainer Google Group or Slack Channel to
+ask for MPI advice from the Apptainer community. HPC cluster
 configurations vary greatly and most MPI problems are related to MPI /
-interconnect configuration, and not caused by issues in Singularity
+interconnect configuration, and not caused by issues in Apptainer
 itself.</p>
 </section>
 </section>

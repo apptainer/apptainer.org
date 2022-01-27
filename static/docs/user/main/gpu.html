@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Contributing" href="contributing.html" />
-    <link rel="prev" title="Singularity and MPI applications" href="mpi.html" /> 
+    <link rel="prev" title="Apptainer and MPI applications" href="mpi.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -77,7 +77,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">GPU Support</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#nvidia-gpus-cuda-standard">NVIDIA GPUs &amp; CUDA (Standard)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
@@ -145,7 +145,7 @@
              
   <section id="gpu-support-nvidia-cuda-amd-rocm">
 <span id="gpu"></span><h1>GPU Support (NVIDIA CUDA &amp; AMD ROCm)<a class="headerlink" href="#gpu-support-nvidia-cuda-amd-rocm" title="Permalink to this headline"></a></h1>
-<p>Singularity natively supports running application containers that use
+<p>Apptainer natively supports running application containers that use
 NVIDIA’s CUDA GPU compute framework, or AMD’s ROCm solution. This allows
 easy access to users of GPU-enabled machine learning frameworks such as
 tensorflow, regardless of the host operating system. As long as the host
@@ -154,7 +154,7 @@ to e.g. run tensorflow in an up-to-date Ubuntu 20.04 container, from an
 older RHEL 7 host.</p>
 <p>Applications that support OpenCL for compute acceleration can also be
 used easily, with an additional bind option.</p>
-<p>Singularity experimental support is provided to use
+<p>Apptainer experimental support is provided to use
 Nvidia’s <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> tooling for GPU container setup. This
 functionality, accessible via the new <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> flag, improves
 compatibility with OCI runtimes and exposes additional container
@@ -194,7 +194,7 @@ drivers and CUDA packages directly from the NVIDIA website. Linux
 distributions may provide NVIDIA drivers and CUDA libraries, but they
 are often outdated which can lead to problems running applications
 compiled for the latest versions of CUDA.</p>
-<p>Singularity will find the NVIDIA/CUDA libraries on your host using the
+<p>Apptainer will find the NVIDIA/CUDA libraries on your host using the
 list of libraries in the configuration file
 <code class="docutils literal notranslate"><span class="pre">etc/singularity/nvbliblist</span></code>, and resolving paths through the
 <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> cache. At time of release this list is appropriate for the
@@ -232,12 +232,12 @@ _  /   /  __/  / / /(__  )/ /_/ /  /   _  __/   _  / / /_/ /_ |/ |/ /
 You are running this container as user with ID 1000 and group 1000,
 which should map to the ID and group for your user on the Docker host. Great!
 
-Singularity&gt;
+Apptainer&gt;
 </pre></div>
 </div>
 <p>You can verify the GPU is available within the container by using the
 tensorflow <code class="docutils literal notranslate"><span class="pre">list_local_devices()</span></code> function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Singularity</span><span class="o">&gt;</span> <span class="n">python</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Apptainer</span><span class="o">&gt;</span> <span class="n">python</span>
 <span class="n">Python</span> <span class="mf">2.7.15</span><span class="o">+</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Jul</span>  <span class="mi">9</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">16</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">35</span><span class="p">)</span>
 <span class="p">[</span><span class="n">GCC</span> <span class="mf">7.4.0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux2</span>
 <span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
@@ -260,7 +260,7 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 </section>
 <section id="multiple-gpus">
 <h3>Multiple GPUs<a class="headerlink" href="#multiple-gpus" title="Permalink to this headline"></a></h3>
-<p>By default, Singularity makes all host devices available in the
+<p>By default, Apptainer makes all host devices available in the
 container. When the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> option is used a minimal <code class="docutils literal notranslate"><span class="pre">/dev</span></code> tree
 is created in the container, but the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> option will ensure that
 all nvidia devices on the host are present in the container.</p>
@@ -269,7 +269,7 @@ all nvidia devices on the host are present in the container.</p>
 whether some or all host GPUs are visible inside a container. The
 <code class="docutils literal notranslate"><span class="pre">nvidia-container-runtime</span></code> explicitly binds the devices into the
 container dependent on the value of <code class="docutils literal notranslate"><span class="pre">NVIDIA_VISIBLE_DEVICES</span></code>.</p>
-<p>To control which GPUs are used in a Singularity container that is run
+<p>To control which GPUs are used in a Apptainer container that is run
 with <code class="docutils literal notranslate"><span class="pre">--nv</span></code> you can set <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_CUDA_VISIBLE_DEVICES</span></code> before
 running the container, or <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code> inside the container.
 This variable will limit the GPU devices that CUDA programs see.</p>
@@ -288,14 +288,14 @@ $ singularity run tensorflow_latest-gpu.sif
 <h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline"></a></h3>
 <p>If the host installation of the NVIDIA / CUDA driver and libraries is
 working and up-to-date there are rarely issues running CUDA programs
-inside of Singularity containers. The most common issue seen is:</p>
+inside of Apptainer containers. The most common issue seen is:</p>
 <section id="cuda-error-unknown-when-everything-seems-to-be-correctly-configured">
 <h4>CUDA_ERROR_UNKNOWN when everything seems to be correctly configured<a class="headerlink" href="#cuda-error-unknown-when-everything-seems-to-be-correctly-configured" title="Permalink to this headline"></a></h4>
 <p>CUDA depends on multiple kernel modules being loaded. Not all of the
 modules are loaded at system startup. Some portions of the NVIDA driver
 stack are initialized when first needed. This is done using a setuid
 root binary, so initializing can be triggered by any user on the host.
-In Singularity containers, privilege escalation is blocked, so the
+In Apptainer containers, privilege escalation is blocked, so the
 setuid root binary cannot initialize the driver stack fully.</p>
 <p>If you experience <code class="docutils literal notranslate"><span class="pre">CUDA_ERROR_UNKNOWN</span></code> in a container, initialize the
 driver stack on the host first, by running a CUDA program there or
@@ -307,14 +307,14 @@ avoid driver unload.</p>
 <section id="nvidia-gpus-cuda-nvidia-container-cli">
 <h2>NVIDIA GPUs &amp; CUDA (nvidia-container-cli)<a class="headerlink" href="#nvidia-gpus-cuda-nvidia-container-cli" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option instructs
-Singularity to perform GPU container setup using the
+Apptainer to perform GPU container setup using the
 <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> utility. This utility must be installed
-separately from Singularity. It is available in the repositories of
+separately from Apptainer. It is available in the repositories of
 some distributions, and at:
 <a class="reference external" href="https://nvidia.github.io/libnvidia-container/">https://nvidia.github.io/libnvidia-container/</a></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This feature is considered experimental in Singularity as of now. It
+<p>This feature is considered experimental in Apptainer as of now. It
 cannot not replace the legacy NVIDIA support in all situations, and
 should be tested carefully before use in production workflows.</p>
 </div>
@@ -337,7 +337,7 @@ OCI containers.</p></li>
 be set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>. This value will be set at build time if
 <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> is found on the search <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p></li>
 <li><p>For security reasons, <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> cannot be used with
-privileged mode in a set-uid install of Singularity.
+privileged mode in a set-uid install of Apptainer.
 Use the traditional binding method with <code class="docutils literal notranslate"><span class="pre">--nv</span></code> only or use
 <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> with the the <code class="docutils literal notranslate"><span class="pre">--user</span></code> (or <code class="docutils literal notranslate"><span class="pre">-u</span></code>) option to run unprivileged.
 The option also cannot be used with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.
@@ -375,12 +375,12 @@ _  /   /  __/  / / /(__  )/ /_/ /  /   _  __/   _  / / /_/ /_ |/ |/ /
 You are running this container as user with ID 1000 and group 1000,
 which should map to the ID and group for your user on the Docker host. Great!
 
-Singularity&gt;
+Apptainer&gt;
 </pre></div>
 </div>
 <p>You can verify the GPU is available within the container by using the
 tensorflow <code class="docutils literal notranslate"><span class="pre">list_local_devices()</span></code> function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Singularity</span><span class="o">&gt;</span> <span class="n">python</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Apptainer</span><span class="o">&gt;</span> <span class="n">python</span>
 <span class="n">Python</span> <span class="mf">2.7.15</span><span class="o">+</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Jul</span>  <span class="mi">9</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">16</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">35</span><span class="p">)</span>
 <span class="p">[</span><span class="n">GCC</span> <span class="mf">7.4.0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux2</span>
 <span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
@@ -402,7 +402,7 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 </section>
 <section id="gpu-selection">
 <h3>GPU Selection<a class="headerlink" href="#gpu-selection" title="Permalink to this headline"></a></h3>
-<p>When running with <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code>, by default Singularity will expose all
+<p>When running with <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code>, by default Apptainer will expose all
 GPUs on the host inside the container. This mirrors the functionality of
 the standard GPU support for the most common use-case.</p>
 <p>Setting the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CUDA_VISIBLE_DEVICES</span></code> environment variable
@@ -443,21 +443,21 @@ devices, you can specify MIG identifiers / UUIDs.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export NVIDIA_VISIBLE_DEVICES=MIG-GPU-5c89852c-d268-c3f3-1b07-005d5ae1dc3f/7/0
 </pre></div>
 </div>
-<p>Singularity does not configure MIG partitions. It is expected that
+<p>Apptainer does not configure MIG partitions. It is expected that
 these would be statically configured by the system administrator, or
 setup dynamically by a job scheduler / workflow system according to the
 requirements of the job.</p>
 </section>
 <section id="other-gpu-options">
 <h3>Other GPU Options<a class="headerlink" href="#other-gpu-options" title="Permalink to this headline"></a></h3>
-<p>In <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> mode, Singularity understands the following additional
+<p>In <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> mode, Apptainer understands the following additional
 environment variables. Note that these environment variables are read
-from the environment where <code class="docutils literal notranslate"><span class="pre">singularity</span></code> is run. Singularity does
+from the environment where <code class="docutils literal notranslate"><span class="pre">singularity</span></code> is run. Apptainer does
 not currently read these settings from the container environment.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">NVIDIA_DRIVER_CAPABILITIES</span></code> controls which libraries and utilities
 are mounted in the container, to support different requirements. The
-default value under Singularity is <code class="docutils literal notranslate"><span class="pre">compute,utility</span></code>, which will
+default value under Apptainer is <code class="docutils literal notranslate"><span class="pre">compute,utility</span></code>, which will
 provide CUDA functionality and basic utilities such as
 <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code>. Other options include <code class="docutils literal notranslate"><span class="pre">graphics</span></code> for OpenGL/Vulkan
 support, <code class="docutils literal notranslate"><span class="pre">video</span></code> for the codecs SDK, and <code class="docutils literal notranslate"><span class="pre">display</span></code> to use X11
@@ -467,7 +467,7 @@ will be checked by <code class="docutils literal notranslate"><span class="pre">
 container. Constraints can be set on <code class="docutils literal notranslate"><span class="pre">cuda</span></code>, <code class="docutils literal notranslate"><span class="pre">driver</span></code>, <code class="docutils literal notranslate"><span class="pre">arch</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">brand</span></code> values. Docker/OCI images may set these variables
 inside the container, to indicate runtime requirements. However,
-these container variables are not yet interpreted by Singularity.</p></li>
+these container variables are not yet interpreted by Apptainer.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">NVIDIA_DISABLE_REQUIRE</span></code> will disable the enforcement of any
 <code class="docutils literal notranslate"><span class="pre">NVIDIA_REQUIRE_*</span></code> requirements that are set.</p></li>
 </ul>
@@ -478,7 +478,7 @@ be found in the container-toolkit guide:</p>
 </section>
 <section id="amd-gpus-rocm">
 <h2>AMD GPUs &amp; ROCm<a class="headerlink" href="#amd-gpus-rocm" title="Permalink to this headline"></a></h2>
-<p>Singularity has a <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> flag to support GPU compute with the
+<p>Apptainer has a <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> flag to support GPU compute with the
 ROCm framework using AMD Radeon GPU cards.</p>
 <p>Commands that <code class="docutils literal notranslate"><span class="pre">run</span></code>, or otherwise execute containers (<code class="docutils literal notranslate"><span class="pre">shell</span></code>,
 <code class="docutils literal notranslate"><span class="pre">exec</span></code>) can take an <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> option, which will setup the
@@ -509,7 +509,7 @@ that is compatible with the ROCm version on your host.</p></li>
 </ul>
 <p>These requirements can be satisfied by following the requirements on the
 <a class="reference external" href="https://rocm.github.io/ROCmInstall.html">ROCm web site</a></p>
-<p>At time of release, Singularity was tested successfully on Debian 10
+<p>At time of release, Apptainer was tested successfully on Debian 10
 with ROCm 2.8/2.9 and the upstream kernel driver, and Ubuntu 18.04 with
 ROCm 2.9 and the DKMS driver.</p>
 </section>
@@ -536,7 +536,7 @@ INFO:    Build complete: tensorflow_latest.sif
 </div>
 <p>You can verify the GPU is available within the container by using the
 tensorflow <code class="docutils literal notranslate"><span class="pre">list_local_devices()</span></code> function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Singularity</span><span class="o">&gt;</span> <span class="n">ipython</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Apptainer</span><span class="o">&gt;</span> <span class="n">ipython</span>
 <span class="n">Python</span> <span class="mf">3.5.2</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Jul</span> <span class="mi">10</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">11</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">48</span><span class="p">)</span>
 <span class="n">Type</span> <span class="s1">&#39;copyright&#39;</span><span class="p">,</span> <span class="s1">&#39;credits&#39;</span> <span class="ow">or</span> <span class="s1">&#39;license&#39;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span>
 <span class="n">IPython</span> <span class="mf">7.8.0</span> <span class="o">--</span> <span class="n">An</span> <span class="n">enhanced</span> <span class="n">Interactive</span> <span class="n">Python</span><span class="o">.</span> <span class="n">Type</span> <span class="s1">&#39;?&#39;</span> <span class="k">for</span> <span class="n">help</span><span class="o">.</span>
@@ -586,7 +586,7 @@ batch rendering (which can also use OpenCL).</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="mpi.html" class="btn btn-neutral float-left" title="Singularity and MPI applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mpi.html" class="btn btn-neutral float-left" title="Apptainer and MPI applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

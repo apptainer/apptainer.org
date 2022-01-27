@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -89,7 +89,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -132,18 +132,18 @@
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group allows users to manage the service
-endpoints Singularity will interact with for many common command
+endpoints Apptainer will interact with for many common command
 flows. This includes managing credentials for image storage services
 and key servers used to locate public keys for SIF
 image verification. Currently, there are three main types of remote
 endpoints managed by this command group: the public Sylabs Cloud (or
-local Singularity Enterprise installation), OCI registries and
+local Apptainer Enterprise installation), OCI registries and
 keyservers.</p>
 </section>
 <section id="public-sylabs-cloud">
 <h2>Public Sylabs Cloud<a class="headerlink" href="#public-sylabs-cloud" title="Permalink to this headline"></a></h2>
 <p>Sylabs introduced the online <a class="reference external" href="https://cloud.sylabs.io/home">Sylabs Cloud</a> to enable users to <a class="reference external" href="https://cloud.sylabs.io/keystore?sign=true">Secure</a>, and <a class="reference external" href="https://cloud.sylabs.io/library">Share</a> their container images with others.</p>
-<p>A fresh, default installation of Singularity is configured to connect
+<p>A fresh, default installation of Apptainer is configured to connect
 to the public <a class="reference external" href="https://cloud.sylabs.io">cloud.sylabs.io</a> services. If
 you only want to use the public services you just need to obtain an
 authentication token, and then <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span></code>:</p>
@@ -180,7 +180,7 @@ the services with the <code class="docutils literal notranslate"><span class="pr
 proxy environment variables to be set, or if a firewall is blocking
 access to <code class="docutils literal notranslate"><span class="pre">*.sylabs.io</span></code>. Talk to your system administrator.</p>
 <p>You can interact with the public Sylabs Cloud using various
-Singularity commands:</p>
+Apptainer commands:</p>
 <p><a class="reference external" href="cli/singularity_pull.html">pull</a>,
 <a class="reference external" href="cli/singularity_push.html">push</a>,
 <a class="reference external" href="cli/singularity_build.html#options">build –remote</a>,
@@ -272,7 +272,7 @@ directory.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity remote add &lt;remote_name&gt; &lt;remote_uri&gt;
 </pre></div>
 </div>
-<p>For example, if you have an installation of Singularity enterprise
+<p>For example, if you have an installation of Apptainer enterprise
 hosted at enterprise.example.com:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity remote add myremote https://enterprise.example.com
 
@@ -299,7 +299,7 @@ INFO:    Global option detected. Will not automatically log into remote.
 <p class="admonition-title">Note</p>
 <p>Global remote configurations can only be modified by the root user
 and are stored in the <code class="docutils literal notranslate"><span class="pre">etc/singularity/remote.yaml</span></code> file, at the
-Singularity installation location.</p>
+Apptainer installation location.</p>
 </div>
 <p>Conversely, to <code class="docutils literal notranslate"><span class="pre">remove</span></code> an endpoint:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity remote remove &lt;remote_name&gt;
@@ -396,19 +396,19 @@ FATAL:   could not use myremote: remote company-remote has been set exclusive by
 </section>
 <section id="keyserver-configurations">
 <h2>Keyserver Configurations<a class="headerlink" href="#keyserver-configurations" title="Permalink to this headline"></a></h2>
-<p>By default, Singularity will use the keyserver correlated to the
+<p>By default, Apptainer will use the keyserver correlated to the
 active cloud service endpoint. This behavior can be changed or
 supplemented via the <code class="docutils literal notranslate"><span class="pre">add-keyserver</span></code> and <code class="docutils literal notranslate"><span class="pre">remove-keyserver</span></code>
 commands. These commands allow an administrator to create a global list
 of key servers used to verify container signatures by default, where
 <code class="docutils literal notranslate"><span class="pre">order</span> <span class="pre">1</span></code> is the first in the list. Other operations performed by
-Singularity that reach out to a keyserver will only use the first
+Apptainer that reach out to a keyserver will only use the first
 entry, or <code class="docutils literal notranslate"><span class="pre">order</span> <span class="pre">1</span></code>, keyserver.</p>
 <p>When we list our default remotes, we can see that the default keyserver
 is <code class="docutils literal notranslate"><span class="pre">https://keys.sylabs.io</span></code> and the asterisk next to its order
 indicates that it is the keyserver associated to the current remote
 endpoint. We can also see the <code class="docutils literal notranslate"><span class="pre">INSECURE</span></code> column indicating that
-Singularity will use TLS when communicating with the keyserver.</p>
+Apptainer will use TLS when communicating with the keyserver.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity remote list
 Cloud Services Endpoints
 ========================
@@ -469,7 +469,7 @@ https://keys.sylabs.io   YES     NO        2*
 keyserver was placed as the first entry in the list and the default
 keyserver was moved to second in the list. With the keyserver
 configuration above, all image default image verification performed by
-Singularity will first reach out to <code class="docutils literal notranslate"><span class="pre">https://pgp.example.com</span></code> and
+Apptainer will first reach out to <code class="docutils literal notranslate"><span class="pre">https://pgp.example.com</span></code> and
 then to <code class="docutils literal notranslate"><span class="pre">https://keys.sylabs.io</span></code> when searching for public keys.</p>
 <p>If a keyserver requires authentication before usage, users can login
 before using it:</p>
@@ -511,14 +511,14 @@ directory.</p>
 </section>
 <section id="managing-oci-registries">
 <span id="sec-managing-oci-registries"></span><h2>Managing OCI Registries<a class="headerlink" href="#managing-oci-registries" title="Permalink to this headline"></a></h2>
-<p>It is common for users of Singularity to use OCI registries as sources
+<p>It is common for users of Apptainer to use OCI registries as sources
 for their container images. Some registries require credentials to
 access certain images or the registry itself. Previously, the only
-methods in Singularity to supply credentials to registries were to
+methods in Apptainer to supply credentials to registries were to
 supply credentials for each command or set environment variables for a
 single registry. See <span class="xref std std-ref">Authentication via Interactive Login</span> and <span class="xref std std-ref">Authentication via
 Environment Variables</span></p>
-<p>Singularity 3.7 introduces the ability for users to supply credentials
+<p>Apptainer 3.7 introduces the ability for users to supply credentials
 on a per registry basis with the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group.</p>
 <p>Users can login to an oci registry with the <code class="docutils literal notranslate"><span class="pre">remote</span> <span class="pre">login</span></code> command by
 specifying a <code class="docutils literal notranslate"><span class="pre">docker://</span></code> prefix to the registry hostname:</p>
@@ -549,9 +549,9 @@ docker://docker.io  NO
 </pre></div>
 </div>
 <p>Now we can see that <code class="docutils literal notranslate"><span class="pre">docker://docker.io</span></code> shows up under
-<code class="docutils literal notranslate"><span class="pre">Authenticated</span> <span class="pre">Logins</span></code> and Singularity will automatically supply the
+<code class="docutils literal notranslate"><span class="pre">Authenticated</span> <span class="pre">Logins</span></code> and Apptainer will automatically supply the
 configured credentials when interacting with DockerHub. We can also see
-the <code class="docutils literal notranslate"><span class="pre">INSECURE</span></code> column indicating that Singularity will use TLS when
+the <code class="docutils literal notranslate"><span class="pre">INSECURE</span></code> column indicating that Apptainer will use TLS when
 communicating with the registry.</p>
 <p>We can login to multiple OCI registries at the same time:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity remote login --username ian docker://registry.example.com
@@ -581,7 +581,7 @@ docker://docker.io             NO
 docker://registry.example.com  NO
 </pre></div>
 </div>
-<p>Singularity will supply the correct credentials for the registry based
+<p>Apptainer will supply the correct credentials for the registry based
 off of the hostname when using the following commands with a
 <code class="docutils literal notranslate"><span class="pre">docker://</span></code> or <code class="docutils literal notranslate"><span class="pre">oras://</span></code> URI:</p>
 <p><a class="reference external" href="cli/singularity_pull.html">pull</a>,

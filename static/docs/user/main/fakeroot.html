@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -96,7 +96,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -223,7 +223,7 @@ the host network.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>For unprivileged installation of Singularity or if <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span>
+<p>For unprivileged installation of Apptainer or if <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span>
 <span class="pre">no</span></code> is set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> users won’t be able to use a
 <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code> network.</p>
 </div>
@@ -235,9 +235,9 @@ the host network.</p>
 mappings in <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>, so your username needs to be listed in
 those files with a valid mapping (see the admin-guide for details), if
 you can’t edit the files ask an administrator.</p>
-<p>Singularity provides a <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">config</span> <span class="pre">fakeroot</span></code> command
+<p>Apptainer provides a <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">config</span> <span class="pre">fakeroot</span></code> command
 to allow configuration of the <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and
-<code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> mappings from the Singularity command line. You must
+<code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> mappings from the Apptainer command line. You must
 be a root user or run with <code class="docutils literal notranslate"><span class="pre">sudo</span></code> to use <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code>, as the
 mapping files are security sensitive. See the admin-guide for more
 details.</p>
@@ -263,7 +263,7 @@ commands:</p>
 <p>With fakeroot an unprivileged user can now build an image from a
 definition file with few restrictions. Some bootstrap methods that
 require creation of block devices (like <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>) may not always
-work correctly with <strong>“fake root”</strong>, Singularity uses seccomp filters
+work correctly with <strong>“fake root”</strong>, Apptainer uses seccomp filters
 to give programs the illusion that block device creation succeeded. This
 appears to work with <code class="docutils literal notranslate"><span class="pre">yum</span></code> bootstraps and <em>may</em> work with other
 bootstrap methods, although <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> is known to not work.</p>

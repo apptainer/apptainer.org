@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -89,7 +89,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -129,10 +129,10 @@
              
   <section id="security-options">
 <span id="id1"></span><h1>Security Options<a class="headerlink" href="#security-options" title="Permalink to this headline"></a></h1>
-<p id="sec-security-options">Singularity implements security related options in the
+<p id="sec-security-options">Apptainer implements security related options in the
 container runtime. This document describes the methods users
 have for specifying the security scope and context when running
-Singularity containers.</p>
+Apptainer containers.</p>
 <section id="linux-capabilities">
 <h2>Linux Capabilities<a class="headerlink" href="#linux-capabilities" title="Permalink to this headline"></a></h2>
 <div class="admonition note">
@@ -149,12 +149,12 @@ option in multi-tenant HPC environments where an admin wants to grant
 a user special privileges within a container. For that and similar
 use cases, the <a class="reference internal" href="fakeroot.html#fakeroot"><span class="std std-ref">fakeroot feature</span></a> is a better option.</p>
 </div>
-<p>Singularity provides full support for granting and revoking Linux
+<p>Apptainer provides full support for granting and revoking Linux
 capabilities on a user or group basis. For example, let us suppose that
 an admin has decided to grant a user (named <code class="docutils literal notranslate"><span class="pre">pinger</span></code>) capabilities to
 open raw sockets so that they can use <code class="docutils literal notranslate"><span class="pre">ping</span></code> in a container where the
 binary is controlled via capabilities. For information about how to
-manage capabilities as an admin please refer to the <a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/configfiles.html#capability.json">capability admin
+manage capabilities as an admin please refer to the <a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#capability.json">capability admin
 docs</a>.</p>
 <p>To take advantage of this granted capability as a user, <code class="docutils literal notranslate"><span class="pre">pinger</span></code> must
 also request the capability when executing a container with the
@@ -169,7 +169,7 @@ rtt min/avg/max/mdev = 73.178/73.178/73.178/0.000 ms
 </pre></div>
 </div>
 <p>If the admin decides that it is no longer necessary to allow the user
-<code class="docutils literal notranslate"><span class="pre">pinger</span></code> to open raw sockets within Singularity containers, they can
+<code class="docutils literal notranslate"><span class="pre">pinger</span></code> to open raw sockets within Apptainer containers, they can
 revoke the appropriate Linux capability and <code class="docutils literal notranslate"><span class="pre">pinger</span></code> will not be able
 to add that capability to their containers anymore:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec --add-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
@@ -180,10 +180,10 @@ ping: socket: Operation not permitted
 <p>Another scenario which is atypical of shared resource environments, but
 useful in cloud-native architectures is dropping capabilities when
 spawning containers as the root user to help minimize attack surfaces.
-With a default installation of Singularity, containers created by the
+With a default installation of Apptainer, containers created by the
 root user will maintain all capabilities. This behavior is configurable
-if desired. Check out the <a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/configfiles.html#capability.json">capability configuration</a>
-and <a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/configfiles.html#setuid-and-capabilities">root default capabilities</a>
+if desired. Check out the <a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#capability.json">capability configuration</a>
+and <a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#setuid-and-capabilities">root default capabilities</a>
 sections of the admin docs for more information.</p>
 <p>Assuming the root user will execute containers with the <code class="docutils literal notranslate"><span class="pre">CAP_NET_RAW</span></code>
 capability by default, executing the same container <code class="docutils literal notranslate"><span class="pre">pinger</span></code> executed
@@ -210,7 +210,7 @@ this keyword.</p>
 </section>
 <section id="building-encrypted-containers">
 <h2>Building encrypted containers<a class="headerlink" href="#building-encrypted-containers" title="Permalink to this headline"></a></h2>
-<p>Beginning in Singularity 3.4.0 it is possible to build and run
+<p>Beginning in Apptainer 3.4.0 it is possible to build and run
 encrypted containers. The containers are decrypted at runtime entirely
 in kernel space, meaning that no intermediate decrypted data is ever
 present on disk. See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more
@@ -218,7 +218,7 @@ details.</p>
 </section>
 <section id="security-related-action-options">
 <h2>Security related action options<a class="headerlink" href="#security-related-action-options" title="Permalink to this headline"></a></h2>
-<p>Singularity has many security related flags that can be passed to the
+<p>Apptainer has many security related flags that can be passed to the
 action commands; <code class="docutils literal notranslate"><span class="pre">shell</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code>, and <code class="docutils literal notranslate"><span class="pre">run</span></code> allowing fine grained
 control of security.</p>
 <section id="add-caps">
@@ -235,9 +235,9 @@ command. This option will also accept the case insensitive keyword
 binary. The most well-known SetUID binaries are owned by root and allow
 a user to execute a command with elevated privileges. But other SetUID
 binaries may allow a user to execute a command as a service account.</p>
-<p>By default SetUID is disallowed within Singularity containers as a
+<p>By default SetUID is disallowed within Apptainer containers as a
 security precaution. But the root user can override this precaution and
-allow SetUID binaries to behave as expected within a Singularity
+allow SetUID binaries to behave as expected within a Apptainer
 container with the <code class="docutils literal notranslate"><span class="pre">--allow-setuid</span></code> option like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity shell --allow-setuid some_container.sif
 </pre></div>
@@ -280,7 +280,7 @@ container.</p>
 <section id="security">
 <h3><code class="docutils literal notranslate"><span class="pre">--security</span></code><a class="headerlink" href="#security" title="Permalink to this headline"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--security</span></code> flag allows the root user to leverage security
-modules such as SELinux, AppArmor, and seccomp within your Singularity
+modules such as SELinux, AppArmor, and seccomp within your Apptainer
 container. You can also change the UID and GID of the user within the
 container at runtime.</p>
 <p>For instance:</p>
@@ -294,10 +294,10 @@ david
 <p>To use seccomp to blacklist a command follow this procedure. (It is
 actually preferable from a security standpoint to whitelist commands but
 this will suffice for a simple example.) Note that this example was run
-on Ubuntu and that Singularity was installed with the
+on Ubuntu and that Apptainer was installed with the
 <code class="docutils literal notranslate"><span class="pre">libseccomp-dev</span></code> and <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> packages as dependencies.</p>
 <p>First write a configuration file. An example configuration file is
-installed with Singularity, normally at
+installed with Apptainer, normally at
 <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity/seccomp-profiles/default.json</span></code>. For this
 example, we will use a much simpler configuration file to blacklist the
 <code class="docutils literal notranslate"><span class="pre">mkdir</span></code> command.</p>
@@ -331,7 +331,7 @@ example, we will use a much simpler configuration file to blacklist the
 the container like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity shell --security seccomp:/home/david/no_mkdir.json my_container.sif
 
-Singularity&gt; mkdir /tmp/foo
+Apptainer&gt; mkdir /tmp/foo
 Bad system call (core dumped)
 </pre></div>
 </div>

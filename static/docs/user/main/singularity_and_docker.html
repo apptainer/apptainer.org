@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -80,7 +80,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#public-containers">Public Containers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#docker-hub-limits">Docker Hub Limits</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#authentication-private-containers">Authentication / Private Containers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#singularity-cli-remote-command">Singularity CLI Remote Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apptainer-cli-remote-command">Apptainer CLI Remote Command</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#docker-cli-authentication">Docker CLI Authentication</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#interactive-login">Interactive Login</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#environment-variables">Environment Variables</a></li>
@@ -124,7 +124,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#argument-handling">Argument Handling</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#best-practices-for-docker-singularity-compatibility">Best Practices for Docker &amp; Singularity Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#best-practices-for-docker-apptainer-compatibility">Best Practices for Docker &amp; Apptainer Compatibility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#registry-authentication-issues">Registry Authentication Issues</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#container-doesn-t-start">Container Doesn’t Start</a></li>
@@ -132,11 +132,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#getting-help">Getting Help</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#singularity-definition-file-vs-dockerfile">Singularity Definition file vs. Dockerfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#apptainer-definition-file-vs-dockerfile">Apptainer Definition file vs. Dockerfile</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -178,13 +178,13 @@
 <span id="singularity-and-docker"></span><h1>Support for Docker and OCI Containers<a class="headerlink" href="#support-for-docker-and-oci-containers" title="Permalink to this headline"></a></h1>
 <p>The Open Containers Initiative (OCI) container format, which grew out of
 Docker, is the dominant standard for cloud-focused containerized
-deployments of software. Although Singularity’s own container format
+deployments of software. Although Apptainer’s own container format
 has many unique advantages, it’s likely you will need to work with
 Docker/OCI containers at some point.</p>
-<p>Singularity aims for maximum compatibility with Docker, within the
+<p>Apptainer aims for maximum compatibility with Docker, within the
 constraints on a runtime that is well suited for use on shared systems
 and especially in HPC environments.</p>
-<p>Using Singularity you can:</p>
+<p>Using Apptainer you can:</p>
 <ul class="simple">
 <li><p>Pull, run, and build from most containers on Docker Hub, without
 changes.</p></li>
@@ -195,7 +195,7 @@ local Docker daemon.</p></li>
 </ul>
 <p>This section will highlight these workflows, and discuss the limitations
 and best practices to keep in mind when creating containers targeting
-both Docker and Singularity.</p>
+both Docker and Apptainer.</p>
 <section id="containers-from-docker-hub">
 <h2>Containers From Docker Hub<a class="headerlink" href="#containers-from-docker-hub" title="Permalink to this headline"></a></h2>
 <p>Docker Hub is the most common place that projects publish public
@@ -203,7 +203,7 @@ container images. At some point, it’s likely that you will want to run
 or build from containers that are hosted there.</p>
 <section id="public-containers">
 <h3>Public Containers<a class="headerlink" href="#public-containers" title="Permalink to this headline"></a></h3>
-<p>It’s easy to run a public Docker Hub container with Singularity. Just
+<p>It’s easy to run a public Docker Hub container with Apptainer. Just
 put <code class="docutils literal notranslate"><span class="pre">docker://</span></code> in front of the container repository and tag. To run
 the container that’s called <code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow:latest</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run docker://sylabsio/lolcow:latest
@@ -228,10 +228,10 @@ INFO:    Creating SIF file...
                 ||     ||
 </pre></div>
 </div>
-<p>Note that Singularity retrieves blobs and configuration data from
+<p>Note that Apptainer retrieves blobs and configuration data from
 Docker Hub, extracts the layers that make up the Docker container, and
 creates a SIF file from them. This SIF file is kept in your
-Singularity <a class="reference internal" href="build_env.html#sec-cache"><span class="std std-ref">cache directory</span></a>, so if you run the same
+Apptainer <a class="reference internal" href="build_env.html#sec-cache"><span class="std std-ref">cache directory</span></a>, so if you run the same
 Docker container again the downloads and conversion aren’t required.</p>
 <p>To obtain the Docker container as a SIF file in a specific location,
 which you can move, share, and keep for later, <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> it:</p>
@@ -260,7 +260,7 @@ exact copy of the image.</p>
 <h3>Docker Hub Limits<a class="headerlink" href="#docker-hub-limits" title="Permalink to this headline"></a></h3>
 <p>Docker Hub introduced limits on anonymous access to its API in November
 2020. Every time you use a <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI to run, pull etc. a
-container Singularity will make requests to Docker Hub in order to
+container Apptainer will make requests to Docker Hub in order to
 check whether the container has been modified there. On shared systems,
 and when running containers in parallel, this can quickly exhaust the
 Docker Hub API limits.</p>
@@ -274,9 +274,9 @@ that you authenticate before using <code class="docutils literal notranslate"><s
 <h3>Authentication / Private Containers<a class="headerlink" href="#authentication-private-containers" title="Permalink to this headline"></a></h3>
 <p>To make use of the API limits under a Docker Hub account, or to access
 private containers, you’ll need to authenticate to Docker Hub. There are
-a number of ways to do this with Singularity.</p>
-<section id="singularity-cli-remote-command">
-<h4>Singularity CLI Remote Command<a class="headerlink" href="#singularity-cli-remote-command" title="Permalink to this headline"></a></h4>
+a number of ways to do this with Apptainer.</p>
+<section id="apptainer-cli-remote-command">
+<h4>Apptainer CLI Remote Command<a class="headerlink" href="#apptainer-cli-remote-command" title="Permalink to this headline"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span></code> command supports logging into Docker
 Hub and other OCI registries. For Docker Hub, the registry hostname is
 <code class="docutils literal notranslate"><span class="pre">docker.io</span></code>, so you will need to login as below, specifying your
@@ -302,12 +302,12 @@ INFO:    Logout succeeded
 <h4>Docker CLI Authentication<a class="headerlink" href="#docker-cli-authentication" title="Permalink to this headline"></a></h4>
 <p>If you have the <code class="docutils literal notranslate"><span class="pre">docker</span></code> CLI installed on your machine, you can
 <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span></code> to your account. This stores authentication information
-in <code class="docutils literal notranslate"><span class="pre">~/.docker/config.json</span></code>. The process that Singularity uses to
+in <code class="docutils literal notranslate"><span class="pre">~/.docker/config.json</span></code>. The process that Apptainer uses to
 retrieve Docker / OCI containers will attempt to use this information to
 login.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Singularity can only read credentials stored directly in
+<p>Apptainer can only read credentials stored directly in
 <code class="docutils literal notranslate"><span class="pre">~/.docker/config.json</span></code>. It cannot read credentials from external
 Docker credential helpers.</p>
 </div>
@@ -324,11 +324,11 @@ Enter Docker Password:
 </section>
 <section id="environment-variables">
 <h4>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline"></a></h4>
-<p>When calling Singularity in a CI/CD workflow, or other non-interactive
+<p>When calling Apptainer in a CI/CD workflow, or other non-interactive
 scenario, it may be useful to specify Docker Hub login credentials using
 environment variables. These are often the default way of passing
 secrets into jobs within CI pipelines.</p>
-<p>Singularity accepts a username, and password / token, as
+<p>Apptainer accepts a username, and password / token, as
 <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code>
 respectively. These environment variables will override any stored
 credentials.</p>
@@ -342,7 +342,7 @@ $ singularity pull docker://sylabsio/private
 </section>
 <section id="containers-from-other-registries">
 <h2>Containers From Other Registries<a class="headerlink" href="#containers-from-other-registries" title="Permalink to this headline"></a></h2>
-<p>You can use <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URIs with Singularity to pull and run
+<p>You can use <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URIs with Apptainer to pull and run
 containers from OCI registries other than Docker Hub. To do this, you’ll
 need to include the hostname or IP address of the registry in your
 <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI. Authentication with other registries is carried out
@@ -371,10 +371,10 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 <p>To pull containers from private repositories you will need to generate a
 CLI token in the Quay web interface, then use it to login with
-Singularity. Use the same methods as described for Docker Hub above:</p>
+Apptainer. Use the same methods as described for Docker Hub above:</p>
 <ul class="simple">
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">docker://quay.io</span></code>
-to store your credentials for Singularity.</p></li>
+to store your credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">quay.io</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME</span></code> and
@@ -385,7 +385,7 @@ to store your credentials for Singularity.</p></li>
 <h3>NVIDIA NGC<a class="headerlink" href="#nvidia-ngc" title="Permalink to this headline"></a></h3>
 <p>The NVIDIA NGC catalog at <a class="reference external" href="https://ngc.nvidia.com">https://ngc.nvidia.com</a> contains various GPU
 software, packaged in containers. Many of these containers are
-specifically documented by NVIDIA as supported by Singularity, with
+specifically documented by NVIDIA as supported by Apptainer, with
 instructions available.</p>
 <p>Previously, an account and API token was required to pull NGC
 containers. However, they are now available to pull as a guest without
@@ -403,7 +403,7 @@ Docker Hub), with the username <code class="docutils literal notranslate"><span 
 your NGC API key.</p>
 <ul class="simple">
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">\$oauthtoken</span>
-<span class="pre">docker://nvcr.io</span></code> to store your credentials for Singularity.</p></li>
+<span class="pre">docker://nvcr.io</span></code> to store your credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">nvcr.io</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME=&quot;\$oauthtoken&quot;</span></code> and
@@ -430,7 +430,7 @@ documentation here.</a></p>
 Docker Hub), with your username and personal access token:</p>
 <ul class="simple">
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">docker://ghcr.io</span></code>
-to store your credentials for Singularity.</p></li>
+to store your credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">ghcr.io</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME</span></code> and
@@ -445,7 +445,7 @@ You should follow one of the approaches in <a class="reference external" href="h
 in order to obtain a username and password.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The ECR Docker credential helper cannot be used, as Singularity
+<p>The ECR Docker credential helper cannot be used, as Apptainer
 does not currently support external credential helpers used with
 Docker, only reading credentials stored directly in the
 <code class="docutils literal notranslate"><span class="pre">.docker/config.json</span></code> file.</p>
@@ -461,7 +461,7 @@ username used in conjunction with this password is always <code class="docutils 
 <ul class="simple">
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">AWS</span>
 <span class="pre">docker://&lt;accountid&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com</span></code> to store your
-credentials for Singularity.</p></li>
+credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">AWS</span>
 <span class="pre">&lt;accountid&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your
 machine.</p></li>
@@ -481,13 +481,13 @@ use in Azure. See the <a class="reference external" href="https://docs.microsoft
 for more information on these options.</p>
 <p>Generally, for identities, using <code class="docutils literal notranslate"><span class="pre">az</span> <span class="pre">acr</span> <span class="pre">login</span></code> from the Azure CLI
 will add credentials to <code class="docutils literal notranslate"><span class="pre">.docker/config.json</span></code> which can be read by
-Singularity.</p>
+Apptainer.</p>
 <p>Service Principle accounts will have an explicit username and password,
 and you should authenticate using one of the following methods:</p>
 <ul class="simple">
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span>
 <span class="pre">docker://myregistry.azurecr.io</span></code> to store your credentials for
-Singularity.</p></li>
+Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">myregistry.azurecr.io</span></code> if
 <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
@@ -505,10 +505,10 @@ methods.</p>
 <h2>Building From Docker / OCI Containers<a class="headerlink" href="#building-from-docker-oci-containers" title="Permalink to this headline"></a></h2>
 <p>If you wish to use an existing Docker or OCI container as the basis for
 a new container, you will need to specify it as the <em>bootstrap</em> source
-in a Singularity definition file.</p>
+in a Apptainer definition file.</p>
 <p>Just as you can run or pull containers from different registries using a
 <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI, you can use different headers in a definition file to
-instruct Singularity where to find the container you want to use as
+instruct Apptainer where to find the container you want to use as
 the starting point for your build.</p>
 <section id="registries-in-definition-files">
 <h3>Registries In Definition Files<a class="headerlink" href="#registries-in-definition-files" title="Permalink to this headline"></a></h3>
@@ -526,7 +526,7 @@ tag:</p>
 </pre></div>
 </div>
 <p>If you <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">build</span></code> a definition file with these lines,
-Singularity will fetch the <code class="docutils literal notranslate"><span class="pre">ubuntu:20.04</span></code> container image from
+Apptainer will fetch the <code class="docutils literal notranslate"><span class="pre">ubuntu:20.04</span></code> container image from
 Docker Hub, and extract it as the basis for your new container.</p>
 </section>
 <section id="other-registries">
@@ -548,7 +548,7 @@ header. The following two examples are equivalent:</p>
 <h4>Authentication During a Build<a class="headerlink" href="#authentication-during-a-build" title="Permalink to this headline"></a></h4>
 <p>If you are building from an image in a private registry you will need to
 ensure that the credentials needed to access the image are available to
-Singularity.</p>
+Apptainer.</p>
 <p>A build might be run as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user, e.g. via <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, or under
 your own account with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
 <p>If you are running the build as <code class="docutils literal notranslate"><span class="pre">root</span></code>, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, then any
@@ -557,7 +557,7 @@ stored credentials or environment variables must be available to the
 <ul class="simple">
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.
 I.E. run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">singularity</span> <span class="pre">build</span> <span class="pre">--docker-login</span> <span class="pre">myimage.sif</span>
-<span class="pre">Singularity</span></code>.</p></li>
+<span class="pre">Apptainer</span></code>.</p></li>
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME</span></code> and
 <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code> environment variables. Pass the
 environment variables through sudo to the <code class="docutils literal notranslate"><span class="pre">root</span></code> build process by
@@ -576,7 +576,7 @@ feature you do not need to specially set credentials for the root user.</p>
 <h3>Archives &amp; Docker Daemon<a class="headerlink" href="#archives-docker-daemon" title="Permalink to this headline"></a></h3>
 <p>As well as being hosted in a registry, Docker / OCI containers might be
 found inside a running Docker daemon, or saved as an archive.
-Singularity can build from these locations by using specialized
+Apptainer can build from these locations by using specialized
 bootstrap agents.</p>
 <section id="containers-cached-by-the-docker-daemon">
 <h4>Containers Cached by the Docker Daemon<a class="headerlink" href="#containers-cached-by-the-docker-daemon" title="Permalink to this headline"></a></h4>
@@ -622,7 +622,7 @@ registry, the <code class="docutils literal notranslate"><span class="pre">docke
 <p class="admonition-title">Note</p>
 <p>In the example above, the build was performed without <code class="docutils literal notranslate"><span class="pre">sudo</span></code>. This
 is possible only when the user is part of the <code class="docutils literal notranslate"><span class="pre">docker</span></code> group on the
-host, since Singularity must contact the Docker daemon through its
+host, since Apptainer must contact the Docker daemon through its
 socket. If you are not part of the <code class="docutils literal notranslate"><span class="pre">docker</span></code> group you will need to
 use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> for the build to complete successfully.</p>
 </div>
@@ -637,7 +637,7 @@ use <code class="docutils literal notranslate"><span class="pre">Bootstrap:</spa
 <h4>Containers in Docker Archive Files<a class="headerlink" href="#containers-in-docker-archive-files" title="Permalink to this headline"></a></h4>
 <p>Docker allows containers to be exported into single file tar archives.
 These cannot be run directly, but are intended to be imported into
-Docker to run at a later date, or another location. Singularity can
+Docker to run at a later date, or another location. Apptainer can
 build from (or run) these archive files, by extracting them as part of
 the build process.</p>
 <p>If an image is listed by the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code> command, then we can
@@ -700,15 +700,15 @@ filename in the <code class="docutils literal notranslate"><span class="pre">Fro
 </section>
 <section id="differences-and-limitations-vs-docker">
 <span id="sec-optional-headers-def-files"></span><h2>Differences and Limitations vs Docker<a class="headerlink" href="#differences-and-limitations-vs-docker" title="Permalink to this headline"></a></h2>
-<p>Though Docker / OCI container compatibility is a goal of Singularity,
-there are some differences and limitations due to the way Singularity
+<p>Though Docker / OCI container compatibility is a goal of Apptainer,
+there are some differences and limitations due to the way Apptainer
 was designed to work well on shared systems and HPC clusters. If you are
 having difficulty running a specific Docker container, check through the
 list of differences below. There are workarounds for many of the issues
 that you are most likely to face.</p>
 <section id="read-only-by-default">
 <h3>Read-only by Default<a class="headerlink" href="#read-only-by-default" title="Permalink to this headline"></a></h3>
-<p>Singularity’s container image format (SIF) is generally read-only.
+<p>Apptainer’s container image format (SIF) is generally read-only.
 This permits containers to be run in parallel from a shared location on
 a network filesystem, support in-built signing and verification, and
 offer encryption. A container’s filesystem is mounted directly from the
@@ -717,7 +717,7 @@ SIF, as SquashFS, so cannot be written to by default.</p>
 resulting container filesystem can be written to and modified by
 default. If a Docker container expects to write files, you will need to
 follow one of the following methods to allow it to run under
-Singularity.</p>
+Apptainer.</p>
 <ul class="simple">
 <li><p>A directory from the host can be passed into the container with the
 <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> flags. It needs to be mounted inside the
@@ -740,7 +740,7 @@ or may not be safe, depending on the program executed. The program must
 use, and the filesystem support, some type of locking in order that the
 parallel runs do not interfere.</p>
 <p>A writable overlay file in a SIF partition cannot be used in parallel.
-Singularity will refuse to run concurrently using the same SIF
+Apptainer will refuse to run concurrently using the same SIF
 writable overlay partition.</p>
 </section>
 <section id="dockerfile-user">
@@ -748,15 +748,15 @@ writable overlay partition.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> used to build a Docker container may contain a
 <code class="docutils literal notranslate"><span class="pre">USER</span></code> statement. This tells the container runtime that it should run
 the container under the specified user account.</p>
-<p>Because Singularity is designed to provide easy and safe access to
+<p>Because Apptainer is designed to provide easy and safe access to
 data on the host system, work under batch schedulers, etc., it does not
 permit changing the user account the container is run as.</p>
 <p>Any <code class="docutils literal notranslate"><span class="pre">USER</span></code> statement in a <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> will be ignored by
-Singularity when the container is run. In practice, this often does
+Apptainer when the container is run. In practice, this often does
 not affect the execution of the software in the container. Software that
 is written in a way that requires execution under a specific user
-account will generally require modification for use with Singularity.</p>
-<p>Singularity’s <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> mode will start a container as a fake
+account will generally require modification for use with Apptainer.</p>
+<p>Apptainer’s <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> mode will start a container as a fake
 <code class="docutils literal notranslate"><span class="pre">root</span></code> user, mapped to the user’s real account outside of the
 container. Inside the container it is possible to change to another user
 account, which is mapped to a configured range of sub-uids / gids
@@ -766,7 +766,7 @@ if your adminstrator has configured the system for <code class="docutils literal
 </section>
 <section id="default-mounts-home">
 <h3>Default Mounts / $HOME<a class="headerlink" href="#default-mounts-home" title="Permalink to this headline"></a></h3>
-<p>A default installation of Singularity will mount the user’s home
+<p>A default installation of Apptainer will mount the user’s home
 directory, <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> directory, and the current working directory, into
 each container that is run. Administrators may also configure e.g. HPC
 project directories to automatically bind mount. Docker does not mount
@@ -778,7 +778,7 @@ installed packages for Python into your home directory (<code class="docutils li
 <span class="pre">--user</span></code>) then a Python container may find and attempt to use them. This
 can cause conflicts and unexpected behavior.</p>
 <p>If you experience issues, use the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> option to stop
-Singularity automatically binding directories into the container. You
+Apptainer automatically binding directories into the container. You
 may need to use <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> to then add back e.g. an HPC
 project directory that you need access to.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Without --contain, python in the container finds packages
@@ -804,7 +804,7 @@ wheel      0.37.0
 </section>
 <section id="environment-propagation">
 <h3>Environment Propagation<a class="headerlink" href="#environment-propagation" title="Permalink to this headline"></a></h3>
-<p>Singularity propagates most environment variables set on the host into
+<p>Apptainer propagates most environment variables set on the host into
 the container, by default. Docker does not propagate any host
 environment variables into the container. Environment variables may
 change the behaviour of software.</p>
@@ -826,19 +826,19 @@ FORCE_VAR=123
 </pre></div>
 </div>
 <p>Any environment variables set via an <code class="docutils literal notranslate"><span class="pre">ENV</span></code> line in a <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>
-will be available when the container is run with Singularity.</p>
+will be available when the container is run with Apptainer.</p>
 </section>
 <section id="namespace-device-isolation">
 <h3>Namespace &amp; Device Isolation<a class="headerlink" href="#namespace-device-isolation" title="Permalink to this headline"></a></h3>
-<p>Because Singularity favors an integration over isolation approach it
+<p>Because Apptainer favors an integration over isolation approach it
 does not, by default, use all the methods through which a container can
 be isolated from the host system. This makes it much easier to run a
-Singularity container like any other program, while the unique
+Apptainer container like any other program, while the unique
 security model ensures safety. You can access the host’s network, GPUs,
 and other devices directly. Processes in the container are not numbered
 separately from host processes. Hostnames are not changed, etc.</p>
 <p>Most containers are not impacted by the differences in isolation. If you
-require more isolation, than Singularity provides by default, you can
+require more isolation, than Apptainer provides by default, you can
 enable some of the extra namespaces that Docker uses, with flags:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--ipc</span> <span class="pre">/</span> <span class="pre">-i</span></code> creates a separate IPC (inter process communication)
@@ -863,14 +863,14 @@ in the container even when <code class="docutils literal notranslate"><span clas
 </section>
 <section id="init-shim-process">
 <h3>Init Shim Process<a class="headerlink" href="#init-shim-process" title="Permalink to this headline"></a></h3>
-<p>When a Singularity container is run using the <code class="docutils literal notranslate"><span class="pre">--pid</span> <span class="pre">/</span> <span class="pre">p</span></code> option, or
+<p>When a Apptainer container is run using the <code class="docutils literal notranslate"><span class="pre">--pid</span> <span class="pre">/</span> <span class="pre">p</span></code> option, or
 started as an instance (which implies <code class="docutils literal notranslate"><span class="pre">--pid</span></code>), a shim init process is
 executed that will run the container payload itself.</p>
 <p>The shim process helps to ensure signals are propagated correctly from
 the terminal, or batch schedulers etc. when containers are not designed
 for interactive use. Because Docker does not provide an init process by
 default, some containers have been designed to run their own init
-process, which cannot operate under the control of Singularity’s shim.</p>
+process, which cannot operate under the control of Apptainer’s shim.</p>
 <p>For example, a container using the <code class="docutils literal notranslate"><span class="pre">tini</span></code> init process will produce
 warnings when started as an instance, or if run with <code class="docutils literal notranslate"><span class="pre">--pid</span></code>. To work
 around this, use the <code class="docutils literal notranslate"><span class="pre">--no-init</span></code> flag to disable the shim:</p>
@@ -888,7 +888,7 @@ $ singularity run --pid --no-init tini_example.sif
 </section>
 <section id="docker-like-compat-flag">
 <h2>Docker-like <code class="docutils literal notranslate"><span class="pre">--compat</span></code> Flag<a class="headerlink" href="#docker-like-compat-flag" title="Permalink to this headline"></a></h2>
-<p>If Docker-like behavior is important, Singularity can be started with
+<p>If Docker-like behavior is important, Apptainer can be started with
 the <code class="docutils literal notranslate"><span class="pre">--compat</span></code> flag. This flag is a convenient short-hand alternative
 to using all of:</p>
 <ul class="simple">
@@ -913,7 +913,7 @@ host.</p></li>
 <li><p>No shim init process.</p></li>
 </ul>
 <p>These options will allow most, but not all, Docker / OCI containers to
-execute correctly under Singularity. The user namespace and network
+execute correctly under Apptainer. The user namespace and network
 namespace are not used, as these negate benefits of SIF and direct
 access to high performance cluster networks.</p>
 </section>
@@ -923,10 +923,10 @@ access to high performance cluster networks.</p>
 on the <code class="docutils literal notranslate"><span class="pre">CMD</span></code> and/or <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> set in the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> that was
 used to build it, along with any arguments on the command line. The
 <code class="docutils literal notranslate"><span class="pre">CMD</span></code> and <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> can also be overridden by flags.</p>
-<p>A Singularity container has the concept of a <em>runscript</em>, which is a
+<p>A Apptainer container has the concept of a <em>runscript</em>, which is a
 single shell script defining what happens when you <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">run</span></code>
 the container. Because there is no internal concept of <code class="docutils literal notranslate"><span class="pre">CMD</span></code> and
-<code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>, Singularity must create a runscript from the <code class="docutils literal notranslate"><span class="pre">CMD</span></code>
+<code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>, Apptainer must create a runscript from the <code class="docutils literal notranslate"><span class="pre">CMD</span></code>
 and <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> when converting a Docker container. The behavior of
 this script mirrors Docker as closely as possible.</p>
 <p>If the Docker container only has an <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> - that <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>
@@ -975,7 +975,7 @@ container. Instead, use <code class="docutils literal notranslate"><span class="
 inside a container.</p>
 <section id="argument-handling">
 <h3>Argument Handling<a class="headerlink" href="#argument-handling" title="Permalink to this headline"></a></h3>
-<p>Because Singularity runscripts are evaluated shell scripts
+<p>Because Apptainer runscripts are evaluated shell scripts
 arguments can behave slightly differently than in Docker/OCI
 runtimes, if they contain shell code that may be evaluated. To
 replicate Docker/OCI behavior you may need additional escaping or
@@ -995,19 +995,19 @@ using the <code class="docutils literal notranslate"><span class="pre">exec</spa
 runtimes as there is no evaluated runscript.</p>
 </section>
 </section>
-<section id="best-practices-for-docker-singularity-compatibility">
-<span id="sec-best-practices"></span><h2>Best Practices for Docker &amp; Singularity Compatibility<a class="headerlink" href="#best-practices-for-docker-singularity-compatibility" title="Permalink to this headline"></a></h2>
-<p>As detailed previously, Singularity can make use of most Docker and
+<section id="best-practices-for-docker-apptainer-compatibility">
+<span id="sec-best-practices"></span><h2>Best Practices for Docker &amp; Apptainer Compatibility<a class="headerlink" href="#best-practices-for-docker-apptainer-compatibility" title="Permalink to this headline"></a></h2>
+<p>As detailed previously, Apptainer can make use of most Docker and
 OCI images without issues, or via simple workarounds. In general,
 however, there are some best practices that should be applied when
 creating Docker / OCI containers that will also be run using
-Singularity.</p>
+Apptainer.</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p><strong>Don’t require execution by a specific user</strong></p></li>
 </ol>
 <p>Avoid using the <code class="docutils literal notranslate"><span class="pre">USER</span></code> instruction in your Docker file, as it is
-ignored by Singularity. Install and configure software inside the
+ignored by Apptainer. Install and configure software inside the
 container so that it can be run by any user.</p>
 <ol class="arabic simple" start="2">
 <li><p><strong>Don’t install software under /root or in another user’s home
@@ -1019,14 +1019,14 @@ default, it’s tempting to install software into root’s home directory
 inaccessible to non-root users. When the container is run as another
 user the software may be inaccessible.</p>
 <p>Software inside another user’s home directory, e.g. <code class="docutils literal notranslate"><span class="pre">/home/myapp</span></code>,
-may be obscured by Singularity’s automatic mounts onto <code class="docutils literal notranslate"><span class="pre">/home</span></code>.</p>
+may be obscured by Apptainer’s automatic mounts onto <code class="docutils literal notranslate"><span class="pre">/home</span></code>.</p>
 <p>Install software into system-wide locations in the container, such as
 under <code class="docutils literal notranslate"><span class="pre">/usr</span></code> or <code class="docutils literal notranslate"><span class="pre">/opt</span></code> to avoid these issues.</p>
 <ol class="arabic simple" start="3">
 <li><p><strong>Support a read-only filesystem</strong></p></li>
 </ol>
 <p>Because of the immutable nature of the SIF format, a container run
-with Singularity is read-only by default.</p>
+with Apptainer is read-only by default.</p>
 <p>Try to ensure your container will run with a read-only filesystem. If
 this is not possible, document exactly where the container needs to
 write, so that a user can bind in a writable location, or use
@@ -1036,7 +1036,7 @@ write, so that a user can bind in a writable location, or use
 <ol class="arabic simple" start="4">
 <li><p><strong>Be careful writing to /tmp</strong></p></li>
 </ol>
-<p>Singularity mounts the <em>host</em> <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> into the container, by
+<p>Apptainer mounts the <em>host</em> <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> into the container, by
 default. This means you must be be careful when writing sensitive
 information to <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, and should ensure your container cleans up
 files it writes there.</p>
@@ -1046,7 +1046,7 @@ files it writes there.</p>
 <p>If your <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> adds libraries and / or manipulates the ld
 search path in the container (<code class="docutils literal notranslate"><span class="pre">ld.so.conf</span></code> / <code class="docutils literal notranslate"><span class="pre">ld.so.conf.d</span></code>), you
 should ensure the library cache is updated during the build.</p>
-<p>Because Singularity runs containers read-only by default, the cache
+<p>Because Apptainer runs containers read-only by default, the cache
 and any missing library symlinks may not be able to be updated /
 created at execution time.</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> toward the <em>end</em> of your <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> to ensure
@@ -1072,7 +1072,7 @@ without external helper programs, if possible.</p>
 <section id="container-doesn-t-start">
 <h3>Container Doesn’t Start<a class="headerlink" href="#container-doesn-t-start" title="Permalink to this headline"></a></h3>
 <p>If a Docker container fails to start, the most common cause is that it
-needs to write files, while Singularity runs read-only by default.</p>
+needs to write files, while Apptainer runs read-only by default.</p>
 <p>Try running with the <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> option, or the <code class="docutils literal notranslate"><span class="pre">--compat</span></code>
 flag (which enables additional compatibility fixes).</p>
 <p>You can also look for error messages mentioning ‘permission denied’ or
@@ -1084,7 +1084,7 @@ needed files, which will appear in the directory you bind in.</p>
 <section id="unexpected-container-behaviour">
 <h3>Unexpected Container Behaviour<a class="headerlink" href="#unexpected-container-behaviour" title="Permalink to this headline"></a></h3>
 <p>If a Docker container runs, but exhibits unexpected behavior, the most
-likely cause is the different level of isolation that Singularity
+likely cause is the different level of isolation that Apptainer
 provides vs Docker.</p>
 <p>Try running the container with the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> option, or the
 <code class="docutils literal notranslate"><span class="pre">--compat</span></code> option (which is more strict). This disables the automatic
@@ -1098,16 +1098,16 @@ present there.</p>
 ask for help with running a specific Docker container. Other users may
 have already had success running the same container or software. Please
 don’t report issues with specific Docker containers on GitHub, unless
-you believe they are due to a bug in Singularity.</p>
+you believe they are due to a bug in Apptainer.</p>
 </section>
 </section>
-<section id="singularity-definition-file-vs-dockerfile">
-<span id="sec-deffile-vs-dockerfile"></span><h2>Singularity Definition file vs. Dockerfile<a class="headerlink" href="#singularity-definition-file-vs-dockerfile" title="Permalink to this headline"></a></h2>
-<p>An alternative to running Docker containers with Singularity is to
+<section id="apptainer-definition-file-vs-dockerfile">
+<span id="sec-deffile-vs-dockerfile"></span><h2>Apptainer Definition file vs. Dockerfile<a class="headerlink" href="#apptainer-definition-file-vs-dockerfile" title="Permalink to this headline"></a></h2>
+<p>An alternative to running Docker containers with Apptainer is to
 re-write the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> as a definition file, and build a native SIF
 image.</p>
 <p>The table below gives a quick reference comparing Dockerfile and
-Singularity definition files. For more detail please see
+Apptainer definition files. For more detail please see
 <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">Definition Files</span></a>.</p>
 </section>
 </section>

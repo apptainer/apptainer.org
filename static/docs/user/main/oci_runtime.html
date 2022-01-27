@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Singularity and MPI applications" href="mpi.html" />
+    <link rel="next" title="Apptainer and MPI applications" href="mpi.html" />
     <link rel="prev" title="Support for Docker and OCI Containers" href="singularity_and_docker.html" /> 
 </head>
 
@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -87,7 +87,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#unmounting-oci-filesystem-bundles">Unmounting OCI Filesystem Bundles</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -132,11 +132,11 @@
 <p>OCI is an acronym for the <a class="reference external" href="https://www.opencontainers.org/">Open Containers Initiative</a> - an independent organization whose
 mandate is to develop open standards relating to containerization. To
 date, standardization efforts have focused on container formats and
-runtimes. Singularity’s compliance with respect to the OCI Image
-Specification is considered in detail <span class="xref std std-ref">elsewhere</span>. It is Singularity’s compliance with the OCI
+runtimes. Apptainer’s compliance with respect to the OCI Image
+Specification is considered in detail <span class="xref std std-ref">elsewhere</span>. It is Apptainer’s compliance with the OCI
 Runtime Specification that is of concern here.</p>
 <p>Briefly, compliance with respect to the OCI Runtime Specification is
-addressed in Singularity through the introduction of the <code class="docutils literal notranslate"><span class="pre">oci</span></code>
+addressed in Apptainer through the introduction of the <code class="docutils literal notranslate"><span class="pre">oci</span></code>
 command group.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -834,7 +834,7 @@ additional properties - for example:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">ociVersion</span></code> - a mandatory property that identifies the version
 of the OCI runtime specification that the bundle is compliant with</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">process</span></code> - an optional property that specifies the container
-process. When invoked via Singularity, sub-properties such as
+process. When invoked via Apptainer, sub-properties such as
 <code class="docutils literal notranslate"><span class="pre">args</span></code> are populated by making use of the contents of the
 <code class="docutils literal notranslate"><span class="pre">.singularity.d</span></code> directory, e.g. via <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">cat</span>
 <span class="pre">/var/tmp/busybox/config.json</span> <span class="pre">|</span> <span class="pre">jq</span> <span class="pre">[.process.args]</span></code>:</p></li>
@@ -847,7 +847,7 @@ process. When invoked via Singularity, sub-properties such as
 </pre></div>
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">run</span></code> equates to the <span class="xref std std-ref">familiar runscript</span> for this container. If image
-creation is bootstrapped via a Docker or OCI agent, Singularity
+creation is bootstrapped via a Docker or OCI agent, Apptainer
 will make use of <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> or <code class="docutils literal notranslate"><span class="pre">CMD</span></code> (from the OCI image) to
 populate <code class="docutils literal notranslate"><span class="pre">args</span></code>; for additional discussion, please refer to
 <span class="xref std std-ref">Directing Execution</span> in the section
@@ -937,7 +937,7 @@ the overlay filesystem, <code class="docutils literal notranslate"><span class="
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="singularity_and_docker.html" class="btn btn-neutral float-left" title="Support for Docker and OCI Containers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="mpi.html" class="btn btn-neutral float-right" title="Singularity and MPI applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mpi.html" class="btn btn-neutral float-right" title="Apptainer and MPI applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
