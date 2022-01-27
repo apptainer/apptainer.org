@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -77,7 +77,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -85,7 +85,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Appendix</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#singularity-s-environment-variables">Singularity’s environment variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#apptainer-s-environment-variables">Apptainer’s environment variables</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#a"><code class="docutils literal notranslate"><span class="pre">A</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#b"><code class="docutils literal notranslate"><span class="pre">B</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c"><code class="docutils literal notranslate"><span class="pre">C</span></code></a></li>
@@ -160,9 +160,9 @@
              
   <section id="appendix">
 <span id="id1"></span><h1>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline"></a></h1>
-<section id="singularity-s-environment-variables">
-<span id="singularity-environment-variables"></span><h2>Singularity’s environment variables<a class="headerlink" href="#singularity-s-environment-variables" title="Permalink to this headline"></a></h2>
-<p>Singularity comes with some environment variables you can set or
+<section id="apptainer-s-environment-variables">
+<span id="singularity-environment-variables"></span><h2>Apptainer’s environment variables<a class="headerlink" href="#apptainer-s-environment-variables" title="Permalink to this headline"></a></h2>
+<p>Apptainer comes with some environment variables you can set or
 modify depending on your needs. You can see them listed alphabetically
 below with their respective functionality.</p>
 <section id="a">
@@ -210,7 +210,7 @@ directory.</p></li>
 <section id="d">
 <h3><code class="docutils literal notranslate"><span class="pre">D</span></code><a class="headerlink" href="#d" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_DEFFILE</strong>: Shows the Singularity recipe that was used
+<li><p><strong>SINGULARITY_DEFFILE</strong>: Shows the Apptainer recipe that was used
 to generate the image.</p></li>
 <li><p><strong>SINGULARITY_DESC</strong>: Contains a description of the capabilities.</p></li>
 <li><p><strong>SINGULARITY_DISABLE_CACHE</strong>: To disable all caching of docker/oci,
@@ -424,8 +424,8 @@ container (skips the header). Default is set to false.</p></li>
 the given user.</p></li>
 <li><p><strong>SINGULARITY_USERNS</strong> and <strong>SINGULARITY_UNSHARE_USERNS</strong>: To specify
 that the container will run in a new user namespace, allowing
-Singularity to run completely unprivileged on recent kernels. This
-may not support every feature of Singularity. (Sandbox image only).
+Apptainer to run completely unprivileged on recent kernels. This
+may not support every feature of Apptainer. (Sandbox image only).
 Default is set to false.</p></li>
 </ol>
 </section>
@@ -435,7 +435,7 @@ Default is set to false.</p></li>
 <li><p><strong>SINGULARITY_WORKDIR</strong>: The working directory to be used for
 <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, <code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code> and <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> (if <code class="docutils literal notranslate"><span class="pre">-c</span></code> or <code class="docutils literal notranslate"><span class="pre">--contain</span></code> was
 also used)</p></li>
-<li><p><strong>SINGULARITY_WRITABLE</strong>: By default, all Singularity containers
+<li><p><strong>SINGULARITY_WRITABLE</strong>: By default, all Apptainer containers
 are available as read only, this option makes the file system
 accessible as read/write. Default set to false.</p></li>
 <li><p><strong>SINGULARITY_WRITABLE_TMPFS</strong>: Makes the file system accessible as
@@ -488,7 +488,7 @@ is signed by keys matching <em>all</em> of the specified fingerprints.</p>
 <p>Docker images are comprised of layers that are assembled at runtime to
 create an image. You can use Docker layers to create a base image, and
 then add your own custom software. For example, you might use Docker’s
-Ubuntu image layers to create an Ubuntu Singularity container. You
+Ubuntu image layers to create an Ubuntu Apptainer container. You
 could do the same with CentOS, Debian, Arch, Suse, Alpine, BusyBox, etc.</p>
 <p>Or maybe you want a container that already has software installed. For
 instance, maybe you want to build a container that uses CUDA and cuDNN
@@ -497,7 +497,7 @@ start with one of the <code class="docutils literal notranslate"><span class="pr
 software on top of that.</p>
 <p>Or perhaps you have already invested in Docker and created your own
 Docker containers. If so, you can seamlessly convert them to
-Singularity with the <code class="docutils literal notranslate"><span class="pre">docker</span></code> bootstrap module.</p>
+Apptainer with the <code class="docutils literal notranslate"><span class="pre">docker</span></code> bootstrap module.</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 </pre></div>
 </div>
@@ -511,7 +511,7 @@ a base. <code class="docutils literal notranslate"><span class="pre">registry</s
 <code class="docutils literal notranslate"><span class="pre">namespace</span></code> is optional and defaults to <code class="docutils literal notranslate"><span class="pre">library</span></code>. This is the
 correct namespace to use for some official containers (ubuntu for
 example). <code class="docutils literal notranslate"><span class="pre">tag</span></code> is also optional and will default to <code class="docutils literal notranslate"><span class="pre">latest</span></code></p>
-<p>See <a class="reference internal" href="singularity_and_docker.html#singularity-and-docker"><span class="std std-ref">Singularity and Docker</span></a> for more
+<p>See <a class="reference internal" href="singularity_and_docker.html#singularity-and-docker"><span class="std std-ref">Apptainer and Docker</span></a> for more
 detailed info on using Docker registries.</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Registry</span>: http://custom_registry
 </pre></div>
@@ -560,7 +560,7 @@ and <code class="docutils literal notranslate"><span class="pre">digest</span></
 <p>When bootstrapping from a Singularity Hub image, all previous definition
 files that led to the creation of the current image will be stored in a
 directory within the container called
-<code class="docutils literal notranslate"><span class="pre">/.singularity.d/bootstrap_history</span></code>. Singularity will also alert you
+<code class="docutils literal notranslate"><span class="pre">/.singularity.d/bootstrap_history</span></code>. Apptainer will also alert you
 if environment variables have been changed between the base image and
 the new image during bootstrap.</p>
 </section>
@@ -591,7 +591,7 @@ you want to use.</p>
 <section id="localimage-bootstrap-agent">
 <span id="build-localimage"></span><h3><code class="docutils literal notranslate"><span class="pre">localimage</span></code> bootstrap agent<a class="headerlink" href="#localimage-bootstrap-agent" title="Permalink to this headline"></a></h3>
 <p id="sec-build-localimage">This module allows you to build a container from an existing
-Singularity container on your host system. The name is somewhat
+Apptainer container on your host system. The name is somewhat
 misleading because your container can be in either image or directory
 format.</p>
 <p>You can use an existing container image as your “base”, and then add
@@ -623,7 +623,7 @@ of the specified fingerprints.</p>
 <p>When building from a local container, all previous definition files that
 led to the creation of the current container will be stored in a
 directory within the container called
-<code class="docutils literal notranslate"><span class="pre">/.singularity.d/bootstrap_history</span></code>. Singularity will also alert you
+<code class="docutils literal notranslate"><span class="pre">/.singularity.d/bootstrap_history</span></code>. Apptainer will also alert you
 if environment variables have been changed between the base image and
 the new image during bootstrap.</p>
 </section>
@@ -737,7 +737,7 @@ build a core operating system.</p>
 <p>Arch Linux is, by design, a very stripped down, light-weight OS. You may
 need to perform a significant amount of configuration to get a usable
 OS. Please refer to this <a class="reference external" href="https://github.com/singularityware/singularity/blob/master/examples/arch/README.md">README.md</a>
-and the <a class="reference external" href="https://github.com/singularityware/singularity/blob/master/examples/arch/Singularity">Arch Linux example</a>
+and the <a class="reference external" href="https://github.com/singularityware/singularity/blob/master/examples/arch/Apptainer">Arch Linux example</a>
 for more info.</p>
 </section>
 <section id="busybox-bootstrap-agent">
@@ -765,7 +765,7 @@ URI.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">zypper</span></code> version 1.11.20 or greater is required on the host system,
-as Singularity requires the <code class="docutils literal notranslate"><span class="pre">--releasever</span></code> flag.</p>
+as Apptainer requires the <code class="docutils literal notranslate"><span class="pre">--releasever</span></code> flag.</p>
 </div>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">zypper</span></code> module to specify a base for a Suse-like container.
 You must also specify a URI for the mirror you would like to use.</p>
@@ -792,7 +792,7 @@ install when using the zypper build module is <code class="docutils literal notr
 <section id="docker-daemon-and-docker-archive-bootstrap-agents">
 <span id="docker-daemon-archive"></span><h3><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> and <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agents<a class="headerlink" href="#docker-daemon-and-docker-archive-bootstrap-agents" title="Permalink to this headline"></a></h3>
 <p>If you are using docker locally there are two options for creating
-Singularity images without the need for a repository. You can either
+Apptainer images without the need for a repository. You can either
 build a SIF from a <code class="docutils literal notranslate"><span class="pre">docker-save</span></code> tar file or you can convert any
 docker image present in docker’s daemon internal storage.</p>
 <p><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> allows you to build a SIF from any docker image
@@ -811,7 +811,7 @@ currently residing in docker’s daemon internal storage:</p>
 <span class="go">Storing signatures</span>
 <span class="go">2019/12/11 14:53:24  info unpack layer: sha256:eb7c47c7f0fd0054242f35366d166e6b041dfb0b89e5f93a82ad3a3206222502</span>
 <span class="go">INFO:    Creating SIF file...</span>
-<span class="go">Singularity&gt;</span>
+<span class="go">Apptainer&gt;</span>
 </pre></div>
 </div>
 <p>while <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> permits you to do the same thing starting from
@@ -828,10 +828,10 @@ a docker image stored in a <code class="docutils literal notranslate"><span clas
 <span class="go">Storing signatures</span>
 <span class="go">2019/12/11 15:25:09  info unpack layer: sha256:eb7c47c7f0fd0054242f35366d166e6b041dfb0b89e5f93a82ad3a3206222502</span>
 <span class="go">INFO:    Creating SIF file...</span>
-<span class="go">Singularity&gt;</span>
+<span class="go">Apptainer&gt;</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> bootstrap agent can be used in a Singularity
+<p>The <code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> bootstrap agent can be used in a Apptainer
 definition file as follows:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: docker-daemon:&lt;image&gt;:&lt;tag&gt;
 </pre></div>
@@ -878,7 +878,7 @@ simple application / static binaries.</p>
 $ singularity run scratch.sif
 WARNING: passwd file doesn&#39;t exist in container, not updating
 WARNING: group file doesn&#39;t exist in container, not updating
-Singularity&gt; echo &quot;Hello from a 696KiB container&quot;
+Apptainer&gt; echo &quot;Hello from a 696KiB container&quot;
 Hello from a 696KiB container
 </pre></div>
 </div>

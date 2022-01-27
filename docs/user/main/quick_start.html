@@ -21,8 +21,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Security in Singularity" href="security.html" />
-    <link rel="prev" title="Introduction to Singularity" href="introduction.html" /> 
+    <link rel="next" title="Security in Apptainer" href="security.html" />
+    <link rel="prev" title="Introduction to Apptainer" href="introduction.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,16 +45,16 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#quick-installation-steps">Quick Installation Steps</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#install-system-dependencies">Install system dependencies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#install-go">Install Go</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#download-singularity-from-a-release">Download Singularity from a release</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compile-the-singularity-source-code">Compile the Singularity source code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-apptainer-from-a-release">Download Apptainer from a release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compile-the-apptainer-source-code">Compile the Apptainer source code</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#overview-of-the-singularity-interface">Overview of the Singularity Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview-of-the-apptainer-interface">Overview of the Apptainer Interface</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#download-pre-built-images">Download pre-built images</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#interact-with-images">Interact with images</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#shell">Shell</a></li>
@@ -69,15 +69,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#build-images-from-scratch">Build images from scratch</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#sandbox-directories">Sandbox Directories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#converting-images-from-one-format-to-another">Converting images from one format to another</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#singularity-definition-files">Singularity Definition Files</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#singularity-on-a-shared-resource">Singularity on a shared resource</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apptainer-definition-files">Apptainer Definition Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#apptainer-on-a-shared-resource">Apptainer on a shared resource</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -107,7 +107,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -147,21 +147,21 @@
              
   <section id="quick-start">
 <span id="id1"></span><h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline"></a></h1>
-<p id="sec-quickstart">This guide is intended for running Singularity on a computer where you
-have root (administrative) privileges, and will install Singularity
+<p id="sec-quickstart">This guide is intended for running Apptainer on a computer where you
+have root (administrative) privileges, and will install Apptainer
 from source code. Other installation options, including building an RPM
-package and installing Singularity without root privileges are
-discussed in the <a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/installation.html">installation section of the admin guide</a>.</p>
+package and installing Apptainer without root privileges are
+discussed in the <a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html">installation section of the admin guide</a>.</p>
 <p>If you need to request an installation on your shared resource, see the
 <a class="reference internal" href="#installation-request"><span class="std std-ref">requesting an installation section</span></a> for
 information to send to your system administrator.</p>
-<p>For any additional help or support contact the Singularity Community:
+<p>For any additional help or support contact the Apptainer Community:
 <a class="reference external" href="https://apptainer.org/help">https://apptainer.org/help</a></p>
 <section id="quick-installation-steps">
 <span id="quick-installation"></span><h2>Quick Installation Steps<a class="headerlink" href="#quick-installation-steps" title="Permalink to this headline"></a></h2>
-<p>You will need a Linux system to run Singularity natively. Options for
-using Singularity on Mac and Windows machines, along with alternate
-Linux installation options are discussed in the <a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/installation.html">installation section of
+<p>You will need a Linux system to run Apptainer natively. Options for
+using Apptainer on Mac and Windows machines, along with alternate
+Linux installation options are discussed in the <a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html">installation section of
 the admin guide</a>.</p>
 <section id="install-system-dependencies">
 <h3>Install system dependencies<a class="headerlink" href="#install-system-dependencies" title="Permalink to this headline"></a></h3>
@@ -192,25 +192,25 @@ the admin guide</a>.</p>
    <span class="n">wget</span> <span class="n">git</span>
 </pre></div>
 </div>
-<p>There are 3 broad steps to installing Singularity:</p>
+<p>There are 3 broad steps to installing Apptainer:</p>
 <ol class="arabic simple">
 <li><p><a class="reference internal" href="#install"><span class="std std-ref">Installing Go</span></a></p></li>
-<li><p><a class="reference internal" href="#download"><span class="std std-ref">Downloading Singularity</span></a></p></li>
-<li><p><a class="reference internal" href="#compile"><span class="std std-ref">Compiling Singularity Source Code</span></a></p></li>
+<li><p><a class="reference internal" href="#download"><span class="std std-ref">Downloading Apptainer</span></a></p></li>
+<li><p><a class="reference internal" href="#compile"><span class="std std-ref">Compiling Apptainer Source Code</span></a></p></li>
 </ol>
 </section>
 <section id="install-go">
 <span id="install"></span><h3>Install Go<a class="headerlink" href="#install-go" title="Permalink to this headline"></a></h3>
-<p>Singularity is written in Go, and may require a newer version of Go than is
+<p>Apptainer is written in Go, and may require a newer version of Go than is
 available in the repositories of your distribution. We recommend installing the
 latest version of Go from the [official binaries](<a class="reference external" href="https://golang.org/dl/">https://golang.org/dl/</a>).</p>
-<p>Singularity aims to maintain support for the two most recent stable versions
+<p>Apptainer aims to maintain support for the two most recent stable versions
 of Go. This corresponds to the Go Release Maintenance Policy and Security
 Policy, ensuring critical bug fixes and security patches are available for all
 supported language versions.</p>
 <p>If you are building rpm or debian packages using the packaging supplied
 in the <code class="docutils literal notranslate"><span class="pre">dist</span></code> directory, and the operating system distribution of Go
-is below the minimum required by Singularity, the packages can make
+is below the minimum required by Apptainer, the packages can make
 use of the native Go to compile a newer version of Go whose source
 tarball is included with the package source.  That capability is
 supplied so packages can be built on systems with no access to the
@@ -243,40 +243,40 @@ commands here:</p>
 </pre></div>
 </div>
 </section>
-<section id="download-singularity-from-a-release">
-<span id="download"></span><h3>Download Singularity from a release<a class="headerlink" href="#download-singularity-from-a-release" title="Permalink to this headline"></a></h3>
-<p>You can download Singularity from one of the releases. To see a full
+<section id="download-apptainer-from-a-release">
+<span id="download"></span><h3>Download Apptainer from a release<a class="headerlink" href="#download-apptainer-from-a-release" title="Permalink to this headline"></a></h3>
+<p>You can download Apptainer from one of the releases. To see a full
 list, visit <a class="reference external" href="https://github.com/apptainer/apptainer/releases">the GitHub release page</a>. After deciding on a
 release to install, you can run the following commands to proceed with
 the installation.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=3.8.5 &amp;&amp; # adjust this as necessary \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.0.0 &amp;&amp; # adjust this as necessary \
     wget https://github.com/apptainer/apptainer/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &amp;&amp; \
     tar -xzf singularity-${VERSION}.tar.gz &amp;&amp; \
     cd singularity-${VERSION}
 </pre></div>
 </div>
 </section>
-<section id="compile-the-singularity-source-code">
-<span id="compile"></span><h3>Compile the Singularity source code<a class="headerlink" href="#compile-the-singularity-source-code" title="Permalink to this headline"></a></h3>
-<p>Now you are ready to build Singularity. Dependencies will be
-automatically downloaded. You can build Singularity using the
+<section id="compile-the-apptainer-source-code">
+<span id="compile"></span><h3>Compile the Apptainer source code<a class="headerlink" href="#compile-the-apptainer-source-code" title="Permalink to this headline"></a></h3>
+<p>Now you are ready to build Apptainer. Dependencies will be
+automatically downloaded. You can build Apptainer using the
 following commands:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mconfig &amp;&amp; \
     make -C builddir &amp;&amp; \
     sudo make -C builddir install
 </pre></div>
 </div>
-<p>Singularity must be installed as root to function properly.</p>
+<p>Apptainer must be installed as root to function properly.</p>
 </section>
 </section>
-<section id="overview-of-the-singularity-interface">
-<h2>Overview of the Singularity Interface<a class="headerlink" href="#overview-of-the-singularity-interface" title="Permalink to this headline"></a></h2>
-<p>Singularity’s <a class="reference internal" href="cli.html#cli"><span class="std std-ref">command line interface</span></a> allows you to build
+<section id="overview-of-the-apptainer-interface">
+<h2>Overview of the Apptainer Interface<a class="headerlink" href="#overview-of-the-apptainer-interface" title="Permalink to this headline"></a></h2>
+<p>Apptainer’s <a class="reference internal" href="cli.html#cli"><span class="std std-ref">command line interface</span></a> allows you to build
 and interact with containers transparently. You can run programs inside
 a container as if they were running on your host system. You can easily
 redirect IO, use pipes, pass arguments, and access files, sockets, and
 ports on the host system from within a container.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">help</span></code> command gives an overview of Singularity options and
+<p>The <code class="docutils literal notranslate"><span class="pre">help</span></code> command gives an overview of Apptainer options and
 subcommands as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity help
 
@@ -287,10 +287,10 @@ Usage:
   singularity [global options...]
 
 Description:
-  Singularity containers provide an application virtualization layer enabling
+  Apptainer containers provide an application virtualization layer enabling
   mobility of compute via both application and environment portability. With
-  Singularity one is capable of building a root file system that runs on any
-  other Linux system where Singularity is installed.
+  Apptainer one is capable of building a root file system that runs on any
+  other Linux system where Apptainer is installed.
 
 Options:
   -d, --debug     print debugging information (highest verbosity)
@@ -301,7 +301,7 @@ Options:
   -v, --verbose   print additional information
 
 Available Commands:
-  build       Build a Singularity image
+  build       Build a Apptainer image
   cache       Manage the local cache
   capability  Manage Linux capabilities for users and groups
   exec        Run a command within a container
@@ -322,7 +322,7 @@ Available Commands:
   sign        Attach a cryptographic signature to an image
   test        Run the user-defined tests within a container
   verify      Verify cryptographic signatures attached to an image
-  version     Show the version for Singularity
+  version     Show the version for Apptainer
 
 Examples:
   $ singularity help &lt;command&gt; [&lt;subcommand&gt;]
@@ -367,21 +367,21 @@ Examples:
 For additional help or support, please visit https://www.sylabs.io/docs/
 </pre></div>
 </div>
-<p>Singularity uses positional syntax (i.e. the order of commands and
+<p>Apptainer uses positional syntax (i.e. the order of commands and
 options matters). Global options affecting the behavior of all commands
 follow the main <code class="docutils literal notranslate"><span class="pre">singularity</span></code> command. Then sub commands are followed
 by their options and arguments.</p>
 <p>For example, to pass the <code class="docutils literal notranslate"><span class="pre">--debug</span></code> option to the main <code class="docutils literal notranslate"><span class="pre">singularity</span></code>
-command and run Singularity with debugging messages on:</p>
+command and run Apptainer with debugging messages on:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity --debug run library://lolcow
 </pre></div>
 </div>
 <p>To pass the <code class="docutils literal notranslate"><span class="pre">--containall</span></code> option to the <code class="docutils literal notranslate"><span class="pre">run</span></code> command and run a
-Singularity image in an isolated manner:</p>
+Apptainer image in an isolated manner:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run --containall library://lolcow
 </pre></div>
 </div>
-<p>Singularity has the concept of command groups. For
+<p>Apptainer has the concept of command groups. For
 instance, to list Linux capabilities for a particular user, you would
 use the <code class="docutils literal notranslate"><span class="pre">list</span></code> command in the <code class="docutils literal notranslate"><span class="pre">capability</span></code> command group like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity capability list dave
@@ -431,7 +431,7 @@ containers of interest on the <a class="reference external" href="https://cloud.
 and <a class="reference external" href="cli/singularity_build.html">build</a>
 commands to download pre-built images from an external resource like the
 <a class="reference external" href="https://cloud.sylabs.io/library">Container Library</a> or <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>.</p>
-<p>When called on a native Singularity image like those provided on the
+<p>When called on a native Apptainer image like those provided on the
 Container Library, <code class="docutils literal notranslate"><span class="pre">pull</span></code> simply downloads the image file to your
 system.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull library://lolcow
@@ -440,7 +440,7 @@ system.</p>
 <p>You can also use <code class="docutils literal notranslate"><span class="pre">pull</span></code> with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code> uri to reference Docker
 images served from a registry. In this case <code class="docutils literal notranslate"><span class="pre">pull</span></code> does not just
 download an image file. Docker images are stored in layers, so <code class="docutils literal notranslate"><span class="pre">pull</span></code>
-must also combine those layers into a usable Singularity file.</p>
+must also combine those layers into a usable Apptainer file.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://sylabsio/lolcow
 </pre></div>
 </div>
@@ -458,12 +458,12 @@ $ singularity build lolcow.sif docker://sylabsio/lolcow
 </pre></div>
 </div>
 <p>Unlike <code class="docutils literal notranslate"><span class="pre">pull</span></code>, <code class="docutils literal notranslate"><span class="pre">build</span></code> will convert your image to the latest
-Singularity image format after downloading it. <code class="docutils literal notranslate"><span class="pre">build</span></code> is like a
+Apptainer image format after downloading it. <code class="docutils literal notranslate"><span class="pre">build</span></code> is like a
 “Swiss Army knife” for container creation. In addition to downloading
 images, you can use <code class="docutils literal notranslate"><span class="pre">build</span></code> to create images from other images or from
 scratch using a <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">definition file</span></a>. You can also
 use <code class="docutils literal notranslate"><span class="pre">build</span></code> to convert an image between the container formats
-supported by Singularity. To see a comparison of Singularity
+supported by Apptainer. To see a comparison of Apptainer
 definition file with Dockerfile, please see: <a class="reference internal" href="singularity_and_docker.html#sec-deffile-vs-dockerfile"><span class="std std-ref">this section</span></a>.</p>
 </section>
 <section id="interact-with-images">
@@ -482,18 +482,18 @@ command allows you to spawn a new shell within your container and
 interact with it as though it were a small virtual machine.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity shell lolcow_latest.sif
 
-Singularity lolcow_latest.sif:~&gt;
+Apptainer lolcow_latest.sif:~&gt;
 </pre></div>
 </div>
 <p>The change in prompt indicates that you have entered the container
 (though you should not rely on that to determine whether you are in
 container or not).</p>
-<p>Once inside of a Singularity container, you are the same user as you
+<p>Once inside of a Apptainer container, you are the same user as you
 are on the host system.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Singularity</span> <span class="n">lolcow_latest</span><span class="o">.</span><span class="n">sif</span><span class="p">:</span><span class="o">~&gt;</span> <span class="n">whoami</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Apptainer</span> <span class="n">lolcow_latest</span><span class="o">.</span><span class="n">sif</span><span class="p">:</span><span class="o">~&gt;</span> <span class="n">whoami</span>
 <span class="n">david</span>
 
-<span class="n">Singularity</span> <span class="n">lolcow_latest</span><span class="o">.</span><span class="n">sif</span><span class="p">:</span><span class="o">~&gt;</span> <span class="nb">id</span>
+<span class="n">Apptainer</span> <span class="n">lolcow_latest</span><span class="o">.</span><span class="n">sif</span><span class="p">:</span><span class="o">~&gt;</span> <span class="nb">id</span>
 <span class="n">uid</span><span class="o">=</span><span class="mi">1000</span><span class="p">(</span><span class="n">david</span><span class="p">)</span> <span class="n">gid</span><span class="o">=</span><span class="mi">1000</span><span class="p">(</span><span class="n">david</span><span class="p">)</span> <span class="n">groups</span><span class="o">=</span><span class="mi">1000</span><span class="p">(</span><span class="n">david</span><span class="p">),</span><span class="mi">4</span><span class="p">(</span><span class="n">adm</span><span class="p">),</span><span class="mi">24</span><span class="p">(</span><span class="n">cdrom</span><span class="p">),</span><span class="mi">27</span><span class="p">(</span><span class="n">sudo</span><span class="p">),</span><span class="mi">30</span><span class="p">(</span><span class="n">dip</span><span class="p">),</span><span class="mi">46</span><span class="p">(</span><span class="n">plugdev</span><span class="p">),</span><span class="mi">116</span><span class="p">(</span><span class="n">lpadmin</span><span class="p">),</span><span class="mi">126</span><span class="p">(</span><span class="n">sambashare</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -538,7 +538,7 @@ command and disappears.</p>
 </section>
 <section id="running-a-container">
 <span id="runcontainer"></span><h3>Running a container<a class="headerlink" href="#running-a-container" title="Permalink to this headline"></a></h3>
-<p>Singularity containers contain <a class="reference internal" href="definition_files.html#runscript"><span class="std std-ref">runscripts</span></a>. These
+<p>Apptainer containers contain <a class="reference internal" href="definition_files.html#runscript"><span class="std std-ref">runscripts</span></a>. These
 are user defined scripts that define the actions a container should
 perform when someone runs it. The runscript can be triggered with the
 <a class="reference external" href="cli/singularity_run.html">run</a>
@@ -590,7 +590,7 @@ to run <code class="docutils literal notranslate"><span class="pre">echo</span><
 hello
 </pre></div>
 </div>
-<p>Because Singularity runscripts are evaluated shell scripts
+<p>Because Apptainer runscripts are evaluated shell scripts
 arguments can behave slightly differently than in Docker/OCI
 runtimes, if they contain shell code that may be evaluated. To
 replicate Docker/OCI behaviour you may need additional escaping or
@@ -621,7 +621,7 @@ Hello from inside the container
 </pre></div>
 </div>
 <p>This example works because <code class="docutils literal notranslate"><span class="pre">hostfile.txt</span></code> exists in the user’s home
-directory. By default Singularity bind mounts <code class="docutils literal notranslate"><span class="pre">/home/$USER</span></code>,
+directory. By default Apptainer bind mounts <code class="docutils literal notranslate"><span class="pre">/home/$USER</span></code>,
 <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, and <code class="docutils literal notranslate"><span class="pre">$PWD</span></code> into your container at runtime.</p>
 <p>You can specify additional directories to bind mount into your container
 with the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option. In this example, the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory on
@@ -633,7 +633,7 @@ $ singularity exec --bind /data:/mnt lolcow_latest.sif cat /mnt/cow_advice.txt
 Drink milk (and never eat hamburgers).
 </pre></div>
 </div>
-<p>Pipes and redirects also work with Singularity commands just like they
+<p>Pipes and redirects also work with Apptainer commands just like they
 do with normal Linux commands.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat /data/cow_advice.txt | singularity exec lolcow_latest.sif cowsay
  ________________________________________
@@ -649,14 +649,14 @@ do with normal Linux commands.</p>
 </section>
 <section id="build-images-from-scratch">
 <span id="id4"></span><h2>Build images from scratch<a class="headerlink" href="#build-images-from-scratch" title="Permalink to this headline"></a></h2>
-<p id="sec-buildimagesfromscratch">Singularity produces immutable images in the
+<p id="sec-buildimagesfromscratch">Apptainer produces immutable images in the
 Singularity Image File (SIF) format. This ensures reproducible and
 verifiable images and allows for many extra benefits such as the ability
 to sign and verify your containers.</p>
 <p>However, during testing and debugging you may want an image format that
 is writable. This way you can <code class="docutils literal notranslate"><span class="pre">shell</span></code> into the image and install
 software and dependencies until you are satisfied that your container
-will fulfill your needs. For these scenarios, Singularity also
+will fulfill your needs. For these scenarios, Apptainer also
 supports the <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> format (which is really just a directory).</p>
 <section id="sandbox-directories">
 <h3>Sandbox Directories<a class="headerlink" href="#sandbox-directories" title="Permalink to this headline"></a></h3>
@@ -666,10 +666,10 @@ supports the <code class="docutils literal notranslate"><span class="pre">sandbo
 </pre></div>
 </div>
 <p>This command creates a directory called <code class="docutils literal notranslate"><span class="pre">ubuntu/</span></code> with an entire
-Ubuntu Operating System and some Singularity metadata in your current
+Ubuntu Operating System and some Apptainer metadata in your current
 working directory.</p>
 <p>You can use commands like <code class="docutils literal notranslate"><span class="pre">shell</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code> , and <code class="docutils literal notranslate"><span class="pre">run</span></code> with this
-directory just as you would with a Singularity image. If you pass the
+directory just as you would with a Apptainer image. If you pass the
 <code class="docutils literal notranslate"><span class="pre">--writable</span></code> option when you use your container you can also write
 files within the sandbox directory (provided you have the permissions to
 do so).</p>
@@ -694,10 +694,10 @@ image format (squashfs) you can do so:</p>
 outside of the context of a definition file, so you are advised to
 exercise care.</p>
 </section>
-<section id="singularity-definition-files">
-<h3>Singularity Definition Files<a class="headerlink" href="#singularity-definition-files" title="Permalink to this headline"></a></h3>
+<section id="apptainer-definition-files">
+<h3>Apptainer Definition Files<a class="headerlink" href="#apptainer-definition-files" title="Permalink to this headline"></a></h3>
 <p>For a reproducible, verifiable and production-quality container you
-should build a SIF file using a Singularity definition file. This also
+should build a SIF file using a Apptainer definition file. This also
 makes it easy to add files, environment variables, and install custom
 software, and still start from your base of choice (e.g., the Container
 Library).</p>
@@ -729,7 +729,7 @@ named lolcow.def), you would call build like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build lolcow.sif lolcow.def
 </pre></div>
 </div>
-<p>In this example, the header tells Singularity to use a base Ubuntu
+<p>In this example, the header tells Apptainer to use a base Ubuntu
 16.04 image from the Container Library.</p>
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">%post</span></code> section executes within the container at build time
@@ -749,24 +749,24 @@ from Docker Hub and use images directly from official repositories such
 as Ubuntu, Debian, CentOS, Arch, and BusyBox. You can also use an
 existing container on your host system as a base.</p>
 <p>This quickstart document just scratches the surface of all of the things
-you can do with Singularity!</p>
+you can do with Apptainer!</p>
 <p>If you need additional help or support, see <a class="reference external" href="https://apptainer.org/help">https://apptainer.org/help</a>.</p>
-<section id="singularity-on-a-shared-resource">
-<span id="installation-request"></span><h4>Singularity on a shared resource<a class="headerlink" href="#singularity-on-a-shared-resource" title="Permalink to this headline"></a></h4>
+<section id="apptainer-on-a-shared-resource">
+<span id="installation-request"></span><h4>Apptainer on a shared resource<a class="headerlink" href="#apptainer-on-a-shared-resource" title="Permalink to this headline"></a></h4>
 <p>Perhaps you are a user who wants a few talking points and background to
 share with your administrator. Or maybe you are an administrator who
-needs to decide whether to install Singularity.</p>
+needs to decide whether to install Apptainer.</p>
 <p>This document, and the accompanying administrator documentation provides
 answers to many common questions.</p>
 <p>If you need to request an installation you may decide to draft a message
 similar to this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Dear shared resource administrator,
 
-We are interested in having Singularity (https://apptainer.org)
-installed on our shared resource. Singularity containers will allow us to
+We are interested in having Apptainer (https://apptainer.org)
+installed on our shared resource. Apptainer containers will allow us to
 build encapsulated environments, meaning that our work is reproducible and
 we are empowered to choose all dependencies including libraries, operating
-system, and custom software. Singularity is already in use on many of the
+system, and custom software. Apptainer is already in use on many of the
 top HPC centers around the world. Examples include:
 
     Texas Advanced Computing Center
@@ -786,13 +786,13 @@ top HPC centers around the world. Examples include:
 Importantly, it has a vibrant team of developers, scientists, and HPC
 administrators that invest heavily in the security and development of the
 software, and are quick to respond to the needs of the community. To help
-learn more about Singularity, I thought these items might be of interest:
+learn more about Apptainer, I thought these items might be of interest:
 
     - Security: A discussion of security concerns is discussed at
-    https://singularity.hpcng.org/admin-docs/3.8/admin_quickstart.html
+    https://apptainer.org/docs/admin/main/admin_quickstart.html
 
     - Installation:
-    https://singularity.hpcng.org/admin-docs/3.8/installation.html
+    https://apptainer.org/docs/admin/main/installation.html
 
 If you have questions about any of the above, you can contact one of the
 sources listed at https://apptainer.org/help. I can do my best
@@ -814,8 +814,8 @@ User
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction to Singularity" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="security.html" class="btn btn-neutral float-right" title="Security in Singularity" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction to Apptainer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="security.html" class="btn btn-neutral float-right" title="Security in Apptainer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

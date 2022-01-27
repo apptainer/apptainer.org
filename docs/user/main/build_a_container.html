@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Definition Files" href="definition_files.html" />
-    <link rel="prev" title="Security in Singularity" href="security.html" /> 
+    <link rel="prev" title="Security in Apptainer" href="security.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Build a container</a><ul>
@@ -56,7 +56,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#downloading-an-existing-container-from-docker-hub">Downloading an existing container from Docker Hub</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-writable-sandbox-directories">Creating writable <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#converting-containers-from-one-format-to-another">Converting containers from one format to another</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#building-containers-from-singularity-definition-files">Building containers from Singularity definition files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-containers-from-apptainer-definition-files">Building containers from Apptainer definition files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-encrypted-containers">Building encrypted containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#build-options">Build options</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#encrypt"><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code></a></li>
@@ -105,7 +105,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -149,8 +149,8 @@
 it to download and assemble existing containers from external resources
 like the <a class="reference external" href="https://cloud.sylabs.io/library">Container Library</a> and
 <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>. You can use it to convert
-containers between the formats supported by Singularity. And you can
-use it in conjunction with a <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">Singularity definition</span></a> file to create a container from scratch and
+containers between the formats supported by Apptainer. And you can
+use it in conjunction with a <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">Apptainer definition</span></a> file to create a container from scratch and
 customized it to fit your needs.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
@@ -164,7 +164,7 @@ container. It can be one of the following:</p>
 <li><p>URI beginning with <strong>shub://</strong> to build from Singularity Hub</p></li>
 <li><p>path to a <strong>existing container</strong> on your local machine</p></li>
 <li><p>path to a <strong>directory</strong> to build from a sandbox</p></li>
-<li><p>path to a <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">Singularity definition file</span></a></p></li>
+<li><p>path to a <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">Apptainer definition file</span></a></p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">build</span></code> can produce containers in two different formats that can be
 specified as follows.</p>
@@ -194,7 +194,7 @@ container in a writable format use the <code class="docutils literal notranslate
 <section id="downloading-an-existing-container-from-docker-hub">
 <h2>Downloading an existing container from Docker Hub<a class="headerlink" href="#downloading-an-existing-container-from-docker-hub" title="Permalink to this headline"></a></h2>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">build</span></code> to download layers from Docker Hub and assemble
-them into Singularity containers.</p>
+them into Apptainer containers.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build lolcow.sif docker://sylabsio/lolcow
 </pre></div>
 </div>
@@ -229,15 +229,15 @@ one format to another. For example if you had a sandbox container called
 </div>
 <p>Use care when converting a sandbox directory to the default SIF format.
 If changes were made to the writable container before conversion, there
-is no record of those changes in the Singularity definition file
+is no record of those changes in the Apptainer definition file
 rendering your container non-reproducible. It is a best practice to
-build your immutable production containers directly from a Singularity
+build your immutable production containers directly from a Apptainer
 definition file instead.</p>
 </section>
-<section id="building-containers-from-singularity-definition-files">
-<h2>Building containers from Singularity definition files<a class="headerlink" href="#building-containers-from-singularity-definition-files" title="Permalink to this headline"></a></h2>
-<p>Of course, Singularity definition files can be used as the target when
-building a container. For detailed information on writing Singularity
+<section id="building-containers-from-apptainer-definition-files">
+<h2>Building containers from Apptainer definition files<a class="headerlink" href="#building-containers-from-apptainer-definition-files" title="Permalink to this headline"></a></h2>
+<p>Of course, Apptainer definition files can be used as the target when
+building a container. For detailed information on writing Apptainer
 definition files, please see the <a class="reference internal" href="definition_files.html"><span class="doc">Container Definition docs</span></a>. Let’s say you already have the following container
 definition file called <code class="docutils literal notranslate"><span class="pre">lolcow.def</span></code>, and you want to use it to build a
 SIF container.</p>
@@ -274,7 +274,7 @@ compressor available is <code class="docutils literal notranslate"><span class="
 </section>
 <section id="building-encrypted-containers">
 <h2>Building encrypted containers<a class="headerlink" href="#building-encrypted-containers" title="Permalink to this headline"></a></h2>
-<p>With Singularity it is possible to build and run
+<p>With Apptainer it is possible to build and run
 encrypted containers. The containers are decrypted at runtime entirely
 in kernel space, meaning that no intermediate decrypted data is ever
 present on disk or in memory. See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
@@ -283,7 +283,7 @@ present on disk or in memory. See <a class="reference internal" href="encryption
 <h2>Build options<a class="headerlink" href="#build-options" title="Permalink to this headline"></a></h2>
 <section id="encrypt">
 <h3><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code><a class="headerlink" href="#encrypt" title="Permalink to this headline"></a></h3>
-<p>Specifies that Singularity should use a secret saved in either the
+<p>Specifies that Apptainer should use a secret saved in either the
 <code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENCRYPTION_PASSPHRASE</span></code> or
 <code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENCRYPTION_PEM_PATH</span></code> environment variable to build an
 encrypted container. See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for
@@ -297,11 +297,11 @@ more details.</p>
 <section id="force">
 <h3><code class="docutils literal notranslate"><span class="pre">--force</span></code><a class="headerlink" href="#force" title="Permalink to this headline"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--force</span></code> option will delete and overwrite an existing
-Singularity image without presenting the normal interactive prompt.</p>
+Apptainer image without presenting the normal interactive prompt.</p>
 </section>
 <section id="json">
 <h3><code class="docutils literal notranslate"><span class="pre">--json</span></code><a class="headerlink" href="#json" title="Permalink to this headline"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">--json</span></code> option will force Singularity to interpret a given
+<p>The <code class="docutils literal notranslate"><span class="pre">--json</span></code> option will force Apptainer to interpret a given
 definition file as a json.</p>
 </section>
 <section id="library">
@@ -340,7 +340,7 @@ section or sections. This option accepts a comma delimited string of
 definition file sections. Acceptable arguments include <code class="docutils literal notranslate"><span class="pre">all</span></code>, <code class="docutils literal notranslate"><span class="pre">none</span></code>
 or any combination of the following: <code class="docutils literal notranslate"><span class="pre">setup</span></code>, <code class="docutils literal notranslate"><span class="pre">post</span></code>, <code class="docutils literal notranslate"><span class="pre">files</span></code>,
 <code class="docutils literal notranslate"><span class="pre">environment</span></code>, <code class="docutils literal notranslate"><span class="pre">test</span></code>, <code class="docutils literal notranslate"><span class="pre">labels</span></code>.</p>
-<p>Under normal build conditions, the Singularity definition file is
+<p>Under normal build conditions, the Apptainer definition file is
 saved into a container’s meta-data so that there is a record showing how
 the container was built. Using the <code class="docutils literal notranslate"><span class="pre">--section</span></code> option may render this
 meta-data useless, so use care if you value reproducibility.</p>
@@ -354,7 +354,7 @@ container and start from scratch).</p>
 <code class="docutils literal notranslate"><span class="pre">build</span></code> command will prompt you to decide whether or not to overwrite
 the container. Instead of this behavior you can use the <code class="docutils literal notranslate"><span class="pre">--update</span></code>
 option to build _into_ an existing container. This will cause
-Singularity to skip the header and build any sections that are in the
+Apptainer to skip the header and build any sections that are in the
 definition file into the existing container.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--update</span></code> option is only valid when used with sandbox containers.</p>
 </section>
@@ -366,7 +366,7 @@ of <code class="docutils literal notranslate"><span class="pre">post</span></cod
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This option can’t be set via the environment variable <cite>SINGULARITY_NV</cite>.
-Singularity will attempt to bind binaries listed in SINGULARITY_CONFDIR/nvliblist.conf,
+Apptainer will attempt to bind binaries listed in SINGULARITY_CONFDIR/nvliblist.conf,
 if the mount destination doesn’t exist inside the container, they are ignored.</p>
 </div>
 </section>
@@ -378,7 +378,7 @@ your build environment. Libraries are mounted during the execution of
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This option can’t be set via the environment variable <cite>SINGULARITY_ROCM</cite>.
-Singularity will attempt to bind binaries listed in <cite>SINGULARITY_CONFDIR/rocmliblist.conf</cite>,
+Apptainer will attempt to bind binaries listed in <cite>SINGULARITY_CONFDIR/rocmliblist.conf</cite>,
 if the mount destination doesn’t exist inside the container, they are ignored.</p>
 </div>
 </section>
@@ -433,7 +433,7 @@ look <a class="reference internal" href="encryption.html#encryption"><span class
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="security.html" class="btn btn-neutral float-left" title="Security in Singularity" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="security.html" class="btn btn-neutral float-left" title="Security in Apptainer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="definition_files.html" class="btn btn-neutral float-right" title="Definition Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

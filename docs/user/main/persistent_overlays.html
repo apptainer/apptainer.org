@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -87,7 +87,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -162,7 +162,7 @@ container finishes executing.</p>
 </div>
 <section id="file-system-image-overlay">
 <h3>File system image overlay<a class="headerlink" href="#file-system-image-overlay" title="Permalink to this headline"></a></h3>
-<p>Singularity provides a command <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">overlay</span>
+<p>Apptainer provides a command <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">overlay</span>
 <span class="pre">create</span></code> to create persistent overlay images. You can create a single
 EXT3 overlay image or adding a EXT3 writable overlay partition to an
 existing SIF image.</p>
@@ -216,16 +216,16 @@ privileges.</p>
 <p>The example below shows the directory overlay in action.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity shell --overlay my_overlay/ ubuntu.sif
 
-Singularity ubuntu.sif:~&gt; mkdir /data
+Apptainer ubuntu.sif:~&gt; mkdir /data
 
-Singularity ubuntu.sif:~&gt; chown user /data
+Apptainer ubuntu.sif:~&gt; chown user /data
 
-Singularity ubuntu.sif:~&gt; apt-get update &amp;&amp; apt-get install -y vim
+Apptainer ubuntu.sif:~&gt; apt-get update &amp;&amp; apt-get install -y vim
 
-Singularity ubuntu.sif:~&gt; which vim
+Apptainer ubuntu.sif:~&gt; which vim
 /usr/bin/vim
 
-Singularity ubuntu.sif:~&gt; exit
+Apptainer ubuntu.sif:~&gt; exit
 </pre></div>
 </div>
 </section>
@@ -240,7 +240,7 @@ you must first create a file system image:</p>
 </pre></div>
 </div>
 <p>Then, you can add the overlay to the SIF image using the <code class="docutils literal notranslate"><span class="pre">sif</span></code>
-functionality of Singularity.</p>
+functionality of Apptainer.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity sif add --datatype 4 --partfs 2 --parttype 4 --partarch 2 --groupid 1 ubuntu_latest.sif overlay.img
 </pre></div>
 </div>
@@ -272,25 +272,25 @@ container with the <code class="docutils literal notranslate"><span class="pre">
 were using a writable container.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity shell --overlay my_overlay/ ubuntu.sif
 
-Singularity ubuntu.sif:~&gt; ls -lasd /data
+Apptainer ubuntu.sif:~&gt; ls -lasd /data
 4 drwxr-xr-x 2 user root 4096 Apr  9 10:21 /data
 
-Singularity ubuntu.sif:~&gt; which vim
+Apptainer ubuntu.sif:~&gt; which vim
 /usr/bin/vim
 
-Singularity ubuntu.sif:~&gt; exit
+Apptainer ubuntu.sif:~&gt; exit
 </pre></div>
 </div>
 <p>If you mount your container without the <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> directory, your
 changes will be gone.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity shell ubuntu.sif
 
-Singularity ubuntu.sif:~&gt; ls /data
+Apptainer ubuntu.sif:~&gt; ls /data
 ls: cannot access &#39;data&#39;: No such file or directory
 
-Singularity ubuntu.sif:~&gt; which vim
+Apptainer ubuntu.sif:~&gt; which vim
 
-Singularity ubuntu.sif:~&gt; exit
+Apptainer ubuntu.sif:~&gt; exit
 </pre></div>
 </div>
 <p>To resize an overlay, standard Linux tools which manipulate ext3 images

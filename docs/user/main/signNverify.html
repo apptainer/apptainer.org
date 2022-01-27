@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -87,7 +87,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -127,9 +127,9 @@
              
   <section id="signing-and-verifying-containers">
 <span id="signnverify"></span><h1>Signing and Verifying Containers<a class="headerlink" href="#signing-and-verifying-containers" title="Permalink to this headline"></a></h1>
-<p id="sec-signnverify">Singularity has the ability to create and manage PGP keys
+<p id="sec-signnverify">Apptainer has the ability to create and manage PGP keys
 and use them to sign and verify containers. This provides a trusted
-method for Singularity users to share containers. It ensures a
+method for Apptainer users to share containers. It ensures a
 bit-for-bit reproduction of the original container as the author
 intended it.</p>
 <div class="admonition note">
@@ -182,7 +182,7 @@ container.</p>
 <h3>Generating and managing PGP keys<a class="headerlink" href="#generating-and-managing-pgp-keys" title="Permalink to this headline"></a></h3>
 <p>To sign your own containers you first need to generate one or more keys.</p>
 <p>If you attempt to sign a container before you have generated any keys,
-Singularity will guide you through the interactive process of creating
+Apptainer will guide you through the interactive process of creating
 a new key. Or you can use the <code class="docutils literal notranslate"><span class="pre">newpair</span></code> subcommand in the <code class="docutils literal notranslate"><span class="pre">key</span></code>
 command group like so:.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity key newpair
@@ -253,7 +253,7 @@ signing).</p>
 </section>
 <section id="searching-for-keys">
 <span id="id1"></span><h3>Searching for keys<a class="headerlink" href="#searching-for-keys" title="Permalink to this headline"></a></h3>
-<p>Singularity allows you to search the keystore for public keys. You can
+<p>Apptainer allows you to search the keystore for public keys. You can
 search for names, emails, and fingerprints (key IDs). When searching for
 a fingerprint, you need to use <code class="docutils literal notranslate"><span class="pre">0x</span></code> before the fingerprint, check the
 example:</p>

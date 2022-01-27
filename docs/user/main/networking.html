@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -84,7 +84,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -124,7 +124,7 @@
              
   <section id="network-virtualization">
 <span id="networking"></span><h1>Network virtualization<a class="headerlink" href="#network-virtualization" title="Permalink to this headline"></a></h1>
-<p id="sec-networking">Singularity provides full integration with <a class="reference external" href="https://github.com/containernetworking/cni">cni</a> , to make network
+<p id="sec-networking">Apptainer provides full integration with <a class="reference external" href="https://github.com/containernetworking/cni">cni</a> , to make network
 virtualization easy. The following options can be used with the the
 action commands (<code class="docutils literal notranslate"><span class="pre">exec</span></code>, <code class="docutils literal notranslate"><span class="pre">run</span></code>, and <code class="docutils literal notranslate"><span class="pre">shell</span></code>) to create and
 configure a virtualized network for a container.</p>
@@ -133,7 +133,7 @@ configure a virtualized network for a container.</p>
 <p>Many of these options are available only to the <code class="docutils literal notranslate"><span class="pre">root</span></code> user by
 default. Unrestricted ability to configure networking for containers
 would allow users to affect networking on the host, or in a cluster.</p>
-<p>Singularity allows the administrator to permit a list of
+<p>Apptainer allows the administrator to permit a list of
 unprivileged users and/or groups to use specified network
 configurations. This is accomplished through settings in
 <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>. See the administrator guide for details.</p>
@@ -168,7 +168,7 @@ hal-9000
 <section id="net">
 <h2><code class="docutils literal notranslate"><span class="pre">--net</span></code><a class="headerlink" href="#net" title="Permalink to this headline"></a></h2>
 <p>Passing the <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag will cause the container to join a new
-network namespace when it initiates. New in Singularity 3.0, a bridge
+network namespace when it initiates. New in Apptainer 3.0, a bridge
 interface will also be set up by default.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ hostname -I
 10.0.2.15
@@ -197,7 +197,7 @@ $ sudo singularity exec --net --network bridge,ptp ubuntu.sif hostname -I
 configuration directory (commonly
 <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity/network/</span></code>) for the cni configuration file
 corresponding to the requested network type(s). Several configuration
-files are installed with Singularity by default corresponding to the
+files are installed with Apptainer by default corresponding to the
 following network types:</p>
 <blockquote>
 <div><ul class="simple">
@@ -214,7 +214,7 @@ network with a loopback interface.</p>
 <p>Administrators can permit certain users or groups to request other
 network configurations through options in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>.
 Additional cni configuration files can be added to the <code class="docutils literal notranslate"><span class="pre">network</span></code>
-configuration directory as required, and Singularity’s provided
+configuration directory as required, and Apptainer’s provided
 configurations may also be modified.</p>
 </section>
 <section id="network-args">

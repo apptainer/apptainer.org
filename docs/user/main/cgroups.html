@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -73,11 +73,11 @@
 <li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Cgroups Support</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#running-singularity-inside-a-cgroup">Running Singularity Inside a Cgroup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#running-apptainer-inside-a-cgroup">Running Apptainer Inside a Cgroup</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#systemd-run">systemd-run</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#using-singularity-to-create-a-cgroup">Using Singularity to Create a Cgroup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-apptainer-to-create-a-cgroup">Using Apptainer to Create a Cgroup</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#limiting-memory">Limiting Memory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#limiting-cpu">Limiting CPU</a></li>
@@ -94,7 +94,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -150,9 +150,9 @@ processes.</p>
 <li><p>v2 documentation:
 <a class="reference external" href="https://www.kernel.org/doc/Documentation/cgroup-v2.txt">https://www.kernel.org/doc/Documentation/cgroup-v2.txt</a></p></li>
 </ul>
-<section id="running-singularity-inside-a-cgroup">
-<h2>Running Singularity Inside a Cgroup<a class="headerlink" href="#running-singularity-inside-a-cgroup" title="Permalink to this headline"></a></h2>
-<p>Because Singularity starts a container as a simple process, rather
+<section id="running-apptainer-inside-a-cgroup">
+<h2>Running Apptainer Inside a Cgroup<a class="headerlink" href="#running-apptainer-inside-a-cgroup" title="Permalink to this headline"></a></h2>
+<p>Because Apptainer starts a container as a simple process, rather
 than using a daemon, you can limit resource usage by running the
 <code class="docutils literal notranslate"><span class="pre">singularity</span></code> command inside an existing cgroup. This is convenient
 where, for example, a job scheduler uses cgroups to control job limits.
@@ -161,7 +161,7 @@ respect the limits set by the scheduler on the job’s cgroup.</p>
 <section id="systemd-run">
 <h3>systemd-run<a class="headerlink" href="#systemd-run" title="Permalink to this headline"></a></h3>
 <p>As well as schedulers you can use tools such as <code class="docutils literal notranslate"><span class="pre">systemd-run</span></code> to
-create a cgroup, and run Singularity inside of it. This is convenient
+create a cgroup, and run Apptainer inside of it. This is convenient
 on modern cgroups v2 systems, where the creation of cgroups can be
 delegated to users through systemd. Without this delegation <code class="docutils literal notranslate"><span class="pre">root</span></code>
 privileges are required to create a cgroup.</p>
@@ -191,9 +191,9 @@ link below, which details the properties you can set using
 <p><a class="reference external" href="https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html">https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html</a></p>
 </section>
 </section>
-<section id="using-singularity-to-create-a-cgroup">
-<h2>Using Singularity to Create a Cgroup<a class="headerlink" href="#using-singularity-to-create-a-cgroup" title="Permalink to this headline"></a></h2>
-<p>Singularity allows you to directly apply resource limitations to
+<section id="using-apptainer-to-create-a-cgroup">
+<h2>Using Apptainer to Create a Cgroup<a class="headerlink" href="#using-apptainer-to-create-a-cgroup" title="Permalink to this headline"></a></h2>
+<p>Apptainer allows you to directly apply resource limitations to
 systems configured for both cgroups v1 and the v2 unified hierarchy.
 Resource limits are specified using a TOML file that represents the
 <cite>resources</cite> section of the OCI runtime-spec:
@@ -206,7 +206,7 @@ directly. Under cgroups v2, the restrictions are applied by attaching
 eBPF programs that implement the requested access controls.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Singularity does not currently support applying native cgroups v2
+<p>Apptainer does not currently support applying native cgroups v2
 <code class="docutils literal notranslate"><span class="pre">unified</span></code> resource limit specifications. Use the cgroups v1 limits,
 which will be translated to v2 format when applied on a cgroups v2
 system.</p>
@@ -362,13 +362,13 @@ or write to <code class="docutils literal notranslate"><span class="pre">/dev/nu
 </section>
 <section id="other-limits">
 <h4>Other limits<a class="headerlink" href="#other-limits" title="Permalink to this headline"></a></h4>
-<p>Singularity can apply all resource limits that are valid in the OCI
+<p>Apptainer can apply all resource limits that are valid in the OCI
 runtime-spec <code class="docutils literal notranslate"><span class="pre">resources</span></code> section, <strong>except</strong> native <code class="docutils literal notranslate"><span class="pre">unified</span></code>
 cgroups v2 constraints. Use the cgroups v1 limits, which will be
 translated to v2 format when applied on a cgroups v1 system.</p>
 <p>See
 <a class="reference external" href="https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md#control-groups">https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md#control-groups</a>
-for information about the available limits. Note that Singularity uses
+for information about the available limits. Note that Apptainer uses
 TOML format for the configuration file, rather than JSON.</p>
 </section>
 </section>

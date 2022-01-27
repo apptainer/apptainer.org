@@ -45,9 +45,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -105,7 +105,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -145,14 +145,14 @@
              
   <section id="definition-files">
 <span id="id1"></span><h1>Definition Files<a class="headerlink" href="#definition-files" title="Permalink to this headline"></a></h1>
-<p id="sec-deffiles">A Singularity Definition File (or “def file” for short) is like a set
+<p id="sec-deffiles">A Apptainer Definition File (or “def file” for short) is like a set
 of blueprints explaining how to build a custom container. It includes
 specifics about the base OS to build or the base container to start
 from, software to install, environment variables to set at runtime,
 files to add from the host system, and container metadata.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
-<p>A Singularity Definition file is divided into two parts:</p>
+<p>A Apptainer Definition file is divided into two parts:</p>
 <ol class="arabic simple">
 <li><p><strong>Header</strong>: The Header describes the core operating system to build
 within the container. Here you will configure the base operating
@@ -168,15 +168,15 @@ build time are executed with the <code class="docutils literal notranslate"><spa
 accept <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code> options. Similarly, sections that produce scripts
 to be executed at runtime can accept options intended for <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code></p></li>
 </ol>
-<p>For more in-depth and practical examples of def files, see the <a class="reference external" href="https://github.com/apptainer/apptainer/tree/master/examples">Singularity
+<p>For more in-depth and practical examples of def files, see the <a class="reference external" href="https://github.com/apptainer/apptainer/tree/master/examples">Apptainer
 examples repository</a></p>
-<p>For a comparison between Dockerfile and Singularity definition file,
+<p>For a comparison between Dockerfile and Apptainer definition file,
 please see: <a class="reference internal" href="singularity_and_docker.html#sec-deffile-vs-dockerfile"><span class="std std-ref">this section</span></a>.</p>
 </section>
 <section id="header">
 <h2>Header<a class="headerlink" href="#header" title="Permalink to this headline"></a></h2>
 <p>The header should be written at the top of the def file. It tells
-Singularity about the base operating system that it should use to
+Apptainer about the base operating system that it should use to
 build the container. It is composed of several keywords.</p>
 <p>The only keyword that is required for every type of build is
 <code class="docutils literal notranslate"><span class="pre">Bootstrap</span></code>. It determines the <em>bootstrap agent</em> that will be used to
@@ -414,7 +414,7 @@ configuration process.</p>
 <section id="app">
 <h3>%app*<a class="headerlink" href="#app" title="Permalink to this headline"></a></h3>
 <p>In some circumstances, it may be redundant to build different containers
-for each app with nearly equivalent dependencies. Singularity supports
+for each app with nearly equivalent dependencies. Apptainer supports
 installing apps within internal modules based on the concept of the
 <a class="reference external" href="https://sci-f.github.io/">Scientific Filesystem (SCIF)</a>. More
 information on defining and using SCIF Apps <a class="reference internal" href="#apps"><span class="std std-ref">here</span></a>.</p>
@@ -553,7 +553,7 @@ on the host, or <code class="docutils literal notranslate"><span class="pre">def
 <code class="docutils literal notranslate"><span class="pre">%post</span></code> will take precedence over variables set in the
 <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section.</p>
 <p>See <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">Environment and Metadata</span></a> for more
-information about the Singularity container environment.</p>
+information about the Apptainer container environment.</p>
 </section>
 <section id="startscript">
 <span id="id3"></span><h3>%startscript<a class="headerlink" href="#startscript" title="Permalink to this headline"></a></h3>
@@ -602,7 +602,7 @@ passed to the container at runtime are printed as a single string
 which ensures that all of the arguments are properly parsed by the
 executed command. The <code class="docutils literal notranslate"><span class="pre">exec</span></code> preceding the final <code class="docutils literal notranslate"><span class="pre">echo</span></code> command
 replaces the current entry in the process table (which originally was
-the call to Singularity). Thus the runscript shell process ceases to
+the call to Apptainer). Thus the runscript shell process ceases to
 exist, and only the process running within the container remains.</p>
 <p>Running the container built using this def file will yield the
 following:</p>
@@ -730,14 +730,14 @@ container with SCIF apps has multiple entry points, and you can choose
 which to run easily. Each entry point can carry out a different task
 with its own environment, metadata etc., without the need for a
 collection of different containers.</p>
-<p>Singularity implements SCIF, and you can read more about how to use it
+<p>Apptainer implements SCIF, and you can read more about how to use it
 below.</p>
-<p>SCIF is not specific to Singularity. You can learn more about it at
+<p>SCIF is not specific to Apptainer. You can learn more about it at
 the project’s site: <a class="reference external" href="https://sci-f.github.io/">https://sci-f.github.io/</a> which includes extended
 tutorials, the specification, and other information.</p>
 <section id="scif-app-sections">
 <h3>SCIF %app* sections<a class="headerlink" href="#scif-app-sections" title="Permalink to this headline"></a></h3>
-<p>SCIF apps within a Singularity container are created using <code class="docutils literal notranslate"><span class="pre">%app*</span></code>
+<p>SCIF apps within a Apptainer container are created using <code class="docutils literal notranslate"><span class="pre">%app*</span></code>
 sections in a definition file. These <code class="docutils literal notranslate"><span class="pre">%app*</span></code> sections, which will
 impact the way the container runs a specific <code class="docutils literal notranslate"><span class="pre">--app</span></code> can exist
 alongside any of the primary sections (i.e. <code class="docutils literal notranslate"><span class="pre">%post</span></code>,``%runscript``,
