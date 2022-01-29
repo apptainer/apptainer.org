@@ -97,10 +97,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#i"><code class="docutils literal notranslate"><span class="pre">I</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#j"><code class="docutils literal notranslate"><span class="pre">J</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#k"><code class="docutils literal notranslate"><span class="pre">K</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#l"><code class="docutils literal notranslate"><span class="pre">L</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#m"><code class="docutils literal notranslate"><span class="pre">M</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#l"><code class="docutils literal notranslate"><span class="pre">L</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#m"><code class="docutils literal notranslate"><span class="pre">M</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#n"><code class="docutils literal notranslate"><span class="pre">N</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#o"><code class="docutils literal notranslate"><span class="pre">O</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#p"><code class="docutils literal notranslate"><span class="pre">P</span></code></a></li>
@@ -112,18 +110,72 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#build-modules">Build Modules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#library-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">library</span></code> bootstrap agent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#docker-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">docker</span></code> bootstrap agent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#shub-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">shub</span></code> bootstrap agent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#oras-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">oras</span></code> bootstrap agent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#localimage-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">localimage</span></code> bootstrap agent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#yum-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">yum</span></code> bootstrap agent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#debootstrap-build-agent"><code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> build agent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#arch-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">arch</span></code> bootstrap agent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#busybox-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">busybox</span></code> bootstrap agent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#zypper-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">zypper</span></code> bootstrap agent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#docker-daemon-and-docker-archive-bootstrap-agents"><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> and <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agents</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scratch-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">scratch</span></code> bootstrap agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#library-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">library</span></code> bootstrap agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keywords">Keywords</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">docker</span></code> bootstrap agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sec-build-docker-module">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#shub-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">shub</span></code> bootstrap agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#oras-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">oras</span></code> bootstrap agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Keywords</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#localimage-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">localimage</span></code> bootstrap agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#yum-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">yum</span></code> bootstrap agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id12">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#debootstrap-build-agent"><code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> build agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id15">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#arch-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">arch</span></code> bootstrap agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id18">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#busybox-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">busybox</span></code> bootstrap agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id21">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#zypper-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">zypper</span></code> bootstrap agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id24">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id25">Keywords</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-daemon-and-docker-archive-bootstrap-agents"><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> and <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id26">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27">Keywords</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scratch-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">scratch</span></code> bootstrap agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id28">Overview</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -316,14 +368,14 @@ image.</p></li>
 <li><p><strong>SINGULARITY_LIBRARY</strong>: Specifies the library to pull from. Default
 is set to our Cloud Library.</p></li>
 </ol>
+</section>
 <section id="m">
-<h4><code class="docutils literal notranslate"><span class="pre">M</span></code><a class="headerlink" href="#m" title="Permalink to this headline"></a></h4>
+<h3><code class="docutils literal notranslate"><span class="pre">M</span></code><a class="headerlink" href="#m" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>SINGULARITY_MOUNT</strong>: To specify host to container mounts, using the
 syntax understood by the <code class="docutils literal notranslate"><span class="pre">--mount</span></code> flag. Multiple mounts should be
 separated by newline characters.</p></li>
 </ol>
-</section>
 </section>
 <section id="n">
 <h3><code class="docutils literal notranslate"><span class="pre">N</span></code><a class="headerlink" href="#n" title="Permalink to this headline"></a></h3>
@@ -448,6 +500,8 @@ Default is set to false.</p></li>
 <span id="buildmodules"></span><h2>Build Modules<a class="headerlink" href="#build-modules" title="Permalink to this headline"></a></h2>
 <section id="library-bootstrap-agent">
 <span id="build-library-module"></span><h3><code class="docutils literal notranslate"><span class="pre">library</span></code> bootstrap agent<a class="headerlink" href="#library-bootstrap-agent" title="Permalink to this headline"></a></h3>
+<section id="overview">
+<span id="sec-build-library-module"></span><h4>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h4>
 <p>You can use an existing container on the Container Library as your
 “base,” and then add customization. This allows you to build multiple
 images from the same starting point. For example, you may want to build
@@ -457,6 +511,9 @@ building these from scratch each time, you could create a base container
 on the Container Library and then build new containers from that
 existing base container adding customizations in <code class="docutils literal notranslate"><span class="pre">%post</span></code>,
 <code class="docutils literal notranslate"><span class="pre">%environment</span></code>, <code class="docutils literal notranslate"><span class="pre">%runscript</span></code>, etc.</p>
+</section>
+<section id="keywords">
+<h4>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline"></a></h4>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
 </pre></div>
 </div>
@@ -483,8 +540,11 @@ separated fingerprints corresponding to PGP public keys. If present, the
 bootstrap image will be verified and the build will only proceed if it
 is signed by keys matching <em>all</em> of the specified fingerprints.</p>
 </section>
+</section>
 <section id="docker-bootstrap-agent">
 <span id="build-docker-module"></span><h3><code class="docutils literal notranslate"><span class="pre">docker</span></code> bootstrap agent<a class="headerlink" href="#docker-bootstrap-agent" title="Permalink to this headline"></a></h3>
+<section id="sec-build-docker-module">
+<span id="id2"></span><h4>Overview<a class="headerlink" href="#sec-build-docker-module" title="Permalink to this headline"></a></h4>
 <p>Docker images are comprised of layers that are assembled at runtime to
 create an image. You can use Docker layers to create a base image, and
 then add your own custom software. For example, you might use Docker’s
@@ -498,6 +558,9 @@ software on top of that.</p>
 <p>Or perhaps you have already invested in Docker and created your own
 Docker containers. If so, you can seamlessly convert them to
 Apptainer with the <code class="docutils literal notranslate"><span class="pre">docker</span></code> bootstrap module.</p>
+</section>
+<section id="id3">
+<h4>Keywords<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h4>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 </pre></div>
 </div>
@@ -522,6 +585,9 @@ detailed info on using Docker registries.</p>
 </pre></div>
 </div>
 <p>The Namespace keyword is optional. It will default to <code class="docutils literal notranslate"><span class="pre">library</span></code>.</p>
+</section>
+<section id="notes">
+<h4>Notes<a class="headerlink" href="#notes" title="Permalink to this headline"></a></h4>
 <p>Docker containers are stored as a collection of tarballs called layers.
 When building from a Docker container the layers must be downloaded and
 then assembled in the proper order to produce a viable file system. Then
@@ -534,8 +600,11 @@ container on the Container Library and building from it instead.</p>
 <p>For detailed information about setting your build environment see
 <a class="reference internal" href="build_env.html#build-environment"><span class="std std-ref">Build Customization</span></a>.</p>
 </section>
+</section>
 <section id="shub-bootstrap-agent">
 <span id="build-shub"></span><h3><code class="docutils literal notranslate"><span class="pre">shub</span></code> bootstrap agent<a class="headerlink" href="#shub-bootstrap-agent" title="Permalink to this headline"></a></h3>
+<section id="id4">
+<h4>Overview<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h4>
 <p>You can use an existing container on Singularity Hub as your “base,” and
 then add customization. This allows you to build multiple images from
 the same starting point. For example, you may want to build several
@@ -545,6 +614,9 @@ building these from scratch each time, you could create a base container
 on Singularity Hub and then build new containers from that existing base
 container adding customizations in <code class="docutils literal notranslate"><span class="pre">%post</span></code> , <code class="docutils literal notranslate"><span class="pre">%environment</span></code>,
 <code class="docutils literal notranslate"><span class="pre">%runscript</span></code>, etc.</p>
+</section>
+<section id="id5">
+<h4>Keywords<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h4>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: shub
 </pre></div>
 </div>
@@ -557,6 +629,9 @@ module to use.</p>
 a base. <code class="docutils literal notranslate"><span class="pre">registry</span> <span class="pre">is</span> <span class="pre">optional</span> <span class="pre">and</span> <span class="pre">defaults</span> <span class="pre">to</span> <span class="pre">``singularity-hub.org</span></code>.
 <code class="docutils literal notranslate"><span class="pre">tag</span></code> and <code class="docutils literal notranslate"><span class="pre">digest</span></code> are also optional. <code class="docutils literal notranslate"><span class="pre">tag</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">latest</span></code>
 and <code class="docutils literal notranslate"><span class="pre">digest</span></code> can be left blank if you want the latest build.</p>
+</section>
+<section id="id6">
+<h4>Notes<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h4>
 <p>When bootstrapping from a Singularity Hub image, all previous definition
 files that led to the creation of the current image will be stored in a
 directory within the container called
@@ -564,8 +639,11 @@ directory within the container called
 if environment variables have been changed between the base image and
 the new image during bootstrap.</p>
 </section>
+</section>
 <section id="oras-bootstrap-agent">
 <span id="build-oras"></span><h3><code class="docutils literal notranslate"><span class="pre">oras</span></code> bootstrap agent<a class="headerlink" href="#oras-bootstrap-agent" title="Permalink to this headline"></a></h3>
+<section id="id7">
+<h4>Overview<a class="headerlink" href="#id7" title="Permalink to this headline"></a></h4>
 <p>Using, this module, a container from supporting OCI Registries - Eg: ACR
 (Azure Container Registry), local container registries, etc can be used
 as your “base” image and later customized. This allows you to build
@@ -576,6 +654,9 @@ Instead of building these from scratch each time, you could make use of
 <code class="docutils literal notranslate"><span class="pre">oras</span></code> to pull an appropriate base container and then build new
 containers by adding customizations in <code class="docutils literal notranslate"><span class="pre">%post</span></code> , <code class="docutils literal notranslate"><span class="pre">%environment</span></code>,
 <code class="docutils literal notranslate"><span class="pre">%runscript</span></code>, etc.</p>
+</section>
+<section id="id8">
+<h4>Keywords<a class="headerlink" href="#id8" title="Permalink to this headline"></a></h4>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: oras
 </pre></div>
 </div>
@@ -588,12 +669,15 @@ module to use.</p>
 a base. Also,``tag`` is mandatory that refers to the version of image
 you want to use.</p>
 </section>
+</section>
 <section id="localimage-bootstrap-agent">
 <span id="build-localimage"></span><h3><code class="docutils literal notranslate"><span class="pre">localimage</span></code> bootstrap agent<a class="headerlink" href="#localimage-bootstrap-agent" title="Permalink to this headline"></a></h3>
 <p id="sec-build-localimage">This module allows you to build a container from an existing
 Apptainer container on your host system. The name is somewhat
 misleading because your container can be in either image or directory
 format.</p>
+<section id="id9">
+<h4>Overview<a class="headerlink" href="#id9" title="Permalink to this headline"></a></h4>
 <p>You can use an existing container image as your “base”, and then add
 customization. This allows you to build multiple images from the same
 starting point. For example, you may want to build several containers
@@ -602,6 +686,9 @@ toolchain, or the same base MPI installation. Instead of building these
 from scratch each time, you could start with the appropriate local base
 container and then customize the new container in <code class="docutils literal notranslate"><span class="pre">%post</span></code>,
 <code class="docutils literal notranslate"><span class="pre">%environment</span></code>, <code class="docutils literal notranslate"><span class="pre">%runscript</span></code>, etc.</p>
+</section>
+<section id="id10">
+<h4>Keywords<a class="headerlink" href="#id10" title="Permalink to this headline"></a></h4>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: localimage
 </pre></div>
 </div>
@@ -620,6 +707,9 @@ separated fingerprints corresponding to PGP public keys. If present, and
 the <code class="docutils literal notranslate"><span class="pre">From:</span></code> keyword points to a SIF format image, it will be verified
 and the build will only proceed if it is signed by keys matching <em>all</em>
 of the specified fingerprints.</p>
+</section>
+<section id="id11">
+<h4>Notes<a class="headerlink" href="#id11" title="Permalink to this headline"></a></h4>
 <p>When building from a local container, all previous definition files that
 led to the creation of the current container will be stored in a
 directory within the container called
@@ -627,12 +717,18 @@ directory within the container called
 if environment variables have been changed between the base image and
 the new image during bootstrap.</p>
 </section>
+</section>
 <section id="yum-bootstrap-agent">
 <span id="build-yum"></span><h3><code class="docutils literal notranslate"><span class="pre">yum</span></code> bootstrap agent<a class="headerlink" href="#yum-bootstrap-agent" title="Permalink to this headline"></a></h3>
 <p id="sec-build-yum">This module allows you to build a Red Hat/CentOS/Scientific Linux style
 container from a mirror URI.</p>
+<section id="id12">
+<h4>Overview<a class="headerlink" href="#id12" title="Permalink to this headline"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">yum</span></code> module to specify a base for a CentOS-like container.
 You must also specify the URI for the mirror you would like to use.</p>
+</section>
+<section id="id13">
+<h4>Keywords<a class="headerlink" href="#id13" title="Permalink to this headline"></a></h4>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: yum
 </pre></div>
 </div>
@@ -658,6 +754,9 @@ packages into the core operating system. It is a best practice to supply
 only the bare essentials such that the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section has what it
 needs to properly complete the build. One common package you may want to
 install when using the <code class="docutils literal notranslate"><span class="pre">yum</span></code> build module is YUM itself.</p>
+</section>
+<section id="id14">
+<h4>Notes<a class="headerlink" href="#id14" title="Permalink to this headline"></a></h4>
 <p>There is a major limitation with using YUM to bootstrap a container. The
 RPM database that exists within the container will be created using the
 RPM library and Berkeley DB implementation that exists on the host
@@ -674,13 +773,19 @@ For instance, on Ubuntu you can install it like so:</p>
 </pre></div>
 </div>
 </section>
+</section>
 <section id="debootstrap-build-agent">
 <span id="build-debootstrap"></span><h3><code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> build agent<a class="headerlink" href="#debootstrap-build-agent" title="Permalink to this headline"></a></h3>
 <p id="sec-build-debootstrap">This module allows you to build a Debian/Ubuntu style container from a
 mirror URI.</p>
+<section id="id15">
+<h4>Overview<a class="headerlink" href="#id15" title="Permalink to this headline"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> module to specify a base for a Debian-like
 container. You must also specify the OS version and a URI for the mirror
 you would like to use.</p>
+</section>
+<section id="id16">
+<h4>Keywords<a class="headerlink" href="#id16" title="Permalink to this headline"></a></h4>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: debootstrap
 </pre></div>
 </div>
@@ -708,6 +813,9 @@ mirror when downloading the OS.</p>
 packages into the core operating system. It is a best practice to supply
 only the bare essentials such that the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section has what it
 needs to properly complete the build.</p>
+</section>
+<section id="id17">
+<h4>Notes<a class="headerlink" href="#id17" title="Permalink to this headline"></a></h4>
 <p>In order to use the <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> build module, you must have
 <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> installed on your system. On Ubuntu you can install it
 like so:</p>
@@ -719,12 +827,18 @@ like so:</p>
 </pre></div>
 </div>
 </section>
+</section>
 <section id="arch-bootstrap-agent">
 <span id="build-arch"></span><h3><code class="docutils literal notranslate"><span class="pre">arch</span></code> bootstrap agent<a class="headerlink" href="#arch-bootstrap-agent" title="Permalink to this headline"></a></h3>
 <p id="sec-build-arch">This module allows you to build a Arch Linux based container.</p>
+<section id="id18">
+<h4>Overview<a class="headerlink" href="#id18" title="Permalink to this headline"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">arch</span></code> module to specify a base for an Arch Linux based
 container. Arch Linux uses the aptly named <code class="docutils literal notranslate"><span class="pre">pacman</span></code> package manager
 (all puns intended).</p>
+</section>
+<section id="id19">
+<h4>Keywords<a class="headerlink" href="#id19" title="Permalink to this headline"></a></h4>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: arch
 </pre></div>
 </div>
@@ -734,17 +848,26 @@ module to use.</p>
 this time. By defining the <code class="docutils literal notranslate"><span class="pre">arch</span></code> module, you have essentially given
 all of the information necessary for that particular bootstrap module to
 build a core operating system.</p>
+</section>
+<section id="id20">
+<h4>Notes<a class="headerlink" href="#id20" title="Permalink to this headline"></a></h4>
 <p>Arch Linux is, by design, a very stripped down, light-weight OS. You may
 need to perform a significant amount of configuration to get a usable
 OS. Please refer to this <a class="reference external" href="https://github.com/singularityware/singularity/blob/master/examples/arch/README.md">README.md</a>
 and the <a class="reference external" href="https://github.com/singularityware/singularity/blob/master/examples/arch/Apptainer">Arch Linux example</a>
 for more info.</p>
 </section>
+</section>
 <section id="busybox-bootstrap-agent">
 <span id="build-busybox"></span><h3><code class="docutils literal notranslate"><span class="pre">busybox</span></code> bootstrap agent<a class="headerlink" href="#busybox-bootstrap-agent" title="Permalink to this headline"></a></h3>
 <p id="sec-build-busybox">This module allows you to build a container based on BusyBox.</p>
+<section id="id21">
+<h4>Overview<a class="headerlink" href="#id21" title="Permalink to this headline"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">busybox</span></code> module to specify a BusyBox base for container. You
 must also specify a URI for the mirror you would like to use.</p>
+</section>
+<section id="id22">
+<h4>Keywords<a class="headerlink" href="#id22" title="Permalink to this headline"></a></h4>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: busybox
 </pre></div>
 </div>
@@ -755,8 +878,12 @@ module to use.</p>
 </div>
 <p>The MirrorURL keyword is mandatory. It specifies a URI to use as a
 mirror when downloading the OS.</p>
+</section>
+<section id="id23">
+<h4>Notes<a class="headerlink" href="#id23" title="Permalink to this headline"></a></h4>
 <p>You can build a fully functional BusyBox container that only takes up
 ~600kB of disk space!</p>
+</section>
 </section>
 <section id="zypper-bootstrap-agent">
 <span id="build-zypper"></span><h3><code class="docutils literal notranslate"><span class="pre">zypper</span></code> bootstrap agent<a class="headerlink" href="#zypper-bootstrap-agent" title="Permalink to this headline"></a></h3>
@@ -767,8 +894,13 @@ URI.</p>
 <p><code class="docutils literal notranslate"><span class="pre">zypper</span></code> version 1.11.20 or greater is required on the host system,
 as Apptainer requires the <code class="docutils literal notranslate"><span class="pre">--releasever</span></code> flag.</p>
 </div>
+<section id="id24">
+<h4>Overview<a class="headerlink" href="#id24" title="Permalink to this headline"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">zypper</span></code> module to specify a base for a Suse-like container.
 You must also specify a URI for the mirror you would like to use.</p>
+</section>
+<section id="id25">
+<h4>Keywords<a class="headerlink" href="#id25" title="Permalink to this headline"></a></h4>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: zypper
 </pre></div>
 </div>
@@ -789,12 +921,15 @@ only the bare essentials such that the <code class="docutils literal notranslate
 needs to properly complete the build. One common package you may want to
 install when using the zypper build module is <code class="docutils literal notranslate"><span class="pre">zypper</span></code> itself.</p>
 </section>
+</section>
 <section id="docker-daemon-and-docker-archive-bootstrap-agents">
 <span id="docker-daemon-archive"></span><h3><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> and <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agents<a class="headerlink" href="#docker-daemon-and-docker-archive-bootstrap-agents" title="Permalink to this headline"></a></h3>
 <p>If you are using docker locally there are two options for creating
 Apptainer images without the need for a repository. You can either
 build a SIF from a <code class="docutils literal notranslate"><span class="pre">docker-save</span></code> tar file or you can convert any
 docker image present in docker’s daemon internal storage.</p>
+<section id="id26">
+<h4>Overview<a class="headerlink" href="#id26" title="Permalink to this headline"></a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> allows you to build a SIF from any docker image
 currently residing in docker’s daemon internal storage:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker images alpine
@@ -831,6 +966,9 @@ a docker image stored in a <code class="docutils literal notranslate"><span clas
 <span class="go">Apptainer&gt;</span>
 </pre></div>
 </div>
+</section>
+<section id="id27">
+<h4>Keywords<a class="headerlink" href="#id27" title="Permalink to this headline"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> bootstrap agent can be used in a Apptainer
 definition file as follows:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: docker-daemon:&lt;image&gt;:&lt;tag&gt;
@@ -846,6 +984,7 @@ instead the path to the tar file containing the image:</p>
 <code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> and <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> don’t require a double slash
 <code class="docutils literal notranslate"><span class="pre">//</span></code> after the colon in the agent name.</p>
 </section>
+</section>
 <section id="scratch-bootstrap-agent">
 <span id="scratch-agent"></span><h3><code class="docutils literal notranslate"><span class="pre">scratch</span></code> bootstrap agent<a class="headerlink" href="#scratch-bootstrap-agent" title="Permalink to this headline"></a></h3>
 <p>The scratch bootstrap agent allows you to start from a completely empty
@@ -853,6 +992,8 @@ container. You are then responsible for adding any and all executables,
 libraries etc. that are required. Starting with a scratch container can
 be useful when you are aiming to minimize container size, and have a
 simple application / static binaries.</p>
+<section id="id28">
+<h4>Overview<a class="headerlink" href="#id28" title="Permalink to this headline"></a></h4>
 <p>A minimal container providing a shell can be created by copying the
 <code class="docutils literal notranslate"><span class="pre">busybox</span></code> static binary into an empty scratch container:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
@@ -887,6 +1028,7 @@ Hello from a 696KiB container
 </pre></div>
 </div>
 <p>There are no additional keywords for the scratch bootstrap agent.</p>
+</section>
 </section>
 </section>
 </section>
