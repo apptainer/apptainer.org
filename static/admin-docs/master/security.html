@@ -134,7 +134,7 @@ support for ‘unprivileged user namespace creation’. This means a normal
 user can create a user namespace, in which most setup operations needed
 to run a container can be run, unprivileged.</p>
 <p>Singularity supports running containers without setuid, using user
-namespaces. It can be compiled with the <code class="docutils literal notranslate"><span class="pre">--without-setuid</span></code> option, or
+namespaces. It can be compiled with the <code class="docutils literal notranslate"><span class="pre">--without-suid</span></code> option, or
 <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> can be set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> to enable this.
 In this mode <em>all</em> operations run as the user who starts the
 <code class="docutils literal notranslate"><span class="pre">singularity</span></code> program. However, there are some disadvantages:</p>
