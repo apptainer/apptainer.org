@@ -270,16 +270,16 @@ whether some or all host GPUs are visible inside a container. The
 <code class="docutils literal notranslate"><span class="pre">nvidia-container-runtime</span></code> explicitly binds the devices into the
 container dependent on the value of <code class="docutils literal notranslate"><span class="pre">NVIDIA_VISIBLE_DEVICES</span></code>.</p>
 <p>To control which GPUs are used in a Apptainer container that is run
-with <code class="docutils literal notranslate"><span class="pre">--nv</span></code> you can set <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_CUDA_VISIBLE_DEVICES</span></code> before
+with <code class="docutils literal notranslate"><span class="pre">--nv</span></code> you can set <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_CUDA_VISIBLE_DEVICES</span></code> before
 running the container, or <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code> inside the container.
 This variable will limit the GPU devices that CUDA programs see.</p>
 <p>E.g. to run the tensorflow container, but using only the first GPU in
 the host, we could do:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ SINGULARITYENV_CUDA_VISIBLE_DEVICES=0 singularity run --nv tensorflow_latest-gpu.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINERENV_CUDA_VISIBLE_DEVICES=0 singularity run --nv tensorflow_latest-gpu.sif
 
 # or
 
-$ export SINGULARITYENV_CUDA_VISIBLE_DEVICES=0
+$ export APPTAINERENV_CUDA_VISIBLE_DEVICES=0
 $ singularity run tensorflow_latest-gpu.sif
 </pre></div>
 </div>
@@ -405,7 +405,7 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 <p>When running with <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code>, by default Apptainer will expose all
 GPUs on the host inside the container. This mirrors the functionality of
 the standard GPU support for the most common use-case.</p>
-<p>Setting the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CUDA_VISIBLE_DEVICES</span></code> environment variable
+<p>Setting the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CUDA_VISIBLE_DEVICES</span></code> environment variable
 before running a container is still supported, to control which GPUs are
 used by CUDA programs that honor <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code>. However, more
 powerful GPU isolation is possible using the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> (or <code class="docutils literal notranslate"><span class="pre">-c</span></code>) flag and
@@ -419,7 +419,7 @@ $ singularity run -uwc --nv --nvccli tensorflow_latest-gpu
 </div>
 <p>Note that:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">NVIDIA_VISIBLE_DEVICES</span></code> is not prepended with <code class="docutils literal notranslate"><span class="pre">SINGULARITY_</span></code> as
+<li><p><code class="docutils literal notranslate"><span class="pre">NVIDIA_VISIBLE_DEVICES</span></code> is not prepended with <code class="docutils literal notranslate"><span class="pre">APPTAINER_</span></code> as
 this variable controls container setup, and is not passed into the
 container.</p></li>
 <li><p>The GPU device identifiers start at 0, so 1,2 refers to the 2nd and

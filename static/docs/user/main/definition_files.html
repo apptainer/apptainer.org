@@ -294,7 +294,7 @@ Stage: build
 
 <span class="gh">%setup</span>
     touch /file1
-    touch <span class="si">${</span><span class="nv">SINGULARITY_ROOTFS</span><span class="si">}</span>/file2
+    touch <span class="si">${</span><span class="nv">APPTAINER_ROOTFS</span><span class="si">}</span>/file2
 
 <span class="gh">%files</span>
     /file1
@@ -307,7 +307,7 @@ Stage: build
 <span class="gh">%post</span>
     apt-get update <span class="o">&amp;&amp;</span> apt-get install -y netcat
     <span class="nv">NOW</span><span class="o">=</span><span class="sb">`</span>date<span class="sb">`</span>
-    <span class="nb">echo</span> <span class="s2">&quot;export NOW=\&quot;</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">\&quot;&quot;</span> &gt;&gt; <span class="nv">$SINGULARITY_ENVIRONMENT</span>
+    <span class="nb">echo</span> <span class="s2">&quot;export NOW=\&quot;</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">\&quot;&quot;</span> &gt;&gt; <span class="nv">$APPTAINER_ENVIRONMENT</span>
 
 <span class="gh">%runscript</span>
     <span class="nb">echo</span> <span class="s2">&quot;Container was created </span><span class="nv">$NOW</span><span class="s2">&quot;</span>
@@ -343,7 +343,7 @@ build process for logical understanding.</p>
 <p>During the build process, commands in the <code class="docutils literal notranslate"><span class="pre">%setup</span></code> section are first
 executed on the host system outside of the container after the base OS
 has been installed. You can reference the container file system with the
-<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ROOTFS</span></code> environment variable in the <code class="docutils literal notranslate"><span class="pre">%setup</span></code> section.</p>
+<code class="docutils literal notranslate"><span class="pre">$APPTAINER_ROOTFS</span></code> environment variable in the <code class="docutils literal notranslate"><span class="pre">%setup</span></code> section.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Be careful with the <code class="docutils literal notranslate"><span class="pre">%setup</span></code> section! This scriptlet is executed
@@ -354,7 +354,7 @@ potentially damage the host.</p>
 <p>Consider the example from the definition file above:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%setup</span>
     touch /file1
-    touch <span class="si">${</span><span class="nv">SINGULARITY_ROOTFS</span><span class="si">}</span>/file2
+    touch <span class="si">${</span><span class="nv">APPTAINER_ROOTFS</span><span class="si">}</span>/file2
 </pre></div>
 </div>
 <p>Here, <code class="docutils literal notranslate"><span class="pre">file1</span></code> is created at the root of the file system <strong>on the
@@ -428,7 +428,7 @@ write configuration files, create new directories, etc.</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%post</span>
     apt-get update <span class="o">&amp;&amp;</span> apt-get install -y netcat
     <span class="nv">NOW</span><span class="o">=</span><span class="sb">`</span>date<span class="sb">`</span>
-    <span class="nb">echo</span> <span class="s2">&quot;export NOW=\&quot;</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">\&quot;&quot;</span> &gt;&gt; <span class="nv">$SINGULARITY_ENVIRONMENT</span>
+    <span class="nb">echo</span> <span class="s2">&quot;export NOW=\&quot;</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">\&quot;&quot;</span> &gt;&gt; <span class="nv">$APPTAINER_ENVIRONMENT</span>
 </pre></div>
 </div>
 <p>This <code class="docutils literal notranslate"><span class="pre">%post</span></code> scriptlet uses the Ubuntu package manager <code class="docutils literal notranslate"><span class="pre">apt</span></code> to
@@ -437,12 +437,12 @@ used in the <code class="docutils literal notranslate"><span class="pre">%starts
 <p>The script is also setting an environment variable at build time. Note
 that the value of this variable cannot be anticipated, and therefore
 cannot be set during the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section. For situations like
-this, the <code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> variable is provided. Redirecting
+this, the <code class="docutils literal notranslate"><span class="pre">$APPTAINER_ENVIRONMENT</span></code> variable is provided. Redirecting
 text to this variable will cause it to be written to a file called
 <code class="docutils literal notranslate"><span class="pre">/.singularity.d/env/91-environment.sh</span></code> that will be sourced at
 runtime.</p>
 <p>Variables set in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section through
-<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> take precedence over those added via
+<code class="docutils literal notranslate"><span class="pre">$APPTAINER_ENVIRONMENT</span></code> take precedence over those added via
 <code class="docutils literal notranslate"><span class="pre">%environment</span></code>.</p>
 </section>
 <section id="test">
@@ -549,7 +549,7 @@ the following syntax:</p>
 <p>The value of <code class="docutils literal notranslate"><span class="pre">FOO</span></code> in the container will take the value of <code class="docutils literal notranslate"><span class="pre">FOO</span></code>
 on the host, or <code class="docutils literal notranslate"><span class="pre">default</span></code> if <code class="docutils literal notranslate"><span class="pre">FOO</span></code> is not set on the host or
 <code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code> / <code class="docutils literal notranslate"><span class="pre">--containall</span></code> have been specified.</p>
-<p>Note that variables added to the <code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> file in
+<p>Note that variables added to the <code class="docutils literal notranslate"><span class="pre">$APPTAINER_ENVIRONMENT</span></code> file in
 <code class="docutils literal notranslate"><span class="pre">%post</span></code> will take precedence over variables set in the
 <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section.</p>
 <p>See <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">Environment and Metadata</span></a> for more

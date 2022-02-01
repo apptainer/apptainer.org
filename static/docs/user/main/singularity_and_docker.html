@@ -329,11 +329,11 @@ scenario, it may be useful to specify Docker Hub login credentials using
 environment variables. These are often the default way of passing
 secrets into jobs within CI pipelines.</p>
 <p>Apptainer accepts a username, and password / token, as
-<code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code>
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code>
 respectively. These environment variables will override any stored
 credentials.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export SINGULARITY_DOCKER_USERNAME=myuser
-$ export SINGULARITY_DOCKER_PASSWORD=mytoken
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_DOCKER_USERNAME=myuser
+$ export APPTAINER_DOCKER_PASSWORD=mytoken
 $ singularity pull docker://sylabsio/private
 </pre></div>
 </div>
@@ -377,8 +377,8 @@ Apptainer. Use the same methods as described for Docker Hub above:</p>
 to store your credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">quay.io</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME</span></code> and
-<code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code> environment variables.</p></li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME</span></code> and
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code> environment variables.</p></li>
 </ul>
 </section>
 <section id="nvidia-ngc">
@@ -406,8 +406,8 @@ your NGC API key.</p>
 <span class="pre">docker://nvcr.io</span></code> to store your credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">nvcr.io</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME=&quot;\$oauthtoken&quot;</span></code> and
-<code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code> environment variables.</p></li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME=&quot;\$oauthtoken&quot;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code> environment variables.</p></li>
 </ul>
 <p>See also:
 <a class="reference external" href="https://docs.nvidia.com/ngc/ngc-private-registry-user-guide/index.html">https://docs.nvidia.com/ngc/ngc-private-registry-user-guide/index.html</a></p>
@@ -433,8 +433,8 @@ Docker Hub), with your username and personal access token:</p>
 to store your credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">ghcr.io</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME</span></code> and
-<code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code> environment variables.</p></li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME</span></code> and
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code> environment variables.</p></li>
 </ul>
 </section>
 <section id="aws-ecr">
@@ -466,8 +466,8 @@ credentials for Apptainer.</p></li>
 <span class="pre">&lt;accountid&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your
 machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME=AWS</span></code> and
-<code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code> environment variables.</p></li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME=AWS</span></code> and
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code> environment variables.</p></li>
 </ul>
 <p>You should now be able to pull containers from your ECR URI at
 <code class="docutils literal notranslate"><span class="pre">docker://&lt;accountid&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com</span></code>.</p>
@@ -491,8 +491,8 @@ Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">myregistry.azurecr.io</span></code> if
 <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME</span></code> and
-<code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code> environment variables.</p></li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME</span></code> and
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code> environment variables.</p></li>
 </ul>
 <p>The recent repository-scoped access token preview may be more
 convenient. See the <a class="reference external" href="https://docs.microsoft.com/en-us/azure/container-registry/container-registry-repository-scoped-permissions">preview documentation</a>
@@ -558,8 +558,8 @@ stored credentials or environment variables must be available to the
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.
 I.E. run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">singularity</span> <span class="pre">build</span> <span class="pre">--docker-login</span> <span class="pre">myimage.sif</span>
 <span class="pre">Apptainer</span></code>.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_USERNAME</span></code> and
-<code class="docutils literal notranslate"><span class="pre">SINGULARITY_DOCKER_PASSWORD</span></code> environment variables. Pass the
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME</span></code> and
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code> environment variables. Pass the
 environment variables through sudo to the <code class="docutils literal notranslate"><span class="pre">root</span></code> build process by
 running <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-E</span> <span class="pre">singularity</span> <span class="pre">build</span> <span class="pre">...</span></code>.</p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">...</span></code> to store your credentials
@@ -810,12 +810,12 @@ environment variables into the container. Environment variables may
 change the behaviour of software.</p>
 <p>To disable automatic propagation of environment variables, the
 <code class="docutils literal notranslate"><span class="pre">--cleanenv</span> <span class="pre">/</span> <span class="pre">-e</span></code> flag can be specified. When <code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code> is used,
-only variables on the host that are prefixed with <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code>
+only variables on the host that are prefixed with <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code>
 are set in the container:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Set a host variable
 $ export HOST_VAR=123
 # Set a singularity container environment variable
-$ export &quot;SINGULARITYENV_FORCE_VAR=&quot;123&quot;
+$ export &quot;APPTAINERENV_FORCE_VAR=&quot;123&quot;
 
 $ singularity run library://alpine env | grep VAR
 FORCE_VAR=123

@@ -81,7 +81,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#overriding-environment-variables">Overriding environment variables</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#env-option"><code class="docutils literal notranslate"><span class="pre">--env</span></code> option</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#env-file-option"><code class="docutils literal notranslate"><span class="pre">--env-file</span></code> option</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#singularityenv-prefix"><code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> prefix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apptainerenv-prefix"><code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> prefix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#manipulating-path">Manipulating <code class="docutils literal notranslate"><span class="pre">PATH</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#escaping-and-evaluation-of-environment-variables">Escaping and evaluation of environment variables</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#using-host-variables">Using host variables</a></li>
@@ -188,9 +188,9 @@ the definition file used to build the container.</p></li>
 passed into the container.</p></li>
 <li><p>Any variables you set specifically for the container at runtime,
 using the <code class="docutils literal notranslate"><span class="pre">--env</span></code>, <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> options, or by setting
-<code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> variables outside of the container.</p></li>
+<code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> variables outside of the container.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable can be manipulated to add entries.</p></li>
-<li><p>Runtime variables <code class="docutils literal notranslate"><span class="pre">SINGULARITY_xxx</span></code> set by Apptainer to
+<li><p>Runtime variables <code class="docutils literal notranslate"><span class="pre">APPTAINER_xxx</span></code> set by Apptainer to
 provide information about the container.</p></li>
 </ul>
 </div></blockquote>
@@ -276,12 +276,12 @@ on the host, or <code class="docutils literal notranslate"><span class="pre">def
 <p>In some circumstances the value that needs to be assigned to an
 environment variable may only be known after e.g. software
 installation, in <code class="docutils literal notranslate"><span class="pre">%post</span></code>. For situations like this, the
-<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> variable is provided. Redirecting text to
+<code class="docutils literal notranslate"><span class="pre">$APPTAINER_ENVIRONMENT</span></code> variable is provided. Redirecting text to
 this variable will cause it to be written to a file called
 <code class="docutils literal notranslate"><span class="pre">/.singularity.d/env/91-environment.sh</span></code> that will be sourced at
 runtime.</p>
 <p>Variables set in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section through
-<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> take precedence over those added via
+<code class="docutils literal notranslate"><span class="pre">$APPTAINER_ENVIRONMENT</span></code> take precedence over those added via
 <code class="docutils literal notranslate"><span class="pre">%environment</span></code>.</p>
 </section>
 </section>
@@ -294,7 +294,7 @@ Except that:</p>
 <div><ul class="simple">
 <li><p>An environment variable set on the host will be overridden by a
 variable of the same name that has been set inside the container
-image, via <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> environment variables, or the
+image, via <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> environment variables, or the
 <code class="docutils literal notranslate"><span class="pre">--env</span></code> and <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> flags.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">PS1</span></code> shell prompt is reset for a container specific prompt.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable will be modified to contain
@@ -316,10 +316,10 @@ PATH=/startpath:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 PROMPT_COMMAND=PS1=&quot;Apptainer&gt; &quot;; unset PROMPT_COMMAND
 PS1=Apptainer&gt;
 PWD=/home/dave/doc-tesrts
-SINGULARITY_COMMAND=exec
-SINGULARITY_CONTAINER=/home/dave/doc-tesrts/env.sif
-SINGULARITY_ENVIRONMENT=/.singularity.d/env/91-environment.sh
-SINGULARITY_NAME=env.sif
+APPTAINER_COMMAND=exec
+APPTAINER_CONTAINER=/home/dave/doc-tesrts/env.sif
+APPTAINER_ENVIRONMENT=/.singularity.d/env/91-environment.sh
+APPTAINER_NAME=env.sif
 TERM=xterm-256color
 </pre></div>
 </div>
@@ -342,14 +342,14 @@ environment variables in a container that can be inspected by any
 program running in the container.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_COMMAND</span></code> - how the container was started, e.g.
+<li><p><code class="docutils literal notranslate"><span class="pre">APPTAINER_COMMAND</span></code> - how the container was started, e.g.
 <code class="docutils literal notranslate"><span class="pre">exec</span></code> / <code class="docutils literal notranslate"><span class="pre">run</span></code> / <code class="docutils literal notranslate"><span class="pre">shell</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_CONTAINER</span></code> - the full path to the container image.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENVIRONMENT</span></code> - path inside the container to the
+<li><p><code class="docutils literal notranslate"><span class="pre">APPTAINER_CONTAINER</span></code> - the full path to the container image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENVIRONMENT</span></code> - path inside the container to the
 shell script holding the container image environment settings.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_NAME</span></code> - name of the container image, e.g.
+<li><p><code class="docutils literal notranslate"><span class="pre">APPTAINER_NAME</span></code> - name of the container image, e.g.
 <code class="docutils literal notranslate"><span class="pre">myfile.sif</span></code> or <code class="docutils literal notranslate"><span class="pre">docker://ubuntu</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_BIND</span></code> - a list of bind paths that the user
+<li><p><code class="docutils literal notranslate"><span class="pre">APPTAINER_BIND</span></code> - a list of bind paths that the user
 requested, via flags or environment variables, when running the
 container.</p></li>
 </ul>
@@ -388,15 +388,15 @@ Hello from a file
 </pre></div>
 </div>
 </section>
-<section id="singularityenv-prefix">
-<h3><code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> prefix<a class="headerlink" href="#singularityenv-prefix" title="Permalink to this headline"></a></h3>
+<section id="apptainerenv-prefix">
+<h3><code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> prefix<a class="headerlink" href="#apptainerenv-prefix" title="Permalink to this headline"></a></h3>
 <p>If you export an environment variable on your host called
-<code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_xxx</span></code> <em>before</em> you run a container, then it will set
+<code class="docutils literal notranslate"><span class="pre">APPTAINERENV_xxx</span></code> <em>before</em> you run a container, then it will set
 the environment variable <code class="docutils literal notranslate"><span class="pre">xxx</span></code> inside the container:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run env.sif
 Hello
 
-$ export SINGULARITYENV_MYVAR=&quot;Overridden&quot;
+$ export APPTAINERENV_MYVAR=&quot;Overridden&quot;
 $ singularity run env.sif
 Overridden
 </pre></div>
@@ -405,8 +405,8 @@ Overridden
 <section id="manipulating-path">
 <h3>Manipulating <code class="docutils literal notranslate"><span class="pre">PATH</span></code><a class="headerlink" href="#manipulating-path" title="Permalink to this headline"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">PATH</span></code> is a special environment variable that tells a system where to
-look for programs that can be run. <code class="docutils literal notranslate"><span class="pre">PATH</span></code> contains multiple filesystem
-locations (paths) separated by colons. When you ask to run a program
+look for programs that can be run. <code class="docutils literal notranslate"><span class="pre">PATH</span></code> contains multiple filesystem</p>
+<p>locations (paths) separated by colons. When you ask to run a program
 <code class="docutils literal notranslate"><span class="pre">myprog</span></code>, the system looks through these locations one by one, until
 it finds <code class="docutils literal notranslate"><span class="pre">myprog</span></code>.</p>
 <p>To ensure containers work correctly, when a host <code class="docutils literal notranslate"><span class="pre">PATH</span></code> might contain
@@ -421,15 +421,15 @@ installed elsewhere in the container, then you can override this by
 setting <code class="docutils literal notranslate"><span class="pre">PATH</span></code> in the container definition <code class="docutils literal notranslate"><span class="pre">%environment</span></code> block.</p>
 <p>If your container depends on things that are bind mounted into it, or
 you have another need to modify the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable when starting a
-container, you can do so with <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_APPEND_PATH</span></code> or
-<code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_PREPEND_PATH</span></code>.</p>
-<p>If you set a variable on your host called <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_APPEND_PATH</span></code>
+container, you can do so with <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_APPEND_PATH</span></code> or
+<code class="docutils literal notranslate"><span class="pre">APPTAINERENV_PREPEND_PATH</span></code>.</p>
+<p>If you set a variable on your host called <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_APPEND_PATH</span></code>
 then its value will be appended (added to the end) of the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>
 variable in the container.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec env.sif sh -c &#39;echo $PATH&#39;
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-$ export SINGULARITYENV_APPEND_PATH=&quot;/endpath&quot;
+$ export APPTAINERENV_APPEND_PATH=&quot;/endpath&quot;
 $ singularity exec env.sif sh -c &#39;echo $PATH&#39;
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/endpath
 </pre></div>
@@ -437,12 +437,12 @@ $ singularity exec env.sif sh -c &#39;echo $PATH&#39;
 <p>Alternatively you could use the <code class="docutils literal notranslate"><span class="pre">--env</span></code> option to set a
 <code class="docutils literal notranslate"><span class="pre">APPEND_PATH</span></code> variable, e.g. <code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">APPEND_PATH=/endpath</span></code>.</p>
 <p>If you set a variable on your host called
-<code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_PREPEND_PATH</span></code> then its value will be prepended (added
+<code class="docutils literal notranslate"><span class="pre">APPTAINERENV_PREPEND_PATH</span></code> then its value will be prepended (added
 to the start) of the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable in the container.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec env.sif sh -c &#39;echo $PATH&#39;
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-$ export SINGULARITYENV_PREPEND_PATH=&quot;/startpath&quot;
+$ export APPTAINERENV_PREPEND_PATH=&quot;/startpath&quot;
 $ singularity exec env.sif sh -c &#39;echo $PATH&#39;
 /startpath:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 </pre></div>
@@ -528,7 +528,7 @@ environment is constructed in the following order:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Clear the environment, keeping just <code class="docutils literal notranslate"><span class="pre">HOME</span></code> and
-<code class="docutils literal notranslate"><span class="pre">SINGULARITY_APPNAME</span></code>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_APPNAME</span></code>.</p></li>
 <li><p>Set Docker/OCI defined environment variables, where a Docker or
 OCI image was used as the base for the container build.</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">PATH</span></code> is not defined set the Apptainer default <code class="docutils literal notranslate"><span class="pre">PATH</span></code>
@@ -541,11 +541,11 @@ override any previously set values, and may reference host
 variables.</p></li>
 <li><p>Set environment variables that were defined in the <code class="docutils literal notranslate"><span class="pre">%post</span></code>
 section of the build, by addition to the
-<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> file.</p></li>
+<code class="docutils literal notranslate"><span class="pre">$APPTAINER_ENVIRONMENT</span></code> file.</p></li>
 <li><p>Set SCIF (<code class="docutils literal notranslate"><span class="pre">--app</span></code>) environment variables</p></li>
 <li><p>Set base environment essential vars (<code class="docutils literal notranslate"><span class="pre">PS1</span></code> and
 <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code>)</p></li>
-<li><p>Inject <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> / <code class="docutils literal notranslate"><span class="pre">--env</span></code> / <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> variables
+<li><p>Inject <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> / <code class="docutils literal notranslate"><span class="pre">--env</span></code> / <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> variables
 so they can override or modify any previous values.</p></li>
 <li><p>Apply special <code class="docutils literal notranslate"><span class="pre">APPEND_PATH</span></code> / <code class="docutils literal notranslate"><span class="pre">PREPEND_PATH</span></code> handling.</p></li>
 <li><p>Restore environment variables from the host, if they have not
@@ -560,7 +560,7 @@ already been set in the container, and the <code class="docutils literal notrans
 recommended to avoid manipulating the container environment by
 directly adding or modifying scripts in this directory. Please use
 the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section of the definition file, and the
-<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_ENVIRONMENT</span></code> file from <code class="docutils literal notranslate"><span class="pre">%post</span></code> if required.</p>
+<code class="docutils literal notranslate"><span class="pre">$APPTAINER_ENVIRONMENT</span></code> file from <code class="docutils literal notranslate"><span class="pre">%post</span></code> if required.</p>
 <p>A future version of Apptainer may move container scripts,
 environment, and metadata outside of the container’s root
 filesystem. This will permit further reproducibility and
@@ -642,7 +642,7 @@ when you are writing the definition file, but can be obtained in the
 <code class="docutils literal notranslate"><span class="pre">%post</span></code> section of your definition file while the container is
 building.</p>
 <p>Apptainer allows this, through adding labels to the
-file defined by the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_LABELS</span></code> environment variable in the
+file defined by the <code class="docutils literal notranslate"><span class="pre">APPTAINER_LABELS</span></code> environment variable in the
 <code class="docutils literal notranslate"><span class="pre">%post</span></code> section:</p>
 <div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
 <span class="k">From</span>: ubuntu:latest<span class="c"></span>
@@ -654,7 +654,7 @@ file defined by the <code class="docutils literal notranslate"><span class="pre"
 <span class="c1"># We can now also set labels to a value at build time</span>
 <span class="gh">%post</span>
   <span class="nv">VAL</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>myprog --version<span class="k">)</span><span class="s2">&quot;</span>
-  <span class="nb">echo</span> <span class="s2">&quot;my.label </span><span class="nv">$VAL</span><span class="s2">&quot;</span> &gt;&gt; <span class="s2">&quot;</span><span class="nv">$SINGULARITY_LABELS</span><span class="s2">&quot;</span>
+  <span class="nb">echo</span> <span class="s2">&quot;my.label </span><span class="nv">$VAL</span><span class="s2">&quot;</span> &gt;&gt; <span class="s2">&quot;</span><span class="nv">$APPTAINER_LABELS</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
 <p>Labels must be added to the file one per line, in a <code class="docutils literal notranslate"><span class="pre">NAME</span> <span class="pre">VALUE</span></code>
@@ -723,7 +723,7 @@ used to build the container.</p>
     touch .condarc
 
 <span class="gh">%post</span>
-    <span class="nb">echo</span> <span class="s1">&#39;export RANDOM=123456&#39;</span> &gt;&gt;<span class="nv">$SINGULARITY_ENVIRONMENT</span>
+    <span class="nb">echo</span> <span class="s1">&#39;export RANDOM=123456&#39;</span> &gt;&gt;<span class="nv">$APPTAINER_ENVIRONMENT</span>
     <span class="c1">#Installing all dependencies</span>
     apt-get update <span class="o">&amp;&amp;</span> apt-get -y upgrade
     apt-get -y install <span class="se">\</span>
@@ -763,27 +763,27 @@ used to build the container.</p>
 <span class="nv">OCI_CMD</span><span class="o">=</span><span class="s2">&quot;bash&quot;</span>
 <span class="c1"># ENTRYPOINT only - run entrypoint plus args</span>
 <span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$OCI_CMD</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-<span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="nv">APPTAINER_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
 <span class="k">fi</span>
 
 <span class="c1"># CMD only - run CMD or override with args</span>
 <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$OCI_CMD</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
 <span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+    <span class="nv">APPTAINER_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
 <span class="k">else</span>
-    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="nv">APPTAINER_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="k">fi</span>
 <span class="k">fi</span>
 
 <span class="c1"># ENTRYPOINT and CMD - run ENTRYPOINT with CMD as default args</span>
 <span class="c1"># override with user provided args</span>
 <span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
+    <span class="nv">APPTAINER_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
 <span class="k">else</span>
-    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="nv">APPTAINER_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="k">fi</span>
 
-<span class="nb">exec</span> <span class="nv">$SINGULARITY_OCI_RUN</span>
+<span class="nb">exec</span> <span class="nv">$APPTAINER_OCI_RUN</span>
 </pre></div>
 </div>
 </section>

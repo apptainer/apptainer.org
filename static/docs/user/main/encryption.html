@@ -189,11 +189,11 @@ build time via an environment variable or a command line option.</p>
 <td><p><strong>Commandline Option</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>Passphrase</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENCRYPTION_PASSPHRASE</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PASSPHRASE</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">--passphrase</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>Asymmetric Key (PEM)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENCRYPTION_PEM_PATH</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PEM_PATH</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">--pem-path</span></code></p></td>
 </tr>
 </tbody>
@@ -205,8 +205,8 @@ following precedence is respected.</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--pem-path</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--passphrase</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENCRYPTION_PEM_PATH</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENCRYPTION_PASSPHRASE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PEM_PATH</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PASSPHRASE</span></code></p></li>
 </ol>
 <section id="passphrase-encryption">
 <h3>Passphrase Encryption<a class="headerlink" href="#passphrase-encryption" title="Permalink to this headline"></a></h3>
@@ -230,7 +230,7 @@ INFO:    Starting build...
 </section>
 <section id="using-an-environment-variable">
 <h4>Using an environment variable<a class="headerlink" href="#using-an-environment-variable" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo SINGULARITY_ENCRYPTION_PASSPHRASE=&lt;secret&gt; singularity build --encrypt encrypted.sif encrypted.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo APPTAINER_ENCRYPTION_PASSPHRASE=&lt;secret&gt; singularity build --encrypt encrypted.sif encrypted.def
 Starting build...
 </pre></div>
 </div>
@@ -242,7 +242,7 @@ a passphrase, you should set the environment variable in a way that will
 not record your passphrase on the command line. For instance, you could
 save a plain text passphrase in a file (e.g. <code class="docutils literal notranslate"><span class="pre">secret.txt</span></code>) and use it
 like so.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export SINGULARITY_ENCRYPTION_PASSPHRASE=$(cat secret.txt)
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_ENCRYPTION_PASSPHRASE=$(cat secret.txt)
 
 $ sudo -E singularity build --encrypt encrypted.sif encrypted.def
 Starting build...
@@ -285,7 +285,7 @@ Starting build...
 </section>
 <section id="encrypting-with-an-environment-variable">
 <h4>Encrypting with an environment variable<a class="headerlink" href="#encrypting-with-an-environment-variable" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo SINGULARITY_ENCRYPTION_PEM_PATH=rsa_pub.pem singularity build --encrypt encrypted.sif encrypted.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo APPTAINER_ENCRYPTION_PEM_PATH=rsa_pub.pem singularity build --encrypt encrypted.sif encrypted.def
 Starting build...
 </pre></div>
 </div>
@@ -313,7 +313,7 @@ Enter passphrase for encrypted container: &lt;secret&gt;
 </section>
 <section id="running-with-a-passphrase-in-an-environment-variable">
 <h4>Running with a passphrase in an environment variable<a class="headerlink" href="#running-with-a-passphrase-in-an-environment-variable" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ SINGULARITY_ENCRYPTION_PASSPHRASE=&quot;secret&quot; singularity run encrypted.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINER_ENCRYPTION_PASSPHRASE=&quot;secret&quot; singularity run encrypted.sif
 </pre></div>
 </div>
 <p>While this example shows how an environment variable can be used to set
@@ -321,7 +321,7 @@ a passphrase, you should set the environment variable in a way that will
 not record your passphrase on the command line. For instance, you could
 save a plain text passphrase in a file (e.g. <code class="docutils literal notranslate"><span class="pre">secret.txt</span></code>) and use it
 like so.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export SINGULARITY_ENCRYPTION_PASSPHRASE=$(cat secret.txt)
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_ENCRYPTION_PASSPHRASE=$(cat secret.txt)
 
 $ singularity run encrypted.sif
 </pre></div>
@@ -340,7 +340,7 @@ Encryption section above.</p>
 </section>
 <section id="running-using-an-environment-variable">
 <h4>Running using an environment variable<a class="headerlink" href="#running-using-an-environment-variable" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ SINGULARITY_ENCRYPTION_PEM_PATH=rsa_pri.pem singularity run encrypted.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINER_ENCRYPTION_PEM_PATH=rsa_pri.pem singularity run encrypted.sif
 </pre></div>
 </div>
 </section>
