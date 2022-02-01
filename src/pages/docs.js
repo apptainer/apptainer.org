@@ -54,7 +54,7 @@ const DocsPage = () => (
                                             </Link>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                <Link to={`/admin-docs/${docsVersion.version}/`} className="text-blue-900 hover:text-blue-700">
+                                                <Link to={`/docs/admin/${docsVersion.version}/`} className="text-blue-900 hover:text-blue-700">
                                                     Admin Documentation
                                             </Link>
                                             </td>
