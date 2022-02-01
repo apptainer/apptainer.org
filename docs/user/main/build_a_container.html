@@ -284,8 +284,8 @@ present on disk or in memory. See <a class="reference internal" href="encryption
 <section id="encrypt">
 <h3><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code><a class="headerlink" href="#encrypt" title="Permalink to this headline"></a></h3>
 <p>Specifies that Apptainer should use a secret saved in either the
-<code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENCRYPTION_PASSPHRASE</span></code> or
-<code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENCRYPTION_PEM_PATH</span></code> environment variable to build an
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PASSPHRASE</span></code> or
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PEM_PATH</span></code> environment variable to build an
 encrypted container. See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for
 more details.</p>
 </section>
@@ -365,8 +365,8 @@ into your build environment. Libraries are mounted during the execution
 of <code class="docutils literal notranslate"><span class="pre">post</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code> sections.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This option can’t be set via the environment variable <cite>SINGULARITY_NV</cite>.
-Apptainer will attempt to bind binaries listed in SINGULARITY_CONFDIR/nvliblist.conf,
+<p>This option can’t be set via the environment variable <cite>APPTAINER_NV</cite>.
+Apptainer will attempt to bind binaries listed in APPTAINER_CONFDIR/nvliblist.conf,
 if the mount destination doesn’t exist inside the container, they are ignored.</p>
 </div>
 </section>
@@ -377,8 +377,8 @@ your build environment. Libraries are mounted during the execution of
 <code class="docutils literal notranslate"><span class="pre">post</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code> sections.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This option can’t be set via the environment variable <cite>SINGULARITY_ROCM</cite>.
-Apptainer will attempt to bind binaries listed in <cite>SINGULARITY_CONFDIR/rocmliblist.conf</cite>,
+<p>This option can’t be set via the environment variable <cite>APPTAINER_ROCM</cite>.
+Apptainer will attempt to bind binaries listed in <cite>APPTAINER_CONFDIR/rocmliblist.conf</cite>,
 if the mount destination doesn’t exist inside the container, they are ignored.</p>
 </div>
 </section>
@@ -391,13 +391,13 @@ paths</span></a>. Bind mount occurs during the execution
 of <code class="docutils literal notranslate"><span class="pre">post</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code> sections.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This option can’t be set via the environment variables <cite>SINGULARITY_BIND</cite> and <cite>SINGULARITY_BINDPATH</cite></p>
+<p>This option can’t be set via the environment variables <cite>APPTAINER_BIND</cite> and <cite>APPTAINER_BINDPATH</cite></p>
 </div>
 <p><strong>Beware that the mount points must exist in the built image</strong> prior to executing <code class="docutils literal notranslate"><span class="pre">post</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code>.
 So if you want to bind <code class="docutils literal notranslate"><span class="pre">--bind</span> <span class="pre">/example</span></code> and it doesn’t exist in the bootstrap image, you have to
 workaround that by adding a <code class="docutils literal notranslate"><span class="pre">setup</span></code> section:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%setup
-  mkdir $SINGULARITY_ROOTFS/example
+  mkdir $APPTAINER_ROOTFS/example
 </pre></div>
 </div>
 <div class="admonition note">

@@ -198,8 +198,8 @@ running, you can disable the <code class="docutils literal notranslate"><span cl
 you will be able to request your own bind paths within your container.</p>
 <p>The Apptainer action commands (<code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code>, <code class="docutils literal notranslate"><span class="pre">shell</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code>) will accept the <code class="docutils literal notranslate"><span class="pre">--bind/-B</span></code> command-line option to
-specify bind paths, and will also honor the <code class="docutils literal notranslate"><span class="pre">$SINGULARITY_BIND</span></code> (or
-<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_BINDPATH</span></code>) environment variable. The argument for this
+specify bind paths, and will also honor the <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BIND</span></code> (or
+<code class="docutils literal notranslate"><span class="pre">$APPTAINER_BINDPATH</span></code>) environment variable. The argument for this
 option is a comma-delimited string of bind path specifications in the
 format <code class="docutils literal notranslate"><span class="pre">src[:dest[:opts]]</span></code>, where <code class="docutils literal notranslate"><span class="pre">src</span></code> and <code class="docutils literal notranslate"><span class="pre">dest</span></code> are paths
 outside and inside of the container respectively. If <code class="docutils literal notranslate"><span class="pre">dest</span></code> is not
@@ -232,12 +232,12 @@ bar  foo
 <code class="docutils literal notranslate"><span class="pre">/data</span></code> on the host to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> in the container.</p>
 <p>Using the environment variable instead of the command line argument,
 this would be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export SINGULARITY_BIND=&quot;/opt,/data:/mnt&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_BIND=&quot;/opt,/data:/mnt&quot;
 
 $ singularity shell my_container.sif
 </pre></div>
 </div>
-<p>Using the environment variable <code class="docutils literal notranslate"><span class="pre">$SINGULARITY_BIND</span></code>, you can bind paths
+<p>Using the environment variable <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BIND</span></code>, you can bind paths
 even when you are running your container as an executable file with a
 runscript. If you bind many directories into your Apptainer
 containers and they don’t change, you could even benefit by setting this
@@ -292,7 +292,7 @@ $ singularity run \
 </pre></div>
 </div>
 <p>Mount specifications are also read from then environment variable
-<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_MOUNT</span></code>. Multiple bind mounts set via this environment
+<code class="docutils literal notranslate"><span class="pre">$APPTAINER_MOUNT</span></code>. Multiple bind mounts set via this environment
 variable should be separated by newlines (<code class="docutils literal notranslate"><span class="pre">\n</span></code>).</p>
 </section>
 <section id="using-bind-or-mount-with-the-writable-flag">

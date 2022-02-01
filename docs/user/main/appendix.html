@@ -213,48 +213,48 @@
   <section id="appendix">
 <span id="id1"></span><h1>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline"></a></h1>
 <section id="apptainer-s-environment-variables">
-<span id="singularity-environment-variables"></span><h2>Apptainer’s environment variables<a class="headerlink" href="#apptainer-s-environment-variables" title="Permalink to this headline"></a></h2>
+<span id="apptainer-environment-variables"></span><h2>Apptainer’s environment variables<a class="headerlink" href="#apptainer-s-environment-variables" title="Permalink to this headline"></a></h2>
 <p>Apptainer comes with some environment variables you can set or
 modify depending on your needs. You can see them listed alphabetically
 below with their respective functionality.</p>
 <section id="a">
 <h3><code class="docutils literal notranslate"><span class="pre">A</span></code><a class="headerlink" href="#a" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_ADD_CAPS</strong>: To specify a list (comma separated string)
+<li><p><strong>APPTAINER_ADD_CAPS</strong>: To specify a list (comma separated string)
 of capabilities to be added. Default is an empty string.</p></li>
-<li><p><strong>SINGULARITY_ALL</strong>: List all the users and groups capabilities.</p></li>
-<li><p><strong>SINGULARITY_ALLOW_SETUID</strong>: To specify that setuid binaries should
+<li><p><strong>APPTAINER_ALL</strong>: List all the users and groups capabilities.</p></li>
+<li><p><strong>APPTAINER_ALLOW_SETUID</strong>: To specify that setuid binaries should
 or not be allowed in the container. (root only) Default is set to
 false.</p></li>
-<li><p><strong>SINGULARITY_APP</strong> and <strong>SINGULARITY_APPNAME</strong>: Sets the name of an
+<li><p><strong>APPTAINER_APP</strong> and <strong>APPTAINER_APPNAME</strong>: Sets the name of an
 application to be run inside a container.</p></li>
-<li><p><strong>SINGULARITY_APPLY_CGROUPS</strong>: Used to apply cgroups from an input
+<li><p><strong>APPTAINER_APPLY_CGROUPS</strong>: Used to apply cgroups from an input
 file for container processes. (it requires root privileges)</p></li>
 </ol>
 </section>
 <section id="b">
 <h3><code class="docutils literal notranslate"><span class="pre">B</span></code><a class="headerlink" href="#b" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_BINDPATH</strong> and <strong>SINGULARITY_BIND</strong>: Comma separated
+<li><p><strong>APPTAINER_BINDPATH</strong> and <strong>APPTAINER_BIND</strong>: Comma separated
 string <code class="docutils literal notranslate"><span class="pre">source:&lt;dest&gt;</span></code> list of paths to bind between the host and
 the container.</p></li>
-<li><p><strong>SINGULARITY_BOOT</strong>: Set to false by default, considers if executing
+<li><p><strong>APPTAINER_BOOT</strong>: Set to false by default, considers if executing
 <code class="docutils literal notranslate"><span class="pre">/sbin/init</span></code> when container boots (root only).</p></li>
 </ol>
 </section>
 <section id="c">
 <h3><code class="docutils literal notranslate"><span class="pre">C</span></code><a class="headerlink" href="#c" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_CACHEDIR</strong>: Specifies the directory for image downloads
+<li><p><strong>APPTAINER_CACHEDIR</strong>: Specifies the directory for image downloads
 to be cached in. See <a class="reference internal" href="build_env.html#sec-cache"><span class="std std-ref">Cache Folders</span></a>.</p></li>
-<li><p><strong>SINGULARITY_CLEANENV</strong>: Specifies if the environment should be
+<li><p><strong>APPTAINER_CLEANENV</strong>: Specifies if the environment should be
 cleaned or not before running the container. Default is set to false.</p></li>
-<li><p><strong>SINGULARITY_CONTAIN</strong>: To use minimal <code class="docutils literal notranslate"><span class="pre">/dev</span></code> and empty other
+<li><p><strong>APPTAINER_CONTAIN</strong>: To use minimal <code class="docutils literal notranslate"><span class="pre">/dev</span></code> and empty other
 directories (e.g. <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> and <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>) instead of sharing
 filesystems from your host. Default is set to false.</p></li>
-<li><p><strong>SINGULARITY_CONTAINALL</strong>: To contain not only file systems, but
+<li><p><strong>APPTAINER_CONTAINALL</strong>: To contain not only file systems, but
 also PID, IPC, and environment. Default is set to false.</p></li>
-<li><p><strong>SINGULARITY_CONTAINLIBS</strong>: Used to specify a string of file names
+<li><p><strong>APPTAINER_CONTAINLIBS</strong>: Used to specify a string of file names
 (comma separated string) to bind to the <code class="docutils literal notranslate"><span class="pre">/.singularity.d/libs</span></code>
 directory.</p></li>
 </ol>
@@ -262,52 +262,52 @@ directory.</p></li>
 <section id="d">
 <h3><code class="docutils literal notranslate"><span class="pre">D</span></code><a class="headerlink" href="#d" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_DEFFILE</strong>: Shows the Apptainer recipe that was used
+<li><p><strong>APPTAINER_DEFFILE</strong>: Shows the Apptainer recipe that was used
 to generate the image.</p></li>
-<li><p><strong>SINGULARITY_DESC</strong>: Contains a description of the capabilities.</p></li>
-<li><p><strong>SINGULARITY_DISABLE_CACHE</strong>: To disable all caching of docker/oci,
+<li><p><strong>APPTAINER_DESC</strong>: Contains a description of the capabilities.</p></li>
+<li><p><strong>APPTAINER_DISABLE_CACHE</strong>: To disable all caching of docker/oci,
 library, oras, etc. downloads and built SIFs. Default is set to
 false.</p></li>
-<li><p><strong>SINGULARITY_DNS</strong>: A list of the DNS server addresses separated by
+<li><p><strong>APPTAINER_DNS</strong>: A list of the DNS server addresses separated by
 commas to be added in <code class="docutils literal notranslate"><span class="pre">resolv.conf</span></code>.</p></li>
-<li><p><strong>SINGULARITY_DOCKER_LOGIN</strong>: To specify the interactive prompt for
+<li><p><strong>APPTAINER_DOCKER_LOGIN</strong>: To specify the interactive prompt for
 docker authentication.</p></li>
-<li><p><strong>SINGULARITY_DOCKER_USERNAME</strong>: To specify a username for docker
+<li><p><strong>APPTAINER_DOCKER_USERNAME</strong>: To specify a username for docker
 authentication.</p></li>
-<li><p><strong>SINGULARITY_DOCKER_PASSWORD</strong>: To specify the password for docker
+<li><p><strong>APPTAINER_DOCKER_PASSWORD</strong>: To specify the password for docker
 authentication.</p></li>
-<li><p><strong>SINGULARITY_DOWNLOAD_CONCURRENCY</strong>: To specify how many concurrent streams
+<li><p><strong>APPTAINER_DOWNLOAD_CONCURRENCY</strong>: To specify how many concurrent streams
 when downloading (pulling) an image from cloud library.</p></li>
-<li><p><strong>SINGULARITY_DOWNLOAD_PART_SIZE</strong>: To specify the size of each part (bytes)
+<li><p><strong>APPTAINER_DOWNLOAD_PART_SIZE</strong>: To specify the size of each part (bytes)
 when concurrent downloads are enabled.</p></li>
-<li><p><strong>SINGULARITY_DOWNLOAD_BUFFER_SIZE</strong>: To specify the transfer buffer size
+<li><p><strong>APPTAINER_DOWNLOAD_BUFFER_SIZE</strong>: To specify the transfer buffer size
 (bytes) when concurrent downloads are enabled.</p></li>
-<li><p><strong>SINGULARITY_DROP_CAPS</strong>: To specify a list (comma separated string)
+<li><p><strong>APPTAINER_DROP_CAPS</strong>: To specify a list (comma separated string)
 of capabilities to be dropped. Default is an empty string.</p></li>
 </ol>
 </section>
 <section id="e">
 <h3><code class="docutils literal notranslate"><span class="pre">E</span></code><a class="headerlink" href="#e" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_ENVIRONMENT</strong>: Contains all the environment variables
+<li><p><strong>APPTAINER_ENVIRONMENT</strong>: Contains all the environment variables
 that have been exported in your container.</p></li>
-<li><p><strong>SINGULARITY_ENCRYPTION_PASSPHRASE</strong>: Used to specify the plaintext
+<li><p><strong>APPTAINER_ENCRYPTION_PASSPHRASE</strong>: Used to specify the plaintext
 passphrase to encrypt the container.</p></li>
-<li><p><strong>SINGULARITY_ENCRYPTION_PEM_PATH</strong>: Used to specify the path of the
+<li><p><strong>APPTAINER_ENCRYPTION_PEM_PATH</strong>: Used to specify the path of the
 file containing public or private key to encrypt the container in PEM
 format.</p></li>
-<li><p><strong>SINGULARITYENV_*</strong>: Allows you to transpose variables into the
+<li><p><strong>APPTAINERENV_*</strong>: Allows you to transpose variables into the
 container at runtime. You can see more in detail how to use this
 variable in our <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">environment and metadata section</span></a>.</p></li>
-<li><p><strong>SINGULARITYENV_APPEND_PATH</strong>: Used to append directories to the end
+<li><p><strong>APPTAINERENV_APPEND_PATH</strong>: Used to append directories to the end
 of the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> environment variable. You can see more in detail on
 how to use this variable in our <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">environment and metadata
 section</span></a>.</p></li>
-<li><p><strong>SINGULARITYENV_PATH</strong>: A specified path to override the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>
+<li><p><strong>APPTAINERENV_PATH</strong>: A specified path to override the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>
 environment variable within the container. You can see more in detail
 on how to use this variable in our <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">environment and metadata
 section</span></a>.</p></li>
-<li><p><strong>SINGULARITYENV_PREPEND_PATH</strong>: Used to prepend directories to the
+<li><p><strong>APPTAINERENV_PREPEND_PATH</strong>: Used to prepend directories to the
 beginning of <cite>$PATH`</cite> environment variable. You can see more in
 detail on how to use this variable in our <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">environment and
 metadata section</span></a>.</p></li>
@@ -316,63 +316,63 @@ metadata section</span></a>.</p></li>
 <section id="f">
 <h3><code class="docutils literal notranslate"><span class="pre">F</span></code><a class="headerlink" href="#f" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_FAKEROOT</strong>: Set to false by default, considers running
+<li><p><strong>APPTAINER_FAKEROOT</strong>: Set to false by default, considers running
 the container in a new user namespace as uid 0 (experimental).</p></li>
-<li><p><strong>SINGULARITY_FORCE</strong>: Forces to kill the instance.</p></li>
+<li><p><strong>APPTAINER_FORCE</strong>: Forces to kill the instance.</p></li>
 </ol>
 </section>
 <section id="g">
 <h3><code class="docutils literal notranslate"><span class="pre">G</span></code><a class="headerlink" href="#g" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_GROUP</strong>: Used to specify a string of capabilities for
+<li><p><strong>APPTAINER_GROUP</strong>: Used to specify a string of capabilities for
 the given group.</p></li>
 </ol>
 </section>
 <section id="h">
 <h3><code class="docutils literal notranslate"><span class="pre">H</span></code><a class="headerlink" href="#h" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_HELPFILE</strong>: Specifies the runscript helpfile, if it
+<li><p><strong>APPTAINER_HELPFILE</strong>: Specifies the runscript helpfile, if it
 exists.</p></li>
-<li><p><strong>SINGULARITY_HOME</strong> : A home directory specification, it could be a
+<li><p><strong>APPTAINER_HOME</strong> : A home directory specification, it could be a
 source or destination path. The source path is the home directory
 outside the container and the destination overrides the home
 directory within the container.</p></li>
-<li><p><strong>SINGULARITY_HOSTNAME</strong>: The container’s hostname.</p></li>
+<li><p><strong>APPTAINER_HOSTNAME</strong>: The container’s hostname.</p></li>
 </ol>
 </section>
 <section id="i">
 <h3><code class="docutils literal notranslate"><span class="pre">I</span></code><a class="headerlink" href="#i" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_IMAGE</strong>: Filename of the container.</p></li>
+<li><p><strong>APPTAINER_IMAGE</strong>: Filename of the container.</p></li>
 </ol>
 </section>
 <section id="j">
 <h3><code class="docutils literal notranslate"><span class="pre">J</span></code><a class="headerlink" href="#j" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_JSON</strong>: Specifies the structured json of the def file,
+<li><p><strong>APPTAINER_JSON</strong>: Specifies the structured json of the def file,
 every node as each section in the def file.</p></li>
 </ol>
 </section>
 <section id="k">
 <h3><code class="docutils literal notranslate"><span class="pre">K</span></code><a class="headerlink" href="#k" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_KEEP_PRIVS</strong>: To let root user keep privileges in the
+<li><p><strong>APPTAINER_KEEP_PRIVS</strong>: To let root user keep privileges in the
 container. Default is set to false.</p></li>
 </ol>
 </section>
 <section id="l">
 <h3><code class="docutils literal notranslate"><span class="pre">L</span></code><a class="headerlink" href="#l" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_LABELS</strong>: Specifies the labels associated with the
+<li><p><strong>APPTAINER_LABELS</strong>: Specifies the labels associated with the
 image.</p></li>
-<li><p><strong>SINGULARITY_LIBRARY</strong>: Specifies the library to pull from. Default
+<li><p><strong>APPTAINER_LIBRARY</strong>: Specifies the library to pull from. Default
 is set to our Cloud Library.</p></li>
 </ol>
 </section>
 <section id="m">
 <h3><code class="docutils literal notranslate"><span class="pre">M</span></code><a class="headerlink" href="#m" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_MOUNT</strong>: To specify host to container mounts, using the
+<li><p><strong>APPTAINER_MOUNT</strong>: To specify host to container mounts, using the
 syntax understood by the <code class="docutils literal notranslate"><span class="pre">--mount</span></code> flag. Multiple mounts should be
 separated by newline characters.</p></li>
 </ol>
@@ -380,37 +380,37 @@ separated by newline characters.</p></li>
 <section id="n">
 <h3><code class="docutils literal notranslate"><span class="pre">N</span></code><a class="headerlink" href="#n" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_NAME</strong>: Specifies a custom image name.</p></li>
-<li><p><strong>SINGULARITY_NETWORK</strong>: Used to specify a desired network. If more
+<li><p><strong>APPTAINER_NAME</strong>: Specifies a custom image name.</p></li>
+<li><p><strong>APPTAINER_NETWORK</strong>: Used to specify a desired network. If more
 than one parameters is used, addresses should be separated by commas,
 where each network will bring up a dedicated interface inside the
 container.</p></li>
-<li><p><strong>SINGULARITY_NETWORK_ARGS</strong>: To specify the network arguments to
+<li><p><strong>APPTAINER_NETWORK_ARGS</strong>: To specify the network arguments to
 pass to CNI plugins.</p></li>
-<li><p><strong>SINGULARITY_NOCLEANUP</strong>: To not clean up the bundle after a failed
+<li><p><strong>APPTAINER_NOCLEANUP</strong>: To not clean up the bundle after a failed
 build, this can be helpful for debugging. Default is set to false.</p></li>
-<li><p><strong>SINGULARITY_NOHTTPS</strong>: Sets to either false or true to avoid using
+<li><p><strong>APPTAINER_NOHTTPS</strong>: Sets to either false or true to avoid using
 HTTPS for communicating with the local docker registry. Default is
 set to false.</p></li>
-<li><p><strong>SINGULARITY_NO_HOME</strong>: Considers not mounting users home directory
+<li><p><strong>APPTAINER_NO_HOME</strong>: Considers not mounting users home directory
 if home is not the current working directory. Default is set to
 false.</p></li>
-<li><p><strong>SINGULARITY_NO_INIT</strong> and <strong>SINGULARITY_NOSHIMINIT</strong>: Considers not
+<li><p><strong>APPTAINER_NO_INIT</strong> and <strong>APPTAINER_NOSHIMINIT</strong>: Considers not
 starting the <code class="docutils literal notranslate"><span class="pre">shim</span></code> process with <code class="docutils literal notranslate"><span class="pre">--pid</span></code>.</p></li>
-<li><p><strong>SINGULARITY_NO_NV</strong>: Flag to disable Nvidia support. Opposite of
-<code class="docutils literal notranslate"><span class="pre">SINGULARITY_NV</span></code>.</p></li>
-<li><p><strong>SINGULARITY_NO_PRIVS</strong>: To drop all the privileges from root user
+<li><p><strong>APPTAINER_NO_NV</strong>: Flag to disable Nvidia support. Opposite of
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_NV</span></code>.</p></li>
+<li><p><strong>APPTAINER_NO_PRIVS</strong>: To drop all the privileges from root user
 in the container. Default is set to false.</p></li>
-<li><p><strong>SINGULARITY_NV</strong>: To enable Nvidia GPU support. Default is
+<li><p><strong>APPTAINER_NV</strong>: To enable Nvidia GPU support. Default is
 set to false.</p></li>
-<li><p><strong>SINGULARITY_NVCCLI</strong>: To use nvidia-container-cli for container GPU setup
+<li><p><strong>APPTAINER_NVCCLI</strong>: To use nvidia-container-cli for container GPU setup
 (experimental, only unprivileged).</p></li>
 </ol>
 </section>
 <section id="o">
 <h3><code class="docutils literal notranslate"><span class="pre">O</span></code><a class="headerlink" href="#o" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_OVERLAY</strong> and <strong>SINGULARITY_OVERLAYIMAGE</strong>: To indicate
+<li><p><strong>APPTAINER_OVERLAY</strong> and <strong>APPTAINER_OVERLAYIMAGE</strong>: To indicate
 the use of an overlay file system image for persistent data storage
 or as read-only layer of container.</p></li>
 </ol>
@@ -418,63 +418,63 @@ or as read-only layer of container.</p></li>
 <section id="p">
 <h3><code class="docutils literal notranslate"><span class="pre">P</span></code><a class="headerlink" href="#p" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_PWD</strong> and <strong>SINGULARITY_TARGET_PWD</strong>: The initial
+<li><p><strong>APPTAINER_PWD</strong> and <strong>APPTAINER_TARGET_PWD</strong>: The initial
 working directory for payload process inside the container.</p></li>
 </ol>
 </section>
 <section id="r">
 <h3><code class="docutils literal notranslate"><span class="pre">R</span></code><a class="headerlink" href="#r" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_ROOTFS</strong>: To reference the system file location.</p></li>
-<li><p><strong>SINGULARITY_RUNSCRIPT</strong>: Specifies the runscript of the image.</p></li>
+<li><p><strong>APPTAINER_ROOTFS</strong>: To reference the system file location.</p></li>
+<li><p><strong>APPTAINER_RUNSCRIPT</strong>: Specifies the runscript of the image.</p></li>
 </ol>
 </section>
 <section id="s">
 <h3><code class="docutils literal notranslate"><span class="pre">S</span></code><a class="headerlink" href="#s" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_SANDBOX</strong>: To specify that the format of the image
+<li><p><strong>APPTAINER_SANDBOX</strong>: To specify that the format of the image
 should be a sandbox. Default is set to false.</p></li>
-<li><p><strong>SINGULARITY_SCRATCH</strong> and <strong>SINGULARITY_SCRATCHDIR</strong>: Used to
+<li><p><strong>APPTAINER_SCRATCH</strong> and <strong>APPTAINER_SCRATCHDIR</strong>: Used to
 include a scratch directory within the container that is linked to a
 temporary directory. (use -W to force location)</p></li>
-<li><p><strong>SINGULARITY_SECTION</strong>: To specify a comma separated string of all
+<li><p><strong>APPTAINER_SECTION</strong>: To specify a comma separated string of all
 the sections to be run from the deffile (setup, post, files,
 environment, test, labels, none)</p></li>
-<li><p><strong>SINGULARITY_SECURITY</strong>: Used to enable security features. (SELinux,
+<li><p><strong>APPTAINER_SECURITY</strong>: Used to enable security features. (SELinux,
 Apparmor, Seccomp)</p></li>
-<li><p><strong>SINGULARITY_SECRET</strong>: Lists all the private keys instead of the
+<li><p><strong>APPTAINER_SECRET</strong>: Lists all the private keys instead of the
 default which display the public ones.</p></li>
-<li><p><strong>SINGULARITY_SHELL</strong>: The path to the program to be used as an
+<li><p><strong>APPTAINER_SHELL</strong>: The path to the program to be used as an
 interactive shell.</p></li>
-<li><p><strong>SINGULARITY_SIGNAL</strong>: Specifies a signal sent to the instance.</p></li>
+<li><p><strong>APPTAINER_SIGNAL</strong>: Specifies a signal sent to the instance.</p></li>
 </ol>
 </section>
 <section id="t">
 <h3><code class="docutils literal notranslate"><span class="pre">T</span></code><a class="headerlink" href="#t" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_TEST</strong>: Specifies the test script for the image.</p></li>
-<li><p><strong>SINGULARITY_TMPDIR</strong>: Used with the <code class="docutils literal notranslate"><span class="pre">build</span></code> command, to consider
+<li><p><strong>APPTAINER_TEST</strong>: Specifies the test script for the image.</p></li>
+<li><p><strong>APPTAINER_TMPDIR</strong>: Used with the <code class="docutils literal notranslate"><span class="pre">build</span></code> command, to consider
 a temporary location for the build. See <a class="reference internal" href="build_env.html#sec-temporaryfolders"><span class="std std-ref">Temporary Folders</span></a>.</p></li>
 </ol>
 </section>
 <section id="u">
 <h3><code class="docutils literal notranslate"><span class="pre">U</span></code><a class="headerlink" href="#u" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_UNSHARE_PID</strong>: To specify that the container will run
+<li><p><strong>APPTAINER_UNSHARE_PID</strong>: To specify that the container will run
 in a new PID namespace. Default is set to false.</p></li>
-<li><p><strong>SINGULARITY_UNSHARE_IPC</strong>: To specify that the container will run
+<li><p><strong>APPTAINER_UNSHARE_IPC</strong>: To specify that the container will run
 in a new IPC namespace. Default is set to false.</p></li>
-<li><p><strong>SINGULARITY_UNSHARE_NET</strong>: To specify that the container will run
+<li><p><strong>APPTAINER_UNSHARE_NET</strong>: To specify that the container will run
 in a new network namespace (sets up a bridge network interface by
 default). Default is set to false.</p></li>
-<li><p><strong>SINGULARITY_UNSHARE_UTS</strong>: To specify that the container will run
+<li><p><strong>APPTAINER_UNSHARE_UTS</strong>: To specify that the container will run
 in a new UTS namespace. Default is set to false.</p></li>
-<li><p><strong>SINGULARITY_UPDATE</strong>: To run the definition over an existing
+<li><p><strong>APPTAINER_UPDATE</strong>: To run the definition over an existing
 container (skips the header). Default is set to false.</p></li>
-<li><p><strong>SINGULARITY_URL</strong>: Specifies the key server <code class="docutils literal notranslate"><span class="pre">URL</span></code>.</p></li>
-<li><p><strong>SINGULARITY_USER</strong>: Used to specify a string of capabilities for
+<li><p><strong>APPTAINER_URL</strong>: Specifies the key server <code class="docutils literal notranslate"><span class="pre">URL</span></code>.</p></li>
+<li><p><strong>APPTAINER_USER</strong>: Used to specify a string of capabilities for
 the given user.</p></li>
-<li><p><strong>SINGULARITY_USERNS</strong> and <strong>SINGULARITY_UNSHARE_USERNS</strong>: To specify
+<li><p><strong>APPTAINER_USERNS</strong> and <strong>APPTAINER_UNSHARE_USERNS</strong>: To specify
 that the container will run in a new user namespace, allowing
 Apptainer to run completely unprivileged on recent kernels. This
 may not support every feature of Apptainer. (Sandbox image only).
@@ -484,13 +484,13 @@ Default is set to false.</p></li>
 <section id="w">
 <h3><code class="docutils literal notranslate"><span class="pre">W</span></code><a class="headerlink" href="#w" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>SINGULARITY_WORKDIR</strong>: The working directory to be used for
+<li><p><strong>APPTAINER_WORKDIR</strong>: The working directory to be used for
 <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, <code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code> and <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> (if <code class="docutils literal notranslate"><span class="pre">-c</span></code> or <code class="docutils literal notranslate"><span class="pre">--contain</span></code> was
 also used)</p></li>
-<li><p><strong>SINGULARITY_WRITABLE</strong>: By default, all Apptainer containers
+<li><p><strong>APPTAINER_WRITABLE</strong>: By default, all Apptainer containers
 are available as read only, this option makes the file system
 accessible as read/write. Default set to false.</p></li>
-<li><p><strong>SINGULARITY_WRITABLE_TMPFS</strong>: Makes the file system accessible as
+<li><p><strong>APPTAINER_WRITABLE_TMPFS</strong>: Makes the file system accessible as
 read-write with non-persistent data (with overlay support only).
 Default is set to false.</p></li>
 </ol>
@@ -514,12 +514,12 @@ existing base container adding customizations in <code class="docutils literal n
 </section>
 <section id="keywords">
 <h4>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline"></a></h4>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: library
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: &lt;entity&gt;/&lt;collection&gt;/&lt;container&gt;:&lt;tag&gt;
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: &lt;entity&gt;/&lt;collection&gt;/&lt;container&gt;:&lt;tag&gt;
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword is mandatory. It specifies the container to use as
@@ -527,12 +527,12 @@ a base. <code class="docutils literal notranslate"><span class="pre">entity</spa
 <code class="docutils literal notranslate"><span class="pre">collection</span></code> is optional and defaults to <code class="docutils literal notranslate"><span class="pre">default</span></code>. This is the
 correct namespace to use for some official containers (<code class="docutils literal notranslate"><span class="pre">alpine</span></code> for
 example). <code class="docutils literal notranslate"><span class="pre">tag</span></code> is also optional and will default to <code class="docutils literal notranslate"><span class="pre">latest</span></code>.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span>Library: http://custom/library
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Library: http://custom/library
 </pre></div>
 </div>
 <p>The Library keyword is optional. It will default to
 <code class="docutils literal notranslate"><span class="pre">https://library.sylabs.io</span></code>.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Fingerprints</span>: 22045C8C0B1004D058DE4BEDA20C27EE7FF7BA84
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Fingerprints: 22045C8C0B1004D058DE4BEDA20C27EE7FF7BA84
 </pre></div>
 </div>
 <p>The Fingerprints keyword is optional. It specifies one or more comma
@@ -561,12 +561,12 @@ Apptainer with the <code class="docutils literal notranslate"><span class="pre">
 </section>
 <section id="id3">
 <h4>Keywords<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h4>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: &lt;registry&gt;/&lt;namespace&gt;/&lt;container&gt;:&lt;tag&gt;@&lt;digest&gt;
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: &lt;registry&gt;/&lt;namespace&gt;/&lt;container&gt;:&lt;tag&gt;@&lt;digest&gt;
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword is mandatory. It specifies the container to use as
@@ -576,12 +576,12 @@ correct namespace to use for some official containers (ubuntu for
 example). <code class="docutils literal notranslate"><span class="pre">tag</span></code> is also optional and will default to <code class="docutils literal notranslate"><span class="pre">latest</span></code></p>
 <p>See <a class="reference internal" href="singularity_and_docker.html#singularity-and-docker"><span class="std std-ref">Apptainer and Docker</span></a> for more
 detailed info on using Docker registries.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Registry</span>: http://custom_registry
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Registry: http://custom_registry
 </pre></div>
 </div>
 <p>The Registry keyword is optional. It will default to
 <code class="docutils literal notranslate"><span class="pre">index.docker.io</span></code>.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Namespace</span>: namespace
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Namespace: namespace
 </pre></div>
 </div>
 <p>The Namespace keyword is optional. It will default to <code class="docutils literal notranslate"><span class="pre">library</span></code>.</p>
@@ -617,12 +617,12 @@ container adding customizations in <code class="docutils literal notranslate"><s
 </section>
 <section id="id5">
 <h4>Keywords<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h4>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: shub
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: shub
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: shub://&lt;registry&gt;/&lt;username&gt;/&lt;container-name&gt;:&lt;tag&gt;@digest
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: shub://&lt;registry&gt;/&lt;username&gt;/&lt;container-name&gt;:&lt;tag&gt;@digest
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword is mandatory. It specifies the container to use as
@@ -657,12 +657,12 @@ containers by adding customizations in <code class="docutils literal notranslate
 </section>
 <section id="id8">
 <h4>Keywords<a class="headerlink" href="#id8" title="Permalink to this headline"></a></h4>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: oras
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: oras
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: oras://registry/namespace/image:tag
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: oras://registry/namespace/image:tag
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword is mandatory. It specifies the container to use as
@@ -689,17 +689,17 @@ container and then customize the new container in <code class="docutils literal 
 </section>
 <section id="id10">
 <h4>Keywords<a class="headerlink" href="#id10" title="Permalink to this headline"></a></h4>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: localimage
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: localimage
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: /path/to/container/file/or/directory
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: /path/to/container/file/or/directory
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword is mandatory. It specifies the local container to
 use as a base.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Fingerprints</span>: 22045C8C0B1004D058DE4BEDA20C27EE7FF7BA84
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Fingerprints: 22045C8C0B1004D058DE4BEDA20C27EE7FF7BA84
 </pre></div>
 </div>
 <p>The Fingerprints keyword is optional. It specifies one or more comma
@@ -729,24 +729,24 @@ You must also specify the URI for the mirror you would like to use.</p>
 </section>
 <section id="id13">
 <h4>Keywords<a class="headerlink" href="#id13" title="Permalink to this headline"></a></h4>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: yum
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: yum
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">OSVersion</span>: <span class="m">7</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>OSVersion: 7
 </pre></div>
 </div>
 <p>The OSVersion keyword is optional. It specifies the OS version you would
 like to use. It is only required if you have specified a %{OSVERSION}
 variable in the <code class="docutils literal notranslate"><span class="pre">MirrorURL</span></code> keyword.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">MirrorURL</span>: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
 </pre></div>
 </div>
 <p>The MirrorURL keyword is mandatory. It specifies the URI to use as a
 mirror to download the OS. If you define the <code class="docutils literal notranslate"><span class="pre">OSVersion</span></code> keyword, then
 you can use it in the URI as in the example above.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Include</span>: yum
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Include: yum
 </pre></div>
 </div>
 <p>The Include keyword is optional. It allows you to install additional
@@ -786,12 +786,12 @@ you would like to use.</p>
 </section>
 <section id="id16">
 <h4>Keywords<a class="headerlink" href="#id16" title="Permalink to this headline"></a></h4>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: debootstrap
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: debootstrap
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">OSVersion</span>: xenial
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>OSVersion: xenial
 </pre></div>
 </div>
 <p>The OSVersion keyword is mandatory. It specifies the OS version you
@@ -800,13 +800,13 @@ would like to use. For Ubuntu you can use code words like <code class="docutils 
 use values like <code class="docutils literal notranslate"><span class="pre">stable</span></code>, <code class="docutils literal notranslate"><span class="pre">oldstable</span></code>, <code class="docutils literal notranslate"><span class="pre">testing</span></code>, and <code class="docutils literal notranslate"><span class="pre">unstable</span></code>
 or code words like <code class="docutils literal notranslate"><span class="pre">wheezy</span></code> (7), <code class="docutils literal notranslate"><span class="pre">jesse</span></code> (8), and <code class="docutils literal notranslate"><span class="pre">stretch</span></code> (9).</p>
 <blockquote>
-<div><div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">MirrorURL</span>:  http://us.archive.ubuntu.com/ubuntu/
+<div><div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>MirrorURL:  http://us.archive.ubuntu.com/ubuntu/
 </pre></div>
 </div>
 </div></blockquote>
 <p>The MirrorURL keyword is mandatory. It specifies a URI to use as a
 mirror when downloading the OS.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Include</span>: somepackage
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Include: somepackage
 </pre></div>
 </div>
 <p>The Include keyword is optional. It allows you to install additional
@@ -839,7 +839,7 @@ container. Arch Linux uses the aptly named <code class="docutils literal notrans
 </section>
 <section id="id19">
 <h4>Keywords<a class="headerlink" href="#id19" title="Permalink to this headline"></a></h4>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: arch
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: arch
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
@@ -868,12 +868,12 @@ must also specify a URI for the mirror you would like to use.</p>
 </section>
 <section id="id22">
 <h4>Keywords<a class="headerlink" href="#id22" title="Permalink to this headline"></a></h4>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: busybox
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: busybox
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">MirrorURL</span>: https://www.busybox.net/downloads/binaries/<span class="m">1.26.1</span>-defconfig-multiarch/busybox-x86_64
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>MirrorURL: https://www.busybox.net/downloads/binaries/1.26.1-defconfig-multiarch/busybox-x86_64
 </pre></div>
 </div>
 <p>The MirrorURL keyword is mandatory. It specifies a URI to use as a
@@ -901,18 +901,18 @@ You must also specify a URI for the mirror you would like to use.</p>
 </section>
 <section id="id25">
 <h4>Keywords<a class="headerlink" href="#id25" title="Permalink to this headline"></a></h4>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: zypper
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: zypper
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">OSVersion</span>: <span class="m">42.2</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>OSVersion: 42.2
 </pre></div>
 </div>
 <p>The OSVersion keyword is optional. It specifies the OS version you would
 like to use. It is only required if you have specified a %{OSVERSION}
 variable in the <code class="docutils literal notranslate"><span class="pre">MirrorURL</span></code> keyword.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Include</span>: somepackage
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Include: somepackage
 </pre></div>
 </div>
 <p>The Include keyword is optional. It allows you to install additional
@@ -971,13 +971,13 @@ a docker image stored in a <code class="docutils literal notranslate"><span clas
 <h4>Keywords<a class="headerlink" href="#id27" title="Permalink to this headline"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> bootstrap agent can be used in a Apptainer
 definition file as follows:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: docker-daemon:&lt;image&gt;:&lt;tag&gt;
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: docker-daemon:&lt;image&gt;:&lt;tag&gt;
 </pre></div>
 </div>
 <p>where both <code class="docutils literal notranslate"><span class="pre">&lt;image&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;tag&gt;</span></code> are mandatory fields that must be
 written explicitly. The <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent requires
 instead the path to the tar file containing the image:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: docker-archive:&lt;path-to-tar-file&gt;
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: docker-archive:&lt;path-to-tar-file&gt;
 </pre></div>
 </div>
 <p>Note that differently from the <code class="docutils literal notranslate"><span class="pre">docker://</span></code> bootstrap agent both
@@ -996,19 +996,19 @@ simple application / static binaries.</p>
 <h4>Overview<a class="headerlink" href="#id28" title="Permalink to this headline"></a></h4>
 <p>A minimal container providing a shell can be created by copying the
 <code class="docutils literal notranslate"><span class="pre">busybox</span></code> static binary into an empty scratch container:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: scratch
 
-<span class="gh">%setup</span>
-    <span class="c1"># Runs on host - fetch static busybox binary</span>
+%setup
+    # Runs on host - fetch static busybox binary
     curl -o /tmp/busybox https://www.busybox.net/downloads/binaries/1.31.0-i686-uclibc/busybox
-    <span class="c1"># It needs to be executable</span>
+    # It needs to be executable
     chmod +x /tmp/busybox
 
-<span class="gh">%files</span>
-    <span class="c1"># Copy from host into empty container</span>
+%files
+    # Copy from host into empty container
     /tmp/busybox /bin/sh
 
-<span class="gh">%runscript</span>
+%runscript
    /bin/sh
 </pre></div>
 </div>
@@ -1016,7 +1016,7 @@ simple application / static binaries.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls -lah scratch.sif
 -rwxr-xr-x. 1 dave dave 696K May 28 13:29 scratch.sif
 
-$ singularity run scratch.sif
+$ apptainer run scratch.sif
 WARNING: passwd file doesn&#39;t exist in container, not updating
 WARNING: group file doesn&#39;t exist in container, not updating
 Apptainer&gt; echo &quot;Hello from a 696KiB container&quot;
@@ -1024,7 +1024,7 @@ Hello from a 696KiB container
 </pre></div>
 </div>
 <p>Keywords</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: scratch
 </pre></div>
 </div>
 <p>There are no additional keywords for the scratch bootstrap agent.</p>
