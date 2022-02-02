@@ -825,8 +825,11 @@ $ singularity run --cleanenv library://alpine env | grep VAR
 FORCE_VAR=123
 </pre></div>
 </div>
-<p>Any environment variables set via an <code class="docutils literal notranslate"><span class="pre">ENV</span></code> line in a <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>
-will be available when the container is run with Apptainer.</p>
+<p>Any environment variables set via an <code class="docutils literal notranslate"><span class="pre">ENV</span></code> line in a <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> will be
+available when the container is run with Apptainer. However, because they
+are set as <a class="reference internal" href="environment_and_metadata.html#environment-default-values"><span class="std std-ref">default values</span></a> in the
+Apptainer container, they will be overridden by host variables unless <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">/</span>
+<span class="pre">--cleanenv</span></code> or the related <code class="docutils literal notranslate"><span class="pre">--containall</span> <span class="pre">/</span> <span class="pre">--compat</span></code> flags are used.</p>
 </section>
 <section id="namespace-device-isolation">
 <h3>Namespace &amp; Device Isolation<a class="headerlink" href="#namespace-device-isolation" title="Permalink to this headline"></a></h3>
