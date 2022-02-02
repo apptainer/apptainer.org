@@ -26,7 +26,7 @@ const Footer = () => {
                     </div>
                 ))}
                 </nav>
-                <p className="mt-8 text-center text-base text-gray-500">Copyright &copy; 2021 Apptainer a Series of LF Projects, LLC.</p>
+                <p className="mt-8 text-center text-base text-gray-500">Copyright &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC.</p>
                 <p className="text-center text-base text-gray-500">For website terms of use, trademark policy, privacy policy and other project policies please see <a className="text-blue-900" href="https://lfprojects.org/policies">https://lfprojects.org/policies</a>.</p>
             </div>
         </footer>
