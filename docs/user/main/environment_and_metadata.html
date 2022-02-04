@@ -226,14 +226,6 @@ PYTHON_VERSION=3.7.7
 <code class="docutils literal notranslate"><span class="pre">ENV</span> <span class="pre">PYTHON_VERSION</span> <span class="pre">3.7.7</span></code> set inside it.</p>
 <p>You can always override the value of these base image environment
 variables, if needed. See below.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Dockerfile <cite>ENV</cite> var entries are set as <a class="reference internal" href="#environment-default-values"><span class="std std-ref">default values</span></a> in the Apptainer container. They will be
-overridden by host variables unless <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">/</span> <span class="pre">--cleanenv</span></code> or the <code class="docutils literal notranslate"><span class="pre">--containall</span>
-<span class="pre">/</span> <span class="pre">--compat</span></code> flags are used. This differs from the behavior of Docker, and
-you should consider using <code class="docutils literal notranslate"><span class="pre">--compat</span></code> if you experience issues when running
-Docker containers dues to environment variables on the host.</p>
-</div>
 </section>
 <section id="environment-from-a-definition-file">
 <h2>Environment from a definition file<a class="headerlink" href="#environment-from-a-definition-file" title="Permalink to this headline"></a></h2>
@@ -267,7 +259,7 @@ initialization tasks because this would impact users running the
 image and the execution could abort due to timeout.</p>
 </div>
 <section id="default-values">
-<span id="environment-default-values"></span><h3>Default values<a class="headerlink" href="#default-values" title="Permalink to this headline"></a></h3>
+<h3>Default values<a class="headerlink" href="#default-values" title="Permalink to this headline"></a></h3>
 <p>To set a default value for a variable in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section,
 but adopt the value of a host environment variable if it is set, use
 the following syntax:</p>
@@ -300,14 +292,10 @@ host, then by default they will be available inside the container.
 Except that:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>An environment variable set on the host will be overridden by a variable
-of the same name that has been set either inside the container image, or
-via <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> environment variables, or the <code class="docutils literal notranslate"><span class="pre">--env</span></code> and
-<code class="docutils literal notranslate"><span class="pre">--env-file</span></code> flags.</p></li>
-<li><p>You can use the <a class="reference internal" href="#environment-default-values"><span class="std std-ref">default values</span></a> method
-to define container environment variables that avoid the hard override,
-and honor the value of an environment variable value from the host if it
-is set.</p></li>
+<li><p>An environment variable set on the host will be overridden by a
+variable of the same name that has been set inside the container
+image, via <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> environment variables, or the
+<code class="docutils literal notranslate"><span class="pre">--env</span></code> and <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> flags.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">PS1</span></code> shell prompt is reset for a container specific prompt.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable will be modified to contain
 default values.</p></li>
@@ -334,14 +322,6 @@ APPTAINER_ENVIRONMENT=/.singularity.d/env/91-environment.sh
 APPTAINER_NAME=env.sif
 TERM=xterm-256color
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Because Dockerfile <cite>ENV</cite> var entries are set as
-<a class="reference internal" href="#environment-default-values"><span class="std std-ref">default values</span></a> in the Apptainer
-container, they will be overridden by host variables unless
-<code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">/</span> <span class="pre">--cleanenv</span></code> or the related <code class="docutils literal notranslate"><span class="pre">--containall</span> <span class="pre">/</span> <span class="pre">--compat</span></code> flags are
-used.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
