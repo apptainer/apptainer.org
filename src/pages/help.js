@@ -62,15 +62,23 @@ const HelpPage = () => (
             </div>
             <h6 className="mb-2 font-semibold leading-5">Mailing List</h6>
             <p className="mb-3 text-sm text-gray-900">
-              The Apptainer project uses a Google Group hosted by LBNL. Join to engage in discussions and receive announcements from the project.
+              The Apptainer project uses Google Groups. Join to engage in discussions and receive announcements from the project.
             </p>
           </div>
           <Link
-            to="https://groups.google.com/a/lbl.gov/g/singularity"
+            to="https://groups.google.com/u/4/a/apptainer.org/g/discuss"
             aria-label=""
             className="inline-flex items-center font-semibold transition-colors duration-200 text-blue-900 hover:text-blue-700"
           >
             Join Mailing List
+          </Link>
+          <br>
+          <Link
+            to="https://groups.google.com/u/4/a/apptainer.org/g/announce"
+            aria-label=""
+            className="inline-flex items-center font-semibold transition-colors duration-200 text-blue-900 hover:text-blue-700"
+          >
+            Join Announcements-only List
           </Link>
         </div>
         <div className="flex flex-col justify-between p-5 border rounded shadow-sm">
