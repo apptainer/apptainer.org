@@ -72,7 +72,6 @@ const HelpPage = () => (
           >
             Join Mailing List
           </Link>
-          <br>
           <Link
             to="https://groups.google.com/u/4/a/apptainer.org/g/announce"
             aria-label=""
