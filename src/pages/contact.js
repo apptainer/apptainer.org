@@ -7,15 +7,15 @@ import Seo from "../components/seo"
 const contacts = [
     {
         name: 'Project Leads',
-        email: 'singularity-leads@hpcng.org',
+        email: 'tsc@apptainer.org',
     },
     {
         name: 'Web',
-        email: 'singularity-web@hpcng.org',
+        email: 'webmaster@apptainer.org',
     },
     {
         name: 'Security',
-        email: 'singularity-security@hpcng.org',
+        email: 'security@apptainer.org',
     },
     // More teams...
 ]
@@ -80,7 +80,7 @@ const ContactPage = () => (
             </h2>
 
             <Link
-                to="https://groups.google.com/a/lbl.gov/g/singularity"
+                to="https://groups.google.com/u/4/a/apptainer.org/g/discuss"
                 class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-blue-900 hover:bg-blue-800 focus:shadow-outline focus:outline-none"
                 aria-label="Join Mailing List"
                 title="Join Mailing List"
