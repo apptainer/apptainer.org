@@ -825,8 +825,25 @@ $ singularity run --cleanenv library://alpine env | grep VAR
 FORCE_VAR=123
 </pre></div>
 </div>
-<p>Any environment variables set via an <code class="docutils literal notranslate"><span class="pre">ENV</span></code> line in a <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>
-will be available when the container is run with Apptainer.</p>
+<p>Any environment variables set via an <code class="docutils literal notranslate"><span class="pre">ENV</span></code> line in a <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> will be
+available when the container is run with Apptainer. You can override them
+with <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> vars, or the <code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">/</span> <span class="pre">--env-file</span></code> flags, but they
+will not be overridden by host environment variables.</p>
+<p>For example, the <code class="docutils literal notranslate"><span class="pre">docker://openjdk:latest</span></code> container sets <code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Set a host JAVA_HOME
+export JAVA_HOME=/test
+
+# Check JAVA_HOME in the docker container.
+# This value comes from ENV in the Dockerfile.
+$ singularity run docker://openjdk:latest echo \$JAVA_HOME
+/usr/java/openjdk-17
+
+# Override JAVA_HOME in the container
+export APPTAINERENV_JAVA_HOME=/test
+$ singularity run docker://openjdk:latest echo \$JAVA_HOME
+/test
+</pre></div>
+</div>
 </section>
 <section id="namespace-device-isolation">
 <h3>Namespace &amp; Device Isolation<a class="headerlink" href="#namespace-device-isolation" title="Permalink to this headline"></a></h3>

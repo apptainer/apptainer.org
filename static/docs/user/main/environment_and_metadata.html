@@ -72,7 +72,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#environment-overview">Environment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#environment-from-a-base-image">Environment from a base image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#environment-from-a-definition-file">Environment from a definition file</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#default-values">Default values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#build-time-variables-in-post">Build time variables in <code class="docutils literal notranslate"><span class="pre">%post</span></code></a></li>
 </ul>
 </li>
@@ -224,8 +223,9 @@ PYTHON_VERSION=3.7.7
 </div>
 <p>This happens because the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> used to build that container has
 <code class="docutils literal notranslate"><span class="pre">ENV</span> <span class="pre">PYTHON_VERSION</span> <span class="pre">3.7.7</span></code> set inside it.</p>
-<p>You can always override the value of these base image environment
-variables, if needed. See below.</p>
+<p>You can override the inherited environment with <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> vars, or the
+<code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">/</span> <span class="pre">--env-file</span></code> flags (see below), but <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> <code class="docutils literal notranslate"><span class="pre">ENV</span></code> vars will
+not be overridden by host environment variables of the same name.</p>
 </section>
 <section id="environment-from-a-definition-file">
 <h2>Environment from a definition file<a class="headerlink" href="#environment-from-a-definition-file" title="Permalink to this headline"></a></h2>
@@ -258,19 +258,6 @@ is not recommended to use this section to run potentially long
 initialization tasks because this would impact users running the
 image and the execution could abort due to timeout.</p>
 </div>
-<section id="default-values">
-<h3>Default values<a class="headerlink" href="#default-values" title="Permalink to this headline"></a></h3>
-<p>To set a default value for a variable in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section,
-but adopt the value of a host environment variable if it is set, use
-the following syntax:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%environment</span>
-    <span class="nv">FOO</span><span class="o">=</span><span class="si">${</span><span class="nv">FOO</span><span class="k">:-</span><span class="s1">&#39;default&#39;</span><span class="si">}</span>
-</pre></div>
-</div>
-<p>The value of <code class="docutils literal notranslate"><span class="pre">FOO</span></code> in the container will take the value of <code class="docutils literal notranslate"><span class="pre">FOO</span></code>
-on the host, or <code class="docutils literal notranslate"><span class="pre">default</span></code> if <code class="docutils literal notranslate"><span class="pre">FOO</span></code> is not set on the host or
-<code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code> / <code class="docutils literal notranslate"><span class="pre">--containall</span></code> have been specified.</p>
-</section>
 <section id="build-time-variables-in-post">
 <h3>Build time variables in <code class="docutils literal notranslate"><span class="pre">%post</span></code><a class="headerlink" href="#build-time-variables-in-post" title="Permalink to this headline"></a></h3>
 <p>In some circumstances the value that needs to be assigned to an
@@ -292,10 +279,10 @@ host, then by default they will be available inside the container.
 Except that:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>An environment variable set on the host will be overridden by a
-variable of the same name that has been set inside the container
-image, via <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> environment variables, or the
-<code class="docutils literal notranslate"><span class="pre">--env</span></code> and <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> flags.</p></li>
+<li><p>An environment variable set on the host will be overridden by a variable
+of the same name that has been set either inside the container image, or
+via <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> environment variables, or the <code class="docutils literal notranslate"><span class="pre">--env</span></code> and
+<code class="docutils literal notranslate"><span class="pre">--env-file</span></code> flags.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">PS1</span></code> shell prompt is reset for a container specific prompt.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable will be modified to contain
 default values.</p></li>
@@ -304,6 +291,17 @@ default values.</p></li>
 libraries if applicable.</p></li>
 </ul>
 </div></blockquote>
+<p>To override an environment variable that is already set in the container with
+the value from the host, use <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> or the <code class="docutils literal notranslate"><span class="pre">--env</span></code> flag. For
+example, to force <code class="docutils literal notranslate"><span class="pre">MYVAR</span></code> in the container to take the value of <code class="docutils literal notranslate"><span class="pre">MYVAR</span></code> on
+the host:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINERENV_MYVAR=&quot;$MYVAR&quot;
+$ singularity run mycontainer.sif
+
+# or
+$ singularity run --env &quot;MYVAR=$MYVAR&quot;
+</pre></div>
+</div>
 <p>If you <em>do not want</em> the host environment variables to pass into the
 container you can use the <code class="docutils literal notranslate"><span class="pre">-e</span></code> or <code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code> option. This gives a
 clean environment inside the container, with a minimal set of
@@ -537,8 +535,7 @@ OCI image was used as the base for the container build.</p></li>
 Apptainer defaults</p></li>
 <li><p>Set environment variables defined explicitly in the
 <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section of the definition file. These can
-override any previously set values, and may reference host
-variables.</p></li>
+override any previously set values.</p></li>
 <li><p>Set environment variables that were defined in the <code class="docutils literal notranslate"><span class="pre">%post</span></code>
 section of the build, by addition to the
 <code class="docutils literal notranslate"><span class="pre">$APPTAINER_ENVIRONMENT</span></code> file.</p></li>
