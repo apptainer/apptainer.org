@@ -87,7 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
@@ -159,7 +159,7 @@ docs</a>.</p>
 <p>To take advantage of this granted capability as a user, <code class="docutils literal notranslate"><span class="pre">pinger</span></code> must
 also request the capability when executing a container with the
 <code class="docutils literal notranslate"><span class="pre">--add-caps</span></code> flag like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec --add-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
 PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=52 time=73.1 ms
 
@@ -172,7 +172,7 @@ rtt min/avg/max/mdev = 73.178/73.178/73.178/0.000 ms
 <code class="docutils literal notranslate"><span class="pre">pinger</span></code> to open raw sockets within Apptainer containers, they can
 revoke the appropriate Linux capability and <code class="docutils literal notranslate"><span class="pre">pinger</span></code> will not be able
 to add that capability to their containers anymore:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec --add-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
 WARNING: not authorized to add capability: CAP_NET_RAW
 ping: socket: Operation not permitted
 </pre></div>
@@ -188,7 +188,7 @@ sections of the admin docs for more information.</p>
 <p>Assuming the root user will execute containers with the <code class="docutils literal notranslate"><span class="pre">CAP_NET_RAW</span></code>
 capability by default, executing the same container <code class="docutils literal notranslate"><span class="pre">pinger</span></code> executed
 above works without the need to grant capabilities:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># singularity exec library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># apptainer exec library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8</span>
 <span class="n">PING</span> <span class="mf">8.8.8.8</span> <span class="p">(</span><span class="mf">8.8.8.8</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="nb">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="o">.</span>
 <span class="mi">64</span> <span class="nb">bytes</span> <span class="kn">from</span> <span class="mf">8.8.8.8</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">52</span> <span class="n">time</span><span class="o">=</span><span class="mf">59.6</span> <span class="n">ms</span>
 
@@ -198,7 +198,7 @@ above works without the need to grant capabilities:</p>
 </pre></div>
 </div>
 <p>Now we can manually drop the <code class="docutils literal notranslate"><span class="pre">CAP_NET_RAW</span></code> capability like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># singularity exec --drop-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># apptainer exec --drop-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8</span>
 <span class="n">ping</span><span class="p">:</span> <span class="n">socket</span><span class="p">:</span> <span class="n">Operation</span> <span class="ow">not</span> <span class="n">permitted</span>
 </pre></div>
 </div>
@@ -239,7 +239,7 @@ binaries may allow a user to execute a command as a service account.</p>
 security precaution. But the root user can override this precaution and
 allow SetUID binaries to behave as expected within a Apptainer
 container with the <code class="docutils literal notranslate"><span class="pre">--allow-setuid</span></code> option like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity shell --allow-setuid some_container.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell --allow-setuid some_container.sif
 </pre></div>
 </div>
 </section>
@@ -248,11 +248,11 @@ container with the <code class="docutils literal notranslate"><span class="pre">
 <p>It is possible for an admin to set a different set of default
 capabilities or to reduce the default capabilities to zero for the root
 user by setting the <code class="docutils literal notranslate"><span class="pre">root</span> <span class="pre">default</span> <span class="pre">capabilities</span></code> parameter in the
-<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> file to <code class="docutils literal notranslate"><span class="pre">file</span></code> or <code class="docutils literal notranslate"><span class="pre">no</span></code> respectively. If this
-change is in effect, the root user can override the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> file to <code class="docutils literal notranslate"><span class="pre">file</span></code> or <code class="docutils literal notranslate"><span class="pre">no</span></code> respectively. If this
+change is in effect, the root user can override the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>
 file and enter the container with full capabilities using the
 <code class="docutils literal notranslate"><span class="pre">--keep-privs</span></code> option.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity exec --keep-privs library://centos ping -c 1 8.8.8.8
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer exec --keep-privs library://centos ping -c 1 8.8.8.8
 PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=128 time=18.8 ms
 
@@ -269,7 +269,7 @@ the container. You may choose to drop specific capabilities when you
 initiate a container as root to enhance security.</p>
 <p>For instance, to drop the ability for the root user to open a raw socket
 inside the container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity exec --drop-caps CAP_NET_RAW library://centos ping -c 1 8.8.8.8
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer exec --drop-caps CAP_NET_RAW library://centos ping -c 1 8.8.8.8
 ping: socket: Operation not permitted
 </pre></div>
 </div>
@@ -287,7 +287,7 @@ container at runtime.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo whoami
 root
 
-$ sudo singularity exec --security uid:1000 my_container.sif whoami
+$ sudo apptainer exec --security uid:1000 my_container.sif whoami
 david
 </pre></div>
 </div>
@@ -298,7 +298,7 @@ on Ubuntu and that Apptainer was installed with the
 <code class="docutils literal notranslate"><span class="pre">libseccomp-dev</span></code> and <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> packages as dependencies.</p>
 <p>First write a configuration file. An example configuration file is
 installed with Apptainer, normally at
-<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity/seccomp-profiles/default.json</span></code>. For this
+<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/apptainer/seccomp-profiles/default.json</span></code>. For this
 example, we will use a much simpler configuration file to blacklist the
 <code class="docutils literal notranslate"><span class="pre">mkdir</span></code> command.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -329,7 +329,7 @@ example, we will use a much simpler configuration file to blacklist the
 </div>
 <p>We’ll save the file at <code class="docutils literal notranslate"><span class="pre">/home/david/no_mkdir.json</span></code>. Then we can invoke
 the container like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity shell --security seccomp:/home/david/no_mkdir.json my_container.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell --security seccomp:/home/david/no_mkdir.json my_container.sif
 
 Apptainer&gt; mkdir /tmp/foo
 Bad system call (core dumped)
@@ -339,7 +339,7 @@ Bad system call (core dumped)
 in a core dump.</p>
 <p>The full list of arguments accepted by the <code class="docutils literal notranslate"><span class="pre">--security</span></code> option are as
 follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;seccomp:/usr/local/etc/singularity/seccomp-profiles/default.json&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;seccomp:/usr/local/etc/apptainer/seccomp-profiles/default.json&quot;</span>
 <span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;apparmor:/usr/bin/man&quot;</span>
 <span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;selinux:context&quot;</span>
 <span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;uid:1000&quot;</span>

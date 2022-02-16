@@ -80,7 +80,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
@@ -134,7 +134,7 @@ the Apptainer runtime.</p>
 <section id="using-plugins">
 <h2>Using Plugins<a class="headerlink" href="#using-plugins" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> command prints the currently installed plugins.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity plugin list
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer plugin list
 There are no plugins installed.
 </pre></div>
 </div>
@@ -143,7 +143,7 @@ versatile Singularity Image Format (SIF). However, plugin authors may
 also distribute the source code of their plugins. A plugin can be
 compiled from its source code with the <code class="docutils literal notranslate"><span class="pre">compile</span></code> command. A sample
 plugin <code class="docutils literal notranslate"><span class="pre">test-plugin</span></code> is included with the Apptainer source code.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity plugin compile examples/plugins/test-plugin/
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer plugin compile examples/plugins/test-plugin/
 </pre></div>
 </div>
 <p>Upon successful compilation, a SIF file will appear in the directory of
@@ -160,7 +160,7 @@ source code tree.</p>
 written in is quite restrictive - it requires extremely close version
 matching of packages used in a plugin to the ones used in the program
 the plugin is built for. Additionally Apptainer is using build
-time config to get the source tree location for <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">plugin</span>
+time config to get the source tree location for <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">plugin</span>
 <span class="pre">compile</span></code> so that you don’t need to export environment variables etc,
 and there isn’t mismatch between package path information that Go
 uses. This means that at present you must:</p>
@@ -175,7 +175,7 @@ executable when compiling a plugin for it.</p></li>
 <p>Every plugin encapsulates various information such as the plugin’s
 author, the plugin’s version, etc. To view this information about a
 plugin, use the <code class="docutils literal notranslate"><span class="pre">inspect</span></code> command.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity plugin inspect examples/plugins/test-plugin/test-plugin.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer plugin inspect examples/plugins/test-plugin/test-plugin.sif
 Name: sylabs.io/test-plugin
 Description: This is a short test plugin for Apptainer
 Author: Michael Bauer
@@ -184,8 +184,8 @@ Version: 0.0.1
 </div>
 <p>To install a plugin, use the <code class="docutils literal notranslate"><span class="pre">install</span></code> command. This operation
 requires root privilege.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity plugin install examples/plugins/test-plugin/test-plugin.sif
-$ singularity plugin list
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer plugin install examples/plugins/test-plugin/test-plugin.sif
+$ apptainer plugin list
 ENABLED  NAME
     yes  sylabs.io/test-plugin
 </pre></div>
@@ -194,21 +194,21 @@ ENABLED  NAME
 Any plugin can be disabled with the <code class="docutils literal notranslate"><span class="pre">disable</span></code> command and re-enabled
 with the <code class="docutils literal notranslate"><span class="pre">enable</span></code> command. Both of these operations require root
 privilege.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity plugin disable sylabs.io/test-plugin
-$ singularity plugin list
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer plugin disable sylabs.io/test-plugin
+$ apptainer plugin list
 ENABLED  NAME
      no  sylabs.io/test-plugin
-$ sudo singularity plugin enable sylabs.io/test-plugin
-$ singularity plugin list
+$ sudo apptainer plugin enable sylabs.io/test-plugin
+$ apptainer plugin list
 ENABLED  NAME
     yes  sylabs.io/test-plugin
 </pre></div>
 </div>
 <p>Finally, to uninstall a plugin, use the <code class="docutils literal notranslate"><span class="pre">uninstall</span></code> command. This
 operation requires root privilege.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity plugin uninstall sylabs.io/test-plugin
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer plugin uninstall sylabs.io/test-plugin
 Uninstalled plugin &quot;sylabs.io/test-plugin&quot;.
-$ singularity plugin list
+$ apptainer plugin list
 There are no plugins installed.
 </pre></div>
 </div>

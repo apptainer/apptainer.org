@@ -75,7 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Apptainer and MPI applications</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#hybrid-model">Hybrid model</a><ul>
@@ -163,7 +163,7 @@ the case on your system please follow the <em>hybrid</em> approach.</p>
 <h2>Hybrid model<a class="headerlink" href="#hybrid-model" title="Permalink to this headline"></a></h2>
 <p>The basic idea behind the <em>Hybrid Approach</em> is when you execute a
 Apptainer container with MPI code, you will call <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> or a
-similar launcher on the <code class="docutils literal notranslate"><span class="pre">singularity</span></code> command itself. The MPI process
+similar launcher on the <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> command itself. The MPI process
 outside of the container will then work in tandem with MPI inside the
 container and the containerized MPI code to instantiate the job.</p>
 <p>The Open MPI/Apptainer workflow in detail:</p>
@@ -368,13 +368,13 @@ containers.</p>
 <p>Assuming your container with MPI and your application is already built,
 the <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> command to start your application looks like when your
 container has been built based on the hybrid model:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mpirun -n &lt;NUMBER_OF_RANKS&gt; singularity exec &lt;PATH/TO/MY/IMAGE&gt; &lt;/PATH/TO/BINARY/WITHIN/CONTAINER&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mpirun -n &lt;NUMBER_OF_RANKS&gt; apptainer exec &lt;PATH/TO/MY/IMAGE&gt; &lt;/PATH/TO/BINARY/WITHIN/CONTAINER&gt;
 </pre></div>
 </div>
 <p>Practically, this command will first start a process instantiating
 <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> and then Apptainer containers on compute nodes. Finally,
 when the containers start, the MPI binary is executed:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mpirun -n 8 singularity run hybrid-mpich.sif /opt/mpitest
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mpirun -n 8 apptainer run hybrid-mpich.sif /opt/mpitest
 Hello, I am rank 3/8
 Hello, I am rank 4/8
 Hello, I am rank 6/8
@@ -473,14 +473,14 @@ systems that have a version-compatible MPI installation, but under
 different installation paths. You can also hard code the MPI path in the
 definition file if you wish.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export MPI_DIR=&quot;&lt;PATH/TO/HOST/MPI/DIRECTORY&gt;&quot;
-$ mpirun -n &lt;NUMBER_OF_RANKS&gt; singularity exec --bind &quot;$MPI_DIR&quot; &lt;PATH/TO/MY/IMAGE&gt; &lt;/PATH/TO/BINARY/WITHIN/CONTAINER&gt;
+$ mpirun -n &lt;NUMBER_OF_RANKS&gt; apptainer exec --bind &quot;$MPI_DIR&quot; &lt;PATH/TO/MY/IMAGE&gt; &lt;/PATH/TO/BINARY/WITHIN/CONTAINER&gt;
 </pre></div>
 </div>
 <p>On an example system we may be using an Open MPI installation at
 <code class="docutils literal notranslate"><span class="pre">/cm/shared/apps/openmpi/gcc/64/4.0.5/</span></code>. This means that the commands
 to run the container in bind mode are:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export MPI_DIR=&quot;/cm/shared/apps/openmpi/gcc/64/4.0.5&quot;
-$ mpirun -n 8 singularity exec --bind &quot;$MPI_DIR&quot; bind.sif /opt/mpitest
+$ mpirun -n 8 apptainer exec --bind &quot;$MPI_DIR&quot; bind.sif /opt/mpitest
 Hello, I am rank 1/8
 Hello, I am rank 2/8
 Hello, I am rank 0/8
@@ -503,11 +503,11 @@ to the execution of the job. It can easily be adapted for all major
 batch systems available.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat my_job.sh
 #!/bin/bash
-#SBATCH --job-name singularity-mpi
+#SBATCH --job-name apptainer-mpi
 #SBATCH -N $NNODES # total number of nodes
 #SBATCH --time=00:05:00 # Max execution time
 
-mpirun -n $NP singularity exec /var/nfsshare/gvallee/mpich.sif /opt/mpitest
+mpirun -n $NP apptainer exec /var/nfsshare/gvallee/mpich.sif /opt/mpitest
 </pre></div>
 </div>
 <p>In fact, the example describes a job that requests the number of nodes
@@ -552,7 +552,7 @@ communicate with, the MPI stack in the container.</p>
 <p>E.g. if we attempt to run the hybrid Open MPI container, but with
 <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> from MPICH loaded on the host:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ module add mpich
-$ mpirun -n 8 singularity run hybrid-openmpi.sif /opt/mpitest
+$ mpirun -n 8 apptainer run hybrid-openmpi.sif /opt/mpitest
 Hello, I am rank 0/1
 Hello, I am rank 0/1
 Hello, I am rank 0/1

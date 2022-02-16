@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Support for Docker and OCI Containers" href="singularity_and_docker.html" />
+    <link rel="next" title="Support for Docker and OCI Containers" href="docker_and_oci.html" />
     <link rel="prev" title="Network virtualization" href="networking.html" /> 
 </head>
 
@@ -92,7 +92,7 @@
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
@@ -154,9 +154,9 @@ processes.</p>
 <h2>Running Apptainer Inside a Cgroup<a class="headerlink" href="#running-apptainer-inside-a-cgroup" title="Permalink to this headline"></a></h2>
 <p>Because Apptainer starts a container as a simple process, rather
 than using a daemon, you can limit resource usage by running the
-<code class="docutils literal notranslate"><span class="pre">singularity</span></code> command inside an existing cgroup. This is convenient
+<code class="docutils literal notranslate"><span class="pre">apptainer</span></code> command inside an existing cgroup. This is convenient
 where, for example, a job scheduler uses cgroups to control job limits.
-By running <code class="docutils literal notranslate"><span class="pre">singularity</span></code> inside your batch script, your container will
+By running <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> inside your batch script, your container will
 respect the limits set by the scheduler on the job’s cgroup.</p>
 <section id="systemd-run">
 <h3>systemd-run<a class="headerlink" href="#systemd-run" title="Permalink to this headline"></a></h3>
@@ -168,7 +168,7 @@ privileges are required to create a cgroup.</p>
 <p>For example, assuming your system is configured correctly for
 unprivileged cgroup creation via systemd, you can limit the number of
 CPUs a container run is allowed to use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ systemd-run --user --scope -p AllowedCPUs=1,2 -- singularity run mycontainer.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ systemd-run --user --scope -p AllowedCPUs=1,2 -- apptainer run mycontainer.sif
 </pre></div>
 </div>
 <ul class="simple">
@@ -183,7 +183,7 @@ CPU 1 and 2 only.</p></li>
 <li><p>The double hyphen <code class="docutils literal notranslate"><span class="pre">--</span></code> separates options for <code class="docutils literal notranslate"><span class="pre">systemd-run</span></code> from
 the actual command we wish to execute. This is important so that
 <code class="docutils literal notranslate"><span class="pre">systemd-run</span></code> doesn’t capture any flags we might need to pass to
-<code class="docutils literal notranslate"><span class="pre">singularity</span></code>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">apptainer</span></code>.</p></li>
 </ul>
 <p>You can read more about how systemd can control resources uses at the
 link below, which details the properties you can set using
@@ -216,7 +216,7 @@ system.</p>
 <p>To apply resource limits to a container, use the <code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code>
 flag, which takes a path to a TOML file specifying the cgroups
 configuration to be applied:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity shell --apply-cgroups /path/to/cgroups.toml my_container.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell --apply-cgroups /path/to/cgroups.toml my_container.sif
 </pre></div>
 </div>
 <div class="admonition note">
@@ -233,19 +233,19 @@ of your cgroups TOML file:</p>
 </pre></div>
 </div>
 <p>Start your container, applying the toml file, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity run --apply-cgroups path/to/cgroups.toml library://alpine
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer run --apply-cgroups path/to/cgroups.toml library://alpine
 </pre></div>
 </div>
 <p>After that, you can verify that the container is only using 500MB of
 memory. This example assumes that there is only one running container.
 If you are running multiple containers you will find multiple cgroups
-trees under the <code class="docutils literal notranslate"><span class="pre">singularity</span></code> directory.</p>
+trees under the <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> directory.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># cgroups v1
-$ cat /sys/fs/cgroup/memory/singularity/*/memory.limit_in_bytes
+$ cat /sys/fs/cgroup/memory/apptainer/*/memory.limit_in_bytes
   524288000
 
 # cgroups v2 - note translation of memory.limit_in_bytes -&gt; memory.max
-$ cat /sys/fs/cgroup/singularity/*/memory.max
+$ cat /sys/fs/cgroup/apptainer/*/memory.max
 524288000
 </pre></div>
 </div>
@@ -380,7 +380,7 @@ TOML format for the configuration file, rather than JSON.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="networking.html" class="btn btn-neutral float-left" title="Network virtualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="singularity_and_docker.html" class="btn btn-neutral float-right" title="Support for Docker and OCI Containers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="docker_and_oci.html" class="btn btn-neutral float-right" title="Support for Docker and OCI Containers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

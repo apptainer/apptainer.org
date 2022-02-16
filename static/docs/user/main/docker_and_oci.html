@@ -166,7 +166,7 @@
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>Support for Docker and OCI Containers</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/hpcng/singularity-userdocs/blob/master/singularity_and_docker.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/hpcng/singularity-userdocs/blob/master/docker_and_oci.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -175,7 +175,7 @@
            <div itemprop="articleBody">
              
   <section id="support-for-docker-and-oci-containers">
-<span id="singularity-and-docker"></span><h1>Support for Docker and OCI Containers<a class="headerlink" href="#support-for-docker-and-oci-containers" title="Permalink to this headline"></a></h1>
+<span id="docker-and-oci"></span><h1>Support for Docker and OCI Containers<a class="headerlink" href="#support-for-docker-and-oci-containers" title="Permalink to this headline"></a></h1>
 <p>The Open Containers Initiative (OCI) container format, which grew out of
 Docker, is the dominant standard for cloud-focused containerized
 deployments of software. Although Apptainer’s own container format
@@ -206,7 +206,7 @@ or build from containers that are hosted there.</p>
 <p>It’s easy to run a public Docker Hub container with Apptainer. Just
 put <code class="docutils literal notranslate"><span class="pre">docker://</span></code> in front of the container repository and tag. To run
 the container that’s called <code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow:latest</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run docker://sylabsio/lolcow:latest
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run docker://sylabsio/lolcow:latest
 INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
 Getting image source signatures
@@ -234,8 +234,8 @@ creates a SIF file from them. This SIF file is kept in your
 Apptainer <a class="reference internal" href="build_env.html#sec-cache"><span class="std std-ref">cache directory</span></a>, so if you run the same
 Docker container again the downloads and conversion aren’t required.</p>
 <p>To obtain the Docker container as a SIF file in a specific location,
-which you can move, share, and keep for later, <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> it:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://sylabsio/lolcow
+which you can move, share, and keep for later, <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://sylabsio/lolcow
 INFO:    Using cached SIF image
 
 $ ls -l lolcow_latest.sif
@@ -247,9 +247,9 @@ translated. If you have pulled the container before, it will be copied
 from the cache.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> of a Docker container actually runs a
-<code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">build</span></code> behind the scenes, since we are translating
-from OCI to SIF. If you <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> a Docker container
+<p><code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> of a Docker container actually runs a
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">build</span></code> behind the scenes, since we are translating
+from OCI to SIF. If you <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> a Docker container
 twice, the output file isn’t identical because metadata such as dates
 from the conversion will vary. This differs from pulling a SIF
 container (e.g. from a <code class="docutils literal notranslate"><span class="pre">library://</span></code> URI), which always give you an
@@ -264,9 +264,9 @@ container Apptainer will make requests to Docker Hub in order to
 check whether the container has been modified there. On shared systems,
 and when running containers in parallel, this can quickly exhaust the
 Docker Hub API limits.</p>
-<p>We recommend that you <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> a Docker image to a local
+<p>We recommend that you <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> a Docker image to a local
 SIF, and then always run from the SIF file, rather than using
-<code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">run</span> <span class="pre">docker://...</span></code> repeatedly.</p>
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run</span> <span class="pre">docker://...</span></code> repeatedly.</p>
 <p>Alternatively, if you have signed up for a Docker Hub account, make sure
 that you authenticate before using <code class="docutils literal notranslate"><span class="pre">docker://</span></code> container URIs.</p>
 </section>
@@ -277,23 +277,23 @@ private containers, you’ll need to authenticate to Docker Hub. There are
 a number of ways to do this with Apptainer.</p>
 <section id="apptainer-cli-remote-command">
 <h4>Apptainer CLI Remote Command<a class="headerlink" href="#apptainer-cli-remote-command" title="Permalink to this headline"></a></h4>
-<p>The <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span></code> command supports logging into Docker
+<p>The <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span></code> command supports logging into Docker
 Hub and other OCI registries. For Docker Hub, the registry hostname is
 <code class="docutils literal notranslate"><span class="pre">docker.io</span></code>, so you will need to login as below, specifying your
 username:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity remote login --username myuser docker://docker.io
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer remote login --username myuser docker://docker.io
 Password / Token:
-INFO:    Token stored in /home/myuser/.singularity/remote.yaml
+INFO:    Token stored in /home/myuser/.apptainer/remote.yaml
 </pre></div>
 </div>
 <p>The Password / Token you enter must be a Docker Hub CLI access token,
 which you should generate in the ‘Security’ section of your account
 profile page on Docker Hub.</p>
 <p>To check which Docker / OCI registries you are currently logged in to,
-use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">list</span></code>.</p>
+use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">list</span></code>.</p>
 <p>To logout of a registry, so that your credentials are forgotten, use
-<code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">logout</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity remote logout docker://docker.io
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">logout</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer remote logout docker://docker.io
 INFO:    Logout succeeded
 </pre></div>
 </div>
@@ -316,7 +316,7 @@ Docker credential helpers.</p>
 <h4>Interactive Login<a class="headerlink" href="#interactive-login" title="Permalink to this headline"></a></h4>
 <p>To perform a one-off interactive login, which will not store your
 credentials, use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull --docker-login docker://sylabsio/private
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull --docker-login docker://sylabsio/private
 Enter Docker Username: myuser
 Enter Docker Password:
 </pre></div>
@@ -334,7 +334,7 @@ respectively. These environment variables will override any stored
 credentials.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_DOCKER_USERNAME=myuser
 $ export APPTAINER_DOCKER_PASSWORD=mytoken
-$ singularity pull docker://sylabsio/private
+$ apptainer pull docker://sylabsio/private
 </pre></div>
 </div>
 </section>
@@ -357,12 +357,12 @@ authenticating to access private images.</p>
 <p>Quay is an OCI container registry used by a large number of projects,
 and hosted at <code class="docutils literal notranslate"><span class="pre">https://quay.io</span></code>. To pull public containers from Quay,
 just include the <code class="docutils literal notranslate"><span class="pre">quay.io</span></code> hostname in your <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://quay.io/bitnami/python:3.7
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://quay.io/bitnami/python:3.7
 INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
 ...
 
-$ singularity run python_3.7.sif
+$ apptainer run python_3.7.sif
 Python 3.7.12 (default, Sep 24 2021, 11:48:27)
 [GCC 8.3.0] on linux
 Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
@@ -373,7 +373,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 CLI token in the Quay web interface, then use it to login with
 Apptainer. Use the same methods as described for Docker Hub above:</p>
 <ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">docker://quay.io</span></code>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">docker://quay.io</span></code>
 to store your credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">quay.io</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
@@ -390,7 +390,7 @@ instructions available.</p>
 <p>Previously, an account and API token was required to pull NGC
 containers. However, they are now available to pull as a guest without
 login:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://nvcr.io/nvidia/pytorch:21.09-py3
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://nvcr.io/nvidia/pytorch:21.09-py3
 INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
 </pre></div>
@@ -402,7 +402,7 @@ key in the web interface in order to authenticate.</p>
 Docker Hub), with the username <code class="docutils literal notranslate"><span class="pre">$oauthtoken</span></code> and the password set to
 your NGC API key.</p>
 <ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">\$oauthtoken</span>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">\$oauthtoken</span>
 <span class="pre">docker://nvcr.io</span></code> to store your credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">nvcr.io</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
@@ -417,7 +417,7 @@ your NGC API key.</p>
 <p>GitHub Container Registry is increasingly used to provide Docker
 containers alongside the source code of hosted projects. You can pull a
 public container from GitHub Container Registry using a <code class="docutils literal notranslate"><span class="pre">ghcr.io</span></code> URI:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://ghcr.io/containerd/alpine:latest
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://ghcr.io/containerd/alpine:latest
 INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
 </pre></div>
@@ -429,7 +429,7 @@ documentation here.</a></p>
 <p>Use one of the following authentication methods (detailed above for
 Docker Hub), with your username and personal access token:</p>
 <ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">docker://ghcr.io</span></code>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">docker://ghcr.io</span></code>
 to store your credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">ghcr.io</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
@@ -459,7 +459,7 @@ username used in conjunction with this password is always <code class="docutils 
 </div>
 <p>Then login using one of the following methods:</p>
 <ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">AWS</span>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">AWS</span>
 <span class="pre">docker://&lt;accountid&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com</span></code> to store your
 credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">AWS</span>
@@ -485,7 +485,7 @@ Apptainer.</p>
 <p>Service Principle accounts will have an explicit username and password,
 and you should authenticate using one of the following methods:</p>
 <ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span>
 <span class="pre">docker://myregistry.azurecr.io</span></code> to store your credentials for
 Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">myregistry.azurecr.io</span></code> if
@@ -521,11 +521,11 @@ the location of the container you wish to pull.</p>
 <p>Docker Hub is the default registry, so when building from Docker Hub the
 <code class="docutils literal notranslate"><span class="pre">From:</span></code> header only needs to specify the container repository and
 tag:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">From</span>: ubuntu:<span class="m">20.04</span>
 </pre></div>
 </div>
-<p>If you <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">build</span></code> a definition file with these lines,
+<p>If you <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">build</span></code> a definition file with these lines,
 Apptainer will fetch the <code class="docutils literal notranslate"><span class="pre">ubuntu:20.04</span></code> container image from
 Docker Hub, and extract it as the basis for your new container.</p>
 </section>
@@ -534,11 +534,11 @@ Docker Hub, and extract it as the basis for your new container.</p>
 <p>To pull from a different Docker registry, you can either specify the
 hostname in the <code class="docutils literal notranslate"><span class="pre">From:</span></code> header, or use the separate <code class="docutils literal notranslate"><span class="pre">Registry:</span></code>
 header. The following two examples are equivalent:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">From</span>: quay.io/bitnami/python:<span class="m">3.7</span>
 </pre></div>
 </div>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">Registry</span>: quay.io
 <span class="k">From</span>: bitnami/python:<span class="m">3.7</span>
 </pre></div>
@@ -556,13 +556,13 @@ stored credentials or environment variables must be available to the
 <code class="docutils literal notranslate"><span class="pre">root</span></code> user:</p>
 <ul class="simple">
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.
-I.E. run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">singularity</span> <span class="pre">build</span> <span class="pre">--docker-login</span> <span class="pre">myimage.sif</span>
+I.E. run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apptainer</span> <span class="pre">build</span> <span class="pre">--docker-login</span> <span class="pre">myimage.sif</span>
 <span class="pre">Apptainer</span></code>.</p></li>
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME</span></code> and
 <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code> environment variables. Pass the
 environment variables through sudo to the <code class="docutils literal notranslate"><span class="pre">root</span></code> build process by
-running <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-E</span> <span class="pre">singularity</span> <span class="pre">build</span> <span class="pre">...</span></code>.</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">...</span></code> to store your credentials
+running <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-E</span> <span class="pre">apptainer</span> <span class="pre">build</span> <span class="pre">...</span></code>.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">...</span></code> to store your credentials
 for the <code class="docutils literal notranslate"><span class="pre">root</span></code> user on your system. This is separate from storing
 the credentials under your own account.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">login</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine. This is
@@ -592,7 +592,7 @@ sylabsio/lolcow     latest              5a15b484bc65        2 hours ago         
 by Docker. You can directly build it into a SIF file using a
 <code class="docutils literal notranslate"><span class="pre">docker-daemon://</span></code> URI specifying the <code class="docutils literal notranslate"><span class="pre">REPOSITORY:TAG</span></code> container
 name:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity build lolcow_from_docker_cache.sif docker-daemon://sylabsio/lolcow:latest
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build lolcow_from_docker_cache.sif docker-daemon://sylabsio/lolcow:latest
 INFO:    Starting build...
 Getting image source signatures
 Copying blob sha256:a2022691bf950a72f9d2d84d557183cb9eee07c065a76485f1695784855c5193
@@ -628,7 +628,7 @@ use <code class="docutils literal notranslate"><span class="pre">sudo</span></co
 </div>
 <p>To build from an image cached by the Docker daemon in a definition file
 use <code class="docutils literal notranslate"><span class="pre">Bootstrap:</span> <span class="pre">docker-daemon</span></code>, and a <code class="docutils literal notranslate"><span class="pre">From:</span> <span class="pre">&lt;REPOSITORY&gt;:TAG</span></code> line:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker-daemon
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker-daemon
 <span class="k">From</span>: sylabsio/lolcow:latest
 </pre></div>
 </div>
@@ -664,11 +664,11 @@ drwxr-xr-x  0 0      0           0 Aug 16 11:22 af7e389ea6636873dbc5adc17826e840
 -rw-r--r--  0 0      0         266 Dec 31  1969 manifest.json
 </pre></div>
 </div>
-<p>We can convert this tar file into a singularity container using the
+<p>We can convert this tar file into a apptainer container using the
 <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent. Because the agent accesses a file,
 rather than an object hosted by a service, it uses <code class="docutils literal notranslate"><span class="pre">:&lt;filename&gt;</span></code>, not
 <code class="docutils literal notranslate"><span class="pre">://&lt;location&gt;</span></code>. To build a tar archive directly to a SIF container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity build lolcow_tar.sif docker-archive:lolcow.tar
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build lolcow_tar.sif docker-archive:lolcow.tar
 INFO:    Starting build...
 Getting image source signatures
 Copying blob sha256:2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171
@@ -691,7 +691,7 @@ archives (<code class="docutils literal notranslate"><span class="pre">.tar.gz</
 <p>To build an image using a definition file, which starts from a container
 in a Docker archive, use <code class="docutils literal notranslate"><span class="pre">Bootstrap:</span> <span class="pre">docker-archive</span></code> and specify the
 filename in the <code class="docutils literal notranslate"><span class="pre">From:</span></code> line:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker-archive
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker-archive
 <span class="k">From</span>: lolcow.tar
 </pre></div>
 </div>
@@ -783,7 +783,7 @@ may need to use <code class="docutils literal notranslate"><span class="pre">--b
 project directory that you need access to.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Without --contain, python in the container finds packages
 # in your $HOME directory.
-$ singularity exec docker://python:3.9 pip list
+$ apptainer exec docker://python:3.9 pip list
 Package    Version
 ---------- -------
 pip        21.2.4
@@ -793,7 +793,7 @@ wheel      0.37.0
 
 # With --contain, python in the container only finds packages
 # installed in the container.
-$ singularity exec --contain docker://python:3.9 pip list
+$ apptainer exec --contain docker://python:3.9 pip list
 Package    Version
 ---------- -------
 pip        21.2.4
@@ -814,14 +814,14 @@ only variables on the host that are prefixed with <code class="docutils literal 
 are set in the container:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Set a host variable
 $ export HOST_VAR=123
-# Set a singularity container environment variable
+# Set a apptainer container environment variable
 $ export &quot;APPTAINERENV_FORCE_VAR=&quot;123&quot;
 
-$ singularity run library://alpine env | grep VAR
+$ apptainer run library://alpine env | grep VAR
 FORCE_VAR=123
 HOST_VAR=ABC
 
-$ singularity run --cleanenv library://alpine env | grep VAR
+$ apptainer run --cleanenv library://alpine env | grep VAR
 FORCE_VAR=123
 </pre></div>
 </div>
@@ -835,12 +835,12 @@ export JAVA_HOME=/test
 
 # Check JAVA_HOME in the docker container.
 # This value comes from ENV in the Dockerfile.
-$ singularity run docker://openjdk:latest echo \$JAVA_HOME
+$ apptainer run docker://openjdk:latest echo \$JAVA_HOME
 /usr/java/openjdk-17
 
 # Override JAVA_HOME in the container
 export APPTAINERENV_JAVA_HOME=/test
-$ singularity run docker://openjdk:latest echo \$JAVA_HOME
+$ apptainer run docker://openjdk:latest echo \$JAVA_HOME
 /test
 </pre></div>
 </div>
@@ -891,12 +891,12 @@ process, which cannot operate under the control of Apptainer’s shim.</p>
 <p>For example, a container using the <code class="docutils literal notranslate"><span class="pre">tini</span></code> init process will produce
 warnings when started as an instance, or if run with <code class="docutils literal notranslate"><span class="pre">--pid</span></code>. To work
 around this, use the <code class="docutils literal notranslate"><span class="pre">--no-init</span></code> flag to disable the shim:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run --pid tini_example.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --pid tini_example.sif
 [WARN  tini (2690)] Tini is not running as PID 1 .
 Zombie processes will not be re-parented to Tini, so zombie reaping won&#39;t work.
 To fix the problem, run Tini as PID 1.
 
-$ singularity run --pid --no-init tini_example.sif
+$ apptainer run --pid --no-init tini_example.sif
 ...
 # NO WARNINGS
 </pre></div>
@@ -941,7 +941,7 @@ on the <code class="docutils literal notranslate"><span class="pre">CMD</span></
 used to build it, along with any arguments on the command line. The
 <code class="docutils literal notranslate"><span class="pre">CMD</span></code> and <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> can also be overridden by flags.</p>
 <p>A Apptainer container has the concept of a <em>runscript</em>, which is a
-single shell script defining what happens when you <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">run</span></code>
+single shell script defining what happens when you <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run</span></code>
 the container. Because there is no internal concept of <code class="docutils literal notranslate"><span class="pre">CMD</span></code> and
 <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>, Apptainer must create a runscript from the <code class="docutils literal notranslate"><span class="pre">CMD</span></code>
 and <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> when converting a Docker container. The behavior of
@@ -951,11 +951,11 @@ is run, with any arguments appended:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># ENTRYPOINT=&quot;date&quot;
 
 # Runs &#39;date&#39;
-$ singularity run mycontainer.sif
+$ apptainer run mycontainer.sif
 Wed 06 Oct 2021 02:42:54 PM CDT
 
 # Runs &#39;date --utc`
-$ singularity run mycontainer.sif --utc
+$ apptainer run mycontainer.sif --utc
 Wed 06 Oct 2021 07:44:27 PM UTC
 </pre></div>
 </div>
@@ -964,11 +964,11 @@ Wed 06 Oct 2021 07:44:27 PM UTC
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># CMD=&quot;date&quot;
 
 # Runs &#39;date&#39;
-$ singularity run mycontainer.sif
+$ apptainer run mycontainer.sif
 Wed 06 Oct 2021 02:45:39 PM CDT
 
 # Runs &#39;echo hello&#39;
-$ singularity run mycontainer.sif echo hello
+$ apptainer run mycontainer.sif echo hello
 hello
 </pre></div>
 </div>
@@ -979,16 +979,16 @@ with any user supplied arguments:</p>
 # CMD=&quot;--utc&quot;
 
 # Runs &#39;date --utc&#39;
-$ singularity run mycontainer.sif
+$ apptainer run mycontainer.sif
 Wed 06 Oct 2021 07:48:43 PM UTC
 
 # Runs &#39;date -R&#39;
-$ singularity run mycontainer.sif -R
+$ apptainer run mycontainer.sif -R
 Wed, 06 Oct 2021 14:49:07 -0500
 </pre></div>
 </div>
 <p>There is no flag to override an <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> set for a Docker
-container. Instead, use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">exec</span></code> to run an arbitrary program
+container. Instead, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">exec</span></code> to run an arbitrary program
 inside a container.</p>
 <section id="argument-handling">
 <h3>Argument Handling<a class="headerlink" href="#argument-handling" title="Permalink to this headline"></a></h3>
@@ -1000,10 +1000,10 @@ quoting of arguments.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker run -it --rm alpine echo &quot;\$HOSTNAME&quot;
 $HOSTNAME
 
-$ singularity run docker://alpine echo &quot;\$HOSTNAME&quot;
+$ apptainer run docker://alpine echo &quot;\$HOSTNAME&quot;
 p700
 
-$ singularity run docker://alpine echo &quot;\\\$HOSTNAME&quot;
+$ apptainer run docker://alpine echo &quot;\\\$HOSTNAME&quot;
 $HOSTNAME
 </pre></div>
 </div>
@@ -1075,10 +1075,10 @@ symbolic links and the the <code class="docutils literal notranslate"><span clas
 <section id="registry-authentication-issues">
 <h3>Registry Authentication Issues<a class="headerlink" href="#registry-authentication-issues" title="Permalink to this headline"></a></h3>
 <p>If you experience problems pulling containers from a private registry,
-check your credentials carefully. You can <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> with the
+check your credentials carefully. You can <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> with the
 <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag to perform an interactive login. This may be
 useful if you are unsure whether you have stored credentials properly
-via <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span></code> or <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span></code>.</p>
+via <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span></code> or <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span></code>.</p>
 <p>OCI registries expect different values for username and password fields.
 Some require a token to be generated and used instead of your account
 password. Some take a generic username, and rely only on the token to
@@ -1126,6 +1126,217 @@ image.</p>
 <p>The table below gives a quick reference comparing Dockerfile and
 Apptainer definition files. For more detail please see
 <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">Definition Files</span></a>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 31%" />
+<col style="width: 18%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="2"><p>Apptainer        Definition file</p></th>
+<th class="head" colspan="2"><p>Dockerfile</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>Section</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Section</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Bootstrap</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Defines the source of</div>
+<div class="line">the base image to build</div>
+<div class="line">your container from.</div>
+<div class="line">Many bootstrap agents</div>
+<div class="line">are supported, e.g.</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">library</span></code>, <code class="docutils literal notranslate"><span class="pre">docker</span></code>,</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">http</span></code>, <code class="docutils literal notranslate"><span class="pre">shub</span></code>,</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">yum</span></code>, <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code>.</div>
+</div>
+</td>
+<td><p>-</p></td>
+<td><div class="line-block">
+<div class="line">Can only bootstrap</div>
+<div class="line">from Docker Hub.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">From:</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Specifies the base</div>
+<div class="line">image from which to the</div>
+<div class="line">build the container.</div>
+</div>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FROM</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Creates a layer from</div>
+<div class="line">the specified docker image.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%setup</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Run setup commands</div>
+<div class="line">outside of the</div>
+<div class="line">container (on the host</div>
+<div class="line">system) after the base</div>
+<div class="line">image bootstrap.</div>
+</div>
+</td>
+<td><p>-</p></td>
+<td><div class="line-block">
+<div class="line">Not supported.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%files</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Copy files from</div>
+<div class="line">your host to</div>
+<div class="line">the container, or</div>
+<div class="line">between build stages.</div>
+</div>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">COPY</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Copy files from</div>
+<div class="line">your host to</div>
+<div class="line">the container, or</div>
+<div class="line">between build stages.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%environment</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Declare and set</div>
+<div class="line">container environment</div>
+<div class="line">variables.</div>
+</div>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ENV</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Declare and set</div>
+<div class="line">a container environment</div>
+<div class="line">variable.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%help</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Provide a help</div>
+<div class="line">section for your</div>
+<div class="line">container image.</div>
+</div>
+</td>
+<td><p>-</p></td>
+<td><div class="line-block">
+<div class="line">Not supported.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%post</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Commands that will</div>
+<div class="line">be run at</div>
+<div class="line">build-time.</div>
+</div>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RUN</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Commands that will</div>
+<div class="line">be run at</div>
+<div class="line">build-time.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%runscript`</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Commands that will</div>
+<div class="line">be run when you</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run</span></code></div>
+<div class="line">the container image.</div>
+</div>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>
+<code class="docutils literal notranslate"><span class="pre">CMD</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Commands / arguments</div>
+<div class="line">that will run in the</div>
+<div class="line">container image.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%startscript</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Commands that will</div>
+<div class="line">be run when</div>
+<div class="line">an instance is started.</div>
+</div>
+</td>
+<td><p>-</p></td>
+<td><div class="line-block">
+<div class="line">Not Applicable.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%test</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Commands that run</div>
+<div class="line">at the very end</div>
+<div class="line">of the build process</div>
+<div class="line">to validate the</div>
+<div class="line">container using</div>
+<div class="line">a method of your</div>
+<div class="line">choice. (to verify</div>
+<div class="line">distribution or</div>
+<div class="line">software versions</div>
+<div class="line">installed inside</div>
+<div class="line">the container)</div>
+</div>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">HEALTHCHECK</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Commands that verify</div>
+<div class="line">the health status of</div>
+<div class="line">the container.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%apps</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Allows you to install</div>
+<div class="line">internal modules</div>
+<div class="line">based on the concept</div>
+<div class="line">of SCIF-apps.</div>
+</div>
+</td>
+<td><p>-</p></td>
+<td><div class="line-block">
+<div class="line">Not supported.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%labels</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Section to add and</div>
+<div class="line">define metadata</div>
+<div class="line">describing your</div>
+<div class="line">container.</div>
+</div>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LABEL</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Declare container</div>
+<div class="line">metadata as a</div>
+<div class="line">key-value pair.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 

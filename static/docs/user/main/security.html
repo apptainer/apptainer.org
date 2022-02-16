@@ -83,7 +83,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
@@ -172,9 +172,9 @@ user can create a user namespace, in which most setup operations needed
 to run a container can be run, unprivileged.</p>
 <p>Apptainer supports running containers without setuid, using user
 namespaces. It can be compiled with the <code class="docutils literal notranslate"><span class="pre">--without-suid</span></code> option, or
-<code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> can be set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> to enable this.
+<code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> can be set in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> to enable this.
 In this mode <em>all</em> operations run as the user who starts the
-<code class="docutils literal notranslate"><span class="pre">singularity</span></code> program. However, there are some disadvantages:</p>
+<code class="docutils literal notranslate"><span class="pre">apptainer</span></code> program. However, there are some disadvantages:</p>
 <ul class="simple">
 <li><p>SIF and other single file container images cannot be mounted
 directly. The container image must be extracted to a directory on
@@ -242,7 +242,7 @@ signature travels in the SIF image itself so that it is always possible
 to verify that the image has not been tampered with or corrupted.</p>
 <p>We use private PGP keys to create a container signature, and the public
 key in order to verify the container. Verification of signed containers
-happens automatically in <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> commands against the
+happens automatically in <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> commands against the
 Sylabs Cloud Container Library. A Keystore in the Sylabs Cloud makes it
 easier to share and obtain public keys for container verification.</p>
 <p>A container may be signed once, by a trusted individual who approves its

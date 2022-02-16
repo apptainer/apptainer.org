@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Apptainer and MPI applications" href="mpi.html" />
-    <link rel="prev" title="Support for Docker and OCI Containers" href="singularity_and_docker.html" /> 
+    <link rel="prev" title="Support for Docker and OCI Containers" href="docker_and_oci.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -75,7 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">OCI Runtime Support</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mounted-oci-filesystem-bundles">Mounted OCI Filesystem Bundles</a><ul>
@@ -152,7 +152,7 @@ privileges.</p>
 of illustration.</p>
 <p>Suppose the Singularity Image Format (SIF) file <code class="docutils literal notranslate"><span class="pre">busybox_latest.sif</span></code>
 exists locally. (Recall:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://busybox
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://busybox
 INFO:    Starting build...
 Getting image source signatures
 Copying blob sha256:fc1a6b909f82ce4b72204198d49de3aaf757b3ab2bb823cb6e47c416b97c5985
@@ -168,10 +168,10 @@ INFO:    Build complete: busybox_latest.sif
 <p>This is one way to bootstrap creation of this image in SIF that
 <em>retains</em> a local copy - i.e., a local copy of the SIF file <em>and</em> a
 cached copy of the OCI blobs. Additional approaches and details can be
-found in the section <a class="reference internal" href="singularity_and_docker.html#singularity-and-docker"><span class="std std-ref">Support for Docker and OCI</span></a>).</p>
+found in the section <a class="reference internal" href="docker_and_oci.html#docker-and-oci"><span class="std std-ref">Support for Docker and OCI</span></a>).</p>
 <p>For the purpose of bootstrapping the creation of an OCI compliant
 container, this SIF file can be mounted as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity oci mount ./busybox_latest.sif /var/tmp/busybox
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer oci mount ./busybox_latest.sif /var/tmp/busybox
 </pre></div>
 </div>
 <p>By issuing the <code class="docutils literal notranslate"><span class="pre">mount</span></code> command, the root filesystem encapsulated in
@@ -819,12 +819,12 @@ detailed as follows via <code class="docutils literal notranslate"><span class="
 <p>identifies <code class="docutils literal notranslate"><span class="pre">/var/tmp/busybox/rootfs</span></code> as the container’s root
 filesystem, as required by the standard; this filesystem has contents:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo ls /var/tmp/busybox/rootfs
-bin  dev  environment  etc  home  proc  root  singularity  sys  tmp  usr  var
+bin  dev  environment  etc  home  proc  root  apptainer  sys  tmp  usr  var
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">environment</span></code> and <code class="docutils literal notranslate"><span class="pre">singularity</span></code> above are symbolic links to the
+<p><code class="docutils literal notranslate"><span class="pre">environment</span></code> and <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> above are symbolic links to the
 <code class="docutils literal notranslate"><span class="pre">.singularity.d</span></code> directory.</p>
 </div>
 <p>Beyond <code class="docutils literal notranslate"><span class="pre">root.path</span></code>, the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file includes a multitude of
@@ -851,7 +851,7 @@ creation is bootstrapped via a Docker or OCI agent, Apptainer
 will make use of <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> or <code class="docutils literal notranslate"><span class="pre">CMD</span></code> (from the OCI image) to
 populate <code class="docutils literal notranslate"><span class="pre">args</span></code>; for additional discussion, please refer to
 <span class="xref std std-ref">Directing Execution</span> in the section
-<a class="reference internal" href="singularity_and_docker.html#singularity-and-docker"><span class="std std-ref">Support for Docker and OCI</span></a>.</p>
+<a class="reference internal" href="docker_and_oci.html#docker-and-oci"><span class="std std-ref">Support for Docker and OCI</span></a>.</p>
 </div></blockquote>
 <p>For a comprehensive discussion of all the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file
 properties, refer to the <a class="reference external" href="https://github.com/opencontainers/runtime-spec/blob/master/config.md">implementation guide</a>.</p>
@@ -870,7 +870,7 @@ above), this encapsulated runtime is revealed; please refer to the note
 below for additional details. Once revealed, the filesystem bundle can
 be used to bootstrap the creation of an OCI compliant container instance
 as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity oci create -b /var/tmp/busybox busybox1
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer oci create -b /var/tmp/busybox busybox1
 </pre></div>
 </div>
 <div class="admonition note">
@@ -878,8 +878,8 @@ as follows:</p>
 <p>Data for the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file exists within the SIF file as a
 descriptor for images pulled or built from Docker/OCI registries. For
 images sourced elsewhere, a default <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file is created
-when the <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">oci</span> <span class="pre">mount</span> <span class="pre">...</span></code> command is issued.</p>
-<p>Upon invocation, <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">oci</span> <span class="pre">mount</span> <span class="pre">...</span></code> also mounts the root
+when the <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">oci</span> <span class="pre">mount</span> <span class="pre">...</span></code> command is issued.</p>
+<p>Upon invocation, <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">oci</span> <span class="pre">mount</span> <span class="pre">...</span></code> also mounts the root
 filesystem stored in the SIF file on <code class="docutils literal notranslate"><span class="pre">/bundle/rootfs</span></code>, and
 establishes an overlay filesystem on the mount point
 <code class="docutils literal notranslate"><span class="pre">/bundle/overlay</span></code>.</p>
@@ -897,7 +897,7 @@ created by simply changing the name of the instance upon subsequent
 invocation requests.</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">state</span></code> of the container instance can be determined via <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">sudo</span>
-<span class="pre">singularity</span> <span class="pre">oci</span> <span class="pre">state</span> <span class="pre">busybox1</span></code>:</p>
+<span class="pre">apptainer</span> <span class="pre">oci</span> <span class="pre">state</span> <span class="pre">busybox1</span></code>:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="nt">&quot;ociVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1-dev&quot;</span><span class="p">,</span>
 <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;busybox1&quot;</span><span class="p">,</span>
@@ -905,8 +905,8 @@ invocation requests.</p>
 <span class="nt">&quot;pid&quot;</span><span class="p">:</span> <span class="mi">6578</span><span class="p">,</span>
 <span class="nt">&quot;bundle&quot;</span><span class="p">:</span> <span class="s2">&quot;/var/tmp/busybox&quot;</span><span class="p">,</span>
 <span class="nt">&quot;createdAt&quot;</span><span class="p">:</span> <span class="mi">1554389921452964253</span><span class="p">,</span>
-<span class="nt">&quot;attachSocket&quot;</span><span class="p">:</span> <span class="s2">&quot;/var/run/singularity/instances/root/busybox1/attach.sock&quot;</span><span class="p">,</span>
-<span class="nt">&quot;controlSocket&quot;</span><span class="p">:</span> <span class="s2">&quot;/var/run/singularity/instances/root/busybox1/control.sock&quot;</span>
+<span class="nt">&quot;attachSocket&quot;</span><span class="p">:</span> <span class="s2">&quot;/var/run/apptainer/instances/root/busybox1/attach.sock&quot;</span><span class="p">,</span>
+<span class="nt">&quot;controlSocket&quot;</span><span class="p">:</span> <span class="s2">&quot;/var/run/apptainer/instances/root/busybox1/control.sock&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -920,7 +920,7 @@ in deployments where auditing requirements exist.</p>
 <h2>Unmounting OCI Filesystem Bundles<a class="headerlink" href="#unmounting-oci-filesystem-bundles" title="Permalink to this headline"></a></h2>
 <p>To unmount a mounted OCI filesystem bundle, the following command should
 be issued:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity oci umount /var/tmp/busybox
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer oci umount /var/tmp/busybox
 </pre></div>
 </div>
 <div class="admonition note">
@@ -936,7 +936,7 @@ the overlay filesystem, <code class="docutils literal notranslate"><span class="
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="singularity_and_docker.html" class="btn btn-neutral float-left" title="Support for Docker and OCI Containers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="docker_and_oci.html" class="btn btn-neutral float-left" title="Support for Docker and OCI Containers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="mpi.html" class="btn btn-neutral float-right" title="Apptainer and MPI applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

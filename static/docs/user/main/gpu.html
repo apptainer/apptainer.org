@@ -75,7 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">GPU Support</a><ul>
@@ -196,7 +196,7 @@ are often outdated which can lead to problems running applications
 compiled for the latest versions of CUDA.</p>
 <p>Apptainer will find the NVIDIA/CUDA libraries on your host using the
 list of libraries in the configuration file
-<code class="docutils literal notranslate"><span class="pre">etc/singularity/nvbliblist</span></code>, and resolving paths through the
+<code class="docutils literal notranslate"><span class="pre">etc/apptainer/nvbliblist</span></code>, and resolving paths through the
 <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> cache. At time of release this list is appropriate for the
 latest stable CUDA version. It can be modified by the administrator to
 add additional libraries if necessary. See the admin guide for more
@@ -213,14 +213,14 @@ supporting containers, that will use CUDA for processing. You can view
 the available versions on the <a class="reference external" href="https://hub.docker.com/r/tensorflow/tensorflow/tags">tags page on Docker Hub</a></p>
 <p>The container is large, so it’s best to build or pull the docker image
 to a SIF before you start working with it:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://tensorflow/tensorflow:latest-gpu
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://tensorflow/tensorflow:latest-gpu
 ...
 INFO:    Creating SIF file...
 INFO:    Build complete: tensorflow_latest-gpu.sif
 </pre></div>
 </div>
 <p>Then run the container with GPU support:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run --nv tensorflow_latest-gpu.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --nv tensorflow_latest-gpu.sif
 
 ________                               _______________
 ___  __/__________________________________  ____/__  /________      __
@@ -275,12 +275,12 @@ running the container, or <code class="docutils literal notranslate"><span class
 This variable will limit the GPU devices that CUDA programs see.</p>
 <p>E.g. to run the tensorflow container, but using only the first GPU in
 the host, we could do:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINERENV_CUDA_VISIBLE_DEVICES=0 singularity run --nv tensorflow_latest-gpu.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINERENV_CUDA_VISIBLE_DEVICES=0 apptainer run --nv tensorflow_latest-gpu.sif
 
 # or
 
 $ export APPTAINERENV_CUDA_VISIBLE_DEVICES=0
-$ singularity run tensorflow_latest-gpu.sif
+$ apptainer run tensorflow_latest-gpu.sif
 </pre></div>
 </div>
 </section>
@@ -334,7 +334,7 @@ OCI containers.</p></li>
 <h3>Requirements &amp; Limitations<a class="headerlink" href="#requirements-limitations" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> must be installed on your host. Its path must
-be set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>. This value will be set at build time if
+be set in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>. This value will be set at build time if
 <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> is found on the search <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p></li>
 <li><p>For security reasons, <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> cannot be used with
 privileged mode in a set-uid install of Apptainer.
@@ -355,7 +355,7 @@ GitHub issue</a></p></li>
 <p>Tensorflow can be run using <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> in a similar manner as the
 standard <code class="docutils literal notranslate"><span class="pre">--nv</span></code> binding approach when run unprivleged. Build the
 large container into a sandbox:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity build --sandbox tensorflow_latest-gpu docker://tensorflow/tensorflow:latest-gpu
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --sandbox tensorflow_latest-gpu docker://tensorflow/tensorflow:latest-gpu
 INFO:    Starting build...
 ...
 INFO:    Creating sandbox directory...
@@ -363,7 +363,7 @@ INFO:    Build complete: tensorflow_latest-gpu
 </pre></div>
 </div>
 <p>Then run the container with <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> GPU support:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run -uw --nv --nvccli tensorflow_latest-gpu
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run -uw --nv --nvccli tensorflow_latest-gpu
 
 ________                               _______________
 ___  __/__________________________________  ____/__  /________      __
@@ -414,7 +414,7 @@ devices are bound into the <code class="docutils literal notranslate"><span clas
 <p>For example, to pass only the 2nd and 3rd GPU into a container running
 on a system with 4 GPUs, run the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export NVIDIA_VISIBLE_DEVICES=1,2
-$ singularity run -uwc --nv --nvccli tensorflow_latest-gpu
+$ apptainer run -uwc --nv --nvccli tensorflow_latest-gpu
 </pre></div>
 </div>
 <p>Note that:</p>
@@ -431,7 +431,7 @@ system.</p></li>
 </ul>
 <p>If you use <code class="docutils literal notranslate"><span class="pre">--contain</span></code> without setting <code class="docutils literal notranslate"><span class="pre">NVIDIA_VISIBLE_DEVICES</span></code>, no
 GPUs will be available in the container, and a warning will be shown:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run -uwc --nv --nvccli tensorflow_latest-gpu
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run -uwc --nv --nvccli tensorflow_latest-gpu
 WARNING: When using nvidia-container-cli with --contain NVIDIA_VISIBLE_DEVICES
 must be set or no GPUs will be available in container.
 </pre></div>
@@ -452,7 +452,7 @@ requirements of the job.</p>
 <h3>Other GPU Options<a class="headerlink" href="#other-gpu-options" title="Permalink to this headline"></a></h3>
 <p>In <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> mode, Apptainer understands the following additional
 environment variables. Note that these environment variables are read
-from the environment where <code class="docutils literal notranslate"><span class="pre">singularity</span></code> is run. Apptainer does
+from the environment where <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> is run. Apptainer does
 not currently read these settings from the container environment.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">NVIDIA_DRIVER_CAPABILITIES</span></code> controls which libraries and utilities
@@ -524,14 +524,14 @@ supporting containers, that will use ROCm for processing. You can view
 the available versions on the <a class="reference external" href="https://hub.docker.com/r/rocm/tensorflow/tags">tags page on Docker Hub</a></p>
 <p>The container is large, so it’s best to build or pull the docker image
 to a SIF before you start working with it:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://rocm/tensorflow:latest
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://rocm/tensorflow:latest
 ...
 INFO:    Creating SIF file...
 INFO:    Build complete: tensorflow_latest.sif
 </pre></div>
 </div>
 <p>Then run the container with GPU support:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run --rocm tensorflow_latest.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --rocm tensorflow_latest.sif
 </pre></div>
 </div>
 <p>You can verify the GPU is available within the container by using the
@@ -573,7 +573,7 @@ application ‘Blender’.</p>
 Blender as a graphical application that will make use of a local Radeon
 GPU for OpenCL compute using the container that has been published to
 the Sylabs library:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec --rocm --bind /etc/OpenCL library://sylabs/examples/blender blender
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --rocm --bind /etc/OpenCL library://sylabs/examples/blender blender
 </pre></div>
 </div>
 <p>Note the <em>exec</em> used as the <em>runscript</em> for this container is setup for

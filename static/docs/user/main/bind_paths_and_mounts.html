@@ -106,7 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
@@ -177,17 +177,17 @@ container.</p>
 <h3>Disabling System Binds<a class="headerlink" href="#disabling-system-binds" title="Permalink to this headline"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--no-mount</span></code> flag allows specific
 system mounts to be disabled, even if they are set in the
-<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> configuration file by the administrator.</p>
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> configuration file by the administrator.</p>
 <p>For example, if Apptainer has been configured with <code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">hostfs</span> <span class="pre">=</span>
 <span class="pre">yes</span></code> then every filesystem on the host will be bind mounted to the
 container by default. If, e.g. a <code class="docutils literal notranslate"><span class="pre">/project</span></code> filesystem on your host
 conflicts with a <code class="docutils literal notranslate"><span class="pre">/project</span></code> directory in the container you are
 running, you can disable the <code class="docutils literal notranslate"><span class="pre">hostfs</span></code> binds:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>singularity run --no-mount hostfs mycontainer.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer run --no-mount hostfs mycontainer.sif
 </pre></div>
 </div>
 <p>Multiple mounts can be disabled by specifying them separated by commas:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>singularity run --no-mount tmp,sys,dev mycontainer.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer run --no-mount tmp,sys,dev mycontainer.sif
 </pre></div>
 </div>
 </section>
@@ -220,12 +220,12 @@ already exist in the container):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls /data
 bar  foo
 
-$ singularity exec --bind /data:/mnt my_container.sif ls /mnt
+$ apptainer exec --bind /data:/mnt my_container.sif ls /mnt
 bar  foo
 </pre></div>
 </div>
 <p>You can bind multiple directories in a single command with this syntax:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity shell --bind /opt,/data:/mnt my_container.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --bind /opt,/data:/mnt my_container.sif
 </pre></div>
 </div>
 <p>This will bind <code class="docutils literal notranslate"><span class="pre">/opt</span></code> on the host to <code class="docutils literal notranslate"><span class="pre">/opt</span></code> in the container and
@@ -234,7 +234,7 @@ bar  foo
 this would be:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_BIND=&quot;/opt,/data:/mnt&quot;
 
-$ singularity shell my_container.sif
+$ apptainer shell my_container.sif
 </pre></div>
 </div>
 <p>Using the environment variable <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BIND</span></code>, you can bind paths
@@ -253,7 +253,7 @@ infer <code class="docutils literal notranslate"><span class="pre">type=bind</sp
 <p><code class="docutils literal notranslate"><span class="pre">src</span></code> or <code class="docutils literal notranslate"><span class="pre">source</span></code> can be used interchangeably. <code class="docutils literal notranslate"><span class="pre">dst</span></code>,
 <code class="docutils literal notranslate"><span class="pre">destination</span></code>, or <code class="docutils literal notranslate"><span class="pre">target</span></code> are also equivalent.</p>
 <p>To mount <code class="docutils literal notranslate"><span class="pre">data</span></code> on the host to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> inside the container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec \
     --mount type=bind,src=/data,dst=/mnt \
     my_container.sif ls /mnt
 bar  foo
@@ -261,7 +261,7 @@ bar  foo
 </div>
 <p>To mount the same directory read-only in the container, add the <code class="docutils literal notranslate"><span class="pre">ro</span></code>
 option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec \
     --mount type=bind,source=/data,dest=/mnt,ro \
     my_container.sif touch /mnt/test
 touch: cannot touch &#39;/mnt/test&#39;: Permission denied
@@ -269,7 +269,7 @@ touch: cannot touch &#39;/mnt/test&#39;: Permission denied
 </div>
 <p>You can bind multiple directories in a single command with multiple
 <code class="docutils literal notranslate"><span class="pre">--mount</span></code> flags:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity shell --mount type=bind,src=/opt,dst=/opt \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --mount type=bind,src=/opt,dst=/opt \
                     --mount type=bind,src=/data,dst=/data \
                     my_container.sif
 </pre></div>
@@ -281,12 +281,12 @@ wrapping each field in double quotes if necessary characters.
 <code class="docutils literal notranslate"><span class="pre">--mount</span></code> allows bind mounting paths that are not possible with the
 <code class="docutils literal notranslate"><span class="pre">--bind</span></code> flag. For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Mount a path containing &#39;:&#39; (not possible with --bind)
-$ singularity run \
+$ apptainer run \
     --mount type=bind,src=/my:path,dst=/mnt \
     mycontainer.sif
 
 # Mount a path containing a &#39;,&#39;
-$ singularity run \
+$ apptainer run \
     --mount type=bind,&quot;src=/comma,dir&quot;,dst=/mnt \
     mycontainer.sif
 </pre></div>
@@ -320,7 +320,7 @@ create them.</p>
 <p>When shelling into your container image, Apptainer allows you to
 mount your current working directory (<code class="docutils literal notranslate"><span class="pre">CWD</span></code>) without mounting your
 host <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory with the <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> flag.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity shell --no-home my_container.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --no-home my_container.sif
 </pre></div>
 </div>
 <div class="admonition note">
@@ -339,7 +339,7 @@ directory because it creates an empty mount. So if you have files
 located in the image at <code class="docutils literal notranslate"><span class="pre">/home/user</span></code>, the <code class="docutils literal notranslate"><span class="pre">--containall</span></code> flag
 will hide them all.</p>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity shell --containall my_container.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --containall my_container.sif
 </pre></div>
 </div>
 </section>
@@ -411,7 +411,7 @@ filesystem will be mounted in the container.</p></li>
 <p>To use a FUSE <code class="docutils literal notranslate"><span class="pre">sshfs</span></code> mount in a container, where the <code class="docutils literal notranslate"><span class="pre">fuse-sshfs</span></code>
 package has been installed on my host, I run with the <code class="docutils literal notranslate"><span class="pre">host</span></code> mount
 type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run --fusemount &quot;host:sshfs server:/ /server&quot; docker://ubuntu
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --fusemount &quot;host:sshfs server:/ /server&quot; docker://ubuntu
 Apptainer&gt; cat /etc/hostname
 localhost.localdomain
 Apptainer&gt; cat /server/etc/hostname
@@ -423,7 +423,7 @@ server
 <h3>FUSE mount with a container executable<a class="headerlink" href="#fuse-mount-with-a-container-executable" title="Permalink to this headline"></a></h3>
 <p>If the FUSE driver / command that you want to use for the mount has been
 added to your container, you can use the <code class="docutils literal notranslate"><span class="pre">container</span></code> mount type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run --fusemount &quot;container:sshfs server:/ /server&quot; sshfs.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --fusemount &quot;container:sshfs server:/ /server&quot; sshfs.sif
 Apptainer&gt; cat /etc/hostname
 localhost.localdomain
 Apptainer&gt; cat /server/etc/hostname
@@ -480,13 +480,13 @@ Writing superblocks and filesystem accounting information: <span class="k">done<
 
 <span class="c1"># Run Apptainer, mounting my input data to &#39;/input-data&#39; in</span>
 <span class="c1"># the container.</span>
-$ singularity run -B inputs.img:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
+$ apptainer run -B inputs.img:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
 Apptainer&gt; ls /input-data
 <span class="m">1</span>           <span class="m">3</span>           <span class="m">5</span>           <span class="m">7</span>           <span class="m">9</span>
 <span class="m">2</span>           <span class="m">4</span>           <span class="m">6</span>           <span class="m">8</span>           lost+found
 
 <span class="c1"># Or with --mount instead of -B</span>
-$ singularity run <span class="se">\</span>
+$ apptainer run <span class="se">\</span>
     --mount <span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>inputs.img,dst<span class="o">=</span>/input-data,image-src<span class="o">=</span>/ <span class="se">\</span>
     mycontainer.sif
 </pre></div>
@@ -506,12 +506,12 @@ Creating <span class="m">4</span>.0 filesystem on inputs.squashfs, block size <s
 
 <span class="c1"># Run Apptainer, mounting my input data to &#39;/input-data&#39; in</span>
 <span class="c1"># the container.</span>
-$ singularity run -B inputs.squashfs:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
+$ apptainer run -B inputs.squashfs:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
 Apptainer&gt; ls /input-data/
 <span class="m">1</span>  <span class="m">2</span>  <span class="m">3</span>  <span class="m">4</span>  <span class="m">5</span>  <span class="m">6</span>  <span class="m">7</span>  <span class="m">8</span>  <span class="m">9</span>
 
 <span class="c1"># Or with --mount instead of -B</span>
-$ singularity run <span class="se">\</span>
+$ apptainer run <span class="se">\</span>
     --mount <span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>src-inputs.squashfs,dst<span class="o">=</span>/input-data,image-src<span class="o">=</span>/ <span class="se">\</span>
     mycontainer.sif
 </pre></div>
@@ -521,21 +521,21 @@ $ singularity run <span class="se">\</span>
 <h3>SIF Image Files<a class="headerlink" href="#sif-image-files" title="Permalink to this headline"></a></h3>
 <p>Advanced users may wish to create a standalone SIF image, which contains
 an <code class="docutils literal notranslate"><span class="pre">ext3</span></code> or <code class="docutils literal notranslate"><span class="pre">squashfs</span></code> data partition holding files, by using the
-<code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">sif</span></code> commands similarly to the <a class="reference internal" href="persistent_overlays.html#overlay-sif"><span class="std std-ref">persistent overlays
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">sif</span></code> commands similarly to the <a class="reference internal" href="persistent_overlays.html#overlay-sif"><span class="std std-ref">persistent overlays
 instructions</span></a>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Create a new empty SIF file
-<span class="gp">$ </span>singularity sif new inputs.sif
+<span class="gp">$ </span>apptainer sif new inputs.sif
 
 <span class="gp"># </span>Add the squashfs data image from above to the SIF
-<span class="gp">$ </span>singularity sif add --datatype <span class="m">4</span> --partarch <span class="m">2</span> --partfs <span class="m">1</span> --parttype <span class="m">3</span> inputs.sif inputs.squashfs
+<span class="gp">$ </span>apptainer sif add --datatype <span class="m">4</span> --partarch <span class="m">2</span> --partfs <span class="m">1</span> --parttype <span class="m">3</span> inputs.sif inputs.squashfs
 
 <span class="gp"># </span>Run Apptainer, binding data from the SIF file
-<span class="gp">$ </span>singularity run -B inputs.sif:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
+<span class="gp">$ </span>apptainer run -B inputs.sif:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
 <span class="go">Apptainer&gt; ls /input-data</span>
 <span class="go">1  2  3  4  5  6  7  8  9</span>
 
 <span class="gp"># </span>Or with --mount instead of -B
-<span class="gp">$ </span>singularity run <span class="se">\</span>
+<span class="gp">$ </span>apptainer run <span class="se">\</span>
     --mount <span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>inputs.sif,dst<span class="o">=</span>/input-data,image-src<span class="o">=</span>/ <span class="se">\</span>
     mycontainer.sif
 </pre></div>

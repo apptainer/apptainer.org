@@ -103,7 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
@@ -171,7 +171,7 @@ to be executed at runtime can accept options intended for <code class="docutils 
 <p>For more in-depth and practical examples of def files, see the <a class="reference external" href="https://github.com/apptainer/apptainer/tree/master/examples">Apptainer
 examples repository</a></p>
 <p>For a comparison between Dockerfile and Apptainer definition file,
-please see: <a class="reference internal" href="singularity_and_docker.html#sec-deffile-vs-dockerfile"><span class="std std-ref">this section</span></a>.</p>
+please see: <a class="reference internal" href="docker_and_oci.html#sec-deffile-vs-dockerfile"><span class="std std-ref">this section</span></a>.</p>
 </section>
 <section id="header">
 <h2>Header<a class="headerlink" href="#header" title="Permalink to this headline"></a></h2>
@@ -193,13 +193,13 @@ also be valid in the header. For example, when using the <code class="docutils l
 bootstrap agent, the <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword becomes valid. Observe the
 following example for building a Debian container from the Container
 Library:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
 <span class="k">From</span>: debian:<span class="m">7</span>
 </pre></div>
 </div>
 <p>A def file that uses an official mirror to install CentOS 7 might look
 like this:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: yum
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: yum
 <span class="k">OSVersion</span>: <span class="m">7</span>
 <span class="k">MirrorURL</span>: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
 <span class="k">Include</span>: yum
@@ -247,14 +247,14 @@ OpenSuse)</p></li>
 performed at build time. This verification checks whether the image has
 been signed. If it has been signed the integrity of the image is
 checked, and the signatures matched to public keys if available. This
-process is equivalent to running <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">verify</span></code> on the bootstrap
+process is equivalent to running <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">verify</span></code> on the bootstrap
 image.</p>
 <p>By default a failed verification, e.g. against an unsigned image, or one
 that has been modified after signing, will produce a warning but the
 build will continue.</p>
 <p>To enforce that the bootstrap image verifies correctly and has been
 signed by one or more keys, you can use the <code class="docutils literal notranslate"><span class="pre">Fingerprints:</span></code> header.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: localimage
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: localimage
 <span class="k">From</span>: test.sif
 <span class="k">Fingerprints</span>: 12045C8C0B1004D058DE4BEDA20C27EE7FF7BA84,22045C8C0B1004D058DE4BEDA20C27EE7FF7BA84
 </pre></div>
@@ -288,7 +288,7 @@ will discuss each section in turn. It is not necessary to include every
 section (or any sections at all) within a def file. Furthermore,
 multiple sections of the same name can be included and will be appended
 to one another during the build process.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
 <span class="k">From</span>: ubuntu:<span class="m">18.04</span>
 Stage: build
 
@@ -352,7 +352,7 @@ with elevated privileges. Commands in <code class="docutils literal notranslate"
 potentially damage the host.</p>
 </div>
 <p>Consider the example from the definition file above:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%setup</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%setup</span>
     touch /file1
     touch <span class="si">${</span><span class="nv">APPTAINER_ROOTFS</span><span class="si">}</span>/file2
 </pre></div>
@@ -371,7 +371,7 @@ system during the build, it’s use is generally discouraged.</p>
 <h3>%files<a class="headerlink" href="#files" title="Permalink to this headline"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">%files</span></code> section allows you to copy files into the container with
 greater safety than using the <code class="docutils literal notranslate"><span class="pre">%setup</span></code> section. Its general form is:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%files</span> <span class="o">[</span>from &lt;stage&gt;<span class="o">]</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%files</span> <span class="o">[</span>from &lt;stage&gt;<span class="o">]</span>
     &lt;source&gt; <span class="o">[</span>&lt;destination&gt;<span class="o">]</span>
     ...
 </pre></div>
@@ -388,7 +388,7 @@ is either:</p>
 <code class="docutils literal notranslate"><span class="pre">&lt;destination&gt;</span></code> path is omitted it will be assumed to be the same as
 <code class="docutils literal notranslate"><span class="pre">&lt;source&gt;</span></code>. To show how copying from your host system works, let’s
 consider the example from the definition file above:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%files</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%files</span>
     /file1
     /file1 /opt
 </pre></div>
@@ -399,7 +399,7 @@ of the container file system and then make a second copy of <code class="docutil
 container in <code class="docutils literal notranslate"><span class="pre">/opt</span></code>.</p>
 <p>Files can also be copied from other stages by providing the source location in the
 previous stage and the destination in the current container.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%files</span> from stage_name
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%files</span> from stage_name
   /root/hello /bin/hello
 </pre></div>
 </div>
@@ -425,7 +425,7 @@ information on defining and using SCIF Apps <a class="reference internal" href="
 tools like <code class="docutils literal notranslate"><span class="pre">git</span></code> and <code class="docutils literal notranslate"><span class="pre">wget</span></code>, install new software and libraries,
 write configuration files, create new directories, etc.</p>
 <p>Consider the example from the definition file above:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%post</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%post</span>
     apt-get update <span class="o">&amp;&amp;</span> apt-get install -y netcat
     <span class="nv">NOW</span><span class="o">=</span><span class="sb">`</span>date<span class="sb">`</span>
     <span class="nb">echo</span> <span class="s2">&quot;export NOW=\&quot;</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">\&quot;&quot;</span> &gt;&gt; <span class="nv">$APPTAINER_ENVIRONMENT</span>
@@ -452,7 +452,7 @@ validate the container using a method of your choice. You can also
 execute this scriptlet through the container itself, using the <code class="docutils literal notranslate"><span class="pre">test</span></code>
 command.</p>
 <p>Consider the example from the def file above:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%test</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%test</span>
     grep -q <span class="nv">NAME</span><span class="o">=</span><span class="se">\&quot;</span>Ubuntu<span class="se">\&quot;</span> /etc/os-release
     <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
         <span class="nb">echo</span> <span class="s2">&quot;Container base is Ubuntu as expected.&quot;</span>
@@ -469,12 +469,12 @@ want to build a container without running the <code class="docutils literal notr
 example, if the build system does not have the same hardware that will
 be used on the production system), you can do so with the <code class="docutils literal notranslate"><span class="pre">--notest</span></code>
 build option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build --notest my_container.sif my_container.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --notest my_container.sif my_container.def
 </pre></div>
 </div>
 <p>Running the test command on a container built with this def file yields
 the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity test my_container.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer test my_container.sif
 Container base is Ubuntu as expected.
 </pre></div>
 </div>
@@ -482,18 +482,18 @@ Container base is Ubuntu as expected.
 programs you intend to install in the container are present. If you
 installed the program <code class="docutils literal notranslate"><span class="pre">samtools</span></code>, which shows a usage screen when run
 without any options, you might test it can be run with:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%test</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%test</span>
     <span class="c1"># Run samtools - exits okay with usage screen if installed</span>
     samtools
 </pre></div>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">samtools</span></code> is not successfully installed in the container then the
-<code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">test</span></code> will exit with an error such as <code class="docutils literal notranslate"><span class="pre">samtools:</span> <span class="pre">command</span>
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">test</span></code> will exit with an error such as <code class="docutils literal notranslate"><span class="pre">samtools:</span> <span class="pre">command</span>
 <span class="pre">not</span> <span class="pre">found</span></code>.</p>
 <p>Some programs return an error code when run without mandatory options.
 If you want to ignore this, and just check the program is present and
 can be called, you can run it as <code class="docutils literal notranslate"><span class="pre">myprog</span> <span class="pre">||</span> <span class="pre">true</span></code> in your test:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%test</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%test</span>
     <span class="c1"># Run bwa - exits with error code if installed and run without</span>
     <span class="c1"># options</span>
     bwa <span class="o">||</span> <span class="nb">true</span>
@@ -524,7 +524,7 @@ sourced.</p></li>
 </ul>
 <p>You should use the same conventions that you would use in a <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>
 or <code class="docutils literal notranslate"><span class="pre">.profile</span></code> file. Consider this example from the def file above:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%environment</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%environment</span>
     <span class="nb">export</span> <span class="nv">LISTEN_PORT</span><span class="o">=</span><span class="m">12345</span>
     <span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>C
 </pre></div>
@@ -534,7 +534,7 @@ section below. The <code class="docutils literal notranslate"><span class="pre">
 (often written in Perl) that complain when no locale is set.</p>
 <p>After building this container, you can verify that the environment
 variables are set appropriately at runtime with the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec my_container.sif env | grep -E &#39;LISTEN_PORT|LC_ALL&#39;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec my_container.sif env | grep -E &#39;LISTEN_PORT|LC_ALL&#39;
 LISTEN_PORT=12345
 LC_ALL=C
 </pre></div>
@@ -542,7 +542,7 @@ LC_ALL=C
 <p>To set a default value for a variable in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section,
 but adopt the value of a host environment variable if it is set, use
 the following syntax:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%environment</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%environment</span>
       <span class="nv">FOO</span><span class="o">=</span><span class="si">${</span><span class="nv">FOO</span><span class="k">:-</span><span class="s1">&#39;default&#39;</span><span class="si">}</span>
 </pre></div>
 </div>
@@ -562,20 +562,20 @@ information about the Apptainer container environment.</p>
 build time. This file is executed when the <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code> command is
 issued.</p>
 <p>Consider the example from the def file above.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%startscript</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%startscript</span>
     nc -lp <span class="nv">$LISTEN_PORT</span>
 </pre></div>
 </div>
 <p>Here the netcat program is used to listen for TCP traffic on the port
 indicated by the <code class="docutils literal notranslate"><span class="pre">$LISTEN_PORT</span></code> variable (set in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code>
 section above). The script can be invoked like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity instance start my_container.sif instance1
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start my_container.sif instance1
 INFO:    instance started successfully
 
 $ lsof | grep LISTEN
 nc        19061               vagrant    3u     IPv4             107409      0t0        TCP *:12345 (LISTEN)
 
-$ singularity instance stop instance1
+$ apptainer instance stop instance1
 Stopping instance1 instance of /home/vagrant/my_container.sif (PID=19035)
 </pre></div>
 </div>
@@ -584,12 +584,12 @@ Stopping instance1 instance of /home/vagrant/my_container.sif (PID=19035)
 <span id="id4"></span><h3>%runscript<a class="headerlink" href="#runscript" title="Permalink to this headline"></a></h3>
 <p>The contents of the <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> section are written to a file within
 the container that is executed when the container image is run (either
-via the <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">run</span></code> command or by executing the container
+via the <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run</span></code> command or by executing the container
 directly as a command). When the container is invoked, arguments
 following the container name are passed to the runscript. This means
 that you can (and should) process arguments within your runscript.</p>
 <p>Consider the example from the def file above:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%runscript</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%runscript</span>
     <span class="nb">echo</span> <span class="s2">&quot;Container was created </span><span class="nv">$NOW</span><span class="s2">&quot;</span>
     <span class="nb">echo</span> <span class="s2">&quot;Arguments received: </span><span class="nv">$*</span><span class="s2">&quot;</span>
     <span class="nb">exec</span> <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
@@ -623,7 +623,7 @@ this that and the other
 <code class="docutils literal notranslate"><span class="pre">/.singularity.d/labels.json</span></code> within your container. The general
 format is a name-value pair.</p>
 <p>Consider the example from the def file above:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%labels</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%labels</span>
     Author d@sylabs.io
     Version v0.0.1
     MyLabel Hello World
@@ -638,7 +638,7 @@ value of <code class="docutils literal notranslate"><span class="pre">v0.0.1</sp
 value of <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World</span></code>.</p>
 <p>To inspect the available labels on your image you can do so by running
 the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity inspect my_container.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer inspect my_container.sif
 
 {
   &quot;Author&quot;: &quot;d@sylabs.io&quot;,
@@ -663,13 +663,13 @@ can read more about labels and metadata <a class="reference internal" href="envi
 the container during the build. This text can then be displayed using
 the <code class="docutils literal notranslate"><span class="pre">run-help</span></code> command.</p>
 <p>Consider the example from the def file above:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="gh">%help</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%help</span>
     This is a demo container used to illustrate a def file that uses all
     supported sections.
 </pre></div>
 </div>
 <p>After building the help can be displayed like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run-help my_container.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run-help my_container.sif
     This is a demo container used to illustrate a def file that uses all
     supported sections.
 </pre></div>
@@ -682,7 +682,7 @@ the <code class="docutils literal notranslate"><span class="pre">run-help</span>
 one environment can be used for compilation, then the resulting binary
 can be copied into a final environment. This allows a slimmer final
 image that does not require the entire development stack.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">From</span>: golang:<span class="m">1.12.3</span>-alpine3<span class="m">.9</span>
 Stage: devel
 
@@ -745,7 +745,7 @@ alongside any of the primary sections (i.e. <code class="docutils literal notran
 <code class="docutils literal notranslate"><span class="pre">%app*</span></code> sections isn’t important.</p>
 <p>The following runscript demonstrates how to build 2 different apps into
 the same container using SCIF modules:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">From</span>: ubuntu
 
 <span class="gh">%environment</span>
@@ -799,7 +799,7 @@ particular app. Similarly, <code class="docutils literal notranslate"><span clas
 <p>After installing apps into modules using the <code class="docutils literal notranslate"><span class="pre">%app*</span></code> sections, the
 <code class="docutils literal notranslate"><span class="pre">--app</span></code> option becomes available allowing the following functions:</p>
 <p>To run a specific app within the container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">singularity</span> <span class="n">run</span> <span class="o">--</span><span class="n">app</span> <span class="n">foo</span> <span class="n">my_container</span><span class="o">.</span><span class="n">sif</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">apptainer</span> <span class="n">run</span> <span class="o">--</span><span class="n">app</span> <span class="n">foo</span> <span class="n">my_container</span><span class="o">.</span><span class="n">sif</span>
 <span class="n">RUNNING</span> <span class="n">FOO</span>
 </pre></div>
 </div>
@@ -807,10 +807,10 @@ particular app. Similarly, <code class="docutils literal notranslate"><span clas
 the def file above. You can execute the following command to search the
 list of active environment variables and <code class="docutils literal notranslate"><span class="pre">grep</span></code> to determine if the
 variable changes depending on the app we specify:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec --app foo my_container.sif env | grep SOFTWARE
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --app foo my_container.sif env | grep SOFTWARE
 SOFTWARE=foo
 
-$ singularity exec --app bar my_container.sif env | grep SOFTWARE
+$ apptainer exec --app bar my_container.sif env | grep SOFTWARE
 SOFTWARE=bar
 </pre></div>
 </div>
