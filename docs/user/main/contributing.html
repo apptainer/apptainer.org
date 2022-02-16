@@ -75,7 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
@@ -206,8 +206,8 @@ fork the <a class="reference external" href="https://github.com/apptainer/apptai
 repository. Once forked, clone your fork of the repo to your computer.
 (Obviously, you should replace <code class="docutils literal notranslate"><span class="pre">your-username</span></code> with your GitHub
 username.)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/your-username/singularity.git &amp;&amp; \
-    cd singularity/
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/your-username/apptainer.git &amp;&amp; \
+    cd apptainer/
 </pre></div>
 </div>
 </section>
@@ -283,7 +283,7 @@ your branch and they will update the Pull Request.</p>
 repository at that moment. As you work, your branch may become out of
 date as others merge changes into the upstream master. In the event that
 you need to update a branch, you will need to follow the next steps:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git remote add upstream https://github.com/hpcng/singularity.git &amp;&amp; # to add a new remote named &quot;upstream&quot; \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git remote add upstream https://github.com/apptainer/apptainer.git &amp;&amp; # to add a new remote named &quot;upstream&quot; \
     git checkout master &amp;&amp; # or another branch to be updated \
     git pull upstream master &amp;&amp; \
     git push origin master &amp;&amp; # to update your fork \

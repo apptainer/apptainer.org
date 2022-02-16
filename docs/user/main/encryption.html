@@ -104,7 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
@@ -173,7 +173,7 @@ versions may have to update.</p>
 or a PEM file containing an asymmetric RSA public key. Of these two
 methods the PEM file is more secure and is therefore recommended for
 production use.</p>
-<p>An <code class="docutils literal notranslate"><span class="pre">-e|--encrypt</span></code> flag to <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">build</span></code> is used to indicate
+<p>An <code class="docutils literal notranslate"><span class="pre">-e|--encrypt</span></code> flag to <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">build</span></code> is used to indicate
 that the container needs to be encrypted.</p>
 <p>A passphrase or a key-file used to perform the encryption is supplied at
 build time via an environment variable or a command line option.</p>
@@ -222,7 +222,7 @@ containers in production are encouraged to use asymmetric keys.</p>
 one of the following methods.</p>
 <section id="encrypting-with-a-passphrase-interactively">
 <h4>Encrypting with a passphrase interactively<a class="headerlink" href="#encrypting-with-a-passphrase-interactively" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build --passphrase encrypted.sif encrypted.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --passphrase encrypted.sif encrypted.def
 Enter encryption passphrase: &lt;secret&gt;
 INFO:    Starting build...
 </pre></div>
@@ -230,7 +230,7 @@ INFO:    Starting build...
 </section>
 <section id="using-an-environment-variable">
 <h4>Using an environment variable<a class="headerlink" href="#using-an-environment-variable" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo APPTAINER_ENCRYPTION_PASSPHRASE=&lt;secret&gt; singularity build --encrypt encrypted.sif encrypted.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo APPTAINER_ENCRYPTION_PASSPHRASE=&lt;secret&gt; apptainer build --encrypt encrypted.sif encrypted.def
 Starting build...
 </pre></div>
 </div>
@@ -244,7 +244,7 @@ save a plain text passphrase in a file (e.g. <code class="docutils literal notra
 like so.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_ENCRYPTION_PASSPHRASE=$(cat secret.txt)
 
-$ sudo -E singularity build --encrypt encrypted.sif encrypted.def
+$ sudo -E apptainer build --encrypt encrypted.sif encrypted.def
 Starting build...
 </pre></div>
 </div>
@@ -278,14 +278,14 @@ $ mv rsa rsa_pri.pem
 <code class="docutils literal notranslate"><span class="pre">rsa_pri.pem</span></code> file to run it.</p>
 <section id="encrypting-with-a-command-line-option">
 <h4>Encrypting with a command line option<a class="headerlink" href="#encrypting-with-a-command-line-option" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build --pem-path=rsa_pub.pem encrypted.sif encrypted.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --pem-path=rsa_pub.pem encrypted.sif encrypted.def
 Starting build...
 </pre></div>
 </div>
 </section>
 <section id="encrypting-with-an-environment-variable">
 <h4>Encrypting with an environment variable<a class="headerlink" href="#encrypting-with-an-environment-variable" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo APPTAINER_ENCRYPTION_PEM_PATH=rsa_pub.pem singularity build --encrypt encrypted.sif encrypted.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo APPTAINER_ENCRYPTION_PEM_PATH=rsa_pub.pem apptainer build --encrypt encrypted.sif encrypted.def
 Starting build...
 </pre></div>
 </div>
@@ -306,14 +306,14 @@ a plaintext passphrase.</p>
 the sections above.</p>
 <section id="running-with-a-passphrase-interactively">
 <h4>Running with a passphrase interactively<a class="headerlink" href="#running-with-a-passphrase-interactively" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run --passphrase encrypted.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --passphrase encrypted.sif
 Enter passphrase for encrypted container: &lt;secret&gt;
 </pre></div>
 </div>
 </section>
 <section id="running-with-a-passphrase-in-an-environment-variable">
 <h4>Running with a passphrase in an environment variable<a class="headerlink" href="#running-with-a-passphrase-in-an-environment-variable" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINER_ENCRYPTION_PASSPHRASE=&quot;secret&quot; singularity run encrypted.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINER_ENCRYPTION_PASSPHRASE=&quot;secret&quot; apptainer run encrypted.sif
 </pre></div>
 </div>
 <p>While this example shows how an environment variable can be used to set
@@ -323,7 +323,7 @@ save a plain text passphrase in a file (e.g. <code class="docutils literal notra
 like so.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_ENCRYPTION_PASSPHRASE=$(cat secret.txt)
 
-$ singularity run encrypted.sif
+$ apptainer run encrypted.sif
 </pre></div>
 </div>
 </section>
@@ -334,13 +334,13 @@ $ singularity run encrypted.sif
 Encryption section above.</p>
 <section id="running-using-a-command-line-option">
 <h4>Running using a command line option<a class="headerlink" href="#running-using-a-command-line-option" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run --pem-path=rsa_pri.pem encrypted.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --pem-path=rsa_pri.pem encrypted.sif
 </pre></div>
 </div>
 </section>
 <section id="running-using-an-environment-variable">
 <h4>Running using an environment variable<a class="headerlink" href="#running-using-an-environment-variable" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINER_ENCRYPTION_PEM_PATH=rsa_pri.pem singularity run encrypted.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINER_ENCRYPTION_PEM_PATH=rsa_pri.pem apptainer run encrypted.sif
 </pre></div>
 </div>
 </section>

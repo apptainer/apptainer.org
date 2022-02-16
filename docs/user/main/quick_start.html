@@ -105,7 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
@@ -250,9 +250,9 @@ list, visit <a class="reference external" href="https://github.com/apptainer/app
 release to install, you can run the following commands to proceed with
 the installation.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.0.0 &amp;&amp; # adjust this as necessary \
-    wget https://github.com/apptainer/apptainer/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &amp;&amp; \
-    tar -xzf singularity-${VERSION}.tar.gz &amp;&amp; \
-    cd singularity-${VERSION}
+    wget https://github.com/apptainer/apptainer/releases/download/v${VERSION}/apptainer-${VERSION}.tar.gz &amp;&amp; \
+    tar -xzf apptainer-${VERSION}.tar.gz &amp;&amp; \
+    cd apptainer-${VERSION}
 </pre></div>
 </div>
 </section>
@@ -278,13 +278,13 @@ redirect IO, use pipes, pass arguments, and access files, sockets, and
 ports on the host system from within a container.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">help</span></code> command gives an overview of Apptainer options and
 subcommands as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity help
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer help
 
 Linux container platform optimized for High Performance Computing (HPC) and
 Enterprise Performance Computing (EPC)
 
 Usage:
-  singularity [global options...]
+  apptainer [global options...]
 
 Description:
   Apptainer containers provide an application virtualization layer enabling
@@ -294,7 +294,7 @@ Description:
 
 Options:
   -d, --debug     print debugging information (highest verbosity)
-  -h, --help      help for singularity
+  -h, --help      help for apptainer
       --nocolor   print without color output (default False)
   -q, --quiet     suppress normal output
   -s, --silent    only print errors
@@ -310,10 +310,10 @@ Available Commands:
   instance    Manage containers running as services
   key         Manage OpenPGP keys
   oci         Manage OCI containers
-  plugin      Manage singularity plugins
+  plugin      Manage apptainer plugins
   pull        Pull an image from a URI
   push        Upload image to the provided library (default is &quot;cloud.sylabs.io&quot;)
-  remote      Manage singularity remote endpoints
+  remote      Manage apptainer remote endpoints
   run         Run the user-defined default command within a container
   run-help    Show the user-defined help for an image
   search      Search a Container Library for images
@@ -325,9 +325,9 @@ Available Commands:
   version     Show the version for Apptainer
 
 Examples:
-  $ singularity help &lt;command&gt; [&lt;subcommand&gt;]
-  $ singularity help build
-  $ singularity help instance start
+  $ apptainer help &lt;command&gt; [&lt;subcommand&gt;]
+  $ apptainer help build
+  $ apptainer help instance start
 
 
 For additional help or support, please visit https://www.sylabs.io/docs/
@@ -335,11 +335,11 @@ For additional help or support, please visit https://www.sylabs.io/docs/
 </div>
 <p>Information about subcommand can also be viewed with the <code class="docutils literal notranslate"><span class="pre">help</span></code>
 command.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity help verify
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer help verify
 Verify cryptographic signatures attached to an image
 
 Usage:
-  singularity verify [verify options...] &lt;image path&gt;
+  apptainer verify [verify options...] &lt;image path&gt;
 
 Description:
   The verify command allows a user to verify cryptographic signatures on SIF
@@ -361,7 +361,7 @@ Options:
 
 
 Examples:
-  $ singularity verify container.sif
+  $ apptainer verify container.sif
 
 
 For additional help or support, please visit https://www.sylabs.io/docs/
@@ -369,30 +369,30 @@ For additional help or support, please visit https://www.sylabs.io/docs/
 </div>
 <p>Apptainer uses positional syntax (i.e. the order of commands and
 options matters). Global options affecting the behavior of all commands
-follow the main <code class="docutils literal notranslate"><span class="pre">singularity</span></code> command. Then sub commands are followed
+follow the main <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> command. Then sub commands are followed
 by their options and arguments.</p>
-<p>For example, to pass the <code class="docutils literal notranslate"><span class="pre">--debug</span></code> option to the main <code class="docutils literal notranslate"><span class="pre">singularity</span></code>
+<p>For example, to pass the <code class="docutils literal notranslate"><span class="pre">--debug</span></code> option to the main <code class="docutils literal notranslate"><span class="pre">apptainer</span></code>
 command and run Apptainer with debugging messages on:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity --debug run library://lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer --debug run library://lolcow
 </pre></div>
 </div>
 <p>To pass the <code class="docutils literal notranslate"><span class="pre">--containall</span></code> option to the <code class="docutils literal notranslate"><span class="pre">run</span></code> command and run a
 Apptainer image in an isolated manner:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run --containall library://lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --containall library://lolcow
 </pre></div>
 </div>
 <p>Apptainer has the concept of command groups. For
 instance, to list Linux capabilities for a particular user, you would
 use the <code class="docutils literal notranslate"><span class="pre">list</span></code> command in the <code class="docutils literal notranslate"><span class="pre">capability</span></code> command group like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity capability list dave
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer capability list dave
 </pre></div>
 </div>
 <p>Container authors might also write help docs specific to a container or
 for an internal module called an <code class="docutils literal notranslate"><span class="pre">app</span></code>. If those help docs exist for a
 particular container, you can view them like so.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity inspect --helpfile container.sif  # See the container&#39;s help, if provided
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer inspect --helpfile container.sif  # See the container&#39;s help, if provided
 
-$ singularity inspect --helpfile --app=foo foo.sif  # See the help for foo, if provided
+$ apptainer inspect --helpfile --app=foo foo.sif  # See the help for foo, if provided
 </pre></div>
 </div>
 </section>
@@ -400,7 +400,7 @@ $ singularity inspect --helpfile --app=foo foo.sif  # See the help for foo, if p
 <h2>Download pre-built images<a class="headerlink" href="#download-pre-built-images" title="Permalink to this headline"></a></h2>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">search</span></code> command to locate groups, collections, and
 containers of interest on the <a class="reference external" href="https://cloud.sylabs.io/library">Container Library</a> .</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">search</span> <span class="n">tensorflow</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">search</span> <span class="n">tensorflow</span>
 <span class="n">Found</span> <span class="mi">22</span> <span class="n">container</span> <span class="n">images</span> <span class="k">for</span> <span class="n">amd64</span> <span class="n">matching</span> <span class="s2">&quot;tensorflow&quot;</span><span class="p">:</span>
 
     <span class="n">library</span><span class="p">:</span><span class="o">//</span><span class="n">ajgreen</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">tensorflow2</span><span class="o">-</span><span class="n">gpu</span><span class="o">-</span><span class="n">py3</span><span class="o">-</span><span class="n">r</span><span class="o">-</span><span class="n">jupyter</span><span class="p">:</span><span class="n">latest</span>
@@ -427,21 +427,21 @@ containers of interest on the <a class="reference external" href="https://cloud.
     <span class="o">...</span>
 </pre></div>
 </div>
-<p>You can use the <a class="reference external" href="cli/singularity_pull.html">pull</a>
-and <a class="reference external" href="cli/singularity_build.html">build</a>
+<p>You can use the <a class="reference external" href="cli/apptainer_pull.html">pull</a>
+and <a class="reference external" href="cli/apptainer_build.html">build</a>
 commands to download pre-built images from an external resource like the
 <a class="reference external" href="https://cloud.sylabs.io/library">Container Library</a> or <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>.</p>
 <p>When called on a native Apptainer image like those provided on the
 Container Library, <code class="docutils literal notranslate"><span class="pre">pull</span></code> simply downloads the image file to your
 system.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull library://lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull library://lolcow
 </pre></div>
 </div>
 <p>You can also use <code class="docutils literal notranslate"><span class="pre">pull</span></code> with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code> uri to reference Docker
 images served from a registry. In this case <code class="docutils literal notranslate"><span class="pre">pull</span></code> does not just
 download an image file. Docker images are stored in layers, so <code class="docutils literal notranslate"><span class="pre">pull</span></code>
 must also combine those layers into a usable Apptainer file.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull docker://sylabsio/lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://sylabsio/lolcow
 </pre></div>
 </div>
 <p>Pulling Docker images reduces reproducibility. If you were to pull a
@@ -452,9 +452,9 @@ you, try building your images from the Container Library.</p>
 <p>You can also use the <code class="docutils literal notranslate"><span class="pre">build</span></code> command to download pre-built images from
 an external resource. When using <code class="docutils literal notranslate"><span class="pre">build</span></code> you must specify a name for
 your container like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity build ubuntu.sif library://ubuntu
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build ubuntu.sif library://ubuntu
 
-$ singularity build lolcow.sif docker://sylabsio/lolcow
+$ apptainer build lolcow.sif docker://sylabsio/lolcow
 </pre></div>
 </div>
 <p>Unlike <code class="docutils literal notranslate"><span class="pre">pull</span></code>, <code class="docutils literal notranslate"><span class="pre">build</span></code> will convert your image to the latest
@@ -464,7 +464,7 @@ images, you can use <code class="docutils literal notranslate"><span class="pre"
 scratch using a <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">definition file</span></a>. You can also
 use <code class="docutils literal notranslate"><span class="pre">build</span></code> to convert an image between the container formats
 supported by Apptainer. To see a comparison of Apptainer
-definition file with Dockerfile, please see: <a class="reference internal" href="singularity_and_docker.html#sec-deffile-vs-dockerfile"><span class="std std-ref">this section</span></a>.</p>
+definition file with Dockerfile, please see: <a class="reference internal" href="docker_and_oci.html#sec-deffile-vs-dockerfile"><span class="std std-ref">this section</span></a>.</p>
 </section>
 <section id="interact-with-images">
 <span id="cowimage"></span><h2>Interact with images<a class="headerlink" href="#interact-with-images" title="Permalink to this headline"></a></h2>
@@ -472,15 +472,15 @@ definition file with Dockerfile, please see: <a class="reference internal" href=
 image URIs in addition to a local image path.</p>
 <p>For demonstration, we will use a <code class="docutils literal notranslate"><span class="pre">lolcow_latest.sif</span></code> image that can be
 pulled from the Container Library:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity pull library://lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull library://lolcow
 </pre></div>
 </div>
 <section id="shell">
 <h3>Shell<a class="headerlink" href="#shell" title="Permalink to this headline"></a></h3>
-<p>The <a class="reference external" href="cli/singularity_shell.html">shell</a>
+<p>The <a class="reference external" href="cli/apptainer_shell.html">shell</a>
 command allows you to spawn a new shell within your container and
 interact with it as though it were a small virtual machine.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity shell lolcow_latest.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell lolcow_latest.sif
 
 Apptainer lolcow_latest.sif:~&gt;
 </pre></div>
@@ -500,17 +500,17 @@ are on the host system.</p>
 <p><code class="docutils literal notranslate"><span class="pre">shell</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">library://</span></code>, <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">shub://</span></code> URIs. This creates an ephemeral container that disappears
 when the shell is exited.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity shell library://lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell library://lolcow
 </pre></div>
 </div>
 </section>
 <section id="executing-commands">
 <h3>Executing Commands<a class="headerlink" href="#executing-commands" title="Permalink to this headline"></a></h3>
-<p>The <a class="reference external" href="cli/singularity_exec.html">exec</a>
+<p>The <a class="reference external" href="cli/apptainer_exec.html">exec</a>
 command allows you to execute a custom command within a container by
 specifying the image file. For instance, to execute the <code class="docutils literal notranslate"><span class="pre">cowsay</span></code>
 program within the <code class="docutils literal notranslate"><span class="pre">lolcow_latest.sif</span></code> container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec lolcow_latest.sif cowsay moo
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec lolcow_latest.sif cowsay moo
  _____
 &lt; moo &gt;
  -----
@@ -524,7 +524,7 @@ program within the <code class="docutils literal notranslate"><span class="pre">
 <p><code class="docutils literal notranslate"><span class="pre">exec</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">library://</span></code>, <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">shub://</span></code> URIs. This creates an ephemeral container that executes a
 command and disappears.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec library://lolcow cowsay &quot;Fresh from the library!&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec library://lolcow cowsay &quot;Fresh from the library!&quot;
  _________________________
 &lt; Fresh from the library! &gt;
  -------------------------
@@ -541,10 +541,10 @@ command and disappears.</p>
 <p>Apptainer containers contain <a class="reference internal" href="definition_files.html#runscript"><span class="std std-ref">runscripts</span></a>. These
 are user defined scripts that define the actions a container should
 perform when someone runs it. The runscript can be triggered with the
-<a class="reference external" href="cli/singularity_run.html">run</a>
+<a class="reference external" href="cli/apptainer_run.html">run</a>
 command, or simply by calling the container as though it were an
 executable.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run lolcow_latest.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run lolcow_latest.sif
 ______________________________
 &lt; Mon Aug 16 13:01:55 CDT 2021 &gt;
  ------------------------------
@@ -568,7 +568,7 @@ ______________________________
 <p><code class="docutils literal notranslate"><span class="pre">run</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">library://</span></code>, <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">shub://</span></code> URIs. This creates an ephemeral container that runs and then
 disappears.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run library://lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run library://lolcow
 ______________________________
 &lt; Mon Aug 16 13:12:33 CDT 2021 &gt;
  ------------------------------
@@ -585,7 +585,7 @@ ______________________________
 them. For example, the default runscript of the <code class="docutils literal notranslate"><span class="pre">library://alpine</span></code>
 container passes any arguments to a shell. We can ask the container
 to run <code class="docutils literal notranslate"><span class="pre">echo</span></code> command in this shell:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run library://alpine echo &quot;hello&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run library://alpine echo &quot;hello&quot;
 
 hello
 </pre></div>
@@ -598,10 +598,10 @@ quoting of arguments.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker run -it --rm alpine echo &quot;\$HOSTNAME&quot;
 $HOSTNAME
 
-$ singularity run docker://alpine echo &quot;\$HOSTNAME&quot;
+$ apptainer run docker://alpine echo &quot;\$HOSTNAME&quot;
 p700
 
-$ singularity run docker://alpine echo &quot;\\\$HOSTNAME&quot;
+$ apptainer run docker://alpine echo &quot;\\\$HOSTNAME&quot;
 $HOSTNAME
 </pre></div>
 </div>
@@ -615,7 +615,7 @@ the specified executable directly.</p>
 <p>Files on the host are reachable from within the container.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &quot;Hello from inside the container&quot; &gt; $HOME/hostfile.txt
 
-$ singularity exec lolcow_latest.sif cat $HOME/hostfile.txt
+$ apptainer exec lolcow_latest.sif cat $HOME/hostfile.txt
 
 Hello from inside the container
 </pre></div>
@@ -629,13 +629,13 @@ the host system is bind mounted to the <code class="docutils literal notranslate
 container.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &quot;Drink milk (and never eat hamburgers).&quot; &gt; /data/cow_advice.txt
 
-$ singularity exec --bind /data:/mnt lolcow_latest.sif cat /mnt/cow_advice.txt
+$ apptainer exec --bind /data:/mnt lolcow_latest.sif cat /mnt/cow_advice.txt
 Drink milk (and never eat hamburgers).
 </pre></div>
 </div>
 <p>Pipes and redirects also work with Apptainer commands just like they
 do with normal Linux commands.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat /data/cow_advice.txt | singularity exec lolcow_latest.sif cowsay
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat /data/cow_advice.txt | apptainer exec lolcow_latest.sif cowsay
  ________________________________________
 &lt; Drink milk (and never eat hamburgers). &gt;
  ----------------------------------------
@@ -662,7 +662,7 @@ supports the <code class="docutils literal notranslate"><span class="pre">sandbo
 <h3>Sandbox Directories<a class="headerlink" href="#sandbox-directories" title="Permalink to this headline"></a></h3>
 <p>To build into a <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> (container in a directory) use the <code class="docutils literal notranslate"><span class="pre">build</span>
 <span class="pre">--sandbox</span></code> command and option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build --sandbox ubuntu/ library://ubuntu
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --sandbox ubuntu/ library://ubuntu
 </pre></div>
 </div>
 <p>This command creates a directory called <code class="docutils literal notranslate"><span class="pre">ubuntu/</span></code> with an entire
@@ -673,9 +673,9 @@ directory just as you would with a Apptainer image. If you pass the
 <code class="docutils literal notranslate"><span class="pre">--writable</span></code> option when you use your container you can also write
 files within the sandbox directory (provided you have the permissions to
 do so).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity exec --writable ubuntu touch /foo
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer exec --writable ubuntu touch /foo
 
-$ singularity exec ubuntu/ ls /foo
+$ apptainer exec ubuntu/ ls /foo
 /foo
 </pre></div>
 </div>
@@ -687,7 +687,7 @@ container. This means that you can use it to convert a container from
 one format to another. For instance, if you have already created a
 sandbox (directory) and want to convert it to the default immutable
 image format (squashfs) you can do so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity build new-sif sandbox
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build new-sif sandbox
 </pre></div>
 </div>
 <p>Doing so may break reproducibility if you have altered your sandbox
@@ -706,7 +706,7 @@ base container to begin with, and the body is further divided into
 sections that perform things like software installation, environment
 setup, and copying files into the container from host system, etc.</p>
 <p>Here is an example of a definition file:</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">BootStrap</span>: library
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">BootStrap</span>: library
 <span class="k">From</span>: ubuntu:<span class="m">16.04</span>
 
 <span class="gh">%post</span>
@@ -726,7 +726,7 @@ setup, and copying files into the container from host system, etc.</p>
 </div>
 <p>To build a container from this definition file (assuming it is a file
 named lolcow.def), you would call build like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build lolcow.sif lolcow.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build lolcow.sif lolcow.def
 </pre></div>
 </div>
 <p>In this example, the header tells Apptainer to use a base Ubuntu

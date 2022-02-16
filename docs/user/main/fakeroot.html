@@ -94,7 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
@@ -208,7 +208,7 @@ system.</p>
 </section>
 <section id="network">
 <h3>Network<a class="headerlink" href="#network" title="Permalink to this headline"></a></h3>
-<p>Restrictions are also applied to networking, if <code class="docutils literal notranslate"><span class="pre">singularity</span></code> is
+<p>Restrictions are also applied to networking, if <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> is
 executed without the <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag, the <strong>“fake root”</strong> user won’t be
 able to use <code class="docutils literal notranslate"><span class="pre">ping</span></code> or bind a container service to a port below 1024.</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">--net</span></code> the <strong>“fake root”</strong> user has full privileges in a
@@ -224,7 +224,7 @@ the host network.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>For unprivileged installation of Apptainer or if <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span>
-<span class="pre">no</span></code> is set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> users won’t be able to use a
+<span class="pre">no</span></code> is set in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> users won’t be able to use a
 <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code> network.</p>
 </div>
 </section>
@@ -235,7 +235,7 @@ the host network.</p>
 mappings in <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>, so your username needs to be listed in
 those files with a valid mapping (see the admin-guide for details), if
 you can’t edit the files ask an administrator.</p>
-<p>Apptainer provides a <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">config</span> <span class="pre">fakeroot</span></code> command
+<p>Apptainer provides a <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">config</span> <span class="pre">fakeroot</span></code> command
 to allow configuration of the <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and
 <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> mappings from the Apptainer command line. You must
 be a root user or run with <code class="docutils literal notranslate"><span class="pre">sudo</span></code> to use <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code>, as the
@@ -247,7 +247,7 @@ details.</p>
 <p>If your user account is configured with valid <code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code>
 mappings you work as a fake root user inside a container by using the
 <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> or <code class="docutils literal notranslate"><span class="pre">-f</span></code> option.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option is available with the following singularity
+<p>The <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option is available with the following apptainer
 commands:</p>
 <blockquote>
 <div><ul class="simple">
@@ -272,19 +272,19 @@ bootstrap methods, although <code class="docutils literal notranslate"><span cla
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h3>
 <section id="build-from-a-definition-file">
 <h4>Build from a definition file:<a class="headerlink" href="#build-from-a-definition-file" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">build</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="k">def</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">build</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="k">def</span>
 </pre></div>
 </div>
 </section>
 <section id="ping-from-container">
 <h4>Ping from container:<a class="headerlink" href="#ping-from-container" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">alpine</span> <span class="n">ping</span> <span class="o">-</span><span class="n">c1</span> <span class="mf">8.8.8.8</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">alpine</span> <span class="n">ping</span> <span class="o">-</span><span class="n">c1</span> <span class="mf">8.8.8.8</span>
 </pre></div>
 </div>
 </section>
 <section id="http-server">
 <h4>HTTP server:<a class="headerlink" href="#http-server" title="Permalink to this headline"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="o">--</span><span class="n">network</span><span class="o">-</span><span class="n">args</span><span class="o">=</span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span> <span class="o">-</span><span class="n">w</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">nginx</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">run</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="o">--</span><span class="n">network</span><span class="o">-</span><span class="n">args</span><span class="o">=</span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span> <span class="o">-</span><span class="n">w</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">nginx</span>
 </pre></div>
 </div>
 </section>

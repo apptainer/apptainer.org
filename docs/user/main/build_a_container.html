@@ -103,7 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
@@ -182,7 +182,7 @@ containers from one format to another.</p>
 <h2>Downloading an existing container from the Container Library<a class="headerlink" href="#downloading-an-existing-container-from-the-container-library" title="Permalink to this headline"></a></h2>
 <p>You can use the build command to download a container from the Container
 Library.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build lolcow.sif library://lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build lolcow.sif library://lolcow
 </pre></div>
 </div>
 <p>The first argument (<code class="docutils literal notranslate"><span class="pre">lolcow.sif</span></code>) specifies a path and name for your
@@ -195,7 +195,7 @@ container in a writable format use the <code class="docutils literal notranslate
 <h2>Downloading an existing container from Docker Hub<a class="headerlink" href="#downloading-an-existing-container-from-docker-hub" title="Permalink to this headline"></a></h2>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">build</span></code> to download layers from Docker Hub and assemble
 them into Apptainer containers.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build lolcow.sif docker://sylabsio/lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build lolcow.sif docker://sylabsio/lolcow
 </pre></div>
 </div>
 </section>
@@ -205,7 +205,7 @@ them into Apptainer containers.</p>
 a sandbox) you can do so with the <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> option. It’s possible to
 create a sandbox without root privileges, but to ensure proper file
 permissions it is recommended to do so as root.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build --sandbox lolcow/ library://lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --sandbox lolcow/ library://lolcow
 </pre></div>
 </div>
 <p>The resulting directory operates just like a container in a SIF file. To
@@ -213,7 +213,7 @@ make changes within the container, use the <code class="docutils literal notrans
 invoke your container. It’s a good idea to do this as root to ensure you
 have permission to access the files and directories that you want to
 change.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity shell --writable lolcow/
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell --writable lolcow/
 </pre></div>
 </div>
 </section>
@@ -224,7 +224,7 @@ target to build a new container. This allows you convert containers from
 one format to another. For example if you had a sandbox container called
 <code class="docutils literal notranslate"><span class="pre">development/</span></code> and you wanted to convert it to SIF container called
 <code class="docutils literal notranslate"><span class="pre">production.sif</span></code> you could:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build production.sif development/
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build production.sif development/
 </pre></div>
 </div>
 <p>Use care when converting a sandbox directory to the default SIF format.
@@ -241,7 +241,7 @@ building a container. For detailed information on writing Apptainer
 definition files, please see the <a class="reference internal" href="definition_files.html"><span class="doc">Container Definition docs</span></a>. Let’s say you already have the following container
 definition file called <code class="docutils literal notranslate"><span class="pre">lolcow.def</span></code>, and you want to use it to build a
 SIF container.</p>
-<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">From</span>: ubuntu:<span class="m">16.04</span>
 
 <span class="gh">%post</span>
@@ -257,7 +257,7 @@ SIF container.</p>
 </pre></div>
 </div>
 <p>You can do so with the following command.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build lolcow.sif lolcow.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build lolcow.sif lolcow.def
 </pre></div>
 </div>
 <p>The command requires <code class="docutils literal notranslate"><span class="pre">sudo</span></code> just as installing software on your local

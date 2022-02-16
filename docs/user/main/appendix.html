@@ -75,7 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
@@ -514,12 +514,12 @@ existing base container adding customizations in <code class="docutils literal n
 </section>
 <section id="keywords">
 <h4>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline"></a></h4>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: library
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: &lt;entity&gt;/&lt;collection&gt;/&lt;container&gt;:&lt;tag&gt;
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: &lt;entity&gt;/&lt;collection&gt;/&lt;container&gt;:&lt;tag&gt;
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword is mandatory. It specifies the container to use as
@@ -532,7 +532,7 @@ example). <code class="docutils literal notranslate"><span class="pre">tag</span
 </div>
 <p>The Library keyword is optional. It will default to
 <code class="docutils literal notranslate"><span class="pre">https://library.sylabs.io</span></code>.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Fingerprints: 22045C8C0B1004D058DE4BEDA20C27EE7FF7BA84
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Fingerprints</span>: 22045C8C0B1004D058DE4BEDA20C27EE7FF7BA84
 </pre></div>
 </div>
 <p>The Fingerprints keyword is optional. It specifies one or more comma
@@ -561,12 +561,12 @@ Apptainer with the <code class="docutils literal notranslate"><span class="pre">
 </section>
 <section id="id3">
 <h4>Keywords<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h4>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: &lt;registry&gt;/&lt;namespace&gt;/&lt;container&gt;:&lt;tag&gt;@&lt;digest&gt;
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: &lt;registry&gt;/&lt;namespace&gt;/&lt;container&gt;:&lt;tag&gt;@&lt;digest&gt;
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword is mandatory. It specifies the container to use as
@@ -574,14 +574,14 @@ a base. <code class="docutils literal notranslate"><span class="pre">registry</s
 <code class="docutils literal notranslate"><span class="pre">namespace</span></code> is optional and defaults to <code class="docutils literal notranslate"><span class="pre">library</span></code>. This is the
 correct namespace to use for some official containers (ubuntu for
 example). <code class="docutils literal notranslate"><span class="pre">tag</span></code> is also optional and will default to <code class="docutils literal notranslate"><span class="pre">latest</span></code></p>
-<p>See <a class="reference internal" href="singularity_and_docker.html#singularity-and-docker"><span class="std std-ref">Apptainer and Docker</span></a> for more
+<p>See <a class="reference internal" href="docker_and_oci.html#docker-and-oci"><span class="std std-ref">Apptainer and Docker</span></a> for more
 detailed info on using Docker registries.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Registry: http://custom_registry
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Registry</span>: http://custom_registry
 </pre></div>
 </div>
 <p>The Registry keyword is optional. It will default to
 <code class="docutils literal notranslate"><span class="pre">index.docker.io</span></code>.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Namespace: namespace
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Namespace</span>: namespace
 </pre></div>
 </div>
 <p>The Namespace keyword is optional. It will default to <code class="docutils literal notranslate"><span class="pre">library</span></code>.</p>
@@ -617,12 +617,12 @@ container adding customizations in <code class="docutils literal notranslate"><s
 </section>
 <section id="id5">
 <h4>Keywords<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h4>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: shub
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: shub
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: shub://&lt;registry&gt;/&lt;username&gt;/&lt;container-name&gt;:&lt;tag&gt;@digest
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: shub://&lt;registry&gt;/&lt;username&gt;/&lt;container-name&gt;:&lt;tag&gt;@digest
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword is mandatory. It specifies the container to use as
@@ -657,12 +657,12 @@ containers by adding customizations in <code class="docutils literal notranslate
 </section>
 <section id="id8">
 <h4>Keywords<a class="headerlink" href="#id8" title="Permalink to this headline"></a></h4>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: oras
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: oras
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: oras://registry/namespace/image:tag
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: oras://registry/namespace/image:tag
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword is mandatory. It specifies the container to use as
@@ -689,17 +689,17 @@ container and then customize the new container in <code class="docutils literal 
 </section>
 <section id="id10">
 <h4>Keywords<a class="headerlink" href="#id10" title="Permalink to this headline"></a></h4>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: localimage
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: localimage
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: /path/to/container/file/or/directory
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: /path/to/container/file/or/directory
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword is mandatory. It specifies the local container to
 use as a base.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Fingerprints: 22045C8C0B1004D058DE4BEDA20C27EE7FF7BA84
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Fingerprints</span>: 22045C8C0B1004D058DE4BEDA20C27EE7FF7BA84
 </pre></div>
 </div>
 <p>The Fingerprints keyword is optional. It specifies one or more comma
@@ -729,24 +729,24 @@ You must also specify the URI for the mirror you would like to use.</p>
 </section>
 <section id="id13">
 <h4>Keywords<a class="headerlink" href="#id13" title="Permalink to this headline"></a></h4>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: yum
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: yum
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>OSVersion: 7
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">OSVersion</span>: <span class="m">7</span>
 </pre></div>
 </div>
 <p>The OSVersion keyword is optional. It specifies the OS version you would
 like to use. It is only required if you have specified a %{OSVERSION}
 variable in the <code class="docutils literal notranslate"><span class="pre">MirrorURL</span></code> keyword.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">MirrorURL</span>: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
 </pre></div>
 </div>
 <p>The MirrorURL keyword is mandatory. It specifies the URI to use as a
 mirror to download the OS. If you define the <code class="docutils literal notranslate"><span class="pre">OSVersion</span></code> keyword, then
 you can use it in the URI as in the example above.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Include: yum
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Include</span>: yum
 </pre></div>
 </div>
 <p>The Include keyword is optional. It allows you to install additional
@@ -786,12 +786,12 @@ you would like to use.</p>
 </section>
 <section id="id16">
 <h4>Keywords<a class="headerlink" href="#id16" title="Permalink to this headline"></a></h4>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: debootstrap
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: debootstrap
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>OSVersion: xenial
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">OSVersion</span>: xenial
 </pre></div>
 </div>
 <p>The OSVersion keyword is mandatory. It specifies the OS version you
@@ -800,13 +800,13 @@ would like to use. For Ubuntu you can use code words like <code class="docutils 
 use values like <code class="docutils literal notranslate"><span class="pre">stable</span></code>, <code class="docutils literal notranslate"><span class="pre">oldstable</span></code>, <code class="docutils literal notranslate"><span class="pre">testing</span></code>, and <code class="docutils literal notranslate"><span class="pre">unstable</span></code>
 or code words like <code class="docutils literal notranslate"><span class="pre">wheezy</span></code> (7), <code class="docutils literal notranslate"><span class="pre">jesse</span></code> (8), and <code class="docutils literal notranslate"><span class="pre">stretch</span></code> (9).</p>
 <blockquote>
-<div><div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>MirrorURL:  http://us.archive.ubuntu.com/ubuntu/
+<div><div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">MirrorURL</span>:  http://us.archive.ubuntu.com/ubuntu/
 </pre></div>
 </div>
 </div></blockquote>
 <p>The MirrorURL keyword is mandatory. It specifies a URI to use as a
 mirror when downloading the OS.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Include: somepackage
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Include</span>: somepackage
 </pre></div>
 </div>
 <p>The Include keyword is optional. It allows you to install additional
@@ -839,7 +839,7 @@ container. Arch Linux uses the aptly named <code class="docutils literal notrans
 </section>
 <section id="id19">
 <h4>Keywords<a class="headerlink" href="#id19" title="Permalink to this headline"></a></h4>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: arch
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: arch
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
@@ -868,12 +868,12 @@ must also specify a URI for the mirror you would like to use.</p>
 </section>
 <section id="id22">
 <h4>Keywords<a class="headerlink" href="#id22" title="Permalink to this headline"></a></h4>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: busybox
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: busybox
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>MirrorURL: https://www.busybox.net/downloads/binaries/1.26.1-defconfig-multiarch/busybox-x86_64
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">MirrorURL</span>: https://www.busybox.net/downloads/binaries/<span class="m">1.26.1</span>-defconfig-multiarch/busybox-x86_64
 </pre></div>
 </div>
 <p>The MirrorURL keyword is mandatory. It specifies a URI to use as a
@@ -901,18 +901,18 @@ You must also specify a URI for the mirror you would like to use.</p>
 </section>
 <section id="id25">
 <h4>Keywords<a class="headerlink" href="#id25" title="Permalink to this headline"></a></h4>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: zypper
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: zypper
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>OSVersion: 42.2
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">OSVersion</span>: <span class="m">42.2</span>
 </pre></div>
 </div>
 <p>The OSVersion keyword is optional. It specifies the OS version you would
 like to use. It is only required if you have specified a %{OSVERSION}
 variable in the <code class="docutils literal notranslate"><span class="pre">MirrorURL</span></code> keyword.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Include: somepackage
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Include</span>: somepackage
 </pre></div>
 </div>
 <p>The Include keyword is optional. It allows you to install additional
@@ -936,7 +936,7 @@ currently residing in docker’s daemon internal storage:</p>
 <span class="go">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span>
 <span class="go">alpine              latest              965ea09ff2eb        7 weeks ago         5.55MB</span>
 
-<span class="gp">$ </span>singularity run docker-daemon:alpine:latest
+<span class="gp">$ </span>apptainer run docker-daemon:alpine:latest
 <span class="go">INFO:    Converting OCI blobs to SIF format</span>
 <span class="go">INFO:    Starting build...</span>
 <span class="go">Getting image source signatures</span>
@@ -953,7 +953,7 @@ currently residing in docker’s daemon internal storage:</p>
 a docker image stored in a <code class="docutils literal notranslate"><span class="pre">docker-save</span></code> formatted tar file:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker save -o alpine.tar alpine:latest
 
-<span class="gp">$ </span>singularity run docker-archive:<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/alpine.tar
+<span class="gp">$ </span>apptainer run docker-archive:<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/alpine.tar
 <span class="go">INFO:    Converting OCI blobs to SIF format</span>
 <span class="go">INFO:    Starting build...</span>
 <span class="go">Getting image source signatures</span>
@@ -971,13 +971,13 @@ a docker image stored in a <code class="docutils literal notranslate"><span clas
 <h4>Keywords<a class="headerlink" href="#id27" title="Permalink to this headline"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> bootstrap agent can be used in a Apptainer
 definition file as follows:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: docker-daemon:&lt;image&gt;:&lt;tag&gt;
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: docker-daemon:&lt;image&gt;:&lt;tag&gt;
 </pre></div>
 </div>
 <p>where both <code class="docutils literal notranslate"><span class="pre">&lt;image&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;tag&gt;</span></code> are mandatory fields that must be
 written explicitly. The <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent requires
 instead the path to the tar file containing the image:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>From: docker-archive:&lt;path-to-tar-file&gt;
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: docker-archive:&lt;path-to-tar-file&gt;
 </pre></div>
 </div>
 <p>Note that differently from the <code class="docutils literal notranslate"><span class="pre">docker://</span></code> bootstrap agent both
@@ -996,19 +996,19 @@ simple application / static binaries.</p>
 <h4>Overview<a class="headerlink" href="#id28" title="Permalink to this headline"></a></h4>
 <p>A minimal container providing a shell can be created by copying the
 <code class="docutils literal notranslate"><span class="pre">busybox</span></code> static binary into an empty scratch container:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: scratch
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
 
-%setup
-    # Runs on host - fetch static busybox binary
+<span class="gh">%setup</span>
+    <span class="c1"># Runs on host - fetch static busybox binary</span>
     curl -o /tmp/busybox https://www.busybox.net/downloads/binaries/1.31.0-i686-uclibc/busybox
-    # It needs to be executable
+    <span class="c1"># It needs to be executable</span>
     chmod +x /tmp/busybox
 
-%files
-    # Copy from host into empty container
+<span class="gh">%files</span>
+    <span class="c1"># Copy from host into empty container</span>
     /tmp/busybox /bin/sh
 
-%runscript
+<span class="gh">%runscript</span>
    /bin/sh
 </pre></div>
 </div>
@@ -1024,7 +1024,7 @@ Hello from a 696KiB container
 </pre></div>
 </div>
 <p>Keywords</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Bootstrap: scratch
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
 </pre></div>
 </div>
 <p>There are no additional keywords for the scratch bootstrap agent.</p>
