@@ -140,7 +140,7 @@ parallel / network filesystems. In general:
 
 -  The ``--localstatedir`` filesystem should support overlay mounts.
 
--  ``TMPDIR`` / ``SINGULARITY_TMPDIR`` should be on a local filesystem
+-  ``TMPDIR`` / ``{ENVPREFIX}_TMPDIR`` should be on a local filesystem
    wherever possible.
 
 .. note::
@@ -206,14 +206,14 @@ runtimes.
 {Project} will cache SIF container images generated from remote
 sources, and any OCI/docker layers used to create them. The cache is
 created at ``$HOME/.singularity/cache`` by default. The location of the
-cache can be changed by setting the ``SINGULARITY_CACHEDIR`` environment
+cache can be changed by setting the ``{ENVPREFIX}_CACHEDIR`` environment
 variable.
 
-The directory used for ``SINGULARITY_CACHEDIR`` should be:
+The directory used for ``{ENVPREFIX}_CACHEDIR`` should be:
 
 -  A unique location for each user. Permissions are set on the cache so
    that private images cached for one user are not exposed to another.
-   This means that ``SINGULARITY_CACHEDIR`` cannot be shared.
+   This means that ``{ENVPREFIX}_CACHEDIR`` cannot be shared.
 
 -  Located on a filesystem with sufficient space for the number and size
    of container images anticipated.
@@ -223,7 +223,7 @@ The directory used for ``SINGULARITY_CACHEDIR`` should be:
 The {Project} cache is concurrency safe.
 Parallel runs of {Project} that would create overlapping cache
 entries will not conflict, as long as the filesystem used by
-``SINGULARITY_CACHEDIR`` supports atomic rename operations.
+``{ENVPREFIX}_CACHEDIR`` supports atomic rename operations.
 
 Support for atomic rename operations is expected on local POSIX
 filesystems, but varies for network / parallel filesystems and may be
@@ -232,7 +232,7 @@ atomic rename of files only on a single MDT. Rename on NFS is only
 atomic to a single client, not across systems accessing the same NFS
 share.
 
-If you are not certain that your ``$HOME`` or ``SINGULARITY_CACHEDIR``
+If you are not certain that your ``$HOME`` or ``{ENVPREFIX}_CACHEDIR``
 filesystems support atomic rename, do not run ``singularity`` in parallel
 using remote container URLs. Instead use ``singularity pull`` to create
 a local SIF image, and then run this SIF image in a parallel step. An
@@ -254,7 +254,7 @@ not support user-namespace (sub)uid/gid mapping.
    filesystem.
 
 -  When using ``--fakeroot`` to build or run a container, your
-   ``TMPDIR`` / ``SINGULARITY_TMPDIR`` should not be set to an NFS
+   ``TMPDIR`` / ``{ENVPREFIX}_TMPDIR`` should not be set to an NFS
    location.
 
 -  You should not run a sandbox container with ``--fakeroot`` from an
@@ -276,7 +276,7 @@ user-namespace (sub)uid/gid mapping.
    filesystem.
 
 -  When using ``--fakeroot`` to build or run a container, your
-   ``TMPDIR/SINGULARITY_TMPDIR`` should not be a Lustre or GPFS
+   ``TMPDIR/{ENVPREFIX}_TMPDIR`` should not be a Lustre or GPFS
    location.
 
 -  You should not run a sandbox container with ``--fakeroot`` from a
@@ -682,7 +682,7 @@ at runtime.
    LIBDIR=/usr/local/lib
    LOCALEDIR=/usr/local/share/locale
    MANDIR=/usr/local/share/man
-   SINGULARITY_CONFDIR=/usr/local/etc/singularity
+   {ENVPREFIX}_CONFDIR=/usr/local/etc/singularity
    SESSIONDIR=/usr/local/var/singularity/mnt/session
 
 Note that the ``LOCALSTATEDIR`` and ``SESSIONDIR`` should be on local,
