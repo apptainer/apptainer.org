@@ -760,27 +760,27 @@ used to build the container.</p>
 <span class="nv">OCI_CMD</span><span class="o">=</span><span class="s2">&quot;bash&quot;</span>
 <span class="c1"># ENTRYPOINT only - run entrypoint plus args</span>
 <span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$OCI_CMD</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-<span class="nv">APPTAINER_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
 <span class="k">fi</span>
 
 <span class="c1"># CMD only - run CMD or override with args</span>
 <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$OCI_CMD</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
 <span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nv">APPTAINER_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
 <span class="k">else</span>
-    <span class="nv">APPTAINER_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="k">fi</span>
 <span class="k">fi</span>
 
 <span class="c1"># ENTRYPOINT and CMD - run ENTRYPOINT with CMD as default args</span>
 <span class="c1"># override with user provided args</span>
 <span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nv">APPTAINER_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
+    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
 <span class="k">else</span>
-    <span class="nv">APPTAINER_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="k">fi</span>
 
-<span class="nb">exec</span> <span class="nv">$APPTAINER_OCI_RUN</span>
+<span class="nb">exec</span> <span class="nv">$SINGULARITY_OCI_RUN</span>
 </pre></div>
 </div>
 </section>
