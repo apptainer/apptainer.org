@@ -460,7 +460,7 @@ option:
 .. code::
 
    $ sudo singularity config global --dry-run --set "bind path" /etc/resolv.conf
-   # SINGULARITY.CONF
+   # {ENVPREFIX}.CONF
    # This is the global configuration file for {Project}. This file controls
    [...]
    # BIND PATH: [STRING]

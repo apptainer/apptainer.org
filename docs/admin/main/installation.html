@@ -244,7 +244,7 @@ compute node.</p></li>
 <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> should be provided on each node, and Apptainer
 configured to use it.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> filesystem should support overlay mounts.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> / <code class="docutils literal notranslate"><span class="pre">SINGULARITY_TMPDIR</span></code> should be on a local filesystem
+<li><p><code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> / <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> should be on a local filesystem
 wherever possible.</p></li>
 </ul>
 <div class="admonition note">
@@ -302,13 +302,13 @@ runtimes.</p>
 <p>Apptainer will cache SIF container images generated from remote
 sources, and any OCI/docker layers used to create them. The cache is
 created at <code class="docutils literal notranslate"><span class="pre">$HOME/.singularity/cache</span></code> by default. The location of the
-cache can be changed by setting the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code> environment
+cache can be changed by setting the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> environment
 variable.</p>
-<p>The directory used for <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code> should be:</p>
+<p>The directory used for <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> should be:</p>
 <ul class="simple">
 <li><p>A unique location for each user. Permissions are set on the cache so
 that private images cached for one user are not exposed to another.
-This means that <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code> cannot be shared.</p></li>
+This means that <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> cannot be shared.</p></li>
 <li><p>Located on a filesystem with sufficient space for the number and size
 of container images anticipated.</p></li>
 <li><p>Located on a filesystem that supports atomic rename, if possible.</p></li>
@@ -316,14 +316,14 @@ of container images anticipated.</p></li>
 <p>The Apptainer cache is concurrency safe.
 Parallel runs of Apptainer that would create overlapping cache
 entries will not conflict, as long as the filesystem used by
-<code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code> supports atomic rename operations.</p>
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> supports atomic rename operations.</p>
 <p>Support for atomic rename operations is expected on local POSIX
 filesystems, but varies for network / parallel filesystems and may be
 affected by topology and configuration. For example, Lustre supports
 atomic rename of files only on a single MDT. Rename on NFS is only
 atomic to a single client, not across systems accessing the same NFS
 share.</p>
-<p>If you are not certain that your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> or <code class="docutils literal notranslate"><span class="pre">SINGULARITY_CACHEDIR</span></code>
+<p>If you are not certain that your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> or <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code>
 filesystems support atomic rename, do not run <code class="docutils literal notranslate"><span class="pre">singularity</span></code> in parallel
 using remote container URLs. Instead use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> to create
 a local SIF image, and then run this SIF image in a parallel step. An
@@ -342,7 +342,7 @@ have restrictions.</p></li>
 container when the overlay (upperdir) directory is on an NFS
 filesystem.</p></li>
 <li><p>When using <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> to build or run a container, your
-<code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> / <code class="docutils literal notranslate"><span class="pre">SINGULARITY_TMPDIR</span></code> should not be set to an NFS
+<code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> / <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> should not be set to an NFS
 location.</p></li>
 <li><p>You should not run a sandbox container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> from an
 NFS location.</p></li>
@@ -361,7 +361,7 @@ containers on Lustre / GPFS will work correctly with these options.</p></li>
 when the overlay (upperdir) directory is on a Lustre or GPFS
 filesystem.</p></li>
 <li><p>When using <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> to build or run a container, your
-<code class="docutils literal notranslate"><span class="pre">TMPDIR/SINGULARITY_TMPDIR</span></code> should not be a Lustre or GPFS
+<code class="docutils literal notranslate"><span class="pre">TMPDIR/APPTAINER_TMPDIR</span></code> should not be a Lustre or GPFS
 location.</p></li>
 <li><p>You should not run a sandbox container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> from a
 Lustre or GPFS location.</p></li>
@@ -692,7 +692,7 @@ INFODIR=/usr/local/share/info
 LIBDIR=/usr/local/lib
 LOCALEDIR=/usr/local/share/locale
 MANDIR=/usr/local/share/man
-SINGULARITY_CONFDIR=/usr/local/etc/singularity
+APPTAINER_CONFDIR=/usr/local/etc/singularity
 SESSIONDIR=/usr/local/var/singularity/mnt/session
 </pre></div>
 </div>
