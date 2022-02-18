@@ -7,7 +7,7 @@
 This section will guide you through the process of installing
 {Project} {InstallationVersion} via several different methods. (For
 instructions on installing earlier versions of {Project} please see
-`earlier versions of the docs <https://singularity.hpcng.org/docs/>`_.)
+`earlier versions of the docs <https://apptainer.org/docs/>`_.)
 
 ***********************
  Installation on Linux
@@ -380,14 +380,14 @@ Download {Project} from a release
 
 You can download {Project} from one of the releases. To see a full
 list, visit `the GitHub release page
-<https://github.com/hpcng/singularity/releases>`_. After deciding on a
+<https://github.com/{orgrepo}/releases>`_. After deciding on a
 release to install, you can run the following commands to proceed with
 the installation.
 
 .. code::
 
    $ export VERSION={InstallationVersion} && # adjust this as necessary \
-       wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
+       wget https://github.com/{orgrepo}/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
        tar -xzf singularity-${VERSION}.tar.gz && \
        cd singularity
 
@@ -395,16 +395,16 @@ Checkout Code from Git
 ----------------------
 
 The following commands will install {Project} from the `GitHub repo
-<https://github.com/hpcng/singularity>`_ to ``/usr/local``. This method
+<https://github.com/{orgrepo}>`_ to ``/usr/local``. This method
 will work for >=v{InstallationVersion}. To install an older tagged
-release see `older versions of the docs <https://singularity.hpcng.org/docs/>`_.
+release see `older versions of the docs <https://apptainer.org/docs/>`_.
 
 When installing from source, you can decide to install from either a
 **tag**, a **release branch**, or from the **master branch**.
 
 -  **tag**: GitHub tags form the basis for releases, so installing from
    a tag is the same as downloading and installing a `specific release
-   <https://github.com/hpcng/singularity/releases>`_. Tags are expected
+   <https://github.com/{orgrepo}/releases>`_. Tags are expected
    to be relatively stable and well-tested.
 
 -  **release branch**: A release branch represents the latest version of
@@ -425,7 +425,7 @@ appropriate directory use these commands.
 
 .. code::
 
-   $ git clone https://github.com/hpcng/singularity.git && \
+   $ git clone https://github.com/{orgrepo}.git && \
        cd singularity && \
        git checkout v{InstallationVersion}
 
@@ -541,12 +541,12 @@ If you use RHEL, CentOS or SUSE, building and installing a {Project}
 RPM allows your {Project} installation be more easily managed,
 upgraded and removed.  You can build an RPM
 directly from the `release tarball
-<https://github.com/hpcng/singularity/releases>`_.
+<https://github.com/{orgrepo}/releases>`_.
 
 .. note::
 
    Be sure to download the correct asset from the `GitHub releases page
-   <https://github.com/hpcng/singularity/releases>`_. It should be
+   <https://github.com/{orgrepo}/releases>`_. It should be
    named ``singularity-<version>.tar.gz``.
 
 After installing the :ref:`dependencies <install-dependencies>` and
@@ -556,7 +556,7 @@ download the tarball and build and install the RPM.
 .. code::
 
    $ export VERSION={InstallationVersion} && # adjust this as necessary \
-       wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
+       wget https://github.com/{orgrepo}/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
        rpmbuild -tb singularity-${VERSION}.tar.gz && \
        sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/singularity-$VERSION-1.el7.x86_64.rpm && \
        rm -rf ~/rpmbuild singularity-$VERSION*.tar.gz
