@@ -91,7 +91,7 @@
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>User Namespaces &amp; Fakeroot</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/singularity-admindocs/blob/master/user_namespace.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-admindocs/blob/master/user_namespace.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -151,7 +151,7 @@ creation’.</p>
 <span id="userns-limitations"></span><h2>Unprivileged Installations<a class="headerlink" href="#unprivileged-installations" title="Permalink to this headline"></a></h2>
 <p>As detailed in the <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">non-setuid installation</span></a>
 section, Apptainer can be compiled or configured with the <code class="docutils literal notranslate"><span class="pre">allow</span>
-<span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> option in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> to not perform privileged
+<span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> option in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> to not perform privileged
 operations using the <code class="docutils literal notranslate"><span class="pre">starter-setuid</span></code> binary.</p>
 <p>When Apptainer does not use <code class="docutils literal notranslate"><span class="pre">setuid</span></code> all container execution will
 use a user namespace. In this mode of operation, some features are not
@@ -174,7 +174,7 @@ distribution.</p></li>
 </section>
 <section id="userns-option">
 <h2>–userns option<a class="headerlink" href="#userns-option" title="Permalink to this headline"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">--userns</span></code> option to <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">run/exec/shell</span></code> will start a
+<p>The <code class="docutils literal notranslate"><span class="pre">--userns</span></code> option to <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run/exec/shell</span></code> will start a
 container using a user namespace, avoiding the setuid privileged
 workflow for container setup even if Apptainer was compiled and
 configured to use setuid by default.</p>
@@ -197,7 +197,7 @@ no privilege on the host.</p>
 <code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code> maps for the user namespace it creates. By
 default this happens transparently in the setuid workflow. With
 unprivileged installations of Apptainer or where <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span>
-<span class="pre">no</span></code> is set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>, Apptainer attempts to use
+<span class="pre">no</span></code> is set in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>, Apptainer attempts to use
 external setuid binaries <code class="docutils literal notranslate"><span class="pre">newuidmap</span></code> and <code class="docutils literal notranslate"><span class="pre">newgidmap</span></code>, so you need to
 install those binaries on your system.</p>
 </section>
@@ -326,7 +326,7 @@ veth pair.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Do not change the <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code> network type in
-<code class="docutils literal notranslate"><span class="pre">etc/singularity/network/40_fakeroot.conflist</span></code> without considering
+<code class="docutils literal notranslate"><span class="pre">etc/apptainer/network/40_fakeroot.conflist</span></code> without considering
 the security implications.</p>
 </div>
 <div class="admonition note">
@@ -346,7 +346,7 @@ editing the files manually. The <code class="docutils literal notranslate"><span
 automatically ensure that generated subuid/subgid ranges are an
 appropriate size, and do not overlap.</p>
 <p><code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> must be run as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user, or via <code class="docutils literal notranslate"><span class="pre">sudo</span>
-<span class="pre">singularity</span> <span class="pre">config</span> <span class="pre">fakeroot</span></code> as the <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>
+<span class="pre">apptainer</span> <span class="pre">config</span> <span class="pre">fakeroot</span></code> as the <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>
 files form part of the system configuration, and are security sensitive.
 You may <code class="docutils literal notranslate"><span class="pre">--add</span></code> or <code class="docutils literal notranslate"><span class="pre">--remove</span></code> user subuid/subgid mappings. You can
 also <code class="docutils literal notranslate"><span class="pre">--enable</span></code> or <code class="docutils literal notranslate"><span class="pre">--disable</span></code> existing mappings.</p>
@@ -364,7 +364,7 @@ central directory such as LDAP.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">-a/--add</span> <span class="pre">&lt;user&gt;</span></code> option to <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> to create new
 mapping entries so that <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> can use the fakeroot feature of
 Apptainer:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity config fakeroot --add dave
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config fakeroot --add dave
 
 # Show generated `/etc/subuid`
 $ cat /etc/subuid
@@ -393,7 +393,7 @@ username.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">-r/--remove</span> <span class="pre">&lt;user&gt;</span></code> option to <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> to
 completely remove mapping entries. The <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> will no longer be able
 to use the fakeroot feature of Apptainer:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity config fakeroot --remove dave
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config fakeroot --remove dave
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -410,14 +410,14 @@ useful to disable fakeroot for a user, but ensure the subuid/subgid
 range assigned to them is reserved, and not re-assigned to a different
 user.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Disable dave
-$ sudo singularity config fakeroot --disable dave
+$ sudo apptainer config fakeroot --disable dave
 
 # Entry is commented
 $ cat /etc/subuid
 !1000:4294836224:65536
 
 # Enable dave
-$ sudo singularity config fakeroot --enable dave
+$ sudo apptainer config fakeroot --enable dave
 
 # Entry is active
 $ cat /etc/subuid

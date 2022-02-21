@@ -83,7 +83,7 @@
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>Admin Quick Start</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/singularity-admindocs/blob/master/admin_quickstart.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-admindocs/blob/master/admin_quickstart.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -99,7 +99,7 @@ to configuration files. More information, including alternate
 installation options and detailed configuration options can be found
 later in this guide.</p>
 <section id="architecture-of-apptainer">
-<span id="singularity-architecture"></span><h2>Architecture of Apptainer<a class="headerlink" href="#architecture-of-apptainer" title="Permalink to this headline"></a></h2>
+<span id="apptainer-architecture"></span><h2>Architecture of Apptainer<a class="headerlink" href="#architecture-of-apptainer" title="Permalink to this headline"></a></h2>
 <p>Apptainer is designed to allow containers to be executed as if they
 were native programs or scripts on a host system. No daemon is required
 to build or run containers, and the security model is compatible with
@@ -122,7 +122,7 @@ can use additional Linux namespaces and other security and resource
 limits to accomplish this.</p>
 </section>
 <section id="apptainer-security">
-<span id="singularity-security"></span><h2>Apptainer Security<a class="headerlink" href="#apptainer-security" title="Permalink to this headline"></a></h2>
+<span id="id1"></span><h2>Apptainer Security<a class="headerlink" href="#apptainer-security" title="Permalink to this headline"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>See also the <a class="reference internal" href="security.html#security"><span class="std std-ref">security section</span></a> of this guide, for more
@@ -160,7 +160,7 @@ runs small amounts of privileged container setup code via a
 Apptainer can perform filesystem loop mounts and other operations
 that need privilege. The setuid flow is the default mode of operation,
 but <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">can be disabled</span></a> on build, or in the
-<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> configuration file if required.</p>
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> configuration file if required.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Running Apptainer in non-setuid mode requires unprivileged user
@@ -256,9 +256,9 @@ list, visit <a class="reference external" href="https://github.com/apptainer/app
 release to install, you can run the following commands to proceed with
 the installation.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.0.0 &amp;&amp; # adjust this as necessary \
-    wget https://github.com/apptainer/apptainer/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &amp;&amp; \
-    tar -xzf singularity-${VERSION}.tar.gz &amp;&amp; \
-    cd singularity
+    wget https://github.com/apptainer/apptainer/releases/download/v${VERSION}/apptainer-${VERSION}.tar.gz &amp;&amp; \
+    tar -xzf apptainer-${VERSION}.tar.gz &amp;&amp; \
+    cd apptainer
 </pre></div>
 </div>
 </section>
@@ -275,7 +275,7 @@ compile and install.</p>
 <p>By default Apptainer will be installed in the <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>
 directory hierarchy. You can specify a custom directory with the
 <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> option, to <code class="docutils literal notranslate"><span class="pre">mconfig</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mconfig --prefix=/opt/singularity
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mconfig --prefix=/opt/apptainer
 </pre></div>
 </div>
 <p>This option can be useful if you want to install multiple versions of
@@ -287,7 +287,7 @@ some of the most common options that you may need to use when building
 Apptainer from source.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--sysconfdir</span></code>: Install read-only config files in sysconfdir. This
-option is important if you need the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> file or
+option is important if you need the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> file or
 other configuration files in a custom location.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code>: Set the state directory where containers are
 mounted. This is a particularly important option for administrators
@@ -301,24 +301,24 @@ each individual node.</p></li>
 </section>
 <section id="configuration">
 <h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline"></a></h2>
-<p>Apptainer is configured using files under <code class="docutils literal notranslate"><span class="pre">etc/singularity</span></code> in
+<p>Apptainer is configured using files under <code class="docutils literal notranslate"><span class="pre">etc/apptainer</span></code> in
 your <code class="docutils literal notranslate"><span class="pre">--prefix</span></code>, or <code class="docutils literal notranslate"><span class="pre">--syconfdir</span></code> if you used that option with
 <code class="docutils literal notranslate"><span class="pre">mconfig</span></code>. In a default installation from source without a
 <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> set you will find them under
-<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity</span></code>. In a default installation from RPM or Deb packages you will find them under <code class="docutils literal notranslate"><span class="pre">/etc/singularity</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/apptainer</span></code>. In a default installation from RPM or Deb packages you will find them under <code class="docutils literal notranslate"><span class="pre">/etc/apptainer</span></code>.</p>
 <p>You can edit these files directly, or using the <code class="docutils literal notranslate"><span class="pre">Apptainer</span> <span class="pre">config</span>
 <span class="pre">global</span></code> command as the root user to manage them.</p>
-<p><code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> contains the majority of options controlling the
+<p><code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> contains the majority of options controlling the
 runtime behavior of Apptainer. Additional files control security,
 network, and resource configuration. Head over to the
-<a class="reference internal" href="configfiles.html#singularity-configfiles"><span class="std std-ref">Configuration files</span></a> section where the
+<a class="reference internal" href="configfiles.html#apptainer-configfiles"><span class="std std-ref">Configuration files</span></a> section where the
 files and configuration options are discussed.</p>
 </section>
 <section id="test-apptainer">
 <h2>Test Apptainer<a class="headerlink" href="#test-apptainer" title="Permalink to this headline"></a></h2>
 <p>You can run a quick test of Apptainer using a container in the
 Sylabs Container Library:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec library://alpine cat /etc/alpine-release
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec library://alpine cat /etc/alpine-release
 3.9.2
 </pre></div>
 </div>

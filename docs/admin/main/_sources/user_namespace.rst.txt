@@ -68,7 +68,7 @@ From 7.4, kernel support is included but must be enabled with:
 
 As detailed in the :ref:`non-setuid installation <install-nonsetuid>`
 section, {Project} can be compiled or configured with the ``allow
-setuid = no`` option in ``singularity.conf`` to not perform privileged
+setuid = no`` option in ``{command}.conf`` to not perform privileged
 operations using the ``starter-setuid`` binary.
 
 When {Project} does not use ``setuid`` all container execution will
@@ -96,7 +96,7 @@ when running SIF container images:
  --userns option
 *****************
 
-The ``--userns`` option to ``singularity run/exec/shell`` will start a
+The ``--userns`` option to ``{command} run/exec/shell`` will start a
 container using a user namespace, avoiding the setuid privileged
 workflow for container setup even if {Project} was compiled and
 configured to use setuid by default.
@@ -128,7 +128,7 @@ In addition to user namespace support, {Project} must manipulate
 ``subuid`` and ``subgid`` maps for the user namespace it creates. By
 default this happens transparently in the setuid workflow. With
 unprivileged installations of {Project} or where ``allow setuid =
-no`` is set in ``singularity.conf``, {Project} attempts to use
+no`` is set in ``{command}.conf``, {Project} attempts to use
 external setuid binaries ``newuidmap`` and ``newgidmap``, so you need to
 install those binaries on your system.
 
@@ -247,7 +247,7 @@ veth pair.
 .. warning::
 
    Do not change the ``fakeroot`` network type in
-   ``etc/singularity/network/40_fakeroot.conflist`` without considering
+   ``etc/{command}/network/40_fakeroot.conflist`` without considering
    the security implications.
 
 .. note::
@@ -270,7 +270,7 @@ automatically ensure that generated subuid/subgid ranges are an
 appropriate size, and do not overlap.
 
 ``config fakeroot`` must be run as the ``root`` user, or via ``sudo
-singularity config fakeroot`` as the ``/etc/subuid`` and ``/etc/subgid``
+{command} config fakeroot`` as the ``/etc/subuid`` and ``/etc/subgid``
 files form part of the system configuration, and are security sensitive.
 You may ``--add`` or ``--remove`` user subuid/subgid mappings. You can
 also ``--enable`` or ``--disable`` existing mappings.
@@ -294,7 +294,7 @@ mapping entries so that ``<user>`` can use the fakeroot feature of
 
 .. code::
 
-   $ sudo singularity config fakeroot --add dave
+   $ sudo {command} config fakeroot --add dave
 
    # Show generated `/etc/subuid`
    $ cat /etc/subuid
@@ -326,7 +326,7 @@ to use the fakeroot feature of {Project}:
 
 .. code::
 
-   $ sudo singularity config fakeroot --remove dave
+   $ sudo {command} config fakeroot --remove dave
 
 .. warning::
 
@@ -345,14 +345,14 @@ user.
 .. code::
 
    # Disable dave
-   $ sudo singularity config fakeroot --disable dave
+   $ sudo {command} config fakeroot --disable dave
 
    # Entry is commented
    $ cat /etc/subuid
    !1000:4294836224:65536
 
    # Enable dave
-   $ sudo singularity config fakeroot --enable dave
+   $ sudo {command} config fakeroot --enable dave
 
    # Entry is active
    $ cat /etc/subuid

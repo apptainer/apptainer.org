@@ -48,9 +48,9 @@ Configurable Paths
 
 The following binaries are found on ``$PATH`` during build time when
 ``./mconfig`` is run, and their location is added to the
-``singularity.conf`` configuration file. At runtime this configured
+``{command}.conf`` configuration file. At runtime this configured
 location is used. To specify an alternate executable, change the
-relevant path entry in ``singularity.conf``.
+relevant path entry in ``{command}.conf``.
 
 -  ``cryptsetup`` version 2 with kernel LUKS2 support is required for
    building or executing encrypted containers.
@@ -62,7 +62,7 @@ relevant path entry in ``singularity.conf``.
    GPU / CUDA support when running with the experimental ``--nvccli``
    option.
 
-For the following additional binaries, if the ``singularity.conf`` entry
+For the following additional binaries, if the ``{command}.conf`` entry
 is left blank, then ``$PATH`` will be searched at runtime.
 
 -  ``go`` is required to compile plugins, and must be an identical
@@ -71,7 +71,7 @@ is left blank, then ``$PATH`` will be searched at runtime.
 -  ``mksquashfs`` from squashfs-tools 4.3+ is used to create the
    squashfs container filesystem that is embedded into SIF container
    images. The ``mksquashfs procs`` and ``mksquashfs mem`` directives in
-   ``singularity.conf`` can be used to control its resource usage.
+   ``{command}.conf`` can be used to control its resource usage.
 
 -  ``unsquashfs`` from squashfs-tools 4.3+ is used to extract the
    squashfs container filesystem from a SIF file when necessary.
@@ -119,7 +119,7 @@ supplies an alternative ``ldconfig``, which does not identify GPU
 libraries installed from host packages.
 
 To allow {Project} to locate the host (i.e. CentOS / Debian) GPU
-libraries correctly, set ``ldconfig path`` in ``singularity.conf`` to
+libraries correctly, set ``ldconfig path`` in ``{command}.conf`` to
 point to the host ``ldconfig``. I.E. it should be set to
 ``/sbin/ldconfig`` or ``/sbin/ldconfig.real`` rather than a Nix or Guix
 related path.
@@ -205,7 +205,7 @@ runtimes.
 
 {Project} will cache SIF container images generated from remote
 sources, and any OCI/docker layers used to create them. The cache is
-created at ``$HOME/.singularity/cache`` by default. The location of the
+created at ``$HOME/.{command}/cache`` by default. The location of the
 cache can be changed by setting the ``{ENVPREFIX}_CACHEDIR`` environment
 variable.
 
@@ -233,8 +233,8 @@ atomic to a single client, not across systems accessing the same NFS
 share.
 
 If you are not certain that your ``$HOME`` or ``{ENVPREFIX}_CACHEDIR``
-filesystems support atomic rename, do not run ``singularity`` in parallel
-using remote container URLs. Instead use ``singularity pull`` to create
+filesystems support atomic rename, do not run ``{command}`` in parallel
+using remote container URLs. Instead use ``{command} pull`` to create
 a local SIF image, and then run this SIF image in a parallel step. An
 alternative is to use the ``--disable-cache`` option, but this will
 result in each {Project} instance independently fetching the
@@ -387,9 +387,9 @@ the installation.
 .. code::
 
    $ export VERSION={InstallationVersion} && # adjust this as necessary \
-       wget https://github.com/{orgrepo}/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
-       tar -xzf singularity-${VERSION}.tar.gz && \
-       cd singularity
+       wget https://github.com/{orgrepo}/releases/download/v${VERSION}/{command}-${VERSION}.tar.gz && \
+       tar -xzf {command}-${VERSION}.tar.gz && \
+       cd {command}
 
 Checkout Code from Git
 ----------------------
@@ -426,7 +426,7 @@ appropriate directory use these commands.
 .. code::
 
    $ git clone https://github.com/{orgrepo}.git && \
-       cd singularity && \
+       cd {command} && \
        git checkout v{InstallationVersion}
 
 Compile {Project}
@@ -439,7 +439,7 @@ compile and install.
 To support the SIF image format, automated networking setup etc., and
 older Linux distributions without user namespace support, {Project}
 must be ``make install``ed as root or with ``sudo``, so it can install
-the ``libexec/singularity/bin/starter-setuid`` binary with root
+the ``libexec/{command}/bin/starter-setuid`` binary with root
 ownership and setuid permissions for privileged operations. If you need
 to install as a normal user, or do not want to use setuid functionality
 :ref:`see below <install-nonsetuid>`.
@@ -456,7 +456,7 @@ directory hierarchy. You can specify a custom directory with the
 
 .. code::
 
-   $ ./mconfig --prefix=/opt/singularity
+   $ ./mconfig --prefix=/opt/{command}
 
 This option can be useful if you want to install multiple versions of
 {Project}, install a personal version of {Project} on a shared
@@ -468,7 +468,7 @@ some of the most common options that you may need to use when building
 {Project} from source.
 
 -  ``--sysconfdir``: Install read-only config files in sysconfdir. This
-   option is important if you need the ``singularity.conf`` file or
+   option is important if you need the ``{command}.conf`` file or
    other configuration files in a custom location.
 
 -  ``--localstatedir``: Set the state directory where containers are
@@ -491,13 +491,13 @@ to allow the use of a setuid root binary, you can configure
 
 .. code::
 
-   $ ./mconfig --without-suid --prefix=/home/dave/singularity && \
+   $ ./mconfig --without-suid --prefix=/home/dave/{command} && \
        make -C ./builddir && \
        make -C ./builddir install
 
 If you have already installed {Project} you can disable the setuid
 flow by setting the option ``allow setuid = no`` in
-``etc/singularity/singularity.conf`` within your installation directory.
+``etc/{command}/{command}.conf`` within your installation directory.
 
 When {Project} does not use setuid all container execution will use
 a user namespace. This requires support from your operating system
@@ -526,7 +526,7 @@ source the bash completion file:
 
 .. code::
 
-   $ . /usr/local/etc/bash_completion.d/singularity
+   $ . /usr/local/etc/bash_completion.d/{command}
 
 Add this command to your ``~/.bashrc`` file so that bash completion
 continues to work in new shells. (Adjust the path if you installed
@@ -556,17 +556,17 @@ download the tarball and build and install the RPM.
 .. code::
 
    $ export VERSION={InstallationVersion} && # adjust this as necessary \
-       wget https://github.com/{orgrepo}/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
-       rpmbuild -tb singularity-${VERSION}.tar.gz && \
-       sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/singularity-$VERSION-1.el7.x86_64.rpm && \
-       rm -rf ~/rpmbuild singularity-$VERSION*.tar.gz
+       wget https://github.com/{orgrepo}/releases/download/v${VERSION}/{command}-${VERSION}.tar.gz && \
+       rpmbuild -tb {command}-${VERSION}.tar.gz && \
+       sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/{command}-$VERSION-1.el7.x86_64.rpm && \
+       rm -rf ~/rpmbuild {command}-$VERSION*.tar.gz
 
 If you encounter a failed dependency error for golang but installed it
 from source, build with this command:
 
 .. code::
 
-   rpmbuild -tb --nodeps singularity-${VERSION}.tar.gz
+   rpmbuild -tb --nodeps {command}-${VERSION}.tar.gz
 
 Options to ``mconfig`` can be passed using the familiar syntax to
 ``rpmbuild``. For example, if you want to force the local state
@@ -575,7 +575,7 @@ following:
 
 .. code::
 
-   rpmbuild -tb --define='_localstatedir /mnt' singularity-$VERSION.tar.gz
+   rpmbuild -tb --define='_localstatedir /mnt' {command}-$VERSION.tar.gz
 
 .. note::
 
@@ -594,7 +594,7 @@ install {Project}:
 
   $ ./mconfig && \
   make -C builddir rpm && \
-  sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/singularity-{InstallationVersion}.el7.x86_64.rpm # or whatever version you built
+  sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/{command}-{InstallationVersion}.el7.x86_64.rpm # or whatever version you built
 
 To build an rpm with an alternative install prefix set ``RPMPREFIX`` on
 the make step, for example:
@@ -620,12 +620,12 @@ directories to completely remove {Project}.
 .. code::
 
    $ sudo rm -rf \
-       /usr/local/libexec/singularity \
-       /usr/local/var/singularity \
-       /usr/local/etc/singularity \
-       /usr/local/bin/singularity \
+       /usr/local/libexec/{command} \
+       /usr/local/var/{command} \
+       /usr/local/etc/{command} \
+       /usr/local/bin/{command} \
        /usr/local/bin/run-singularity \
-       /usr/local/etc/bash_completion.d/singularity
+       /usr/local/etc/bash_completion.d/{command}
 
 If you anticipate needing to remove {Project}, it might be easier to
 install it in a custom directory using the ``--prefix`` option to
@@ -643,28 +643,28 @@ library:
 
 .. code::
 
-   $ singularity exec library://alpine cat /etc/alpine-release
+   $ {command} exec library://alpine cat /etc/alpine-release
    3.9.2
 
 See the `user guide
 <{userdocs}>`__ for more
 information about how to use {Project}.
 
-singularity buildcfg
+{command} buildcfg
 --------------------
 
-Running ``singularity buildcfg`` will show the build configuration of an
+Running ``{command} buildcfg`` will show the build configuration of an
 installed version of {Project}, and lists the paths used by
-{Project}. Use ``singularity buildcfg`` to confirm paths are set
+{Project}. Use ``{command} buildcfg`` to confirm paths are set
 correctly for your installation, and troubleshoot any 'not-found' errors
 at runtime.
 
 .. code::
 
-   $ singularity buildcfg
-   PACKAGE_NAME=singularity
+   $ {command} buildcfg
+   PACKAGE_NAME={command}
    PACKAGE_VERSION={InstallationVersion}
-   BUILDDIR=/home/dtrudg/Sylabs/Git/singularity/builddir
+   BUILDDIR=/home/dtrudg/Sylabs/Git/{command}/builddir
    PREFIX=/usr/local
    EXECPREFIX=/usr/local
    BINDIR=/usr/local/bin
@@ -677,13 +677,13 @@ at runtime.
    LOCALSTATEDIR=/usr/local/var
    RUNSTATEDIR=/usr/local/var/run
    INCLUDEDIR=/usr/local/include
-   DOCDIR=/usr/local/share/doc/singularity
+   DOCDIR=/usr/local/share/doc/{command}
    INFODIR=/usr/local/share/info
    LIBDIR=/usr/local/lib
    LOCALEDIR=/usr/local/share/locale
    MANDIR=/usr/local/share/man
-   {ENVPREFIX}_CONFDIR=/usr/local/etc/singularity
-   SESSIONDIR=/usr/local/var/singularity/mnt/session
+   {ENVPREFIX}_CONFDIR=/usr/local/etc/{command}
+   SESSIONDIR=/usr/local/var/{command}/mnt/session
 
 Note that the ``LOCALSTATEDIR`` and ``SESSIONDIR`` should be on local,
 non-shared storage.
@@ -772,8 +772,8 @@ directory to be used with your Vagrant VM.
 
 .. code::
 
-   $ mkdir vm-singularity && \
-       cd vm-singularity
+   $ mkdir vm-{command} && \
+       cd vm-{command}
 
 If you have already created and used this folder for another VM, you
 will need to destroy the VM and delete the Vagrantfile.
@@ -797,7 +797,7 @@ You can check the installed version of {Project} with the following:
 
 .. code::
 
-   vagrant@vagrant:~$ singularity version
+   vagrant@vagrant:~$ {command} version
    {InstallationVersion}
 
 Of course, you can also start with a plain OS Vagrant box as a base and
@@ -812,7 +812,7 @@ It is possible to use a Dockerized {Project}, here is a sample
 .. code::
 
    services:
-     singularity:
+     {command}:
        image: quay.io/singularity/singularity:v3.7.4-slim
        stdin_open: true
        tty: true
