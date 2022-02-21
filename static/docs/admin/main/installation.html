@@ -83,7 +83,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#remove-an-old-version">Remove an old version</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-checking-the-build-configuration">Testing &amp; Checking the Build Configuration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#singularity-buildcfg">singularity buildcfg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apptainer-buildcfg">apptainer buildcfg</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#test-suite">Test Suite</a></li>
 </ul>
 </li>
@@ -121,7 +121,7 @@
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>Installing Apptainer</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/singularity-admindocs/blob/master/installation.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-admindocs/blob/master/installation.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -164,9 +164,9 @@ these binaries have been standardized as below.</p>
 <h5>Configurable Paths<a class="headerlink" href="#configurable-paths" title="Permalink to this headline"></a></h5>
 <p>The following binaries are found on <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> during build time when
 <code class="docutils literal notranslate"><span class="pre">./mconfig</span></code> is run, and their location is added to the
-<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> configuration file. At runtime this configured
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> configuration file. At runtime this configured
 location is used. To specify an alternate executable, change the
-relevant path entry in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>.</p>
+relevant path entry in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">cryptsetup</span></code> version 2 with kernel LUKS2 support is required for
 building or executing encrypted containers.</p></li>
@@ -176,7 +176,7 @@ using the <code class="docutils literal notranslate"><span class="pre">-nv</span
 GPU / CUDA support when running with the experimental <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code>
 option.</p></li>
 </ul>
-<p>For the following additional binaries, if the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> entry
+<p>For the following additional binaries, if the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> entry
 is left blank, then <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> will be searched at runtime.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">go</span></code> is required to compile plugins, and must be an identical
@@ -184,7 +184,7 @@ version as that used to build Apptainer.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mksquashfs</span></code> from squashfs-tools 4.3+ is used to create the
 squashfs container filesystem that is embedded into SIF container
 images. The <code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">procs</span></code> and <code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">mem</span></code> directives in
-<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> can be used to control its resource usage.</p></li>
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> can be used to control its resource usage.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">unsquashfs</span></code> from squashfs-tools 4.3+ is used to extract the
 squashfs container filesystem from a SIF file when necessary.</p></li>
 </ul>
@@ -227,7 +227,7 @@ and <code class="docutils literal notranslate"><span class="pre">--rocm</span></
 supplies an alternative <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code>, which does not identify GPU
 libraries installed from host packages.</p>
 <p>To allow Apptainer to locate the host (i.e. CentOS / Debian) GPU
-libraries correctly, set <code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">path</span></code> in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> to
+libraries correctly, set <code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">path</span></code> in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> to
 point to the host <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code>. I.E. it should be set to
 <code class="docutils literal notranslate"><span class="pre">/sbin/ldconfig</span></code> or <code class="docutils literal notranslate"><span class="pre">/sbin/ldconfig.real</span></code> rather than a Nix or Guix
 related path.</p>
@@ -301,7 +301,7 @@ runtimes.</p>
 <h5>Apptainer cache / atomic rename<a class="headerlink" href="#apptainer-cache-atomic-rename" title="Permalink to this headline"></a></h5>
 <p>Apptainer will cache SIF container images generated from remote
 sources, and any OCI/docker layers used to create them. The cache is
-created at <code class="docutils literal notranslate"><span class="pre">$HOME/.singularity/cache</span></code> by default. The location of the
+created at <code class="docutils literal notranslate"><span class="pre">$HOME/.apptainer/cache</span></code> by default. The location of the
 cache can be changed by setting the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> environment
 variable.</p>
 <p>The directory used for <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> should be:</p>
@@ -324,8 +324,8 @@ atomic rename of files only on a single MDT. Rename on NFS is only
 atomic to a single client, not across systems accessing the same NFS
 share.</p>
 <p>If you are not certain that your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> or <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code>
-filesystems support atomic rename, do not run <code class="docutils literal notranslate"><span class="pre">singularity</span></code> in parallel
-using remote container URLs. Instead use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> to create
+filesystems support atomic rename, do not run <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> in parallel
+using remote container URLs. Instead use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> to create
 a local SIF image, and then run this SIF image in a parallel step. An
 alternative is to use the <code class="docutils literal notranslate"><span class="pre">--disable-cache</span></code> option, but this will
 result in each Apptainer instance independently fetching the
@@ -451,9 +451,9 @@ list, visit <a class="reference external" href="https://github.com/apptainer/app
 release to install, you can run the following commands to proceed with
 the installation.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.0.0 &amp;&amp; # adjust this as necessary \
-    wget https://github.com/apptainer/apptainer/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &amp;&amp; \
-    tar -xzf singularity-${VERSION}.tar.gz &amp;&amp; \
-    cd singularity
+    wget https://github.com/apptainer/apptainer/releases/download/v${VERSION}/apptainer-${VERSION}.tar.gz &amp;&amp; \
+    tar -xzf apptainer-${VERSION}.tar.gz &amp;&amp; \
+    cd apptainer
 </pre></div>
 </div>
 </section>
@@ -483,7 +483,7 @@ may be unstable.</p></li>
 <p>To ensure that the Apptainer source code is downloaded to the
 appropriate directory use these commands.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/apptainer/apptainer.git &amp;&amp; \
-    cd singularity &amp;&amp; \
+    cd apptainer &amp;&amp; \
     git checkout v1.0.0
 </pre></div>
 </div>
@@ -496,7 +496,7 @@ compile and install.</p>
 <p>To support the SIF image format, automated networking setup etc., and
 older Linux distributions without user namespace support, Apptainer
 must be <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install``ed</span> <span class="pre">as</span> <span class="pre">root</span> <span class="pre">or</span> <span class="pre">with</span> <span class="pre">``sudo</span></code>, so it can install
-the <code class="docutils literal notranslate"><span class="pre">libexec/singularity/bin/starter-setuid</span></code> binary with root
+the <code class="docutils literal notranslate"><span class="pre">libexec/apptainer/bin/starter-setuid</span></code> binary with root
 ownership and setuid permissions for privileged operations. If you need
 to install as a normal user, or do not want to use setuid functionality
 <a class="reference internal" href="#install-nonsetuid"><span class="std std-ref">see below</span></a>.</p>
@@ -508,7 +508,7 @@ to install as a normal user, or do not want to use setuid functionality
 <p>By default Apptainer will be installed in the <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>
 directory hierarchy. You can specify a custom directory with the
 <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> option, to <code class="docutils literal notranslate"><span class="pre">mconfig</span></code> like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mconfig --prefix=/opt/singularity
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mconfig --prefix=/opt/apptainer
 </pre></div>
 </div>
 <p>This option can be useful if you want to install multiple versions of
@@ -520,7 +520,7 @@ some of the most common options that you may need to use when building
 Apptainer from source.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--sysconfdir</span></code>: Install read-only config files in sysconfdir. This
-option is important if you need the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> file or
+option is important if you need the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> file or
 other configuration files in a custom location.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code>: Set the state directory where containers are
 mounted. This is a particularly important option for administrators
@@ -536,14 +536,14 @@ each individual node.</p></li>
 <p>If you need to install Apptainer as a non-root user, or do not wish
 to allow the use of a setuid root binary, you can configure
 Apptainer with the <code class="docutils literal notranslate"><span class="pre">--without-suid</span></code> option to mconfig:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mconfig --without-suid --prefix=/home/dave/singularity &amp;&amp; \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mconfig --without-suid --prefix=/home/dave/apptainer &amp;&amp; \
     make -C ./builddir &amp;&amp; \
     make -C ./builddir install
 </pre></div>
 </div>
 <p>If you have already installed Apptainer you can disable the setuid
 flow by setting the option <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> in
-<code class="docutils literal notranslate"><span class="pre">etc/singularity/singularity.conf</span></code> within your installation directory.</p>
+<code class="docutils literal notranslate"><span class="pre">etc/apptainer/apptainer.conf</span></code> within your installation directory.</p>
 <p>When Apptainer does not use setuid all container execution will use
 a user namespace. This requires support from your operating system
 kernel, and imposes some limitations on functionality. You should review
@@ -564,7 +564,7 @@ security.</p>
 <h4>Source bash completion file<a class="headerlink" href="#source-bash-completion-file" title="Permalink to this headline"></a></h4>
 <p>To enjoy bash shell completion with Apptainer commands and options,
 source the bash completion file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ . /usr/local/etc/bash_completion.d/singularity
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ . /usr/local/etc/bash_completion.d/apptainer
 </pre></div>
 </div>
 <p>Add this command to your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file so that bash completion
@@ -587,22 +587,22 @@ named <code class="docutils literal notranslate"><span class="pre">singularity-&
 installing <a class="reference internal" href="#install-go"><span class="std std-ref">Go</span></a> as detailed above, you are ready to
 download the tarball and build and install the RPM.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.0.0 &amp;&amp; # adjust this as necessary \
-    wget https://github.com/apptainer/apptainer/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &amp;&amp; \
-    rpmbuild -tb singularity-${VERSION}.tar.gz &amp;&amp; \
-    sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/singularity-$VERSION-1.el7.x86_64.rpm &amp;&amp; \
-    rm -rf ~/rpmbuild singularity-$VERSION*.tar.gz
+    wget https://github.com/apptainer/apptainer/releases/download/v${VERSION}/apptainer-${VERSION}.tar.gz &amp;&amp; \
+    rpmbuild -tb apptainer-${VERSION}.tar.gz &amp;&amp; \
+    sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/apptainer-$VERSION-1.el7.x86_64.rpm &amp;&amp; \
+    rm -rf ~/rpmbuild apptainer-$VERSION*.tar.gz
 </pre></div>
 </div>
 <p>If you encounter a failed dependency error for golang but installed it
 from source, build with this command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>rpmbuild -tb --nodeps singularity-${VERSION}.tar.gz
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>rpmbuild -tb --nodeps apptainer-${VERSION}.tar.gz
 </pre></div>
 </div>
 <p>Options to <code class="docutils literal notranslate"><span class="pre">mconfig</span></code> can be passed using the familiar syntax to
 <code class="docutils literal notranslate"><span class="pre">rpmbuild</span></code>. For example, if you want to force the local state
 directory to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> (instead of the default <code class="docutils literal notranslate"><span class="pre">/var</span></code>) you can do the
 following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>rpmbuild -tb --define=&#39;_localstatedir /mnt&#39; singularity-$VERSION.tar.gz
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>rpmbuild -tb --define=&#39;_localstatedir /mnt&#39; apptainer-$VERSION.tar.gz
 </pre></div>
 </div>
 <div class="admonition note">
@@ -618,7 +618,7 @@ can clone the repository, directly <code class="docutils literal notranslate"><s
 install Apptainer:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mconfig &amp;&amp; \
 make -C builddir rpm &amp;&amp; \
-sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/singularity-1.0.0.el7.x86_64.rpm # or whatever version you built
+sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/apptainer-1.0.0.el7.x86_64.rpm # or whatever version you built
 </pre></div>
 </div>
 <p>To build an rpm with an alternative install prefix set <code class="docutils literal notranslate"><span class="pre">RPMPREFIX</span></code> on
@@ -638,12 +638,12 @@ building from source), the command <code class="docutils literal notranslate"><s
 files as they are installed. You must remove all of these files and
 directories to completely remove Apptainer.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo rm -rf \
-    /usr/local/libexec/singularity \
-    /usr/local/var/singularity \
-    /usr/local/etc/singularity \
-    /usr/local/bin/singularity \
+    /usr/local/libexec/apptainer \
+    /usr/local/var/apptainer \
+    /usr/local/etc/apptainer \
+    /usr/local/bin/apptainer \
     /usr/local/bin/run-singularity \
-    /usr/local/etc/bash_completion.d/singularity
+    /usr/local/etc/bash_completion.d/apptainer
 </pre></div>
 </div>
 <p>If you anticipate needing to remove Apptainer, it might be easier to
@@ -658,23 +658,23 @@ can be updated and/or uninstalled with ease in the future.</p>
 <p>After installation you can perform a basic test of Apptainer
 functionality by executing a simple container from the Sylabs Cloud
 library:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec library://alpine cat /etc/alpine-release
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec library://alpine cat /etc/alpine-release
 3.9.2
 </pre></div>
 </div>
 <p>See the <a class="reference external" href="https://apptainer.org/docs/user/main">user guide</a> for more
 information about how to use Apptainer.</p>
-<section id="singularity-buildcfg">
-<h4>singularity buildcfg<a class="headerlink" href="#singularity-buildcfg" title="Permalink to this headline"></a></h4>
-<p>Running <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">buildcfg</span></code> will show the build configuration of an
+<section id="apptainer-buildcfg">
+<h4>apptainer buildcfg<a class="headerlink" href="#apptainer-buildcfg" title="Permalink to this headline"></a></h4>
+<p>Running <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">buildcfg</span></code> will show the build configuration of an
 installed version of Apptainer, and lists the paths used by
-Apptainer. Use <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">buildcfg</span></code> to confirm paths are set
+Apptainer. Use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">buildcfg</span></code> to confirm paths are set
 correctly for your installation, and troubleshoot any ‘not-found’ errors
 at runtime.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity buildcfg
-PACKAGE_NAME=singularity
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer buildcfg
+PACKAGE_NAME=apptainer
 PACKAGE_VERSION=1.0.0
-BUILDDIR=/home/dtrudg/Sylabs/Git/singularity/builddir
+BUILDDIR=/home/dtrudg/Sylabs/Git/apptainer/builddir
 PREFIX=/usr/local
 EXECPREFIX=/usr/local
 BINDIR=/usr/local/bin
@@ -687,13 +687,13 @@ SHAREDSTATEDIR=/usr/local/com
 LOCALSTATEDIR=/usr/local/var
 RUNSTATEDIR=/usr/local/var/run
 INCLUDEDIR=/usr/local/include
-DOCDIR=/usr/local/share/doc/singularity
+DOCDIR=/usr/local/share/doc/apptainer
 INFODIR=/usr/local/share/info
 LIBDIR=/usr/local/lib
 LOCALEDIR=/usr/local/share/locale
 MANDIR=/usr/local/share/man
-APPTAINER_CONFDIR=/usr/local/etc/singularity
-SESSIONDIR=/usr/local/var/singularity/mnt/session
+APPTAINER_CONFDIR=/usr/local/etc/apptainer
+SESSIONDIR=/usr/local/var/apptainer/mnt/session
 </pre></div>
 </div>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">LOCALSTATEDIR</span></code> and <code class="docutils literal notranslate"><span class="pre">SESSIONDIR</span></code> should be on local,
@@ -766,8 +766,8 @@ $ brew install --cask virtualbox vagrant vagrant-manager
 <h3>Apptainer Vagrant Box<a class="headerlink" href="#apptainer-vagrant-box" title="Permalink to this headline"></a></h3>
 <p>Run Git Bash (Windows) or open a terminal (Mac) and create and enter a
 directory to be used with your Vagrant VM.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir vm-singularity &amp;&amp; \
-    cd vm-singularity
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir vm-apptainer &amp;&amp; \
+    cd vm-apptainer
 </pre></div>
 </div>
 <p>If you have already created and used this folder for another VM, you
@@ -785,7 +785,7 @@ will need to destroy the VM and delete the Vagrantfile.</p>
 </pre></div>
 </div>
 <p>You can check the installed version of Apptainer with the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>vagrant@vagrant:~$ singularity version
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>vagrant@vagrant:~$ apptainer version
 1.0.0
 </pre></div>
 </div>
@@ -797,7 +797,7 @@ then install Apptainer using one of the above methods for Linux.</p>
 <p>It is possible to use a Dockerized Apptainer, here is a sample
 <code class="docutils literal notranslate"><span class="pre">compose.yaml</span></code> for use with Docker Compose:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">services</span><span class="p">:</span>
-  <span class="n">singularity</span><span class="p">:</span>
+  <span class="n">apptainer</span><span class="p">:</span>
     <span class="n">image</span><span class="p">:</span> <span class="n">quay</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">singularity</span><span class="o">/</span><span class="n">singularity</span><span class="p">:</span><span class="n">v3</span><span class="mf">.7.4</span><span class="o">-</span><span class="n">slim</span>
     <span class="n">stdin_open</span><span class="p">:</span> <span class="n">true</span>
     <span class="n">tty</span><span class="p">:</span> <span class="n">true</span>

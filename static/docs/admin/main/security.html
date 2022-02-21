@@ -78,7 +78,7 @@
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>Security in Apptainer</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/singularity-admindocs/blob/master/security.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-admindocs/blob/master/security.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -135,9 +135,9 @@ user can create a user namespace, in which most setup operations needed
 to run a container can be run, unprivileged.</p>
 <p>Apptainer supports running containers without setuid, using user
 namespaces. It can be compiled with the <code class="docutils literal notranslate"><span class="pre">--without-suid</span></code> option, or
-<code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> can be set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> to enable this.
+<code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> can be set in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> to enable this.
 In this mode <em>all</em> operations run as the user who starts the
-<code class="docutils literal notranslate"><span class="pre">singularity</span></code> program. However, there are some disadvantages:</p>
+<code class="docutils literal notranslate"><span class="pre">apptainer</span></code> program. However, there are some disadvantages:</p>
 <ul class="simple">
 <li><p>SIF and other single file container images cannot be mounted
 directly. The container image must be extracted to a directory on
@@ -204,7 +204,7 @@ signature travels in the SIF image itself so that it is always possible
 to verify that the image has not been tampered with or corrupted.</p>
 <p>We use private PGP keys to create a container signature, and the public
 key in order to verify the container. Verification of signed containers
-happens automatically in <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> commands when using a
+happens automatically in <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> commands when using a
 <cite>library://</cite> URI.</p>
 <p>A container may be signed once, by a trusted individual who approves its
 use. It could also be signed with multiple keys to signify it has passed
@@ -231,7 +231,7 @@ capabilities, manage resources and authorize containers etc.</p>
 <p>For example, the <a class="reference internal" href="configfiles.html#execution-control-list"><span class="std std-ref">Execution Control List</span></a> file
 allows restricting usage of SIF containers based on their signature
 and the key used to sign them.</p>
-<p>Configuration files and their parameters are <a class="reference internal" href="configfiles.html#singularity-configfiles"><span class="std std-ref">documented for
+<p>Configuration files and their parameters are <a class="reference internal" href="configfiles.html#apptainer-configfiles"><span class="std std-ref">documented for
 administrators here</span></a>.</p>
 <p>When running a container as root, Apptainer can apply hardening rules using
 cgroups, seccomp, apparmor. See the ‘security options’ section of the user

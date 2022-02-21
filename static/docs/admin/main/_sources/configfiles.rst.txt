@@ -1,4 +1,4 @@
-.. _singularity_configfiles:
+.. _{command}_configfiles:
 
 ###################################
  {Project} Configuration Files
@@ -8,31 +8,31 @@ As a {Project} Administrator, you will have access to various
 configuration files, that will let you manage container resources, set
 security restrictions and configure network options etc, when
 installing {Project} across the system. All of these files can be
-found in ``/usr/local/etc/singularity`` by default for installations
+found in ``/usr/local/etc/{command}`` by default for installations
 from source (though the location may differ based on options passed
 during the installation). For installations from RPM or Deb packages
-you will find the configuration files in ``/etc/singularity``. This
+you will find the configuration files in ``/etc/{command}``. This
 section will describe the configuration files and the various
 parameters contained by them.
 
 ******************
- singularity.conf
+ {command}.conf
 ******************
 
 Most of the configuration options are set using the file
-``singularity.conf`` that defines the global configuration for
+``{command}.conf`` that defines the global configuration for
 {Project} across the entire system. Using this file, system
 administrators can influence the behavior of {Project} and
 restrict the functionality that users can access. As a security
 measure, for ``setuid`` installations of {Project},
-``singularity.conf`` must be owned by root and must not be writable by
+``{command}.conf`` must be owned by root and must not be writable by
 users or {Project} will refuse to run. This is not the case for
 ``non-setuid`` installations that will only ever execute with user
 privilege and thus do not require such limitations.
 
-The options set via ``singularity.conf`` are listed below. Options are
+The options set via ``{command}.conf`` are listed below. Options are
 grouped together based on relevance. The actual order of options within
-``singularity.conf`` may differ.
+``{command}.conf`` may differ.
 
 Setuid and Capabilities
 =======================
@@ -54,7 +54,7 @@ Options include:
 -  full: all capabilities are maintained, this gives the same behavior
    as the ``--keep-privs`` option.
 -  file: only capabilities granted in
-   ``/usr/local/etc/singularity/capabilities/user.root`` are maintained.
+   ``/usr/local/etc/{command}/capabilities/user.root`` are maintained.
 -  no: no capabilities are maintained, this gives the same behavior as
    the ``--no-privs`` option.
 
@@ -205,7 +205,7 @@ Or you can specify different source and destination locations using:
 
 .. code::
 
-   bind path = /etc/singularity/default-nsswitch.conf:/etc/nsswitch.conf
+   bind path = /etc/{command}/default-nsswitch.conf:/etc/nsswitch.conf
 
 ``user bind control``: This allows admins to decide if users can define
 bind points at runtime. By Default, this option is set to ``YES``, which
@@ -348,10 +348,10 @@ External Binaries
 
 {Project} calls a number of external binaries for full
 functionality. The paths for certain critical binaries can be set in
-``singularity.conf``. At build time, ``mconfig`` will set initial values
+``{command}.conf``. At build time, ``mconfig`` will set initial values
 for these, by searching on the ``$PATH`` environment variable. You can
 override which external binaries are called by changing the value in
-``singularity.conf``.
+``{command}.conf``.
 
 ``cryptsetup path``: Path to the cryptsetup executable, used to work
 with encrypted containers. Must be owned by root for security reasons.
@@ -363,7 +363,7 @@ libraries. Must be owned by root for security reasons.
 executable, used to find GPU libraries and configure the container when
 running with the ``--nvccli`` option.
 
-For the following additional binaries, if the ``singularity.conf`` entry
+For the following additional binaries, if the ``{command}.conf`` entry
 is left blank, then ``$PATH`` will be searched at runtime.
 
 ``go path``: Path to the go executable, used to compile plugins.
@@ -410,7 +410,7 @@ Updating Configuration Options
 In order to manage this configuration file, {Project} has a ``config
 global`` command group that allows you to get, set, reset, and unset
 values through the CLI. It's important to note that these commands must
-be run with elevated privileges because the ``singularity.conf`` can
+be run with elevated privileges because the ``{command}.conf`` can
 only be modified by an administrator.
 
 Example
@@ -422,23 +422,23 @@ system configuration:
 
 .. code::
 
-   $ sudo singularity config global --get "bind path"
+   $ sudo {command} config global --get "bind path"
    /etc/localtime,/etc/hosts
 
 Now we can add a new path and verify it was successfully added:
 
 .. code::
 
-   $ sudo singularity config global --set "bind path" /etc/resolv.conf
-   $ sudo singularity config global --get "bind path"
+   $ sudo {command} config global --set "bind path" /etc/resolv.conf
+   $ sudo {command} config global --get "bind path"
    /etc/resolv.conf,/etc/localtime,/etc/hosts
 
 From here we can remove a path with:
 
 .. code::
 
-   $ sudo singularity config global --unset "bind path" /etc/localtime
-   $ sudo singularity config global --get "bind path"
+   $ sudo {command} config global --unset "bind path" /etc/localtime
+   $ sudo {command} config global --get "bind path"
    /etc/resolv.conf,/etc/hosts
 
 If we want to reset the option to the default at installation, then we
@@ -446,8 +446,8 @@ can reset it with:
 
 .. code::
 
-   $ sudo singularity config global --reset "bind path"
-   $ sudo singularity config global --get "bind path"
+   $ sudo {command} config global --reset "bind path"
+   $ sudo {command} config global --get "bind path"
    /etc/localtime,/etc/hosts
 
 And now we are back to our original option settings. You can also test
@@ -459,7 +459,7 @@ option:
 
 .. code::
 
-   $ sudo singularity config global --dry-run --set "bind path" /etc/resolv.conf
+   $ sudo {command} config global --dry-run --set "bind path" /etc/resolv.conf
    # {ENVPREFIX}.CONF
    # This is the global configuration file for {Project}. This file controls
    [...]
@@ -469,12 +469,12 @@ option:
    # the container. The file or directory must exist within the container on
    # which to attach to. you can specify a different source and destination
    # path (respectively) with a colon; otherwise source and dest are the same.
-   # NOTE: these are ignored if singularity is invoked with --contain.
+   # NOTE: these are ignored if {command} is invoked with --contain.
    bind path = /etc/resolv.conf
    bind path = /etc/localtime
    bind path = /etc/hosts
    [...]
-   $ sudo singularity config global --get "bind path"
+   $ sudo {command} config global --get "bind path"
    /etc/localtime,/etc/hosts
 
 Above we can see that ``/etc/resolv.conf`` is listed as a bind path in
@@ -535,7 +535,7 @@ configuration to be applied:
 
 .. code::
 
-   $ sudo singularity shell --apply-cgroups /path/to/cgroups.toml my_container.sif
+   $ sudo {command} shell --apply-cgroups /path/to/cgroups.toml my_container.sif
 
 .. note::
 
@@ -557,21 +557,21 @@ Start your container, applying the toml file, e.g.:
 
 .. code::
 
-   $ sudo singularity run --apply-cgroups path/to/cgroups.toml library://alpine
+   $ sudo {command} run --apply-cgroups path/to/cgroups.toml library://alpine
 
 After that, you can verify that the container is only using 500MB of
 memory. This example assumes that there is only one running container.
 If you are running multiple containers you will find multiple cgroups
-trees under the ``singularity`` directory.
+trees under the ``{command}`` directory.
 
 .. code::
 
    # cgroups v1
-   $ cat /sys/fs/cgroup/memory/singularity/*/memory.limit_in_bytes
+   $ cat /sys/fs/cgroup/memory/{command}/*/memory.limit_in_bytes
      524288000
 
    # cgroups v2 - note translation of memory.limit_in_bytes -> memory.max
-   $ cat /sys/fs/cgroup/singularity/*/memory.max
+   $ cat /sys/fs/cgroup/{command}/*/memory.max
    524288000
 
 Limiting CPU
@@ -713,7 +713,7 @@ filesystem and by checking against a list of signing entities.
 
    The ECL configuration applies to SIF container images only. To lock
    down execution fully you should disable execution of other container
-   types (squashfs/extfs/dir) via the ``singularity.conf`` file ``allow
+   types (squashfs/extfs/dir) via the ``{command}.conf`` file ``allow
    container`` settings.
 
 .. code::
@@ -752,17 +752,17 @@ Managing ECL public keys
 verification. This keyring can be administered using the ``--global``
 flag for the following commands:
 
--  ``singularity key import`` (root user only)
--  ``singularity key pull`` (root user only)
--  ``singularity key remove`` (root user only)
--  ``singularity key export``
--  ``singularity key list``
+-  ``{command} key import`` (root user only)
+-  ``{command} key pull`` (root user only)
+-  ``{command} key remove`` (root user only)
+-  ``{command} key export``
+-  ``{command} key list``
 
 .. note::
 
    For security reasons, it is not possible to import private keys into
    this global keyring because it must be accessible by users and is
-   stored in the file ``SYSCONFDIR/singularity/global-pgp-public``.
+   stored in the file ``SYSCONFDIR/{command}/global-pgp-public``.
 
 .. _gpu_library_configuration:
 
@@ -812,9 +812,9 @@ rather than use the ``nvliblist.conf`` approach.
 
 To use ``--nvccli`` a ``nvidia-container-cli`` binary must be
 present on the host. The binary that is run is controlled by the
-``nvidia-container-cli`` directive in ``singularity.conf``. During
+``nvidia-container-cli`` directive in ``{command}.conf``. During
 installation of {Project}, the ``./mconfig`` step will set the
-correct value in ``singularity.conf`` if ``nvidia-container-cli`` is
+correct value in ``{command}.conf`` if ``nvidia-container-cli`` is
 found on the ``$PATH``. If the value of ``nvidia-container-cli path`` is
 empty, {Project} will look for the binary on ``$PATH`` at runtime.
 
@@ -822,7 +822,7 @@ empty, {Project} will look for the binary on ``$PATH`` at runtime.
 
    To prevent use of ``nvidia-container-cli`` via the ``--nvccli`` flag,
    you may set ``nvidia-container-cli path`` to ``/bin/false`` in
-   ``singularity.conf``.
+   ``{command}.conf``.
 
 For security reasons, ``nvidia-container-cli`` cannot be used with privileged mode
 in a setuid installation of {Project}, it can only be used unprivileged. The
@@ -908,7 +908,7 @@ To do so, we would issue a command such as this:
 
 .. code::
 
-   $ sudo singularity capability add --user pinger CAP_NET_RAW
+   $ sudo {command} capability add --user pinger CAP_NET_RAW
 
 This means the user ``pinger`` has just been granted permissions
 (through Linux capabilities) to open raw sockets within {Project}
@@ -919,7 +919,7 @@ command.
 
 .. code::
 
-   $ sudo singularity capability list --user pinger
+   $ sudo {command} capability list --user pinger
    CAP_NET_RAW
 
 To take advantage of this new capability, the user ``pinger`` must also
@@ -928,7 +928,7 @@ request the capability when executing a container with the
 
 .. code::
 
-   $ singularity exec --add-caps CAP_NET_RAW \
+   $ {command} exec --add-caps CAP_NET_RAW \
      library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
    PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
    64 bytes from 8.8.8.8: icmp_seq=1 ttl=52 time=73.1 ms
@@ -943,7 +943,7 @@ appropriate Linux capability like so:
 
 .. code::
 
-   $ sudo singularity capability drop --user pinger CAP_NET_RAW
+   $ sudo {command} capability drop --user pinger CAP_NET_RAW
 
 Now if ``pinger`` tries to use ``CAP_NET_RAW``, {Project} will not
 give the capability to the container and ``ping`` will fail to create a
@@ -951,7 +951,7 @@ socket:
 
 .. code::
 
-   $ singularity exec --add-caps CAP_NET_RAW \
+   $ {command} exec --add-caps CAP_NET_RAW \
      library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
    WARNING: not authorized to add capability: CAP_NET_RAW
    ping: socket: Operation not permitted
@@ -991,7 +991,7 @@ Use the ``--security`` option to invoke the container like:
 
 .. code::
 
-   $ sudo singularity shell --security seccomp:/home/david/my.json my_container.sif
+   $ sudo {command} shell --security seccomp:/home/david/my.json my_container.sif
 
 For more insight into security options, network options, cgroups,
 capabilities, etc, please check the `Userdocs
@@ -1004,7 +1004,7 @@ capabilities, etc, please check the `Userdocs
 *************
 
 System-wide remote endpoints are defined in a configuration file
-typically located at ``/usr/local/etc/singularity/remote.yaml`` (this
+typically located at ``/usr/local/etc/{command}/remote.yaml`` (this
 location may vary depending on installation parameters) and can be
 managed by administrators with the ``remote`` command group.
 
@@ -1036,7 +1036,7 @@ system-wide remote endpoint:
 
 .. code::
 
-   $ sudo singularity remote add --global company-remote https://enterprise.example.com
+   $ sudo {command} remote add --global company-remote https://enterprise.example.com
    INFO:    Remote "company-remote" added.
    INFO:    Global option detected. Will not automatically log into remote.
 
@@ -1044,13 +1044,13 @@ Conversely, to remove a system-wide endpoint:
 
 .. code::
 
-   $ sudo singularity remote remove --global company-remote
+   $ sudo {command} remote remove --global company-remote
    INFO:    Remote "company-remote" removed.
 
 .. note::
 
    Once users log in to a system wide endpoint, a copy of the endpoint
-   will be listed in a their ``~/.singularity/remote.yaml`` file. This
+   will be listed in a their ``~/.{command}/remote.yaml`` file. This
    means modifications or removal of the system-wide endpoint will not
    be reflected in the users configuration unless they remove the
    endpoint themselves.
@@ -1064,9 +1064,9 @@ remote the only usable remote for the system by using the
 
 .. code::
 
-   $ sudo singularity remote use --exclusive company-remote
+   $ sudo {command} remote use --exclusive company-remote
    INFO:    Remote "company-remote" now in use.
-   $ singularity remote list
+   $ {command} remote list
    Cloud Services Endpoints
    ========================
 
@@ -1092,7 +1092,7 @@ added by specifying the ``--insecure`` flag:
 
 .. code::
 
-   $ sudo singularity remote add --global --insecure test http://test.example.com
+   $ sudo {command} remote add --global --insecure test http://test.example.com
    INFO:    Remote "test" added.
    INFO:    Global option detected. Will not automatically log into remote.
 

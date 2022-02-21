@@ -48,7 +48,7 @@
 <li class="toctree-l1"><a class="reference internal" href="admin_quickstart.html">Admin Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Apptainer</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration files</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#singularity-conf">singularity.conf</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#apptainer-conf">apptainer.conf</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#setuid-and-capabilities">Setuid and Capabilities</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loop-devices">Loop Devices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#namespace-options">Namespace Options</a></li>
@@ -127,7 +127,7 @@
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>Apptainer Configuration Files</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/singularity-admindocs/blob/master/configfiles.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-admindocs/blob/master/configfiles.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -136,32 +136,32 @@
            <div itemprop="articleBody">
              
   <section id="apptainer-configuration-files">
-<span id="singularity-configfiles"></span><h1>Apptainer Configuration Files<a class="headerlink" href="#apptainer-configuration-files" title="Permalink to this headline"></a></h1>
+<span id="apptainer-configfiles"></span><h1>Apptainer Configuration Files<a class="headerlink" href="#apptainer-configuration-files" title="Permalink to this headline"></a></h1>
 <p>As a Apptainer Administrator, you will have access to various
 configuration files, that will let you manage container resources, set
 security restrictions and configure network options etc, when
 installing Apptainer across the system. All of these files can be
-found in <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity</span></code> by default for installations
+found in <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/apptainer</span></code> by default for installations
 from source (though the location may differ based on options passed
 during the installation). For installations from RPM or Deb packages
-you will find the configuration files in <code class="docutils literal notranslate"><span class="pre">/etc/singularity</span></code>. This
+you will find the configuration files in <code class="docutils literal notranslate"><span class="pre">/etc/apptainer</span></code>. This
 section will describe the configuration files and the various
 parameters contained by them.</p>
-<section id="singularity-conf">
-<h2>singularity.conf<a class="headerlink" href="#singularity-conf" title="Permalink to this headline"></a></h2>
+<section id="apptainer-conf">
+<h2>apptainer.conf<a class="headerlink" href="#apptainer-conf" title="Permalink to this headline"></a></h2>
 <p>Most of the configuration options are set using the file
-<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> that defines the global configuration for
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> that defines the global configuration for
 Apptainer across the entire system. Using this file, system
 administrators can influence the behavior of Apptainer and
 restrict the functionality that users can access. As a security
 measure, for <code class="docutils literal notranslate"><span class="pre">setuid</span></code> installations of Apptainer,
-<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> must be owned by root and must not be writable by
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> must be owned by root and must not be writable by
 users or Apptainer will refuse to run. This is not the case for
 <code class="docutils literal notranslate"><span class="pre">non-setuid</span></code> installations that will only ever execute with user
 privilege and thus do not require such limitations.</p>
-<p>The options set via <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> are listed below. Options are
+<p>The options set via <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> are listed below. Options are
 grouped together based on relevance. The actual order of options within
-<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> may differ.</p>
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> may differ.</p>
 <section id="setuid-and-capabilities">
 <h3>Setuid and Capabilities<a class="headerlink" href="#setuid-and-capabilities" title="Permalink to this headline"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span></code>: To use all features of Apptainer containers,
@@ -179,7 +179,7 @@ Options include:</p>
 <li><p>full: all capabilities are maintained, this gives the same behavior
 as the <code class="docutils literal notranslate"><span class="pre">--keep-privs</span></code> option.</p></li>
 <li><p>file: only capabilities granted in
-<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity/capabilities/user.root</span></code> are maintained.</p></li>
+<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/apptainer/capabilities/user.root</span></code> are maintained.</p></li>
 <li><p>no: no capabilities are maintained, this gives the same behavior as
 the <code class="docutils literal notranslate"><span class="pre">--no-privs</span></code> option.</p></li>
 </ul>
@@ -305,7 +305,7 @@ identical:</p>
 </pre></div>
 </div>
 <p>Or you can specify different source and destination locations using:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bind</span> <span class="n">path</span> <span class="o">=</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">singularity</span><span class="o">/</span><span class="n">default</span><span class="o">-</span><span class="n">nsswitch</span><span class="o">.</span><span class="n">conf</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nsswitch</span><span class="o">.</span><span class="n">conf</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bind</span> <span class="n">path</span> <span class="o">=</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apptainer</span><span class="o">/</span><span class="n">default</span><span class="o">-</span><span class="n">nsswitch</span><span class="o">.</span><span class="n">conf</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nsswitch</span><span class="o">.</span><span class="n">conf</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">user</span> <span class="pre">bind</span> <span class="pre">control</span></code>: This allows admins to decide if users can define
@@ -427,10 +427,10 @@ section of the user guide for more information.</p>
 <h3>External Binaries<a class="headerlink" href="#external-binaries" title="Permalink to this headline"></a></h3>
 <p>Apptainer calls a number of external binaries for full
 functionality. The paths for certain critical binaries can be set in
-<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>. At build time, <code class="docutils literal notranslate"><span class="pre">mconfig</span></code> will set initial values
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>. At build time, <code class="docutils literal notranslate"><span class="pre">mconfig</span></code> will set initial values
 for these, by searching on the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> environment variable. You can
 override which external binaries are called by changing the value in
-<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">cryptsetup</span> <span class="pre">path</span></code>: Path to the cryptsetup executable, used to work
 with encrypted containers. Must be owned by root for security reasons.</p>
 <p><code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">path</span></code>: Path to the ldconfig executable, used to find GPU
@@ -438,7 +438,7 @@ libraries. Must be owned by root for security reasons.</p>
 <p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span> <span class="pre">path</span></code>: Path to the nvidia-container-cli
 executable, used to find GPU libraries and configure the container when
 running with the <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option.</p>
-<p>For the following additional binaries, if the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> entry
+<p>For the following additional binaries, if the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> entry
 is left blank, then <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> will be searched at runtime.</p>
 <p><code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">path</span></code>: Path to the go executable, used to compile plugins.</p>
 <p><code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">path</span></code>: Path to the mksquashfs executable, used to create
@@ -475,33 +475,33 @@ when concurrent downloads are enabled.</p>
 <p>In order to manage this configuration file, Apptainer has a <code class="docutils literal notranslate"><span class="pre">config</span>
 <span class="pre">global</span></code> command group that allows you to get, set, reset, and unset
 values through the CLI. It’s important to note that these commands must
-be run with elevated privileges because the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> can
+be run with elevated privileges because the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> can
 only be modified by an administrator.</p>
 <section id="example">
 <h4>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h4>
 <p>In this example we will changing the <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">path</span></code> option described
 above. First we can see the current list of bind paths set within our
 system configuration:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity config global --get &quot;bind path&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config global --get &quot;bind path&quot;
 /etc/localtime,/etc/hosts
 </pre></div>
 </div>
 <p>Now we can add a new path and verify it was successfully added:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity config global --set &quot;bind path&quot; /etc/resolv.conf
-$ sudo singularity config global --get &quot;bind path&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config global --set &quot;bind path&quot; /etc/resolv.conf
+$ sudo apptainer config global --get &quot;bind path&quot;
 /etc/resolv.conf,/etc/localtime,/etc/hosts
 </pre></div>
 </div>
 <p>From here we can remove a path with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity config global --unset &quot;bind path&quot; /etc/localtime
-$ sudo singularity config global --get &quot;bind path&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config global --unset &quot;bind path&quot; /etc/localtime
+$ sudo apptainer config global --get &quot;bind path&quot;
 /etc/resolv.conf,/etc/hosts
 </pre></div>
 </div>
 <p>If we want to reset the option to the default at installation, then we
 can reset it with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity config global --reset &quot;bind path&quot;
-$ sudo singularity config global --get &quot;bind path&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config global --reset &quot;bind path&quot;
+$ sudo apptainer config global --get &quot;bind path&quot;
 /etc/localtime,/etc/hosts
 </pre></div>
 </div>
@@ -511,7 +511,7 @@ conjunction with the above commands. Instead of writing to the
 configuration file, it will output what would have been written to the
 configuration file if the command had been run without the <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code>
 option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity config global --dry-run --set &quot;bind path&quot; /etc/resolv.conf
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config global --dry-run --set &quot;bind path&quot; /etc/resolv.conf
 # APPTAINER.CONF
 # This is the global configuration file for Apptainer. This file controls
 [...]
@@ -521,12 +521,12 @@ option:</p>
 # the container. The file or directory must exist within the container on
 # which to attach to. you can specify a different source and destination
 # path (respectively) with a colon; otherwise source and dest are the same.
-# NOTE: these are ignored if singularity is invoked with --contain.
+# NOTE: these are ignored if apptainer is invoked with --contain.
 bind path = /etc/resolv.conf
 bind path = /etc/localtime
 bind path = /etc/hosts
 [...]
-$ sudo singularity config global --get &quot;bind path&quot;
+$ sudo apptainer config global --get &quot;bind path&quot;
 /etc/localtime,/etc/hosts
 </pre></div>
 </div>
@@ -577,7 +577,7 @@ system.</p>
 <p>To apply resource limits to a container, use the <code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code>
 flag, which takes a path to a TOML file specifying the cgroups
 configuration to be applied:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity shell --apply-cgroups /path/to/cgroups.toml my_container.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell --apply-cgroups /path/to/cgroups.toml my_container.sif
 </pre></div>
 </div>
 <div class="admonition note">
@@ -594,19 +594,19 @@ of your cgroups TOML file:</p>
 </pre></div>
 </div>
 <p>Start your container, applying the toml file, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity run --apply-cgroups path/to/cgroups.toml library://alpine
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer run --apply-cgroups path/to/cgroups.toml library://alpine
 </pre></div>
 </div>
 <p>After that, you can verify that the container is only using 500MB of
 memory. This example assumes that there is only one running container.
 If you are running multiple containers you will find multiple cgroups
-trees under the <code class="docutils literal notranslate"><span class="pre">singularity</span></code> directory.</p>
+trees under the <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> directory.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># cgroups v1
-$ cat /sys/fs/cgroup/memory/singularity/*/memory.limit_in_bytes
+$ cat /sys/fs/cgroup/memory/apptainer/*/memory.limit_in_bytes
   524288000
 
 # cgroups v2 - note translation of memory.limit_in_bytes -&gt; memory.max
-$ cat /sys/fs/cgroup/singularity/*/memory.max
+$ cat /sys/fs/cgroup/apptainer/*/memory.max
 524288000
 </pre></div>
 </div>
@@ -724,7 +724,7 @@ filesystem and by checking against a list of signing entities.</p>
 <p class="admonition-title">Warning</p>
 <p>The ECL configuration applies to SIF container images only. To lock
 down execution fully you should disable execution of other container
-types (squashfs/extfs/dir) via the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> file <code class="docutils literal notranslate"><span class="pre">allow</span>
+types (squashfs/extfs/dir) via the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> file <code class="docutils literal notranslate"><span class="pre">allow</span>
 <span class="pre">container</span></code> settings.</p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">execgroup</span><span class="p">]]</span>
@@ -755,17 +755,17 @@ pass ECL checks because they are insecure.</p>
 verification. This keyring can be administered using the <code class="docutils literal notranslate"><span class="pre">--global</span></code>
 flag for the following commands:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">import</span></code> (root user only)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">pull</span></code> (root user only)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">remove</span></code> (root user only)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">export</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">list</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">key</span> <span class="pre">import</span></code> (root user only)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">key</span> <span class="pre">pull</span></code> (root user only)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">key</span> <span class="pre">remove</span></code> (root user only)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">key</span> <span class="pre">export</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">key</span> <span class="pre">list</span></code></p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For security reasons, it is not possible to import private keys into
 this global keyring because it must be accessible by users and is
-stored in the file <code class="docutils literal notranslate"><span class="pre">SYSCONFDIR/singularity/global-pgp-public</span></code>.</p>
+stored in the file <code class="docutils literal notranslate"><span class="pre">SYSCONFDIR/apptainer/global-pgp-public</span></code>.</p>
 </div>
 </section>
 </section>
@@ -804,16 +804,16 @@ will call out to <code class="docutils literal notranslate"><span class="pre">nv
 rather than use the <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> approach.</p>
 <p>To use <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> a <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> binary must be
 present on the host. The binary that is run is controlled by the
-<code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> directive in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>. During
+<code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> directive in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>. During
 installation of Apptainer, the <code class="docutils literal notranslate"><span class="pre">./mconfig</span></code> step will set the
-correct value in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> if <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> is
+correct value in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> if <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> is
 found on the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>. If the value of <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span> <span class="pre">path</span></code> is
 empty, Apptainer will look for the binary on <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> at runtime.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To prevent use of <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> via the <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> flag,
 you may set <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span> <span class="pre">path</span></code> to <code class="docutils literal notranslate"><span class="pre">/bin/false</span></code> in
-<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>.</p>
 </div>
 <p>For security reasons, <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> cannot be used with privileged mode
 in a setuid installation of Apptainer, it can only be used unprivileged. The
@@ -886,7 +886,7 @@ maintained by Apptainer in order to manage these capabilities. The
 <code class="docutils literal notranslate"><span class="pre">pinger</span></code>) capabilities to open raw sockets so that they can use
 <code class="docutils literal notranslate"><span class="pre">ping</span></code> in a container where the binary is controlled via capabilities.</p>
 <p>To do so, we would issue a command such as this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity capability add --user pinger CAP_NET_RAW
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer capability add --user pinger CAP_NET_RAW
 </pre></div>
 </div>
 <p>This means the user <code class="docutils literal notranslate"><span class="pre">pinger</span></code> has just been granted permissions
@@ -894,14 +894,14 @@ maintained by Apptainer in order to manage these capabilities. The
 containers.</p>
 <p>We can check that this change is in effect with the <code class="docutils literal notranslate"><span class="pre">capability</span> <span class="pre">list</span></code>
 command.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity capability list --user pinger
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer capability list --user pinger
 CAP_NET_RAW
 </pre></div>
 </div>
 <p>To take advantage of this new capability, the user <code class="docutils literal notranslate"><span class="pre">pinger</span></code> must also
 request the capability when executing a container with the
 <code class="docutils literal notranslate"><span class="pre">--add-caps</span></code> flag. <code class="docutils literal notranslate"><span class="pre">pinger</span></code> would need to run a command like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec --add-caps CAP_NET_RAW \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW \
   library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
 PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=52 time=73.1 ms
@@ -914,13 +914,13 @@ rtt min/avg/max/mdev = 73.178/73.178/73.178/0.000 ms
 <p>If we decide that it is no longer necessary to allow the user <code class="docutils literal notranslate"><span class="pre">pinger</span></code>
 to open raw sockets within Apptainer containers, we can revoke the
 appropriate Linux capability like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity capability drop --user pinger CAP_NET_RAW
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer capability drop --user pinger CAP_NET_RAW
 </pre></div>
 </div>
 <p>Now if <code class="docutils literal notranslate"><span class="pre">pinger</span></code> tries to use <code class="docutils literal notranslate"><span class="pre">CAP_NET_RAW</span></code>, Apptainer will not
 give the capability to the container and <code class="docutils literal notranslate"><span class="pre">ping</span></code> will fail to create a
 socket:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec --add-caps CAP_NET_RAW \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW \
   library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
 WARNING: not authorized to add capability: CAP_NET_RAW
 ping: socket: Operation not permitted
@@ -953,7 +953,7 @@ syscalls related to the current architecture where it’s been executed.
 The <code class="docutils literal notranslate"><span class="pre">include</span></code>/<code class="docutils literal notranslate"><span class="pre">exclude</span></code>-&gt; <code class="docutils literal notranslate"><span class="pre">caps</span></code> section will include/exclude the
 listed system calls if the user has the associated capability.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">--security</span></code> option to invoke the container like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity shell --security seccomp:/home/david/my.json my_container.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell --security seccomp:/home/david/my.json my_container.sif
 </pre></div>
 </div>
 <p>For more insight into security options, network options, cgroups,
@@ -963,7 +963,7 @@ capabilities, etc, please check the <a class="reference external" href="https://
 <section id="remote-yaml">
 <h2>remote.yaml<a class="headerlink" href="#remote-yaml" title="Permalink to this headline"></a></h2>
 <p>System-wide remote endpoints are defined in a configuration file
-typically located at <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity/remote.yaml</span></code> (this
+typically located at <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/apptainer/remote.yaml</span></code> (this
 location may vary depending on installation parameters) and can be
 managed by administrators with the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group.</p>
 <section id="remote-endpoints">
@@ -983,20 +983,20 @@ services.</p>
 <p><strong>Examples</strong></p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group with the <code class="docutils literal notranslate"><span class="pre">--global</span></code> flag to create a
 system-wide remote endpoint:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity remote add --global company-remote https://enterprise.example.com
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer remote add --global company-remote https://enterprise.example.com
 INFO:    Remote &quot;company-remote&quot; added.
 INFO:    Global option detected. Will not automatically log into remote.
 </pre></div>
 </div>
 <p>Conversely, to remove a system-wide endpoint:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity remote remove --global company-remote
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer remote remove --global company-remote
 INFO:    Remote &quot;company-remote&quot; removed.
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Once users log in to a system wide endpoint, a copy of the endpoint
-will be listed in a their <code class="docutils literal notranslate"><span class="pre">~/.singularity/remote.yaml</span></code> file. This
+will be listed in a their <code class="docutils literal notranslate"><span class="pre">~/.apptainer/remote.yaml</span></code> file. This
 means modifications or removal of the system-wide endpoint will not
 be reflected in the users configuration unless they remove the
 endpoint themselves.</p>
@@ -1006,9 +1006,9 @@ endpoint themselves.</p>
 <p>Apptainer has the ability for an administrator to make a
 remote the only usable remote for the system by using the
 <code class="docutils literal notranslate"><span class="pre">--exclusive</span></code> flag:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity remote use --exclusive company-remote
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer remote use --exclusive company-remote
 INFO:    Remote &quot;company-remote&quot; now in use.
-$ singularity remote list
+$ apptainer remote list
 Cloud Services Endpoints
 ========================
 
@@ -1032,7 +1032,7 @@ https://keys.example.com  YES     NO        1*
 <p>If you are using a endpoint that exposes its
 service discovery file over an insecure HTTP connection only, it can be
 added by specifying the <code class="docutils literal notranslate"><span class="pre">--insecure</span></code> flag:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo singularity remote add --global --insecure test http://test.example.com
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer remote add --global --insecure test http://test.example.com
 INFO:    Remote &quot;test&quot; added.
 INFO:    Global option detected. Will not automatically log into remote.
 </pre></div>

@@ -8,7 +8,7 @@ to configuration files. More information, including alternate
 installation options and detailed configuration options can be found
 later in this guide.
 
-.. _singularity-architecture:
+.. _{command}-architecture:
 
 *******************************
  Architecture of {Project}
@@ -37,7 +37,7 @@ workflows. Where more complete isolation is important, {Project}
 can use additional Linux namespaces and other security and resource
 limits to accomplish this.
 
-.. _singularity-security:
+.. _{command}-security:
 
 ************************
  {Project} Security
@@ -82,7 +82,7 @@ runs small amounts of privileged container setup code via a
 {Project} can perform filesystem loop mounts and other operations
 that need privilege. The setuid flow is the default mode of operation,
 but :ref:`can be disabled <install-nonsetuid>` on build, or in the
-``singularity.conf`` configuration file if required.
+``{command}.conf`` configuration file if required.
 
 .. note::
 
@@ -201,9 +201,9 @@ the installation.
 .. code::
 
     $ export VERSION={InstallationVersion} && # adjust this as necessary \
-        wget https://github.com/{orgrepo}/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
-        tar -xzf singularity-${VERSION}.tar.gz && \
-        cd singularity
+        wget https://github.com/{orgrepo}/releases/download/v${VERSION}/{command}-${VERSION}.tar.gz && \
+        tar -xzf {command}-${VERSION}.tar.gz && \
+        cd {command}
 
 Compile & Install {Project}
 ===============================
@@ -224,7 +224,7 @@ directory hierarchy. You can specify a custom directory with the
 
 .. code::
 
-   $ ./mconfig --prefix=/opt/singularity
+   $ ./mconfig --prefix=/opt/{command}
 
 This option can be useful if you want to install multiple versions of
 {Project}, install a personal version of {Project} on a shared
@@ -236,7 +236,7 @@ some of the most common options that you may need to use when building
 {Project} from source.
 
 -  ``--sysconfdir``: Install read-only config files in sysconfdir. This
-   option is important if you need the ``singularity.conf`` file or
+   option is important if you need the ``{command}.conf`` file or
    other configuration files in a custom location.
 
 -  ``--localstatedir``: Set the state directory where containers are
@@ -252,19 +252,19 @@ some of the most common options that you may need to use when building
  Configuration
 ***************
 
-{Project} is configured using files under ``etc/singularity`` in
+{Project} is configured using files under ``etc/{command}`` in
 your ``--prefix``, or ``--syconfdir`` if you used that option with
 ``mconfig``. In a default installation from source without a
 ``--prefix`` set you will find them under
-``/usr/local/etc/singularity``. In a default installation from RPM or Deb packages you will find them under ``/etc/singularity``.
+``/usr/local/etc/{command}``. In a default installation from RPM or Deb packages you will find them under ``/etc/{command}``.
 
 You can edit these files directly, or using the ``{Project} config
 global`` command as the root user to manage them.
 
-``singularity.conf`` contains the majority of options controlling the
+``{command}.conf`` contains the majority of options controlling the
 runtime behavior of {Project}. Additional files control security,
 network, and resource configuration. Head over to the
-:ref:`Configuration files <singularity_configfiles>` section where the
+:ref:`Configuration files <{command}_configfiles>` section where the
 files and configuration options are discussed.
 
 ********************
@@ -276,7 +276,7 @@ Sylabs Container Library:
 
 .. code::
 
-   $ singularity exec library://alpine cat /etc/alpine-release
+   $ {command} exec library://alpine cat /etc/alpine-release
    3.9.2
 
 See the `user guide
