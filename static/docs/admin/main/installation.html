@@ -93,7 +93,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#apptainer-vagrant-box">Apptainer Vagrant Box</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#apptainer-docker-image">Apptainer Docker Image</a></li>
 </ul>
 </li>
 </ul>
@@ -791,28 +790,6 @@ will need to destroy the VM and delete the Vagrantfile.</p>
 </div>
 <p>Of course, you can also start with a plain OS Vagrant box as a base and
 then install Apptainer using one of the above methods for Linux.</p>
-</section>
-<section id="apptainer-docker-image">
-<h3>Apptainer Docker Image<a class="headerlink" href="#apptainer-docker-image" title="Permalink to this headline"></a></h3>
-<p>It is possible to use a Dockerized Apptainer, here is a sample
-<code class="docutils literal notranslate"><span class="pre">compose.yaml</span></code> for use with Docker Compose:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">services</span><span class="p">:</span>
-  <span class="n">apptainer</span><span class="p">:</span>
-    <span class="n">image</span><span class="p">:</span> <span class="n">quay</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">singularity</span><span class="o">/</span><span class="n">singularity</span><span class="p">:</span><span class="n">v3</span><span class="mf">.7.4</span><span class="o">-</span><span class="n">slim</span>
-    <span class="n">stdin_open</span><span class="p">:</span> <span class="n">true</span>
-    <span class="n">tty</span><span class="p">:</span> <span class="n">true</span>
-    <span class="n">privileged</span><span class="p">:</span> <span class="n">true</span>
-    <span class="n">volumes</span><span class="p">:</span>
-      <span class="o">-</span> <span class="o">.</span><span class="p">:</span><span class="o">/</span><span class="n">root</span>
-    <span class="n">entrypoint</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;/bin/sh&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>Apptainer in Docker can have various disadvantages, but basic
-container operations will work. Currently, the intended use case is
-continuous integration, meaning that you should be able to build a
-Apptainer container using this Docker Compose file. For more
-information see <a class="reference external" href="https://github.com/sylabs/singularity-admindocs/issues/5#issuecomment-852307931">issue#5</a>
-and the image’s source <a class="reference external" href="https://github.com/singularityhub/singularity-docker#use-cases">repo</a></p>
 </section>
 </section>
 </section>
