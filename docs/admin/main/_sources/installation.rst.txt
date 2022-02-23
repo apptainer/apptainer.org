@@ -340,7 +340,7 @@ On Ubuntu or Debian install the following dependencies:
 Install Go
 ----------
 
-{Project} v3 is written primarily in Go, and you will need Go 1.16
+{Project} is written primarily in Go, and you will need Go 1.16
 or above installed to compile it from source.
 
 This is one of several ways to `install and configure Go
