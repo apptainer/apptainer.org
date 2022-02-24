@@ -139,11 +139,11 @@ verification.</p>
 <h2>Key import command<a class="headerlink" href="#key-import-command" title="Permalink to this headline"></a></h2>
 <p>Apptainer allows you to import keys reading either from binary or
 armored key format and automatically detect if it is a private or public
-key and add it to the correspondent local keystore.</p>
+key and add it to the correspondent local keyring.</p>
 <p>To give a quick view on how it works, we will first consider the case in
 which a user wants to import a secret (private) key to the local
-keystore.</p>
-<p>First we will check what’s the status of the local keystore (which keys
+keyring.</p>
+<p>First we will check what’s the status of the local keyring (which keys
 are stored by the moment before importing a new key).</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>$ apptainer key list --secret
 </pre></div>
@@ -154,14 +154,14 @@ are stored by the moment before importing a new key).</p>
 secret or private local keyring as output.</p>
 </div>
 <p>The output will look as it follows:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Private key listing (/home/joana/.apptainer/sypgp/pgp-secret):
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Private key listing (/home/joana/.apptainer/keys/pgp-secret):
 
-<span class="m">0</span>) U: Johnny Cash (none) &lt;cash@sylabs.io&gt;
+<span class="m">0</span>) U: Johnny Cash (none) &lt;cash@example.com&gt;
 C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">22</span>:<span class="m">22</span>:<span class="m">28</span> +<span class="m">0200</span> CEST
 F: 47282BDC661F58FA4BEBEF47CA576CBD8EF1A2B4
 L: <span class="m">3072</span>
 --------
-<span class="m">1</span>) U: John Green (none) &lt;john@sylabs.io&gt;
+<span class="m">1</span>) U: John Green (none) &lt;john@example.com&gt;
 C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">13</span>:<span class="m">08</span>:<span class="m">45</span> +<span class="m">0200</span> CEST
 F: 5720799FE7B048CF36FAB8445EE1E2BD7B6342C5
 L: <span class="m">1024</span>
@@ -172,7 +172,7 @@ L: <span class="m">1024</span>
 <p class="admonition-title">Note</p>
 <p>Remember that running that same command but with sudo privilege, will
 give you a totally different list since it will be the correspondent
-keystore from user <code class="docutils literal notranslate"><span class="pre">root</span></code></p>
+keyring from user <code class="docutils literal notranslate"><span class="pre">root</span></code></p>
 </div>
 <p>After this, you can simply import the key you need by adding the exact
 location to the file, let’s say you own a gpg key file named
@@ -188,7 +188,7 @@ directory. You can specify any location to the file.</p>
 </div>
 <p>Since you’re importing a private (secret) key, you will need to specify
 the passphrase related to it and then a new passphrase to be added on
-your local keystore.</p>
+your local keyring.</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Enter your old password :
 Enter a new password for this key :
 Retype your passphrase :
@@ -197,19 +197,19 @@ Key with fingerprint 8C10B902F438E4D504C3ACF689FCFFAED5F34A77 successfully added
 </div>
 <p>After this you can see if that key was correctly added to your local
 keystore by running <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">key</span> <span class="pre">list</span> <span class="pre">-s</span></code> command:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Private key listing (/home/joana/.apptainer/sypgp/pgp-secret):
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Private key listing (/home/joana/.apptainer/keys/pgp-secret):
 
-  <span class="m">0</span>) U: Johnny Cash (none) &lt;cash@sylabs.io&gt;
+  <span class="m">0</span>) U: Johnny Cash (none) &lt;cash@example.com&gt;
   C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">22</span>:<span class="m">22</span>:<span class="m">28</span> +<span class="m">0200</span> CEST
   F: 47282BDC661F58FA4BEBEF47CA576CBD8EF1A2B4
   L: <span class="m">3072</span>
   --------
-  <span class="m">1</span>) U: John Green (none) &lt;john@sylabs.io&gt;
+  <span class="m">1</span>) U: John Green (none) &lt;john@example.com&gt;
   C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">13</span>:<span class="m">08</span>:<span class="m">45</span> +<span class="m">0200</span> CEST
   F: 5720799FE7B048CF36FAB8445EE1E2BD7B6342C5
   L: <span class="m">1024</span>
   --------
-  <span class="m">3</span>) U: Pinkie Pie (Eternal chaos comes with chocolate rain!) &lt;balloons@sylabs.io&gt;
+  <span class="m">3</span>) U: Pinkie Pie (Eternal chaos comes with chocolate rain!) &lt;balloons@example.com&gt;
   C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">26</span> <span class="m">12</span>:<span class="m">07</span>:<span class="m">07</span> +<span class="m">0200</span> CEST
   F: 8C10B902F438E4D504C3ACF689FCFFAED5F34A77
   L: <span class="m">1024</span>
@@ -229,9 +229,9 @@ key to be imported is either public or private.</p>
 <section id="key-export-command">
 <span id="key-export"></span><h2>Key export command<a class="headerlink" href="#key-export-command" title="Permalink to this headline"></a></h2>
 <p>The key export command allows you to export a key that is on your local
-keystore. This key could be either private or public, and the key can be
+keyring. This key could be either private or public, and the key can be
 exported on <code class="docutils literal notranslate"><span class="pre">ASCII</span></code> armored format or on binary format. Of course to
-identify the keystore and the format the syntax varies from the <code class="docutils literal notranslate"><span class="pre">key</span>
+identify the keyring and the format the syntax varies from the <code class="docutils literal notranslate"><span class="pre">key</span>
 <span class="pre">import</span></code> command.</p>
 <p>For example to export a public key in binary format you can run:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>$ apptainer key export 8C10B902F438E4D504C3ACF689FCFFAED5F34A77 $HOME/mykey.asc
@@ -256,8 +256,8 @@ the key, since the fingerprint is the same.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Exporting keys will not change the status of your local keystore or
-keyring. This will just obtain the content of the keys and save it on
+<p>Exporting keys will not change the status of your local keyring.
+This will just obtain the content of the keys and save it on
 a local file on your host.</p>
 </div>
 </section>
