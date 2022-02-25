@@ -103,6 +103,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#keyserver-configuration">Keyserver Configuration</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#dmtcp-conf-yaml">dmtcp-conf.yaml</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="user_namespace.html">User Namespaces &amp; Fakeroot</a></li>
@@ -1057,6 +1058,47 @@ of key servers used to verify container signatures by default.</p>
 <p>For more details on the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group and managing
 keyservers, please check the <a class="reference external" href="https://apptainer.org/docs/user/main/endpoint.html">Remote Userdocs</a>.</p>
 </section>
+</section>
+<section id="dmtcp-conf-yaml">
+<span id="dmtcp-configuration"></span><h2>dmtcp-conf.yaml<a class="headerlink" href="#dmtcp-conf-yaml" title="Permalink to this headline"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">dmtcp-conf.yaml</span></code> is a YAML configuration file that is used to specify the
+libraries and executables that need to be injected into the container, without
+path information. This configuration is used when running Apptainer instances
+with application checkpointing ( e.g. <code class="docutils literal notranslate"><span class="pre">--dmctp-launch</span></code>, <code class="docutils literal notranslate"><span class="pre">dmtcp-restart</span></code>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This feature is marked as <strong>experimental</strong> to allow flexibility as community
+feedback may warrant breaking changes to improve the overall usability for
+this feature set as it matures.</p>
+</div>
+<p>Binaries are specified as an array under the <code class="docutils literal notranslate"><span class="pre">bins</span></code> key and are found by
+searching <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># List binaries to bind into the container here</span>
+<span class="c1"># In shared environments you should ensure that permissions on these files</span>
+<span class="c1"># exclude writing by non-privileged users.</span>
+<span class="n">bins</span><span class="p">:</span>
+  <span class="o">-</span> <span class="s2">&quot;dmtcp_command&quot;</span>
+  <span class="o">-</span> <span class="s2">&quot;dmtcp_discover_rm&quot;</span>
+  <span class="o">-</span> <span class="s2">&quot;dmtcp_launch&quot;</span>
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Libraries are specified as an array under the <code class="docutils literal notranslate"><span class="pre">libs</span></code> key and should be
+specified without version information, i.e.
+<code class="docutils literal notranslate"><span class="pre">libname.so</span></code>, and are resolved using <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># List libraries to bind into the container here. Library names must end in &quot;.so&quot;</span>
+<span class="n">libs</span><span class="p">:</span>
+  <span class="o">-</span> <span class="s2">&quot;libdmtcp_alloc.so&quot;</span>
+  <span class="o">-</span> <span class="s2">&quot;libdmtcp_dl.so&quot;</span>
+  <span class="o">-</span> <span class="s2">&quot;libdmtcp_modify-env.so&quot;</span>
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If you receive warnings that binaries or libraries are not found, ensure
+that they are in a system path (binaries), or available in paths
+configured in <code class="docutils literal notranslate"><span class="pre">/etc/ld.so.conf</span></code> (libraries).</p>
+<p>For more details on the checkpointing features in Apptainer, please check the
+<a class="reference external" href="https://apptainer.org/docs/user/main/checkpoint.html">Checkpoint Userdocs</a>.</p>
 </section>
 </section>
 

@@ -1119,3 +1119,55 @@ of key servers used to verify container signatures by default.
 For more details on the ``remote`` command group and managing
 keyservers, please check the `Remote Userdocs
 <{userdocs}/endpoint.html>`_.
+
+
+.. _dmtcp_configuration:
+
+*****************
+ dmtcp-conf.yaml
+*****************
+
+The ``dmtcp-conf.yaml`` is a YAML configuration file that is used to specify the
+libraries and executables that need to be injected into the container, without
+path information. This configuration is used when running {Project} instances
+with application checkpointing ( e.g. ``--dmctp-launch``, ``dmtcp-restart``).
+
+.. note::
+
+    This feature is marked as **experimental** to allow flexibility as community
+    feedback may warrant breaking changes to improve the overall usability for
+    this feature set as it matures.
+
+Binaries are specified as an array under the ``bins`` key and are found by
+searching ``$PATH``:
+
+.. code::
+
+   # List binaries to bind into the container here
+   # In shared environments you should ensure that permissions on these files
+   # exclude writing by non-privileged users.
+   bins:
+     - "dmtcp_command"
+     - "dmtcp_discover_rm"
+     - "dmtcp_launch"
+   [...]
+
+Libraries are specified as an array under the ``libs`` key and should be
+specified without version information, i.e.
+``libname.so``, and are resolved using ``ldconfig``.
+
+.. code::
+
+   # List libraries to bind into the container here. Library names must end in ".so"
+   libs:
+     - "libdmtcp_alloc.so"
+     - "libdmtcp_dl.so"
+     - "libdmtcp_modify-env.so"
+   [...]
+
+If you receive warnings that binaries or libraries are not found, ensure
+that they are in a system path (binaries), or available in paths
+configured in ``/etc/ld.so.conf`` (libraries).
+
+For more details on the checkpointing features in {Project}, please check the
+`Checkpoint Userdocs <{userdocs}/checkpoint.html>`_.
