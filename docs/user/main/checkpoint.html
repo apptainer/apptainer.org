@@ -139,16 +139,14 @@ environment failures, random hardware failures or job premption.</p>
 feedback may warrant breaking changes to improve the overall usability for
 this feature set as it matures.</p>
 </div>
-<p>In order to enable checkpointing as a feature, the <cite>DMTCP
-&lt;https://dmtcp.sourceforge.io/&gt;</cite> project has been chosen as the basis for an
+<p>In order to enable checkpointing as a feature, the <a class="reference external" href="https://dmtcp.sourceforge.io/">DMTCP</a> project has been chosen as the basis for an
 integration. Apptainer injects an installation of DMTCP from the host into the
 container at container creation and uses it to wrap the launching of the
 container process. When launching a process, DMTCP will monitor the spawned
 application process and its children in order to fully checkpoint the state
 of the application when triggered.</p>
 <p>For interested readers, more detailed information about the technology can be
-found in the publications listed on the <cite>DMTCP website
-&lt;https://dmtcp.sourceforge.io/publications.html&gt;</cite>.</p>
+found in the publications listed on the <a class="reference external" href="https://dmtcp.sourceforge.io/publications.html">DMTCP website</a>.</p>
 <section id="requirements">
 <h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h3>
 <p>Due to the architecture of DMTCP, there are a couple requirements that must be
@@ -169,13 +167,12 @@ the absolute paths of the listed binaries and libraries.</p></li>
 </ul>
 <p>At time of release, the list of libraries and binaries in this configuration
 is appropriate for the latest master branch of DMTCP. It can be modified by the
-system administrator to add additional libraries if necessary. See the <cite>admin
-guide &lt;https://apptainer.org/docs/admin/main/configfiles.html#dmtcp-conf-yaml&gt;</cite> for more details.</p>
+system administrator to add additional libraries if necessary. See the <a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#dmtcp-conf-yaml">admin
+guide</a> for more details.</p>
 </section>
 <section id="dmtcp-installation">
 <h3>DMTCP Installation<a class="headerlink" href="#dmtcp-installation" title="Permalink to this headline"></a></h3>
-<p>Installation instructions for DMTCP can be found on their git <cite>repository
-&lt;https://github.com/dmtcp/dmtcp/blob/master/INSTALL.md&gt;</cite>.
+<p>Installation instructions for DMTCP can be found on their git <a class="reference external" href="https://github.com/dmtcp/dmtcp/blob/master/INSTALL.md">repository</a>.
 In order to maximize the portability of the DMTCP build, we recommend using the
 <code class="docutils literal notranslate"><span class="pre">--enable-static-libstdcxx</span></code> configure option.</p>
 <p>The DMTCP project is currently working towards a <code class="docutils literal notranslate"><span class="pre">3.0</span></code> release. If you
