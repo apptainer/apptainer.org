@@ -406,7 +406,7 @@ of key servers used to verify container signatures by default, where
 Apptainer that reach out to a keyserver will only use the first
 entry, or <code class="docutils literal notranslate"><span class="pre">order</span> <span class="pre">1</span></code>, keyserver.</p>
 <p>When we list our default remotes, we can see that the default keyserver
-is <code class="docutils literal notranslate"><span class="pre">https://keys.sylabs.io</span></code> and the asterisk next to its order
+is <code class="docutils literal notranslate"><span class="pre">https://keys.openpgp.org</span></code> and the asterisk next to its order
 indicates that it is the keyserver associated to the current remote
 endpoint. We can also see the <code class="docutils literal notranslate"><span class="pre">INSECURE</span></code> column indicating that
 Apptainer will use TLS when communicating with the keyserver.</p>
@@ -414,14 +414,14 @@ Apptainer will use TLS when communicating with the keyserver.</p>
 Cloud Services Endpoints
 ========================
 
-NAME         URI              ACTIVE  GLOBAL  EXCLUSIVE
-SylabsCloud  cloud.sylabs.io  YES     YES     NO
+NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE
+DefaultRemote  cloud.apptainer.org  YES     YES     NO
 
 Keyservers
 ==========
 
-URI                     GLOBAL  INSECURE  ORDER
-https://keys.sylabs.io  YES     NO        1*
+URI                       GLOBAL  INSECURE  ORDER
+https://keys.openpgp.org  YES     NO        1*
 
 * Active cloud services keyserver
 </pre></div>
@@ -432,15 +432,15 @@ $ apptainer remote list
 Cloud Services Endpoints
 ========================
 
-NAME         URI              ACTIVE  GLOBAL  EXCLUSIVE
-SylabsCloud  cloud.sylabs.io  YES     YES     NO
+NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE
+DefaultRemote  cloud.apptainer.org  YES     YES     NO
 
 Keyservers
 ==========
 
-URI                      GLOBAL  INSECURE  ORDER
-https://keys.sylabs.io   YES     NO        1*
-https://pgp.example.com  YES     NO        2
+URI                       GLOBAL  INSECURE  ORDER
+https://keys.openpgp.org  YES     NO        1*
+https://pgp.example.com   YES     NO        2
 
 * Active cloud services keyserver
 </pre></div>
@@ -453,15 +453,15 @@ $ apptainer remote list
 Cloud Services Endpoints
 ========================
 
-NAME         URI              ACTIVE  GLOBAL  EXCLUSIVE
-SylabsCloud  cloud.sylabs.io  YES     YES     NO
+NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE
+DefaultRemote  cloud.apptainer.org  YES     YES     NO
 
 Keyservers
 ==========
 
 URI                      GLOBAL  INSECURE  ORDER
 https://pgp.example.com  YES     NO        1
-https://keys.sylabs.io   YES     NO        2*
+https://keys.openpgp.org YES     NO        2*
 
 * Active cloud services keyserver
 </pre></div>
@@ -471,7 +471,7 @@ keyserver was placed as the first entry in the list and the default
 keyserver was moved to second in the list. With the keyserver
 configuration above, all image default image verification performed by
 Apptainer will first reach out to <code class="docutils literal notranslate"><span class="pre">https://pgp.example.com</span></code> and
-then to <code class="docutils literal notranslate"><span class="pre">https://keys.sylabs.io</span></code> when searching for public keys.</p>
+then to <code class="docutils literal notranslate"><span class="pre">https://keys.openpgp.org</span></code> when searching for public keys.</p>
 <p>If a keyserver requires authentication before usage, users can login
 before using it:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer remote login --username ian https://pgp.example.com
@@ -484,15 +484,15 @@ INFO:    Token stored in /home/ian/.apptainer/remote.yaml
 Cloud Services Endpoints
 ========================
 
-NAME         URI              ACTIVE  GLOBAL  EXCLUSIVE
-SylabsCloud  cloud.sylabs.io  YES     YES     NO
+NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE
+DefaultRemote  cloud.apptainer.org  YES     YES     NO
 
 Keyservers
 ==========
 
-URI                      GLOBAL  INSECURE  ORDER
-https://pgp.example.com  YES     NO        1
-https://keys.sylabs.io   YES     NO        2*
+URI                       GLOBAL  INSECURE  ORDER
+https://pgp.example.com   YES     NO        1
+https://keys.openpgp.org  YES     NO        2*
 
 * Active cloud services keyserver
 
@@ -531,14 +531,14 @@ $ apptainer remote list
 Cloud Services Endpoints
 ========================
 
-NAME         URI              ACTIVE  GLOBAL  EXCLUSIVE
-SylabsCloud  cloud.sylabs.io  YES     YES     NO
+NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE
+DefaultRemote  cloud.apptainer.org  YES     YES     NO
 
 Keyservers
 ==========
 
-URI                     GLOBAL  INSECURE  ORDER
-https://keys.sylabs.io  YES     NO        1*
+URI                       GLOBAL  INSECURE  ORDER
+https://keys.openpgp.org  YES     NO        1*
 
 * Active cloud services keyserver
 
@@ -563,14 +563,14 @@ $ apptainer remote list
 Cloud Services Endpoints
 ========================
 
-NAME         URI              ACTIVE  GLOBAL  EXCLUSIVE
-SylabsCloud  cloud.sylabs.io  YES     YES     NO
+NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE
+DefaultRemote  cloud.apptainer.org  YES     YES     NO
 
 Keyservers
 ==========
 
-URI                     GLOBAL  INSECURE  ORDER
-https://keys.sylabs.io  YES     NO        1*
+URI                       GLOBAL  INSECURE  ORDER
+https://keys.openpgp.org  YES     NO        1*
 
 * Active cloud services keyserver
 
