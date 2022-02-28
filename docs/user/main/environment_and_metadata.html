@@ -118,6 +118,7 @@
 <li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Application Checkpointing</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
@@ -292,6 +293,11 @@ default values.</p></li>
 libraries if applicable.</p></li>
 </ul>
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See compatibility documentation for <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> prefixed environment
+variable support <cite>here &lt;singularity_environment_variable_compatibility&gt;</cite>.</p>
+</div>
 <p>To override an environment variable that is already set in the container with
 the value from the host, use <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> or the <code class="docutils literal notranslate"><span class="pre">--env</span></code> flag. For
 example, to force <code class="docutils literal notranslate"><span class="pre">MYVAR</span></code> in the container to take the value of <code class="docutils literal notranslate"><span class="pre">MYVAR</span></code> on
@@ -353,6 +359,11 @@ requested, via flags or environment variables, when running the
 container.</p></li>
 </ul>
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See compatibility documentation for <code class="docutils literal notranslate"><span class="pre">SINGULARITY_</span></code> prefixed environment
+variable support <cite>here &lt;singularity_environment_variable_compatibility&gt;</cite>.</p>
+</div>
 </section>
 <section id="overriding-environment-variables">
 <h2>Overriding environment variables<a class="headerlink" href="#overriding-environment-variables" title="Permalink to this headline"></a></h2>
