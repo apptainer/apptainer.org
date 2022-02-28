@@ -316,9 +316,8 @@ files and configuration options are discussed.</p>
 </section>
 <section id="test-apptainer">
 <h2>Test Apptainer<a class="headerlink" href="#test-apptainer" title="Permalink to this headline"></a></h2>
-<p>You can run a quick test of Apptainer using a container in the
-Sylabs Container Library:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec library://alpine cat /etc/alpine-release
+<p>You can run a quick test of Apptainer using a small alpine container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine cat /etc/alpine-release
 3.9.2
 </pre></div>
 </div>

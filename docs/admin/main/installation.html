@@ -655,9 +655,8 @@ can be updated and/or uninstalled with ease in the future.</p>
 <section id="testing-checking-the-build-configuration">
 <h3>Testing &amp; Checking the Build Configuration<a class="headerlink" href="#testing-checking-the-build-configuration" title="Permalink to this headline"></a></h3>
 <p>After installation you can perform a basic test of Apptainer
-functionality by executing a simple container from the Sylabs Cloud
-library:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec library://alpine cat /etc/alpine-release
+functionality by executing a simple alpine container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine cat /etc/alpine-release
 3.9.2
 </pre></div>
 </div>
