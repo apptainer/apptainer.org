@@ -392,8 +392,10 @@ Concurrent Downloads
 {Project} will pull ``library://`` container images
 using multiple concurrent downloads of parts of the image. This speeds
 up downloads vs using a single stream. The defaults are generally
-appropriate for the Sylabs Cloud, but may be tuned for your network
-conditions, or if you are pulling from a different library server.
+appropriate for `Library API Registries
+<https://singularityhub.github.io/library-api/#/?id=library-api>`_,
+but may be tuned for your network conditions, or if you are pulling
+from a different library server.
 
 ``download concurrency``: specifies how many concurrent streams when
 downloading (pulling) an image from cloud library.
@@ -1011,23 +1013,19 @@ managed by administrators with the ``remote`` command group.
 Remote Endpoints
 ================
 
-Sylabs introduced the online `Sylabs Cloud
-<https://cloud.sylabs.io/home>`_ to enable users to `Create
-<https://cloud.sylabs.io/builder>`_, `Secure
-<https://cloud.sylabs.io/keystore?sign=true>`_, and `Share
-<https://cloud.sylabs.io/library/guide#create>`_ their container images
-with others.
-
-{Project} allows users to login to an account on the Sylabs Cloud,
-or configure {Project} to use an API compatible container service
-such as a local installation of {Project} Enterprise, which provides
-an on-premise private Container Library, Remote Builder and Key Store.
+{Project} allows users to login to an account and authenticate with a
+`Library API Registry
+<https://singularityhub.github.io/library-api/#/?id=library-api>`_. Whether
+that registry exists on premise or in the cloud.
 
 .. note::
 
-   A fresh installation of {Project} is automatically configured to
-   connect to the public `Sylabs Cloud <https://cloud.sylabs.io>`__
-   services.
+   A fresh installation of {Project} is configured with the ``DefaultRemote``,
+   which does not support the Library API as it is only configured with a
+   functioning key server, ``https://keys.openpgp.org``. Users or administrators
+   should configure one of the Library API implementations listed `here
+   <https://singularityhub.github.io/library-api/#/?id=library-api>`_ if they would
+   like to use a Library API registry.
 
 **Examples**
 
@@ -1071,7 +1069,7 @@ remote the only usable remote for the system by using the
    ========================
 
    NAME            URI                     ACTIVE  GLOBAL  EXCLUSIVE  INSECURE
-   SylabsCloud     cloud.sylabs.io         NO      YES     NO         NO
+   DefaultRemote   cloud.apptainer.org     NO      YES     NO         NO
    company-remote  enterprise.example.com  YES     YES     YES        NO
    myremote        enterprise.example.com  NO      NO      NO         NO
 

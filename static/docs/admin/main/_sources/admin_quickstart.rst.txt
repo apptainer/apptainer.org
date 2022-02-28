@@ -271,12 +271,11 @@ files and configuration options are discussed.
  Test {Project}
 ********************
 
-You can run a quick test of {Project} using a container in the
-Sylabs Container Library:
+You can run a quick test of {Project} using a small alpine container:
 
 .. code::
 
-   $ {command} exec library://alpine cat /etc/alpine-release
+   $ {command} exec docker://alpine cat /etc/alpine-release
    3.9.2
 
 See the `user guide

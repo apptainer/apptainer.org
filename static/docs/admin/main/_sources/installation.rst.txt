@@ -638,12 +638,11 @@ Testing & Checking the Build Configuration
 ==========================================
 
 After installation you can perform a basic test of {Project}
-functionality by executing a simple container from the Sylabs Cloud
-library:
+functionality by executing a simple alpine container:
 
 .. code::
 
-   $ {command} exec library://alpine cat /etc/alpine-release
+   $ {command} exec docker://alpine cat /etc/alpine-release
    3.9.2
 
 See the `user guide

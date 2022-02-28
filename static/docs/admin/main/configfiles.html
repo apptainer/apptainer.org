@@ -462,8 +462,9 @@ SIF and SquashFS containers.</p>
 <p>Apptainer will pull <code class="docutils literal notranslate"><span class="pre">library://</span></code> container images
 using multiple concurrent downloads of parts of the image. This speeds
 up downloads vs using a single stream. The defaults are generally
-appropriate for the Sylabs Cloud, but may be tuned for your network
-conditions, or if you are pulling from a different library server.</p>
+appropriate for <a class="reference external" href="https://singularityhub.github.io/library-api/#/?id=library-api">Library API Registries</a>,
+but may be tuned for your network conditions, or if you are pulling
+from a different library server.</p>
 <p><code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">concurrency</span></code>: specifies how many concurrent streams when
 downloading (pulling) an image from cloud library.</p>
 <p><code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">part</span> <span class="pre">size</span></code>: specifies the size of each part (bytes) when
@@ -969,17 +970,16 @@ location may vary depending on installation parameters) and can be
 managed by administrators with the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group.</p>
 <section id="remote-endpoints">
 <h3>Remote Endpoints<a class="headerlink" href="#remote-endpoints" title="Permalink to this headline"></a></h3>
-<p>Sylabs introduced the online <a class="reference external" href="https://cloud.sylabs.io/home">Sylabs Cloud</a> to enable users to <a class="reference external" href="https://cloud.sylabs.io/builder">Create</a>, <a class="reference external" href="https://cloud.sylabs.io/keystore?sign=true">Secure</a>, and <a class="reference external" href="https://cloud.sylabs.io/library/guide#create">Share</a> their container images
-with others.</p>
-<p>Apptainer allows users to login to an account on the Sylabs Cloud,
-or configure Apptainer to use an API compatible container service
-such as a local installation of Apptainer Enterprise, which provides
-an on-premise private Container Library, Remote Builder and Key Store.</p>
+<p>Apptainer allows users to login to an account and authenticate with a
+<a class="reference external" href="https://singularityhub.github.io/library-api/#/?id=library-api">Library API Registry</a>. Whether
+that registry exists on premise or in the cloud.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>A fresh installation of Apptainer is automatically configured to
-connect to the public <a class="reference external" href="https://cloud.sylabs.io">Sylabs Cloud</a>
-services.</p>
+<p>A fresh installation of Apptainer is configured with the <code class="docutils literal notranslate"><span class="pre">DefaultRemote</span></code>,
+which does not support the Library API as it is only configured with a
+functioning key server, <code class="docutils literal notranslate"><span class="pre">https://keys.openpgp.org</span></code>. Users or administrators
+should configure one of the Library API implementations listed <a class="reference external" href="https://singularityhub.github.io/library-api/#/?id=library-api">here</a> if they would
+like to use a Library API registry.</p>
 </div>
 <p><strong>Examples</strong></p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group with the <code class="docutils literal notranslate"><span class="pre">--global</span></code> flag to create a
@@ -1014,7 +1014,7 @@ Cloud Services Endpoints
 ========================
 
 NAME            URI                     ACTIVE  GLOBAL  EXCLUSIVE  INSECURE
-SylabsCloud     cloud.sylabs.io         NO      YES     NO         NO
+DefaultRemote   cloud.apptainer.org     NO      YES     NO         NO
 company-remote  enterprise.example.com  YES     YES     YES        NO
 myremote        enterprise.example.com  NO      NO      NO         NO
 
