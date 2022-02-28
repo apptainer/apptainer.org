@@ -17,6 +17,7 @@ information about how to use {Project}.
 
    Admin Quickstart <admin_quickstart>
    Installing {Project} <installation>
+   Migrating from Singularity <singularity_migration>
    Configuration files <configfiles>
    User Namespaces & Fakeroot <user_namespace>
    Security in {Project} <security>
