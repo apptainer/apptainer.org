@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cloud Library &mdash; Apptainer User Guide main documentation</title>
+  <title>Library API Registries &mdash; Apptainer User Guide main documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -62,10 +62,8 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Sylabs Cloud Library</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Library API Registries</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#make-an-account">Make an Account</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#creating-a-access-token">Creating a Access token</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pushing-a-container">Pushing a Container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pulling-a-container">Pulling a container</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pulling-your-own-container">Pulling your own container</a></li>
@@ -122,9 +120,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Cloud Library</li>
+      <li>Library API Registries</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/cloud_library.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/library_api.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -132,46 +130,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="cloud-library">
-<span id="id1"></span><h1>Cloud Library<a class="headerlink" href="#cloud-library" title="Permalink to this headline"></a></h1>
+  <section id="library-api-registries">
+<span id="id1"></span><h1>Library API Registries<a class="headerlink" href="#library-api-registries" title="Permalink to this headline"></a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
-<p>The Sylabs Cloud Library is the place to <a class="reference internal" href="#push"><span class="std std-ref">push</span></a> your
-containers to the cloud so other users can <a class="reference internal" href="#pull"><span class="std std-ref">pull</span></a>,
-<a class="reference internal" href="signNverify.html#signnverify"><span class="std std-ref">verify</span></a>, and use them.</p>
-</section>
-<section id="make-an-account">
-<span id="make-a-account"></span><h2>Make an Account<a class="headerlink" href="#make-an-account" title="Permalink to this headline"></a></h2>
-<p>Making an account is easy, and straightforward:</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li><p>Go to: <a class="reference external" href="https://cloud.sylabs.io/library">https://cloud.sylabs.io/library</a>.</p></li>
-<li><p>Click “Sign in to Sylabs” (top right corner).</p></li>
-<li><p>Select your method to sign in, with Google, GitHub, GitLab, or
-Microsoft.</p></li>
-<li><p>Type your passwords, and that’s it!</p></li>
-</ol>
-</div></blockquote>
-</section>
-<section id="creating-a-access-token">
-<span id="id2"></span><h2>Creating a Access token<a class="headerlink" href="#creating-a-access-token" title="Permalink to this headline"></a></h2>
-<p>Access tokens for pushing a container.</p>
-<p>To generate a access token, do the following steps:</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li><p>Go to: <a class="reference external" href="https://cloud.sylabs.io/">https://cloud.sylabs.io/</a></p></li>
-<li><p>Click “Sign In” and follow the sign in steps.</p></li>
-<li><p>Click on your login id (same and updated button as the Sign in
-one).</p></li>
-<li><p>Select “Access Tokens” from the drop down menu.</p></li>
-<li><p>Enter a name for your new access token, such as “test token”</p></li>
-<li><p>Click the “Create a New Access Token” button.</p></li>
-<li><p>Click “Copy token to Clipboard” from the “New API Token” page.</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span></code> and paste the access token at the
-prompt.</p></li>
-</ol>
-</div></blockquote>
-<p>Now that you have your token, you are ready to push your container!</p>
+<p>Apptainer enables users to use <a class="reference external" href="https://singularityhub.github.io/library-api/#/?id=library-api">Library API Container Registries</a> to
+<a class="reference internal" href="#push"><span class="std std-ref">push</span></a> containers to a registry that was designed specifically for
+SIF images and <a class="reference internal" href="#pull"><span class="std std-ref">pull</span></a> SIF images created by others.</p>
+<p>Many Library API registries will require authentication to perform operations
+like pushing container images or pulling potentially private container images.
+The <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group governs the authentication for Library API
+registries. Check out the instructions for how to add and login with a
+<a class="reference internal" href="endpoint.html#remote-add-and-login"><span class="std std-ref">remote endpoint</span></a>.</p>
+<p>Once you have authenticated, you are ready to push your container!</p>
 </section>
 <section id="pushing-a-container">
 <span id="push"></span><h2>Pushing a Container<a class="headerlink" href="#pushing-a-container" title="Permalink to this headline"></a></h2>
@@ -204,18 +175,18 @@ to setting the description via the web interface:</p>
 <span class="go">2.7MiB / 2.7MiB [=========================================================================] 100 % 1.1 MiB/s 0s</span>
 
 <span class="go">Library storage: using 13.24 MiB out of 11.00 GiB quota (0.1% used)</span>
-<span class="go">Container URL: https://cloud.sylabs.io/library/myuser/examples/alpine</span>
+<span class="go">Container URL: https://cloud.example.com/library/myuser/examples/alpine</span>
 </pre></div>
 </div>
-<p>Note that when you push to a library that supports it, Apptainer 3.7
-and above will report your quota usage and the direct URL to view the
-container in your web browser.</p>
+<p>Note that when you push to a library that supports it, Apptainer will report
+your quota usage and the direct URL to view the container in your web browser.</p>
 </section>
 <section id="pulling-a-container">
 <span id="pull"></span><h2>Pulling a container<a class="headerlink" href="#pulling-a-container" title="Permalink to this headline"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> command will download a container from the
-<a class="reference external" href="https://cloud.sylabs.io/library">Library</a> (<code class="docutils literal notranslate"><span class="pre">library://</span></code>), <a class="reference external" href="https://hub.docker.com/">Docker
-Hub</a> (<code class="docutils literal notranslate"><span class="pre">docker://</span></code>), and also <a class="reference external" href="https://singularity-hub.org">Shub</a> (<code class="docutils literal notranslate"><span class="pre">shub://</span></code>).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> command will download a container from an
+<a class="reference external" href="https://hub.docker.com/">OCI Registry</a> (<code class="docutils literal notranslate"><span class="pre">docker://</span></code>),
+<a class="reference external" href="https://singularityhub.github.io/library-api/#/?id=library-api">Library API Registry</a>
+(<code class="docutils literal notranslate"><span class="pre">library://</span></code>), and also <a class="reference external" href="https://singularity-hub.org">Shub</a> (<code class="docutils literal notranslate"><span class="pre">shub://</span></code>).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>When pulling from Docker, the container will automatically be
@@ -270,14 +241,13 @@ sign your own containers</span></a>.</p>
 </section>
 <section id="searching-the-library-for-containers">
 <span id="search-the-library"></span><h2>Searching the Library for Containers<a class="headerlink" href="#searching-the-library-for-containers" title="Permalink to this headline"></a></h2>
-<p>To find interesting or useful containers in the library, you can open
-<a class="reference external" href="https://cloud.sylabs.io/library">https://cloud.sylabs.io/library</a> in your browser and search from there
-through the web GUI.</p>
+<p>To find interesting or useful containers in a library, you can open that
+library in your browser if that project supports a web GUI.</p>
 <p>Alternatively, from the CLI you can use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">search</span> <span class="pre">&lt;query&gt;</span></code>.
-This will search the library for container images matching <code class="docutils literal notranslate"><span class="pre">&lt;query&gt;</span></code>.</p>
+This will search a library for container images matching <code class="docutils literal notranslate"><span class="pre">&lt;query&gt;</span></code>.</p>
 <section id="using-the-cli-search">
 <h3>Using the CLI Search<a class="headerlink" href="#using-the-cli-search" title="Permalink to this headline"></a></h3>
-<p>Here is an example of searching the library for <code class="docutils literal notranslate"><span class="pre">centos</span></code>:</p>
+<p>Here is an example of searching a library for <code class="docutils literal notranslate"><span class="pre">centos</span></code>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apptainer search centos</span>
 <span class="go">Found 72 container images for amd64 matching &quot;centos&quot;:</span>
 
@@ -369,7 +339,7 @@ current system. To e.g. search for <code class="docutils literal notranslate"><s
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Make sure you have a <a class="reference internal" href="#creating-a-access-token"><span class="std std-ref">access token</span></a>,
+<p>Make sure you have a <span class="xref std std-ref">access token</span>,
 otherwise the build will fail.</p>
 </div>
 <p>After building, you can test your container like so:</p>
