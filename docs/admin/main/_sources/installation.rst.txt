@@ -169,7 +169,7 @@ Overlay support has two aspects:
 
 -  ``lowerdir`` support for a filesystem allows a directory on that
    filesystem to act as the 'base' of a container. A filesystem must
-   support overlay ``lowerdir`` for you be able to run a {Project}
+   support overlay ``lowerdir`` for you be able to run {aProject}
    sandbox container on it, while using functionality such as
    ``--writable-tmpfs`` / ``--overlay``.
 
@@ -537,7 +537,7 @@ continues to work in new shells. (Adjust the path if you installed
 Build and install an RPM
 ========================
 
-If you use RHEL, CentOS or SUSE, building and installing a {Project}
+If you use RHEL, CentOS or SUSE, building and installing {aProject}
 RPM allows your {Project} installation be more easily managed,
 upgraded and removed.  You can build an RPM
 directly from the `release tarball

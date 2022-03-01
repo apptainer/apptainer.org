@@ -4,7 +4,7 @@
  {Project} Configuration Files
 ###################################
 
-As a {Project} Administrator, you will have access to various
+As {aProject} Administrator, you will have access to various
 configuration files, that will let you manage container resources, set
 security restrictions and configure network options etc, when
 installing {Project} across the system. All of these files can be
