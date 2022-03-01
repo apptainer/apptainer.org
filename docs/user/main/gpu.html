@@ -271,7 +271,7 @@ all nvidia devices on the host are present in the container.</p>
 whether some or all host GPUs are visible inside a container. The
 <code class="docutils literal notranslate"><span class="pre">nvidia-container-runtime</span></code> explicitly binds the devices into the
 container dependent on the value of <code class="docutils literal notranslate"><span class="pre">NVIDIA_VISIBLE_DEVICES</span></code>.</p>
-<p>To control which GPUs are used in a Apptainer container that is run
+<p>To control which GPUs are used in an Apptainer container that is run
 with <code class="docutils literal notranslate"><span class="pre">--nv</span></code> you can set <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_CUDA_VISIBLE_DEVICES</span></code> before
 running the container, or <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code> inside the container.
 This variable will limit the GPU devices that CUDA programs see.</p>
