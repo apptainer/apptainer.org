@@ -145,7 +145,7 @@ moment - <a class="reference external" href="https://www.open-mpi.org/">OpenMPI<
 Apptainer. The goal of this page is to demonstrate the development
 and running of MPI programs using Apptainer containers.</p>
 <p>There are several ways of carrying this out, the most popular way of
-executing MPI applications installed in a Apptainer container is to
+executing MPI applications installed in an Apptainer container is to
 rely on the MPI implementation available on the host. This is called the
 <em>Host MPI</em> or the <em>Hybrid</em> model since both the MPI implementations
 provided by system administrators (on the host) and in the containers
@@ -422,7 +422,7 @@ used to compile and install the application in the container.</p></li>
 </ul>
 </dd>
 </dl>
-<p>The creation of a Apptainer container for the bind model is based on
+<p>The creation of an Apptainer container for the bind model is based on
 the following steps:</p>
 <ol class="arabic simple">
 <li><p>Compile your application on a system with the target MPI
@@ -500,7 +500,7 @@ Hello, I am rank 6/8
 <p>If your target system is setup with a batch system such as SLURM, a
 standard way to execute MPI applications is through a batch script. The
 following example illustrates the context of a batch script for Slurm
-that aims at starting a Apptainer container on each node allocated
+that aims at starting an Apptainer container on each node allocated
 to the execution of the job. It can easily be adapted for all major
 batch systems available.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat my_job.sh

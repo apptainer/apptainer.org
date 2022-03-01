@@ -507,7 +507,7 @@ methods.</p>
 <h2>Building From Docker / OCI Containers<a class="headerlink" href="#building-from-docker-oci-containers" title="Permalink to this headline"></a></h2>
 <p>If you wish to use an existing Docker or OCI container as the basis for
 a new container, you will need to specify it as the <em>bootstrap</em> source
-in a Apptainer definition file.</p>
+in an Apptainer definition file.</p>
 <p>Just as you can run or pull containers from different registries using a
 <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI, you can use different headers in a definition file to
 instruct Apptainer where to find the container you want to use as
@@ -666,7 +666,7 @@ drwxr-xr-x  0 0      0           0 Aug 16 11:22 af7e389ea6636873dbc5adc17826e840
 -rw-r--r--  0 0      0         266 Dec 31  1969 manifest.json
 </pre></div>
 </div>
-<p>We can convert this tar file into a apptainer container using the
+<p>We can convert this tar file into an Apptainer container using the
 <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent. Because the agent accesses a file,
 rather than an object hosted by a service, it uses <code class="docutils literal notranslate"><span class="pre">:&lt;filename&gt;</span></code>, not
 <code class="docutils literal notranslate"><span class="pre">://&lt;location&gt;</span></code>. To build a tar archive directly to a SIF container:</p>
@@ -816,7 +816,7 @@ only variables on the host that are prefixed with <code class="docutils literal 
 are set in the container:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Set a host variable
 $ export HOST_VAR=123
-# Set a apptainer container environment variable
+# Set a container environment variable
 $ export &quot;APPTAINERENV_FORCE_VAR=&quot;123&quot;
 
 $ apptainer run library://alpine env | grep VAR
@@ -882,7 +882,7 @@ in the container even when <code class="docutils literal notranslate"><span clas
 </section>
 <section id="init-shim-process">
 <h3>Init Shim Process<a class="headerlink" href="#init-shim-process" title="Permalink to this headline"></a></h3>
-<p>When a Apptainer container is run using the <code class="docutils literal notranslate"><span class="pre">--pid</span> <span class="pre">/</span> <span class="pre">p</span></code> option, or
+<p>When an Apptainer container is run using the <code class="docutils literal notranslate"><span class="pre">--pid</span> <span class="pre">/</span> <span class="pre">p</span></code> option, or
 started as an instance (which implies <code class="docutils literal notranslate"><span class="pre">--pid</span></code>), a shim init process is
 executed that will run the container payload itself.</p>
 <p>The shim process helps to ensure signals are propagated correctly from
@@ -942,7 +942,7 @@ access to high performance cluster networks.</p>
 on the <code class="docutils literal notranslate"><span class="pre">CMD</span></code> and/or <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> set in the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> that was
 used to build it, along with any arguments on the command line. The
 <code class="docutils literal notranslate"><span class="pre">CMD</span></code> and <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> can also be overridden by flags.</p>
-<p>A Apptainer container has the concept of a <em>runscript</em>, which is a
+<p>An Apptainer container has the concept of a <em>runscript</em>, which is a
 single shell script defining what happens when you <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run</span></code>
 the container. Because there is no internal concept of <code class="docutils literal notranslate"><span class="pre">CMD</span></code> and
 <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>, Apptainer must create a runscript from the <code class="docutils literal notranslate"><span class="pre">CMD</span></code>

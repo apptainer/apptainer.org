@@ -216,7 +216,7 @@ install of a Linux distribution into your container. No specific
 environment variables will be set. If you are using a <code class="docutils literal notranslate"><span class="pre">library</span></code> or
 <code class="docutils literal notranslate"><span class="pre">Docker</span></code> source then you may inherit environment variables from your
 base image.</p>
-<p>If I build a apptainer container from the image
+<p>If I build an Apptainer container from the image
 <code class="docutils literal notranslate"><span class="pre">docker://python:3.7</span></code> then when I run the container I can see that the
 <code class="docutils literal notranslate"><span class="pre">PYTHON_VERSION</span></code> variable is set in the container:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec python.sif env | grep PYTHON_VERSION

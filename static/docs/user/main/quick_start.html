@@ -303,7 +303,7 @@ Options:
   -v, --verbose   print additional information
 
 Available Commands:
-  build       Build a Apptainer image
+  build       Build an Apptainer image
   cache       Manage the local cache
   capability  Manage Linux capabilities for users and groups
   exec        Run a command within a container
@@ -490,7 +490,7 @@ Apptainer lolcow_latest.sif:~&gt;
 <p>The change in prompt indicates that you have entered the container
 (though you should not rely on that to determine whether you are in
 container or not).</p>
-<p>Once inside of a Apptainer container, you are the same user as you
+<p>Once inside of an Apptainer container, you are the same user as you
 are on the host system.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Apptainer</span> <span class="n">lolcow_latest</span><span class="o">.</span><span class="n">sif</span><span class="p">:</span><span class="o">~&gt;</span> <span class="n">whoami</span>
 <span class="n">david</span>
@@ -671,7 +671,7 @@ supports the <code class="docutils literal notranslate"><span class="pre">sandbo
 Ubuntu Operating System and some Apptainer metadata in your current
 working directory.</p>
 <p>You can use commands like <code class="docutils literal notranslate"><span class="pre">shell</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code> , and <code class="docutils literal notranslate"><span class="pre">run</span></code> with this
-directory just as you would with a Apptainer image. If you pass the
+directory just as you would with an Apptainer image. If you pass the
 <code class="docutils literal notranslate"><span class="pre">--writable</span></code> option when you use your container you can also write
 files within the sandbox directory (provided you have the permissions to
 do so).</p>
@@ -699,7 +699,7 @@ exercise care.</p>
 <section id="apptainer-definition-files">
 <h3>Apptainer Definition Files<a class="headerlink" href="#apptainer-definition-files" title="Permalink to this headline"></a></h3>
 <p>For a reproducible, verifiable and production-quality container you
-should build a SIF file using a Apptainer definition file. This also
+should build a SIF file using an Apptainer definition file. This also
 makes it easy to add files, environment variables, and install custom
 software, and still start from your base of choice (e.g., the Container
 Library).</p>
