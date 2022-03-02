@@ -98,6 +98,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#remote-endpoints">Remote Endpoints</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#exclusive-endpoint">Exclusive Endpoint</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#insecure-http-endpoints">Insecure (HTTP) Endpoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#restoring-pre-apptainer-library-behavior">Restoring pre-Apptainer library behavior</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#additional-information">Additional Information</a></li>
 </ul>
 </li>
@@ -1042,6 +1043,12 @@ INFO:    Global option detected. Will not automatically log into remote.
 <p>This flag controls HTTP vs HTTPS for service discovery only. The
 protocol used to access individual library, build and keyserver URLs is
 set by the service discovery file.</p>
+</section>
+<section id="restoring-pre-apptainer-library-behavior">
+<span id="restore-library-behavior"></span><h4>Restoring pre-Apptainer library behavior<a class="headerlink" href="#restoring-pre-apptainer-library-behavior" title="Permalink to this headline"></a></h4>
+<p>These are the commands to restore the library behavior from before
+Apptainer, where using the <cite>library://</cite> URI would download from the
+Sylabs Cloud anonymously:</p>
 </section>
 <section id="additional-information">
 <h4>Additional Information<a class="headerlink" href="#additional-information" title="Permalink to this headline"></a></h4>
