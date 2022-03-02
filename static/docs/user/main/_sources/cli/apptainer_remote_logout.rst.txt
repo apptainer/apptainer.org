@@ -26,7 +26,7 @@ Examples
 
 
     To log out from an endpoint
-    $ apptainer remote logout SylabsCloud
+    $ apptainer remote logout
 
     To log out from a docker/OCI registry
     $ apptainer remote logout docker://docker.io

@@ -57,7 +57,7 @@ Options
       --compat                 apply settings for increased OCI/Docker compatibility. Infers --containall, --no-init, --no-umask, --writable-tmpfs.
   -c, --contain                use minimal /dev and empty other directories (e.g. /tmp and $HOME) instead of sharing filesystems from your host
   -C, --containall             contain not only file systems, but also PID, IPC, and environment
-      --disable-cache          dont use cache, and dont create cache
+      --disable-cache          do not use or create cache
       --dns string             list of DNS server separated by commas to add in resolv.conf
       --docker-login           login to a Docker Repository interactively
       --drop-caps string       a comma separated capability list to drop

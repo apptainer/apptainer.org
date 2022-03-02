@@ -100,6 +100,11 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_avail.html">apptainer capability avail</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_drop.html">apptainer capability drop</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_list.html">apptainer capability list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint.html">apptainer checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_create.html">apptainer checkpoint create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_delete.html">apptainer checkpoint delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_instance.html">apptainer checkpoint instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_list.html">apptainer checkpoint list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config.html">apptainer config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_fakeroot.html">apptainer config fakeroot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_global.html">apptainer config global</a></li>
@@ -218,7 +223,7 @@
 <div><p>The ‘remote login’ command allows you to set credentials for a specific endpoint,
 an OCI/Docker registry or a keyserver.</p>
 <p>If no endpoint or registry is specified, the command will login to the currently
-active remote endpoint. This is cloud.sylabs.io by default.</p>
+active remote endpoint.</p>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">remote</span> <span class="n">login</span> <span class="p">[</span><span class="n">login</span> <span class="n">options</span><span class="o">...</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">remote_name</span><span class="o">|</span><span class="n">registry_uri</span><span class="o">&gt;</span>
 </pre></div>
@@ -227,7 +232,7 @@ active remote endpoint. This is cloud.sylabs.io by default.</p>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>To log in to an endpoint:
-$ apptainer remote login SylabsCloud
+$ apptainer remote login
 
 To login in to a docker/OCI registry:
 $ apptainer remote login --username foo docker://docker.io

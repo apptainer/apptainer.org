@@ -23,7 +23,7 @@ Examples
 ::
 
 
-    $ apptainer remote use SylabsCloud
+    $ apptainer remote use ExampleCloud
 
 Options
 ~~~~~~~

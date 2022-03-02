@@ -23,7 +23,7 @@ Examples
 ::
 
 
-    $ apptainer remote remove SylabsCloud
+    $ apptainer remote remove ExampleCloud
 
 Options
 ~~~~~~~

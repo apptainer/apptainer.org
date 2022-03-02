@@ -100,6 +100,11 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_avail.html">apptainer capability avail</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_drop.html">apptainer capability drop</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_list.html">apptainer capability list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint.html">apptainer checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_create.html">apptainer checkpoint create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_delete.html">apptainer checkpoint delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_instance.html">apptainer checkpoint instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_list.html">apptainer checkpoint list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config.html">apptainer config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_fakeroot.html">apptainer config fakeroot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_global.html">apptainer config global</a></li>
@@ -236,7 +241,7 @@ URI. Supported URIs include:</p>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>From Sylabs cloud library
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>From a library
 $ apptainer pull alpine.sif library://alpine:latest
 
 From Docker
@@ -254,7 +259,7 @@ $ apptainer pull image.sif oras://&lt;username&gt;.azurecr.io/namespace/image:ta
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">--</span><span class="n">arch</span> <span class="n">string</span>      <span class="n">architecture</span> <span class="n">to</span> <span class="n">pull</span> <span class="kn">from</span> <span class="nn">library</span> <span class="p">(</span><span class="n">default</span> <span class="s2">&quot;amd64&quot;</span><span class="p">)</span>
     <span class="o">--</span><span class="nb">dir</span> <span class="n">string</span>       <span class="n">download</span> <span class="n">images</span> <span class="n">to</span> <span class="n">the</span> <span class="n">specific</span> <span class="n">directory</span>
-    <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">cache</span>    <span class="n">dont</span> <span class="n">use</span> <span class="n">cached</span> <span class="n">images</span><span class="o">/</span><span class="n">blobs</span> <span class="ow">and</span> <span class="n">dont</span> <span class="n">create</span> <span class="n">them</span>
+    <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">cache</span>    <span class="n">do</span> <span class="ow">not</span> <span class="n">use</span> <span class="ow">or</span> <span class="n">create</span> <span class="n">cached</span> <span class="n">images</span><span class="o">/</span><span class="n">blobs</span>
     <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">login</span>     <span class="n">login</span> <span class="n">to</span> <span class="n">a</span> <span class="n">Docker</span> <span class="n">Repository</span> <span class="n">interactively</span>
 <span class="o">-</span><span class="n">F</span><span class="p">,</span> <span class="o">--</span><span class="n">force</span>            <span class="n">overwrite</span> <span class="n">an</span> <span class="n">image</span> <span class="n">file</span> <span class="k">if</span> <span class="n">it</span> <span class="n">exists</span>
 <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>             <span class="n">help</span> <span class="k">for</span> <span class="n">pull</span>
