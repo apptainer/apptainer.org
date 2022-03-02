@@ -356,34 +356,13 @@ FATAL:   could not use myremote: remote company-remote has been set exclusive by
 </ul>
 </section>
 <section id="restoring-pre-apptainer-library-behavior">
-<h3>Restoring pre-Apptainer library behavior<a class="headerlink" href="#restoring-pre-apptainer-library-behavior" title="Permalink to this headline"></a></h3>
+<span id="restore-library-behavior"></span><h3>Restoring pre-Apptainer library behavior<a class="headerlink" href="#restoring-pre-apptainer-library-behavior" title="Permalink to this headline"></a></h3>
 <p>The previous sections described how to manipulate remotes in general,
 and in particular these are the commands for a user to restore the library
 behavior from before Apptainer, where using the <cite>library://</cite> URI would
 download from the Sylabs Cloud anonymously:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer remote add --no-login SylabsCloud cloud.sylabs.io
-INFO:    Remote &quot;SylabsCloud&quot; added.
-$ apptainer remote use SylabsCloud
-INFO:    Remote &quot;SylabsCloud&quot; now in use.
-$ apptainer remote list
-Cloud Services Endpoints
-========================
-
-NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE
-DefaultRemote  cloud.apptainer.org  NO      YES     NO
-SylabsCloud    cloud.sylabs.io      YES     NO      NO
-
-Keyservers
-==========
-
-URI                     GLOBAL  INSECURE  ORDER
-https://keys.sylabs.io  YES     NO        1*
-
-* Active cloud services keyserver
-</pre></div>
-</div>
 <p>To set the defaults system-wide see the corresponding section in the
-<a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#restoring-pre-apptainer-library-behavior">admin guide</a>.</p>
+<a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#restore_library_behavior">admin guide</a>.</p>
 </section>
 </section>
 <section id="keyserver-configurations">
