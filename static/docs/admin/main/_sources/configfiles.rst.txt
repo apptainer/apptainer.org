@@ -1098,8 +1098,6 @@ This flag controls HTTP vs HTTPS for service discovery only. The
 protocol used to access individual library, build and keyserver URLs is
 set by the service discovery file.
 
-.. _restore_library_behavior:
-
 Restoring pre-{Project} library behavior
 ----------------------------------------
 
@@ -1108,6 +1106,7 @@ These are the commands to restore the library behavior from before
 Sylabs Cloud anonymously:
 
 .. code::
+
    $ sudo {command} remote add --global SylabsCloud cloud.sylabs.io
    INFO:    Remote "SylabsCloud" added.
    INFO:    Global option detected. Will not automatically log into remote.
