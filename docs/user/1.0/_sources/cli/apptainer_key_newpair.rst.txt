@@ -12,7 +12,7 @@ Synopsis
 
   The 'key newpair' command allows you to create a new key or public/private
   keys to be stored in the default user local keyring location (e.g., 
-  $HOME/.apptainer/sypgp).
+  $HOME/.apptainer/keys).
 
 ::
 

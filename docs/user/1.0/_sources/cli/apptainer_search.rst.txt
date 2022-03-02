@@ -11,7 +11,7 @@ Synopsis
 
 
   Search a Container Library for container images matching the search query.
-  (default cloud.sylabs.io). You can specify an alternate architecture, and/or limit
+  You can specify an alternate architecture, and/or limit
   the results to only signed images.
 
 ::
@@ -36,7 +36,7 @@ Options
       --arch string      architecture to search for (default "amd64")
   -h, --help             help for search
       --library string   URI for library to search
-      --signed           architecture to search for
+      --signed           search for only signed images
 
 SEE ALSO
 ~~~~~~~~

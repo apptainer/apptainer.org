@@ -11,7 +11,7 @@ Synopsis
 
 
   The 'remote remove-keyserver' command allows to remove a defined keyserver from a specific
-  endpoint. If no endpoint is specified, it will use the default remote endpoint (SylabsCloud).
+  endpoint. If no endpoint is specified, it will use the default remote endpoint.
 
 ::
 

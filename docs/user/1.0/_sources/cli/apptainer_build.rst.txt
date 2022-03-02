@@ -35,7 +35,7 @@ Synopsis
 
   Targets can also be remote and defined by a URI of the following formats:
 
-      library://  an image library (default https://cloud.sylabs.io/library)
+      library://  an image library (no default)
       docker://   a Docker/OCI registry (default Docker Hub)
       shub://     an Apptainer registry (default Singularity Hub)
       oras://     an OCI registry that holds SIF files using ORAS

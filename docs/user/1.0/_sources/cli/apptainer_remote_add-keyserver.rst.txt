@@ -13,7 +13,7 @@ Synopsis
   The 'remote add-keyserver' command allows to define additional keyserver. The --order
   option can define the order of the keyserver for all related key operations, therefore
   when specifying '--order 1' the keyserver is becoming the primary keyserver. If no endpoint
-  is specified, it will use the default remote endpoint (SylabsCloud).
+  is specified, it will use the default remote endpoint.
 
 ::
 

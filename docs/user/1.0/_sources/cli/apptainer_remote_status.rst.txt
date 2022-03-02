@@ -12,7 +12,7 @@ Synopsis
 
   The 'remote status' command checks the status of the specified remote endpoint
   and reports the availability of services and their versions. If no endpoint is
-  specified, it will check the status of the default remote (SylabsCloud). If you
+  specified, it will check the status of the default remote. If you
   have logged in with an authentication token the validity of that token will be
   checked.
 
@@ -26,7 +26,7 @@ Examples
 ::
 
 
-    $ apptainer remote status SylabsCloud
+    $ apptainer remote status
 
 Options
 ~~~~~~~

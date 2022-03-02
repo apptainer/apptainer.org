@@ -14,7 +14,7 @@ Synopsis
 
 ::
 
-  apptainer delete [arch] <imageRef> [flags]
+  apptainer delete [delete options...] <imageRef> [flags]
 
 Examples
 ~~~~~~~~

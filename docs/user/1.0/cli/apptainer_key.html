@@ -100,6 +100,11 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_avail.html">apptainer capability avail</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_drop.html">apptainer capability drop</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_list.html">apptainer capability list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint.html">apptainer checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_create.html">apptainer checkpoint create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_delete.html">apptainer checkpoint delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_instance.html">apptainer checkpoint instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_list.html">apptainer checkpoint list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config.html">apptainer config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_fakeroot.html">apptainer config fakeroot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_global.html">apptainer config global</a></li>
@@ -216,7 +221,7 @@
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>Manage your trusted, public and private keys in your local or in the global keyring
-(local keyring: ‘~/.apptainer/sypgp’ if ‘APPTAINER_SYPGPDIR’ is not set,
+(local keyring: ‘~/.apptainer/keys’ if ‘APPTAINER_KEYSDIR’ is not set,
 global keyring: ‘/usr/local/etc/apptainer/global-pgp-public’)</p>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">key</span> <span class="p">[</span><span class="n">key</span> <span class="n">options</span><span class="o">...</span><span class="p">]</span>
