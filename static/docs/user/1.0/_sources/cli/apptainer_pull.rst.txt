@@ -38,7 +38,7 @@ Examples
 ::
 
 
-    From Sylabs cloud library
+    From a library
     $ apptainer pull alpine.sif library://alpine:latest
 
     From Docker
@@ -57,7 +57,7 @@ Options
 
       --arch string      architecture to pull from library (default "amd64")
       --dir string       download images to the specific directory
-      --disable-cache    dont use cached images/blobs and dont create them
+      --disable-cache    do not use or create cached images/blobs
       --docker-login     login to a Docker Repository interactively
   -F, --force            overwrite an image file if it exists
   -h, --help             help for pull

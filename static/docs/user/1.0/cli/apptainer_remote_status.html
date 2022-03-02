@@ -100,6 +100,11 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_avail.html">apptainer capability avail</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_drop.html">apptainer capability drop</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_list.html">apptainer capability list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint.html">apptainer checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_create.html">apptainer checkpoint create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_delete.html">apptainer checkpoint delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_instance.html">apptainer checkpoint instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_list.html">apptainer checkpoint list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config.html">apptainer config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_fakeroot.html">apptainer config fakeroot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_global.html">apptainer config global</a></li>
@@ -217,7 +222,7 @@
 <blockquote>
 <div><p>The ‘remote status’ command checks the status of the specified remote endpoint
 and reports the availability of services and their versions. If no endpoint is
-specified, it will check the status of the default remote (SylabsCloud). If you
+specified, it will check the status of the default remote. If you
 have logged in with an authentication token the validity of that token will be
 checked.</p>
 </div></blockquote>
@@ -227,7 +232,7 @@ checked.</p>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer remote status SylabsCloud
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer remote status
 </pre></div>
 </div>
 </section>

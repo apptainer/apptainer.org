@@ -30,8 +30,7 @@ Synopsis
   instance://*        A local running instance of a container. (See the instance
                       command group.)
 
-  library://*         A SIF container hosted on a Library
-                      (default https://cloud.sylabs.io/library)
+  library://*         A SIF container hosted on a Library (no default)
 
   docker://*          A Docker/OCI container hosted on Docker Hub or another
                       OCI registry.
@@ -80,7 +79,9 @@ Options
       --compat                 apply settings for increased OCI/Docker compatibility. Infers --containall, --no-init, --no-umask, --writable-tmpfs.
   -c, --contain                use minimal /dev and empty other directories (e.g. /tmp and $HOME) instead of sharing filesystems from your host
   -C, --containall             contain not only file systems, but also PID, IPC, and environment
-      --disable-cache          dont use cache, and dont create cache
+      --disable-cache          do not use or create cache
+      --dmtcp-launch string    checkpoint for dmtcp to save container process state to (experimental)
+      --dmtcp-restart string   checkpoint for dmtcp to use to restart container process (experimental)
       --dns string             list of DNS server separated by commas to add in resolv.conf
       --docker-login           login to a Docker Repository interactively
       --drop-caps string       a comma separated capability list to drop
