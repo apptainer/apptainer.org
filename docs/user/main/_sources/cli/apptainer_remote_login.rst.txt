@@ -14,7 +14,7 @@ Synopsis
   an OCI/Docker registry or a keyserver.
 
   If no endpoint or registry is specified, the command will login to the currently
-  active remote endpoint. This is cloud.sylabs.io by default.
+  active remote endpoint.
 
 ::
 
@@ -27,7 +27,7 @@ Examples
 
 
     To log in to an endpoint:
-    $ apptainer remote login SylabsCloud
+    $ apptainer remote login
 
     To login in to a docker/OCI registry:
     $ apptainer remote login --username foo docker://docker.io

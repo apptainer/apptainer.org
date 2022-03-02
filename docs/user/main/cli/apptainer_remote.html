@@ -100,6 +100,11 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_avail.html">apptainer capability avail</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_drop.html">apptainer capability drop</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_list.html">apptainer capability list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint.html">apptainer checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_create.html">apptainer checkpoint create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_delete.html">apptainer checkpoint delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_instance.html">apptainer checkpoint instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_list.html">apptainer checkpoint list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config.html">apptainer config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_fakeroot.html">apptainer config fakeroot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_global.html">apptainer config global</a></li>
@@ -218,10 +223,10 @@
 <div><p>The ‘remote’ command allows you to manage Apptainer remote endpoints,
 standalone keyservers and OCI/Docker registry credentials through its
 subcommands.</p>
-<p>A ‘remote endpoint’ is the Sylabs Cloud, a Singularity Enterprise installation,
-or a compatible group of services. The remote endpoint is a single address,
-e.g. ‘cloud.sylabs.io’ through which linked library, builder and keystore
-sevices will be automatically discovered.</p>
+<p>A ‘remote endpoint’ is a group of services that is compatible with the
+container library API.  The remote endpoint is a single address,
+e.g. ‘cloud.example.com’ through which library and/or keystore services
+will be automatically discovered.</p>
 <p>To configure a remote endpoint you must ‘remote add’ it. You can ‘remote login’ if
 you will be performing actions needing authentication. Switch between
 configured remote endpoints with the ‘remote use’ command. The active remote

@@ -11,7 +11,7 @@ Synopsis
 
 
   Manage your trusted, public and private keys in your local or in the global keyring
-  (local keyring: '~/.apptainer/sypgp' if 'APPTAINER_SYPGPDIR' is not set,
+  (local keyring: '~/.apptainer/keys' if 'APPTAINER_KEYSDIR' is not set,
   global keyring: '/usr/local/etc/apptainer/global-pgp-public')
 
 ::

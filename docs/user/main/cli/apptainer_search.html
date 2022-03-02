@@ -100,6 +100,11 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_avail.html">apptainer capability avail</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_drop.html">apptainer capability drop</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_list.html">apptainer capability list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint.html">apptainer checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_create.html">apptainer checkpoint create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_delete.html">apptainer checkpoint delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_instance.html">apptainer checkpoint instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_list.html">apptainer checkpoint list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config.html">apptainer config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_fakeroot.html">apptainer config fakeroot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_global.html">apptainer config global</a></li>
@@ -216,7 +221,7 @@
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>Search a Container Library for container images matching the search query.
-(default cloud.sylabs.io). You can specify an alternate architecture, and/or limit
+You can specify an alternate architecture, and/or limit
 the results to only signed images.</p>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">search</span> <span class="p">[</span><span class="n">search</span> <span class="n">options</span><span class="o">...</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">search_query</span><span class="o">&gt;</span>
@@ -236,7 +241,7 @@ $ apptainer search --signed tensorflow
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">--</span><span class="n">arch</span> <span class="n">string</span>      <span class="n">architecture</span> <span class="n">to</span> <span class="n">search</span> <span class="k">for</span> <span class="p">(</span><span class="n">default</span> <span class="s2">&quot;amd64&quot;</span><span class="p">)</span>
 <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>             <span class="n">help</span> <span class="k">for</span> <span class="n">search</span>
     <span class="o">--</span><span class="n">library</span> <span class="n">string</span>   <span class="n">URI</span> <span class="k">for</span> <span class="n">library</span> <span class="n">to</span> <span class="n">search</span>
-    <span class="o">--</span><span class="n">signed</span>           <span class="n">architecture</span> <span class="n">to</span> <span class="n">search</span> <span class="k">for</span>
+    <span class="o">--</span><span class="n">signed</span>           <span class="n">search</span> <span class="k">for</span> <span class="n">only</span> <span class="n">signed</span> <span class="n">images</span>
 </pre></div>
 </div>
 </section>

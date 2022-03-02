@@ -100,6 +100,11 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_avail.html">apptainer capability avail</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_drop.html">apptainer capability drop</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_capability_list.html">apptainer capability list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint.html">apptainer checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_create.html">apptainer checkpoint create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_delete.html">apptainer checkpoint delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_instance.html">apptainer checkpoint instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_list.html">apptainer checkpoint list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config.html">apptainer config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_fakeroot.html">apptainer config fakeroot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_config_global.html">apptainer config global</a></li>
@@ -229,8 +234,9 @@ pass arguments to startscript</p>
 </dd>
 <dt>instance://*        A local running instance of a container. (See the instance</dt><dd><p>command group.)</p>
 </dd>
-<dt>library://*         A SIF container hosted on a Library</dt><dd><p>(default <a class="reference external" href="https://cloud.sylabs.io/library">https://cloud.sylabs.io/library</a>)</p>
-</dd>
+</dl>
+<p>library://*         A SIF container hosted on a Library (no default)</p>
+<dl class="simple">
 <dt>docker://*          A Docker/OCI container hosted on Docker Hub or another</dt><dd><p>OCI registry.</p>
 </dd>
 </dl>
@@ -274,7 +280,9 @@ Stopping /tmp/my-sql.sif mysql
     --compat                 apply settings for increased OCI/Docker compatibility. Infers --containall, --no-init, --no-umask, --writable-tmpfs.
 -c, --contain                use minimal /dev and empty other directories (e.g. /tmp and $HOME) instead of sharing filesystems from your host
 -C, --containall             contain not only file systems, but also PID, IPC, and environment
-    --disable-cache          dont use cache, and dont create cache
+    --disable-cache          do not use or create cache
+    --dmtcp-launch string    checkpoint for dmtcp to save container process state to (experimental)
+    --dmtcp-restart string   checkpoint for dmtcp to use to restart container process (experimental)
     --dns string             list of DNS server separated by commas to add in resolv.conf
     --docker-login           login to a Docker Repository interactively
     --drop-caps string       a comma separated capability list to drop

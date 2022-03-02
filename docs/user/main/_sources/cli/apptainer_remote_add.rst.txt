@@ -24,7 +24,7 @@ Examples
 ::
 
 
-    $ apptainer remote add SylabsCloud cloud.sylabs.io
+    $ apptainer remote add ExampleCloud cloud.example.com
 
 Options
 ~~~~~~~

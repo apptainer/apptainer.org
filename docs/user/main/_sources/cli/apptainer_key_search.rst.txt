@@ -24,7 +24,7 @@ Examples
 ::
 
 
-    $ apptainer key search sylabs.io
+    $ apptainer key search apptainer.org
 
     # search by fingerprint:
     $ apptainer key search 8883491F4268F173C6E5DC49EDECE4F3F38D871E

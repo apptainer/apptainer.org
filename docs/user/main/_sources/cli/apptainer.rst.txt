@@ -50,6 +50,7 @@ SEE ALSO
 * :ref:`apptainer build <apptainer_build>` 	 - Build an Apptainer image
 * :ref:`apptainer cache <apptainer_cache>` 	 - Manage the local cache
 * :ref:`apptainer capability <apptainer_capability>` 	 - Manage Linux capabilities for users and groups
+* :ref:`apptainer checkpoint <apptainer_checkpoint>` 	 - Manage container checkpoint state (experimental)
 * :ref:`apptainer config <apptainer_config>` 	 - Manage various apptainer configuration (root user only)
 * :ref:`apptainer delete <apptainer_delete>` 	 - Deletes requested image from the library
 * :ref:`apptainer exec <apptainer_exec>` 	 - Run a command within a container
