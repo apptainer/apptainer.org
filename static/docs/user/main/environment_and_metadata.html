@@ -234,8 +234,8 @@ not be overridden by host environment variables of the same name.</p>
 <p>Environment variables can be included in your container by adding them
 to your definition file. Use <code class="docutils literal notranslate"><span class="pre">export</span></code> in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section
 of a definition file to set a container environment variable:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
-<span class="k">From</span>: default/alpine
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: alpine
 
 <span class="gh">%environment</span>
     <span class="nb">export</span> <span class="nv">MYVAR</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span>
@@ -296,7 +296,7 @@ libraries if applicable.</p></li>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>See compatibility documentation for <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> prefixed environment
-variable support <cite>here &lt;singularity_environment_variable_compatibility&gt;</cite>.</p>
+variable support <a class="reference internal" href="singularity_compatibility.html#singularity-environment-variable-compatibility"><span class="std std-ref">here</span></a>.</p>
 </div>
 <p>To override an environment variable that is already set in the container with
 the value from the host, use <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> or the <code class="docutils literal notranslate"><span class="pre">--env</span></code> flag. For
@@ -362,7 +362,7 @@ container.</p></li>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>See compatibility documentation for <code class="docutils literal notranslate"><span class="pre">SINGULARITY_</span></code> prefixed environment
-variable support <cite>here &lt;singularity_environment_variable_compatibility&gt;</cite>.</p>
+variable support <a class="reference internal" href="singularity_compatibility.html#singularity-environment-variable-compatibility"><span class="std std-ref">here</span></a>.</p>
 </div>
 </section>
 <section id="overriding-environment-variables">
@@ -372,7 +372,6 @@ define additional variables, in various ways as appropriate for your
 workflow.</p>
 <section id="env-option">
 <h3><code class="docutils literal notranslate"><span class="pre">--env</span></code> option<a class="headerlink" href="#env-option" title="Permalink to this headline"></a></h3>
-<p><em>New in Apptainer 3.6</em></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--env</span></code> option on the <code class="docutils literal notranslate"><span class="pre">run/exec/shell</span></code> commands allows you to
 specify environment variables as <code class="docutils literal notranslate"><span class="pre">NAME=VALUE</span></code> pairs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run env.sif
@@ -631,7 +630,7 @@ WARNING: Label: OWNER already exists and force option is false, not overwriting
 <h3>Custom Labels<a class="headerlink" href="#custom-labels" title="Permalink to this headline"></a></h3>
 <p>You can add custom labels to your container using the <code class="docutils literal notranslate"><span class="pre">%labels</span></code>
 section in a definition file:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">From</span>: ubuntu:latest
 
 <span class="gh">%labels</span>
@@ -648,7 +647,7 @@ building.</p>
 <p>Apptainer allows this, through adding labels to the
 file defined by the <code class="docutils literal notranslate"><span class="pre">APPTAINER_LABELS</span></code> environment variable in the
 <code class="docutils literal notranslate"><span class="pre">%post</span></code> section:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">From</span>: ubuntu:latest<span class="c"></span>
 
 <span class="c"># These labels take a fixed value in the definition</span>
@@ -678,7 +677,7 @@ options will display any labels set on the container</p>
 <span class="go">org.label-schema.build-arch: amd64</span>
 <span class="go">org.label-schema.build-date: Thursday_12_November_2020_10:51:59_CST</span>
 <span class="go">org.label-schema.schema-version: 1.0</span>
-<span class="go">org.label-schema.usage.singularity.deffile.bootstrap: library</span>
+<span class="go">org.label-schema.usage.singularity.deffile.bootstrap: docker</span>
 <span class="go">org.label-schema.usage.singularity.deffile.from: ubuntu:latest</span>
 <span class="go">org.label-schema.usage.singularity.version: 3.7.0-rc.1</span>
 </pre></div>
@@ -696,7 +695,7 @@ used to build the container.</p>
 </pre></div>
 </div>
 <p>And the output would look like:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">From</span>: debian:<span class="m">9</span>
 
 <span class="gh">%help</span>
@@ -850,7 +849,7 @@ format.</p>
                                 <span class="nt">&quot;org.label-schema.build-arch&quot;</span><span class="p">:</span> <span class="s2">&quot;amd64&quot;</span><span class="p">,</span>
                                 <span class="nt">&quot;org.label-schema.build-date&quot;</span><span class="p">:</span> <span class="s2">&quot;Thursday_12_November_2020_10:51:59_CST&quot;</span><span class="p">,</span>
                                 <span class="nt">&quot;org.label-schema.schema-version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-                                <span class="nt">&quot;org.label-schema.usage.singularity.deffile.bootstrap&quot;</span><span class="p">:</span> <span class="s2">&quot;library&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;org.label-schema.usage.singularity.deffile.bootstrap&quot;</span><span class="p">:</span> <span class="s2">&quot;docker&quot;</span><span class="p">,</span>
                                 <span class="nt">&quot;org.label-schema.usage.singularity.deffile.from&quot;</span><span class="p">:</span> <span class="s2">&quot;ubuntu:latest&quot;</span><span class="p">,</span>
                                 <span class="nt">&quot;org.label-schema.usage.singularity.version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.7.0-rc.1&quot;</span>
                         <span class="p">}</span>

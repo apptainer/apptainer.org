@@ -144,10 +144,10 @@ configurations. This is accomplished through settings in
 <h2><code class="docutils literal notranslate"><span class="pre">--dns</span></code><a class="headerlink" href="#dns" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--dns</span></code> option allows you to specify a comma separated list of DNS
 servers to add to the <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> file.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nslookup sylabs.io | grep Server
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nslookup google.com | grep Server
 Server:             127.0.0.53
 
-$ sudo apptainer exec --dns 8.8.8.8 ubuntu.sif nslookup sylabs.io | grep Server
+$ sudo apptainer exec --dns 8.8.8.8 ubuntu.sif nslookup google.com | grep Server
 Server:             8.8.8.8
 
 $ sudo apptainer exec --dns 8.8.8.8 ubuntu.sif cat /etc/resolv.conf

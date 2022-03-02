@@ -160,12 +160,12 @@ FOO=BAR
 set inside the container.</p>
 <p>Next we can use the <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> prefix to do the same thing, but this
 time we wil have the intended value be <code class="docutils literal notranslate"><span class="pre">BAZ</span></code>:</p>
-<blockquote>
-<div><p>$ SINGULARITYENV_FOO=BAZ apptainer exec  docker://alpine env
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ SINGULARITYENV_FOO=BAZ apptainer exec  docker://alpine env
 WARNING: DEPRECATED USAGE: Forwarding SINGULARITYENV_FOO as environment variable will not be supported in the future, use APPTAINERENV_FOO instead
-[…]
-FOO=BAZ</p>
-</div></blockquote>
+[...]
+FOO=BAZ
+</pre></div>
+</div>
 <p>Notice that we have a warning for <code class="docutils literal notranslate"><span class="pre">DEPRECATED</span> <span class="pre">USAGE</span></code> when doing so. This is
 because a future version of Apptainer may stop supporting environment variable
 compatibility once it is past this current period of transition.</p>

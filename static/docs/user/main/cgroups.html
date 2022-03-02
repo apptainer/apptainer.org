@@ -235,7 +235,7 @@ of your cgroups TOML file:</p>
 </pre></div>
 </div>
 <p>Start your container, applying the toml file, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer run --apply-cgroups path/to/cgroups.toml library://alpine
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer run --apply-cgroups path/to/cgroups.toml docker://alpine
 </pre></div>
 </div>
 <p>After that, you can verify that the container is only using 500MB of
@@ -368,8 +368,7 @@ or write to <code class="docutils literal notranslate"><span class="pre">/dev/nu
 runtime-spec <code class="docutils literal notranslate"><span class="pre">resources</span></code> section, <strong>except</strong> native <code class="docutils literal notranslate"><span class="pre">unified</span></code>
 cgroups v2 constraints. Use the cgroups v1 limits, which will be
 translated to v2 format when applied on a cgroups v1 system.</p>
-<p>See
-<a class="reference external" href="https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md#control-groups">https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md#control-groups</a>
+<p>See the <a class="reference external" href="https://github.com/opencontainers/runtime-spec/blob/main/config-linux.md#control-groups">runtime spec</a>
 for information about the available limits. Note that Apptainer uses
 TOML format for the configuration file, rather than JSON.</p>
 </section>

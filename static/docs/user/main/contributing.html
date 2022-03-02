@@ -175,7 +175,7 @@ and <a class="reference external" href="https://readthedocs.org/">ReadTheDocs</a
 </ul>
 <p>More information about contributing to the documentation, instructions
 on how to install the dependencies, and how to generate the files can be
-obtained <a class="reference external" href="https://github.com/apptainer/apptainer-userdocs/blob/master/README.md">here</a>.</p>
+obtained <a class="reference external" href="https://github.com/apptainer/apptainer-userdocs/blob/main/README.md">here</a>.</p>
 <p>For more information on using Git and GitHub to create a pull request
 suggesting additions and edits to the docs, see the <a class="reference internal" href="#contribute-to-the-code"><span class="std std-ref">section on
 contributing to the code</span></a>. The procedure is
@@ -185,9 +185,9 @@ identical for contributions to the documentation and the code base.</p>
 <span id="id2"></span><h2>Contribute to the code<a class="headerlink" href="#contribute-to-the-code" title="Permalink to this headline"></a></h2>
 <p>We use the traditional <a class="reference external" href="https://guides.github.com/introduction/flow/">GitHub Flow</a> to develop. This means
 that you fork the main repo, create a new branch to make changes, and
-submit a pull request (PR) to the master branch.</p>
-<p>Check out our official <a class="reference external" href="https://github.com/apptainer/apptainer/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>
-document, which also includes a <a class="reference external" href="https://github.com/apptainer/apptainer/blob/master/CONTRIBUTING.md#code-of-conduct">code of conduct</a>.</p>
+submit a pull request (PR) to the main branch.</p>
+<p>Check out our official <a class="reference external" href="https://github.com/apptainer/apptainer/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
+document, which also includes a <a class="reference external" href="https://github.com/apptainer/apptainer/blob/main/CONTRIBUTING.md#code-of-conduct">code of conduct</a>.</p>
 <section id="step-1-fork-the-repo">
 <h3>Step 1. Fork the repo<a class="headerlink" href="#step-1-fork-the-repo" title="Permalink to this headline"></a></h3>
 <p>To contribute to Apptainer, you should obtain a GitHub account and
@@ -204,10 +204,10 @@ username.)</p>
 <h3>Step 2. Checkout a new branch<a class="headerlink" href="#step-2-checkout-a-new-branch" title="Permalink to this headline"></a></h3>
 <p><a class="reference external" href="https://guides.github.com/introduction/flow//">Branches</a> are a way of
 isolating your features from the main branch. Given that we’ve just
-cloned the repo, we will probably want to make a new branch from master
+cloned the repo, we will probably want to make a new branch from main
 in which to work on our new feature. Lets call that branch
 <code class="docutils literal notranslate"><span class="pre">new-feature</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout master &amp;&amp; \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout main &amp;&amp; \
     git checkout -b new-feature
 </pre></div>
 </div>
@@ -235,7 +235,7 @@ $ git commit -m &quot;updated docs about shell to close #10&quot;
 </div>
 <p>The tags <code class="docutils literal notranslate"><span class="pre">close</span> <span class="pre">#10</span></code> and <code class="docutils literal notranslate"><span class="pre">fix</span> <span class="pre">#2</span></code> are referencing issues that are
 posted on the upstream repo where you will direct your pull request.
-When your PR is merged into the master branch, these messages will
+When your PR is merged into the main branch, these messages will
 automatically close the issues, and further, they will link your commits
 directly to the issues they intend to fix. This will help future
 maintainers understand your contribution, or (hopefully not) revert the
@@ -259,7 +259,7 @@ what has been pushed (or not):</p>
 <p>Once you have pushed your branch, then you can go to your fork (in the
 web GUI on GitHub) and <a class="reference external" href="https://help.github.com/articles/creating-a-pull-request/">submit a Pull Request</a>.
 Regardless of the name of your branch, your PR should be submitted to
-the Apptainer <code class="docutils literal notranslate"><span class="pre">master</span></code> branch. Submitting your PR will open a
+the Apptainer <code class="docutils literal notranslate"><span class="pre">main</span></code> branch. Submitting your PR will open a
 conversation thread for the maintainers of Apptainer to discuss your
 contribution. At this time, the continuous integration that is linked
 with the code base will also be executed. If there is an issue, or if
@@ -270,14 +270,14 @@ your branch and they will update the Pull Request.</p>
 <h3>Step 6. Keep your branch in sync<a class="headerlink" href="#step-6-keep-your-branch-in-sync" title="Permalink to this headline"></a></h3>
 <p>Cloning the repo will create an exact copy of the Apptainer
 repository at that moment. As you work, your branch may become out of
-date as others merge changes into the upstream master. In the event that
+date as others merge changes into the upstream main. In the event that
 you need to update a branch, you will need to follow the next steps:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git remote add upstream https://github.com/apptainer/apptainer.git &amp;&amp; # to add a new remote named &quot;upstream&quot; \
-    git checkout master &amp;&amp; # or another branch to be updated \
-    git pull upstream master &amp;&amp; \
-    git push origin master &amp;&amp; # to update your fork \
+    git checkout main &amp;&amp; # or another branch to be updated \
+    git pull upstream main &amp;&amp; \
+    git push origin main &amp;&amp; # to update your fork \
     git checkout new-feature &amp;&amp; \
-    git merge master
+    git merge main
 </pre></div>
 </div>
 </section>
