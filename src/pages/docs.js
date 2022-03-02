@@ -6,6 +6,7 @@ import Seo from "../components/seo"
 
 const docsVersions = [
     { version: 'main' },
+    { version: '1.0'  },
 ]
 
 const DocsPage = () => (
