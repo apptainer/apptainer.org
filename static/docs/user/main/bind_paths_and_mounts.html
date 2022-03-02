@@ -200,8 +200,9 @@ running, you can disable the <code class="docutils literal notranslate"><span cl
 you will be able to request your own bind paths within your container.</p>
 <p>The Apptainer action commands (<code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code>, <code class="docutils literal notranslate"><span class="pre">shell</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code>) will accept the <code class="docutils literal notranslate"><span class="pre">--bind/-B</span></code> command-line option to
-specify bind paths, and will also honor the <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BIND</span></code> (or
-<code class="docutils literal notranslate"><span class="pre">$APPTAINER_BINDPATH</span></code>) environment variable. The argument for this
+specify bind paths, and will also honor the <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BIND</span></code> and
+<code class="docutils literal notranslate"><span class="pre">$APPTAINER_BINDPATH</span></code> environment variables (in that order).
+The argument for this
 option is a comma-delimited string of bind path specifications in the
 format <code class="docutils literal notranslate"><span class="pre">src[:dest[:opts]]</span></code>, where <code class="docutils literal notranslate"><span class="pre">src</span></code> and <code class="docutils literal notranslate"><span class="pre">dest</span></code> are paths
 outside and inside of the container respectively. If <code class="docutils literal notranslate"><span class="pre">dest</span></code> is not

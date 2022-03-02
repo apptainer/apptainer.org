@@ -237,7 +237,7 @@ file for container processes. (it requires root privileges)</p></li>
 <section id="b">
 <h3><code class="docutils literal notranslate"><span class="pre">B</span></code><a class="headerlink" href="#b" title="Permalink to this headline"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>APPTAINER_BINDPATH</strong> and <strong>APPTAINER_BIND</strong>: Comma separated
+<li><p><strong>APPTAINER_BIND</strong> and <strong>APPTAINER_BINDPATH</strong>: Comma separated
 string <code class="docutils literal notranslate"><span class="pre">source:&lt;dest&gt;</span></code> list of paths to bind between the host and
 the container.</p></li>
 <li><p><strong>APPTAINER_BOOT</strong>: Set to false by default, considers if executing
@@ -875,7 +875,7 @@ must also specify a URI for the mirror you would like to use.</p>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">MirrorURL</span>: https://www.busybox.net/downloads/binaries/<span class="m">1.26.1</span>-defconfig-multiarch/busybox-x86_64
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">MirrorURL</span>: https://www.busybox.net/downloads/binaries/<span class="m">1.35.0</span>-x86_64-linux-musl/busybox
 </pre></div>
 </div>
 <p>The MirrorURL keyword is mandatory. It specifies a URI to use as a
@@ -884,7 +884,7 @@ mirror when downloading the OS.</p>
 <section id="id23">
 <h4>Notes<a class="headerlink" href="#id23" title="Permalink to this headline"></a></h4>
 <p>You can build a fully functional BusyBox container that only takes up
-~600kB of disk space!</p>
+~700kB of disk space!</p>
 </section>
 </section>
 <section id="zypper-bootstrap-agent">
