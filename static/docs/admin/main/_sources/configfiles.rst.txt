@@ -1098,6 +1098,37 @@ This flag controls HTTP vs HTTPS for service discovery only. The
 protocol used to access individual library, build and keyserver URLs is
 set by the service discovery file.
 
+.. _restore_library_behavior:
+
+Restoring pre-{Project} library behavior
+----------------------------------------
+
+These are the commands to restore the library behavior from before
+{Project}, where using the `library://` URI would download from the
+Sylabs Cloud anonymously:
+
+.. code::
+   $ sudo {command} remote add --global SylabsCloud cloud.sylabs.io
+   INFO:    Remote "SylabsCloud" added.
+   INFO:    Global option detected. Will not automatically log into remote.
+   $ sudo {command} remote use --global SylabsCloud
+   INFO:    Remote "SylabsCloud" now in use.
+   $ {command} remote list
+   Cloud Services Endpoints
+   ========================
+
+   NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE
+   DefaultRemote  cloud.apptainer.org  NO      YES     NO
+   SylabsCloud    cloud.sylabs.io      YES     YES     NO
+
+   Keyservers
+   ==========
+
+   URI                     GLOBAL  INSECURE  ORDER
+   https://keys.sylabs.io  YES     NO        1*
+
+   * Active cloud services keyserver
+
 Additional Information
 ----------------------
 
