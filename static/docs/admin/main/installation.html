@@ -92,7 +92,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#installation-on-windows-or-mac">Installation on Windows or Mac</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#apptainer-vagrant-box">Apptainer Vagrant Box</a></li>
 </ul>
 </li>
 </ul>
@@ -463,7 +462,7 @@ the installation.</p>
 will work for &gt;=v1.0.0. To install an older tagged
 release see <a class="reference external" href="https://apptainer.org/docs/">older versions of the docs</a>.</p>
 <p>When installing from source, you can decide to install from either a
-<strong>tag</strong>, a <strong>release branch</strong>, or from the <strong>master branch</strong>.</p>
+<strong>tag</strong>, a <strong>release branch</strong>, or from the <strong>main branch</strong>.</p>
 <ul class="simple">
 <li><p><strong>tag</strong>: GitHub tags form the basis for releases, so installing from
 a tag is the same as downloading and installing a <a class="reference external" href="https://github.com/apptainer/apptainer/releases">specific release</a>. Tags are expected
@@ -474,10 +473,10 @@ those that have not yet made it into a point release). For instance,
 to install v1.0 with the latest bug fixes and enhancements checkout
 <code class="docutils literal notranslate"><span class="pre">release-1.0</span></code>. Release branches may be less stable than code in a
 tagged point release.</p></li>
-<li><p><strong>master branch</strong>: The <code class="docutils literal notranslate"><span class="pre">master</span></code> branch contains the latest,
+<li><p><strong>main branch</strong>: The <code class="docutils literal notranslate"><span class="pre">main</span></code> branch contains the latest,
 bleeding edge version of Apptainer. This is the default branch
 when you clone the source code, so you don’t have to check out any
-new branches to install it. The <code class="docutils literal notranslate"><span class="pre">master</span></code> branch changes quickly and
+new branches to install it. The <code class="docutils literal notranslate"><span class="pre">main</span></code> branch changes quickly and
 may be unstable.</p></li>
 </ul>
 <p>To ensure that the Apptainer source code is downloaded to the
@@ -581,7 +580,7 @@ directly from the <a class="reference external" href="https://github.com/apptain
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Be sure to download the correct asset from the <a class="reference external" href="https://github.com/apptainer/apptainer/releases">GitHub releases page</a>. It should be
-named <code class="docutils literal notranslate"><span class="pre">singularity-&lt;version&gt;.tar.gz</span></code>.</p>
+named <code class="docutils literal notranslate"><span class="pre">apptainer-&lt;version&gt;.tar.gz</span></code>.</p>
 </div>
 <p>After installing the <a class="reference internal" href="#install-dependencies"><span class="std std-ref">dependencies</span></a> and
 installing <a class="reference internal" href="#install-go"><span class="std std-ref">Go</span></a> as detailed above, you are ready to
@@ -738,10 +737,12 @@ tests in an isolated development or build environment.</p>
 Windows or Mac because of basic incompatibilities with the host kernel.
 (Contrary to a popular misconception, MacOS does not run on a Linux
 kernel. It runs on a kernel called Darwin originally forked from BSD.)</p>
-<p>For this reason, the Apptainer community maintains a set of Vagrant
+<p>In order to use Apptainer on these platforms, you can install Vagrant
 Boxes via <a class="reference external" href="https://www.vagrantup.com/">Vagrant Cloud</a>, one of
 <a class="reference external" href="https://www.hashicorp.com/#open-source-tools">Hashicorp’s</a> open
-source tools. The current versions can be found under the <a class="reference external" href="https://app.vagrantup.com/sylabs">sylabs</a> organization.</p>
+source tools, by following the instructions below. Then you can install
+Apptainer in the base VM of your choice by following the linux
+<a class="reference internal" href="#installation"><span class="std std-ref">installation instructions</span></a> above.</p>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline"></a></h3>
 <p>Install the following programs:</p>
@@ -760,36 +761,6 @@ source tools. The current versions can be found under the <a class="reference ex
 $ brew install --cask virtualbox vagrant vagrant-manager
 </pre></div>
 </div>
-</section>
-<section id="apptainer-vagrant-box">
-<h3>Apptainer Vagrant Box<a class="headerlink" href="#apptainer-vagrant-box" title="Permalink to this headline"></a></h3>
-<p>Run Git Bash (Windows) or open a terminal (Mac) and create and enter a
-directory to be used with your Vagrant VM.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir vm-apptainer &amp;&amp; \
-    cd vm-apptainer
-</pre></div>
-</div>
-<p>If you have already created and used this folder for another VM, you
-will need to destroy the VM and delete the Vagrantfile.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ vagrant destroy &amp;&amp; \
-    rm Vagrantfile
-</pre></div>
-</div>
-<p>Then issue the following commands to bring up the Virtual Machine.
-(Substitute a different value for the <code class="docutils literal notranslate"><span class="pre">$VM</span></code> variable if you like.)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VM=sylabs/singularity-3.8-ubuntu-bionic64 &amp;&amp; \
-    vagrant init $VM &amp;&amp; \
-    vagrant up &amp;&amp; \
-    vagrant ssh
-</pre></div>
-</div>
-<p>You can check the installed version of Apptainer with the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>vagrant@vagrant:~$ apptainer version
-1.0.0
-</pre></div>
-</div>
-<p>Of course, you can also start with a plain OS Vagrant box as a base and
-then install Apptainer using one of the above methods for Linux.</p>
 </section>
 </section>
 </section>

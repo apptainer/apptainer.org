@@ -400,7 +400,7 @@ will work for >=v{InstallationVersion}. To install an older tagged
 release see `older versions of the docs <https://apptainer.org/docs/>`_.
 
 When installing from source, you can decide to install from either a
-**tag**, a **release branch**, or from the **master branch**.
+**tag**, a **release branch**, or from the **main branch**.
 
 -  **tag**: GitHub tags form the basis for releases, so installing from
    a tag is the same as downloading and installing a `specific release
@@ -414,10 +414,10 @@ When installing from source, you can decide to install from either a
    ``release-1.0``. Release branches may be less stable than code in a
    tagged point release.
 
--  **master branch**: The ``master`` branch contains the latest,
+-  **main branch**: The ``main`` branch contains the latest,
    bleeding edge version of {Project}. This is the default branch
    when you clone the source code, so you don't have to check out any
-   new branches to install it. The ``master`` branch changes quickly and
+   new branches to install it. The ``main`` branch changes quickly and
    may be unstable.
 
 To ensure that the {Project} source code is downloaded to the
@@ -547,7 +547,7 @@ directly from the `release tarball
 
    Be sure to download the correct asset from the `GitHub releases page
    <https://github.com/{orgrepo}/releases>`_. It should be
-   named ``singularity-<version>.tar.gz``.
+   named ``{command}-<version>.tar.gz``.
 
 After installing the :ref:`dependencies <install-dependencies>` and
 installing :ref:`Go <install-go>` as detailed above, you are ready to
@@ -734,11 +734,12 @@ Windows or Mac because of basic incompatibilities with the host kernel.
 (Contrary to a popular misconception, MacOS does not run on a Linux
 kernel. It runs on a kernel called Darwin originally forked from BSD.)
 
-For this reason, the {Project} community maintains a set of Vagrant
+In order to use {Project} on these platforms, you can install Vagrant
 Boxes via `Vagrant Cloud <https://www.vagrantup.com/>`__, one of
 `Hashicorp's <https://www.hashicorp.com/#open-source-tools>`_ open
-source tools. The current versions can be found under the `sylabs
-<https://app.vagrantup.com/sylabs>`_ organization.
+source tools, by following the instructions below. Then you can install
+{Project} in the base VM of your choice by following the linux
+:ref:`installation instructions <installation>` above.
 
 Windows
 =======
@@ -762,44 +763,3 @@ To use Vagrant via Homebrew:
 
    $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
    $ brew install --cask virtualbox vagrant vagrant-manager
-
-{Project} Vagrant Box
-=========================
-
-Run Git Bash (Windows) or open a terminal (Mac) and create and enter a
-directory to be used with your Vagrant VM.
-
-.. code::
-
-   $ mkdir vm-{command} && \
-       cd vm-{command}
-
-If you have already created and used this folder for another VM, you
-will need to destroy the VM and delete the Vagrantfile.
-
-.. code::
-
-   $ vagrant destroy && \
-       rm Vagrantfile
-
-Then issue the following commands to bring up the Virtual Machine.
-(Substitute a different value for the ``$VM`` variable if you like.)
-
-.. code::
-
-   $ export VM=sylabs/singularity-3.8-ubuntu-bionic64 && \
-       vagrant init $VM && \
-       vagrant up && \
-       vagrant ssh
-
-You can check the installed version of {Project} with the following:
-
-.. code::
-
-   vagrant@vagrant:~$ {command} version
-   {InstallationVersion}
-
-Of course, you can also start with a plain OS Vagrant box as a base and
-then install {Project} using one of the above methods for Linux.
-
-
