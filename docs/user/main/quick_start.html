@@ -55,7 +55,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#overview-of-the-apptainer-interface">Overview of the Apptainer Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#download-pre-built-images">Download pre-built images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#downloading-images">Downloading images</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#interact-with-images">Interact with images</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#shell">Shell</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#executing-commands">Executing Commands</a></li>
@@ -205,7 +205,7 @@ the admin guide</a>.</p>
 <span id="install"></span><h3>Install Go<a class="headerlink" href="#install-go" title="Permalink to this headline"></a></h3>
 <p>Apptainer is written in Go, and may require a newer version of Go than is
 available in the repositories of your distribution. We recommend installing the
-latest version of Go from the [official binaries](<a class="reference external" href="https://golang.org/dl/">https://golang.org/dl/</a>).</p>
+latest version of Go from the <a class="reference external" href="https://golang.org/dl/">official binaries</a>.</p>
 <p>Apptainer aims to maintain support for the two most recent stable versions
 of Go. This corresponds to the Go Release Maintenance Policy and Security
 Policy, ensuring critical bug fixes and security patches are available for all
@@ -314,7 +314,7 @@ Available Commands:
   oci         Manage OCI containers
   plugin      Manage apptainer plugins
   pull        Pull an image from a URI
-  push        Upload image to the provided library (default is &quot;cloud.sylabs.io&quot;)
+  push        Upload image to the provided URI
   remote      Manage apptainer remote endpoints
   run         Run the user-defined default command within a container
   run-help    Show the user-defined help for an image
@@ -375,12 +375,12 @@ follow the main <code class="docutils literal notranslate"><span class="pre">app
 by their options and arguments.</p>
 <p>For example, to pass the <code class="docutils literal notranslate"><span class="pre">--debug</span></code> option to the main <code class="docutils literal notranslate"><span class="pre">apptainer</span></code>
 command and run Apptainer with debugging messages on:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer --debug run library://lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer --debug run docker://alpine
 </pre></div>
 </div>
 <p>To pass the <code class="docutils literal notranslate"><span class="pre">--containall</span></code> option to the <code class="docutils literal notranslate"><span class="pre">run</span></code> command and run a
 Apptainer image in an isolated manner:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --containall library://lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --containall docker://alpine
 </pre></div>
 </div>
 <p>Apptainer has the concept of command groups. For
@@ -398,65 +398,22 @@ $ apptainer inspect --helpfile --app=foo foo.sif  # See the help for foo, if pro
 </pre></div>
 </div>
 </section>
-<section id="download-pre-built-images">
-<h2>Download pre-built images<a class="headerlink" href="#download-pre-built-images" title="Permalink to this headline"></a></h2>
-<p>You can use the <code class="docutils literal notranslate"><span class="pre">search</span></code> command to locate groups, collections, and
-containers of interest on the <a class="reference external" href="https://cloud.sylabs.io/library">Container Library</a> .</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">search</span> <span class="n">tensorflow</span>
-<span class="n">Found</span> <span class="mi">22</span> <span class="n">container</span> <span class="n">images</span> <span class="k">for</span> <span class="n">amd64</span> <span class="n">matching</span> <span class="s2">&quot;tensorflow&quot;</span><span class="p">:</span>
-
-    <span class="n">library</span><span class="p">:</span><span class="o">//</span><span class="n">ajgreen</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">tensorflow2</span><span class="o">-</span><span class="n">gpu</span><span class="o">-</span><span class="n">py3</span><span class="o">-</span><span class="n">r</span><span class="o">-</span><span class="n">jupyter</span><span class="p">:</span><span class="n">latest</span>
-            <span class="n">Current</span> <span class="n">software</span><span class="p">:</span> <span class="n">tensorflow2</span><span class="p">;</span> <span class="n">py3</span><span class="mf">.7</span><span class="p">;</span> <span class="n">r</span><span class="p">;</span> <span class="n">jupyterlab1</span><span class="mf">.2.6</span>
-            <span class="n">Signed</span> <span class="n">by</span><span class="p">:</span> <span class="mi">1</span><span class="n">B8565093D80FA393BC2BD73EA4711C01D881FCB</span>
-
-    <span class="n">library</span><span class="p">:</span><span class="o">//</span><span class="n">bensonyang</span><span class="o">/</span><span class="n">collection</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">rdma_v4</span><span class="o">.</span><span class="n">sif</span><span class="p">:</span><span class="n">latest</span>
-
-    <span class="n">library</span><span class="p">:</span><span class="o">//</span><span class="n">dxtr</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">hpc</span><span class="o">-</span><span class="n">tensorflow</span><span class="p">:</span><span class="mf">0.1</span>
-
-    <span class="n">library</span><span class="p">:</span><span class="o">//</span><span class="n">emmeff</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">latest</span>
-
-    <span class="n">library</span><span class="p">:</span><span class="o">//</span><span class="n">husi253</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">tensorflow</span><span class="p">:</span><span class="mf">20.01</span><span class="o">-</span><span class="n">tf1</span><span class="o">-</span><span class="n">py3</span><span class="o">-</span><span class="n">mrcnn</span><span class="o">-</span><span class="mf">2020.10.07</span>
-
-    <span class="n">library</span><span class="p">:</span><span class="o">//</span><span class="n">husi253</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">tensorflow</span><span class="p">:</span><span class="mf">20.01</span><span class="o">-</span><span class="n">tf1</span><span class="o">-</span><span class="n">py3</span><span class="o">-</span><span class="n">mrcnn</span><span class="o">-</span><span class="mi">20201014</span>
-
-    <span class="n">library</span><span class="p">:</span><span class="o">//</span><span class="n">husi253</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">tensorflow</span><span class="p">:</span><span class="mf">20.01</span><span class="o">-</span><span class="n">tf2</span><span class="o">-</span><span class="n">py3</span><span class="o">-</span><span class="n">lhx</span><span class="o">-</span><span class="mi">20201007</span>
-
-    <span class="n">library</span><span class="p">:</span><span class="o">//</span><span class="n">irinaespejo</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">gan</span><span class="p">:</span><span class="n">sha256</span><span class="mf">.0</span><span class="n">c1b6026ba2d6989242f418835d76cd02fc4cfc8115682986395a71ef015af18</span>
-
-    <span class="n">library</span><span class="p">:</span><span class="o">//</span><span class="n">jon</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">tensorflow</span><span class="p">:</span><span class="mf">1.12</span><span class="o">-</span><span class="n">gpu</span>
-            <span class="n">Signed</span> <span class="n">by</span><span class="p">:</span> <span class="n">D0E30822F7F4B229B1454388597B8AFA69C8EE9F</span>
-
-    <span class="o">...</span>
-</pre></div>
-</div>
+<section id="downloading-images">
+<h2>Downloading images<a class="headerlink" href="#downloading-images" title="Permalink to this headline"></a></h2>
 <p>You can use the <a class="reference external" href="cli/apptainer_pull.html">pull</a>
 and <a class="reference external" href="cli/apptainer_build.html">build</a>
-commands to download pre-built images from an external resource like the
-<a class="reference external" href="https://cloud.sylabs.io/library">Container Library</a> or <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>.</p>
-<p>When called on a native Apptainer image like those provided on the
-Container Library, <code class="docutils literal notranslate"><span class="pre">pull</span></code> simply downloads the image file to your
-system.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull library://lolcow
-</pre></div>
-</div>
-<p>You can also use <code class="docutils literal notranslate"><span class="pre">pull</span></code> with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code> uri to reference Docker
-images served from a registry. In this case <code class="docutils literal notranslate"><span class="pre">pull</span></code> does not just
-download an image file. Docker images are stored in layers, so <code class="docutils literal notranslate"><span class="pre">pull</span></code>
+commands to download images from an external resource like an OCI registry.</p>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">pull</span></code> with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code> uri to reference OCI
+images served from an OCI registry. In this case <code class="docutils literal notranslate"><span class="pre">pull</span></code> does not just
+download an image file. OCI images are stored in layers, so <code class="docutils literal notranslate"><span class="pre">pull</span></code>
 must also combine those layers into a usable Apptainer file.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://sylabsio/lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://alpine
 </pre></div>
 </div>
-<p>Pulling Docker images reduces reproducibility. If you were to pull a
-Docker image today and then wait six months and pull again, you are not
-guaranteed to get the same image. If any of the source layers has
-changed the image will be altered. If reproducibility is a priority for
-you, try building your images from the Container Library.</p>
 <p>You can also use the <code class="docutils literal notranslate"><span class="pre">build</span></code> command to download pre-built images from
 an external resource. When using <code class="docutils literal notranslate"><span class="pre">build</span></code> you must specify a name for
 your container like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build ubuntu.sif library://ubuntu
-
-$ apptainer build lolcow.sif docker://sylabsio/lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build alpine.sif docker://alpine
 </pre></div>
 </div>
 <p>Unlike <code class="docutils literal notranslate"><span class="pre">pull</span></code>, <code class="docutils literal notranslate"><span class="pre">build</span></code> will convert your image to the latest
@@ -473,8 +430,8 @@ definition file with Dockerfile, please see: <a class="reference internal" href=
 <p>You can interact with images in several ways, each of which can accept
 image URIs in addition to a local image path.</p>
 <p>For demonstration, we will use a <code class="docutils literal notranslate"><span class="pre">lolcow_latest.sif</span></code> image that can be
-pulled from the Container Library:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull library://lolcow
+pulled from DockerHub:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://sylabsio/lolcow
 </pre></div>
 </div>
 <section id="shell">
@@ -499,10 +456,10 @@ are on the host system.</p>
 <span class="n">uid</span><span class="o">=</span><span class="mi">1000</span><span class="p">(</span><span class="n">david</span><span class="p">)</span> <span class="n">gid</span><span class="o">=</span><span class="mi">1000</span><span class="p">(</span><span class="n">david</span><span class="p">)</span> <span class="n">groups</span><span class="o">=</span><span class="mi">1000</span><span class="p">(</span><span class="n">david</span><span class="p">),</span><span class="mi">4</span><span class="p">(</span><span class="n">adm</span><span class="p">),</span><span class="mi">24</span><span class="p">(</span><span class="n">cdrom</span><span class="p">),</span><span class="mi">27</span><span class="p">(</span><span class="n">sudo</span><span class="p">),</span><span class="mi">30</span><span class="p">(</span><span class="n">dip</span><span class="p">),</span><span class="mi">46</span><span class="p">(</span><span class="n">plugdev</span><span class="p">),</span><span class="mi">116</span><span class="p">(</span><span class="n">lpadmin</span><span class="p">),</span><span class="mi">126</span><span class="p">(</span><span class="n">sambashare</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">shell</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">library://</span></code>, <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, and
+<p><code class="docutils literal notranslate"><span class="pre">shell</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, <code class="docutils literal notranslate"><span class="pre">oras://</span></code>, <code class="docutils literal notranslate"><span class="pre">library://</span></code>,  and
 <code class="docutils literal notranslate"><span class="pre">shub://</span></code> URIs. This creates an ephemeral container that disappears
 when the shell is exited.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell library://lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell docker://sylabsio/lolcow
 </pre></div>
 </div>
 </section>
@@ -523,12 +480,12 @@ program within the <code class="docutils literal notranslate"><span class="pre">
                 ||     ||
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">exec</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">library://</span></code>, <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, and
+<p><code class="docutils literal notranslate"><span class="pre">exec</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, <code class="docutils literal notranslate"><span class="pre">oras://</span></code>, <code class="docutils literal notranslate"><span class="pre">library://</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">shub://</span></code> URIs. This creates an ephemeral container that executes a
 command and disappears.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec library://lolcow cowsay &quot;Fresh from the library!&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://sylabsio/lolcow cowsay &quot;Fresh from the internet!&quot;
  _________________________
-&lt; Fresh from the library! &gt;
+&lt; Fresh from the internet! &gt;
  -------------------------
         \   ^__^
          \  (oo)\_______
@@ -567,7 +524,7 @@ ______________________________
                 ||     ||
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">run</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">library://</span></code>, <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, and
+<p><code class="docutils literal notranslate"><span class="pre">run</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, <code class="docutils literal notranslate"><span class="pre">oras://</span></code>, <code class="docutils literal notranslate"><span class="pre">library://</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">shub://</span></code> URIs. This creates an ephemeral container that runs and then
 disappears.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run library://lolcow
@@ -584,10 +541,10 @@ ______________________________
 <section id="arguments-to-run">
 <h4>Arguments to <code class="docutils literal notranslate"><span class="pre">run</span></code><a class="headerlink" href="#arguments-to-run" title="Permalink to this headline"></a></h4>
 <p>You can pass arguments to the runscript of a container, if it accepts
-them. For example, the default runscript of the <code class="docutils literal notranslate"><span class="pre">library://alpine</span></code>
+them. For example, the default runscript of the <code class="docutils literal notranslate"><span class="pre">docker://alpine</span></code>
 container passes any arguments to a shell. We can ask the container
 to run <code class="docutils literal notranslate"><span class="pre">echo</span></code> command in this shell:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run library://alpine echo &quot;hello&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run docker://alpine echo &quot;hello&quot;
 
 hello
 </pre></div>
@@ -650,7 +607,7 @@ do with normal Linux commands.</p>
 </div>
 </section>
 <section id="build-images-from-scratch">
-<span id="id4"></span><h2>Build images from scratch<a class="headerlink" href="#build-images-from-scratch" title="Permalink to this headline"></a></h2>
+<span id="id3"></span><h2>Build images from scratch<a class="headerlink" href="#build-images-from-scratch" title="Permalink to this headline"></a></h2>
 <p id="sec-buildimagesfromscratch">Apptainer produces immutable images in the
 Singularity Image File (SIF) format. This ensures reproducible and
 verifiable images and allows for many extra benefits such as the ability
@@ -664,7 +621,7 @@ supports the <code class="docutils literal notranslate"><span class="pre">sandbo
 <h3>Sandbox Directories<a class="headerlink" href="#sandbox-directories" title="Permalink to this headline"></a></h3>
 <p>To build into a <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> (container in a directory) use the <code class="docutils literal notranslate"><span class="pre">build</span>
 <span class="pre">--sandbox</span></code> command and option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --sandbox ubuntu/ library://ubuntu
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --sandbox ubuntu/ docker://ubuntu
 </pre></div>
 </div>
 <p>This command creates a directory called <code class="docutils literal notranslate"><span class="pre">ubuntu/</span></code> with an entire
@@ -701,14 +658,15 @@ exercise care.</p>
 <p>For a reproducible, verifiable and production-quality container you
 should build a SIF file using an Apptainer definition file. This also
 makes it easy to add files, environment variables, and install custom
-software, and still start from your base of choice (e.g., the Container
-Library).</p>
+software. You can start with base images from Docker Hub and use
+images directly from official repositories such as Ubuntu, Debian,
+CentOS, Arch, and BusyBox.</p>
 <p>A definition file has a header and a body. The header determines the
 base container to begin with, and the body is further divided into
 sections that perform things like software installation, environment
 setup, and copying files into the container from host system, etc.</p>
 <p>Here is an example of a definition file:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">BootStrap</span>: library
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">BootStrap</span>: docker
 <span class="k">From</span>: ubuntu:<span class="m">16.04</span>
 
 <span class="gh">%post</span>
@@ -723,7 +681,7 @@ setup, and copying files into the container from host system, etc.</p>
     date <span class="p">|</span> cowsay <span class="p">|</span> lolcat
 
 <span class="gh">%labels</span>
-    Author Sylabs
+    Author Alice
 </pre></div>
 </div>
 <p>To build a container from this definition file (assuming it is a file
@@ -732,7 +690,7 @@ named lolcow.def), you would call build like so:</p>
 </pre></div>
 </div>
 <p>In this example, the header tells Apptainer to use a base Ubuntu
-16.04 image from the Container Library.</p>
+16.04 image from the default OCI registry.</p>
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">%post</span></code> section executes within the container at build time
 after the base OS has been installed. The <code class="docutils literal notranslate"><span class="pre">%post</span></code> section is
@@ -745,10 +703,7 @@ when it is executed.</p></li>
 added to the container.</p></li>
 </ul>
 <p>This is a very small example of the things that you can do with a
-<a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">definition file</span></a>. In addition to building a
-container from the Container Library, you can start with base images
-from Docker Hub and use images directly from official repositories such
-as Ubuntu, Debian, CentOS, Arch, and BusyBox. You can also use an
+<a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">definition file</span></a>. You can also use an
 existing container on your host system as a base.</p>
 <p>This quickstart document just scratches the surface of all of the things
 you can do with Apptainer!</p>

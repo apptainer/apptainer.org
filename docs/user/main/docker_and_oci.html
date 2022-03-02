@@ -254,8 +254,8 @@ from the cache.</p>
 from OCI to SIF. If you <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> a Docker container
 twice, the output file isn’t identical because metadata such as dates
 from the conversion will vary. This differs from pulling a SIF
-container (e.g. from a <code class="docutils literal notranslate"><span class="pre">library://</span></code> URI), which always give you an
-exact copy of the image.</p>
+container (e.g. from an <code class="docutils literal notranslate"><span class="pre">oras://</span> <span class="pre">or</span></code> <code class="docutils literal notranslate"><span class="pre">library://</span></code> URI), which always
+give you an exact copy of the image.</p>
 </div>
 </section>
 <section id="docker-hub-limits">
@@ -318,7 +318,7 @@ Docker credential helpers.</p>
 <h4>Interactive Login<a class="headerlink" href="#interactive-login" title="Permalink to this headline"></a></h4>
 <p>To perform a one-off interactive login, which will not store your
 credentials, use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull --docker-login docker://sylabsio/private
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull --docker-login docker://myuser/private
 Enter Docker Username: myuser
 Enter Docker Password:
 </pre></div>
@@ -336,7 +336,7 @@ respectively. These environment variables will override any stored
 credentials.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_DOCKER_USERNAME=myuser
 $ export APPTAINER_DOCKER_PASSWORD=mytoken
-$ apptainer pull docker://sylabsio/private
+$ apptainer pull docker://myuser/private
 </pre></div>
 </div>
 </section>

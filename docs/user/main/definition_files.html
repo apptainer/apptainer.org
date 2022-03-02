@@ -170,7 +170,7 @@ build time are executed with the <code class="docutils literal notranslate"><spa
 accept <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code> options. Similarly, sections that produce scripts
 to be executed at runtime can accept options intended for <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code></p></li>
 </ol>
-<p>For more in-depth and practical examples of def files, see the <a class="reference external" href="https://github.com/apptainer/apptainer/tree/master/examples">Apptainer
+<p>For more in-depth and practical examples of def files, see the <a class="reference external" href="https://github.com/apptainer/apptainer/tree/main/examples">Apptainer
 examples repository</a></p>
 <p>For a comparison between Dockerfile and Apptainer definition file,
 please see: <a class="reference internal" href="docker_and_oci.html#sec-deffile-vs-dockerfile"><span class="std std-ref">this section</span></a>.</p>
@@ -183,19 +183,16 @@ build the container. It is composed of several keywords.</p>
 <p>The only keyword that is required for every type of build is
 <code class="docutils literal notranslate"><span class="pre">Bootstrap</span></code>. It determines the <em>bootstrap agent</em> that will be used to
 create the base operating system you want to use. For example, the
-<code class="docutils literal notranslate"><span class="pre">library</span></code> bootstrap agent will pull a container from the <a class="reference external" href="https://cloud.sylabs.io/library">Container
-Library</a> as a base. Similarly, the
 <code class="docutils literal notranslate"><span class="pre">docker</span></code> bootstrap agent will pull docker layers from <a class="reference external" href="https://hub.docker.com/">Docker Hub</a> as a base OS to start your image.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Bootstrap</span></code> keyword needs to be
 the first entry in the header section. This breaks compatibility with
 older versions that allow the parameters of the header to appear in any
 order.</p>
 <p>Depending on the value assigned to <code class="docutils literal notranslate"><span class="pre">Bootstrap</span></code>, other keywords may
-also be valid in the header. For example, when using the <code class="docutils literal notranslate"><span class="pre">library</span></code>
+also be valid in the header. For example, when using the <code class="docutils literal notranslate"><span class="pre">docker</span></code>
 bootstrap agent, the <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword becomes valid. Observe the
-following example for building a Debian container from the Container
-Library:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
+following example for building a Debian container:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">From</span>: debian:<span class="m">7</span>
 </pre></div>
 </div>
@@ -212,11 +209,9 @@ about them and see examples in the <a class="reference internal" href="appendix.
 <section id="preferred-bootstrap-agents">
 <h3>Preferred bootstrap agents<a class="headerlink" href="#preferred-bootstrap-agents" title="Permalink to this headline"></a></h3>
 <ul class="simple">
-<li><p><a class="reference internal" href="appendix.html#build-library-module"><span class="std std-ref">library</span></a> (images hosted on the
-<a class="reference external" href="https://cloud.sylabs.io/library">Container Library</a>)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-docker-module"><span class="std std-ref">docker</span></a> (images hosted on Docker Hub)</p></li>
-<li><p><a class="reference internal" href="appendix.html#build-shub"><span class="std std-ref">shub</span></a> (images hosted on Singularity Hub)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-oras"><span class="std std-ref">oras</span></a> (images from supporting OCI registries)</p></li>
+<li><p><a class="reference internal" href="appendix.html#build-library-module"><span class="std std-ref">library</span></a> (images hosted on Library API Registries)</p></li>
 <li><p><a class="reference internal" href="appendix.html#scratch-agent"><span class="std std-ref">scratch</span></a> (a flexible option for building a
 container from scratch)</p></li>
 </ul>
@@ -224,6 +219,7 @@ container from scratch)</p></li>
 <section id="other-bootstrap-agents">
 <h3>Other bootstrap agents<a class="headerlink" href="#other-bootstrap-agents" title="Permalink to this headline"></a></h3>
 <ul class="simple">
+<li><p><a class="reference internal" href="appendix.html#build-shub"><span class="std std-ref">shub</span></a> (images hosted on Singularity Hub)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-localimage"><span class="std std-ref">localimage</span></a> (images saved on your machine)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-yum"><span class="std std-ref">yum</span></a> (yum based systems such as CentOS and
 Scientific Linux)</p></li>
@@ -290,7 +286,7 @@ will discuss each section in turn. It is not necessary to include every
 section (or any sections at all) within a def file. Furthermore,
 multiple sections of the same name can be included and will be appended
 to one another during the build process.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">From</span>: ubuntu:<span class="m">18.04</span>
 Stage: build
 
@@ -329,7 +325,7 @@ Stage: build
     <span class="k">fi</span>
 
 <span class="gh">%labels</span>
-    Author d@sylabs.io
+    Author alice
     Version v0.0.1
 
 <span class="gh">%help</span>
@@ -558,7 +554,7 @@ on the host, or <code class="docutils literal notranslate"><span class="pre">def
 information about the Apptainer container environment.</p>
 </section>
 <section id="startscript">
-<span id="id3"></span><h3>%startscript<a class="headerlink" href="#startscript" title="Permalink to this headline"></a></h3>
+<span id="id2"></span><h3>%startscript<a class="headerlink" href="#startscript" title="Permalink to this headline"></a></h3>
 <p>Similar to the <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> section, the contents of the
 <code class="docutils literal notranslate"><span class="pre">%startscript</span></code> section is written to a file within the container at
 build time. This file is executed when the <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code> command is
@@ -583,7 +579,7 @@ Stopping instance1 instance of /home/vagrant/my_container.sif (PID=19035)
 </div>
 </section>
 <section id="runscript">
-<span id="id4"></span><h3>%runscript<a class="headerlink" href="#runscript" title="Permalink to this headline"></a></h3>
+<span id="id3"></span><h3>%runscript<a class="headerlink" href="#runscript" title="Permalink to this headline"></a></h3>
 <p>The contents of the <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> section are written to a file within
 the container that is executed when the container image is run (either
 via the <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run</span></code> command or by executing the container
@@ -635,25 +631,25 @@ format is a name-value pair.</p>
 add it on the labels section and after the first space character add the
 correspondent value to the label.</p>
 <p>In the previous example, the first label name is <code class="docutils literal notranslate"><span class="pre">Author`</span></code> with a
-value of <code class="docutils literal notranslate"><span class="pre">d&#64;sylabs.io</span></code>. The second label name is <code class="docutils literal notranslate"><span class="pre">Version</span></code> with a
+value of <code class="docutils literal notranslate"><span class="pre">alice</span></code>. The second label name is <code class="docutils literal notranslate"><span class="pre">Version</span></code> with a
 value of <code class="docutils literal notranslate"><span class="pre">v0.0.1</span></code>. Finally, the last label named <code class="docutils literal notranslate"><span class="pre">MyLabel</span></code> has the
 value of <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World</span></code>.</p>
 <p>To inspect the available labels on your image you can do so by running
 the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer inspect my_container.sif
 
-{
-  &quot;Author&quot;: &quot;d@sylabs.io&quot;,
-  &quot;Version&quot;: &quot;v0.0.1&quot;,
-  &quot;MyLabel&quot;: &quot;Hello World&quot;,
-  &quot;org.label-schema.build-date&quot;: &quot;Thursday_6_December_2018_20:1:56_UTC&quot;,
-  &quot;org.label-schema.schema-version&quot;: &quot;1.0&quot;,
-  &quot;org.label-schema.usage&quot;: &quot;/.singularity.d/runscript.help&quot;,
-  &quot;org.label-schema.usage.singularity.deffile.bootstrap&quot;: &quot;library&quot;,
-  &quot;org.label-schema.usage.singularity.deffile.from&quot;: &quot;ubuntu:18.04&quot;,
-  &quot;org.label-schema.usage.singularity.runscript.help&quot;: &quot;/.singularity.d/runscript.help&quot;,
-  &quot;org.label-schema.usage.singularity.version&quot;: &quot;3.0.1&quot;
-}
+Author: alice
+Version: v0.0.1
+MyLabel: Hello World
+org.label-schema.build-arch: amd64
+org.label-schema.build-date: Tuesday_1_March_2022_16:49:5_PST
+org.label-schema.schema-version: 1.0
+org.label-schema.usage: /.singularity.d/runscript.help
+org.label-schema.usage.apptainer.runscript.help: /.singularity.d/runscript.help
+org.label-schema.usage.apptainer.version: 1.0.0
+org.label-schema.usage.singularity.deffile.bootstrap: docker
+org.label-schema.usage.singularity.deffile.from: ubuntu:18.04
+org.label-schema.usage.singularity.deffile.stage: build
 </pre></div>
 </div>
 <p>Some labels that are captured automatically from the build process. You
