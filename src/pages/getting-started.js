@@ -27,7 +27,7 @@ const gettingStartedLinks = [
         name: 'Binary Packages',
         href: 'https://github.com/apptainer/apptainer/releases',
         description:
-            'Pre-built packages are available for download as Assets under each github release; you can also find them in <a href=https://docs.fedoraproject.org/en-US/epel/>EPEL</a> for RHEL derivatives.',
+            'Pre-built packages are available for download as Assets under each github release; you can also find them in EPEL for RHEL derivatives.',
         icon: SupportIcon,
         button: 'Releases'
     },
