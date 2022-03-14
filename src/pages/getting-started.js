@@ -9,7 +9,7 @@ import Seo from "../components/seo"
 const gettingStartedLinks = [
     {
         name: 'GitHub Project',
-        href: 'https://github.com/apptainer/singularity',
+        href: 'https://github.com/apptainer/apptainer',
         description:
             'Grab the latest stable release of Apptainer, submit issues, and contribute to the project at the official GitHub repository.',
         icon: DownloadIcon,
@@ -17,19 +17,19 @@ const gettingStartedLinks = [
     },
     {
         name: 'Quick Start Guide',
-        href: 'https://apptainer.org/user-docs/master/quick_start.html',
+        href: 'https://apptainer.org/docs/user/main/quick_start.html',
         description:
             'Check out the quick start documentation to get Apptainer installed and set up in a hurry.',
         icon: NewspaperIcon,
         button: 'Get Started'
     },
     {
-        name: 'Supported Binary Packages',
-        href: 'https://repo.ctrliq.com',
+        name: 'Binary Packages',
+        href: 'https://github.com/apptainer/apptainer/releases',
         description:
-            'CIQ is freely providing binary packages for non-production use; you can also find them in EPEL for RHEL derivatives.',
+            'Pre-built packages are available for download as Assets under each github release; you can also find them in <a href=https://docs.fedoraproject.org/en-US/epel/>EPEL</a> for RHEL derivatives.',
         icon: SupportIcon,
-        button: 'Repos'
+        button: 'Releases'
     },
 ]
 
@@ -43,9 +43,6 @@ const GettingStartedPage = () => (
                         <h2 className="mb-6 max-w-xl font-sans text-4xl font-extrabold leading-none tracking-tight text-gray-900 sm:text-5xl md:mx-auto">
                             Getting Started
                         </h2>
-                        <p className="text-base text-gray-700 md:text-lg">
-                            Until the release of Apptainer-1.0, these links will point to the current Singularity repo and releases. Stay tuned for the official first release of Apptainer!
-                        </p>
                     </div>
                 </div>
             </div>
