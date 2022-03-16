@@ -27,7 +27,7 @@ const gettingStartedLinks = [
         name: 'Binary Packages',
         href: 'https://github.com/apptainer/apptainer/releases',
         description:
-            'Pre-built packages are available for download as Assets under each github release for some operating systems; you can also find them in EPEL for RHEL derivatives and in Fedora.',
+            'Pre-built packages are available for download as Assets under each github release for some operating systems.  You will also be able to find it in EPEL for RHEL derivatives and in Fedora, although currently in those it is still under the name singularity while waiting for further apptainer validation.',
         icon: SupportIcon,
         button: 'Releases'
     },
