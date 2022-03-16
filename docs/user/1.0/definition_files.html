@@ -490,16 +490,13 @@ without any options, you might test it can be run with:</p>
 <span class="pre">not</span> <span class="pre">found</span></code>.</p>
 <p>Some programs return an error code when run without mandatory options.
 If you want to ignore this, and just check the program is present and
-can be called, you can run it as <code class="docutils literal notranslate"><span class="pre">myprog</span> <span class="pre">||</span> <span class="pre">true</span></code> in your test:</p>
+executable, you can do this in your test:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%test</span>
-    <span class="c1"># Run bwa - exits with error code if installed and run without</span>
-    <span class="c1"># options</span>
-    bwa <span class="o">||</span> <span class="nb">true</span>
+    <span class="c1"># Exits with error code if command can not be found or</span>
+    <span class="c1"># is not executable:</span>
+    <span class="o">[</span> -x <span class="s2">&quot;</span><span class="k">$(</span><span class="nb">command</span> -v bwa<span class="k">)</span><span class="s2">&quot;</span> <span class="o">]</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">||</span> <span class="pre">true</span></code> means that if the command before it is found but returns
-an error code it will be ignored, and replaced with the error code from
-<code class="docutils literal notranslate"><span class="pre">true</span></code> - which is always <code class="docutils literal notranslate"><span class="pre">0</span></code> indicating success.</p>
 <p>Because the <code class="docutils literal notranslate"><span class="pre">%test</span></code> section is a shell scriptlet, complex tests are
 possible. Your scriptlet should usually be written so it will exit with
 a non-zero error code if there is a problem during the tests.</p>
