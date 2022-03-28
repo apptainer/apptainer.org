@@ -107,7 +107,7 @@ with different user identifiers and/or privileges inside that namespace
 than are permitted outside. A user may have a <code class="docutils literal notranslate"><span class="pre">uid</span></code> of <code class="docutils literal notranslate"><span class="pre">1001</span></code> on a
 system outside of a user namespace, but run programs with a different
 <code class="docutils literal notranslate"><span class="pre">uid</span></code> with different privileges inside the namespace.</p>
-<p>User namespaces are used with containers to make it possible to setup a
+<p>User namespaces are used with containers to make it possible to set up a
 container without privileged operations, and so that a normal user can
 act as root inside a container to perform administrative tasks, without
 being root on the host outside.</p>
@@ -333,7 +333,7 @@ the security implications.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Unprivileged installations of Apptainer cannot use <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code>
-network as it requires privilege during container creation to setup
+network as it requires privilege during container creation to set up
 the network.</p>
 </div>
 </section>

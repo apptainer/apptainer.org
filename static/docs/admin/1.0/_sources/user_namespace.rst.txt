@@ -10,7 +10,7 @@ than are permitted outside. A user may have a ``uid`` of ``1001`` on a
 system outside of a user namespace, but run programs with a different
 ``uid`` with different privileges inside the namespace.
 
-User namespaces are used with containers to make it possible to setup a
+User namespaces are used with containers to make it possible to set up a
 container without privileged operations, and so that a normal user can
 act as root inside a container to perform administrative tasks, without
 being root on the host outside.
@@ -253,7 +253,7 @@ veth pair.
 .. note::
 
    Unprivileged installations of {Project} cannot use ``fakeroot``
-   network as it requires privilege during container creation to setup
+   network as it requires privilege during container creation to set up
    the network.
 
 .. _config-fakeroot:
