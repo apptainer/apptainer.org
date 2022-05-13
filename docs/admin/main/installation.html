@@ -131,7 +131,7 @@
   <section id="installing-apptainer">
 <span id="installation"></span><h1>Installing Apptainer<a class="headerlink" href="#installing-apptainer" title="Permalink to this headline"></a></h1>
 <p>This section will guide you through the process of installing
-Apptainer 1.0.0 via several different methods. (For
+Apptainer 1.0.2 via several different methods. (For
 instructions on installing earlier versions of Apptainer please see
 <a class="reference external" href="https://apptainer.org/docs/">earlier versions of the docs</a>.)</p>
 <section id="installation-on-linux">
@@ -430,7 +430,7 @@ have been removed or replaced in newer versions.</p>
 package archive to download. Copy the link address and download with
 wget. Then extract the archive to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> (or use other
 instructions on go installation page).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.17.6 OS=linux ARCH=amd64 &amp;&amp; \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.18.1 OS=linux ARCH=amd64 &amp;&amp; \
     wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \
     sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \
     rm go$VERSION.$OS-$ARCH.tar.gz
@@ -449,7 +449,7 @@ instructions on go installation page).</p>
 list, visit <a class="reference external" href="https://github.com/apptainer/apptainer/releases">the GitHub release page</a>. After deciding on a
 release to install, you can run the following commands to proceed with
 the installation.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.0.0 &amp;&amp; # adjust this as necessary \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.0.2 &amp;&amp; # adjust this as necessary \
     wget https://github.com/apptainer/apptainer/releases/download/v${VERSION}/apptainer-${VERSION}.tar.gz &amp;&amp; \
     tar -xzf apptainer-${VERSION}.tar.gz &amp;&amp; \
     cd apptainer
@@ -459,7 +459,7 @@ the installation.</p>
 <section id="checkout-code-from-git">
 <h4>Checkout Code from Git<a class="headerlink" href="#checkout-code-from-git" title="Permalink to this headline"></a></h4>
 <p>The following commands will install Apptainer from the <a class="reference external" href="https://github.com/apptainer/apptainer">GitHub repo</a> to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>. This method
-will work for &gt;=v1.0.0. To install an older tagged
+will work for &gt;=v1.0.2. To install an older tagged
 release see <a class="reference external" href="https://apptainer.org/docs/">older versions of the docs</a>.</p>
 <p>When installing from source, you can decide to install from either a
 <strong>tag</strong>, a <strong>release branch</strong>, or from the <strong>main branch</strong>.</p>
@@ -483,7 +483,7 @@ may be unstable.</p></li>
 appropriate directory use these commands.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/apptainer/apptainer.git &amp;&amp; \
     cd apptainer &amp;&amp; \
-    git checkout v1.0.0
+    git checkout v1.0.2
 </pre></div>
 </div>
 </section>
@@ -585,7 +585,7 @@ named <code class="docutils literal notranslate"><span class="pre">apptainer-&lt
 <p>After installing the <a class="reference internal" href="#install-dependencies"><span class="std std-ref">dependencies</span></a> and
 installing <a class="reference internal" href="#install-go"><span class="std std-ref">Go</span></a> as detailed above, you are ready to
 download the tarball and build and install the RPM.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.0.0 &amp;&amp; # adjust this as necessary \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.0.2 &amp;&amp; # adjust this as necessary \
     wget https://github.com/apptainer/apptainer/releases/download/v${VERSION}/apptainer-${VERSION}.tar.gz &amp;&amp; \
     rpmbuild -tb apptainer-${VERSION}.tar.gz &amp;&amp; \
     sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/apptainer-$VERSION-1.el7.x86_64.rpm &amp;&amp; \
@@ -617,7 +617,7 @@ can clone the repository, directly <code class="docutils literal notranslate"><s
 install Apptainer:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mconfig &amp;&amp; \
 make -C builddir rpm &amp;&amp; \
-sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/apptainer-1.0.0.el7.x86_64.rpm # or whatever version you built
+sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/apptainer-1.0.2.el7.x86_64.rpm # or whatever version you built
 </pre></div>
 </div>
 <p>To build an rpm with an alternative install prefix set <code class="docutils literal notranslate"><span class="pre">RPMPREFIX</span></code> on
@@ -671,7 +671,7 @@ correctly for your installation, and troubleshoot any ‘not-found’ errors
 at runtime.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer buildcfg
 PACKAGE_NAME=apptainer
-PACKAGE_VERSION=1.0.0
+PACKAGE_VERSION=1.0.2
 BUILDDIR=/home/dtrudg/Sylabs/Git/apptainer/builddir
 PREFIX=/usr/local
 EXECPREFIX=/usr/local
