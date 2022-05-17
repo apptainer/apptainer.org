@@ -406,6 +406,14 @@ concurrent downloads are enabled.
 ``download buffer size``: specifies the transfer buffer size (bytes)
 when concurrent downloads are enabled.
 
+Cgroups Options
+===============
+
+``systemd cgroups``: specifies whether to use systemd to manage container
+cgroups. Required (with cgroups v2) for unprivileged users to apply resource
+limits on containers. If set to ``no``, {Project} will directly manage
+cgroups via the cgroupfs.
+
 Updating Configuration Options
 ==============================
 
@@ -521,13 +529,6 @@ Under cgroups v1, access restrictions for device nodes are managed
 directly. Under cgroups v2, the restrictions are applied by attaching
 eBPF programs that implement the requested access controls.
 
-.. note::
-
-   {Project} does not currently support applying native cgroups v2
-   ``unified`` resource limit specifications. Use the cgroups v1 limits,
-   which will be translated to v2 format when applied on a cgroups v2
-   system.
-
 Examples
 ========
 
@@ -537,11 +538,12 @@ configuration to be applied:
 
 .. code::
 
-   $ sudo {command} shell --apply-cgroups /path/to/cgroups.toml my_container.sif
+   $ {command} shell --apply-cgroups /path/to/cgroups.toml my_container.sif
 
 .. note::
 
-   The ``--apply-cgroups`` option can only be used with root privileges.
+   The ``--apply-cgroups`` option requires cgroups v2 to be used without root
+   privileges.
 
 Limiting memory
 ---------------
@@ -559,22 +561,7 @@ Start your container, applying the toml file, e.g.:
 
 .. code::
 
-   $ sudo {command} run --apply-cgroups path/to/cgroups.toml library://alpine
-
-After that, you can verify that the container is only using 500MB of
-memory. This example assumes that there is only one running container.
-If you are running multiple containers you will find multiple cgroups
-trees under the ``{command}`` directory.
-
-.. code::
-
-   # cgroups v1
-   $ cat /sys/fs/cgroup/memory/{command}/*/memory.limit_in_bytes
-     524288000
-
-   # cgroups v2 - note translation of memory.limit_in_bytes -> memory.max
-   $ cat /sys/fs/cgroup/{command}/*/memory.max
-   524288000
+   $ {command} run --apply-cgroups path/to/cgroups.toml library://alpine
 
 Limiting CPU
 ------------
@@ -691,9 +678,9 @@ Other limits
 ------------
 
 {Project} can apply all resource limits that are valid in the OCI
-runtime-spec ``resources`` section, **except** native ``unified``
-cgroups v2 constraints. Use the cgroups v1 limits, which will be
-translated to v2 format when applied on a cgroups v1 system.
+runtime-spec ``resources`` section, including ``unified`` cgroups v2
+constraints. It is most compatible, however, to use the cgroups v1 limits,
+which will be translated to v2 format when applied on a cgroups v2 system.
 
 See
 https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md#control-groups
