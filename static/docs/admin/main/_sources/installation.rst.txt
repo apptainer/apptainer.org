@@ -687,10 +687,6 @@ at runtime.
 Note that the ``LOCALSTATEDIR`` and ``SESSIONDIR`` should be on local,
 non-shared storage.
 
-The list of files installed by a successful ``setuid`` installation of
-{Project} can be found in the :ref:`appendix, installed files
-section <installed-files>`.
-
 Test Suite
 ----------
 
