@@ -22,5 +22,4 @@ information about how to use {Project}.
    User Namespaces & Fakeroot <user_namespace>
    Security in {Project} <security>
 
-   Appendix <appendix>
    License <license>
