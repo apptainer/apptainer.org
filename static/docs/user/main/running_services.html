@@ -169,13 +169,11 @@ properly.</p>
 <section id="container-instances-in-apptainer">
 <h2>Container Instances in Apptainer<a class="headerlink" href="#container-instances-in-apptainer" title="Permalink to this heading"></a></h2>
 <p>For demonstration, let’s use an easy (though somewhat useless) example
-of <a class="reference external" href="https://cloud.sylabs.io/library/_container/5baba5e594feb900016ea41c">alpine_latest.sif</a>
-image from the <a class="reference external" href="https://cloud.sylabs.io/library/">container library</a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull library://alpine
+of <code class="docutils literal notranslate"><span class="pre">alpine_latest.sif</span></code> from Apptainer’s github container registry:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull oras://ghcr.io/apptainer/alpine:latest
 </pre></div>
 </div>
-<p>The above command will save the alpine image from the Container Library
-as <code class="docutils literal notranslate"><span class="pre">alpine_latest.sif</span></code>.</p>
+<p>The above command will save the alpine image as <code class="docutils literal notranslate"><span class="pre">alpine_latest.sif</span></code>.</p>
 <p>To start an instance, you should follow this procedure :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[command]                      [image]              [name of instance]
 
@@ -221,7 +219,7 @@ instance3        22493                    /home/dave/instances/alpine_latest.sif
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance list &#39;*2&#39;
 
 INSTANCE NAME    PID      IP              IMAGE
-instance2        22443                    /home/dave/instances/alpine_latest.s
+instance2        22443                    /home/dave/instances/alpine_latest.sif
 </pre></div>
 </div>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run/exec</span></code> commands on instances:</p>
@@ -332,8 +330,8 @@ Commercial support is available at
 into a container and running it. The service we will be packaging is an
 API server that converts a web page into a PDF, and can be found <a class="reference external" href="https://github.com/alvarcarto/url-to-pdf-api">here</a>. You can build the
 image by following the steps described below or you can just download
-the final image directly from Container Library, simply run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull url-to-pdf.sif library://sylabs/doc-examples/url-to-pdf:latest
+the final image directly from the container registry, simply run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull url-to-pdf.sif oras://ghcr.io/apptainer/doc-examples/url-to-pdf:latest
 </pre></div>
 </div>
 <section id="building-the-image">
@@ -367,6 +365,7 @@ well as the installation script for the <code class="docutils literal notranslat
     <span class="nb">cd</span> pdf_server
     npm install
     chmod -R <span class="m">0755</span> .
+    cp .env.sample .env
 </pre></div>
 </div>
 <p>And now we need to define what happens when we start an instance of the
@@ -408,6 +407,7 @@ be set, which we can do in the environment section:</p>
     <span class="nb">cd</span> pdf_server
     npm install
     chmod -R <span class="m">0755</span> .
+    cp .env.sample .env
 
 <span class="gh">%startscript</span>
     <span class="nb">cd</span> /pdf_server
@@ -430,7 +430,7 @@ be set, which we can do in the environment section:</p>
 <section id="running-the-service">
 <h3>Running the Service<a class="headerlink" href="#running-the-service" title="Permalink to this heading"></a></h3>
 <p>We can now start an instance and run the service:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer instance start url-to-pdf.sif pdf
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start url-to-pdf.sif pdf
 </pre></div>
 </div>
 <div class="admonition note">
@@ -438,35 +438,37 @@ be set, which we can do in the environment section:</p>
 <p>If there occurs an error related to port connection being refused
 while starting the instance or while using it later, you can try
 specifying different port numbers in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section of
-the definition file above.</p>
+the definition file above.  Also, the starting directory has to
+be bound in to the container and writable, so something under your
+home directory is easiest.</p>
 </div>
 <p>We can confirm it’s working by sending the server an http request using
 curl:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -o apptainer.pdf localhost:9000/api/render?url=http://apptainer.org/docs
-
-% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                         Dload  Upload   Total   Spent    Left  Speed
-
-100 73750  100 73750    0     0  14583      0  0:00:05  0:00:05 --:--:-- 19130
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 64753  100 64753    0     0  19663      0  0:00:03  0:00:03 --:--:-- 19669
 </pre></div>
 </div>
 <p>You should see a PDF file being generated like the one shown below:</p>
 <img alt="Screenshot of the PDF generated!" src="_images/docpage.png" />
 <p>If you shell into the instance, you can see the running processes:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell instance://pdf
-Apptainer: Invoking an interactive shell within container...
-
-Apptainer final.sif:/home/ysub&gt; ps auxf
-USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-root       461  0.0  0.0  18204  3188 pts/1    S    17:58   0:00 /bin/bash --norc
-root       468  0.0  0.0  36640  2880 pts/1    R+   17:59   0:00  \_ ps auxf
-root         1  0.0  0.1 565392 12144 ?        Sl   15:10   0:00 sinit
-root        16  0.0  0.4 1113904 39492 ?       Sl   15:10   0:00 npm
-root        26  0.0  0.0   4296   752 ?        S    15:10   0:00  \_ sh -c nodemon --watch ./src -e js src/index.js
-root        27  0.0  0.5 1179476 40312 ?       Sl   15:10   0:00      \_ node /pdf_server/node_modules/.bin/nodemon --watch ./src -e js src/index.js
-root        39  0.0  0.7 936444 61220 ?        Sl   15:10   0:02          \_ /usr/local/bin/node src/index.js
-
-Apptainer final.sif:/home/ysub&gt; exit
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell instance://pdf
+Apptainer&gt; ps -wef
+UID        PID  PPID  C STIME TTY          TIME CMD
+user         1     0  0 14:13 ?        00:00:00 sinit
+user        13     1  0 14:13 ?        00:00:00 npm
+user        23    13  0 14:13 ?        00:00:00 sh -c env-cmd nodemon --watch ./src -e js src/index.js
+user        24    23  0 14:13 ?        00:00:00 node /pdf_server/node_modules/.bin/env-cmd nodemon --watch ./src -e js src/index.js
+user        30    24  0 14:13 ?        00:00:00 node /pdf_server/node_modules/.bin/nodemon --watch ./src -e js src/index.js
+user        42    30  0 14:13 ?        00:00:00 /usr/local/bin/node src/index.js
+user       155     0  0 14:23 pts/1    00:00:00 /bin/bash --norc
+user       161   155  0 14:23 pts/1    00:00:00 ps -wef
+</pre></div>
+</div>
+<p>When you are finished, use the instance stop command to stop the
+running instance.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance stop pdf
 </pre></div>
 </div>
 </section>
@@ -500,11 +502,12 @@ server:</p>
     <span class="nb">cd</span> pdf_server
     npm install
     chmod -R <span class="m">0755</span> .
+    cp .env.sample .env
 </pre></div>
 </div>
 <p>And update our <code class="docutils literal notranslate"><span class="pre">startscript</span></code> to point to the app location:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%startscript</span>
-    <span class="nb">cd</span> /scif/apps/pdf_server/scif/pdf_server
+    <span class="nb">cd</span> /scif/apps/pdf_server/pdf_server
     <span class="c1"># Use nohup and /dev/null to completely detach server process from terminal</span>
     nohup npm start &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> &lt; /dev/null <span class="p">&amp;</span>
 </pre></div>
@@ -543,9 +546,10 @@ provides at least one argument.</p>
     <span class="nb">cd</span> pdf_server
     npm install
     chmod -R <span class="m">0755</span> .
+    cp .env.sample .env
 
 <span class="gh">%startscript</span>
-    <span class="nb">cd</span> /scif/apps/pdf_server/scif/pdf_server
+    <span class="nb">cd</span> /scif/apps/pdf_server/pdf_server
     <span class="c1"># Use nohup and /dev/null to completely detach server process from terminal</span>
     nohup npm start &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> &lt; /dev/null <span class="p">&amp;</span>
 
@@ -564,9 +568,7 @@ provides at least one argument.</p>
     curl -o <span class="s2">&quot;</span><span class="si">${</span><span class="nv">APPTAINER_APPDATA</span><span class="si">}</span><span class="s2">/output/</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">output</span><span class="p">.pdf</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">URL</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">PORT</span><span class="si">}</span><span class="s2">/api/render?url=</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
-<p>Create the container as before. The <code class="docutils literal notranslate"><span class="pre">--force</span></code> option will overwrite
-the old container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --force url-to-pdf.sif url-to-pdf.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build url-to-pdf-app.sif url-to-pdf-app.def
 </pre></div>
 </div>
 <p>Now that we have an output directory in the container, we need to expose
@@ -577,21 +579,21 @@ make a new directory called <code class="docutils literal notranslate"><span cla
 </div>
 <p>After building the image from the edited definition file we simply start
 the instance:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start --bind /tmp/out/:/output url-to-pdf.sif pdf
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start --bind /tmp/out/:/output url-to-pdf-app.sif pdf
 </pre></div>
 </div>
 <p>To request a pdf simply do:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --app pdf_client instance://pdf http://sylabs.io/docs sylabs.pdf
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --app pdf_client instance://pdf http://apptainer.org/docs apptainer.pdf
 </pre></div>
 </div>
 <p>To confirm that it worked:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls /tmp/out/
-sylabs.pdf
+apptainer.pdf
 </pre></div>
 </div>
-<p>When you are finished, use the instance stop command to close all
-running instances.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance stop --all
+<p>When you are finished, use the instance stop command to stop the
+running instance.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance stop pdf
 </pre></div>
 </div>
 <div class="admonition note">
