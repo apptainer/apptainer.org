@@ -16,6 +16,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -147,11 +148,11 @@
            <div itemprop="articleBody">
              
   <section id="encrypted-containers">
-<span id="encryption"></span><h1>Encrypted Containers<a class="headerlink" href="#encrypted-containers" title="Permalink to this headline"></a></h1>
+<span id="encryption"></span><h1>Encrypted Containers<a class="headerlink" href="#encrypted-containers" title="Permalink to this heading"></a></h1>
 <p>Users can build a secure, confidential container environment by
 encrypting the root file system.</p>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p>Apptainer provides a feature to build and run encrypted
 containers to allow users to encrypt the file system
 image within a SIF. This encryption can be performed using either a
@@ -170,7 +171,7 @@ versions may have to update.</p>
 </div>
 </section>
 <section id="encrypting-a-container">
-<h2>Encrypting a container<a class="headerlink" href="#encrypting-a-container" title="Permalink to this headline"></a></h2>
+<h2>Encrypting a container<a class="headerlink" href="#encrypting-a-container" title="Permalink to this heading"></a></h2>
 <p>A container can be encrypted either by supplying a plaintext passphrase
 or a PEM file containing an asymmetric RSA public key. Of these two
 methods the PEM file is more secure and is therefore recommended for
@@ -211,7 +212,7 @@ following precedence is respected.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PASSPHRASE</span></code></p></li>
 </ol>
 <section id="passphrase-encryption">
-<h3>Passphrase Encryption<a class="headerlink" href="#passphrase-encryption" title="Permalink to this headline"></a></h3>
+<h3>Passphrase Encryption<a class="headerlink" href="#passphrase-encryption" title="Permalink to this heading"></a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Passphrase encryption is less secure than encrypting containers using
@@ -223,7 +224,7 @@ containers in production are encouraged to use asymmetric keys.</p>
 <p>In case of plaintext passphrase encryption, a passphrase is supplied by
 one of the following methods.</p>
 <section id="encrypting-with-a-passphrase-interactively">
-<h4>Encrypting with a passphrase interactively<a class="headerlink" href="#encrypting-with-a-passphrase-interactively" title="Permalink to this headline"></a></h4>
+<h4>Encrypting with a passphrase interactively<a class="headerlink" href="#encrypting-with-a-passphrase-interactively" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --passphrase encrypted.sif encrypted.def
 Enter encryption passphrase: &lt;secret&gt;
 INFO:    Starting build...
@@ -231,7 +232,7 @@ INFO:    Starting build...
 </div>
 </section>
 <section id="using-an-environment-variable">
-<h4>Using an environment variable<a class="headerlink" href="#using-an-environment-variable" title="Permalink to this headline"></a></h4>
+<h4>Using an environment variable<a class="headerlink" href="#using-an-environment-variable" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo APPTAINER_ENCRYPTION_PASSPHRASE=&lt;secret&gt; apptainer build --encrypt encrypted.sif encrypted.def
 Starting build...
 </pre></div>
@@ -253,7 +254,7 @@ Starting build...
 </section>
 </section>
 <section id="pem-file-encryption">
-<h3>PEM File Encryption<a class="headerlink" href="#pem-file-encryption" title="Permalink to this headline"></a></h3>
+<h3>PEM File Encryption<a class="headerlink" href="#pem-file-encryption" title="Permalink to this heading"></a></h3>
 <p>Apptainer currently supports RSA encryption using a public/private
 key-pair. Keys are supplied in PEM format. The public key is used to
 encrypt containers that can be decrypted on a host that has access to
@@ -279,14 +280,14 @@ $ mv rsa rsa_pri.pem
 <p>You would use the <code class="docutils literal notranslate"><span class="pre">rsa_pub.pem</span></code> file to encrypt your container and the
 <code class="docutils literal notranslate"><span class="pre">rsa_pri.pem</span></code> file to run it.</p>
 <section id="encrypting-with-a-command-line-option">
-<h4>Encrypting with a command line option<a class="headerlink" href="#encrypting-with-a-command-line-option" title="Permalink to this headline"></a></h4>
+<h4>Encrypting with a command line option<a class="headerlink" href="#encrypting-with-a-command-line-option" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --pem-path=rsa_pub.pem encrypted.sif encrypted.def
 Starting build...
 </pre></div>
 </div>
 </section>
 <section id="encrypting-with-an-environment-variable">
-<h4>Encrypting with an environment variable<a class="headerlink" href="#encrypting-with-an-environment-variable" title="Permalink to this headline"></a></h4>
+<h4>Encrypting with an environment variable<a class="headerlink" href="#encrypting-with-an-environment-variable" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo APPTAINER_ENCRYPTION_PEM_PATH=rsa_pub.pem apptainer build --encrypt encrypted.sif encrypted.def
 Starting build...
 </pre></div>
@@ -298,23 +299,23 @@ build workflow.</p>
 </section>
 </section>
 <section id="running-an-encrypted-container">
-<h2>Running an encrypted container<a class="headerlink" href="#running-an-encrypted-container" title="Permalink to this headline"></a></h2>
+<h2>Running an encrypted container<a class="headerlink" href="#running-an-encrypted-container" title="Permalink to this heading"></a></h2>
 <p>To <code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">shell</span></code>, or <code class="docutils literal notranslate"><span class="pre">exec</span></code> an encrypted image, credentials to
 decrypt the image need to be supplied at runtime either in a key-file or
 a plaintext passphrase.</p>
 <section id="running-a-container-encrypted-with-a-passphrase">
-<h3>Running a container encrypted with a passphrase<a class="headerlink" href="#running-a-container-encrypted-with-a-passphrase" title="Permalink to this headline"></a></h3>
+<h3>Running a container encrypted with a passphrase<a class="headerlink" href="#running-a-container-encrypted-with-a-passphrase" title="Permalink to this heading"></a></h3>
 <p>A passphrase can be supplied at runtime by either of the ways listed in
 the sections above.</p>
 <section id="running-with-a-passphrase-interactively">
-<h4>Running with a passphrase interactively<a class="headerlink" href="#running-with-a-passphrase-interactively" title="Permalink to this headline"></a></h4>
+<h4>Running with a passphrase interactively<a class="headerlink" href="#running-with-a-passphrase-interactively" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --passphrase encrypted.sif
 Enter passphrase for encrypted container: &lt;secret&gt;
 </pre></div>
 </div>
 </section>
 <section id="running-with-a-passphrase-in-an-environment-variable">
-<h4>Running with a passphrase in an environment variable<a class="headerlink" href="#running-with-a-passphrase-in-an-environment-variable" title="Permalink to this headline"></a></h4>
+<h4>Running with a passphrase in an environment variable<a class="headerlink" href="#running-with-a-passphrase-in-an-environment-variable" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINER_ENCRYPTION_PASSPHRASE=&quot;secret&quot; apptainer run encrypted.sif
 </pre></div>
 </div>
@@ -331,17 +332,17 @@ $ apptainer run encrypted.sif
 </section>
 </section>
 <section id="running-a-container-encrypted-with-a-pem-file">
-<h3>Running a container encrypted with a PEM file<a class="headerlink" href="#running-a-container-encrypted-with-a-pem-file" title="Permalink to this headline"></a></h3>
+<h3>Running a container encrypted with a PEM file<a class="headerlink" href="#running-a-container-encrypted-with-a-pem-file" title="Permalink to this heading"></a></h3>
 <p>A private key is supplied using either of the methods listed in the
 Encryption section above.</p>
 <section id="running-using-a-command-line-option">
-<h4>Running using a command line option<a class="headerlink" href="#running-using-a-command-line-option" title="Permalink to this headline"></a></h4>
+<h4>Running using a command line option<a class="headerlink" href="#running-using-a-command-line-option" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --pem-path=rsa_pri.pem encrypted.sif
 </pre></div>
 </div>
 </section>
 <section id="running-using-an-environment-variable">
-<h4>Running using an environment variable<a class="headerlink" href="#running-using-an-environment-variable" title="Permalink to this headline"></a></h4>
+<h4>Running using an environment variable<a class="headerlink" href="#running-using-an-environment-variable" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINER_ENCRYPTION_PEM_PATH=rsa_pri.pem apptainer run encrypted.sif
 </pre></div>
 </div>

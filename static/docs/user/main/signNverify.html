@@ -16,6 +16,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -128,7 +129,7 @@
            <div itemprop="articleBody">
              
   <section id="signing-and-verifying-containers">
-<span id="signnverify"></span><h1>Signing and Verifying Containers<a class="headerlink" href="#signing-and-verifying-containers" title="Permalink to this headline"></a></h1>
+<span id="signnverify"></span><h1>Signing and Verifying Containers<a class="headerlink" href="#signing-and-verifying-containers" title="Permalink to this heading"></a></h1>
 <p id="sec-signnverify">Apptainer has the ability to create and manage PGP keys
 and use them to sign and verify containers. This provides a trusted
 method for Apptainer users to share containers. It ensures a
@@ -141,7 +142,7 @@ intended it.</p>
 <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">verify</span></code> command.</p>
 </div>
 <section id="verifying-containers-from-the-remote-sources">
-<span id="verify-container-from-remote-sources"></span><h2>Verifying containers from the remote sources<a class="headerlink" href="#verifying-containers-from-the-remote-sources" title="Permalink to this headline"></a></h2>
+<span id="verify-container-from-remote-sources"></span><h2>Verifying containers from the remote sources<a class="headerlink" href="#verifying-containers-from-the-remote-sources" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">verify</span></code> command will allow you to verify that a container has
 been signed using a PGP key. To use this feature with SIF images that you
 pull from container libraries or OCI registries via <cite>oras://</cite>. This ensures
@@ -165,9 +166,9 @@ Container verified: my_container.sif
 container.</p>
 </section>
 <section id="signing-your-own-containers">
-<span id="sign-your-own-containers"></span><h2>Signing your own containers<a class="headerlink" href="#signing-your-own-containers" title="Permalink to this headline"></a></h2>
+<span id="sign-your-own-containers"></span><h2>Signing your own containers<a class="headerlink" href="#signing-your-own-containers" title="Permalink to this heading"></a></h2>
 <section id="generating-and-managing-pgp-keys">
-<h3>Generating and managing PGP keys<a class="headerlink" href="#generating-and-managing-pgp-keys" title="Permalink to this headline"></a></h3>
+<h3>Generating and managing PGP keys<a class="headerlink" href="#generating-and-managing-pgp-keys" title="Permalink to this heading"></a></h3>
 <p>To sign your own containers you first need to generate one or more keys.</p>
 <p>If you attempt to sign a container before you have generated any keys,
 Apptainer will guide you through the interactive process of creating
@@ -257,7 +258,7 @@ to your local machine and does not restore the <em>private</em> key (used for
 signing).</p>
 </section>
 <section id="searching-for-keys">
-<span id="id1"></span><h3>Searching for keys<a class="headerlink" href="#searching-for-keys" title="Permalink to this headline"></a></h3>
+<span id="id1"></span><h3>Searching for keys<a class="headerlink" href="#searching-for-keys" title="Permalink to this heading"></a></h3>
 <p>Apptainer allows you to search the keystore for public keys. You can
 search for names, emails, and fingerprints (key IDs). When searching for
 a fingerprint, you need to use <code class="docutils literal notranslate"><span class="pre">0x</span></code> before the fingerprint, check the
@@ -277,7 +278,7 @@ $ apptainer key search @gmail.com
 </div>
 </section>
 <section id="signing-and-validating-your-own-containers">
-<h3>Signing and validating your own containers<a class="headerlink" href="#signing-and-validating-your-own-containers" title="Permalink to this headline"></a></h3>
+<h3>Signing and validating your own containers<a class="headerlink" href="#signing-and-validating-your-own-containers" title="Permalink to this heading"></a></h3>
 <p>Now that you have a key generated, you can use it to sign images like
 so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sign my_container.sif
@@ -336,7 +337,7 @@ offline with <code class="docutils literal notranslate"><span class="pre">apptai
 </div>
 </section>
 <section id="advanced-signing-sif-ids-and-groups">
-<h3>Advanced Signing - SIF IDs and Groups<a class="headerlink" href="#advanced-signing-sif-ids-and-groups" title="Permalink to this headline"></a></h3>
+<h3>Advanced Signing - SIF IDs and Groups<a class="headerlink" href="#advanced-signing-sif-ids-and-groups" title="Permalink to this heading"></a></h3>
 <p>As well as the default behaviour, which signs all objects, fine-grained
 control of signing is possible.</p>
 <p>If you <code class="docutils literal notranslate"><span class="pre">sif</span> <span class="pre">list</span></code> a SIF file you will see it is comprised of a number

@@ -16,6 +16,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -130,7 +131,7 @@
            <div itemprop="articleBody">
              
   <section id="running-services">
-<span id="id1"></span><h1>Running Services<a class="headerlink" href="#running-services" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Running Services<a class="headerlink" href="#running-services" title="Permalink to this heading"></a></h1>
 <p>There are <a class="reference internal" href="quick_start.html#runcontainer"><span class="std std-ref">different ways</span></a> in which you can run
 Apptainer containers. If you use commands like <code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code> and
 <code class="docutils literal notranslate"><span class="pre">shell</span></code> to interact with processes in the container, you are running
@@ -142,7 +143,7 @@ a web server or a database. To run services in an Apptainer container
 one should use <em>instances</em>. A container instance is a persistent and
 isolated version of the container image that runs in the background.</p>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p id="sec-instances">Apptainer has the concept of <em>instances</em> allowing users
 to run services in Apptainer. This page will help you understand
 instances using an elementary example followed by a more useful example
@@ -166,7 +167,7 @@ process. Apptainer instances give you the ability to handle services
 properly.</p>
 </section>
 <section id="container-instances-in-apptainer">
-<h2>Container Instances in Apptainer<a class="headerlink" href="#container-instances-in-apptainer" title="Permalink to this headline"></a></h2>
+<h2>Container Instances in Apptainer<a class="headerlink" href="#container-instances-in-apptainer" title="Permalink to this heading"></a></h2>
 <p>For demonstration, let’s use an easy (though somewhat useless) example
 of <a class="reference external" href="https://cloud.sylabs.io/library/_container/5baba5e594feb900016ea41c">alpine_latest.sif</a>
 image from the <a class="reference external" href="https://cloud.sylabs.io/library/">container library</a>:</p>
@@ -261,7 +262,7 @@ $ apptainer instance stop -a
 </div>
 </section>
 <section id="nginx-hello-world-in-apptainer">
-<h2>Nginx “Hello-world” in Apptainer<a class="headerlink" href="#nginx-hello-world-in-apptainer" title="Permalink to this headline"></a></h2>
+<h2>Nginx “Hello-world” in Apptainer<a class="headerlink" href="#nginx-hello-world-in-apptainer" title="Permalink to this heading"></a></h2>
 <p>The above example, although not very useful, should serve as a fair
 introduction to the concept of Apptainer instances and running
 services in the background. The following illustrates a more useful
@@ -326,7 +327,7 @@ Commercial support is available at
 <p>Visit localhost on your browser, you should see a Welcome message!</p>
 </section>
 <section id="putting-all-together">
-<h2>Putting all together<a class="headerlink" href="#putting-all-together" title="Permalink to this headline"></a></h2>
+<h2>Putting all together<a class="headerlink" href="#putting-all-together" title="Permalink to this heading"></a></h2>
 <p>In this section, we will demonstrate an example of packaging a service
 into a container and running it. The service we will be packaging is an
 API server that converts a web page into a PDF, and can be found <a class="reference external" href="https://github.com/alvarcarto/url-to-pdf-api">here</a>. You can build the
@@ -336,7 +337,7 @@ the final image directly from Container Library, simply run:</p>
 </pre></div>
 </div>
 <section id="building-the-image">
-<h3>Building the image<a class="headerlink" href="#building-the-image" title="Permalink to this headline"></a></h3>
+<h3>Building the image<a class="headerlink" href="#building-the-image" title="Permalink to this heading"></a></h3>
 <p>This section will describe the requirements for creating the definition
 file (url-to-pdf.def) that will be used to build the container image.
 <code class="docutils literal notranslate"><span class="pre">url-to-pdf-api</span></code> is based on a Node 8 server that uses a headless
@@ -427,7 +428,7 @@ be set, which we can do in the environment section:</p>
 </div>
 </section>
 <section id="running-the-service">
-<h3>Running the Service<a class="headerlink" href="#running-the-service" title="Permalink to this headline"></a></h3>
+<h3>Running the Service<a class="headerlink" href="#running-the-service" title="Permalink to this heading"></a></h3>
 <p>We can now start an instance and run the service:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer instance start url-to-pdf.sif pdf
 </pre></div>
@@ -470,7 +471,7 @@ Apptainer final.sif:/home/ysub&gt; exit
 </div>
 </section>
 <section id="making-it-fancy">
-<h3>Making it Fancy<a class="headerlink" href="#making-it-fancy" title="Permalink to this headline"></a></h3>
+<h3>Making it Fancy<a class="headerlink" href="#making-it-fancy" title="Permalink to this heading"></a></h3>
 <p>Now that we have confirmation that the server is working, let’s make it
 a little cleaner. It’s difficult to remember the exact <code class="docutils literal notranslate"><span class="pre">curl</span></code> command
 and URL syntax each time you want to request a PDF, so let’s automate
@@ -607,7 +608,7 @@ the container you could do:</p>
 </section>
 </section>
 <section id="system-integration-pid-files">
-<h2>System integration / PID files<a class="headerlink" href="#system-integration-pid-files" title="Permalink to this headline"></a></h2>
+<h2>System integration / PID files<a class="headerlink" href="#system-integration-pid-files" title="Permalink to this heading"></a></h2>
 <p>If you are running services in containers you may want them to be
 started on boot, and shutdown gracefully automatically. This is usually
 performed by an init process, or another supervisor daemon installed on

@@ -16,6 +16,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -141,16 +142,16 @@
            <div itemprop="articleBody">
              
   <section id="build-environment">
-<span id="id1"></span><h1>Build Environment<a class="headerlink" href="#build-environment" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Build Environment<a class="headerlink" href="#build-environment" title="Permalink to this heading"></a></h1>
 <section id="overview">
-<span id="sec-buildenv"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<span id="sec-buildenv"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p>You may wish to customize your build environment by doing things such as
 specifying a custom cache directory for images or sending your Docker
 Credentials to the registry endpoint. Here we will discuss these and
 other topics related to the build environment.</p>
 </section>
 <section id="cache-folders">
-<span id="sec-cache"></span><h2>Cache Folders<a class="headerlink" href="#cache-folders" title="Permalink to this headline"></a></h2>
+<span id="sec-cache"></span><h2>Cache Folders<a class="headerlink" href="#cache-folders" title="Permalink to this heading"></a></h2>
 <p>Apptainer will cache SIF container images generated from remote
 sources, and any OCI/docker layers used to create them. The cache is
 created at <code class="docutils literal notranslate"><span class="pre">$HOME/.apptainer/cache</span></code> by default. The location of the
@@ -209,7 +210,7 @@ as this may cause checksum / integrity errors when you run or build
 containers. If you experience problems use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">clean</span></code>
 to reset the cache to a clean, empty state.</p>
 <section id="boltdb-corruption-errors">
-<h3>BoltDB Corruption Errors<a class="headerlink" href="#boltdb-corruption-errors" title="Permalink to this headline"></a></h3>
+<h3>BoltDB Corruption Errors<a class="headerlink" href="#boltdb-corruption-errors" title="Permalink to this heading"></a></h3>
 <p>The library that Apptainer uses to retrieve and cache Docker/OCI
 layers keeps track of them using a single file database. If your home
 directory is on a network filesystem which experiences interruptions, or
@@ -224,7 +225,7 @@ file:</p>
 </section>
 </section>
 <section id="cache-commands">
-<h2>Cache commands<a class="headerlink" href="#cache-commands" title="Permalink to this headline"></a></h2>
+<h2>Cache commands<a class="headerlink" href="#cache-commands" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">cache</span></code> command for Apptainer allows you to view and clean up
 your cache, without manually inspecting the cache directories.</p>
 <div class="admonition note">
@@ -235,7 +236,7 @@ use <code class="docutils literal notranslate"><span class="pre">sudo</span></co
 these cache entries.</p>
 </div>
 <section id="listing-cache">
-<h3>Listing Cache<a class="headerlink" href="#listing-cache" title="Permalink to this headline"></a></h3>
+<h3>Listing Cache<a class="headerlink" href="#listing-cache" title="Permalink to this heading"></a></h3>
 <p>To view a summary of cache usage, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">list</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache list
 There are 4 container file(s) using 59.45 MB and 23 oci blob file(s) using 379.10 MB of space
@@ -287,7 +288,7 @@ are named for the source of the image e.g. <code class="docutils literal notrans
 / <code class="docutils literal notranslate"><span class="pre">-t</span></code> option.</p>
 </section>
 <section id="cleaning-the-cache">
-<h3>Cleaning the Cache<a class="headerlink" href="#cleaning-the-cache" title="Permalink to this headline"></a></h3>
+<h3>Cleaning the Cache<a class="headerlink" href="#cleaning-the-cache" title="Permalink to this heading"></a></h3>
 <p>To reclaim space used by the Apptainer cache, use <code class="docutils literal notranslate"><span class="pre">apptainer</span>
 <span class="pre">cache</span> <span class="pre">clean</span></code>.</p>
 <p>By default <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">clean</span></code> will remove all cache entries,
@@ -315,7 +316,7 @@ use the <code class="docutils literal notranslate"><span class="pre">type</span>
 </section>
 </section>
 <section id="temporary-folders">
-<span id="sec-temporaryfolders"></span><h2>Temporary Folders<a class="headerlink" href="#temporary-folders" title="Permalink to this headline"></a></h2>
+<span id="sec-temporaryfolders"></span><h2>Temporary Folders<a class="headerlink" href="#temporary-folders" title="Permalink to this heading"></a></h2>
 <p>When building a container, or pulling/running an Apptainer container
 from a Docker/OCI source, a temporary working space is required. The
 container is constructed in this temporary space before being packaged
@@ -347,14 +348,14 @@ some container builds.</p>
 </div>
 </section>
 <section id="encrypted-containers">
-<h2>Encrypted Containers<a class="headerlink" href="#encrypted-containers" title="Permalink to this headline"></a></h2>
+<h2>Encrypted Containers<a class="headerlink" href="#encrypted-containers" title="Permalink to this heading"></a></h2>
 <p>With Apptainer it is possible to build and run
 encrypted containers. The containers are decrypted at runtime entirely
 in kernel space, meaning that no intermediate decrypted data is ever
 present on disk or in memory. See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
 </section>
 <section id="environment-variables">
-<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline"></a></h2>
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>If a flag is represented by both a CLI option and an environment
 variable, and both are set, the CLI option will always take
@@ -365,11 +366,11 @@ with the <code class="docutils literal notranslate"><span class="pre">--bind</sp
 <li><p>Any defaults in the CLI code are applied.</p></li>
 </ol>
 <section id="defaults">
-<h3>Defaults<a class="headerlink" href="#defaults" title="Permalink to this headline"></a></h3>
+<h3>Defaults<a class="headerlink" href="#defaults" title="Permalink to this heading"></a></h3>
 <p>The following variables have defaults that can be customized by you via
 environment variables at runtime.</p>
 <section id="docker">
-<h4>Docker<a class="headerlink" href="#docker" title="Permalink to this headline"></a></h4>
+<h4>Docker<a class="headerlink" href="#docker" title="Permalink to this heading"></a></h4>
 <p><strong>APPTAINER_DOCKER_LOGIN</strong> Used for the interactive login for Docker
 Hub.</p>
 <p><strong>APPTAINER_DOCKER_USERNAME</strong> Your Docker username.</p>
@@ -385,14 +386,14 @@ https when interacting with a Docker registry. This use case is
 typically for use of a local registry.</p>
 </section>
 <section id="library">
-<h4>Library<a class="headerlink" href="#library" title="Permalink to this headline"></a></h4>
+<h4>Library<a class="headerlink" href="#library" title="Permalink to this heading"></a></h4>
 <p><strong>APPTAINER_LIBRARY</strong> Used to specify the library to pull from.
 Default is set to our Cloud Library.</p>
 <p><strong>APPTAINER_REMOTE</strong> Used to build an image remotely (This does not
 require root). The default is set to false.</p>
 </section>
 <section id="encryption">
-<h4>Encryption<a class="headerlink" href="#encryption" title="Permalink to this headline"></a></h4>
+<h4>Encryption<a class="headerlink" href="#encryption" title="Permalink to this heading"></a></h4>
 <p><strong>APPTAINER_ENCRYPTION_PASSPHRASE</strong> Used to pass a plaintext
 passphrase to encrypt a container file system (with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code>
 flag). The default is empty.</p>

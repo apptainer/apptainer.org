@@ -16,6 +16,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -146,14 +147,14 @@
            <div itemprop="articleBody">
              
   <section id="definition-files">
-<span id="id1"></span><h1>Definition Files<a class="headerlink" href="#definition-files" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Definition Files<a class="headerlink" href="#definition-files" title="Permalink to this heading"></a></h1>
 <p id="sec-deffiles">An Apptainer Definition File (or “def file” for short) is like a set
 of blueprints explaining how to build a custom container. It includes
 specifics about the base OS to build or the base container to start
 from, software to install, environment variables to set at runtime,
 files to add from the host system, and container metadata.</p>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p>An Apptainer Definition file is divided into two parts:</p>
 <ol class="arabic simple">
 <li><p><strong>Header</strong>: The Header describes the core operating system to build
@@ -176,7 +177,7 @@ examples repository</a></p>
 please see: <a class="reference internal" href="docker_and_oci.html#sec-deffile-vs-dockerfile"><span class="std std-ref">this section</span></a>.</p>
 </section>
 <section id="header">
-<h2>Header<a class="headerlink" href="#header" title="Permalink to this headline"></a></h2>
+<h2>Header<a class="headerlink" href="#header" title="Permalink to this heading"></a></h2>
 <p>The header should be written at the top of the def file. It tells
 Apptainer about the base operating system that it should use to
 build the container. It is composed of several keywords.</p>
@@ -207,7 +208,7 @@ like this:</p>
 <p>Each bootstrap agent enables its own options and keywords. You can read
 about them and see examples in the <a class="reference internal" href="appendix.html#buildmodules"><span class="std std-ref">appendix section</span></a>:</p>
 <section id="preferred-bootstrap-agents">
-<h3>Preferred bootstrap agents<a class="headerlink" href="#preferred-bootstrap-agents" title="Permalink to this headline"></a></h3>
+<h3>Preferred bootstrap agents<a class="headerlink" href="#preferred-bootstrap-agents" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="appendix.html#build-docker-module"><span class="std std-ref">docker</span></a> (images hosted on Docker Hub)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-oras"><span class="std std-ref">oras</span></a> (images from supporting OCI registries)</p></li>
@@ -217,7 +218,7 @@ container from scratch)</p></li>
 </ul>
 </section>
 <section id="other-bootstrap-agents">
-<h3>Other bootstrap agents<a class="headerlink" href="#other-bootstrap-agents" title="Permalink to this headline"></a></h3>
+<h3>Other bootstrap agents<a class="headerlink" href="#other-bootstrap-agents" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="appendix.html#build-shub"><span class="std std-ref">shub</span></a> (images hosted on Singularity Hub)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-localimage"><span class="std std-ref">localimage</span></a> (images saved on your machine)</p></li>
@@ -240,7 +241,7 @@ OpenSuse)</p></li>
 </ul>
 </section>
 <section id="sif-image-verification-fingerprints-header">
-<h3>SIF Image Verification / Fingerprints Header<a class="headerlink" href="#sif-image-verification-fingerprints-header" title="Permalink to this headline"></a></h3>
+<h3>SIF Image Verification / Fingerprints Header<a class="headerlink" href="#sif-image-verification-fingerprints-header" title="Permalink to this heading"></a></h3>
 <p>If the bootstrap image is in the SIF format, then verification will be
 performed at build time. This verification checks whether the image has
 been signed. If it has been signed the integrity of the image is
@@ -276,7 +277,7 @@ process on a compromised machine.</p>
 </section>
 </section>
 <section id="sections">
-<h2>Sections<a class="headerlink" href="#sections" title="Permalink to this headline"></a></h2>
+<h2>Sections<a class="headerlink" href="#sections" title="Permalink to this heading"></a></h2>
 <p>The main content of the bootstrap file is broken into sections.
 Different sections add different content or execute commands at
 different times during the build process. Note that if any command
@@ -337,7 +338,7 @@ Stage: build
 have been documented below in the order of their execution during the
 build process for logical understanding.</p>
 <section id="setup">
-<h3>%setup<a class="headerlink" href="#setup" title="Permalink to this headline"></a></h3>
+<h3>%setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h3>
 <p>During the build process, commands in the <code class="docutils literal notranslate"><span class="pre">%setup</span></code> section are first
 executed on the host system outside of the container after the base OS
 has been installed. You can reference the container file system with the
@@ -366,7 +367,7 @@ running the <code class="docutils literal notranslate"><span class="pre">%setup<
 system during the build, it’s use is generally discouraged.</p>
 </section>
 <section id="files">
-<h3>%files<a class="headerlink" href="#files" title="Permalink to this headline"></a></h3>
+<h3>%files<a class="headerlink" href="#files" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">%files</span></code> section allows you to copy files into the container with
 greater safety than using the <code class="docutils literal notranslate"><span class="pre">%setup</span></code> section. Its general form is:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%files</span> <span class="o">[</span>from &lt;stage&gt;<span class="o">]</span>
@@ -410,7 +411,7 @@ section is executed so that they are available during the build and
 configuration process.</p>
 </section>
 <section id="app">
-<h3>%app*<a class="headerlink" href="#app" title="Permalink to this headline"></a></h3>
+<h3>%app*<a class="headerlink" href="#app" title="Permalink to this heading"></a></h3>
 <p>In some circumstances, it may be redundant to build different containers
 for each app with nearly equivalent dependencies. Apptainer supports
 installing apps within internal modules based on the concept of the
@@ -418,7 +419,7 @@ installing apps within internal modules based on the concept of the
 information on defining and using SCIF Apps <a class="reference internal" href="#apps"><span class="std std-ref">here</span></a>.</p>
 </section>
 <section id="post">
-<h3>%post<a class="headerlink" href="#post" title="Permalink to this headline"></a></h3>
+<h3>%post<a class="headerlink" href="#post" title="Permalink to this heading"></a></h3>
 <p>This section is where you can download files from the internet with
 tools like <code class="docutils literal notranslate"><span class="pre">git</span></code> and <code class="docutils literal notranslate"><span class="pre">wget</span></code>, install new software and libraries,
 write configuration files, create new directories, etc.</p>
@@ -444,7 +445,7 @@ runtime.</p>
 <code class="docutils literal notranslate"><span class="pre">%environment</span></code>.</p>
 </section>
 <section id="test">
-<h3>%test<a class="headerlink" href="#test" title="Permalink to this headline"></a></h3>
+<h3>%test<a class="headerlink" href="#test" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">%test</span></code> section runs at the very end of the build process to
 validate the container using a method of your choice. You can also
 execute this scriptlet through the container itself, using the <code class="docutils literal notranslate"><span class="pre">test</span></code>
@@ -504,7 +505,7 @@ a non-zero error code if there is a problem during the tests.</p>
 filesystem in single step:</p>
 </section>
 <section id="environment">
-<h3>%environment<a class="headerlink" href="#environment" title="Permalink to this headline"></a></h3>
+<h3>%environment<a class="headerlink" href="#environment" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section allows you to define environment variables
 that will be set at runtime. Note that these variables are not made
 available at build time by their inclusion in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code>
@@ -551,7 +552,7 @@ on the host, or <code class="docutils literal notranslate"><span class="pre">def
 information about the Apptainer container environment.</p>
 </section>
 <section id="startscript">
-<span id="id2"></span><h3>%startscript<a class="headerlink" href="#startscript" title="Permalink to this headline"></a></h3>
+<span id="id2"></span><h3>%startscript<a class="headerlink" href="#startscript" title="Permalink to this heading"></a></h3>
 <p>Similar to the <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> section, the contents of the
 <code class="docutils literal notranslate"><span class="pre">%startscript</span></code> section is written to a file within the container at
 build time. This file is executed when the <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code> command is
@@ -576,7 +577,7 @@ Stopping instance1 instance of /home/vagrant/my_container.sif (PID=19035)
 </div>
 </section>
 <section id="runscript">
-<span id="id3"></span><h3>%runscript<a class="headerlink" href="#runscript" title="Permalink to this headline"></a></h3>
+<span id="id3"></span><h3>%runscript<a class="headerlink" href="#runscript" title="Permalink to this heading"></a></h3>
 <p>The contents of the <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> section are written to a file within
 the container that is executed when the container image is run (either
 via the <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run</span></code> command or by executing the container
@@ -613,7 +614,7 @@ this that and the other
 </div>
 </section>
 <section id="labels">
-<h3>%labels<a class="headerlink" href="#labels" title="Permalink to this headline"></a></h3>
+<h3>%labels<a class="headerlink" href="#labels" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">%labels</span></code> section is used to add metadata to the file
 <code class="docutils literal notranslate"><span class="pre">/.singularity.d/labels.json</span></code> within your container. The general
 format is a name-value pair.</p>
@@ -653,7 +654,7 @@ org.label-schema.usage.singularity.deffile.stage: build
 can read more about labels and metadata <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">here</span></a>.</p>
 </section>
 <section id="help">
-<h3>%help<a class="headerlink" href="#help" title="Permalink to this headline"></a></h3>
+<h3>%help<a class="headerlink" href="#help" title="Permalink to this heading"></a></h3>
 <p>Any text in the <code class="docutils literal notranslate"><span class="pre">%help</span></code> section is transcribed into a metadata file in
 the container during the build. This text can then be displayed using
 the <code class="docutils literal notranslate"><span class="pre">run-help</span></code> command.</p>
@@ -672,7 +673,7 @@ the <code class="docutils literal notranslate"><span class="pre">run-help</span>
 </section>
 </section>
 <section id="multi-stage-builds">
-<h2>Multi-Stage Builds<a class="headerlink" href="#multi-stage-builds" title="Permalink to this headline"></a></h2>
+<h2>Multi-Stage Builds<a class="headerlink" href="#multi-stage-builds" title="Permalink to this heading"></a></h2>
 <p>Multi-stage builds are supported where
 one environment can be used for compilation, then the resulting binary
 can be copied into a final environment. This allows a slimmer final
@@ -719,7 +720,7 @@ above definition cannot copy files from the <code class="docutils literal notran
 <code class="docutils literal notranslate"><span class="pre">final</span></code> stage can copy files from the <code class="docutils literal notranslate"><span class="pre">devel</span></code> stage.</p>
 </section>
 <section id="scif-apps">
-<span id="apps"></span><h2>SCIF Apps<a class="headerlink" href="#scif-apps" title="Permalink to this headline"></a></h2>
+<span id="apps"></span><h2>SCIF Apps<a class="headerlink" href="#scif-apps" title="Permalink to this heading"></a></h2>
 <p>SCIF is a standard for encapsulating multiple apps into a container. A
 container with SCIF apps has multiple entry points, and you can choose
 which to run easily. Each entry point can carry out a different task
@@ -731,7 +732,7 @@ below.</p>
 the project’s site: <a class="reference external" href="https://sci-f.github.io/">https://sci-f.github.io/</a> which includes extended
 tutorials, the specification, and other information.</p>
 <section id="scif-app-sections">
-<h3>SCIF %app* sections<a class="headerlink" href="#scif-app-sections" title="Permalink to this headline"></a></h3>
+<h3>SCIF %app* sections<a class="headerlink" href="#scif-app-sections" title="Permalink to this heading"></a></h3>
 <p>SCIF apps within an Apptainer container are created using <code class="docutils literal notranslate"><span class="pre">%app*</span></code>
 sections in a definition file. These <code class="docutils literal notranslate"><span class="pre">%app*</span></code> sections, which will
 impact the way the container runs a specific <code class="docutils literal notranslate"><span class="pre">--app</span></code> can exist
@@ -812,7 +813,7 @@ SOFTWARE=bar
 </section>
 </section>
 <section id="best-practices-for-build-recipes">
-<h2>Best Practices for Build Recipes<a class="headerlink" href="#best-practices-for-build-recipes" title="Permalink to this headline"></a></h2>
+<h2>Best Practices for Build Recipes<a class="headerlink" href="#best-practices-for-build-recipes" title="Permalink to this heading"></a></h2>
 <p>When crafting your recipe, it is best to consider the following:</p>
 <ol class="arabic simple">
 <li><p>Always install packages, programs, data, and files into operating
