@@ -16,6 +16,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -137,9 +138,9 @@
            <div itemprop="articleBody">
              
   <section id="fakeroot-feature">
-<span id="fakeroot"></span><h1>Fakeroot feature<a class="headerlink" href="#fakeroot-feature" title="Permalink to this headline"></a></h1>
+<span id="fakeroot"></span><h1>Fakeroot feature<a class="headerlink" href="#fakeroot-feature" title="Permalink to this heading"></a></h1>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p>The fakeroot feature (commonly referred as rootless mode) allows an
 unprivileged user to run a container as a <strong>“fake root”</strong> user by
 leveraging <a class="reference external" href="http://man7.org/linux/man-pages/man7/user_namespaces.7.html">user namespace UID/GID mapping</a>.</p>
@@ -162,9 +163,9 @@ uts)</p></li>
 </div></blockquote>
 </section>
 <section id="restrictions-security">
-<h2>Restrictions/security<a class="headerlink" href="#restrictions-security" title="Permalink to this headline"></a></h2>
+<h2>Restrictions/security<a class="headerlink" href="#restrictions-security" title="Permalink to this heading"></a></h2>
 <section id="filesystem">
-<h3>Filesystem<a class="headerlink" href="#filesystem" title="Permalink to this headline"></a></h3>
+<h3>Filesystem<a class="headerlink" href="#filesystem" title="Permalink to this heading"></a></h3>
 <p>A <strong>“fake root”</strong> user can’t access or modify files and directories for
 which they don’t already have access or rights on the host filesystem,
 so a <strong>“fake root”</strong> user won’t be able to access root-only host files
@@ -209,7 +210,7 @@ ensure that there is no overlap with the current user’s UID/GID on the
 system.</p>
 </section>
 <section id="network">
-<h3>Network<a class="headerlink" href="#network" title="Permalink to this headline"></a></h3>
+<h3>Network<a class="headerlink" href="#network" title="Permalink to this heading"></a></h3>
 <p>Restrictions are also applied to networking, if <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> is
 executed without the <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag, the <strong>“fake root”</strong> user won’t be
 able to use <code class="docutils literal notranslate"><span class="pre">ping</span></code> or bind a container service to a port below 1024.</p>
@@ -232,7 +233,7 @@ the host network.</p>
 </section>
 </section>
 <section id="requirements-configuration">
-<h2>Requirements / Configuration<a class="headerlink" href="#requirements-configuration" title="Permalink to this headline"></a></h2>
+<h2>Requirements / Configuration<a class="headerlink" href="#requirements-configuration" title="Permalink to this heading"></a></h2>
 <p>Fakeroot depends on user mappings set in <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and group
 mappings in <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>, so your username needs to be listed in
 those files with a valid mapping (see the admin-guide for details), if
@@ -245,7 +246,7 @@ mapping files are security sensitive. See the admin-guide for more
 details.</p>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
 <p>If your user account is configured with valid <code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code>
 mappings you work as a fake root user inside a container by using the
 <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> or <code class="docutils literal notranslate"><span class="pre">-f</span></code> option.</p>
@@ -261,7 +262,7 @@ commands:</p>
 </ul>
 </div></blockquote>
 <section id="build">
-<h3>Build<a class="headerlink" href="#build" title="Permalink to this headline"></a></h3>
+<h3>Build<a class="headerlink" href="#build" title="Permalink to this heading"></a></h3>
 <p>With fakeroot an unprivileged user can now build an image from a
 definition file with few restrictions. Some bootstrap methods that
 require creation of block devices (like <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>) may not always
@@ -271,21 +272,21 @@ appears to work with <code class="docutils literal notranslate"><span class="pre
 bootstrap methods, although <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> is known to not work.</p>
 </section>
 <section id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h3>
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h3>
 <section id="build-from-a-definition-file">
-<h4>Build from a definition file:<a class="headerlink" href="#build-from-a-definition-file" title="Permalink to this headline"></a></h4>
+<h4>Build from a definition file:<a class="headerlink" href="#build-from-a-definition-file" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">build</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="k">def</span>
 </pre></div>
 </div>
 </section>
 <section id="ping-from-container">
-<h4>Ping from container:<a class="headerlink" href="#ping-from-container" title="Permalink to this headline"></a></h4>
+<h4>Ping from container:<a class="headerlink" href="#ping-from-container" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">alpine</span> <span class="n">ping</span> <span class="o">-</span><span class="n">c1</span> <span class="mf">8.8.8.8</span>
 </pre></div>
 </div>
 </section>
 <section id="http-server">
-<h4>HTTP server:<a class="headerlink" href="#http-server" title="Permalink to this headline"></a></h4>
+<h4>HTTP server:<a class="headerlink" href="#http-server" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">run</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="o">--</span><span class="n">network</span><span class="o">-</span><span class="n">args</span><span class="o">=</span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span> <span class="o">-</span><span class="n">w</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">nginx</span>
 </pre></div>
 </div>

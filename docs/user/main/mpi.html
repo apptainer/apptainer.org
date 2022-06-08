@@ -16,6 +16,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -136,7 +137,7 @@
            <div itemprop="articleBody">
              
   <section id="apptainer-and-mpi-applications">
-<span id="mpi"></span><h1>Apptainer and MPI applications<a class="headerlink" href="#apptainer-and-mpi-applications" title="Permalink to this headline"></a></h1>
+<span id="mpi"></span><h1>Apptainer and MPI applications<a class="headerlink" href="#apptainer-and-mpi-applications" title="Permalink to this heading"></a></h1>
 <p id="sec-mpi">The <a class="reference external" href="https://mpi-forum.org">Message Passing Interface (MPI)</a> is a
 standard extensively used by HPC applications to implement various
 communication across compute nodes of a single system or across compute
@@ -162,7 +163,7 @@ disabled by system administrators for operational reasons. If this is
 the case on your system please follow the <em>hybrid</em> approach.</p>
 </div>
 <section id="hybrid-model">
-<h2>Hybrid model<a class="headerlink" href="#hybrid-model" title="Permalink to this headline"></a></h2>
+<h2>Hybrid model<a class="headerlink" href="#hybrid-model" title="Permalink to this heading"></a></h2>
 <p>The basic idea behind the <em>Hybrid Approach</em> is when you execute a
 Apptainer container with MPI code, you will call <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> or a
 similar launcher on the <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> command itself. The MPI process
@@ -203,7 +204,7 @@ version available on the host system, a standard approach is to build
 your own MPI container, including building the same MPI framework
 installed on the host from source.</p>
 <section id="test-application">
-<h3>Test Application<a class="headerlink" href="#test-application" title="Permalink to this headline"></a></h3>
+<h3>Test Application<a class="headerlink" href="#test-application" title="Permalink to this heading"></a></h3>
 <p>To illustrate how Apptainer can be used to execute MPI applications,
 we will assume for a moment that the application is <code class="docutils literal notranslate"><span class="pre">mpitest.c</span></code>, a
 simple Hello World:</p>
@@ -258,7 +259,7 @@ container, which will depend on the MPI implementation available on the
 host.</p>
 </section>
 <section id="mpich-hybrid-container">
-<h3>MPICH Hybrid Container<a class="headerlink" href="#mpich-hybrid-container" title="Permalink to this headline"></a></h3>
+<h3>MPICH Hybrid Container<a class="headerlink" href="#mpich-hybrid-container" title="Permalink to this heading"></a></h3>
 <p>If the host MPI is MPICH, a definition file such as the following
 example can be used:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
@@ -312,7 +313,7 @@ details.</p>
 </div>
 </section>
 <section id="open-mpi-hybrid-container">
-<h3>Open MPI Hybrid Container<a class="headerlink" href="#open-mpi-hybrid-container" title="Permalink to this headline"></a></h3>
+<h3>Open MPI Hybrid Container<a class="headerlink" href="#open-mpi-hybrid-container" title="Permalink to this heading"></a></h3>
 <p>If the host MPI is Open MPI, the definition file looks like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
 From: ubuntu:18.04
@@ -362,7 +363,7 @@ details.</p>
 </div>
 </section>
 <section id="running-an-mpi-application">
-<h3>Running an MPI Application<a class="headerlink" href="#running-an-mpi-application" title="Permalink to this headline"></a></h3>
+<h3>Running an MPI Application<a class="headerlink" href="#running-an-mpi-application" title="Permalink to this heading"></a></h3>
 <p>The standard way to execute MPI applications with hybrid Apptainer
 containers is to run the native <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> command from the host, which
 will start Apptainer containers and ultimately MPI ranks within the
@@ -390,7 +391,7 @@ Hello, I am rank 7/8
 </section>
 </section>
 <section id="bind-model">
-<h2>Bind model<a class="headerlink" href="#bind-model" title="Permalink to this headline"></a></h2>
+<h2>Bind model<a class="headerlink" href="#bind-model" title="Permalink to this heading"></a></h2>
 <p>Similar to the <em>Hybrid Approach</em>, the basic idea behind the <em>Bind
 Approach</em> is to start the MPI application by calling the MPI launcher
 (e.g., <cite>mpirun</cite>) from the host. The main difference between the hybrid
@@ -442,7 +443,7 @@ application has been compiled with MPICH will not be able to run on a
 system where only Open MPI is available, even if you mount the directory
 where Open MPI is installed.</p>
 <section id="bind-mode-definition-file">
-<h3>Bind Mode Definition File<a class="headerlink" href="#bind-mode-definition-file" title="Permalink to this headline"></a></h3>
+<h3>Bind Mode Definition File<a class="headerlink" href="#bind-mode-definition-file" title="Permalink to this heading"></a></h3>
 <p>A definition file for a container in bind mode is fairly straight
 forward. The following example shows the definition file for the test
 program, which in this case has been compiled on the host to
@@ -465,7 +466,7 @@ container.</p>
 <code class="docutils literal notranslate"><span class="pre">$MPI_DIR</span></code> - which we will need to set when running the container.</p>
 </section>
 <section id="id1">
-<h3>Running an MPI Application<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
+<h3>Running an MPI Application<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
 <p>When running our bind mode container we need to <code class="docutils literal notranslate"><span class="pre">--bind</span></code> our host’s
 MPI installation into the container. We also need to set the environment
 variable <code class="docutils literal notranslate"><span class="pre">$MPI_DIR</span></code> in the container to point to the location where
@@ -496,7 +497,7 @@ Hello, I am rank 6/8
 </section>
 </section>
 <section id="batch-scheduler-slurm">
-<h2>Batch Scheduler / Slurm<a class="headerlink" href="#batch-scheduler-slurm" title="Permalink to this headline"></a></h2>
+<h2>Batch Scheduler / Slurm<a class="headerlink" href="#batch-scheduler-slurm" title="Permalink to this heading"></a></h2>
 <p>If your target system is setup with a batch system such as SLURM, a
 standard way to execute MPI applications is through a batch script. The
 following example illustrates the context of a batch script for Slurm
@@ -523,7 +524,7 @@ is based on the bind model, please add the appropriate bind options.</p>
 </div>
 </section>
 <section id="alternative-launchers">
-<h2>Alternative Launchers<a class="headerlink" href="#alternative-launchers" title="Permalink to this headline"></a></h2>
+<h2>Alternative Launchers<a class="headerlink" href="#alternative-launchers" title="Permalink to this heading"></a></h2>
 <p>On many systems it is common to use an alternative launcher to start MPI
 applications, e.g. Slurm’s <code class="docutils literal notranslate"><span class="pre">srun</span></code> rather than the <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> provided
 by the MPI installation. This approach is supported with Apptainer
@@ -534,7 +535,7 @@ launcher.</p>
 interact correctly with the same launchers as it does on the host.</p>
 </section>
 <section id="interconnects-networking">
-<h2>Interconnects / Networking<a class="headerlink" href="#interconnects-networking" title="Permalink to this headline"></a></h2>
+<h2>Interconnects / Networking<a class="headerlink" href="#interconnects-networking" title="Permalink to this heading"></a></h2>
 <p>High performance interconnects such as Infiniband and Omnipath require
 that MPI implementations are built to support them. You may need to
 install or bind Infiniband/Omnipath libraries into your containers when
@@ -546,7 +547,7 @@ to bind in additional <code class="docutils literal notranslate"><span class="pr
 operation of your interconnect drivers in the container in this case.</p>
 </section>
 <section id="troubleshooting-tips">
-<h2>Troubleshooting Tips<a class="headerlink" href="#troubleshooting-tips" title="Permalink to this headline"></a></h2>
+<h2>Troubleshooting Tips<a class="headerlink" href="#troubleshooting-tips" title="Permalink to this heading"></a></h2>
 <p>If your containers run N rank 0 processes, instead of operating
 correctly as an MPI application, it is likely that the MPI stack used to
 launch the containerized application is not compatible with, or cannot
