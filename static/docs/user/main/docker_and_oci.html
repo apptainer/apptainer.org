@@ -118,6 +118,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#dockerfile-user">Dockerfile <code class="docutils literal notranslate"><span class="pre">USER</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#default-mounts-home">Default Mounts / $HOME</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#environment-propagation">Environment Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#environment-variable-escaping-evaluation">Environment Variable Escaping / Evaluation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#namespace-device-isolation">Namespace &amp; Device Isolation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#init-shim-process">Init Shim Process</a></li>
 </ul>
@@ -848,6 +849,36 @@ $ apptainer run docker://openjdk:latest echo \$JAVA_HOME
 </pre></div>
 </div>
 </section>
+<section id="environment-variable-escaping-evaluation">
+<h3>Environment Variable Escaping / Evaluation<a class="headerlink" href="#environment-variable-escaping-evaluation" title="Permalink to this heading"></a></h3>
+<p>The default behavior of Apptainer differs from Docker/OCI handling of
+environment variables as Apptainer uses a shell interpreter to process
+environment on container startup, in a manner that evaluates environment
+variables. To avoid the extra evaluation of variables that Apptainer
+performs you can:</p>
+<ul class="simple">
+<li><p>Follow the instructions in the <a class="reference internal" href="environment_and_metadata.html#escaping-environment"><span class="std std-ref">Escaping and Evaluation of Environment Variables</span></a> section to
+explictly escape environment variables.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">--no-eval</span></code> flag.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">--no-eval</span></code> prevents Apptainer from evaluating environment variables on
+container startup, so that they will take the same value as with a Docker/OCI
+runtime:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Set an environment variable that would run `date` if evaluated
+$ export APPTAINER_MYVAR=&#39;$(date)&#39;
+
+# Default behavior
+# MYVAR was evaluated in the container, and is set to the output of `date`
+$ apptainer run ~/ubuntu_latest.sif env | grep MYVAR
+MYVAR=Tue Apr 26 14:37:07 CDT 2022
+
+# --no-eval / --compat behavior
+# MYVAR was not evaluated and is a literal `$(date)`
+$ apptainer run --no-eval ~/ubuntu_latest.sif env | grep MYVAR
+MYVAR=$(date)
+</pre></div>
+</div>
+</section>
 <section id="namespace-device-isolation">
 <h3>Namespace &amp; Device Isolation<a class="headerlink" href="#namespace-device-isolation" title="Permalink to this heading"></a></h3>
 <p>Because Apptainer favors an integration over isolation approach it
@@ -907,7 +938,7 @@ $ apptainer run --pid --no-init tini_example.sif
 </section>
 </section>
 <section id="docker-like-compat-flag">
-<h2>Docker-like <code class="docutils literal notranslate"><span class="pre">--compat</span></code> Flag<a class="headerlink" href="#docker-like-compat-flag" title="Permalink to this heading"></a></h2>
+<span id="compat-flag"></span><h2>Docker-like <code class="docutils literal notranslate"><span class="pre">--compat</span></code> Flag<a class="headerlink" href="#docker-like-compat-flag" title="Permalink to this heading"></a></h2>
 <p>If Docker-like behavior is important, Apptainer can be started with
 the <code class="docutils literal notranslate"><span class="pre">--compat</span></code> flag. This flag is a convenient short-hand alternative
 to using all of:</p>
@@ -916,6 +947,7 @@ to using all of:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">--no-init</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--no-umask</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-eval</span></code></p></li>
 </ul>
 <p>A container run with <code class="docutils literal notranslate"><span class="pre">--compat</span></code> has:</p>
 <ul class="simple">
@@ -927,10 +959,12 @@ host into the container.</p></li>
 which will be discarded at container exit.</p></li>
 <li><p>A minimal <code class="docutils literal notranslate"><span class="pre">/dev</span></code> tree, that does not expose host devices inside the
 container (except GPUs when used with <code class="docutils literal notranslate"><span class="pre">--nv</span></code> or <code class="docutils literal notranslate"><span class="pre">--rocm</span></code>).</p></li>
-<li><p>An clean environment, not including environment variables set on the
+<li><p>A clean environment, not including environment variables set on the
 host.</p></li>
 <li><p>Its own PID and IPC namespaces.</p></li>
 <li><p>No shim init process.</p></li>
+<li><p>Argument and environment variable handling matching Docker / OCI runtimes,
+with respect to evaluation and escaping.</p></li>
 </ul>
 <p>These options will allow most, but not all, Docker / OCI containers to
 execute correctly under Apptainer. The user namespace and network
@@ -995,11 +1029,36 @@ container. Instead, use <code class="docutils literal notranslate"><span class="
 inside a container.</p>
 <section id="argument-handling">
 <h3>Argument Handling<a class="headerlink" href="#argument-handling" title="Permalink to this heading"></a></h3>
-<p>Because Apptainer runscripts are evaluated shell scripts
-arguments can behave slightly differently than in Docker/OCI
-runtimes, if they contain shell code that may be evaluated. To
-replicate Docker/OCI behavior you may need additional escaping or
-quoting of arguments.</p>
+<p>Because Apptainer runscripts are evaluated shell scripts, arguments can
+behave slightly differently than in Docker/OCI runtimes if they contain shell
+code that may be evaluated.</p>
+<p>If you are using a container that was directly built or run from a Docker/OCI
+source, with Apptainer 1.1.0 or later, the <code class="docutils literal notranslate"><span class="pre">--no-eval</span></code> flag will prevent
+this extra evaluation so that arguments are handled in a compatible manner:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># docker/OCI behavior
+$ docker run -it --rm alpine echo &quot;\$HOSTNAME&quot;
+$HOSTNAME
+
+# Apptainer default
+$ apptainer run docker://alpine echo &quot;\$HOSTNAME&quot;
+p700
+
+# Apptainer with --no-eval
+$ apptainer run --no-eval docker://alpine echo &quot;\$HOSTNAME&quot;
+$HOSTNAME
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">--no-eval</span></code> will not change argument behavior for containers built with
+Apptainer 1.1.0 or earlier, as the handling is implemented in the runscript
+that is built into the container.</p>
+<p>You can check the version of Apptainer used to build  a container with
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">inspect</span> <span class="pre">mycontainer.sif</span></code>.</p>
+</div>
+<p>To avoid evaluation without <code class="docutils literal notranslate"><span class="pre">--no-eval</span></code>, and when using containers built
+earlier than Apptainer 1.1.0, you will need to add an extra level of shell
+escaping to arguments on the command line:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker run -it --rm alpine echo &quot;\$HOSTNAME&quot;
 $HOSTNAME
 
@@ -1011,7 +1070,7 @@ $HOSTNAME
 </pre></div>
 </div>
 <p>If you are running a binary inside a <code class="docutils literal notranslate"><span class="pre">docker://</span></code> container directly,
-using the <code class="docutils literal notranslate"><span class="pre">exec</span></code> command the argument handling mirrors Docker/OCI
+using the <code class="docutils literal notranslate"><span class="pre">exec</span></code> command, the argument handling mirrors Docker/OCI
 runtimes as there is no evaluated runscript.</p>
 </section>
 </section>
