@@ -71,27 +71,28 @@
 <li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Environment and Metadata</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#environment-overview">Environment Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#environment-from-a-base-image">Environment from a base image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#environment-from-a-definition-file">Environment from a definition file</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#build-time-variables-in-post">Build time variables in <code class="docutils literal notranslate"><span class="pre">%post</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-from-a-base-image">Environment From a Base Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-from-a-definition-file">Environment From a Definition File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-time-variables-in-post">Build Time Variables in <code class="docutils literal notranslate"><span class="pre">%post</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#environment-from-the-host">Environment from the host</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#environment-from-the-apptainer-runtime">Environment from the Apptainer runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#overriding-environment-variables">Overriding environment variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#environment-from-the-host">Environment From the Host</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-from-the-apptainer-runtime">Environment From the Apptainer Runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overriding-environment-variables">Overriding Environment Variables</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#env-option"><code class="docutils literal notranslate"><span class="pre">--env</span></code> option</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#env-file-option"><code class="docutils literal notranslate"><span class="pre">--env-file</span></code> option</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#apptainerenv-prefix"><code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> prefix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#manipulating-path">Manipulating <code class="docutils literal notranslate"><span class="pre">PATH</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#escaping-and-evaluation-of-environment-variables">Escaping and evaluation of environment variables</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#using-host-variables">Using host variables</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#using-container-variables">Using Container Variables</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#quoting-avoiding-evaluation">Quoting / Avoiding Evaluation</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#environment-variable-precedence">Environment Variable Precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#escaping-and-evaluation-of-environment-variables">Escaping and Evaluation of Environment Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#docker-oci-compatibility">Docker / OCI Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-host-variables">Using Host Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-container-variables">Using Container Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quoting-avoiding-evaluation">Quoting / Avoiding Evaluation</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-variable-precedence">Environment Variable Precedence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#umask-default-file-permissions">Umask / Default File Permissions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#container-metadata">Container Metadata</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#inherited-labels">Inherited Labels</a></li>
@@ -208,7 +209,7 @@ container, rather than when running a container, see <a class="reference interna
 environment section</span></a>.</p>
 </section>
 <section id="environment-from-a-base-image">
-<h2>Environment from a base image<a class="headerlink" href="#environment-from-a-base-image" title="Permalink to this heading"></a></h2>
+<h2>Environment From a Base Image<a class="headerlink" href="#environment-from-a-base-image" title="Permalink to this heading"></a></h2>
 <p>When you build a container with Apptainer you might <em>bootstrap</em> from
 a library or Docker image, or using Linux distribution bootstrap tools
 such as <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code>, <code class="docutils literal notranslate"><span class="pre">yum</span></code> etc.</p>
@@ -231,7 +232,7 @@ PYTHON_VERSION=3.7.7
 not be overridden by host environment variables of the same name.</p>
 </section>
 <section id="environment-from-a-definition-file">
-<h2>Environment from a definition file<a class="headerlink" href="#environment-from-a-definition-file" title="Permalink to this heading"></a></h2>
+<h2>Environment From a Definition File<a class="headerlink" href="#environment-from-a-definition-file" title="Permalink to this heading"></a></h2>
 <p>Environment variables can be included in your container by adding them
 to your definition file. Use <code class="docutils literal notranslate"><span class="pre">export</span></code> in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section
 of a definition file to set a container environment variable:</p>
@@ -262,7 +263,7 @@ initialization tasks because this would impact users running the
 image and the execution could abort due to timeout.</p>
 </div>
 <section id="build-time-variables-in-post">
-<h3>Build time variables in <code class="docutils literal notranslate"><span class="pre">%post</span></code><a class="headerlink" href="#build-time-variables-in-post" title="Permalink to this heading"></a></h3>
+<h3>Build Time Variables in <code class="docutils literal notranslate"><span class="pre">%post</span></code><a class="headerlink" href="#build-time-variables-in-post" title="Permalink to this heading"></a></h3>
 <p>In some circumstances the value that needs to be assigned to an
 environment variable may only be known after e.g. software
 installation, in <code class="docutils literal notranslate"><span class="pre">%post</span></code>. For situations like this, the
@@ -276,7 +277,7 @@ runtime.</p>
 </section>
 </section>
 <section id="environment-from-the-host">
-<h2>Environment from the host<a class="headerlink" href="#environment-from-the-host" title="Permalink to this heading"></a></h2>
+<h2>Environment From the Host<a class="headerlink" href="#environment-from-the-host" title="Permalink to this heading"></a></h2>
 <p>If you have environment variables set outside of your container, on the
 host, then by default they will be available inside the container.
 Except that:</p>
@@ -340,7 +341,7 @@ consider using <code class="docutils literal notranslate"><span class="pre">--cl
 </div>
 </section>
 <section id="environment-from-the-apptainer-runtime">
-<h2>Environment from the Apptainer runtime<a class="headerlink" href="#environment-from-the-apptainer-runtime" title="Permalink to this heading"></a></h2>
+<h2>Environment From the Apptainer Runtime<a class="headerlink" href="#environment-from-the-apptainer-runtime" title="Permalink to this heading"></a></h2>
 <p>It can be useful for a program to know when it is running in a
 Apptainer container, and some basic information about the container
 environment. Apptainer will automatically set a number of
@@ -367,7 +368,7 @@ variable support <a class="reference internal" href="singularity_compatibility.h
 </div>
 </section>
 <section id="overriding-environment-variables">
-<h2>Overriding environment variables<a class="headerlink" href="#overriding-environment-variables" title="Permalink to this heading"></a></h2>
+<h2>Overriding Environment Variables<a class="headerlink" href="#overriding-environment-variables" title="Permalink to this heading"></a></h2>
 <p>You can override variables that have been set in the container image, or
 define additional variables, in various ways as appropriate for your
 workflow.</p>
@@ -460,22 +461,46 @@ $ apptainer exec env.sif sh -c &#39;echo $PATH&#39;
 <p>Alternatively you could use the <code class="docutils literal notranslate"><span class="pre">--env</span></code> option to set a
 <code class="docutils literal notranslate"><span class="pre">PREPEND_PATH</span></code> variable, e.g. <code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">PREPEND_PATH=/startpath</span></code>.</p>
 </section>
+</section>
 <section id="escaping-and-evaluation-of-environment-variables">
-<h3>Escaping and evaluation of environment variables<a class="headerlink" href="#escaping-and-evaluation-of-environment-variables" title="Permalink to this heading"></a></h3>
-<p>Apptainer uses an embedded shell interpreter to process the
-container startup scripts and environment. When this processing is
-performed, a single step of shell evaluation happens in the container
-context. The shell from which you are running Apptainer may also
-evaluate variables on your command line before passing them to
-Apptainer.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This behavior differs from Docker/OCI handling of environment
-variables / <code class="docutils literal notranslate"><span class="pre">ENV</span></code> directives. You may need additional quoting and
-escaping to replicate behavior. See below.</p>
+<span id="escaping-environment"></span><h2>Escaping and Evaluation of Environment Variables<a class="headerlink" href="#escaping-and-evaluation-of-environment-variables" title="Permalink to this heading"></a></h2>
+<p>Apptainer uses an embedded shell interpreter to process the container
+startup scripts and environment. When this processing is performed, by default a
+single step of shell evaluation happens in the container context. The shell from
+which you are running Apptainer may also evaluate variables on your command
+line before passing them to Apptainer.</p>
+<section id="docker-oci-compatibility">
+<h3>Docker / OCI Compatibility<a class="headerlink" href="#docker-oci-compatibility" title="Permalink to this heading"></a></h3>
+<p>This default behavior of Apptainer differs from Docker/OCI handling of
+environment variables / <code class="docutils literal notranslate"><span class="pre">ENV</span></code> directives. To avoid the extra evaluation of
+variables that Apptainer performs you can:</p>
+<ul class="simple">
+<li><p>Follow the instructions about escaping in the sections below, to add
+additional escape characters and/or quoting.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">--no-eval</span></code> or <code class="docutils literal notranslate"><span class="pre">--compat</span></code> flags.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">--no-eval</span></code> prevents Apptainer from evaluating environment variables on
+container startup, so that they will take the same value as with a Docker/OCI
+runtime:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Set an environment variable that would run `date` if evaluated
+$ export APPTAINER_MYVAR=&#39;$(date)&#39;
+
+# Default behavior
+# MYVAR was evaluated in the container, and is set to the output of `date`
+$ apptainer run ~/ubuntu_latest.sif env | grep MYVAR
+MYVAR=Tue Apr 26 14:37:07 CDT 2022
+
+# --no-eval / --compat behavior
+# MYVAR was not evaluated and is a literal `$(date)`
+$ apptainer run --no-eval ~/ubuntu_latest.sif env | grep MYVAR
+MYVAR=$(date)
+</pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--compat</span></code> flag is a short-hand flag to activate <code class="docutils literal notranslate"><span class="pre">--no-eval</span></code> along with
+other Docker/OCI compatibility flags. See <a class="reference internal" href="docker_and_oci.html#compat-flag"><span class="std std-ref">Docker-like --compat Flag</span></a> for more details.</p>
+</section>
 <section id="using-host-variables">
-<h4>Using host variables<a class="headerlink" href="#using-host-variables" title="Permalink to this heading"></a></h4>
+<h3>Using Host Variables<a class="headerlink" href="#using-host-variables" title="Permalink to this heading"></a></h3>
 <p>To set a container environment variable to the value of a variable on
 the host, use double quotes around the variable, so that it is
 processed by the host shell before the value is passed to
@@ -494,7 +519,7 @@ correctly.</p>
 </div>
 </section>
 <section id="using-container-variables">
-<h4>Using Container Variables<a class="headerlink" href="#using-container-variables" title="Permalink to this heading"></a></h4>
+<h3>Using Container Variables<a class="headerlink" href="#using-container-variables" title="Permalink to this heading"></a></h3>
 <p>To set an environment variable to a value that references another
 variable inside the container, you should escape the <code class="docutils literal notranslate"><span class="pre">$</span></code> sign to
 <code class="docutils literal notranslate"><span class="pre">\$</span></code>. This prevents the host shell from substituting the
@@ -511,7 +536,7 @@ are already set in the container. For example, <code class="docutils literal not
 handling for <code class="docutils literal notranslate"><span class="pre">PATH</span></code> discussed above.</p>
 </section>
 <section id="quoting-avoiding-evaluation">
-<h4>Quoting / Avoiding Evaluation<a class="headerlink" href="#quoting-avoiding-evaluation" title="Permalink to this heading"></a></h4>
+<h3>Quoting / Avoiding Evaluation<a class="headerlink" href="#quoting-avoiding-evaluation" title="Permalink to this heading"></a></h3>
 <p>If you need to pass an environment variable into the container
 verbatim, it must be quoted and escaped appropriately. For example, if
 you need to set a path containing a literal <code class="docutils literal notranslate"><span class="pre">$LIB</span></code> for the
@@ -532,7 +557,7 @@ level of escaping:</p>
 </section>
 </section>
 <section id="environment-variable-precedence">
-<h3>Environment Variable Precedence<a class="headerlink" href="#environment-variable-precedence" title="Permalink to this heading"></a></h3>
+<h2>Environment Variable Precedence<a class="headerlink" href="#environment-variable-precedence" title="Permalink to this heading"></a></h2>
 <p>When a container is run with Apptainer, the container
 environment is constructed in the following order:</p>
 <blockquote>
@@ -576,7 +601,6 @@ filesystem. This will permit further reproducibility and
 compatibility improvements, but will preclude environment
 manipulation via arbitrary scripts.</p>
 </div>
-</section>
 </section>
 <section id="umask-default-file-permissions">
 <span id="sec-umask"></span><h2>Umask / Default File Permissions<a class="headerlink" href="#umask-default-file-permissions" title="Permalink to this heading"></a></h2>
@@ -903,15 +927,14 @@ container to carry out the action commands. (e.g. <code class="docutils literal 
 or <code class="docutils literal notranslate"><span class="pre">shell</span></code>). In later versions of Apptainer, these files may be
 dynamically written at runtime, <em>and should not be modified</em> in the
 container.</p></li>
-<li><p><strong>env</strong>: All <code class="docutils literal notranslate"><span class="pre">*.sh</span></code> files in this directory are sourced in
-alphanumeric order when the container is started. For legacy purposes
-there is a symbolic link called <code class="docutils literal notranslate"><span class="pre">/environment</span></code> that points to
-<code class="docutils literal notranslate"><span class="pre">/.singularity.d/env/90-environment.sh</span></code>. Whenever possible, avoid
-modifying or creating environment files manually to prevent potential
-issues building &amp; running containers with future versions of
-Apptainer. Additional
-facilities such as <code class="docutils literal notranslate"><span class="pre">--env</span></code> and <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> are available to
-allow manipulation of the container environment at runtime.</p></li>
+<li><p><strong>env</strong>: All <code class="docutils literal notranslate"><span class="pre">*.sh</span></code> files in this directory are sourced in alphanumeric
+order when the container is started. For legacy purposes there is a symbolic
+link called <code class="docutils literal notranslate"><span class="pre">/environment</span></code> that points to
+<code class="docutils literal notranslate"><span class="pre">/.singularity.d/env/90-environment.sh</span></code>. Whenever possible, avoid modifying
+or creating environment files manually to prevent potential issues building &amp;
+running containers with future versions of Apptainer. Additional
+facilities such as <code class="docutils literal notranslate"><span class="pre">--env</span></code> and <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> are available to allow
+manipulation of the container environment at runtime.</p></li>
 <li><p><strong>labels.json</strong>: The json file that stores a containers labels
 described above.</p></li>
 <li><p><strong>libs</strong>: At runtime the user may request some host-system libraries
