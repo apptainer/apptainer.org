@@ -263,7 +263,7 @@ the secret private key.</p>
 with the <code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code> command, and then create a PEM file with a few
 specific flags like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Generate a key pair
-$ ssh-keygen -t rsa -b 2048
+$ ssh-keygen -t rsa -b 4096 -m pem
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/vagrant/.ssh/id_rsa): rsa
 Enter passphrase (empty for no passphrase):
