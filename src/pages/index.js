@@ -72,8 +72,9 @@ const IndexPage = () => (
               THE CONTAINER SYSTEM FOR SECURE HIGH PERFORMANCE COMPUTING
             </h3>
             <p className="text-base mb-10 text-gray-700 md:text-lg">
-              Apptainer/Singularity is the most widely used container system for HPC. It is designed to execute applications at bare-metal performance while being secure, portable, and 100% reproducible. Apptainer is an open-source project with a friendly community of developers and users. The user base continues to expand, with Apptainer/Singularity now used across industry and academia in many areas of work.
+              Apptainer/Singularity is the most widely used container system for HPC. It is designed to execute applications at bare-metal performance while being secure, portable, and can be configured to be 100% reproducible*. Apptainer is an open-source project with a friendly community of developers and users. The user base continues to expand, with Apptainer/Singularity now used across industry and academia in many areas of work.
             </p>
+            <p><small>*By using the --containall flag, <a href=http://apptainer.org/user-docs/master/index.html>see the documentation for more details.</a></small></p>
           </div>
 
           <div className="flex items-center sm:justify-center">
