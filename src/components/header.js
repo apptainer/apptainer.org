@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import { SpeakerphoneIcon, XIcon } from "@heroicons/react/outline"
 
-import logo from "../images/logo.png"
+import logo from "../images/logo.svg"
 
 const Header = ({ siteTitle }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
