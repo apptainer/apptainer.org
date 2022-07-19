@@ -526,7 +526,7 @@ source the bash completion file:
 
 .. code::
 
-   $ . /usr/local/etc/bash_completion.d/{command}
+   $ . /usr/local/share/bash-completion/completions/{command}
 
 Add this command to your ``~/.bashrc`` file so that bash completion
 continues to work in new shells. (Adjust the path if you installed
@@ -625,7 +625,7 @@ directories to completely remove {Project}.
        /usr/local/etc/{command} \
        /usr/local/bin/{command} \
        /usr/local/bin/run-singularity \
-       /usr/local/etc/bash_completion.d/{command}
+       /usr/local/share/bash-completion/completions/{command}
 
 If you anticipate needing to remove {Project}, it might be easier to
 install it in a custom directory using the ``--prefix`` option to
