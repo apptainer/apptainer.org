@@ -340,7 +340,7 @@ On Ubuntu or Debian install the following dependencies:
 Install Go
 ----------
 
-{Project} is written primarily in Go, and you will need Go 1.16
+{Project} is written primarily in Go, and you will need Go 1.16.12
 or above installed to compile it from source.
 
 This is one of several ways to `install and configure Go
@@ -389,7 +389,7 @@ the installation.
    $ export VERSION={InstallationVersion} && # adjust this as necessary \
        wget https://github.com/{orgrepo}/releases/download/v${VERSION}/{command}-${VERSION}.tar.gz && \
        tar -xzf {command}-${VERSION}.tar.gz && \
-       cd {command}
+       cd {command}-${VERSION}
 
 Checkout Code from Git
 ----------------------
