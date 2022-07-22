@@ -594,9 +594,9 @@ sylabsio/lolcow     latest              5a15b484bc65        2 hours ago         
 </div>
 <p>This indicates that <code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow:latest</span></code> has been cached locally
 by Docker. You can directly build it into a SIF file using a
-<code class="docutils literal notranslate"><span class="pre">docker-daemon://</span></code> URI specifying the <code class="docutils literal notranslate"><span class="pre">REPOSITORY:TAG</span></code> container
+<code class="docutils literal notranslate"><span class="pre">docker-daemon:</span></code> URI specifying the <code class="docutils literal notranslate"><span class="pre">REPOSITORY:TAG</span></code> container
 name:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build lolcow_from_docker_cache.sif docker-daemon://sylabsio/lolcow:latest
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build lolcow_from_docker_cache.sif docker-daemon:sylabsio/lolcow:latest
 INFO:    Starting build...
 Getting image source signatures
 Copying blob sha256:a2022691bf950a72f9d2d84d557183cb9eee07c065a76485f1695784855c5193
