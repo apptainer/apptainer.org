@@ -11,17 +11,17 @@ system outside of a user namespace, but run programs with a different
 ``uid`` with different privileges inside the namespace.
 
 User namespaces are used with containers to make it possible to set up a
-container without privileged operations, and so that a normal user can
-act as root inside a container to perform administrative tasks, without
-being root on the host outside.
+container without privileged operations, so that a normal user can
+act as root inside a container to perform administrative tasks without
+being root on the host outside. 
 
-{Project} uses user namespaces in 3 situations:
-
--  When the ``setuid`` workflow is disabled or {Project} was
-   installed without root.
--  When a container is run with the ``--userns`` option.
--  When ``--fakeroot`` is used to impersonate a root user when building
-   or running a container.
+User namespaces are required whenever the setuid-root component of
+{Project} is not installed.
+The default installation of {Project} does not include a setuid-root
+component.
+Pros and cons of a setuid-root installation are discussed in the
+`Security section <{userdocs}/security.html#setuid-user-namespaces>`_
+of the user guide.
 
 .. _userns-requirements:
 
@@ -62,72 +62,111 @@ From 7.4, kernel support is included but must be enabled with:
 
 .. _userns-limitations:
 
-****************************
- Unprivileged Installations
-****************************
+******************************
+ Disabling network namespaces
+******************************
 
-As detailed in the :ref:`non-setuid installation <install-nonsetuid>`
-section, {Project} can be compiled or configured with the ``allow
-setuid = no`` option in ``{command}.conf`` to not perform privileged
-operations using the ``starter-setuid`` binary.
+There have been many Linux kernel exploits that have made use of
+unprivileged user namespaces as a point of entry, but almost all of them
+in the last few years have been in combination with network namespaces.
+Therefore even though the {Project} project recommends enabling
+unprivileged user namespaces, it recommends disabling network namespaces
+when possible in order to substantially reduce the risk profile
+and need for urgent updates when vulnerabilities are announced.
 
-When {Project} does not use ``setuid`` all container execution will
-use a user namespace. In this mode of operation, some features are not
-available, and there are impacts to the security/integrity guarantees
-when running SIF container images:
+Network namespaces can be disabled on most Linux-based systems
+like this:
 
--  All containers must be run from sandbox directories. SIF images are
-   extracted to a sandbox directory on the fly, preventing verification
-   at runtime, and potentially allowing external modification of the
-   container at runtime.
+.. code:: bash
 
--  Filesystem image, and SIF-embedded persistent overlays cannot be
-   used.
+   echo "user.max_net_namespaces = 0" \
+        >/etc/sysctl.d/90-max_net_namespaces.conf
+   sysctl -p /etc/sysctl.d/90-max_net_namespaces.conf 
 
--  Encrypted containers cannot be used. {Project} mounts encrypted
-   containers directly through the kernel, so that encrypted content is
-   not extracted to disk. This requires the setuid workflow.
+{Project} does not by default make use of network namespaces, but it
+does have some little-used privileged options beginning with ``--net``
+that do.
+Those options will not work when network namespaces are disabled.
+Unfortunately it is not possible to disable only unprivileged
+network namespaces, so this will affect programs that use them
+even if run as root.
 
--  Fakeroot functionality will rely on external setuid root
-   ``newuidmap`` and ``newgidmap`` binaries which may be provided by the
-   distribution.
+Some other container runtimes such as Docker and Podman do make use
+of network namespaces by default.
+Those two runtimes can still work when network namespaces are disabled
+by adding the ``--net=host`` option.
 
-*****************
- --userns option
-*****************
+Disabling network namespaces also blocks the systemd PrivateNetwork
+feature.
+To find services that use it, look for ``PrivateNetwork=true``
+or ``PrivateNetwork=yes`` in ``/lib/systemd/system/*.service``.
+This can be turned off for each service through a
+``/etc/systemd/system/<service>.d/*.conf`` file, for example for
+``systemd-hostnamed``:
 
-The ``--userns`` option to ``{command} run/exec/shell`` will start a
-container using a user namespace, avoiding the setuid privileged
-workflow for container setup even if {Project} was compiled and
-configured to use setuid by default.
+.. code:: bash
 
-The same limitations apply as in an unprivileged installation.
+   cd /etc/systemd/system
+   mkdir -p systemd-hostnamed.service.d
+   (echo "[Service]"; echo "PrivateNetwork=no") \
+        >systemd-hostnamed.service.d/no-private-network.conf
+
+If the service is enabled (that is, actively used) then restart it
+and check its status:
+
+.. code:: bash
+
+   systemctl status systemd-hostnamed
+   systemctl daemon-reload
+   systemctl restart systemd-hostnamed
+   systemctl status systemd-hostnamed
 
 .. _fakeroot:
 
-******************
- Fakeroot feature
-******************
+********************************
+ "Rootless" Fakeroot feature
+********************************
 
-Fakeroot (or commonly referred as rootless mode) allows an unprivileged
-user to run a container as a **"fake root"** user by leveraging user
-namespaces with `user namespace UID/GID mapping
+The ``--fakeroot`` option available on many {Project} functions allows an 
+unprivileged user to run a container with the appearance of running as
+root.
+{Project} does this in multiple different ways depending on what
+is available on the system. 
+See details in the 
+`Fakeroot feature section <{userdocs}/fakeroot.html>`_
+of the user guide.
+
+The most complete method of emulating running as root, the method used
+for example by Podman and also commonly referred to as "rootless mode",
+requires administrator setup and also requires some assistance from a
+setuid-root program.
+The rest of the documentation on this page describes how to do that
+setup.
+If this setup is done, {Project} will take advantage of it and use
+it, otherwise it will try to use one of its other methods when the
+``--fakeroot`` option is used.
+
+This mode not only maps the root user to the original unprivileged
+user, but it also maps many additional UIDs and GIDs to otherwise 
+unused UIDs and GIDs on the host, via `user namespace UID/GID mapping
 <http://man7.org/linux/man-pages/man7/user_namespaces.7.html>`_.
 
-User namespace UID/GID mapping allows a user to act as a different
-UID/GID in the container than they are on the host. A user can access a
+User namespace UID/GID mapping allows a user to act as different
+UIDs/GIDs in the container than they are on the host. A user can access a
 configured range of UIDs/GIDs in the container, which map back to
-(generally) unprivileged user UIDs/GIDs on the host. This allows a user
+unprivileged user UIDs/GIDs on the host. This allows a user
 to be ``root (uid 0)`` in a container, install packages etc., but have
 no privilege on the host.
 
 Requirements
 ============
 
-In addition to user namespace support, {Project} must manipulate
-``subuid`` and ``subgid`` maps for the user namespace it creates. By
-default this happens transparently in the setuid workflow. With
-unprivileged installations of {Project} or where ``allow setuid =
+In addition to user namespace support, for rootless fakeroot mode {Project}
+must manipulate ``subuid`` and ``subgid`` maps for the user namespace it
+creates.
+When {Project} is installed as setuid-root, it handles doing the
+manipulations itself.
+With non-suid installations of {Project} or where ``allow setuid =
 no`` is set in ``{command}.conf``, {Project} attempts to use
 external setuid binaries ``newuidmap`` and ``newgidmap``, so you need to
 install those binaries on your system.
@@ -135,7 +174,7 @@ install those binaries on your system.
 Basics
 ======
 
-Fakeroot relies on ``/etc/subuid`` and ``/etc/subgid`` files to find
+Rootless fakeroot relies on ``/etc/subuid`` and ``/etc/subgid`` files to find
 configured mappings from real user and group IDs, to a range of
 otherwise vacant IDs for each user on the host system that can be
 remapped in the user namespace. A user must have an entry in these system
@@ -168,7 +207,7 @@ Same for ``/etc/subgid``:
    The glibc nss name service switch mechanism does not currently
    support managing ``subuid`` and ``subgid`` mappings with external
    directory services such as LDAP. You must manage or provision mapping
-   files direct to systems where fakeroot will be used.
+   files direct to systems where rootless fakeroot will be used.
 
 .. warning::
 
@@ -219,7 +258,7 @@ Filesystem considerations
 =========================
 
 Based on the above range, here we can see what happens when the user
-``foo`` create files with ``--fakeroot`` feature:
+``foo`` create files with the rootless ``--fakeroot`` feature:
 
 +--------------------------------+----------------------------------+
 | Create file with container UID | Created host file owned by UID   |
@@ -239,8 +278,9 @@ container shell running with fakeroot.
 Network configuration
 =====================
 
-With fakeroot, users can request a container network named ``fakeroot``,
-other networks are restricted and can only be used by the real host root
+With rootless fakeroot, users can request a container network named
+``fakeroot``.  
+Other networks are restricted and can only be used by the real host root
 user. By default the ``fakeroot`` network is configured to use a network
 veth pair.
 
@@ -270,8 +310,8 @@ automatically ensure that generated subuid/subgid ranges are an
 appropriate size, and do not overlap.
 
 ``config fakeroot`` must be run as the ``root`` user, or via ``sudo
-{command} config fakeroot`` as the ``/etc/subuid`` and ``/etc/subgid``
-files form part of the system configuration, and are security sensitive.
+{command} config fakeroot``, as the ``/etc/subuid`` and ``/etc/subgid``
+files form part of the system configuration and are security sensitive.
 You may ``--add`` or ``--remove`` user subuid/subgid mappings. You can
 also ``--enable`` or ``--disable`` existing mappings.
 
