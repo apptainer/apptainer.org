@@ -56,9 +56,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#rhel-centos-7">RHEL/CentOS 7</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#unprivileged-installations">Unprivileged Installations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#userns-option">–userns option</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#fakeroot-feature">Fakeroot feature</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#disabling-network-namespaces">Disabling network namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rootless-fakeroot-feature">“Rootless” Fakeroot feature</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#basics">Basics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#filesystem-considerations">Filesystem considerations</a></li>
@@ -108,17 +107,16 @@ than are permitted outside. A user may have a <code class="docutils literal notr
 system outside of a user namespace, but run programs with a different
 <code class="docutils literal notranslate"><span class="pre">uid</span></code> with different privileges inside the namespace.</p>
 <p>User namespaces are used with containers to make it possible to set up a
-container without privileged operations, and so that a normal user can
-act as root inside a container to perform administrative tasks, without
+container without privileged operations, so that a normal user can
+act as root inside a container to perform administrative tasks without
 being root on the host outside.</p>
-<p>Apptainer uses user namespaces in 3 situations:</p>
-<ul class="simple">
-<li><p>When the <code class="docutils literal notranslate"><span class="pre">setuid</span></code> workflow is disabled or Apptainer was
-installed without root.</p></li>
-<li><p>When a container is run with the <code class="docutils literal notranslate"><span class="pre">--userns</span></code> option.</p></li>
-<li><p>When <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> is used to impersonate a root user when building
-or running a container.</p></li>
-</ul>
+<p>User namespaces are required whenever the setuid-root component of
+Apptainer is not installed.
+The default installation of Apptainer does not include a setuid-root
+component.
+Pros and cons of a setuid-root installation are discussed in the
+<a class="reference external" href="https://apptainer.org/docs/user/main/security.html#setuid-user-namespaces">Security section</a>
+of the user guide.</p>
 <section id="user-namespace-requirements">
 <span id="userns-requirements"></span><h2>User Namespace Requirements<a class="headerlink" href="#user-namespace-requirements" title="Permalink to this heading"></a></h2>
 <p>To allow unprivileged creation of user namespaces a kernel &gt;=3.8 is
@@ -148,63 +146,98 @@ creation’.</p>
 </div>
 </section>
 </section>
-<section id="unprivileged-installations">
-<span id="userns-limitations"></span><h2>Unprivileged Installations<a class="headerlink" href="#unprivileged-installations" title="Permalink to this heading"></a></h2>
-<p>As detailed in the <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">non-setuid installation</span></a>
-section, Apptainer can be compiled or configured with the <code class="docutils literal notranslate"><span class="pre">allow</span>
-<span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> option in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> to not perform privileged
-operations using the <code class="docutils literal notranslate"><span class="pre">starter-setuid</span></code> binary.</p>
-<p>When Apptainer does not use <code class="docutils literal notranslate"><span class="pre">setuid</span></code> all container execution will
-use a user namespace. In this mode of operation, some features are not
-available, and there are impacts to the security/integrity guarantees
-when running SIF container images:</p>
-<ul class="simple">
-<li><p>All containers must be run from sandbox directories. SIF images are
-extracted to a sandbox directory on the fly, preventing verification
-at runtime, and potentially allowing external modification of the
-container at runtime.</p></li>
-<li><p>Filesystem image, and SIF-embedded persistent overlays cannot be
-used.</p></li>
-<li><p>Encrypted containers cannot be used. Apptainer mounts encrypted
-containers directly through the kernel, so that encrypted content is
-not extracted to disk. This requires the setuid workflow.</p></li>
-<li><p>Fakeroot functionality will rely on external setuid root
-<code class="docutils literal notranslate"><span class="pre">newuidmap</span></code> and <code class="docutils literal notranslate"><span class="pre">newgidmap</span></code> binaries which may be provided by the
-distribution.</p></li>
-</ul>
+<section id="disabling-network-namespaces">
+<span id="userns-limitations"></span><h2>Disabling network namespaces<a class="headerlink" href="#disabling-network-namespaces" title="Permalink to this heading"></a></h2>
+<p>There have been many Linux kernel exploits that have made use of
+unprivileged user namespaces as a point of entry, but almost all of them
+in the last few years have been in combination with network namespaces.
+Therefore even though the Apptainer project recommends enabling
+unprivileged user namespaces, it recommends disabling network namespaces
+when possible in order to substantially reduce the risk profile
+and need for urgent updates when vulnerabilities are announced.</p>
+<p>Network namespaces can be disabled on most Linux-based systems
+like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;user.max_net_namespaces = 0&quot;</span> <span class="se">\</span>
+     &gt;/etc/sysctl.d/90-max_net_namespaces.conf
+sysctl -p /etc/sysctl.d/90-max_net_namespaces.conf
+</pre></div>
+</div>
+<p>Apptainer does not by default make use of network namespaces, but it
+does have some little-used privileged options beginning with <code class="docutils literal notranslate"><span class="pre">--net</span></code>
+that do.
+Those options will not work when network namespaces are disabled.
+Unfortunately it is not possible to disable only unprivileged
+network namespaces, so this will affect programs that use them
+even if run as root.</p>
+<p>Some other container runtimes such as Docker and Podman do make use
+of network namespaces by default.
+Those two runtimes can still work when network namespaces are disabled
+by adding the <code class="docutils literal notranslate"><span class="pre">--net=host</span></code> option.</p>
+<p>Disabling network namespaces also blocks the systemd PrivateNetwork
+feature.
+To find services that use it, look for <code class="docutils literal notranslate"><span class="pre">PrivateNetwork=true</span></code>
+or <code class="docutils literal notranslate"><span class="pre">PrivateNetwork=yes</span></code> in <code class="docutils literal notranslate"><span class="pre">/lib/systemd/system/*.service</span></code>.
+This can be turned off for each service through a
+<code class="docutils literal notranslate"><span class="pre">/etc/systemd/system/&lt;service&gt;.d/*.conf</span></code> file, for example for
+<code class="docutils literal notranslate"><span class="pre">systemd-hostnamed</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /etc/systemd/system
+mkdir -p systemd-hostnamed.service.d
+<span class="o">(</span><span class="nb">echo</span> <span class="s2">&quot;[Service]&quot;</span><span class="p">;</span> <span class="nb">echo</span> <span class="s2">&quot;PrivateNetwork=no&quot;</span><span class="o">)</span> <span class="se">\</span>
+     &gt;systemd-hostnamed.service.d/no-private-network.conf
+</pre></div>
+</div>
+<p>If the service is enabled (that is, actively used) then restart it
+and check its status:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl status systemd-hostnamed
+systemctl daemon-reload
+systemctl restart systemd-hostnamed
+systemctl status systemd-hostnamed
+</pre></div>
+</div>
 </section>
-<section id="userns-option">
-<h2>–userns option<a class="headerlink" href="#userns-option" title="Permalink to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">--userns</span></code> option to <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run/exec/shell</span></code> will start a
-container using a user namespace, avoiding the setuid privileged
-workflow for container setup even if Apptainer was compiled and
-configured to use setuid by default.</p>
-<p>The same limitations apply as in an unprivileged installation.</p>
-</section>
-<section id="fakeroot-feature">
-<span id="fakeroot"></span><h2>Fakeroot feature<a class="headerlink" href="#fakeroot-feature" title="Permalink to this heading"></a></h2>
-<p>Fakeroot (or commonly referred as rootless mode) allows an unprivileged
-user to run a container as a <strong>“fake root”</strong> user by leveraging user
-namespaces with <a class="reference external" href="http://man7.org/linux/man-pages/man7/user_namespaces.7.html">user namespace UID/GID mapping</a>.</p>
-<p>User namespace UID/GID mapping allows a user to act as a different
-UID/GID in the container than they are on the host. A user can access a
+<section id="rootless-fakeroot-feature">
+<span id="fakeroot"></span><h2>“Rootless” Fakeroot feature<a class="headerlink" href="#rootless-fakeroot-feature" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option available on many Apptainer functions allows an
+unprivileged user to run a container with the appearance of running as
+root.
+Apptainer does this in multiple different ways depending on what
+is available on the system.
+See details in the
+<a class="reference external" href="https://apptainer.org/docs/user/main/fakeroot.html">Fakeroot feature section</a>
+of the user guide.</p>
+<p>The most complete method of emulating running as root, the method used
+for example by Podman and also commonly referred to as “rootless mode”,
+requires administrator setup and also requires some assistance from a
+setuid-root program.
+The rest of the documentation on this page describes how to do that
+setup.
+If this setup is done, Apptainer will take advantage of it and use
+it, otherwise it will try to use one of its other methods when the
+<code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option is used.</p>
+<p>This mode not only maps the root user to the original unprivileged
+user, but it also maps many additional UIDs and GIDs to otherwise
+unused UIDs and GIDs on the host, via <a class="reference external" href="http://man7.org/linux/man-pages/man7/user_namespaces.7.html">user namespace UID/GID mapping</a>.</p>
+<p>User namespace UID/GID mapping allows a user to act as different
+UIDs/GIDs in the container than they are on the host. A user can access a
 configured range of UIDs/GIDs in the container, which map back to
-(generally) unprivileged user UIDs/GIDs on the host. This allows a user
+unprivileged user UIDs/GIDs on the host. This allows a user
 to be <code class="docutils literal notranslate"><span class="pre">root</span> <span class="pre">(uid</span> <span class="pre">0)</span></code> in a container, install packages etc., but have
 no privilege on the host.</p>
 <section id="requirements">
 <h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h3>
-<p>In addition to user namespace support, Apptainer must manipulate
-<code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code> maps for the user namespace it creates. By
-default this happens transparently in the setuid workflow. With
-unprivileged installations of Apptainer or where <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span>
+<p>In addition to user namespace support, for rootless fakeroot mode Apptainer
+must manipulate <code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code> maps for the user namespace it
+creates.
+When Apptainer is installed as setuid-root, it handles doing the
+manipulations itself.
+With non-suid installations of Apptainer or where <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span>
 <span class="pre">no</span></code> is set in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>, Apptainer attempts to use
 external setuid binaries <code class="docutils literal notranslate"><span class="pre">newuidmap</span></code> and <code class="docutils literal notranslate"><span class="pre">newgidmap</span></code>, so you need to
 install those binaries on your system.</p>
 </section>
 <section id="basics">
 <h3>Basics<a class="headerlink" href="#basics" title="Permalink to this heading"></a></h3>
-<p>Fakeroot relies on <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> files to find
+<p>Rootless fakeroot relies on <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> files to find
 configured mappings from real user and group IDs, to a range of
 otherwise vacant IDs for each user on the host system that can be
 remapped in the user namespace. A user must have an entry in these system
@@ -230,7 +263,7 @@ users.</p>
 <p>The glibc nss name service switch mechanism does not currently
 support managing <code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code> mappings with external
 directory services such as LDAP. You must manage or provision mapping
-files direct to systems where fakeroot will be used.</p>
+files direct to systems where rootless fakeroot will be used.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -290,7 +323,7 @@ Benchmarks have shown speed-ups up to 20x.”</p>
 <section id="filesystem-considerations">
 <h3>Filesystem considerations<a class="headerlink" href="#filesystem-considerations" title="Permalink to this heading"></a></h3>
 <p>Based on the above range, here we can see what happens when the user
-<code class="docutils literal notranslate"><span class="pre">foo</span></code> create files with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> feature:</p>
+<code class="docutils literal notranslate"><span class="pre">foo</span></code> create files with the rootless <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> feature:</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 48%" />
@@ -320,8 +353,9 @@ container shell running with fakeroot.</p>
 </section>
 <section id="network-configuration">
 <h3>Network configuration<a class="headerlink" href="#network-configuration" title="Permalink to this heading"></a></h3>
-<p>With fakeroot, users can request a container network named <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code>,
-other networks are restricted and can only be used by the real host root
+<p>With rootless fakeroot, users can request a container network named
+<code class="docutils literal notranslate"><span class="pre">fakeroot</span></code>.
+Other networks are restricted and can only be used by the real host root
 user. By default the <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code> network is configured to use a network
 veth pair.</p>
 <div class="admonition warning">
@@ -347,8 +381,8 @@ editing the files manually. The <code class="docutils literal notranslate"><span
 automatically ensure that generated subuid/subgid ranges are an
 appropriate size, and do not overlap.</p>
 <p><code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> must be run as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user, or via <code class="docutils literal notranslate"><span class="pre">sudo</span>
-<span class="pre">apptainer</span> <span class="pre">config</span> <span class="pre">fakeroot</span></code> as the <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>
-files form part of the system configuration, and are security sensitive.
+<span class="pre">apptainer</span> <span class="pre">config</span> <span class="pre">fakeroot</span></code>, as the <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>
+files form part of the system configuration and are security sensitive.
 You may <code class="docutils literal notranslate"><span class="pre">--add</span></code> or <code class="docutils literal notranslate"><span class="pre">--remove</span></code> user subuid/subgid mappings. You can
 also <code class="docutils literal notranslate"><span class="pre">--enable</span></code> or <code class="docutils literal notranslate"><span class="pre">--disable</span></code> existing mappings.</p>
 <div class="admonition note">

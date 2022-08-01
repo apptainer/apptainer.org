@@ -45,8 +45,8 @@ limits to accomplish this.
 
 .. note::
 
-   See also the :ref:`security section <security>` of this guide, for more
-   detail.
+   See also the `Security section <{userdocs}/security.html>`_ of the
+   user guide for more detail.
 
 {Project} uses a number of strategies to provide safety and
 ease-of-use on both single-user and shared systems. Notable security
