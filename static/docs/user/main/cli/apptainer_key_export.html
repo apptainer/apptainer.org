@@ -115,6 +115,7 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance.html">apptainer instance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance_list.html">apptainer instance list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance_start.html">apptainer instance start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_instance_stats.html">apptainer instance stats</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance_stop.html">apptainer instance stop</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key.html">apptainer key</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">apptainer key export</a><ul>
@@ -241,10 +242,11 @@ $ apptainer key export ./public.asc
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="o">--</span><span class="n">armor</span>    <span class="n">ascii</span> <span class="n">armored</span> <span class="nb">format</span>
-<span class="o">-</span><span class="n">g</span><span class="p">,</span> <span class="o">--</span><span class="k">global</span>   <span class="n">manage</span> <span class="k">global</span> <span class="n">public</span> <span class="n">keys</span> <span class="p">(</span><span class="n">import</span><span class="o">/</span><span class="n">pull</span><span class="o">/</span><span class="n">remove</span> <span class="n">are</span> <span class="n">restricted</span> <span class="n">to</span> <span class="n">root</span> <span class="n">user</span> <span class="ow">or</span> <span class="n">unprivileged</span> <span class="n">installation</span> <span class="n">only</span><span class="p">)</span>
-<span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>     <span class="n">help</span> <span class="k">for</span> <span class="n">export</span>
-<span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">secret</span>   <span class="n">export</span> <span class="n">a</span> <span class="n">secret</span> <span class="n">key</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="o">--</span><span class="n">armor</span>            <span class="n">ascii</span> <span class="n">armored</span> <span class="nb">format</span>
+<span class="o">-</span><span class="n">g</span><span class="p">,</span> <span class="o">--</span><span class="k">global</span>           <span class="n">manage</span> <span class="k">global</span> <span class="n">public</span> <span class="n">keys</span> <span class="p">(</span><span class="n">import</span><span class="o">/</span><span class="n">pull</span><span class="o">/</span><span class="n">remove</span> <span class="n">are</span> <span class="n">restricted</span> <span class="n">to</span> <span class="n">root</span> <span class="n">user</span> <span class="ow">or</span> <span class="n">unprivileged</span> <span class="n">installation</span> <span class="n">only</span><span class="p">)</span>
+<span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>             <span class="n">help</span> <span class="k">for</span> <span class="n">export</span>
+<span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="o">--</span><span class="n">keysdir</span> <span class="n">string</span>   <span class="nb">set</span> <span class="n">local</span> <span class="n">keyring</span> <span class="nb">dir</span> <span class="n">path</span><span class="p">,</span> <span class="n">an</span> <span class="n">alternative</span> <span class="n">way</span> <span class="ow">is</span> <span class="n">to</span> <span class="nb">set</span> <span class="n">environment</span> <span class="n">variable</span> <span class="s1">&#39;APPTAINER_KEYSDIR&#39;</span> <span class="p">(</span><span class="n">default</span> <span class="s2">&quot;/home/runner/.apptainer/keys&quot;</span><span class="p">)</span>
+<span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">secret</span>           <span class="n">export</span> <span class="n">a</span> <span class="n">secret</span> <span class="n">key</span>
 </pre></div>
 </div>
 </section>
@@ -253,7 +255,7 @@ $ apptainer key export ./public.asc
 <ul class="simple">
 <li><p><a class="reference internal" href="apptainer_key.html#apptainer-key"><span class="std std-ref">apptainer key</span></a>   - Manage OpenPGP keys</p></li>
 </ul>
-<p><em>Auto generated by spf13/cobra on 1-Aug-2022</em></p>
+<p><em>Auto generated by spf13/cobra on 12-Aug-2022</em></p>
 </section>
 </section>
 
