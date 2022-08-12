@@ -173,11 +173,12 @@ Apptainer will need to have access to some privileged system calls.
 Apptainer achieves this by using a helper binary with the <code class="docutils literal notranslate"><span class="pre">setuid</span></code>
 bit enabled. The <code class="docutils literal notranslate"><span class="pre">allow-setuid</span></code> option lets you enable/disable users
 ability to utilize these binaries within Apptainer. By default, it
-is set to “yes”, but when disabled, various Apptainer features will
-not function. Please see <a class="reference internal" href="user_namespace.html#userns-limitations"><span class="std std-ref">Unprivileged Installations</span></a> for more information about running Apptainer
-without <code class="docutils literal notranslate"><span class="pre">setuid</span></code> enabled.</p>
+is set to “yes”, but that only makes a difference if the suid helper
+binary is installed, which is not the case by default (see the
+<a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installation section</span></a>).</p>
 <p><code class="docutils literal notranslate"><span class="pre">root</span> <span class="pre">default</span> <span class="pre">capabilities</span></code>: Apptainer allows the specification of
-capabilities kept by the root user when running a container by default.
+capabilities kept by the root user when running a container in
+setuid (also known as SUID) mode.
 Options include:</p>
 <ul class="simple">
 <li><p>full: all capabilities are maintained, this gives the same behavior
@@ -197,7 +198,8 @@ in the user guide for more information.</p>
 </section>
 <section id="loop-devices">
 <h3>Loop Devices<a class="headerlink" href="#loop-devices" title="Permalink to this heading"></a></h3>
-<p>Apptainer uses loop devices to facilitate the mounting of container file systems from SIF and other images.</p>
+<p>Apptainer in SUID mode uses loop devices to facilitate the mounting of
+container file systems from SIF and other images.</p>
 <p><code class="docutils literal notranslate"><span class="pre">max</span> <span class="pre">loop</span> <span class="pre">devices</span></code>: This option allows an admin to limit the total
 number of loop devices Apptainer will consume at a given time.</p>
 <p><code class="docutils literal notranslate"><span class="pre">shared</span> <span class="pre">loop</span> <span class="pre">devices</span></code>: This allows containers running the same image
@@ -429,36 +431,13 @@ section of the user guide for more information.</p>
 </section>
 <section id="external-binaries">
 <h3>External Binaries<a class="headerlink" href="#external-binaries" title="Permalink to this heading"></a></h3>
-<p>Apptainer calls a number of external binaries for full
-functionality. The paths for certain critical binaries can be set in
-<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>. At build time, <code class="docutils literal notranslate"><span class="pre">mconfig</span></code> will set initial values
-for these, by searching on the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> environment variable. You can
-override which external binaries are called by changing the value in
-<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">cryptsetup</span> <span class="pre">path</span></code>: Path to the cryptsetup executable, used to work
-with encrypted containers. Must be owned by root for security reasons.</p>
-<p><code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">path</span></code>: Path to the ldconfig executable, used to find GPU
-libraries. Must be owned by root for security reasons.</p>
-<p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span> <span class="pre">path</span></code>: Path to the nvidia-container-cli
-executable, used to find GPU libraries and configure the container when
-running with the <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option.</p>
-<p>For the following additional binaries, if the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> entry
-is left blank, then <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> will be searched at runtime.</p>
-<p><code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">path</span></code>: Path to the go executable, used to compile plugins.</p>
-<p><code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">path</span></code>: Path to the mksquashfs executable, used to create
-SIF and SquashFS containers.</p>
-<p><code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">procs</span></code>: Allows the administrator to specify the number of
-CPUs that mksquashfs may use when building an image. The fewer
-processors the longer it takes. To use all available CPU’s set this to
-0.</p>
-<p><code class="docutils literal notranslate"><span class="pre">mksquashfs</span> <span class="pre">mem</span></code>: Allows the administrator to set the maximum amount
-of memory that mksquashfs nay use when building an image. e.g. 1G for
-1gb or 500M for 500mb. Restricting memory can have a major impact on the
-time it takes mksquashfs to create the image. NOTE: This functionality
-did not exist in squashfs-tools prior to version 4.3. If using an
-earlier version you should not set this.</p>
-<p><code class="docutils literal notranslate"><span class="pre">unsquashfs</span> <span class="pre">path</span></code>: Path to the unsquashfs executable, used to extract
-SIF and SquashFS containers.</p>
+<p>Apptainer calls a number of external binaries for full functionality.
+They are found using the path defined by the <code class="docutils literal notranslate"><span class="pre">binary</span> <span class="pre">path</span></code> option in
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>.
+If that option includes <code class="docutils literal notranslate"><span class="pre">$PATH:</span></code> (as it does by default) then
+that is replaced by the user’s <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> whenever it isn’t some
+very basic system command or a command that can be run as root
+by the SUID flow.</p>
 </section>
 <section id="concurrent-downloads">
 <h3>Concurrent Downloads<a class="headerlink" href="#concurrent-downloads" title="Permalink to this heading"></a></h3>
@@ -795,22 +774,15 @@ targeted at OCI container runtimes.</p>
 <p>Apptainer has an experimental <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option, which
 will call out to <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> for container GPU setup,
 rather than use the <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> approach.</p>
-<p>To use <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> a <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> binary must be
-present on the host. The binary that is run is controlled by the
-<code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> directive in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>. During
-installation of Apptainer, the <code class="docutils literal notranslate"><span class="pre">./mconfig</span></code> step will set the
-correct value in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> if <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> is
-found on the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>. If the value of <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span> <span class="pre">path</span></code> is
-empty, Apptainer will look for the binary on <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> at runtime.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To prevent use of <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> via the <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> flag,
 you may set <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span> <span class="pre">path</span></code> to <code class="docutils literal notranslate"><span class="pre">/bin/false</span></code> in
 <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>.</p>
 </div>
-<p>For security reasons, <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> cannot be used with privileged mode
-in a setuid installation of Apptainer, it can only be used unprivileged. The
-operations performed by <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> are broadly similar to
+<p>For security reasons, <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> cannot be used with privileged
+mode in a SUID installation of Apptainer, it can only be used unprivileged.
+The operations performed by <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> are broadly similar to
 those which Apptainer carries out when setting up a GPU container
 from <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code>.</p>
 </section>
@@ -870,8 +842,8 @@ option in multi-tenant HPC environments where an admin wants to grant
 a user special privileges within a container. For that and similar
 use cases, the <a class="reference internal" href="user_namespace.html#fakeroot"><span class="std std-ref">fakeroot feature</span></a> is a better option.</p>
 </div>
-<p>Apptainer provides full support for admins to grant and revoke Linux
-capabilities on a user or group basis. The <code class="docutils literal notranslate"><span class="pre">capability.json</span></code> file is
+<p>Apptainer in SUID mode provides full support for admins to grant and revoke
+Linux capabilities on a user or group basis. The <code class="docutils literal notranslate"><span class="pre">capability.json</span></code> file is
 maintained by Apptainer in order to manage these capabilities. The
 <code class="docutils literal notranslate"><span class="pre">capability</span></code> command group allows you to <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">drop</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">list</span></code> capabilities for users and groups.</p>
