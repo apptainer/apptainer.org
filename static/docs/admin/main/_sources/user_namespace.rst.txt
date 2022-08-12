@@ -60,8 +60,6 @@ From 7.4, kernel support is included but must be enabled with:
        >/etc/sysctl.d/90-max_net_namespaces.conf'
    sudo sysctl -p /etc/sysctl.d /etc/sysctl.d/90-max_net_namespaces.conf
 
-.. _userns-limitations:
-
 ******************************
  Disabling network namespaces
 ******************************

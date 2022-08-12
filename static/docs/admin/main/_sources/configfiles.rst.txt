@@ -42,13 +42,13 @@ Setuid and Capabilities
 {Project} achieves this by using a helper binary with the ``setuid``
 bit enabled. The ``allow-setuid`` option lets you enable/disable users
 ability to utilize these binaries within {Project}. By default, it
-is set to "yes", but when disabled, various {Project} features will
-not function. Please see :ref:`Unprivileged Installations
-<userns-limitations>` for more information about running {Project}
-without ``setuid`` enabled.
+is set to "yes", but that only makes a difference if the suid helper
+binary is installed, which is not the case by default (see the
+:ref:`Installation section <installation>`).
 
 ``root default capabilities``: {Project} allows the specification of
-capabilities kept by the root user when running a container by default.
+capabilities kept by the root user when running a container in
+setuid (also known as SUID) mode.
 Options include:
 
 -  full: all capabilities are maintained, this gives the same behavior
@@ -69,7 +69,8 @@ Options include:
 Loop Devices
 ============
 
-{Project} uses loop devices to facilitate the mounting of container file systems from SIF and other images.
+{Project} in SUID mode uses loop devices to facilitate the mounting of
+container file systems from SIF and other images.
 
 ``max loop devices``: This option allows an admin to limit the total
 number of loop devices {Project} will consume at a given time.
@@ -346,45 +347,13 @@ section of the user guide for more information.
 External Binaries
 =================
 
-{Project} calls a number of external binaries for full
-functionality. The paths for certain critical binaries can be set in
-``{command}.conf``. At build time, ``mconfig`` will set initial values
-for these, by searching on the ``$PATH`` environment variable. You can
-override which external binaries are called by changing the value in
-``{command}.conf``.
-
-``cryptsetup path``: Path to the cryptsetup executable, used to work
-with encrypted containers. Must be owned by root for security reasons.
-
-``ldconfig path``: Path to the ldconfig executable, used to find GPU
-libraries. Must be owned by root for security reasons.
-
-``nvidia-container-cli path``: Path to the nvidia-container-cli
-executable, used to find GPU libraries and configure the container when
-running with the ``--nvccli`` option.
-
-For the following additional binaries, if the ``{command}.conf`` entry
-is left blank, then ``$PATH`` will be searched at runtime.
-
-``go path``: Path to the go executable, used to compile plugins.
-
-``mksquashfs path``: Path to the mksquashfs executable, used to create
-SIF and SquashFS containers.
-
-``mksquashfs procs``: Allows the administrator to specify the number of
-CPUs that mksquashfs may use when building an image. The fewer
-processors the longer it takes. To use all available CPU's set this to
-0.
-
-``mksquashfs mem``: Allows the administrator to set the maximum amount
-of memory that mksquashfs nay use when building an image. e.g. 1G for
-1gb or 500M for 500mb. Restricting memory can have a major impact on the
-time it takes mksquashfs to create the image. NOTE: This functionality
-did not exist in squashfs-tools prior to version 4.3. If using an
-earlier version you should not set this.
-
-``unsquashfs path``: Path to the unsquashfs executable, used to extract
-SIF and SquashFS containers.
+{Project} calls a number of external binaries for full functionality. 
+They are found using the path defined by the ``binary path`` option in
+``{command}.conf``. 
+If that option includes ``$PATH:`` (as it does by default) then
+that is replaced by the user's ``$PATH`` whenever it isn't some
+very basic system command or a command that can be run as root
+by the SUID flow.
 
 Concurrent Downloads
 ====================
@@ -799,23 +768,15 @@ targeted at OCI container runtimes.
 will call out to ``nvidia-container-cli`` for container GPU setup,
 rather than use the ``nvliblist.conf`` approach.
 
-To use ``--nvccli`` a ``nvidia-container-cli`` binary must be
-present on the host. The binary that is run is controlled by the
-``nvidia-container-cli`` directive in ``{command}.conf``. During
-installation of {Project}, the ``./mconfig`` step will set the
-correct value in ``{command}.conf`` if ``nvidia-container-cli`` is
-found on the ``$PATH``. If the value of ``nvidia-container-cli path`` is
-empty, {Project} will look for the binary on ``$PATH`` at runtime.
-
 .. note::
 
    To prevent use of ``nvidia-container-cli`` via the ``--nvccli`` flag,
    you may set ``nvidia-container-cli path`` to ``/bin/false`` in
    ``{command}.conf``.
 
-For security reasons, ``nvidia-container-cli`` cannot be used with privileged mode
-in a setuid installation of {Project}, it can only be used unprivileged. The
-operations performed by ``nvidia-container-cli`` are broadly similar to
+For security reasons, ``nvidia-container-cli`` cannot be used with privileged
+mode in a SUID installation of {Project}, it can only be used unprivileged.
+The operations performed by ``nvidia-container-cli`` are broadly similar to
 those which {Project} carries out when setting up a GPU container
 from ``nvliblist.conf``.
 
@@ -883,8 +844,8 @@ configured in ``/etc/ld.so.conf`` (libraries).
    a user special privileges within a container. For that and similar
    use cases, the :ref:`fakeroot feature <fakeroot>` is a better option.
 
-{Project} provides full support for admins to grant and revoke Linux
-capabilities on a user or group basis. The ``capability.json`` file is
+{Project} in SUID mode provides full support for admins to grant and revoke
+Linux capabilities on a user or group basis. The ``capability.json`` file is
 maintained by {Project} in order to manage these capabilities. The
 ``capability`` command group allows you to ``add``, ``drop``, and
 ``list`` capabilities for users and groups.

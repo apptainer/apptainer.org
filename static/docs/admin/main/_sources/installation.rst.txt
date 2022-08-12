@@ -14,17 +14,17 @@ instructions on installing earlier versions of {Project} please see
 ***********************
 
 {Project} can be installed on any modern Linux distribution, on
-bare-metal or inside a Virtual Machine. Nested installations inside
-containers are not recommended, and require the outer container to be
-run with full privilege.
+bare-metal or inside a Virtual Machine.
+It can even often be run nested inside another {Project} container
+or inside some other container system.
 
 System Requirements
 ===================
 
-{Project} requires ~140MiB disk space once compiled and installed.
+{Project} requires ~150MiB disk space once compiled and installed.
 
-There are no specific CPU or memory requirements at runtime, though 2GB
-of RAM is recommended when building from source.
+There are no specific CPU or memory requirements at runtime, though 
+at least 2GB of RAM is recommended when building from source.
 
 Full functionality of {Project} requires that the kernel supports:
 
@@ -36,93 +36,28 @@ Full functionality of {Project} requires that the kernel supports:
    recommended) Required to run containers without root or setuid
    privilege.
 
-External Binaries
------------------
-
-{Project} depends on a number of external binaries for full
-functionality. The methods that are used to find
-these binaries have been standardized as below.
-
-Configurable Paths
-^^^^^^^^^^^^^^^^^^
-
-The following binaries are found on ``$PATH`` during build time when
-``./mconfig`` is run, and their location is added to the
-``{command}.conf`` configuration file. At runtime this configured
-location is used. To specify an alternate executable, change the
-relevant path entry in ``{command}.conf``.
-
--  ``cryptsetup`` version 2 with kernel LUKS2 support is required for
-   building or executing encrypted containers.
-
--  ``ldconfig`` is used to resolve library locations / symlinks when
-   using the ``-nv`` or ``--rocm`` GPU support.
-
--  ``nvidia-container-cli`` is used to configure a container for Nvidia
-   GPU / CUDA support when running with the experimental ``--nvccli``
-   option.
-
-For the following additional binaries, if the ``{command}.conf`` entry
-is left blank, then ``$PATH`` will be searched at runtime.
-
--  ``go`` is required to compile plugins, and must be an identical
-   version as that used to build {Project}.
-
--  ``mksquashfs`` from squashfs-tools 4.3+ is used to create the
-   squashfs container filesystem that is embedded into SIF container
-   images. The ``mksquashfs procs`` and ``mksquashfs mem`` directives in
-   ``{command}.conf`` can be used to control its resource usage.
-
--  ``unsquashfs`` from squashfs-tools 4.3+ is used to extract the
-   squashfs container filesystem from a SIF file when necessary.
-
-Searching $PATH
-^^^^^^^^^^^^^^^
-
-The following standard utilities are always found by searching ``$PATH``
-at runtime:
-
--  ``true``
-
--  ``mkfs.ext3`` is used to create overlay images.
-
--  ``cp``
-
--  ``dd``
-
--  ``newuidmap`` and ``newgidmap`` are distribution provided setuid
-   binaries used to configure subuid/gid mappings for ``--fakeroot`` in
-   non-setuid installs.
-
-Bootstrap Utilities
-^^^^^^^^^^^^^^^^^^^
-
-The following utilities are required to bootstrap containerized
-distributions using their native tooling:
-
--  ``mount``, ``umount``, ``pacstrap`` for Arch Linux.
--  ``mount``, ``umount``, ``mknod``, ``debootstrap`` for Debian based
-   distributions.
--  ``dnf`` or ``yum``, ``rpm``, ``curl`` for EL derived RPM based
-   distributions.
--  ``uname``, ``zypper``, ``SUSEConnect`` for SLES derived RPM based
-   distributions.
+Please make sure you are familiar with the discussion on
+`Setuid & User Namespaces <{userdocs}/security.html#setuid-user-namespaces>`_
+in the Security section of the user guide, and the
+:ref:`User Namespace Requirements <userns-requirements>`
+in this guide.
 
 Non-standard ldconfig / Nix & Guix Environments
 -----------------------------------------------
 
 If {Project} is installed under a package manager such as Nix or
-Guix, but on top of a standard Linux distribution (e.g. CentOS or
+Guix, but on top of a standard Linux distribution (e.g. RHEL or
 Debian), it may be unable to correctly find the libraries for ``--nv``
 and ``--rocm`` GPU support. This issue occurs as the package manager
 supplies an alternative ``ldconfig``, which does not identify GPU
 libraries installed from host packages.
 
-To allow {Project} to locate the host (i.e. CentOS / Debian) GPU
-libraries correctly, set ``ldconfig path`` in ``{command}.conf`` to
-point to the host ``ldconfig``. I.E. it should be set to
-``/sbin/ldconfig`` or ``/sbin/ldconfig.real`` rather than a Nix or Guix
-related path.
+To allow {Project} to locate the host (i.e. RHEL / Debian) GPU
+libraries correctly, set ``binary path`` in ``{command}.conf`` to
+point to the directory of the host's ``ldconfig`` before the
+``$PATH:`` which is replaced by the user's PATH.
+I.E., ``/sbin`` should be before any Nix or Guix
+related path or the user's PATH.
 
 Filesystem support / limitations
 --------------------------------
@@ -158,14 +93,22 @@ parallel / network filesystems. In general:
 Overlay support
 ^^^^^^^^^^^^^^^
 
-Various features of {Project}, such as the ``--writable-tmpfs`` and
-``--overlay``, options use the Linux ``overlay`` filesystem driver to
+Some features of {Project}, such as the ``--writable-tmpfs`` and
+``--overlay`` options, try to use the Linux ``overlay`` filesystem driver to
 construct a container root filesystem that combines files from different
-locations. Not all filesystems can be used with the ``overlay`` driver,
+locations.
+Not all filesystems can be used with the ``overlay`` driver,
 so when containers are run from these filesystems some {Project}
 features may not be available.
 
-Overlay support has two aspects:
+If the ``overlay`` kernel driver does not work, but the setuid flow
+is not being used and unprivileged user namespaces are available, then
+{Project} will use the ``fuse-overlayfs`` command if it can be found.
+That works with additional filesystem types than the ``overlay``
+kernel driver does not work with, and also works in cases where
+older kernels do not support using the ``overlay`` driver unprivileged.
+
+Overlay support has two aspects, referenced below:
 
 -  ``lowerdir`` support for a filesystem allows a directory on that
    filesystem to act as the 'base' of a container. A filesystem must
@@ -179,26 +122,28 @@ Overlay support has two aspects:
    onto a container, then the filesystem holding the overlay directory
    must support ``upperdir``.
 
-Note that any overlay limitations mainly apply to sandbox (directory)
-containers only. A SIF container is mounted into the ``--localstatedir``
-location, which should generally be on a local filesystem that supports
-overlay.
+Fakeroot with uid/gid mapping on Network filesystems
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Fakeroot / (sub)uid/gid mapping
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+When {Project} is run using the :ref:`fakeroot <fakeroot>` option and
+mappings are available in ``/etc/subuid`` and ``/etc/subgid`` then uids / gids
+inside the container are mapped to different host uids / gids.
 
-When {Project} is run using the :ref:`fakeroot <fakeroot>` option it
-creates a user namespace for the container, and UIDs / GIDs in that user
-namespace are mapped to different host UID / GIDs.
-
-Most local filesystems (ext4/xfs etc.) support this uid/gid mapping in a
-user namespace.
-
-Most network filesystems (NFS/Lustre/GPFS etc.) *do not* support this
-uid/gid mapping in a user namespace. Because the fileserver is not aware
-of the mappings it will deny many operations, with 'permission denied'
-errors. This is currently a generic problem for rootless container
+Most local filesystems (ext4/xfs etc.) have no problem with this
+uid/gid mapping.
+Most network filesystems (NFS/Lustre/GPFS etc.), however, only
+support a single uid for each user. 
+When additional user ids are attempted to be used the fileserver
+will deny many operations, with 'permission denied' errors. 
+This is currently a generic problem for rootless container
 runtimes.
+
+This is only a problem when sandbox images are stored on the network
+filesystems.
+For that case it is probably better to use one of the other fakeroot
+modes that {Project} supports.
+Alternatively, use SIF images instead of sandbox images because they
+don't have the problem.
 
 {Project} cache / atomic rename
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -249,16 +194,18 @@ not support user-namespace (sub)uid/gid mapping.
 -  Containers run from SIF files located on an NFS filesystem do not
    have restrictions.
 
--  You cannot use ``--overlay mynfsdir/`` to overlay a directory onto a
-   container when the overlay (upperdir) directory is on an NFS
-   filesystem.
+-  In setuid mode, you cannot use ``--overlay mynfsdir/`` to overlay a
+   directory onto a container when the overlay (upperdir) directory is
+   on an NFS filesystem.  
+   In non-setuid mode and fuse-overlayfs it is allowed but will be read-only.
 
--  When using ``--fakeroot`` to build or run a container, your
+-  When using ``--fakeroot`` and ``/etc/subuid` mappings to build or run a
+   container, your
    ``TMPDIR`` / ``{ENVPREFIX}_TMPDIR`` should not be set to an NFS
    location.
 
--  You should not run a sandbox container with ``--fakeroot`` from an
-   NFS location.
+-  You should not run a sandbox container with ``--fakeroot`` and 
+   ``/etc/subuid`` mappings from an NFS location.
 
 Lustre / GPFS
 ^^^^^^^^^^^^^
@@ -267,262 +214,127 @@ Lustre and GPFS do not have sufficient ``upperdir`` or ``lowerdir``
 overlay support for certain {Project} features, and do not support
 user-namespace (sub)uid/gid mapping.
 
--  You cannot use ``-overlay`` or ``--writable-tmpfs`` with a sandbox
-   container that is located on a Lustre or GPFS filesystem. SIF
+-  In setuid mode, you cannot use ``--overlay`` or ``--writable-tmpfs`` with a
+   sandbox container that is located on a Lustre or GPFS filesystem. SIF
    containers on Lustre / GPFS will work correctly with these options.
+   It works with fuse-overlayfs in non-setuid mode.
 
--  You cannot use ``--overlay`` to overlay a directory onto a container,
-   when the overlay (upperdir) directory is on a Lustre or GPFS
+-  In setuid mode, you cannot use ``--overlay`` to overlay a directory onto
+   a container, when the overlay (upperdir) directory is on a Lustre or GPFS
    filesystem.
+   In non-setuid mode and fuse-overlayfs it is allowed but will be read-only.
 
--  When using ``--fakeroot`` to build or run a container, your
+-  When using ``--fakeroot`` and ``/etc/subuid`` mappings to build or run a
+   container, your
    ``TMPDIR/{ENVPREFIX}_TMPDIR`` should not be a Lustre or GPFS
    location.
 
--  You should not run a sandbox container with ``--fakeroot`` from a
+-  You should not run a sandbox container with ``--fakeroot`` and 
+   ``/etc/subuid`` mappings from a
    Lustre or GPFS location.
 
-.. _install-dependencies:
+FUSE-based filesystems
+^^^^^^^^^^^^^^^^^^^^^^
+
+The kernel overlay driver does not allow the upperdir to be a FUSE-based
+filesystem, so in setuid mode that is disallowed.
+It does work in non-setuid mode with fuse-overlayfs.
+
+Install from Pre-built packages
+===============================
+
+Prebuilt packages are available for released versions of {Project} on
+a variety of host operating systems.
+
+Install RPM from EPEL or Fedora
+-------------------------------
+
+Multiple architectures of RPMs are available for Red Hat Enterprise
+Linux and Fedora.
+
+First, on Red Hat Enterprise Linux derived systems enable the EPEL
+repositories like this:
+
+.. code::
+
+   $ sudo yum install -y epel-release
+
+Then to install a non-setuid installation of {Project} do:
+
+.. code::
+
+   $ sudo yum install -y {command}
+
+or for a setuid installation do:
+
+.. code::
+
+   $ sudo yum install -y {command}-suid
+
+Install from GitHub release RPMs
+--------------------------------
+
+Alternatively, x86_64 RPMs are available on GitHub immediately after each
+{Project} release and they can be installed directly from there.  For the
+non-setuid installation:
+
+.. code::
+
+   $ sudo yum install -y https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-{GitHubDownloadVersion}.x86_64.rpm
+
+For the setuid installation do above command first and then this one:
+
+.. code::
+
+   $ sudo yum install -y https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid-{GitHubDownloadVersion}.x86_64.rpm
+
+Install Debian/Ubuntu packages
+------------------------------
+
+Pre-built Debian/Ubuntu packages are only available on GitHub and only
+for the amd64 architecture.
+For the non-setuid installation use these commands:
+
+.. code::
+
+    $ sudo apt-get update
+    $ sudo apt-get install -y wget
+    $ cd /tmp
+    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}_{InstallationVersion}_amd64.deb
+    $ sudo apt-get install -y ./{command}_{InstallationVersion}_amd64.deb
+
+For the setuid installation do above commands first and then these:
+
+.. code::
+
+    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid_{InstallationVersion}_amd64.deb
+    $ sudo dpkg -i ./{command}-suid_{InstallationVersion}_amd64.deb
 
 Install from Source
 ===================
 
-To use the latest version of {Project} from GitHub you will need to
-build and install it from source. This may sound daunting, but the
-process is straightforward, and detailed below.
-
-If you have an earlier version of {Project} installed, you should
-:ref:`remove it <remove-an-old-version>` before executing the
-installation commands. You will also need to install some dependencies
-and install `Go <https://golang.org/>`_.
-
-Install Dependencies
---------------------
-
-On Red Hat Enterprise Linux or CentOS install the following
-dependencies:
-
-.. code:: sh
-
-   $ sudo yum update -y && \
-        sudo yum groupinstall -y 'Development Tools' && \
-        sudo yum install -y \
-        openssl-devel \
-        libuuid-devel \
-        libseccomp-devel \
-        wget \
-        squashfs-tools \
-        cryptsetup
-
-On Ubuntu or Debian install the following dependencies:
-
-.. code:: sh
-
-   $ sudo apt-get update && sudo apt-get install -y \
-       build-essential \
-       uuid-dev \
-       libgpgme-dev \
-       squashfs-tools \
-       libseccomp-dev \
-       wget \
-       pkg-config \
-       git \
-       cryptsetup-bin
-
-.. note::
-
-   You can build {Project} without ``cryptsetup`` available,
-   but will not be able to use encrypted containers without it installed
-   on your system.
-
-.. _install-go:
-
-Install Go
-----------
-
-{Project} is written primarily in Go, and you will need Go 1.16.12
-or above installed to compile it from source.
-
-This is one of several ways to `install and configure Go
-<https://golang.org/doc/install>`_.
-
-.. note::
-
-   If you have previously installed Go from a download, rather than an
-   operating system package, you should remove your ``go`` directory,
-   e.g. ``rm -r /usr/local/go`` before installing a newer version.
-   Extracting a new version of Go over an existing installation can lead
-   to errors when building Go programs, as it may leave old files, which
-   have been removed or replaced in newer versions.
-
-Visit the `Go download page <https://golang.org/dl/>`_ and pick a
-package archive to download. Copy the link address and download with
-wget. Then extract the archive to ``/usr/local`` (or use other
-instructions on go installation page).
-
-.. code::
-
-   $ export VERSION={GoVersion} OS=linux ARCH=amd64 && \
-       wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz && \
-       sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz && \
-       rm go$VERSION.$OS-$ARCH.tar.gz
-
-Then, set up your environment for Go.
-
-.. code::
-
-   $ echo 'export GOPATH=${HOME}/go' >> ~/.bashrc && \
-       echo 'export PATH=/usr/local/go/bin:${PATH}:${GOPATH}/bin' >> ~/.bashrc && \
-       source ~/.bashrc
-
-Download {Project} from a release
--------------------------------------
-
-You can download {Project} from one of the releases. To see a full
-list, visit `the GitHub release page
-<https://github.com/{orgrepo}/releases>`_. After deciding on a
-release to install, you can run the following commands to proceed with
-the installation.
-
-.. code::
-
-   $ export VERSION={InstallationVersion} && # adjust this as necessary \
-       wget https://github.com/{orgrepo}/releases/download/v${VERSION}/{command}-${VERSION}.tar.gz && \
-       tar -xzf {command}-${VERSION}.tar.gz && \
-       cd {command}-${VERSION}
-
-Checkout Code from Git
-----------------------
-
-The following commands will install {Project} from the `GitHub repo
-<https://github.com/{orgrepo}>`_ to ``/usr/local``. This method
-will work for >=v{InstallationVersion}. To install an older tagged
-release see `older versions of the docs <https://apptainer.org/docs/>`_.
-
-When installing from source, you can decide to install from either a
-**tag**, a **release branch**, or from the **main branch**.
-
--  **tag**: GitHub tags form the basis for releases, so installing from
-   a tag is the same as downloading and installing a `specific release
-   <https://github.com/{orgrepo}/releases>`_. Tags are expected
-   to be relatively stable and well-tested.
-
--  **release branch**: A release branch represents the latest version of
-   a minor release with all the newest bug fixes and enhancements (even
-   those that have not yet made it into a point release). For instance,
-   to install v1.0 with the latest bug fixes and enhancements checkout
-   ``release-1.0``. Release branches may be less stable than code in a
-   tagged point release.
-
--  **main branch**: The ``main`` branch contains the latest,
-   bleeding edge version of {Project}. This is the default branch
-   when you clone the source code, so you don't have to check out any
-   new branches to install it. The ``main`` branch changes quickly and
-   may be unstable.
-
-To ensure that the {Project} source code is downloaded to the
-appropriate directory use these commands.
-
-.. code::
-
-   $ git clone https://github.com/{orgrepo}.git && \
-       cd {command} && \
-       git checkout v{InstallationVersion}
-
-Compile {Project}
--------------------
-
-{Project} uses a custom build system called ``makeit``. ``mconfig``
-is called to generate a ``Makefile`` and then ``make`` is used to
-compile and install.
-
-To support the SIF image format, automated networking setup etc., and
-older Linux distributions without user namespace support, {Project}
-must be ``make install``ed as root or with ``sudo``, so it can install
-the ``libexec/{command}/bin/starter-setuid`` binary with root
-ownership and setuid permissions for privileged operations. If you need
-to install as a normal user, or do not want to use setuid functionality
-:ref:`see below <install-nonsetuid>`.
-
-.. code::
-
-   $ ./mconfig && \
-       make -C ./builddir && \
-       sudo make -C ./builddir install
-
-By default {Project} will be installed in the ``/usr/local``
-directory hierarchy. You can specify a custom directory with the
-``--prefix`` option, to ``mconfig`` like so:
-
-.. code::
-
-   $ ./mconfig --prefix=/opt/{command}
-
-This option can be useful if you want to install multiple versions of
-{Project}, install a personal version of {Project} on a shared
-system, or if you want to remove {Project} easily after installing
-it.
-
-For a full list of ``mconfig`` options, run ``mconfig --help``. Here are
-some of the most common options that you may need to use when building
-{Project} from source.
-
--  ``--sysconfdir``: Install read-only config files in sysconfdir. This
-   option is important if you need the ``{command}.conf`` file or
-   other configuration files in a custom location.
-
--  ``--localstatedir``: Set the state directory where containers are
-   mounted. This is a particularly important option for administrators
-   installing {Project} on a shared file system. The
-   ``--localstatedir`` should be set to a directory that is present on
-   each individual node.
-
--  ``-b``: Build {Project} in a given directory. By default this is
-   ``./builddir``.
-
-.. _install-nonsetuid:
-
-Unprivileged (non-setuid) Installation
---------------------------------------
-
-If you need to install {Project} as a non-root user, or do not wish
-to allow the use of a setuid root binary, you can configure
-{Project} with the ``--without-suid`` option to mconfig:
-
-.. code::
-
-   $ ./mconfig --without-suid --prefix=/home/dave/{command} && \
-       make -C ./builddir && \
-       make -C ./builddir install
-
-If you have already installed {Project} you can disable the setuid
-flow by setting the option ``allow setuid = no`` in
-``etc/{command}/{command}.conf`` within your installation directory.
-
-When {Project} does not use setuid all container execution will use
-a user namespace. This requires support from your operating system
-kernel, and imposes some limitations on functionality. You should review
-the :ref:`requirements <userns-requirements>` and :ref:`limitations
-<userns-limitations>` in the :ref:`user namespace <userns>` section of
-this guide.
+To install from source, follow the instructions in `INSTALL.md
+<https://github.com/{orgrepo}/blob/{repobranch}/INSTALL.md>`_
+on GitHub.
 
 Relocatable Installation
 ------------------------
 
-An unprivileged (non-setuid) {Project} installation is
+An unprivileged (non-setuid) {Project} installation built from source is
 relocatable. As long as the structure inside the installation directory
 (``--prefix``) is maintained, it can be moved to a different location
 and {Project} will continue to run normally.
 
-Relocation of a default setuid installation is not supported, as
+Relocation of a setuid installation is not supported, as
 restricted location / ownership of configuration files is important to
 security.
 
 Source bash completion file
 ---------------------------
 
-To enjoy bash shell completion with {Project} commands and options,
-source the bash completion file:
+If you installed from source, then
+to enjoy bash shell completion with {Project} commands and options,
+source the bash completion file (assuming the default installation prefix):
 
 .. code::
 
@@ -532,107 +344,26 @@ Add this command to your ``~/.bashrc`` file so that bash completion
 continues to work in new shells. (Adjust the path if you installed
 {Project} to a different location.)
 
-.. _install-rpm:
-
-Build and install an RPM
-========================
+Build an RPM
+------------
 
 If you use RHEL, CentOS or SUSE, building and installing {aProject}
 RPM allows your {Project} installation be more easily managed,
-upgraded and removed.  You can build an RPM
-directly from the `release tarball
-<https://github.com/{orgrepo}/releases>`_.
+upgraded and removed.  
 
-.. note::
+The instructions on how to build the RPM from source are in a
+`INSTALL.md section
+<https://github.com/apptainer/apptainer/blob/main/INSTALL.md#building--installing-from-rpm>`_
+on GitHub.
 
-   Be sure to download the correct asset from the `GitHub releases page
-   <https://github.com/{orgrepo}/releases>`_. It should be
-   named ``{command}-<version>.tar.gz``.
+Build a Debian package
+----------------------
 
-After installing the :ref:`dependencies <install-dependencies>` and
-installing :ref:`Go <install-go>` as detailed above, you are ready to
-download the tarball and build and install the RPM.
+Packaging for Debian and Ubuntu can also be built from source.
+The instructions on how to do that are in a separate file `DEBIAN_PACKAGE.md
+<https://github.com/apptainer/apptainer/blob/main/dist/debian/DEBIAN_PACKAGE.md>`_
+on GitHub.
 
-.. code::
-
-   $ export VERSION={InstallationVersion} && # adjust this as necessary \
-       wget https://github.com/{orgrepo}/releases/download/v${VERSION}/{command}-${VERSION}.tar.gz && \
-       rpmbuild -tb {command}-${VERSION}.tar.gz && \
-       sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/{command}-$VERSION-1.el7.x86_64.rpm && \
-       rm -rf ~/rpmbuild {command}-$VERSION*.tar.gz
-
-If you encounter a failed dependency error for golang but installed it
-from source, build with this command:
-
-.. code::
-
-   rpmbuild -tb --nodeps {command}-${VERSION}.tar.gz
-
-Options to ``mconfig`` can be passed using the familiar syntax to
-``rpmbuild``. For example, if you want to force the local state
-directory to ``/mnt`` (instead of the default ``/var``) you can do the
-following:
-
-.. code::
-
-   rpmbuild -tb --define='_localstatedir /mnt' {command}-$VERSION.tar.gz
-
-.. note::
-
-   It is very important to set the local state directory to a directory
-   that physically exists on nodes within a cluster when installing
-   {Project} in an HPC environment with a shared file system.
-
-Build an RPM from Git source
-----------------------------
-
-Alternatively, to build an RPM from a branch of the Git repository you
-can clone the repository, directly ``make`` an rpm, and use it to
-install {Project}:
-
-.. code::
-
-  $ ./mconfig && \
-  make -C builddir rpm && \
-  sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/{command}-{InstallationVersion}.el7.x86_64.rpm # or whatever version you built
-
-To build an rpm with an alternative install prefix set ``RPMPREFIX`` on
-the make step, for example:
-
-.. code::
-
-   $ make -C builddir rpm RPMPREFIX=/usr/local
-
-For finer control of the rpmbuild process you may wish to use ``make
-dist`` to create a tarball that you can then build into an rpm with
-``rpmbuild -tb`` as above.
-
-.. _remove-an-old-version:
-
-Remove an old version
-=====================
-
-In a standard installation of {Project} (when
-building from source), the command ``sudo make install`` lists all the
-files as they are installed. You must remove all of these files and
-directories to completely remove {Project}.
-
-.. code::
-
-   $ sudo rm -rf \
-       /usr/local/libexec/{command} \
-       /usr/local/var/{command} \
-       /usr/local/etc/{command} \
-       /usr/local/bin/{command} \
-       /usr/local/bin/run-singularity \
-       /usr/local/share/bash-completion/completions/{command}
-
-If you anticipate needing to remove {Project}, it might be easier to
-install it in a custom directory using the ``--prefix`` option to
-``mconfig``. In that case {Project} can be uninstalled simply by
-deleting the parent directory. Or it may be useful to install
-{Project} :ref:`using a package manager <install-rpm>` so that it
-can be updated and/or uninstalled with ease in the future.
 
 Testing & Checking the Build Configuration
 ==========================================
@@ -711,7 +442,7 @@ targets from the ``builddir`` directory in the source tree:
    Running the full test suite requires a ``docker`` installation, and
    ``nc`` in order to test docker and instance/networking functionality.
 
-   {Project} must be installed in order to run the full test suite,
+   {Project} must be installed with suid in order to run the full test suite,
    as it must run the CLI with setuid privilege for the ``starter-suid``
    binary.
 
