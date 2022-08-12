@@ -341,13 +341,14 @@ be set in <code class="docutils literal notranslate"><span class="pre">apptainer
 <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> is found on the search <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p></li>
 <li><p>For security reasons, <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> cannot be used with
 privileged mode in a set-uid install of Apptainer.
-Use the traditional binding method with <code class="docutils literal notranslate"><span class="pre">--nv</span></code> only or use
-<code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> with the the <code class="docutils literal notranslate"><span class="pre">--user</span></code> (or <code class="docutils literal notranslate"><span class="pre">-u</span></code>) option to run unprivileged.
-The option also cannot be used with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.
-Since unprivileged mode does not support SIF files, use sandbox mode.
-<code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> also requires writing to the image, and
-since without set-uid there is no overlay available, the <code class="docutils literal notranslate"><span class="pre">--writable</span></code>
-(or <code class="docutils literal notranslate"><span class="pre">-w</span></code>) option is also required.</p></li>
+<code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> also requires writing to the image, so
+either the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> (<code class="docutils literal notranslate"><span class="pre">-w</span></code>) or <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> option
+is also required; if neither is given, <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> is
+implied.
+That also means that the permissions on system directories such as
+<code class="docutils literal notranslate"><span class="pre">/usr/bin</span></code> have to be writable, so either use a sandbox image that
+has that directory writable by the user (for example built with
+the <code class="docutils literal notranslate"><span class="pre">--fix-perms</span></code> option) or use <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p></li>
 <li><p>There are known problems with library discovery for the current
 <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> in recent Debian distributions. See <a class="reference external" href="https://github.com/NVIDIA/nvidia-docker/issues/1399">this
 GitHub issue</a></p></li>
@@ -366,7 +367,7 @@ INFO:    Build complete: tensorflow_latest-gpu
 </pre></div>
 </div>
 <p>Then run the container with <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> GPU support:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run -uw --nv --nvccli tensorflow_latest-gpu
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --nvccli tensorflow_latest-gpu
 
 ________                               _______________
 ___  __/__________________________________  ____/__  /________      __
@@ -417,7 +418,7 @@ devices are bound into the <code class="docutils literal notranslate"><span clas
 <p>For example, to pass only the 2nd and 3rd GPU into a container running
 on a system with 4 GPUs, run the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export NVIDIA_VISIBLE_DEVICES=1,2
-$ apptainer run -uwc --nv --nvccli tensorflow_latest-gpu
+$ apptainer run -uwc --nvccli tensorflow_latest-gpu
 </pre></div>
 </div>
 <p>Note that:</p>
@@ -434,7 +435,7 @@ system.</p></li>
 </ul>
 <p>If you use <code class="docutils literal notranslate"><span class="pre">--contain</span></code> without setting <code class="docutils literal notranslate"><span class="pre">NVIDIA_VISIBLE_DEVICES</span></code>, no
 GPUs will be available in the container, and a warning will be shown:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run -uwc --nv --nvccli tensorflow_latest-gpu
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run -uwc --nvccli tensorflow_latest-gpu
 WARNING: When using nvidia-container-cli with --contain NVIDIA_VISIBLE_DEVICES
 must be set or no GPUs will be available in container.
 </pre></div>
