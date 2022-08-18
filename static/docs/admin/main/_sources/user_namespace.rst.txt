@@ -136,13 +136,14 @@ of the user guide.
 
 The most complete method of emulating running as root, the method used
 for example by Podman and also commonly referred to as "rootless mode",
-requires administrator setup and also requires some assistance from a
-setuid-root program.
+requires administrator setup and also requires some assistance from an
+enhanced-privilege program.
 The rest of the documentation on this page describes how to do that
 setup.
 If this setup is done, {Project} will take advantage of it and use
 it, otherwise it will try to use one of its other methods when the
 ``--fakeroot`` option is used.
+The other methods do not require any special administrator setup.
 
 This mode not only maps the root user to the original unprivileged
 user, but it also maps many additional UIDs and GIDs to otherwise 

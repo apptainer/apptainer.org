@@ -207,13 +207,14 @@ See details in the
 of the user guide.</p>
 <p>The most complete method of emulating running as root, the method used
 for example by Podman and also commonly referred to as “rootless mode”,
-requires administrator setup and also requires some assistance from a
-setuid-root program.
+requires administrator setup and also requires some assistance from an
+enhanced-privilege program.
 The rest of the documentation on this page describes how to do that
 setup.
 If this setup is done, Apptainer will take advantage of it and use
 it, otherwise it will try to use one of its other methods when the
-<code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option is used.</p>
+<code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option is used.
+The other methods do not require any special administrator setup.</p>
 <p>This mode not only maps the root user to the original unprivileged
 user, but it also maps many additional UIDs and GIDs to otherwise
 unused UIDs and GIDs on the host, via <a class="reference external" href="http://man7.org/linux/man-pages/man7/user_namespaces.7.html">user namespace UID/GID mapping</a>.</p>

@@ -51,7 +51,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#apptainer-security">Apptainer Security</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#test-apptainer">Test Apptainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Apptainer</a></li>
@@ -88,8 +88,8 @@
              
   <section id="admin-quick-start">
 <h1>Admin Quick Start<a class="headerlink" href="#admin-quick-start" title="Permalink to this heading"></a></h1>
-<p>This quick start gives an overview of installation of Apptainer from
-source, a description of the architecture of Apptainer, and pointers
+<p>This quick start gives an overview of installation of Apptainer,
+a description of the architecture of Apptainer, and pointers
 to configuration files. More information, including alternate
 installation options and detailed configuration options can be found
 later in this guide.</p>
@@ -105,7 +105,7 @@ other command. All standard input, output, errors, pipes, IPC, and other
 communication pathways used by locally running programs are synchronized
 with the applications running locally within the container.</p>
 <p>Apptainer favors an ‘integration over isolation’ approach to
-containers. By default only the mount namespace is isolated for
+containers. By default only the mount and user namespaces are isolated for
 containers, so that they have their own filesystem view. Access to
 hardware such as GPUs, high speed networks, and shared filesystems is
 easy and does not require special configuration. Default access to
@@ -146,8 +146,8 @@ network, and resource configuration. Head over to the
 <a class="reference internal" href="configfiles.html#apptainer-configfiles"><span class="std std-ref">Configuration files</span></a> section where the
 files and configuration options are discussed.</p>
 </section>
-<section id="test-apptainer">
-<h2>Test Apptainer<a class="headerlink" href="#test-apptainer" title="Permalink to this heading"></a></h2>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
 <p>You can run a quick test of Apptainer using a small alpine container:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine cat /etc/alpine-release
 3.9.2

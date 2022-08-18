@@ -199,7 +199,7 @@ not support user-namespace (sub)uid/gid mapping.
    on an NFS filesystem.  
    In non-setuid mode and fuse-overlayfs it is allowed but will be read-only.
 
--  When using ``--fakeroot`` and ``/etc/subuid` mappings to build or run a
+-  When using ``--fakeroot`` and ``/etc/subuid`` mappings to build or run a
    container, your
    ``TMPDIR`` / ``{ENVPREFIX}_TMPDIR`` should not be set to an NFS
    location.
@@ -414,6 +414,9 @@ at runtime.
    MANDIR=/usr/local/share/man
    {ENVPREFIX}_CONFDIR=/usr/local/etc/{command}
    SESSIONDIR=/usr/local/var/{command}/mnt/session
+   PLUGIN_ROOTDIR=/usr/local/libexec/apptainer/plugin
+   APPTAINER_CONF_FILE=/usr/local/etc/apptainer/apptainer.conf
+   APPTAINER_SUID_INSTALL=0
 
 Note that the ``LOCALSTATEDIR`` and ``SESSIONDIR`` should be on local,
 non-shared storage.

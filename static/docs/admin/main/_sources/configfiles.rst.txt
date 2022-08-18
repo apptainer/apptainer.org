@@ -202,7 +202,8 @@ identical:
 
    bind path = /etc/localtime
 
-Or you can specify different source and destination locations using:
+Or you can specify different source and destination locations using a
+colon:
 
 .. code::
 
@@ -243,9 +244,9 @@ allow containers that are located within the specified path prefix.
    This feature will only apply when {Project} is running in SUID
    mode and the user is non-root. By default this is set to ``NULL``.
 
-``allow container ${type}``: This option allows admins to limit the
+``allow container ${type}``: This set of options allows admins to limit the
 types of image formats that can be leveraged by users with
-{Project}.
+{Project} of the following types:
 
 -  ``allow container sif`` permits / denies execution of unencrypted SIF
    containers.
@@ -275,25 +276,22 @@ as certain configurations may disrupt the host networking environment.
 {Project} allows specific users or groups to be granted the
 ability to run containers with administrator specified CNI
 configurations.
+These features only have an effect when {Project} is running in SUID
+mode and the user is non-root.
 
 ``allow net users``: Allow specified root administered CNI network
 configurations to be used by the specified list of users. By default
 only root may use CNI configuration, except in the case of a fakeroot
-execution where only 40_fakeroot.conflist is used. This feature only
-applies when {Project} is running in SUID mode and the user is
-non-root.
+execution where only 40_fakeroot.conflist is used. 
 
 ``allow net groups``: Allow specified root administered CNI network
 configurations to be used by the specified list of users. By default
 only root may use CNI configuration, except in the case of a fakeroot
-execution where only 40_fakeroot.conflist is used. This feature only
-applies when {Project} is running in SUID mode and the user is
-non-root.
+execution where only 40_fakeroot.conflist is used.
 
 ``allow net networks``: Specify the names of CNI network configurations
 that may be used by users and groups listed in the allow net users /
-allow net groups directives. Thus feature only applies when
-{Project} is running in SUID mode and the user is non-root.
+allow net groups directives.
 
 GPU Options
 ===========
@@ -320,9 +318,14 @@ inside containers using the ``--fusemount`` flag.
 
 ``enable overlay``: This option will allow {Project} to create bind
 mounts at paths that do not exist within the container image. This
-option can be set to ``try``, which will try to use an overlayfs. If it
-fails to create an overlayfs in this case the bind path will be silently
-ignored.
+option can be set to ``try`` (the default), which will try to use an overlayfs.
+If it fails to create an overlayfs in this case the bind path will be
+silently ignored.
+If the option is set to ``yes`` then if overlayfs fails in SUID mode it
+will be a fatal error,
+but if overlayfs fails in non-SUID mode it will use fuse-overlayfs.
+Underlay is more efficient than fuse-overlayfs so setting this option
+to ``yes`` is generally not desirable.
 
 ``enable underlay``: This option will allow {Project} to create bind
 mounts at paths that do not exist within the container image, just like
@@ -738,8 +741,8 @@ restrict the in-container device tree.
 Compatibility between containerized CUDA/ROCm/OpenCL applications and
 host drivers/libraries is dependent on the versions of the GPU compute
 frameworks that were used to build the applications. Compatibility and
-usage information is discussed in the 'GPU Support' section of the `user
-guide <{userdocs}>`__
+usage information is discussed in the `GPU Support <{userdocs}/gpu.html>`_
+section of the user guide.
 
 NVIDIA GPUs / CUDA
 ==================
@@ -767,12 +770,6 @@ targeted at OCI container runtimes.
 {Project} has an experimental ``--nvccli`` option, which
 will call out to ``nvidia-container-cli`` for container GPU setup,
 rather than use the ``nvliblist.conf`` approach.
-
-.. note::
-
-   To prevent use of ``nvidia-container-cli`` via the ``--nvccli`` flag,
-   you may set ``nvidia-container-cli path`` to ``/bin/false`` in
-   ``{command}.conf``.
 
 For security reasons, ``nvidia-container-cli`` cannot be used with privileged
 mode in a SUID installation of {Project}, it can only be used unprivileged.
