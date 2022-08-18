@@ -2,8 +2,8 @@
  Admin Quick Start
 ###################
 
-This quick start gives an overview of installation of {Project} from
-source, a description of the architecture of {Project}, and pointers
+This quick start gives an overview of installation of {Project},
+a description of the architecture of {Project}, and pointers
 to configuration files. More information, including alternate
 installation options and detailed configuration options can be found
 later in this guide.
@@ -26,7 +26,7 @@ communication pathways used by locally running programs are synchronized
 with the applications running locally within the container.
 
 {Project} favors an 'integration over isolation' approach to
-containers. By default only the mount namespace is isolated for
+containers. By default only the mount and user namespaces are isolated for
 containers, so that they have their own filesystem view. Access to
 hardware such as GPUs, high speed networks, and shared filesystems is
 easy and does not require special configuration. Default access to
@@ -81,9 +81,9 @@ network, and resource configuration. Head over to the
 :ref:`Configuration files <{command}_configfiles>` section where the
 files and configuration options are discussed.
 
-********************
- Test {Project}
-********************
+*********
+ Testing
+*********
 
 You can run a quick test of {Project} using a small alpine container:
 

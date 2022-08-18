@@ -39,7 +39,7 @@ further configuration.
 On EL8 and Ubuntu 20.04 it is possible to setup a compatible configuration by
 following the 'Enabling cgroup v2' and 'Enabling CPU, CPUSET, and I/O
 delegation' steps at the `rootless containers website
-<https://rootlesscontaine.rs/getting-started/common/cgroup2/>`_
+<https://rootlesscontaine.rs/getting-started/common/cgroup2/>`_.
 
 See the `Limiting Container Resources section
 <{userdocs}/cgroups.html>`_ of the user guide

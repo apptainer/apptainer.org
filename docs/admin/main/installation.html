@@ -286,9 +286,9 @@ have restrictions.</p></li>
 directory onto a container when the overlay (upperdir) directory is
 on an NFS filesystem.
 In non-setuid mode and fuse-overlayfs it is allowed but will be read-only.</p></li>
-<li><p>When using <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subuid`</span> <span class="pre">mappings</span> <span class="pre">to</span> <span class="pre">build</span> <span class="pre">or</span> <span class="pre">run</span> <span class="pre">a</span>
-<span class="pre">container,</span> <span class="pre">your</span>
-<span class="pre">``TMPDIR</span></code> / <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> should not be set to an NFS
+<li><p>When using <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> mappings to build or run a
+container, your
+<code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> / <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> should not be set to an NFS
 location.</p></li>
 <li><p>You should not run a sandbox container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> and
 <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> mappings from an NFS location.</p></li>
@@ -461,6 +461,9 @@ LOCALEDIR=/usr/local/share/locale
 MANDIR=/usr/local/share/man
 APPTAINER_CONFDIR=/usr/local/etc/apptainer
 SESSIONDIR=/usr/local/var/apptainer/mnt/session
+PLUGIN_ROOTDIR=/usr/local/libexec/apptainer/plugin
+APPTAINER_CONF_FILE=/usr/local/etc/apptainer/apptainer.conf
+APPTAINER_SUID_INSTALL=0
 </pre></div>
 </div>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">LOCALSTATEDIR</span></code> and <code class="docutils literal notranslate"><span class="pre">SESSIONDIR</span></code> should be on local,

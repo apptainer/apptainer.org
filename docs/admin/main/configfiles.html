@@ -310,7 +310,8 @@ identical:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bind</span> <span class="n">path</span> <span class="o">=</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">localtime</span>
 </pre></div>
 </div>
-<p>Or you can specify different source and destination locations using:</p>
+<p>Or you can specify different source and destination locations using a
+colon:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bind</span> <span class="n">path</span> <span class="o">=</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apptainer</span><span class="o">/</span><span class="n">default</span><span class="o">-</span><span class="n">nsswitch</span><span class="o">.</span><span class="n">conf</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nsswitch</span><span class="o">.</span><span class="n">conf</span>
 </pre></div>
 </div>
@@ -344,9 +345,9 @@ allow containers that are located within the specified path prefix.</p>
 <p>This feature will only apply when Apptainer is running in SUID
 mode and the user is non-root. By default this is set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">${type}</span></code>: This option allows admins to limit the
+<p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">${type}</span></code>: This set of options allows admins to limit the
 types of image formats that can be leveraged by users with
-Apptainer.</p>
+Apptainer of the following types:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">sif</span></code> permits / denies execution of unencrypted SIF
 containers.</p></li>
@@ -373,23 +374,20 @@ Unrestricted use of CNI network configurations requires root privilege,
 as certain configurations may disrupt the host networking environment.</p>
 <p>Apptainer allows specific users or groups to be granted the
 ability to run containers with administrator specified CNI
-configurations.</p>
+configurations.
+These features only have an effect when Apptainer is running in SUID
+mode and the user is non-root.</p>
 <p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">net</span> <span class="pre">users</span></code>: Allow specified root administered CNI network
 configurations to be used by the specified list of users. By default
 only root may use CNI configuration, except in the case of a fakeroot
-execution where only 40_fakeroot.conflist is used. This feature only
-applies when Apptainer is running in SUID mode and the user is
-non-root.</p>
+execution where only 40_fakeroot.conflist is used.</p>
 <p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">net</span> <span class="pre">groups</span></code>: Allow specified root administered CNI network
 configurations to be used by the specified list of users. By default
 only root may use CNI configuration, except in the case of a fakeroot
-execution where only 40_fakeroot.conflist is used. This feature only
-applies when Apptainer is running in SUID mode and the user is
-non-root.</p>
+execution where only 40_fakeroot.conflist is used.</p>
 <p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">net</span> <span class="pre">networks</span></code>: Specify the names of CNI network configurations
 that may be used by users and groups listed in the allow net users /
-allow net groups directives. Thus feature only applies when
-Apptainer is running in SUID mode and the user is non-root.</p>
+allow net groups directives.</p>
 </section>
 <section id="gpu-options">
 <h3>GPU Options<a class="headerlink" href="#gpu-options" title="Permalink to this heading"></a></h3>
@@ -410,9 +408,14 @@ option implicitly added.</p>
 inside containers using the <code class="docutils literal notranslate"><span class="pre">--fusemount</span></code> flag.</p>
 <p><code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">overlay</span></code>: This option will allow Apptainer to create bind
 mounts at paths that do not exist within the container image. This
-option can be set to <code class="docutils literal notranslate"><span class="pre">try</span></code>, which will try to use an overlayfs. If it
-fails to create an overlayfs in this case the bind path will be silently
-ignored.</p>
+option can be set to <code class="docutils literal notranslate"><span class="pre">try</span></code> (the default), which will try to use an overlayfs.
+If it fails to create an overlayfs in this case the bind path will be
+silently ignored.
+If the option is set to <code class="docutils literal notranslate"><span class="pre">yes</span></code> then if overlayfs fails in SUID mode it
+will be a fatal error,
+but if overlayfs fails in non-SUID mode it will use fuse-overlayfs.
+Underlay is more efficient than fuse-overlayfs so setting this option
+to <code class="docutils literal notranslate"><span class="pre">yes</span></code> is generally not desirable.</p>
 <p><code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">underlay</span></code>: This option will allow Apptainer to create bind
 mounts at paths that do not exist within the container image, just like
 <code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">overlay</span></code>, but instead using an underlay. This is suitable for
@@ -752,8 +755,8 @@ restrict the in-container device tree.</p>
 <p>Compatibility between containerized CUDA/ROCm/OpenCL applications and
 host drivers/libraries is dependent on the versions of the GPU compute
 frameworks that were used to build the applications. Compatibility and
-usage information is discussed in the ‘GPU Support’ section of the <a class="reference external" href="https://apptainer.org/docs/user/main">user
-guide</a></p>
+usage information is discussed in the <a class="reference external" href="https://apptainer.org/docs/user/main/gpu.html">GPU Support</a>
+section of the user guide.</p>
 <section id="nvidia-gpus-cuda">
 <h3>NVIDIA GPUs / CUDA<a class="headerlink" href="#nvidia-gpus-cuda" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> configuration file is used to specify libraries
@@ -774,12 +777,6 @@ targeted at OCI container runtimes.</p>
 <p>Apptainer has an experimental <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option, which
 will call out to <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> for container GPU setup,
 rather than use the <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> approach.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>To prevent use of <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> via the <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> flag,
-you may set <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span> <span class="pre">path</span></code> to <code class="docutils literal notranslate"><span class="pre">/bin/false</span></code> in
-<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>.</p>
-</div>
 <p>For security reasons, <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> cannot be used with privileged
 mode in a SUID installation of Apptainer, it can only be used unprivileged.
 The operations performed by <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> are broadly similar to
