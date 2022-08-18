@@ -154,7 +154,7 @@ to PDFs.</p>
 container. On Ubuntu, you can simply install NGINX and start the service
 by:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get update &amp;&amp; sudo apt-get install -y nginx
-
+...
 $ sudo service nginx start
 </pre></div>
 </div>
@@ -202,13 +202,11 @@ simple as running the command multiple times with different instance
 names. The instance name uniquely identify instances, so they cannot be
 repeated.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start alpine_latest.sif instance2
-
 $ apptainer instance start alpine_latest.sif instance3
 </pre></div>
 </div>
 <p>And again to confirm that the instances are running as we expected:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance list
-
 INSTANCE NAME    PID      IP              IMAGE
 instance1        22084                    /home/dave/instances/alpine_latest.sif
 instance2        22443                    /home/dave/instances/alpine_latest.sif
@@ -217,14 +215,12 @@ instance3        22493                    /home/dave/instances/alpine_latest.sif
 </div>
 <p>You can also filter the instance list by supplying a pattern:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance list &#39;*2&#39;
-
 INSTANCE NAME    PID      IP              IMAGE
 instance2        22443                    /home/dave/instances/alpine_latest.sif
 </pre></div>
 </div>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run/exec</span></code> commands on instances:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run instance://instance1
-
 $ apptainer exec instance://instance2 cat /etc/os-release
 </pre></div>
 </div>
@@ -234,7 +230,6 @@ execute the given command in the instance.</p>
 <p>If you want to poke around inside of your instance, you can do a normal
 <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">shell</span></code> command, but give it the instance URI:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell instance://instance3
-
 Apptainer&gt;
 </pre></div>
 </div>
@@ -279,8 +274,8 @@ call it nginx.def):</p>
 Apptainer image, and tells it to run NGINX when you start the
 instance. Since we’re running a web server, we’re going to run the
 following commands as root.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build nginx.sif nginx.def
-
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build nginx.sif nginx.def
+...
 $ sudo apptainer instance start --writable-tmpfs nginx.sif web
 </pre></div>
 </div>
@@ -423,7 +418,7 @@ be set, which we can do in the environment section:</p>
 </pre></div>
 </div>
 <p>The container can be built like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build url-to-pdf.sif url-to-pdf.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build url-to-pdf.sif url-to-pdf.def
 </pre></div>
 </div>
 </section>
@@ -489,7 +484,7 @@ choose which to run easily. Each entry point can carry out a
 different task with it’s own environment, metadata etc., without the
 need for a collection of different containers.</p>
 <p>Apptainer implements SCIF, and you can read more about how to use
-it <span class="xref std std-ref">apps</span>.</p>
+it in the <a class="reference internal" href="definition_files.html#apps"><span class="std std-ref">SCIF Apps</span></a> section.</p>
 <p>SCIF is not specific to Apptainer. You can learn more about it at
 the project site: &lt;<a class="reference external" href="https://sci-f.github.io/">https://sci-f.github.io/</a>&gt;`_.</p>
 </div>
@@ -568,7 +563,7 @@ provides at least one argument.</p>
     curl -o <span class="s2">&quot;</span><span class="si">${</span><span class="nv">APPTAINER_APPDATA</span><span class="si">}</span><span class="s2">/output/</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">output</span><span class="p">.pdf</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">URL</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">PORT</span><span class="si">}</span><span class="s2">/api/render?url=</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build url-to-pdf-app.sif url-to-pdf-app.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build url-to-pdf-app.sif url-to-pdf-app.def
 </pre></div>
 </div>
 <p>Now that we have an output directory in the container, we need to expose

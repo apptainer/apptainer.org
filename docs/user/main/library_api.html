@@ -237,8 +237,8 @@ file.</p>
 <h2>Verify/Sign your Container<a class="headerlink" href="#verify-sign-your-container" title="Permalink to this heading"></a></h2>
 <p>Verify containers that you pull from the library, ensuring they are
 bit-for-bit reproductions of the original image.</p>
-<p>Check out <a class="reference internal" href="signNverify.html#signnverify"><span class="std std-ref">this page</span></a> on how to: <span class="xref std std-ref">verify a
-container</span>, <a class="reference internal" href="signNverify.html#sign-your-own-containers"><span class="std std-ref">making PGP key, and
+<p>Check out <a class="reference internal" href="signNverify.html#signnverify"><span class="std std-ref">this page</span></a> on how to: <a class="reference internal" href="signNverify.html#verify-container-from-remote-sources"><span class="std std-ref">verify a
+container</span></a>, <a class="reference internal" href="signNverify.html#sign-your-own-containers"><span class="std std-ref">making PGP key, and
 sign your own containers</span></a>.</p>
 </section>
 <section id="searching-the-library-for-containers">
@@ -338,11 +338,6 @@ current system. To e.g. search for <code class="docutils literal notranslate"><s
 <code class="docutils literal notranslate"><span class="pre">sudo</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --remote ubuntu.sif ubuntu.def
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Make sure you have a <span class="xref std std-ref">access token</span>,
-otherwise the build will fail.</p>
 </div>
 <p>After building, you can test your container like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./ubuntu.sif

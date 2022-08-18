@@ -221,17 +221,20 @@ in which to work on our new feature. Lets call that branch
 <section id="step-3-make-your-changes">
 <h3>Step 3. Make your changes<a class="headerlink" href="#step-3-make-your-changes" title="Permalink to this heading"></a></h3>
 <p>On your new branch, go nuts! Make changes, test them, and when you are
-happy commit the changes to the branch:</p>
+happy commit the changes to the branch.
+The Apptainer requires that all contributed git commits use the <code class="docutils literal notranslate"><span class="pre">-s</span></code> option
+which adds a <code class="docutils literal notranslate"><span class="pre">Signed-off-by</span></code> line to indicate agreement with the
+<a class="reference external" href="https://developercertificate.org">Developer Certificate of Origin</a>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git add file-changed1 file-changed2...
 
-$ git commit -m &quot;what changed?&quot;
+$ git commit -s -m &quot;what changed?&quot;
 </pre></div>
 </div>
 <p>This commit message is important - it should describe exactly the
 changes that you have made. Good commit messages read like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git commit -m &quot;changed function getConfig in functions.go to output csv to fix #2&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git commit -s -m &quot;changed function getConfig in functions.go to output csv to fix #2&quot;
 
-$ git commit -m &quot;updated docs about shell to close #10&quot;
+$ git commit -s -m &quot;updated docs about shell to close #10&quot;
 </pre></div>
 </div>
 <p>The tags <code class="docutils literal notranslate"><span class="pre">close</span> <span class="pre">#10</span></code> and <code class="docutils literal notranslate"><span class="pre">fix</span> <span class="pre">#2</span></code> are referencing issues that are

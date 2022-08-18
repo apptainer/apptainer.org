@@ -336,11 +336,11 @@ OCI containers.</p></li>
 <section id="requirements-limitations">
 <h3>Requirements &amp; Limitations<a class="headerlink" href="#requirements-limitations" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> must be installed on your host. Its path must
-be set in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>. This value will be set at build time if
-<code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> is found on the search <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> must be installed on your host.
+It must be able to be found by the <code class="docutils literal notranslate"><span class="pre">binary</span> <span class="pre">path</span></code> set in
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> which by default includes the user’s PATH.</p></li>
 <li><p>For security reasons, <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> cannot be used with
-privileged mode in a set-uid install of Apptainer.
+privileged mode in a setuid install of Apptainer.
 <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> also requires writing to the image, so
 either the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> (<code class="docutils literal notranslate"><span class="pre">-w</span></code>) or <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> option
 is also required; if neither is given, <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> is

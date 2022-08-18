@@ -440,6 +440,13 @@ to store your credentials for Apptainer.</p></li>
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME</span></code> and
 <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code> environment variables.</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Apptainer can directly push SIF files to ghcr.io as well, using the
+<code class="docutils literal notranslate"><span class="pre">oras://</span></code> protocol.
+The containers share the same namespace, but they have to be pulled
+using the same protocol that they were pushed with.</p>
+</div>
 </section>
 <section id="aws-ecr">
 <h3>AWS ECR<a class="headerlink" href="#aws-ecr" title="Permalink to this heading"></a></h3>
@@ -554,7 +561,7 @@ header. The following two examples are equivalent:</p>
 ensure that the credentials needed to access the image are available to
 Apptainer.</p>
 <p>A build might be run as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user, e.g. via <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, or under
-your own account with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
+your own account.</p>
 <p>If you are running the build as <code class="docutils literal notranslate"><span class="pre">root</span></code>, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, then any
 stored credentials or environment variables must be available to the
 <code class="docutils literal notranslate"><span class="pre">root</span></code> user:</p>
@@ -572,8 +579,8 @@ the credentials under your own account.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">login</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine. This is
 separate from storing the credentials under your own account.</p></li>
 </ul>
-<p>If you are running the build under your account via the <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>
-feature you do not need to specially set credentials for the root user.</p>
+<p>If you are running the build under your account
+you do not need to specially set credentials for the root user.</p>
 </section>
 </section>
 <section id="archives-docker-daemon">
@@ -762,11 +769,11 @@ is written in a way that requires execution under a specific user
 account will generally require modification for use with Apptainer.</p>
 <p>Apptainer’s <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> mode will start a container as a fake
 <code class="docutils literal notranslate"><span class="pre">root</span></code> user, mapped to the user’s real account outside of the
-container. Inside the container it is possible to change to another user
-account, which is mapped to a configured range of sub-uids / gids
+container. When using the fakeroot mode that is based on <cite>/etc/subuid</cite>,
+then inside the container it is possible to change to another user
+account which is mapped to different subuids
 belonging to the original user. It may be possible to execute software
-expecting a fixed user account manually inside a <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> shell,
-if your adminstrator has configured the system for <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
+expecting a fixed user account manually inside such a <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> shell.</p>
 </section>
 <section id="default-mounts-home">
 <h3>Default Mounts / $HOME<a class="headerlink" href="#default-mounts-home" title="Permalink to this heading"></a></h3>
@@ -821,11 +828,11 @@ $ export HOST_VAR=123
 # Set a container environment variable
 $ export &quot;APPTAINERENV_FORCE_VAR=&quot;123&quot;
 
-$ apptainer run library://alpine env | grep VAR
+$ apptainer run docker://alpine env | grep VAR
 FORCE_VAR=123
 HOST_VAR=ABC
 
-$ apptainer run --cleanenv library://alpine env | grep VAR
+$ apptainer run --cleanenv docker://alpine env | grep VAR
 FORCE_VAR=123
 </pre></div>
 </div>
@@ -897,8 +904,7 @@ namespace, for SystemV IPC objects and POSIX message queues.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--net</span> <span class="pre">/</span> <span class="pre">-n</span></code> creates a new network namespace, abstracting the
 container networking from the host.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--userns</span> <span class="pre">/</span> <span class="pre">-u</span></code> runs the container unprivileged, inside a user
-namespace and avoiding setuid setup code. This prevents executing SIF
-images directly. They will be extracted to a directory sandbox.</p></li>
+namespace and avoiding setuid setup code if it is installed.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--uts</span></code> creates a new UTS namespace, which allows a different
 hostname and/or NIS domain for the container.</p></li>
 </ul>

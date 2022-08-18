@@ -157,12 +157,13 @@ capabilities on a user or group basis. For example, let us suppose that
 an admin has decided to grant a user (named <code class="docutils literal notranslate"><span class="pre">pinger</span></code>) capabilities to
 open raw sockets so that they can use <code class="docutils literal notranslate"><span class="pre">ping</span></code> in a container where the
 binary is controlled via capabilities. For information about how to
-manage capabilities as an admin please refer to the <a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#capability.json">capability admin
-docs</a>.</p>
+manage capabilities as an admin please refer to the <a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#capability-json">capability admin
+docs</a>.
+This feature requires a setuid-root installation of Apptainer.</p>
 <p>To take advantage of this granted capability as a user, <code class="docutils literal notranslate"><span class="pre">pinger</span></code> must
 also request the capability when executing a container with the
 <code class="docutils literal notranslate"><span class="pre">--add-caps</span></code> flag like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW oras://ghcr.io/apptainer/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
 PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=52 time=73.1 ms
 
@@ -175,7 +176,7 @@ rtt min/avg/max/mdev = 73.178/73.178/73.178/0.000 ms
 <code class="docutils literal notranslate"><span class="pre">pinger</span></code> to open raw sockets within Apptainer containers, they can
 revoke the appropriate Linux capability and <code class="docutils literal notranslate"><span class="pre">pinger</span></code> will not be able
 to add that capability to their containers anymore:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW oras://ghcr.io/apptainer/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
 WARNING: not authorized to add capability: CAP_NET_RAW
 ping: socket: Operation not permitted
 </pre></div>
@@ -191,7 +192,7 @@ sections of the admin docs for more information.</p>
 <p>Assuming the root user will execute containers with the <code class="docutils literal notranslate"><span class="pre">CAP_NET_RAW</span></code>
 capability by default, executing the same container <code class="docutils literal notranslate"><span class="pre">pinger</span></code> executed
 above works without the need to grant capabilities:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># apptainer exec library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># apptainer exec oras://ghcr.io/apptainer/ubuntu_ping:v1.0 ping -c 1 8.8.8.8</span>
 <span class="n">PING</span> <span class="mf">8.8.8.8</span> <span class="p">(</span><span class="mf">8.8.8.8</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="nb">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="o">.</span>
 <span class="mi">64</span> <span class="nb">bytes</span> <span class="kn">from</span> <span class="mf">8.8.8.8</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">52</span> <span class="n">time</span><span class="o">=</span><span class="mf">59.6</span> <span class="n">ms</span>
 
@@ -201,7 +202,7 @@ above works without the need to grant capabilities:</p>
 </pre></div>
 </div>
 <p>Now we can manually drop the <code class="docutils literal notranslate"><span class="pre">CAP_NET_RAW</span></code> capability like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># apptainer exec --drop-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># apptainer exec --drop-caps CAP_NET_RAW oras://ghcr.io/apptainer/ubuntu_ping:v1.0 ping -c 1 8.8.8.8</span>
 <span class="n">ping</span><span class="p">:</span> <span class="n">socket</span><span class="p">:</span> <span class="n">Operation</span> <span class="ow">not</span> <span class="n">permitted</span>
 </pre></div>
 </div>
@@ -213,7 +214,8 @@ this keyword.</p>
 </section>
 <section id="building-encrypted-containers">
 <h2>Building encrypted containers<a class="headerlink" href="#building-encrypted-containers" title="Permalink to this heading"></a></h2>
-<p>With Apptainer it is possible to build and run encrypted containers.
+<p>With an Apptainer setuid installation it is possible to build and run
+encrypted containers.
 The containers are decrypted at runtime entirely in kernel space, meaning
 that no intermediate decrypted data is ever present on disk. See
 <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
@@ -254,7 +256,7 @@ user by setting the <code class="docutils literal notranslate"><span class="pre"
 change is in effect, the root user can override the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>
 file and enter the container with full capabilities using the
 <code class="docutils literal notranslate"><span class="pre">--keep-privs</span></code> option.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer exec --keep-privs library://centos ping -c 1 8.8.8.8
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer exec --keep-privs docker://centos:7 ping -c 1 8.8.8.8
 PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=128 time=18.8 ms
 
@@ -271,7 +273,7 @@ the container. You may choose to drop specific capabilities when you
 initiate a container as root to enhance security.</p>
 <p>For instance, to drop the ability for the root user to open a raw socket
 inside the container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer exec --drop-caps CAP_NET_RAW library://centos ping -c 1 8.8.8.8
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer exec --drop-caps CAP_NET_RAW docker://centos:7 ping -c 1 8.8.8.8
 ping: socket: Operation not permitted
 </pre></div>
 </div>

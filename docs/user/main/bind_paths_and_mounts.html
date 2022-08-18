@@ -368,17 +368,15 @@ command / driver that mounts a particular type of filesystem can be
 located on the host, or in the container.</p>
 <section id="requirements">
 <h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h3>
-<p>The FUSE command <em>must</em> be based on libfuse3 3.3.0 or greater to work
+<p>The FUSE command invoked with the <code class="docutils literal notranslate"><span class="pre">--fusemount</span></code> option
+<em>must</em> be based on libfuse3 3.3.0 or greater to work
 correctly with Apptainer. Older versions do not support the way in
 which the Apptainer runtime passes a pre-mounted file descriptor
 into the container.</p>
 <p>If you are using an older distribution that provides FUSE commands such
 as <code class="docutils literal notranslate"><span class="pre">sshfs</span></code> based on FUSE 2 then you can install FUSE 3 versions of the
 commands you need inside your container. EL7 distributions can install a
-compatible version of FUSE 3 from the EPEL repository. EL8 distributions
-ship FUSE 3.2.1 as a base package. Unfortunately this is an older version
-which does not fully support the way in which Apptainer prepares FUSE
-mounts.</p>
+compatible version of FUSE 3 from the EPEL repository.</p>
 </section>
 <section id="fuse-mount-definitions">
 <h3>FUSE mount definitions<a class="headerlink" href="#fuse-mount-definitions" title="Permalink to this heading"></a></h3>

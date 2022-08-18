@@ -71,7 +71,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#file-system-image-overlay">File system image overlay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fakeroot-with-overlay">Fakeroot with overlay</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#directory-overlay">Directory overlay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#readonly-overlay">Readonly overlay</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#overlay-embedded-in-sif">Overlay embedded in SIF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#final-note">Final note</a></li>
 </ul>
@@ -143,26 +145,17 @@ create and modify files the overlay will store the changes.</p>
 create a directory, an ext3 file system image, or embed an ext3 file
 system image in SIF to use as a persistent overlay. Then you can specify
 that you want to use the directory or image as an overlay at runtime
-with the <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> option, or <code class="docutils literal notranslate"><span class="pre">--writable</span></code> if you want to use the
-overlay embedded in SIF.</p>
+with the <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> option, or <code class="docutils literal notranslate"><span class="pre">--writable</span></code> if you want to modify
+the overlay embedded in SIF.</p>
 <p>If you want to make changes to the image, but do not want them to
 persist, use the <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> option. This stores all changes in
 an in-memory temporary filesystem which is discarded as soon as the
 container finishes executing.</p>
-<p>You can use persistent overlays with the following commands:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">run</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exec</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">shell</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">instance.start</span></code></p></li>
-</ul>
+<p>You can use persistent overlays with the following commands: <code class="docutils literal notranslate"><span class="pre">run</span></code>,
+<code class="docutils literal notranslate"><span class="pre">exec</span></code>, <code class="docutils literal notranslate"><span class="pre">shell</span></code>, and <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code>.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
-<p>To use a persistent overlay, you must first have a container.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build ubuntu.sif library://ubuntu
-</pre></div>
-</div>
 <section id="file-system-image-overlay">
 <h3>File system image overlay<a class="headerlink" href="#file-system-image-overlay" title="Permalink to this heading"></a></h3>
 <p>Apptainer provides a command <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">overlay</span>
@@ -180,7 +173,9 @@ create an overlay directory tree usable by a regular user.</p>
 </pre></div>
 </div>
 <p>To add a 1 GiB writable overlay partition to an existing SIF image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer overlay create --size 1024 ubuntu.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build ubuntu.sif library://ubuntu
+...
+$ apptainer overlay create --size 1024 ubuntu.sif
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -196,39 +191,101 @@ particularly useful when you need to make a directory writable by your
 user.</p>
 <p>So for example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build /tmp/nginx.sif docker://nginx
+...
 $ apptainer overlay create --size 1024 --create-dir /var/cache/nginx /tmp/nginx.sif
 $ echo &quot;test&quot; | apptainer exec /tmp/nginx.sif sh -c &quot;cat &gt; /var/cache/nginx/test&quot;
 </pre></div>
 </div>
 </section>
+<section id="fakeroot-with-overlay">
+<h3>Fakeroot with overlay<a class="headerlink" href="#fakeroot-with-overlay" title="Permalink to this heading"></a></h3>
+<p>If you want to be able to modify the container with an overlay
+(including with <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code>) you will generally want to run it
+either as root or with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> because usually containers are
+modifiable only by root.</p>
+<p>If that is the way you plan to use the image, then when creating the
+filesystem image with <code class="docutils literal notranslate"><span class="pre">overlay</span> <span class="pre">create</span></code> also give it a <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>
+option.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build ubuntu.sif docker://ubuntu
+...
+$ apptainer overlay create --fakeroot --size 1024 overlay.img
+$ apptainer shell --fakeroot --overlay overlay.img ubuntu.sif
+Apptainer&gt; which vim
+Apptainer&gt; apt-get update &amp;&amp; apt-get install -y vim
+...
+Apptainer&gt; which vim
+/usr/bin/vim
+</pre></div>
+</div>
+<p>An exception is if you are using the 4th <a class="reference internal" href="fakeroot.html#fakeroot"><span class="std std-ref">fakeroot mode</span></a>
+with a setuid installation and no unprivileged user namespaces available.
+In that case the <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option to <code class="docutils literal notranslate"><span class="pre">overlay</span> <span class="pre">create</span></code> makes
+the overlay image unwritable, so leave it out.
+This case also has other restrictions in that it only works when the
+underlying image is a sandbox directory, and yet the overlay itself must
+not be a directory.</p>
+</section>
 <section id="directory-overlay">
 <h3>Directory overlay<a class="headerlink" href="#directory-overlay" title="Permalink to this heading"></a></h3>
-<p>A directory overlay is simpler to use than a filesystem image overlay,
-but a directory of modifications to a base container image cannot be
-transported or shared as easily as a single overlay file.</p>
+<p>A directory overlay is simpler to use than a filesystem image overlay.
+On the other hand, a directory of modifications to a base container image
+cannot be transported or shared as easily as a single overlay file,
+and it generally does not work well on network file servers
+(see the <a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html#nfs">NFS</a> and
+<a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html#lustre-gpfs">Lustre / GPFS</a>
+sections of the admin guide).
+It is supported, however, and this section describes how to use it.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For security reasons, you must be root to use a bare directory as an
-overlay. ext3 file system images can be used as overlays without root
-privileges.</p>
+<p>For security reasons, with setuid mode only root may use a bare
+directory as an overlay.
+If unprivileged user namespaces are also available, however, the
+<code class="docutils literal notranslate"><span class="pre">--userns</span></code> or <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> options should make it work.</p>
 </div>
 <p>Create a directory as usual:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir my_overlay
 </pre></div>
 </div>
 <p>The example below shows the directory overlay in action.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell --overlay my_overlay/ ubuntu.sif
-
-Apptainer ubuntu.sif:~&gt; mkdir /data
-
-Apptainer ubuntu.sif:~&gt; chown user /data
-
-Apptainer ubuntu.sif:~&gt; apt-get update &amp;&amp; apt-get install -y vim
-
-Apptainer ubuntu.sif:~&gt; which vim
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --fakeroot --overlay my_overlay ubuntu.sif
+Apptainer&gt; mkdir /data
+Apptainer&gt; apt-get update &amp;&amp; apt-get install -y vim
+...
+Apptainer&gt; which vim
 /usr/bin/vim
-
-Apptainer ubuntu.sif:~&gt; exit
+</pre></div>
+</div>
+<p>You will find that your changes persist across sessions as though you
+were using a writable container.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --userns --overlay my_overlay ubuntu.sif
+Apptainer&gt; ls -ld /data
+drwxr-xr-x 2 user group 4096 Apr  9 10:21 /data
+Apptainer&gt; which vim
+/usr/bin/vim
+</pre></div>
+</div>
+<p>If you mount your container without the <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> directory, your
+changes will be gone.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell ubuntu.sif
+Apptainer&gt; ls /data
+ls: cannot access &#39;data&#39;: No such file or directory
+Apptainer&gt; which vim
+</pre></div>
+</div>
+</section>
+<section id="readonly-overlay">
+<h3>Readonly overlay<a class="headerlink" href="#readonly-overlay" title="Permalink to this heading"></a></h3>
+<p>After all modifications to an overlay (either ext3 image or directory)
+have been completed,
+it can be mounted read-only by appending a <code class="docutils literal notranslate"><span class="pre">:ro</span></code> to the overlay path
+and no longer needs to use <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
+<p>Continuing the above example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --userns --overlay my_overlay:ro ubuntu.sif
+Apptainer&gt; which vim
+/usr/bin/vim
+Apptainer&gt; touch /usr/bin/myfile
+touch: cannot touch &#39;/usr/bin/more&#39;: Read-only file system
 </pre></div>
 </div>
 </section>
@@ -236,15 +293,14 @@ Apptainer ubuntu.sif:~&gt; exit
 <span id="overlay-sif"></span><h3>Overlay embedded in SIF<a class="headerlink" href="#overlay-embedded-in-sif" title="Permalink to this heading"></a></h3>
 <p>It is possible to embed an overlay image in the SIF file that holds a
 container. This allows the read-only container image and your
-modifications to it to be managed as a single file. In order to do this,
-you must first create a file system image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ dd if=/dev/zero of=overlay.img bs=1M count=500 &amp;&amp; \
-    mkfs.ext3 overlay.img
-</pre></div>
-</div>
-<p>Then, you can add the overlay to the SIF image using the <code class="docutils literal notranslate"><span class="pre">sif</span></code>
-functionality of Apptainer.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sif add --datatype 4 --partfs 2 --parttype 4 --partarch 2 --groupid 1 ubuntu_latest.sif overlay.img
+modifications to it to be managed as a single file.
+An example of doing that directly with the <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">overlay</span> <span class="pre">create</span></code>
+command was shown above,
+but an external image file can also be added to a SIF file with the
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">sif</span> <span class="pre">add</span></code> command like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sif add --datatype 4 --partfs 2 --parttype 4 --partarch 2 --groupid 1 ubuntu.sif overlay.img
+$ apptainer sif list ubuntu.sif | grep -i ext3
+5    |1       |NONE    |29810688-1103552512       |FS (Ext3/Overlay/amd64)
 </pre></div>
 </div>
 <p>Below is the explanation what each parameter means, and how it can
@@ -263,44 +319,26 @@ there’s no more than one group, therefore we can assume it is 1.</p></li>
 </ul>
 <p>All of these options are documented within the CLI help. Access it by
 running <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">sif</span> <span class="pre">add</span> <span class="pre">--help</span></code>.</p>
-<p>After you’ve completed the steps above, you can shell into your
-container with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> option.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell --writable ubuntu_latest.sif
+<p>Unlike the <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> option, an overlay image inside a SIF is by
+default mounted readonly.
+To modify the overlay image, use the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> option (and likely
+also the <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --writable --fakeroot ubuntu.sif
+Apptainer&gt; apt-get update &amp;&amp; apt-get install -y vim
+...
+Apptainer&gt; exit
+$ apptainer exec ubuntu.sif which vim
+/usr/bin/vim
 </pre></div>
 </div>
 </section>
 <section id="final-note">
 <h3>Final note<a class="headerlink" href="#final-note" title="Permalink to this heading"></a></h3>
-<p>You will find that your changes persist across sessions as though you
-were using a writable container.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --overlay my_overlay/ ubuntu.sif
-
-Apptainer ubuntu.sif:~&gt; ls -lasd /data
-4 drwxr-xr-x 2 user root 4096 Apr  9 10:21 /data
-
-Apptainer ubuntu.sif:~&gt; which vim
-/usr/bin/vim
-
-Apptainer ubuntu.sif:~&gt; exit
-</pre></div>
-</div>
-<p>If you mount your container without the <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> directory, your
-changes will be gone.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell ubuntu.sif
-
-Apptainer ubuntu.sif:~&gt; ls /data
-ls: cannot access &#39;data&#39;: No such file or directory
-
-Apptainer ubuntu.sif:~&gt; which vim
-
-Apptainer ubuntu.sif:~&gt; exit
-</pre></div>
-</div>
 <p>To resize an overlay, standard Linux tools which manipulate ext3 images
 can be used. For instance, to resize the 500MB file created above to
 700MB one could use the <code class="docutils literal notranslate"><span class="pre">e2fsck</span></code> and <code class="docutils literal notranslate"><span class="pre">resize2fs</span></code> utilities like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ e2fsck -f my_overlay &amp;&amp; \
-    resize2fs my_overlay 700M
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ e2fsck -f overlay.img &amp;&amp; \
+    resize2fs overlay.img 700M
 </pre></div>
 </div>
 <p>Hints for creating and manipulating ext3 images on your distribution are
