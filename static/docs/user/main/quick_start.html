@@ -145,12 +145,7 @@
   <section id="quick-start">
 <span id="id1"></span><h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h1>
 <p id="sec-quickstart">This guide is intended for running Apptainer on a computer where you
-have root (administrative) privileges, and will install Apptainer
-from source code. Other installation options,
-including installing from a pre-built RPM,
-building an RPM package,
-and installing Apptainer without root privileges are
-discussed in the <a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html">installation section of the admin guide</a>.</p>
+will install Apptainer yourself.</p>
 <p>If you need to request an installation on your shared resource, see the
 <a class="reference internal" href="#installation-request"><span class="std std-ref">requesting an installation section</span></a> for
 information to send to your system administrator.</p>
@@ -158,12 +153,16 @@ information to send to your system administrator.</p>
 <a class="reference external" href="https://apptainer.org/help">https://apptainer.org/help</a></p>
 <section id="quick-installation">
 <span id="id2"></span><h2>Quick Installation<a class="headerlink" href="#quick-installation" title="Permalink to this heading"></a></h2>
-<p>You will need a Linux system to run Apptainer natively. Options for
-using Apptainer on Mac and Windows machines, along with alternate
-Linux installation options are discussed in the <a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html">installation section of
-the admin guide</a>.</p>
+<p>You will need a Linux system to run Apptainer natively and it’s easiest
+to install if you have root access.</p>
 <p>To install from source, follow the instructions in the <a class="reference external" href="https://github.com/apptainer/apptainer/blob/main/INSTALL.md">INSTALL.md</a>
-on github.</p>
+on github.
+Other installation options,
+including installing from a pre-built RPM,
+building an RPM or Debian package,
+installing Apptainer without root privileges,
+and using Apptainer on Mac and Windows machines
+are discussed in the <a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html">installation section of the admin guide</a>.</p>
 </section>
 <section id="overview-of-the-apptainer-interface">
 <h2>Overview of the Apptainer Interface<a class="headerlink" href="#overview-of-the-apptainer-interface" title="Permalink to this heading"></a></h2>
@@ -324,8 +323,8 @@ definition file with Dockerfile, please see: <a class="reference internal" href=
 <p>You can interact with images in several ways, each of which can accept
 image URIs in addition to a local image path.</p>
 <p>For demonstration, we will use a <code class="docutils literal notranslate"><span class="pre">lolcow_latest.sif</span></code> image that can be
-pulled from DockerHub:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://sylabsio/lolcow
+pulled from ghcr.io:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://ghcr.io/apptainer/lolcow
 </pre></div>
 </div>
 <section id="shell">
@@ -353,7 +352,7 @@ are on the host system.</p>
 <p><code class="docutils literal notranslate"><span class="pre">shell</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, <code class="docutils literal notranslate"><span class="pre">oras://</span></code>, <code class="docutils literal notranslate"><span class="pre">library://</span></code>,  and
 <code class="docutils literal notranslate"><span class="pre">shub://</span></code> URIs. This creates an ephemeral container that disappears
 when the shell is exited.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell docker://sylabsio/lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell docker://ghcr.io/apptainer/lolcow
 </pre></div>
 </div>
 </section>
@@ -377,9 +376,9 @@ program within the <code class="docutils literal notranslate"><span class="pre">
 <p><code class="docutils literal notranslate"><span class="pre">exec</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, <code class="docutils literal notranslate"><span class="pre">oras://</span></code>, <code class="docutils literal notranslate"><span class="pre">library://</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">shub://</span></code> URIs. This creates an ephemeral container that executes a
 command and disappears.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://sylabsio/lolcow cowsay &quot;Fresh from the internet!&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://ghcr.io/apptainer/lolcow cowsay &quot;Fresh from the internet&quot;
  _________________________
-&lt; Fresh from the internet! &gt;
+&lt; Fresh from the internet &gt;
  -------------------------
         \   ^__^
          \  (oo)\_______
@@ -421,7 +420,7 @@ ______________________________
 <p><code class="docutils literal notranslate"><span class="pre">run</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, <code class="docutils literal notranslate"><span class="pre">oras://</span></code>, <code class="docutils literal notranslate"><span class="pre">library://</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">shub://</span></code> URIs. This creates an ephemeral container that runs and then
 disappears.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run library://lolcow
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run docker://ghcr.io/apptainer/lolcow
 ______________________________
 &lt; Mon Aug 16 13:12:33 CDT 2021 &gt;
  ------------------------------
@@ -515,7 +514,7 @@ supports the <code class="docutils literal notranslate"><span class="pre">sandbo
 <h3>Sandbox Directories<a class="headerlink" href="#sandbox-directories" title="Permalink to this heading"></a></h3>
 <p>To build into a <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> (container in a directory) use the <code class="docutils literal notranslate"><span class="pre">build</span>
 <span class="pre">--sandbox</span></code> command and option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --sandbox ubuntu/ docker://ubuntu
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --sandbox ubuntu/ docker://ubuntu
 </pre></div>
 </div>
 <p>This command creates a directory called <code class="docutils literal notranslate"><span class="pre">ubuntu/</span></code> with an entire
@@ -526,7 +525,7 @@ directory just as you would with an Apptainer image. If you pass the
 <code class="docutils literal notranslate"><span class="pre">--writable</span></code> option when you use your container you can also write
 files within the sandbox directory (provided you have the permissions to
 do so).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer exec --writable ubuntu touch /foo
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --writable ubuntu touch /foo
 
 $ apptainer exec ubuntu/ ls /foo
 /foo
@@ -561,7 +560,7 @@ sections that perform things like software installation, environment
 setup, and copying files into the container from host system, etc.</p>
 <p>Here is an example of a definition file:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">BootStrap</span>: docker
-<span class="k">From</span>: ubuntu:<span class="m">16.04</span>
+<span class="k">From</span>: ubuntu:<span class="m">20.04</span>
 
 <span class="gh">%post</span>
     apt-get -y update
@@ -580,7 +579,7 @@ setup, and copying files into the container from host system, etc.</p>
 </div>
 <p>To build a container from this definition file (assuming it is a file
 named lolcow.def), you would call build like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build lolcow.sif lolcow.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build lolcow.sif lolcow.def
 </pre></div>
 </div>
 <p>In this example, the header tells Apptainer to use a base Ubuntu

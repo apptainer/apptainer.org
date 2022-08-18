@@ -135,9 +135,9 @@
 <p>OCI is an acronym for the <a class="reference external" href="https://www.opencontainers.org/">Open Containers Initiative</a> - an independent organization whose
 mandate is to develop open standards relating to containerization. To
 date, standardization efforts have focused on container formats and
-runtimes. Apptainer’s compliance with respect to the OCI Image
-Specification is considered in detail <span class="xref std std-ref">elsewhere</span>. It is Apptainer’s compliance with the OCI
-Runtime Specification that is of concern here.</p>
+runtimes.
+It is Apptainer’s compliance with the OCI
+Runtime Specification that is of concern here, not container formats.</p>
 <p>Briefly, compliance with respect to the OCI Runtime Specification is
 addressed in Apptainer through the introduction of the <code class="docutils literal notranslate"><span class="pre">oci</span></code>
 command group.</p>
@@ -849,12 +849,10 @@ process. When invoked via Apptainer, sub-properties such as
 <span class="p">]</span>
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">run</span></code> equates to the <span class="xref std std-ref">familiar runscript</span> for this container. If image
-creation is bootstrapped via a Docker or OCI agent, Apptainer
+<p>where <code class="docutils literal notranslate"><span class="pre">run</span></code> equates to the familiar runscript for this container.
+If image creation is bootstrapped via a Docker or OCI agent, Apptainer
 will make use of <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> or <code class="docutils literal notranslate"><span class="pre">CMD</span></code> (from the OCI image) to
-populate <code class="docutils literal notranslate"><span class="pre">args</span></code>; for additional discussion, please refer to
-<span class="xref std std-ref">Directing Execution</span> in the section
-<a class="reference internal" href="docker_and_oci.html#docker-and-oci"><span class="std std-ref">Support for Docker and OCI</span></a>.</p>
+populate <code class="docutils literal notranslate"><span class="pre">args</span></code>.</p>
 </div></blockquote>
 <p>For a comprehensive discussion of all the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file
 properties, refer to the <a class="reference external" href="https://github.com/opencontainers/runtime-spec/blob/master/config.md">implementation guide</a>.</p>

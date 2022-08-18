@@ -382,7 +382,7 @@ of your cgroups TOML file:</p>
 </pre></div>
 </div>
 <p>Start your container, applying the toml file, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --apply-cgroups path/to/cgroups.toml library://alpine
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --apply-cgroups path/to/cgroups.toml docker://alpine
 </pre></div>
 </div>
 <p>After that, you can verify that the container is only using 500MB of

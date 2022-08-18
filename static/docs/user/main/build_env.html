@@ -157,7 +157,7 @@ sources, and any OCI/docker layers used to create them. The cache is
 created at <code class="docutils literal notranslate"><span class="pre">$HOME/.apptainer/cache</span></code> by default. The location of the
 cache can be changed by setting the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> environment
 variable.</p>
-<p>When you run builds as root, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, images will be cached in
+<p>If you run builds as root, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, images will be cached in
 root’s home at <code class="docutils literal notranslate"><span class="pre">/root</span></code> and not your user’s home. Use the <code class="docutils literal notranslate"><span class="pre">-E</span></code> option
 to sudo to pass through the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> environment
 variable, if you set it.</p>
@@ -320,9 +320,7 @@ use the <code class="docutils literal notranslate"><span class="pre">type</span>
 <p>When building a container, or pulling/running an Apptainer container
 from a Docker/OCI source, a temporary working space is required. The
 container is constructed in this temporary space before being packaged
-into an Apptainer SIF image. Temporary space is also used when
-running containers in unprivileged mode, and performing some operations
-on filesystems that do not fully support <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
+into an Apptainer SIF image.</p>
 <p>The location for temporary directories defaults to <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>.
 Apptainer will also respect the environment variable <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>, and
 both of these locations can be overridden by setting the environment
@@ -349,10 +347,11 @@ some container builds.</p>
 </section>
 <section id="encrypted-containers">
 <h2>Encrypted Containers<a class="headerlink" href="#encrypted-containers" title="Permalink to this heading"></a></h2>
-<p>With Apptainer it is possible to build and run
+<p>With an Apptainer setuid installation it is possible to build and run
 encrypted containers. The containers are decrypted at runtime entirely
 in kernel space, meaning that no intermediate decrypted data is ever
-present on disk or in memory. See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
+present on disk.
+See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
 </section>
 <section id="environment-variables">
 <h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this heading"></a></h2>
@@ -371,15 +370,15 @@ with the <code class="docutils literal notranslate"><span class="pre">--bind</sp
 environment variables at runtime.</p>
 <section id="docker">
 <h4>Docker<a class="headerlink" href="#docker" title="Permalink to this heading"></a></h4>
-<p><strong>APPTAINER_DOCKER_LOGIN</strong> Used for the interactive login for Docker
+<p><strong>APPTAINER_DOCKER_LOGIN</strong> - Used for the interactive login for Docker
 Hub.</p>
-<p><strong>APPTAINER_DOCKER_USERNAME</strong> Your Docker username.</p>
-<p><strong>APPTAINER_DOCKER_PASSWORD</strong> Your Docker password.</p>
-<p><strong>RUNSCRIPT_COMMAND</strong> Is not obtained from the environment, but is a
-hard coded default (“/bin/bash”). This is the fallback command used in
+<p><strong>APPTAINER_DOCKER_USERNAME</strong> - Your Docker username.</p>
+<p><strong>APPTAINER_DOCKER_PASSWORD</strong> - Your Docker password.</p>
+<p><strong>RUNSCRIPT_COMMAND</strong> - Is not obtained from the environment, but is a
+hard coded default (“/bin/bash”. This is the fallback command used in
 the case that the docker image does not have a CMD or ENTRYPOINT.
 <strong>TAG</strong> Is the default tag, <code class="docutils literal notranslate"><span class="pre">latest</span></code>.</p>
-<p><strong>APPTAINER_NOHTTPS</strong> This is relevant if you want to use a registry
+<p><strong>APPTAINER_NOHTTPS</strong> - This is relevant if you want to use a registry
 that doesn’t have https, and it speaks for itself. If you export the
 variable <code class="docutils literal notranslate"><span class="pre">APPTAINER_NOHTTPS</span></code> you can force the software to not use
 https when interacting with a Docker registry. This use case is
@@ -387,17 +386,15 @@ typically for use of a local registry.</p>
 </section>
 <section id="library">
 <h4>Library<a class="headerlink" href="#library" title="Permalink to this heading"></a></h4>
-<p><strong>APPTAINER_LIBRARY</strong> Used to specify the library to pull from.
-Default is set to our Cloud Library.</p>
-<p><strong>APPTAINER_REMOTE</strong> Used to build an image remotely (This does not
-require root). The default is set to false.</p>
+<p><strong>APPTAINER_LIBRARY</strong> - Used to specify the library to pull from.
+Default is the currently selected <a class="reference internal" href="endpoint.html#endpoints"><span class="std std-ref">remote endpoint</span></a>.</p>
 </section>
 <section id="encryption">
 <h4>Encryption<a class="headerlink" href="#encryption" title="Permalink to this heading"></a></h4>
-<p><strong>APPTAINER_ENCRYPTION_PASSPHRASE</strong> Used to pass a plaintext
+<p><strong>APPTAINER_ENCRYPTION_PASSPHRASE</strong> - Used to pass a plaintext
 passphrase to encrypt a container file system (with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code>
 flag). The default is empty.</p>
-<p><strong>APPTAINER_ENCRYPTION_PEM_PATH</strong> Used to specify the location of a
+<p><strong>APPTAINER_ENCRYPTION_PEM_PATH</strong> - Used to specify the location of a
 public key to use for container encryption (with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code>
 flag). The default is empty.</p>
 </section>

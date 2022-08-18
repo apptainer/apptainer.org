@@ -172,9 +172,9 @@ accept <code class="docutils literal notranslate"><span class="pre">/bin/sh</spa
 to be executed at runtime can accept options intended for <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code></p></li>
 </ol>
 <p>For more in-depth and practical examples of def files, see the <a class="reference external" href="https://github.com/apptainer/apptainer/tree/main/examples">Apptainer
-examples repository</a></p>
+examples repository</a>.</p>
 <p>For a comparison between Dockerfile and Apptainer definition file,
-please see: <a class="reference internal" href="docker_and_oci.html#sec-deffile-vs-dockerfile"><span class="std std-ref">this section</span></a>.</p>
+please see <a class="reference internal" href="docker_and_oci.html#sec-deffile-vs-dockerfile"><span class="std std-ref">this section</span></a>.</p>
 </section>
 <section id="header">
 <h2>Header<a class="headerlink" href="#header" title="Permalink to this heading"></a></h2>
@@ -212,7 +212,7 @@ about them and see examples in the <a class="reference internal" href="appendix.
 <ul class="simple">
 <li><p><a class="reference internal" href="appendix.html#build-docker-module"><span class="std std-ref">docker</span></a> (images hosted on Docker Hub)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-oras"><span class="std std-ref">oras</span></a> (images from supporting OCI registries)</p></li>
-<li><p><a class="reference internal" href="appendix.html#build-library-module"><span class="std std-ref">library</span></a> (images hosted on Library API Registries)</p></li>
+<li><p><a class="reference internal" href="appendix.html#build-localimage"><span class="std std-ref">localimage</span></a> (images saved on your machine)</p></li>
 <li><p><a class="reference internal" href="appendix.html#scratch-agent"><span class="std std-ref">scratch</span></a> (a flexible option for building a
 container from scratch)</p></li>
 </ul>
@@ -220,16 +220,14 @@ container from scratch)</p></li>
 <section id="other-bootstrap-agents">
 <h3>Other bootstrap agents<a class="headerlink" href="#other-bootstrap-agents" title="Permalink to this heading"></a></h3>
 <ul class="simple">
+<li><p><a class="reference internal" href="appendix.html#build-library-module"><span class="std std-ref">library</span></a> (images hosted on Library API Registries)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-shub"><span class="std std-ref">shub</span></a> (images hosted on Singularity Hub)</p></li>
-<li><p><a class="reference internal" href="appendix.html#build-localimage"><span class="std std-ref">localimage</span></a> (images saved on your machine)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-yum"><span class="std std-ref">yum</span></a> (yum based systems such as CentOS and
 Scientific Linux)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-debootstrap"><span class="std std-ref">debootstrap</span></a> (apt based systems such as
 Debian and Ubuntu)</p></li>
-<li><p><span class="xref std std-ref">oci</span> (bundle compliant with OCI Image
-Specification)</p></li>
-<li><p><span class="xref std std-ref">oci-archive</span> (tar files
-obeying the OCI Image Layout Specification)</p></li>
+<li><p>oci (bundle compliant with OCI Image Specification)</p></li>
+<li><p>oci-archive (tar files obeying the OCI Image Layout Specification)</p></li>
 <li><p><a class="reference internal" href="appendix.html#docker-daemon-archive"><span class="std std-ref">docker-daemon</span></a> (images managed by the
 locally running docker daemon)</p></li>
 <li><p><a class="reference internal" href="appendix.html#docker-daemon-archive"><span class="std std-ref">docker-archive</span></a> (archived docker
@@ -346,9 +344,8 @@ has been installed. You can reference the container file system with the
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Be careful with the <code class="docutils literal notranslate"><span class="pre">%setup</span></code> section! This scriptlet is executed
-outside of the container on the host system itself, and is executed
-with elevated privileges. Commands in <code class="docutils literal notranslate"><span class="pre">%setup</span></code> can alter and
-potentially damage the host.</p>
+outside of the container on the host system itself.
+Commands in <code class="docutils literal notranslate"><span class="pre">%setup</span></code> can alter and potentially damage the host.</p>
 </div>
 <p>Consider the example from the definition file above:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%setup</span>
@@ -363,7 +360,7 @@ section below. The <code class="docutils literal notranslate"><span class="pre">
 <p>The <code class="docutils literal notranslate"><span class="pre">%files</span></code> section is provided as
 a safer alternative to copying files from the host system into the
 container during the build. Because of the potential danger involved in
-running the <code class="docutils literal notranslate"><span class="pre">%setup</span></code> scriptlet with elevated privileges on the host
+running the <code class="docutils literal notranslate"><span class="pre">%setup</span></code> scriptlet on the host
 system during the build, it’s use is generally discouraged.</p>
 </section>
 <section id="files">
@@ -468,7 +465,7 @@ want to build a container without running the <code class="docutils literal notr
 example, if the build system does not have the same hardware that will
 be used on the production system), you can do so with the <code class="docutils literal notranslate"><span class="pre">--notest</span></code>
 build option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --notest my_container.sif my_container.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --notest my_container.sif my_container.def
 </pre></div>
 </div>
 <p>Running the test command on a container built with this def file yields

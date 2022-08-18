@@ -132,7 +132,7 @@
            <div itemprop="articleBody">
              
   <section id="remote-endpoints">
-<h1>Remote Endpoints<a class="headerlink" href="#remote-endpoints" title="Permalink to this heading"></a></h1>
+<span id="endpoints"></span><h1>Remote Endpoints<a class="headerlink" href="#remote-endpoints" title="Permalink to this heading"></a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group allows users to manage the service
@@ -143,20 +143,20 @@ image verification. Currently, there are three main types of remote
 endpoints managed by this command group: <a class="reference external" href="https://singularityhub.github.io/library-api/#/?id=library-api">Library API Registries</a>,
 OCI registries and keyservers.</p>
 <p>You are most likely interacting with remote endpoints on a regular basis using
-various Apptainer commands:</p>
-<p><a class="reference external" href="cli/apptainer_pull.html">pull</a>,
+various Apptainer commands:
+<a class="reference external" href="cli/apptainer_pull.html">pull</a>,
 <a class="reference external" href="cli/apptainer_push.html">push</a>,
-<a class="reference external" href="cli/apptainer_build.html#options">build –remote</a>,
+<a class="reference external" href="cli/apptainer_build.html">build</a>,
 <a class="reference external" href="cli/apptainer_key.html">key</a>,
 <a class="reference external" href="cli/apptainer_search.html">search</a>,
 <a class="reference external" href="cli/apptainer_verify.html">verify</a>,
 <a class="reference external" href="cli/apptainer_exec.html">exec</a>,
 <a class="reference external" href="cli/apptainer_shell.html">shell</a>,
 <a class="reference external" href="cli/apptainer_run.html">run</a>,
-<a class="reference external" href="cli/apptainer_instance.html">instance</a></p>
+or <a class="reference external" href="cli/apptainer_instance.html">instance</a>.</p>
 </section>
 <section id="managing-remote-endpoints">
-<h2>Managing Remote Endpoints<a class="headerlink" href="#managing-remote-endpoints" title="Permalink to this heading"></a></h2>
+<span id="sec-managing-remote-endpoints"></span><h2>Managing Remote Endpoints<a class="headerlink" href="#managing-remote-endpoints" title="Permalink to this heading"></a></h2>
 <p>A fresh installation of Apptainer is configured with the <code class="docutils literal notranslate"><span class="pre">DefaultRemote</span></code>,
 which does not support the Library API as it is only configured with a
 functioning key server, <code class="docutils literal notranslate"><span class="pre">https://keys.openpgp.org</span></code>. Users or administrators
@@ -509,8 +509,7 @@ for their container images. Some registries require credentials to
 access certain images or the registry itself. Previously, the only
 methods in Apptainer to supply credentials to registries were to
 supply credentials for each command or set environment variables for a
-single registry. See <span class="xref std std-ref">Authentication via Interactive Login</span> and <span class="xref std std-ref">Authentication via
-Environment Variables</span></p>
+single registry.</p>
 <p>Apptainer supports the ability for users to supply credentials
 on a per registry basis with the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group.</p>
 <p>Users can login to an oci registry with the <code class="docutils literal notranslate"><span class="pre">remote</span> <span class="pre">login</span></code> command by
@@ -576,20 +575,19 @@ docker://registry.example.com  NO
 </div>
 <p>Apptainer will supply the correct credentials for the registry based
 off of the hostname when using the following commands with a
-<code class="docutils literal notranslate"><span class="pre">docker://</span></code> or <code class="docutils literal notranslate"><span class="pre">oras://</span></code> URI:</p>
-<p><a class="reference external" href="cli/apptainer_pull.html">pull</a>,
+<code class="docutils literal notranslate"><span class="pre">docker://</span></code> or <code class="docutils literal notranslate"><span class="pre">oras://</span></code> URI:
+<a class="reference external" href="cli/apptainer_pull.html">pull</a>,
 <a class="reference external" href="cli/apptainer_push.html">push</a>,
 <a class="reference external" href="cli/apptainer_build.html">build</a>,
 <a class="reference external" href="cli/apptainer_exec.html">exec</a>,
 <a class="reference external" href="cli/apptainer_shell.html">shell</a>,
 <a class="reference external" href="cli/apptainer_run.html">run</a>,
-<a class="reference external" href="cli/apptainer_instance.html">instance</a>
-1
-.. note:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">It</span> <span class="ow">is</span> <span class="n">important</span> <span class="k">for</span> <span class="n">users</span> <span class="n">to</span> <span class="n">be</span> <span class="n">aware</span> <span class="n">that</span> <span class="n">the</span> <span class="n">login</span> <span class="n">command</span> <span class="n">will</span>
-<span class="n">store</span> <span class="n">the</span> <span class="n">supplied</span> <span class="n">credentials</span> <span class="ow">or</span> <span class="n">tokens</span> <span class="n">unencrypted</span> <span class="ow">in</span> <span class="n">your</span> <span class="n">home</span>
-<span class="n">directory</span><span class="o">.</span>
-</pre></div>
+or <a class="reference external" href="cli/apptainer_instance.html">instance</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is important for users to be aware that the login command will
+store the supplied credentials or tokens unencrypted in your home
+directory.</p>
 </div>
 </section>
 </section>
