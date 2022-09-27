@@ -7,7 +7,7 @@ is now available.</p>
 <p>The most significant change is that Apptainer is no longer setuid-root
 by default.  It can still be installed that way, but either an extra
 apptainer-suid package has to be installed or when compiling an extra
-<code>--without-suid</code> option has to be given to mconfig.</p>
+<code>--with-suid</code> option has to be given to mconfig.</p>
 <p>This is practical because almost all functionality can now be done with
 only unprivileged user namespaces and readily available unprivileged commands.
 SIF files (that is, squashfs-based files), EXT2/3/4 files, and OverlayFS
