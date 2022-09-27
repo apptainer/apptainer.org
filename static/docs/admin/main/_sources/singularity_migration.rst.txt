@@ -52,6 +52,14 @@ changed.
     ``/usr/local/etc/singularity``) needs to be removed to prevent {Project}
     from producing a warning at runtime about the migration being incomplete.
 
-See the user guide documentation about `Singularity compatibility
+However, a big change from Singularity is that {Project} does not
+install a setuid-root component by default.  That means that either
+user namespaces needs to be enabled or the setuid-root component needs
+to be installed separately.  See the 
+:ref:`User Namespaces & Fakeroot <userns>` section
+or to find out about how to install the setuid-root component see the
+:ref:`Installation <installation>` section.
+
+Also see the user guide documentation about `Singularity compatibility
 <{userdocs}/singularity_compatibility.html>`__ for information about how the
 migration to {Project} will impact users.
