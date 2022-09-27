@@ -193,7 +193,7 @@ the <code class="docutils literal notranslate"><span class="pre">--no-privs</spa
 <p class="admonition-title">Note</p>
 <p>The root user can manage the capabilities granted to individual
 containers when they are launched through the <code class="docutils literal notranslate"><span class="pre">--add-caps</span></code> and
-<code class="docutils literal notranslate"><span class="pre">drop-caps</span></code> flags. Please see <a class="reference external" href="https://apptainer.org/docs/user/1.1/security_options.html#linux-capabilities">Linux Capabilities</a>
+<code class="docutils literal notranslate"><span class="pre">drop-caps</span></code> flags. Please see <a class="reference external" href="https://apptainer.org/docs/user/main/security_options.html#linux-capabilities">Linux Capabilities</a>
 in the user guide for more information.</p>
 </div>
 </section>
@@ -369,7 +369,7 @@ directory containers.</p></li>
 <section id="networking-options">
 <h3>Networking Options<a class="headerlink" href="#networking-options" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--network</span></code> option can be used to specify a CNI networking
-configuration that will be used when running a container with <a class="reference external" href="https://apptainer.org/docs/user/1.1/networking.html">network
+configuration that will be used when running a container with <a class="reference external" href="https://apptainer.org/docs/user/main/networking.html">network
 virtualization</a>.
 Unrestricted use of CNI network configurations requires root privilege,
 as certain configurations may disrupt the host networking environment.</p>
@@ -427,10 +427,10 @@ option is available and working, it will be used instead.</p>
 <h3>CNI Configuration and Plugins<a class="headerlink" href="#cni-configuration-and-plugins" title="Permalink to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">cni</span> <span class="pre">configuration</span> <span class="pre">path</span></code>: This option allows admins to specify a
 custom path for the CNI configuration that Apptainer will use for
-<a class="reference external" href="https://apptainer.org/docs/user/1.1/networking.html">Network Virtualization</a>.</p>
+<a class="reference external" href="https://apptainer.org/docs/user/main/networking.html">Network Virtualization</a>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">cni</span> <span class="pre">plugin</span> <span class="pre">path</span></code>: This option allows admins to specify a custom path
 for Apptainer to access CNI plugin executables. Check out the
-<a class="reference external" href="https://apptainer.org/docs/user/1.1/networking.html">Network Virtualization</a>
+<a class="reference external" href="https://apptainer.org/docs/user/main/networking.html">Network Virtualization</a>
 section of the user guide for more information.</p>
 </section>
 <section id="external-binaries">
@@ -756,7 +756,7 @@ restrict the in-container device tree.</p>
 <p>Compatibility between containerized CUDA/ROCm/OpenCL applications and
 host drivers/libraries is dependent on the versions of the GPU compute
 frameworks that were used to build the applications. Compatibility and
-usage information is discussed in the <a class="reference external" href="https://apptainer.org/docs/user/1.1/gpu.html">GPU Support</a>
+usage information is discussed in the <a class="reference external" href="https://apptainer.org/docs/user/main/gpu.html">GPU Support</a>
 section of the user guide.</p>
 <section id="nvidia-gpus-cuda">
 <h3>NVIDIA GPUs / CUDA<a class="headerlink" href="#nvidia-gpus-cuda" title="Permalink to this heading"></a></h3>
@@ -920,8 +920,8 @@ listed system calls if the user has the associated capability.</p>
 </pre></div>
 </div>
 <p>For more insight into security options, network options, cgroups,
-capabilities, etc, please check the <a class="reference external" href="https://apptainer.org/docs/user/1.1">Userdocs</a> and it’s
-<a class="reference external" href="https://apptainer.org/docs/user/1.1/appendix.html">Appendix</a>.</p>
+capabilities, etc, please check the <a class="reference external" href="https://apptainer.org/docs/user/main">Userdocs</a> and it’s
+<a class="reference external" href="https://apptainer.org/docs/user/main/appendix.html">Appendix</a>.</p>
 </section>
 <section id="remote-yaml">
 <h2>remote.yaml<a class="headerlink" href="#remote-yaml" title="Permalink to this heading"></a></h2>
@@ -1034,7 +1034,7 @@ https://keys.sylabs.io  YES     NO        1*
 <section id="additional-information">
 <h4>Additional Information<a class="headerlink" href="#additional-information" title="Permalink to this heading"></a></h4>
 <p>For more details on the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group and managing remote
-endpoints, please check the <a class="reference external" href="https://apptainer.org/docs/user/1.1/endpoint.html">Remote Userdocs</a>.</p>
+endpoints, please check the <a class="reference external" href="https://apptainer.org/docs/user/main/endpoint.html">Remote Userdocs</a>.</p>
 </section>
 </section>
 <section id="keyserver-configuration">
@@ -1045,7 +1045,7 @@ supplemented via the <code class="docutils literal notranslate"><span class="pre
 commands. These commands allow an administrator to create a global list
 of key servers used to verify container signatures by default.</p>
 <p>For more details on the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group and managing
-keyservers, please check the <a class="reference external" href="https://apptainer.org/docs/user/1.1/endpoint.html">Remote Userdocs</a>.</p>
+keyservers, please check the <a class="reference external" href="https://apptainer.org/docs/user/main/endpoint.html">Remote Userdocs</a>.</p>
 </section>
 </section>
 <section id="dmtcp-conf-yaml">
@@ -1087,7 +1087,7 @@ specified without version information, i.e.
 that they are in a system path (binaries), or available in paths
 configured in <code class="docutils literal notranslate"><span class="pre">/etc/ld.so.conf</span></code> (libraries).</p>
 <p>For more details on the checkpointing features in Apptainer, please check the
-<a class="reference external" href="https://apptainer.org/docs/user/1.1/checkpoint.html">Checkpoint Userdocs</a>.</p>
+<a class="reference external" href="https://apptainer.org/docs/user/main/checkpoint.html">Checkpoint Userdocs</a>.</p>
 </section>
 </section>
 
