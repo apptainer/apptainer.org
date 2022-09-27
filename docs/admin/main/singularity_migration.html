@@ -19,6 +19,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -121,7 +122,14 @@ your <code class="docutils literal notranslate"><span class="pre">apptainer</spa
 <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity</span></code>) needs to be removed to prevent Apptainer
 from producing a warning at runtime about the migration being incomplete.</p>
 </div>
-<p>See the user guide documentation about <a class="reference external" href="https://apptainer.org/docs/user/main/singularity_compatibility.html">Singularity compatibility</a> for information about how the
+<p>However, a big change from Singularity is that Apptainer does not
+install a setuid-root component by default.  That means that either
+user namespaces needs to be enabled or the setuid-root component needs
+to be installed separately.  See the
+<a class="reference internal" href="user_namespace.html#userns"><span class="std std-ref">User Namespaces &amp; Fakeroot</span></a> section
+or to find out about how to install the setuid-root component see the
+<a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installation</span></a> section.</p>
+<p>Also see the user guide documentation about <a class="reference external" href="https://apptainer.org/docs/user/main/singularity_compatibility.html">Singularity compatibility</a> for information about how the
 migration to Apptainer will impact users.</p>
 </section>
 
