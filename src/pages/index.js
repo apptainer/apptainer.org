@@ -32,7 +32,7 @@ const features = [
   {
     name: 'Secure',
     description:
-      'Apptainer runs "rootless" and prohibits privilege escalation within the container; users are the same inside and outside the container.',
+      'Apptainer runs "rootless" by default. It allows unprivileged users to leverage containers and prohibits privilege escalation within the container; users are the same inside and outside the container.',
   },
   {
     name: 'Integration over isolation',
