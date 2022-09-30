@@ -28,13 +28,17 @@ at least 2GB of RAM is recommended when building from source.
 
 Full functionality of {Project} requires that the kernel supports:
 
--  **OverlayFS mounts** - (minimum kernel >=3.18) Required for full
-   flexibility in bind mounts to containers, and to support persistent
-   overlays for writable containers.
+-  **Unprivileged user namespaces** - (minimum kernel >=3.8, >=4.18
+   or 3.10.0-1127 on RHEL7 recommended)
+   Required to run containers without root or setuid privilege.
+   The recommended versions are required for unprivileged SIF file
+   mounts.
 
--  **Unprivileged user namespaces** - (minimum kernel >=3.8, >=3.18
-   recommended) Required to run containers without root or setuid
-   privilege.
+-  **OverlayFS mounts** - (minimum kernel >=3.18, >=5.11 recommended)
+   Required for full flexibility in bind mounts to containers in suid
+   mode, and to support persistent overlays for writable containers
+   in suid mode.  Kernel 5.11 enables support for persistent overlay
+   unprivileged, but otherwise fuse-overlayfs will be used for that.
 
 Please make sure you are familiar with the discussion on
 `Setuid & User Namespaces <{userdocs}/security.html#setuid-user-namespaces>`_
@@ -66,7 +70,7 @@ Filesystem support / limitations
 when installing {Project} on, or running containers from, common
 parallel / network filesystems. In general:
 
--  We strongly recommend installing {Project} on local disk on each
+-  We recommend installing {Project} on local disk on each
    compute node.
 
 -  If {Project} is installed to a network location, a
