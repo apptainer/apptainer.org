@@ -19,7 +19,33 @@ const Talks = () => (
       </div>
   </div>
       <div className="bg-gray-100 py-10">
-        <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+      <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+          <div className="flex flex-col bg-white border rounded shadow-sm lg:flex-row">
+            <div className="flex flex-col justify-between p-5 border-b sm:p-10 lg:border-b-0">
+              <div>
+                <p className="mb-2 text-xs font-semibold tracking-wide uppercase">
+                  CTRL IQ WEEKLY WEBINAR SERIES
+                </p>
+                <h5 className="mb-4 text-2xl font-extrabold leading-none sm:text-3xl">
+                  Apptainer 1.1.0 Has Been Released
+                </h5>
+                <p className="mb-4 text-base text-gray-700 md:text-lg sm:mb-8">
+                  A discussion of the new features and updated security posture of the groundbreaking Apptainer 1.1.0 release. 
+                </p>
+              </div>
+              <div className="flex items-center">
+                <Link to="https://youtu.be/lZENN9LVqY8">
+                  <button
+                      className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-blue-900 hover:bg-blue-700 focus:shadow-outline focus:outline-none"
+                  >
+                    View Presentation
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="px-4 pt-2 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
           <div className="flex flex-col bg-white border rounded shadow-sm lg:flex-row">
             <div className="flex flex-col justify-between p-5 border-b sm:p-10 lg:border-b-0">
               <div>
@@ -35,6 +61,32 @@ const Talks = () => (
               </div>
               <div className="flex items-center">
                 <Link to="https://www.youtube.com/watch?v=DA87Ba2dpNM">
+                  <button
+                      className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-blue-900 hover:bg-blue-700 focus:shadow-outline focus:outline-none"
+                  >
+                    View Presentation
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="px-4 pt-2 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+          <div className="flex flex-col bg-white border rounded shadow-sm lg:flex-row">
+            <div className="flex flex-col justify-between p-5 border-b sm:p-10 lg:border-b-0">
+              <div>
+                <p className="mb-2 text-xs font-semibold tracking-wide uppercase">
+                  CTRL IQ WEEKLY WEBINAR SERIES
+                </p>
+                <h5 className="mb-4 text-2xl font-extrabold leading-none sm:text-3xl">
+                  Container Education Series: Building Apptainer Containers
+                </h5>
+                <p className="mb-4 text-base text-gray-700 md:text-lg sm:mb-8">
+                  A deep dive starting generally and venturing into the obscure and dark corners of container building with Apptainer. 
+                </p>
+              </div>
+              <div className="flex items-center">
+                <Link to="https://youtu.be/DmrkxzW_F1Q">
                   <button
                       className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-blue-900 hover:bg-blue-700 focus:shadow-outline focus:outline-none"
                   >
