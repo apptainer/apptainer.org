@@ -140,12 +140,16 @@ or inside some other container system.</p>
 at least 2GB of RAM is recommended when building from source.</p>
 <p>Full functionality of Apptainer requires that the kernel supports:</p>
 <ul class="simple">
-<li><p><strong>OverlayFS mounts</strong> - (minimum kernel &gt;=3.18) Required for full
-flexibility in bind mounts to containers, and to support persistent
-overlays for writable containers.</p></li>
-<li><p><strong>Unprivileged user namespaces</strong> - (minimum kernel &gt;=3.8, &gt;=3.18
-recommended) Required to run containers without root or setuid
-privilege.</p></li>
+<li><p><strong>Unprivileged user namespaces</strong> - (minimum kernel &gt;=3.8, &gt;=4.18
+or 3.10.0-1127 on RHEL7 recommended)
+Required to run containers without root or setuid privilege.
+The recommended versions are required for unprivileged SIF file
+mounts.</p></li>
+<li><p><strong>OverlayFS mounts</strong> - (minimum kernel &gt;=3.18, &gt;=5.11 recommended)
+Required for full flexibility in bind mounts to containers in suid
+mode, and to support persistent overlays for writable containers
+in suid mode.  Kernel 5.11 enables support for persistent overlay
+unprivileged, but otherwise fuse-overlayfs will be used for that.</p></li>
 </ul>
 <p>Please make sure you are familiar with the discussion on
 <a class="reference external" href="https://apptainer.org/docs/user/1.1/security.html#setuid-user-namespaces">Setuid &amp; User Namespaces</a>
@@ -173,7 +177,7 @@ related path or the user’s PATH.</p>
 when installing Apptainer on, or running containers from, common
 parallel / network filesystems. In general:</p>
 <ul class="simple">
-<li><p>We strongly recommend installing Apptainer on local disk on each
+<li><p>We recommend installing Apptainer on local disk on each
 compute node.</p></li>
 <li><p>If Apptainer is installed to a network location, a
 <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> should be provided on each node, and Apptainer

@@ -30,9 +30,13 @@ of the user guide.
 *****************************
 
 To allow unprivileged creation of user namespaces a kernel >=3.8 is
-required, with >=3.18 being recommended due to security fixes for user
-namespaces (3.18 also adds OverlayFS support which is used by
-{Project}).
+required, with >=4.18 being recommended due to support for unprivileged
+mounting of FUSE filesystems (needed for example for mounting SIF files).
+The equivalent recommendation on RHEL7 is >=3.10.0-1127 from release
+7.8, where unprivileged mounting of FUSE filesystems was backported.
+To use unprivileged overlayFS for persistent overlays, kernel >=5.11 is
+recommended, but if that's not available then {Project} will use
+fuse-overlayfs instead.  That feature has not been backported to RHEL7.
 
 Additionally, some Linux distributions require that unprivileged user
 namespace creation is enabled using a ``sysctl`` or kernel command line
