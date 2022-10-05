@@ -224,16 +224,16 @@ $ apptainer run --cpu-shares 1024 myfirstapp.sif
 $ apptainer run --cpu-shares 512 mysecondapp.sif
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">--cpu-set-cpus</span></code> specifies a list of physical CPU IDs on which a container can
+<p><code class="docutils literal notranslate"><span class="pre">--cpuset-cpus</span></code> specifies a list of physical CPU IDs on which a container can
 run. For example, on a dual CPU system you might pin one container to the first
 12 cores on CPU 1, and a second container to the second 12 cores on CPU 2.</p>
-<p><code class="docutils literal notranslate"><span class="pre">--cpu-set-mems</span></code> specifies a list of memory nodes the container can use. It
-should generally be set to the same value as <code class="docutils literal notranslate"><span class="pre">--cpu-set-cpus</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--cpuset-mems</span></code> specifies a list of memory nodes the container can use. It
+should generally be set to the same value as <code class="docutils literal notranslate"><span class="pre">--cpuset-cpus</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Container A - first CPU
-$ apptainer run --cpu-set-cpus 0-11 --cpu-set-mems 0-11 myfirstapp.sif
+$ apptainer run --cpuset-cpus 0-11 --cpuset-mems 0-11 myfirstapp.sif
 
 # Container B - second CPU
-$ apptainer run --cpu-set-cpus 12-23 --cpu-set-mems 12-23 myfirstapp.sif
+$ apptainer run --cpuset-cpus 12-23 --cpuset-mems 12-23 myfirstapp.sif
 </pre></div>
 </div>
 </section>
