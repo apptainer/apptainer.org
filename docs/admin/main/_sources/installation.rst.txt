@@ -40,6 +40,7 @@ Full functionality of {Project} requires that the kernel supports:
    in suid mode.  Kernel 5.11 enables support for persistent overlay
    unprivileged, but otherwise fuse-overlayfs will be used for that.
 
+Instructions to install without or with setuid privileges are below.
 Please make sure you are familiar with the discussion on
 `Setuid & User Namespaces <{userdocs}/security.html#setuid-user-namespaces>`_
 in the Security section of the user guide, and the
