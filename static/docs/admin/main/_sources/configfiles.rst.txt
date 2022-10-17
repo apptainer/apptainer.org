@@ -1052,7 +1052,7 @@ Sylabs Cloud anonymously:
 
 .. code::
 
-   $ sudo {command} remote add --global SylabsCloud cloud.sylabs.io
+   $ sudo {command} remote add --global SylabsCloud cloud.sycloud.io
    INFO:    Remote "SylabsCloud" added.
    INFO:    Global option detected. Will not automatically log into remote.
    $ sudo {command} remote use --global SylabsCloud
@@ -1063,13 +1063,13 @@ Sylabs Cloud anonymously:
 
    NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE
    DefaultRemote  cloud.apptainer.org  NO      YES     NO
-   SylabsCloud    cloud.sylabs.io      YES     YES     NO
+   SylabsCloud    cloud.sycloud.io     YES     YES     NO
 
    Keyservers
    ==========
 
-   URI                     GLOBAL  INSECURE  ORDER
-   https://keys.sylabs.io  YES     NO        1*
+   URI                                 GLOBAL  INSECURE  ORDER
+   https://keys.production.sycloud.io  YES     NO        1*
 
    * Active cloud services keyserver
 
