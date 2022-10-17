@@ -363,7 +363,7 @@ FATAL:   could not use myremote: remote company-remote has been set exclusive by
 and in particular these are the commands for a user to restore the library
 behavior from before Apptainer, where using the <cite>library://</cite> URI would
 download from the Sylabs Cloud anonymously:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer remote add --no-login SylabsCloud cloud.sylabs.io
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer remote add --no-login SylabsCloud cloud.sycloud.io
 INFO:    Remote &quot;SylabsCloud&quot; added.
 $ apptainer remote use SylabsCloud
 INFO:    Remote &quot;SylabsCloud&quot; now in use.
@@ -373,13 +373,13 @@ Cloud Services Endpoints
 
 NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE
 DefaultRemote  cloud.apptainer.org  NO      YES     NO
-SylabsCloud    cloud.sylabs.io      YES     NO      NO
+SylabsCloud    cloud.sycloud.io     YES     NO      NO
 
 Keyservers
 ==========
 
-URI                     GLOBAL  INSECURE  ORDER
-https://keys.sylabs.io  YES     NO        1*
+URI                                 GLOBAL  INSECURE  ORDER
+https://keys.production.sycloud.io  YES     NO        1*
 
 * Active cloud services keyserver
 </pre></div>
