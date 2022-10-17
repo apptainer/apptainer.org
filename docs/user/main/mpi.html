@@ -328,6 +328,9 @@ From: ubuntu:18.04
     export PATH=&quot;$OMPI_DIR/bin:$PATH&quot;
     export LD_LIBRARY_PATH=&quot;$OMPI_DIR/lib:$LD_LIBRARY_PATH&quot;
     export MANPATH=&quot;$OMPI_DIR/share/man:$MANPATH&quot;
+    # Work around a problem that UCX has with unprivileged user namespaces
+    # See https://github.com/apptainer/apptainer/issues/769
+    export UCX_POSIX_USE_PROC_LINK=n
 
 %post
     echo &quot;Installing required packages...&quot;
