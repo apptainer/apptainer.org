@@ -7,6 +7,7 @@
   <title>Installing Apptainer &mdash; Apptainer Admin Guide main documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
@@ -20,6 +21,8 @@
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -84,8 +87,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#installation-on-windows-or-mac">Installation on Windows or Mac</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vagrant">Vagrant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Lima</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Vagrant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Lima</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -518,8 +529,13 @@ Boxes via <a class="reference external" href="https://www.vagrantup.com/">Vagran
 source tools, by following the instructions below. Then you can install
 Apptainer in the base VM of your choice by following the linux
 <a class="reference internal" href="#installation"><span class="std std-ref">installation instructions</span></a> above.</p>
+<p>You can also use <a class="reference external" href="https://github.com/lima-vm/lima">Lima</a> to install
+both the Linux VM and Apptainer for access from the host operating system.
+It will install the “cloud” version of the selected VM operating system.</p>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading"></a></h3>
+<section id="vagrant">
+<h4>Vagrant<a class="headerlink" href="#vagrant" title="Permalink to this heading"></a></h4>
 <p>Install the following programs:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://git-for-windows.github.io/">Git for Windows</a></p></li>
@@ -528,14 +544,59 @@ Apptainer in the base VM of your choice by following the linux
 <li><p><a class="reference external" href="http://vagrantmanager.com/downloads/">Vagrant Manager for Windows</a></p></li>
 </ul>
 </section>
+<section id="id1">
+<h4>Lima<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<p>The Windows version of Lima (using Hyper-V) is still in development.</p>
+<p>You can use <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/">WSL</a> instead:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">wsl</span> <span class="o">--</span><span class="n">install</span>
+</pre></div>
+</div>
+<p>And use the Linux instructions.</p>
+</section>
+</section>
 <section id="mac">
 <h3>Mac<a class="headerlink" href="#mac" title="Permalink to this heading"></a></h3>
+<section id="id2">
+<h4>Vagrant<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
 <p>Apptainer is available via Vagrant (installable with <a class="reference external" href="https://brew.sh">Homebrew</a> or manually)</p>
 <p>To use Vagrant via Homebrew:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
 $ brew install --cask virtualbox vagrant vagrant-manager
 </pre></div>
 </div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">init</span></code> to create a new Vagrantfile, or use this example:</p>
+<div class="copy-button highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="c1"># Choose operating system distribution</span>
+  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="s2">&quot;fedora/36-cloud-base&quot;</span>
+
+  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provider</span> <span class="s2">&quot;virtualbox&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">vb</span><span class="o">|</span>
+    <span class="c1"># Customize the number of cpus on the VM:</span>
+    <span class="n">vb</span><span class="o">.</span><span class="n">cpus</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
+
+    <span class="c1"># Customize the amount of memory on the VM:</span>
+    <span class="n">vb</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="s2">&quot;1024&quot;</span>
+  <span class="k">end</span>
+
+  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="s2">&quot;shell&quot;</span><span class="p">,</span> <span class="ss">inline</span><span class="p">:</span> <span class="o">&lt;&lt;-</span><span class="dl">SHELL</span>
+<span class="sh">    # Matching linux installation instructions</span>
+<span class="sh">    yum install -y apptainer</span>
+<span class="dl">  SHELL</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Then do <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>, and <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">ssh</span></code> to access the virtual machine.</p>
+</section>
+<section id="id3">
+<h4>Lima<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<p>Apptainer is available via Lima (installable with <a class="reference external" href="https://brew.sh">Homebrew</a> or manually)</p>
+<p>To use Lima via Homebrew:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+$ brew install qemu lima
+</pre></div>
+</div>
+<p>Then do <code class="docutils literal notranslate"><span class="pre">limactl</span> <span class="pre">start</span> <span class="pre">template://apptainer</span></code> and <code class="docutils literal notranslate"><span class="pre">limactl</span> <span class="pre">shell</span> <span class="pre">apptainer</span></code>.</p>
+<p>See the <a class="reference external" href="https://github.com/lima-vm/lima/blob/master/examples/apptainer.yaml">lima apptainer template</a> for more details.</p>
+</section>
 </section>
 </section>
 </section>
