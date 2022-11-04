@@ -51,7 +51,7 @@ Debian
 
    sudo sh -c 'echo kernel.unprivileged_userns_clone=1 \
        >/etc/sysctl.d/90-unprivileged_userns.conf'
-   sudo sysctl -p /etc/sysctl.d /etc/sysctl.d/90-unprivileged_userns.conf
+   sudo sysctl -p /etc/sysctl.d/90-unprivileged_userns.conf
 
 RHEL/CentOS 7
 =============
@@ -61,8 +61,8 @@ From 7.4, kernel support is included but must be enabled with:
 .. code::
 
    sudo sh -c 'echo user.max_user_namespaces=15000 \
-       >/etc/sysctl.d/90-max_net_namespaces.conf'
-   sudo sysctl -p /etc/sysctl.d /etc/sysctl.d/90-max_net_namespaces.conf
+       >/etc/sysctl.d/90-max_user_namespaces.conf'
+   sudo sysctl -p /etc/sysctl.d/90-max_user_namespaces.conf
 
 ******************************
  Disabling network namespaces

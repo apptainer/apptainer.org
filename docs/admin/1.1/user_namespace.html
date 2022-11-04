@@ -89,8 +89,8 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>User Namespaces &amp; Fakeroot</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">User Namespaces &amp; Fakeroot</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-admindocs/blob/master/user_namespace.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -137,7 +137,7 @@ creation’.</p>
 <h3>Debian<a class="headerlink" href="#debian" title="Permalink to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;echo kernel.unprivileged_userns_clone=1 </span><span class="se">\</span>
 <span class="s1">    &gt;/etc/sysctl.d/90-unprivileged_userns.conf&#39;</span>
-<span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">d</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">90</span><span class="o">-</span><span class="n">unprivileged_userns</span><span class="o">.</span><span class="n">conf</span>
+<span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">90</span><span class="o">-</span><span class="n">unprivileged_userns</span><span class="o">.</span><span class="n">conf</span>
 </pre></div>
 </div>
 </section>
@@ -145,8 +145,8 @@ creation’.</p>
 <h3>RHEL/CentOS 7<a class="headerlink" href="#rhel-centos-7" title="Permalink to this heading"></a></h3>
 <p>From 7.4, kernel support is included but must be enabled with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;echo user.max_user_namespaces=15000 </span><span class="se">\</span>
-<span class="s1">    &gt;/etc/sysctl.d/90-max_net_namespaces.conf&#39;</span>
-<span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">d</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">90</span><span class="o">-</span><span class="n">max_net_namespaces</span><span class="o">.</span><span class="n">conf</span>
+<span class="s1">    &gt;/etc/sysctl.d/90-max_user_namespaces.conf&#39;</span>
+<span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">90</span><span class="o">-</span><span class="n">max_user_namespaces</span><span class="o">.</span><span class="n">conf</span>
 </pre></div>
 </div>
 </section>
