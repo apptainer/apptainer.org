@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security in Apptainer &mdash; Apptainer Admin Guide 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="License" href="license.html" />
+    <link rel="prev" title="User Namespaces &amp; Fakeroot" href="user_namespace.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Apptainer Admin Guide
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="admin_quickstart.html">Admin Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_migration.html">Migrating from Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configfiles.html">Configuration files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_namespace.html">User Namespaces &amp; Fakeroot</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Security in Apptainer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-runtime-options">Configuration &amp; Runtime Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apptainer Admin Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Security in Apptainer</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-admindocs/blob/master/security.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="security-in-apptainer">
+<span id="security"></span><h1>Security in Apptainer<a class="headerlink" href="#security-in-apptainer" title="Permalink to this heading"></a></h1>
+<p>First please see the <a class="reference external" href="https://apptainer.org/docs/user/1.1/security.html">Security section</a> of
+the user guide.</p>
+<section id="configuration-runtime-options">
+<h2>Configuration &amp; Runtime Options<a class="headerlink" href="#configuration-runtime-options" title="Permalink to this heading"></a></h2>
+<p>System administrators who manage Apptainer can use configuration
+files to set security restrictions, grant or revoke a user’s
+capabilities, manage resources and authorize containers etc.</p>
+<p>For example, the <a class="reference internal" href="configfiles.html#execution-control-list"><span class="std std-ref">Execution Control List</span></a> file
+allows restricting usage of SIF containers based on their signature
+and the key used to sign them.</p>
+<p>Configuration files and their parameters are <a class="reference internal" href="configfiles.html#apptainer-configfiles"><span class="std std-ref">documented for
+administrators here</span></a>.</p>
+<p>When running a container as root, Apptainer can apply hardening rules using
+seccomp and apparmor.  Please see the <a class="reference external" href="https://apptainer.org/docs/user/1.1/security_options.html">Security Options section</a> of the user guide.</p>
+<p>Limits on resource usage by containers can be enforced using cgroups. On systems
+that use cgroups v1, only the root user can set resource limits. On systems that
+use cgroups v2 and systemd, all users can apply resource limits as long as the
+system is configured for delegation.</p>
+<p>By default, EL9, Ubuntu 22.04, Debian 11, Fedora 31 and newer use cgroups v2 and
+are configured for delegation so that unprivileged users will be able to use the
+<code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code> and other resource limit flags of Apptainer without
+further configuration.</p>
+<p>On EL8 and Ubuntu 20.04 it is possible to setup a compatible configuration by
+following the ‘Enabling cgroup v2’ and ‘Enabling CPU, CPUSET, and I/O
+delegation’ steps at the <a class="reference external" href="https://rootlesscontaine.rs/getting-started/common/cgroup2/">rootless containers website</a>.</p>
+<p>See the <a class="reference external" href="https://apptainer.org/docs/user/1.1/cgroups.html">Limiting Container Resources section</a> of the user guide
+for more details of how to apply cgroups limits to containers at runtime.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="user_namespace.html" class="btn btn-neutral float-left" title="User Namespaces &amp; Fakeroot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="license.html" class="btn btn-neutral float-right" title="License" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
