@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -133,11 +135,19 @@
       </nav>
 
       <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/user/latest/">https://apptainer.org/docs/user/latest/</a></p>
+    </div>
+</div>
+
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Quick Start</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Quick Start</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/quick_start.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -148,7 +158,7 @@
            <div itemprop="articleBody">
              
   <section id="quick-start">
-<span id="id1"></span><h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h1>
 <p id="sec-quickstart">This guide is intended for running Apptainer on a computer where you
 have root (administrative) privileges, and will install Apptainer
 from source code. Other installation options, including building an RPM
@@ -160,13 +170,13 @@ information to send to your system administrator.</p>
 <p>For any additional help or support contact the Apptainer Community:
 <a class="reference external" href="https://apptainer.org/help">https://apptainer.org/help</a></p>
 <section id="quick-installation-steps">
-<span id="quick-installation"></span><h2>Quick Installation Steps<a class="headerlink" href="#quick-installation-steps" title="Permalink to this headline"></a></h2>
+<span id="quick-installation"></span><h2>Quick Installation Steps<a class="headerlink" href="#quick-installation-steps" title="Permalink to this heading"></a></h2>
 <p>You will need a Linux system to run Apptainer natively. Options for
 using Apptainer on Mac and Windows machines, along with alternate
 Linux installation options are discussed in the <a class="reference external" href="https://apptainer.org/docs/admin/1.0/installation.html">installation section of
 the admin guide</a>.</p>
 <section id="install-system-dependencies">
-<h3>Install system dependencies<a class="headerlink" href="#install-system-dependencies" title="Permalink to this headline"></a></h3>
+<h3>Install system dependencies<a class="headerlink" href="#install-system-dependencies" title="Permalink to this heading"></a></h3>
 <p>You must first install development tools and libraries to your host.</p>
 <p>On Debian-based systems, including Ubuntu:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure repositories are up-to-date</span>
@@ -202,7 +212,7 @@ the admin guide</a>.</p>
 </ol>
 </section>
 <section id="install-go">
-<span id="install"></span><h3>Install Go<a class="headerlink" href="#install-go" title="Permalink to this headline"></a></h3>
+<span id="install"></span><h3>Install Go<a class="headerlink" href="#install-go" title="Permalink to this heading"></a></h3>
 <p>Apptainer is written in Go, and may require a newer version of Go than is
 available in the repositories of your distribution. We recommend installing the
 latest version of Go from the <a class="reference external" href="https://golang.org/dl/">official binaries</a>.</p>
@@ -246,7 +256,7 @@ commands here:</p>
 </div>
 </section>
 <section id="download-apptainer-from-a-release">
-<span id="download"></span><h3>Download Apptainer from a release<a class="headerlink" href="#download-apptainer-from-a-release" title="Permalink to this headline"></a></h3>
+<span id="download"></span><h3>Download Apptainer from a release<a class="headerlink" href="#download-apptainer-from-a-release" title="Permalink to this heading"></a></h3>
 <p>You can download Apptainer from one of the releases. To see a full
 list, visit <a class="reference external" href="https://github.com/apptainer/apptainer/releases">the GitHub release page</a>. After deciding on a
 release to install, you can run the following commands to proceed with
@@ -259,7 +269,7 @@ the installation.</p>
 </div>
 </section>
 <section id="compile-the-apptainer-source-code">
-<span id="compile"></span><h3>Compile the Apptainer source code<a class="headerlink" href="#compile-the-apptainer-source-code" title="Permalink to this headline"></a></h3>
+<span id="compile"></span><h3>Compile the Apptainer source code<a class="headerlink" href="#compile-the-apptainer-source-code" title="Permalink to this heading"></a></h3>
 <p>Now you are ready to build Apptainer. Dependencies will be
 automatically downloaded. You can build Apptainer using the
 following commands:</p>
@@ -272,7 +282,7 @@ following commands:</p>
 </section>
 </section>
 <section id="overview-of-the-apptainer-interface">
-<h2>Overview of the Apptainer Interface<a class="headerlink" href="#overview-of-the-apptainer-interface" title="Permalink to this headline"></a></h2>
+<h2>Overview of the Apptainer Interface<a class="headerlink" href="#overview-of-the-apptainer-interface" title="Permalink to this heading"></a></h2>
 <p>Apptainer’s <a class="reference internal" href="cli.html#cli"><span class="std std-ref">command line interface</span></a> allows you to build
 and interact with containers transparently. You can run programs inside
 a container as if they were running on your host system. You can easily
@@ -399,7 +409,7 @@ $ apptainer inspect --helpfile --app=foo foo.sif  # See the help for foo, if pro
 </div>
 </section>
 <section id="downloading-images">
-<h2>Downloading images<a class="headerlink" href="#downloading-images" title="Permalink to this headline"></a></h2>
+<h2>Downloading images<a class="headerlink" href="#downloading-images" title="Permalink to this heading"></a></h2>
 <p>You can use the <a class="reference external" href="cli/apptainer_pull.html">pull</a>
 and <a class="reference external" href="cli/apptainer_build.html">build</a>
 commands to download images from an external resource like an OCI registry.</p>
@@ -426,7 +436,7 @@ supported by Apptainer. To see a comparison of Apptainer
 definition file with Dockerfile, please see: <a class="reference internal" href="docker_and_oci.html#sec-deffile-vs-dockerfile"><span class="std std-ref">this section</span></a>.</p>
 </section>
 <section id="interact-with-images">
-<span id="cowimage"></span><h2>Interact with images<a class="headerlink" href="#interact-with-images" title="Permalink to this headline"></a></h2>
+<span id="cowimage"></span><h2>Interact with images<a class="headerlink" href="#interact-with-images" title="Permalink to this heading"></a></h2>
 <p>You can interact with images in several ways, each of which can accept
 image URIs in addition to a local image path.</p>
 <p>For demonstration, we will use a <code class="docutils literal notranslate"><span class="pre">lolcow_latest.sif</span></code> image that can be
@@ -435,7 +445,7 @@ pulled from DockerHub:</p>
 </pre></div>
 </div>
 <section id="shell">
-<h3>Shell<a class="headerlink" href="#shell" title="Permalink to this headline"></a></h3>
+<h3>Shell<a class="headerlink" href="#shell" title="Permalink to this heading"></a></h3>
 <p>The <a class="reference external" href="cli/apptainer_shell.html">shell</a>
 command allows you to spawn a new shell within your container and
 interact with it as though it were a small virtual machine.</p>
@@ -464,7 +474,7 @@ when the shell is exited.</p>
 </div>
 </section>
 <section id="executing-commands">
-<h3>Executing Commands<a class="headerlink" href="#executing-commands" title="Permalink to this headline"></a></h3>
+<h3>Executing Commands<a class="headerlink" href="#executing-commands" title="Permalink to this heading"></a></h3>
 <p>The <a class="reference external" href="cli/apptainer_exec.html">exec</a>
 command allows you to execute a custom command within a container by
 specifying the image file. For instance, to execute the <code class="docutils literal notranslate"><span class="pre">cowsay</span></code>
@@ -496,7 +506,7 @@ command and disappears.</p>
 </div>
 </section>
 <section id="running-a-container">
-<span id="runcontainer"></span><h3>Running a container<a class="headerlink" href="#running-a-container" title="Permalink to this headline"></a></h3>
+<span id="runcontainer"></span><h3>Running a container<a class="headerlink" href="#running-a-container" title="Permalink to this heading"></a></h3>
 <p>Apptainer containers contain <a class="reference internal" href="definition_files.html#runscript"><span class="std std-ref">runscripts</span></a>. These
 are user defined scripts that define the actions a container should
 perform when someone runs it. The runscript can be triggered with the
@@ -539,7 +549,7 @@ ______________________________
 </pre></div>
 </div>
 <section id="arguments-to-run">
-<h4>Arguments to <code class="docutils literal notranslate"><span class="pre">run</span></code><a class="headerlink" href="#arguments-to-run" title="Permalink to this headline"></a></h4>
+<h4>Arguments to <code class="docutils literal notranslate"><span class="pre">run</span></code><a class="headerlink" href="#arguments-to-run" title="Permalink to this heading"></a></h4>
 <p>You can pass arguments to the runscript of a container, if it accepts
 them. For example, the default runscript of the <code class="docutils literal notranslate"><span class="pre">docker://alpine</span></code>
 container passes any arguments to a shell. We can ask the container
@@ -570,7 +580,7 @@ the specified executable directly.</p>
 </section>
 </section>
 <section id="working-with-files">
-<h2>Working with Files<a class="headerlink" href="#working-with-files" title="Permalink to this headline"></a></h2>
+<h2>Working with Files<a class="headerlink" href="#working-with-files" title="Permalink to this heading"></a></h2>
 <p>Files on the host are reachable from within the container.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &quot;Hello from inside the container&quot; &gt; $HOME/hostfile.txt
 
@@ -607,7 +617,7 @@ do with normal Linux commands.</p>
 </div>
 </section>
 <section id="build-images-from-scratch">
-<span id="id3"></span><h2>Build images from scratch<a class="headerlink" href="#build-images-from-scratch" title="Permalink to this headline"></a></h2>
+<span id="id3"></span><h2>Build images from scratch<a class="headerlink" href="#build-images-from-scratch" title="Permalink to this heading"></a></h2>
 <p id="sec-buildimagesfromscratch">Apptainer produces immutable images in the
 Singularity Image File (SIF) format. This ensures reproducible and
 verifiable images and allows for many extra benefits such as the ability
@@ -618,7 +628,7 @@ software and dependencies until you are satisfied that your container
 will fulfill your needs. For these scenarios, Apptainer also
 supports the <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> format (which is really just a directory).</p>
 <section id="sandbox-directories">
-<h3>Sandbox Directories<a class="headerlink" href="#sandbox-directories" title="Permalink to this headline"></a></h3>
+<h3>Sandbox Directories<a class="headerlink" href="#sandbox-directories" title="Permalink to this heading"></a></h3>
 <p>To build into a <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> (container in a directory) use the <code class="docutils literal notranslate"><span class="pre">build</span>
 <span class="pre">--sandbox</span></code> command and option:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --sandbox ubuntu/ docker://ubuntu
@@ -640,7 +650,7 @@ $ apptainer exec ubuntu/ ls /foo
 </div>
 </section>
 <section id="converting-images-from-one-format-to-another">
-<h3>Converting images from one format to another<a class="headerlink" href="#converting-images-from-one-format-to-another" title="Permalink to this headline"></a></h3>
+<h3>Converting images from one format to another<a class="headerlink" href="#converting-images-from-one-format-to-another" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">build</span></code> command allows you to build a container from an existing
 container. This means that you can use it to convert a container from
 one format to another. For instance, if you have already created a
@@ -654,7 +664,7 @@ outside of the context of a definition file, so you are advised to
 exercise care.</p>
 </section>
 <section id="apptainer-definition-files">
-<h3>Apptainer Definition Files<a class="headerlink" href="#apptainer-definition-files" title="Permalink to this headline"></a></h3>
+<h3>Apptainer Definition Files<a class="headerlink" href="#apptainer-definition-files" title="Permalink to this heading"></a></h3>
 <p>For a reproducible, verifiable and production-quality container you
 should build a SIF file using an Apptainer definition file. This also
 makes it easy to add files, environment variables, and install custom
@@ -709,7 +719,7 @@ existing container on your host system as a base.</p>
 you can do with Apptainer!</p>
 <p>If you need additional help or support, see <a class="reference external" href="https://apptainer.org/help">https://apptainer.org/help</a>.</p>
 <section id="apptainer-on-a-shared-resource">
-<span id="installation-request"></span><h4>Apptainer on a shared resource<a class="headerlink" href="#apptainer-on-a-shared-resource" title="Permalink to this headline"></a></h4>
+<span id="installation-request"></span><h4>Apptainer on a shared resource<a class="headerlink" href="#apptainer-on-a-shared-resource" title="Permalink to this heading"></a></h4>
 <p>Perhaps you are a user who wants a few talking points and background to
 share with your administrator. Or maybe you are an administrator who
 needs to decide whether to install Apptainer.</p>
@@ -793,6 +803,7 @@ User
 
 </footer>
         </div>
+
       </div>
     </section>
   </div>

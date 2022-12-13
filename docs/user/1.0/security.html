@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -111,11 +113,19 @@
       </nav>
 
       <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/user/latest/">https://apptainer.org/docs/user/latest/</a></p>
+    </div>
+</div>
+
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Security in Apptainer</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Security in Apptainer</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/security.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -126,9 +136,9 @@
            <div itemprop="articleBody">
              
   <section id="security-in-apptainer">
-<span id="security"></span><h1>Security in Apptainer<a class="headerlink" href="#security-in-apptainer" title="Permalink to this headline"></a></h1>
+<span id="security"></span><h1>Security in Apptainer<a class="headerlink" href="#security-in-apptainer" title="Permalink to this heading"></a></h1>
 <section id="security-policy">
-<h2>Security Policy<a class="headerlink" href="#security-policy" title="Permalink to this headline"></a></h2>
+<h2>Security Policy<a class="headerlink" href="#security-policy" title="Permalink to this heading"></a></h2>
 <p>If you suspect you have found a vulnerability in Apptainer we want
 to work with you so that it can be investigated, fixed, and disclosed in
 a responsible manner. Please follow the steps in our published <a class="reference external" href="https://apptainer.org/security-policy/">Security
@@ -141,7 +151,7 @@ information. Security patches are applied to the latest open-source
 release.</p>
 </section>
 <section id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline"></a></h2>
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h2>
 <p>Apptainer grew out of the need to implement a container platform
 that was suitable for use on shared systems, such as HPC clusters. In
 these environments multiple people access a shared resource. User
@@ -165,7 +175,7 @@ setuid starter binary to perform only the specific tasks needed to setup
 the container.</p>
 </section>
 <section id="setuid-user-namespaces">
-<h2>Setuid &amp; User Namespaces<a class="headerlink" href="#setuid-user-namespaces" title="Permalink to this headline"></a></h2>
+<h2>Setuid &amp; User Namespaces<a class="headerlink" href="#setuid-user-namespaces" title="Permalink to this heading"></a></h2>
 <p>Using a setuid binary to run container setup operations is essential to
 support containers on older Linux distributions, such as CentOS 6, that
 were previously common in HPC and enterprise. Newer distributions have
@@ -204,7 +214,7 @@ circumstances that require this as new functionality is developed and
 reaches commonly deployed Linux distributions.</p>
 </section>
 <section id="runtime-user-privilege-model">
-<h2>Runtime &amp; User Privilege Model<a class="headerlink" href="#runtime-user-privilege-model" title="Permalink to this headline"></a></h2>
+<h2>Runtime &amp; User Privilege Model<a class="headerlink" href="#runtime-user-privilege-model" title="Permalink to this heading"></a></h2>
 <p>While other runtimes have aimed to safely sandbox containers executing
 as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user, so that they cannot affect the host system,
 Apptainer has adopted an alternative security model:</p>
@@ -230,7 +240,7 @@ etc. provided by other runtimes, Apptainer can make use of
 additional namespaces and functionality such as seccomp and cgroups.</p>
 </section>
 <section id="singularity-image-format-sif">
-<h2>Singularity Image Format (SIF)<a class="headerlink" href="#singularity-image-format-sif" title="Permalink to this headline"></a></h2>
+<h2>Singularity Image Format (SIF)<a class="headerlink" href="#singularity-image-format-sif" title="Permalink to this heading"></a></h2>
 <p>Apptainer uses SIF as its default container format. A SIF container
 is a single file, which makes it easy to manage and distribute. Inside
 the SIF file, the container filesystem is held in a SquashFS object. By
@@ -265,7 +275,7 @@ kernel. Unlike other container formats, an encrypted container is not
 decrypted to disk in order to run it.</p>
 </section>
 <section id="configuration-runtime-options">
-<h2>Configuration &amp; Runtime Options<a class="headerlink" href="#configuration-runtime-options" title="Permalink to this headline"></a></h2>
+<h2>Configuration &amp; Runtime Options<a class="headerlink" href="#configuration-runtime-options" title="Permalink to this heading"></a></h2>
 <p>System administrators who manage Apptainer can use configuration
 files to set security restrictions, grant or revoke a user’s
 capabilities, manage resources and authorize containers etc.</p>
@@ -305,6 +315,7 @@ here</span></a>.</p>
 
 </footer>
         </div>
+
       </div>
     </section>
   </div>

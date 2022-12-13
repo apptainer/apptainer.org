@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -131,11 +133,19 @@
       </nav>
 
       <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/user/latest/">https://apptainer.org/docs/user/latest/</a></p>
+    </div>
+</div>
+
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Build a Container</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Build a Container</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/build_a_container.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -146,7 +156,7 @@
            <div itemprop="articleBody">
              
   <section id="build-a-container">
-<span id="id1"></span><h1>Build a Container<a class="headerlink" href="#build-a-container" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Build a Container<a class="headerlink" href="#build-a-container" title="Permalink to this heading"></a></h1>
 <p id="sec-build-a-container"><code class="docutils literal notranslate"><span class="pre">build</span></code> is the “Swiss army knife” of container creation. You can use
 it to download and assemble existing containers from external resources
 like <a class="reference external" href="https://hub.docker.com/">Docker Hub</a> and other OCI registries.
@@ -154,7 +164,7 @@ You can use it to convert containers between the formats supported by
 Apptainer. And you can use it in conjunction with a <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">Apptainer definition</span></a> file to create a container from scratch and
 customized it to fit your needs.</p>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">build</span></code> command accepts a target as input and produces a container
 as output.</p>
 <p>The target defines the method that <code class="docutils literal notranslate"><span class="pre">build</span></code> uses to create the
@@ -181,7 +191,7 @@ create a container in either supported format you can convert existing
 containers from one format to another.</p>
 </section>
 <section id="downloading-an-existing-container-from-docker-hub">
-<h2>Downloading an existing container from Docker Hub<a class="headerlink" href="#downloading-an-existing-container-from-docker-hub" title="Permalink to this headline"></a></h2>
+<h2>Downloading an existing container from Docker Hub<a class="headerlink" href="#downloading-an-existing-container-from-docker-hub" title="Permalink to this heading"></a></h2>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">build</span></code> to download layers from Docker Hub and assemble
 them into Apptainer containers.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build alpine.sif docker://alpine
@@ -189,7 +199,7 @@ them into Apptainer containers.</p>
 </div>
 </section>
 <section id="downloading-an-existing-container-from-a-library-api-registry">
-<h2>Downloading an existing container from a Library API Registry<a class="headerlink" href="#downloading-an-existing-container-from-a-library-api-registry" title="Permalink to this headline"></a></h2>
+<h2>Downloading an existing container from a Library API Registry<a class="headerlink" href="#downloading-an-existing-container-from-a-library-api-registry" title="Permalink to this heading"></a></h2>
 <p>You can use the build command to download a container from the Container
 Library.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build lolcow.sif library://lolcow
@@ -202,7 +212,7 @@ will be converted to a compressed, read-only SIF. If you want your
 container in a writable format use the <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> option.</p>
 </section>
 <section id="creating-writable-sandbox-directories">
-<span id="create-a-writable-container"></span><h2>Creating writable <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> directories<a class="headerlink" href="#creating-writable-sandbox-directories" title="Permalink to this headline"></a></h2>
+<span id="create-a-writable-container"></span><h2>Creating writable <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> directories<a class="headerlink" href="#creating-writable-sandbox-directories" title="Permalink to this heading"></a></h2>
 <p>If you wanted to create a container within a writable directory (called
 a sandbox) you can do so with the <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> option. It’s possible to
 create a sandbox without root privileges, but to ensure proper file
@@ -220,7 +230,7 @@ change.</p>
 </div>
 </section>
 <section id="converting-containers-from-one-format-to-another">
-<h2>Converting containers from one format to another<a class="headerlink" href="#converting-containers-from-one-format-to-another" title="Permalink to this headline"></a></h2>
+<h2>Converting containers from one format to another<a class="headerlink" href="#converting-containers-from-one-format-to-another" title="Permalink to this heading"></a></h2>
 <p>If you already have a container saved locally, you can use it as a
 target to build a new container. This allows you convert containers from
 one format to another. For example if you had a sandbox container called
@@ -237,7 +247,7 @@ build your immutable production containers directly from an Apptainer
 definition file instead.</p>
 </section>
 <section id="building-containers-from-apptainer-definition-files">
-<h2>Building containers from Apptainer definition files<a class="headerlink" href="#building-containers-from-apptainer-definition-files" title="Permalink to this headline"></a></h2>
+<h2>Building containers from Apptainer definition files<a class="headerlink" href="#building-containers-from-apptainer-definition-files" title="Permalink to this heading"></a></h2>
 <p>Of course, Apptainer definition files can be used as the target when
 building a container. For detailed information on writing Apptainer
 definition files, please see the <a class="reference internal" href="definition_files.html"><span class="doc">Container Definition docs</span></a>. Let’s say you already have the following container
@@ -275,16 +285,16 @@ compressor available is <code class="docutils literal notranslate"><span class="
 </div>
 </section>
 <section id="building-encrypted-containers">
-<h2>Building encrypted containers<a class="headerlink" href="#building-encrypted-containers" title="Permalink to this headline"></a></h2>
+<h2>Building encrypted containers<a class="headerlink" href="#building-encrypted-containers" title="Permalink to this heading"></a></h2>
 <p>With Apptainer it is possible to build and run
 encrypted containers. The containers are decrypted at runtime entirely
 in kernel space, meaning that no intermediate decrypted data is ever
 present on disk or in memory. See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
 </section>
 <section id="build-options">
-<h2>Build options<a class="headerlink" href="#build-options" title="Permalink to this headline"></a></h2>
+<h2>Build options<a class="headerlink" href="#build-options" title="Permalink to this heading"></a></h2>
 <section id="encrypt">
-<h3><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code><a class="headerlink" href="#encrypt" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code><a class="headerlink" href="#encrypt" title="Permalink to this heading"></a></h3>
 <p>Specifies that Apptainer should use a secret saved in either the
 <code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PASSPHRASE</span></code> or
 <code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PEM_PATH</span></code> environment variable to build an
@@ -292,27 +302,27 @@ encrypted container. See <a class="reference internal" href="encryption.html#enc
 more details.</p>
 </section>
 <section id="fakeroot">
-<h3><code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code><a class="headerlink" href="#fakeroot" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code><a class="headerlink" href="#fakeroot" title="Permalink to this heading"></a></h3>
 <p>Gives users a way to build containers completely unprivileged. See
 <a class="reference internal" href="fakeroot.html#fakeroot"><span class="std std-ref">the fakeroot feature</span></a> for details.</p>
 </section>
 <section id="force">
-<h3><code class="docutils literal notranslate"><span class="pre">--force</span></code><a class="headerlink" href="#force" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--force</span></code><a class="headerlink" href="#force" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--force</span></code> option will delete and overwrite an existing
 Apptainer image without presenting the normal interactive prompt.</p>
 </section>
 <section id="json">
-<h3><code class="docutils literal notranslate"><span class="pre">--json</span></code><a class="headerlink" href="#json" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--json</span></code><a class="headerlink" href="#json" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--json</span></code> option will force Apptainer to interpret a given
 definition file as a json.</p>
 </section>
 <section id="library">
-<h3><code class="docutils literal notranslate"><span class="pre">--library</span></code><a class="headerlink" href="#library" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--library</span></code><a class="headerlink" href="#library" title="Permalink to this heading"></a></h3>
 <p>This command allows you to set a different library. Look
 <a class="reference internal" href="library_api.html#library-api-registries"><span class="std std-ref">here</span></a> for more information.</p>
 </section>
 <section id="notest">
-<h3><code class="docutils literal notranslate"><span class="pre">--notest</span></code><a class="headerlink" href="#notest" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--notest</span></code><a class="headerlink" href="#notest" title="Permalink to this heading"></a></h3>
 <p>If you don’t want to run the <code class="docutils literal notranslate"><span class="pre">%test</span></code> section during the container
 build, you can skip it with the <code class="docutils literal notranslate"><span class="pre">--notest</span></code> option. For instance, maybe
 you are building a container intended to run in a production environment
@@ -322,21 +332,21 @@ don’t want your build to exit with an error because it cannot find a GPU
 on your system.</p>
 </section>
 <section id="passphrase">
-<h3><code class="docutils literal notranslate"><span class="pre">--passphrase</span></code><a class="headerlink" href="#passphrase" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--passphrase</span></code><a class="headerlink" href="#passphrase" title="Permalink to this heading"></a></h3>
 <p>This flag allows you to pass a plaintext passphrase to encrypt the
 container file system at build time. See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
 </section>
 <section id="pem-path">
-<h3><code class="docutils literal notranslate"><span class="pre">--pem-path</span></code><a class="headerlink" href="#pem-path" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--pem-path</span></code><a class="headerlink" href="#pem-path" title="Permalink to this heading"></a></h3>
 <p>This flag allows you to pass the location of a public key to encrypt the
 container file system at build time. See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
 </section>
 <section id="sandbox">
-<h3><code class="docutils literal notranslate"><span class="pre">--sandbox</span></code><a class="headerlink" href="#sandbox" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--sandbox</span></code><a class="headerlink" href="#sandbox" title="Permalink to this heading"></a></h3>
 <p>Build a sandbox (chroot directory) instead of the default SIF format.</p>
 </section>
 <section id="section">
-<h3><code class="docutils literal notranslate"><span class="pre">--section</span></code><a class="headerlink" href="#section" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--section</span></code><a class="headerlink" href="#section" title="Permalink to this heading"></a></h3>
 <p>Instead of running the entire definition file, only run a specific
 section or sections. This option accepts a comma delimited string of
 definition file sections. Acceptable arguments include <code class="docutils literal notranslate"><span class="pre">all</span></code>, <code class="docutils literal notranslate"><span class="pre">none</span></code>
@@ -348,7 +358,7 @@ the container was built. Using the <code class="docutils literal notranslate"><s
 meta-data useless, so use care if you value reproducibility.</p>
 </section>
 <section id="update">
-<h3><code class="docutils literal notranslate"><span class="pre">--update</span></code><a class="headerlink" href="#update" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--update</span></code><a class="headerlink" href="#update" title="Permalink to this heading"></a></h3>
 <p>You can build into the same sandbox container multiple times (though the
 results may be unpredictable and it is generally better to delete your
 container and start from scratch).</p>
@@ -361,7 +371,7 @@ definition file into the existing container.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--update</span></code> option is only valid when used with sandbox containers.</p>
 </section>
 <section id="nv">
-<h3><code class="docutils literal notranslate"><span class="pre">--nv</span></code><a class="headerlink" href="#nv" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--nv</span></code><a class="headerlink" href="#nv" title="Permalink to this heading"></a></h3>
 <p>This flag allows you to mount the Nvidia CUDA libraries of your host
 into your build environment. Libraries are mounted during the execution
 of <code class="docutils literal notranslate"><span class="pre">post</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code> sections.</p>
@@ -373,7 +383,7 @@ if the mount destination doesn’t exist inside the container, they are ignored.
 </div>
 </section>
 <section id="rocm">
-<h3><code class="docutils literal notranslate"><span class="pre">--rocm</span></code><a class="headerlink" href="#rocm" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--rocm</span></code><a class="headerlink" href="#rocm" title="Permalink to this heading"></a></h3>
 <p>This flag allows you to mount the AMD Rocm libraries of your host into
 your build environment. Libraries are mounted during the execution of
 <code class="docutils literal notranslate"><span class="pre">post</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code> sections.</p>
@@ -385,7 +395,7 @@ if the mount destination doesn’t exist inside the container, they are ignored.
 </div>
 </section>
 <section id="bind">
-<h3><code class="docutils literal notranslate"><span class="pre">--bind</span></code><a class="headerlink" href="#bind" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--bind</span></code><a class="headerlink" href="#bind" title="Permalink to this heading"></a></h3>
 <p>This flag allows you to mount a directory, a file or an image during
 build, it works the same way as <code class="docutils literal notranslate"><span class="pre">--bind</span></code> for <code class="docutils literal notranslate"><span class="pre">shell</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code> and
 <code class="docutils literal notranslate"><span class="pre">run</span></code> and can be specified multiple times, see <a class="reference internal" href="bind_paths_and_mounts.html#user-defined-bind-paths"><span class="std std-ref">user defined bind
@@ -410,7 +420,7 @@ in the definition file.</p>
 </div>
 </section>
 <section id="writable-tmpfs">
-<h3><code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code><a class="headerlink" href="#writable-tmpfs" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code><a class="headerlink" href="#writable-tmpfs" title="Permalink to this heading"></a></h3>
 <p>This flag will run the <code class="docutils literal notranslate"><span class="pre">%test</span></code> section of the build with a writable
 tmpfs overlay filesystem in place. This allows the tests to create
 files, which will be discarded at the end of the build. Other portions
@@ -418,7 +428,7 @@ of the build do not use this temporary filesystem.</p>
 </section>
 </section>
 <section id="more-build-topics">
-<h2>More Build topics<a class="headerlink" href="#more-build-topics" title="Permalink to this headline"></a></h2>
+<h2>More Build topics<a class="headerlink" href="#more-build-topics" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>If you want to <strong>customize the cache location</strong> (where Docker layers
 are downloaded on your system), specify Docker credentials, or any
@@ -457,6 +467,7 @@ look <a class="reference internal" href="encryption.html#encryption"><span class
 
 </footer>
         </div>
+
       </div>
     </section>
   </div>

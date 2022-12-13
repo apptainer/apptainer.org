@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -110,11 +112,19 @@
       </nav>
 
       <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/user/latest/">https://apptainer.org/docs/user/latest/</a></p>
+    </div>
+</div>
+
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Network virtualization</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Network virtualization</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/networking.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -125,7 +135,7 @@
            <div itemprop="articleBody">
              
   <section id="network-virtualization">
-<span id="networking"></span><h1>Network virtualization<a class="headerlink" href="#network-virtualization" title="Permalink to this headline"></a></h1>
+<span id="networking"></span><h1>Network virtualization<a class="headerlink" href="#network-virtualization" title="Permalink to this heading"></a></h1>
 <p id="sec-networking">Apptainer provides full integration with <a class="reference external" href="https://github.com/containernetworking/cni">cni</a> , to make network
 virtualization easy. The following options can be used with the the
 action commands (<code class="docutils literal notranslate"><span class="pre">exec</span></code>, <code class="docutils literal notranslate"><span class="pre">run</span></code>, and <code class="docutils literal notranslate"><span class="pre">shell</span></code>) to create and
@@ -141,7 +151,7 @@ configurations. This is accomplished through settings in
 <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>. See the administrator guide for details.</p>
 </div>
 <section id="dns">
-<h2><code class="docutils literal notranslate"><span class="pre">--dns</span></code><a class="headerlink" href="#dns" title="Permalink to this headline"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">--dns</span></code><a class="headerlink" href="#dns" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--dns</span></code> option allows you to specify a comma separated list of DNS
 servers to add to the <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> file.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nslookup google.com | grep Server
@@ -156,7 +166,7 @@ nameserver 8.8.8.8
 </div>
 </section>
 <section id="hostname">
-<h2><code class="docutils literal notranslate"><span class="pre">--hostname</span></code><a class="headerlink" href="#hostname" title="Permalink to this headline"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">--hostname</span></code><a class="headerlink" href="#hostname" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--hostname</span></code> option accepts a string argument to change the
 hostname within the container.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ hostname
@@ -168,7 +178,7 @@ hal-9000
 </div>
 </section>
 <section id="net">
-<h2><code class="docutils literal notranslate"><span class="pre">--net</span></code><a class="headerlink" href="#net" title="Permalink to this headline"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">--net</span></code><a class="headerlink" href="#net" title="Permalink to this heading"></a></h2>
 <p>Passing the <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag will cause the container to join a new
 network namespace when it initiates. A bridge interface is also set up by
 default.</p>
@@ -181,7 +191,7 @@ $ sudo apptainer exec --net my_container.sif hostname -I
 </div>
 </section>
 <section id="network">
-<h2><code class="docutils literal notranslate"><span class="pre">--network</span></code><a class="headerlink" href="#network" title="Permalink to this headline"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">--network</span></code><a class="headerlink" href="#network" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--network</span></code> option can only be invoked in combination with the
 <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag. It accepts a comma delimited string of network types.
 Each entry will bring up a dedicated interface inside container.</p>
@@ -220,7 +230,7 @@ configuration directory as required, and Apptainer’s provided
 configurations may also be modified.</p>
 </section>
 <section id="network-args">
-<h2><code class="docutils literal notranslate"><span class="pre">--network-args</span></code><a class="headerlink" href="#network-args" title="Permalink to this headline"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">--network-args</span></code><a class="headerlink" href="#network-args" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--network-args</span></code> option provides a convenient way to specify
 arguments to pass directly to the cni plugins. It must be used in
 conjunction with the <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag.</p>
@@ -302,6 +312,7 @@ Commercial support is available at
 
 </footer>
         </div>
+
       </div>
     </section>
   </div>
