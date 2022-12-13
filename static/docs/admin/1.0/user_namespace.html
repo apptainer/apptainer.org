@@ -17,7 +17,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -86,11 +88,19 @@
       </nav>
 
       <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/admin/latest/">https://apptainer.org/docs/admin/latest/</a></p>
+    </div>
+</div>
+
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>User Namespaces &amp; Fakeroot</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">User Namespaces &amp; Fakeroot</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-admindocs/blob/master/user_namespace.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -101,7 +111,7 @@
            <div itemprop="articleBody">
              
   <section id="user-namespaces-fakeroot">
-<span id="userns"></span><h1>User Namespaces &amp; Fakeroot<a class="headerlink" href="#user-namespaces-fakeroot" title="Permalink to this headline"></a></h1>
+<span id="userns"></span><h1>User Namespaces &amp; Fakeroot<a class="headerlink" href="#user-namespaces-fakeroot" title="Permalink to this heading"></a></h1>
 <p>User namespaces are an isolation feature that allow processes to run
 with different user identifiers and/or privileges inside that namespace
 than are permitted outside. A user may have a <code class="docutils literal notranslate"><span class="pre">uid</span></code> of <code class="docutils literal notranslate"><span class="pre">1001</span></code> on a
@@ -120,7 +130,7 @@ installed without root.</p></li>
 or running a container.</p></li>
 </ul>
 <section id="user-namespace-requirements">
-<span id="userns-requirements"></span><h2>User Namespace Requirements<a class="headerlink" href="#user-namespace-requirements" title="Permalink to this headline"></a></h2>
+<span id="userns-requirements"></span><h2>User Namespace Requirements<a class="headerlink" href="#user-namespace-requirements" title="Permalink to this heading"></a></h2>
 <p>To allow unprivileged creation of user namespaces a kernel &gt;=3.8 is
 required, with &gt;=3.18 being recommended due to security fixes for user
 namespaces (3.18 also adds OverlayFS support which is used by
@@ -131,7 +141,7 @@ parameter. Please consult your distribution documentation or vendor to
 confirm the steps necessary to ‘enable unprivileged user namespace
 creation’.</p>
 <section id="debian">
-<h3>Debian<a class="headerlink" href="#debian" title="Permalink to this headline"></a></h3>
+<h3>Debian<a class="headerlink" href="#debian" title="Permalink to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;echo kernel.unprivileged_userns_clone=1 </span><span class="se">\</span>
 <span class="s1">    &gt;/etc/sysctl.d/90-unprivileged_userns.conf&#39;</span>
 <span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">d</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">90</span><span class="o">-</span><span class="n">unprivileged_userns</span><span class="o">.</span><span class="n">conf</span>
@@ -139,7 +149,7 @@ creation’.</p>
 </div>
 </section>
 <section id="rhel-centos-7">
-<h3>RHEL/CentOS 7<a class="headerlink" href="#rhel-centos-7" title="Permalink to this headline"></a></h3>
+<h3>RHEL/CentOS 7<a class="headerlink" href="#rhel-centos-7" title="Permalink to this heading"></a></h3>
 <p>From 7.4, kernel support is included but must be enabled with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;echo user.max_user_namespaces=15000 </span><span class="se">\</span>
 <span class="s1">    &gt;/etc/sysctl.d/90-max_net_namespaces.conf&#39;</span>
@@ -149,7 +159,7 @@ creation’.</p>
 </section>
 </section>
 <section id="unprivileged-installations">
-<span id="userns-limitations"></span><h2>Unprivileged Installations<a class="headerlink" href="#unprivileged-installations" title="Permalink to this headline"></a></h2>
+<span id="userns-limitations"></span><h2>Unprivileged Installations<a class="headerlink" href="#unprivileged-installations" title="Permalink to this heading"></a></h2>
 <p>As detailed in the <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">non-setuid installation</span></a>
 section, Apptainer can be compiled or configured with the <code class="docutils literal notranslate"><span class="pre">allow</span>
 <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> option in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> to not perform privileged
@@ -174,7 +184,7 @@ distribution.</p></li>
 </ul>
 </section>
 <section id="userns-option">
-<h2>–userns option<a class="headerlink" href="#userns-option" title="Permalink to this headline"></a></h2>
+<h2>–userns option<a class="headerlink" href="#userns-option" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--userns</span></code> option to <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run/exec/shell</span></code> will start a
 container using a user namespace, avoiding the setuid privileged
 workflow for container setup even if Apptainer was compiled and
@@ -182,7 +192,7 @@ configured to use setuid by default.</p>
 <p>The same limitations apply as in an unprivileged installation.</p>
 </section>
 <section id="fakeroot-feature">
-<span id="fakeroot"></span><h2>Fakeroot feature<a class="headerlink" href="#fakeroot-feature" title="Permalink to this headline"></a></h2>
+<span id="fakeroot"></span><h2>Fakeroot feature<a class="headerlink" href="#fakeroot-feature" title="Permalink to this heading"></a></h2>
 <p>Fakeroot (or commonly referred as rootless mode) allows an unprivileged
 user to run a container as a <strong>“fake root”</strong> user by leveraging user
 namespaces with <a class="reference external" href="http://man7.org/linux/man-pages/man7/user_namespaces.7.html">user namespace UID/GID mapping</a>.</p>
@@ -193,7 +203,7 @@ configured range of UIDs/GIDs in the container, which map back to
 to be <code class="docutils literal notranslate"><span class="pre">root</span> <span class="pre">(uid</span> <span class="pre">0)</span></code> in a container, install packages etc., but have
 no privilege on the host.</p>
 <section id="requirements">
-<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h3>
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h3>
 <p>In addition to user namespace support, Apptainer must manipulate
 <code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code> maps for the user namespace it creates. By
 default this happens transparently in the setuid workflow. With
@@ -203,7 +213,7 @@ external setuid binaries <code class="docutils literal notranslate"><span class=
 install those binaries on your system.</p>
 </section>
 <section id="basics">
-<h3>Basics<a class="headerlink" href="#basics" title="Permalink to this headline"></a></h3>
+<h3>Basics<a class="headerlink" href="#basics" title="Permalink to this heading"></a></h3>
 <p>Fakeroot relies on <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> files to find
 configured mappings from real user and group IDs, to a range of
 otherwise vacant IDs for each user on the host system that can be
@@ -288,7 +298,7 @@ Benchmarks have shown speed-ups up to 20x.”</p>
 </div>
 </section>
 <section id="filesystem-considerations">
-<h3>Filesystem considerations<a class="headerlink" href="#filesystem-considerations" title="Permalink to this headline"></a></h3>
+<h3>Filesystem considerations<a class="headerlink" href="#filesystem-considerations" title="Permalink to this heading"></a></h3>
 <p>Based on the above range, here we can see what happens when the user
 <code class="docutils literal notranslate"><span class="pre">foo</span></code> create files with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> feature:</p>
 <table class="docutils align-default">
@@ -319,7 +329,7 @@ the user’s UID on the host. The user can remove these files by using a
 container shell running with fakeroot.</p>
 </section>
 <section id="network-configuration">
-<h3>Network configuration<a class="headerlink" href="#network-configuration" title="Permalink to this headline"></a></h3>
+<h3>Network configuration<a class="headerlink" href="#network-configuration" title="Permalink to this heading"></a></h3>
 <p>With fakeroot, users can request a container network named <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code>,
 other networks are restricted and can only be used by the real host root
 user. By default the <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code> network is configured to use a network
@@ -338,7 +348,7 @@ the network.</p>
 </div>
 </section>
 <section id="configuration-with-config-fakeroot">
-<span id="config-fakeroot"></span><h3>Configuration with <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code><a class="headerlink" href="#configuration-with-config-fakeroot" title="Permalink to this headline"></a></h3>
+<span id="config-fakeroot"></span><h3>Configuration with <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code><a class="headerlink" href="#configuration-with-config-fakeroot" title="Permalink to this heading"></a></h3>
 <p>Apptainer provides a <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> command that
 can be used by a root user to administer local system <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code>
 and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> files in a simple manner. This allows users to be
@@ -361,7 +371,7 @@ support subuid or subgid mappings, so they cannot be defined in a
 central directory such as LDAP.</p>
 </div>
 <section id="adding-a-fakeroot-mapping">
-<h4>Adding a fakeroot mapping<a class="headerlink" href="#adding-a-fakeroot-mapping" title="Permalink to this headline"></a></h4>
+<h4>Adding a fakeroot mapping<a class="headerlink" href="#adding-a-fakeroot-mapping" title="Permalink to this heading"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">-a/--add</span> <span class="pre">&lt;user&gt;</span></code> option to <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> to create new
 mapping entries so that <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> can use the fakeroot feature of
 Apptainer:</p>
@@ -390,7 +400,7 @@ username.</p>
 </div>
 </section>
 <section id="deleting-disabling-enabling-mappings">
-<h4>Deleting, disabling, enabling mappings<a class="headerlink" href="#deleting-disabling-enabling-mappings" title="Permalink to this headline"></a></h4>
+<h4>Deleting, disabling, enabling mappings<a class="headerlink" href="#deleting-disabling-enabling-mappings" title="Permalink to this heading"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">-r/--remove</span> <span class="pre">&lt;user&gt;</span></code> option to <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> to
 completely remove mapping entries. The <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> will no longer be able
 to use the fakeroot feature of Apptainer:</p>
@@ -456,6 +466,7 @@ $ cat /etc/subuid
 
 </footer>
         </div>
+
       </div>
     </section>
   </div>
