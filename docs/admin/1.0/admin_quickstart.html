@@ -17,7 +17,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -78,11 +80,19 @@
       </nav>
 
       <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/admin/latest/">https://apptainer.org/docs/admin/latest/</a></p>
+    </div>
+</div>
+
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Admin Quick Start</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Admin Quick Start</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-admindocs/blob/master/admin_quickstart.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -93,14 +103,14 @@
            <div itemprop="articleBody">
              
   <section id="admin-quick-start">
-<h1>Admin Quick Start<a class="headerlink" href="#admin-quick-start" title="Permalink to this headline"></a></h1>
+<h1>Admin Quick Start<a class="headerlink" href="#admin-quick-start" title="Permalink to this heading"></a></h1>
 <p>This quick start gives an overview of installation of Apptainer from
 source, a description of the architecture of Apptainer, and pointers
 to configuration files. More information, including alternate
 installation options and detailed configuration options can be found
 later in this guide.</p>
 <section id="architecture-of-apptainer">
-<span id="apptainer-architecture"></span><h2>Architecture of Apptainer<a class="headerlink" href="#architecture-of-apptainer" title="Permalink to this headline"></a></h2>
+<span id="apptainer-architecture"></span><h2>Architecture of Apptainer<a class="headerlink" href="#architecture-of-apptainer" title="Permalink to this heading"></a></h2>
 <p>Apptainer is designed to allow containers to be executed as if they
 were native programs or scripts on a host system. No daemon is required
 to build or run containers, and the security model is compatible with
@@ -123,7 +133,7 @@ can use additional Linux namespaces and other security and resource
 limits to accomplish this.</p>
 </section>
 <section id="apptainer-security">
-<span id="id1"></span><h2>Apptainer Security<a class="headerlink" href="#apptainer-security" title="Permalink to this headline"></a></h2>
+<span id="id1"></span><h2>Apptainer Security<a class="headerlink" href="#apptainer-security" title="Permalink to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>See also the <a class="reference internal" href="security.html#security"><span class="std std-ref">security section</span></a> of this guide, for more
@@ -174,7 +184,7 @@ non-setuid mode.</p>
 </div>
 </section>
 <section id="installation-from-source">
-<h2>Installation from Source<a class="headerlink" href="#installation-from-source" title="Permalink to this headline"></a></h2>
+<h2>Installation from Source<a class="headerlink" href="#installation-from-source" title="Permalink to this heading"></a></h2>
 <p>Apptainer can be installed from source directly, or by building an
 RPM package from the source. Linux distributions may also package
 Apptainer, but their packages may not be up-to-date with the
@@ -190,7 +200,7 @@ install as a non-root user, and how this affects the functionality of
 Apptainer.</p>
 </div>
 <section id="install-dependencies">
-<h3>Install Dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this headline"></a></h3>
+<h3>Install Dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this heading"></a></h3>
 <p>On Red Hat Enterprise Linux or CentOS install the following
 dependencies:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo yum update -y <span class="o">&amp;&amp;</span> <span class="se">\</span>
@@ -219,7 +229,7 @@ dependencies:</p>
 </div>
 </section>
 <section id="install-go">
-<h3>Install Go<a class="headerlink" href="#install-go" title="Permalink to this headline"></a></h3>
+<h3>Install Go<a class="headerlink" href="#install-go" title="Permalink to this heading"></a></h3>
 <p>Apptainer is written primarily in Go, and you will need Go 1.16
 or above installed to compile it from source. Versions of Go packaged by
 your distribution may not be new enough to build Apptainer.</p>
@@ -251,7 +261,7 @@ instructions on go installation page).</p>
 </div>
 </section>
 <section id="download-apptainer-from-a-github-release">
-<h3>Download Apptainer from a GitHub release<a class="headerlink" href="#download-apptainer-from-a-github-release" title="Permalink to this headline"></a></h3>
+<h3>Download Apptainer from a GitHub release<a class="headerlink" href="#download-apptainer-from-a-github-release" title="Permalink to this heading"></a></h3>
 <p>You can download Apptainer from one of the releases. To see a full
 list, visit <a class="reference external" href="https://github.com/apptainer/apptainer/releases">the GitHub release page</a>.  After deciding on a
 release to install, you can run the following commands to proceed with
@@ -264,7 +274,7 @@ the installation.</p>
 </div>
 </section>
 <section id="compile-install-apptainer">
-<h3>Compile &amp; Install Apptainer<a class="headerlink" href="#compile-install-apptainer" title="Permalink to this headline"></a></h3>
+<h3>Compile &amp; Install Apptainer<a class="headerlink" href="#compile-install-apptainer" title="Permalink to this heading"></a></h3>
 <p>Apptainer uses a custom build system called <code class="docutils literal notranslate"><span class="pre">makeit</span></code>. <code class="docutils literal notranslate"><span class="pre">mconfig</span></code>
 is called to generate a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> and then <code class="docutils literal notranslate"><span class="pre">make</span></code> is used to
 compile and install.</p>
@@ -301,7 +311,7 @@ each individual node.</p></li>
 </section>
 </section>
 <section id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline"></a></h2>
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
 <p>Apptainer is configured using files under <code class="docutils literal notranslate"><span class="pre">etc/apptainer</span></code> in
 your <code class="docutils literal notranslate"><span class="pre">--prefix</span></code>, or <code class="docutils literal notranslate"><span class="pre">--syconfdir</span></code> if you used that option with
 <code class="docutils literal notranslate"><span class="pre">mconfig</span></code>. In a default installation from source without a
@@ -316,7 +326,7 @@ network, and resource configuration. Head over to the
 files and configuration options are discussed.</p>
 </section>
 <section id="test-apptainer">
-<h2>Test Apptainer<a class="headerlink" href="#test-apptainer" title="Permalink to this headline"></a></h2>
+<h2>Test Apptainer<a class="headerlink" href="#test-apptainer" title="Permalink to this heading"></a></h2>
 <p>You can run a quick test of Apptainer using a small alpine container:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine cat /etc/alpine-release
 3.9.2
@@ -353,6 +363,7 @@ information about how to use Apptainer.</p>
 
 </footer>
         </div>
+
       </div>
     </section>
   </div>

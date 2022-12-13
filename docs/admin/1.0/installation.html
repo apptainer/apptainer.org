@@ -17,7 +17,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -114,11 +116,19 @@
       </nav>
 
       <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/admin/latest/">https://apptainer.org/docs/admin/latest/</a></p>
+    </div>
+</div>
+
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Installing Apptainer</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Installing Apptainer</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-admindocs/blob/master/installation.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -129,19 +139,19 @@
            <div itemprop="articleBody">
              
   <section id="installing-apptainer">
-<span id="installation"></span><h1>Installing Apptainer<a class="headerlink" href="#installing-apptainer" title="Permalink to this headline"></a></h1>
+<span id="installation"></span><h1>Installing Apptainer<a class="headerlink" href="#installing-apptainer" title="Permalink to this heading"></a></h1>
 <p>This section will guide you through the process of installing
 Apptainer 1.0.0 via several different methods. (For
 instructions on installing earlier versions of Apptainer please see
 <a class="reference external" href="https://apptainer.org/docs/">earlier versions of the docs</a>.)</p>
 <section id="installation-on-linux">
-<h2>Installation on Linux<a class="headerlink" href="#installation-on-linux" title="Permalink to this headline"></a></h2>
+<h2>Installation on Linux<a class="headerlink" href="#installation-on-linux" title="Permalink to this heading"></a></h2>
 <p>Apptainer can be installed on any modern Linux distribution, on
 bare-metal or inside a Virtual Machine. Nested installations inside
 containers are not recommended, and require the outer container to be
 run with full privilege.</p>
 <section id="system-requirements">
-<h3>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline"></a></h3>
+<h3>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading"></a></h3>
 <p>Apptainer requires ~140MiB disk space once compiled and installed.</p>
 <p>There are no specific CPU or memory requirements at runtime, though 2GB
 of RAM is recommended when building from source.</p>
@@ -155,12 +165,12 @@ recommended) Required to run containers without root or setuid
 privilege.</p></li>
 </ul>
 <section id="external-binaries">
-<h4>External Binaries<a class="headerlink" href="#external-binaries" title="Permalink to this headline"></a></h4>
+<h4>External Binaries<a class="headerlink" href="#external-binaries" title="Permalink to this heading"></a></h4>
 <p>Apptainer depends on a number of external binaries for full
 functionality. The methods that are used to find
 these binaries have been standardized as below.</p>
 <section id="configurable-paths">
-<h5>Configurable Paths<a class="headerlink" href="#configurable-paths" title="Permalink to this headline"></a></h5>
+<h5>Configurable Paths<a class="headerlink" href="#configurable-paths" title="Permalink to this heading"></a></h5>
 <p>The following binaries are found on <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> during build time when
 <code class="docutils literal notranslate"><span class="pre">./mconfig</span></code> is run, and their location is added to the
 <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> configuration file. At runtime this configured
@@ -189,7 +199,7 @@ squashfs container filesystem from a SIF file when necessary.</p></li>
 </ul>
 </section>
 <section id="searching-path">
-<h5>Searching $PATH<a class="headerlink" href="#searching-path" title="Permalink to this headline"></a></h5>
+<h5>Searching $PATH<a class="headerlink" href="#searching-path" title="Permalink to this heading"></a></h5>
 <p>The following standard utilities are always found by searching <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>
 at runtime:</p>
 <ul class="simple">
@@ -203,7 +213,7 @@ non-setuid installs.</p></li>
 </ul>
 </section>
 <section id="bootstrap-utilities">
-<h5>Bootstrap Utilities<a class="headerlink" href="#bootstrap-utilities" title="Permalink to this headline"></a></h5>
+<h5>Bootstrap Utilities<a class="headerlink" href="#bootstrap-utilities" title="Permalink to this heading"></a></h5>
 <p>The following utilities are required to bootstrap containerized
 distributions using their native tooling:</p>
 <ul class="simple">
@@ -218,7 +228,7 @@ distributions.</p></li>
 </section>
 </section>
 <section id="non-standard-ldconfig-nix-guix-environments">
-<h4>Non-standard ldconfig / Nix &amp; Guix Environments<a class="headerlink" href="#non-standard-ldconfig-nix-guix-environments" title="Permalink to this headline"></a></h4>
+<h4>Non-standard ldconfig / Nix &amp; Guix Environments<a class="headerlink" href="#non-standard-ldconfig-nix-guix-environments" title="Permalink to this heading"></a></h4>
 <p>If Apptainer is installed under a package manager such as Nix or
 Guix, but on top of a standard Linux distribution (e.g. CentOS or
 Debian), it may be unable to correctly find the libraries for <code class="docutils literal notranslate"><span class="pre">--nv</span></code>
@@ -232,7 +242,7 @@ point to the host <code class="docutils literal notranslate"><span class="pre">l
 related path.</p>
 </section>
 <section id="filesystem-support-limitations">
-<h4>Filesystem support / limitations<a class="headerlink" href="#filesystem-support-limitations" title="Permalink to this headline"></a></h4>
+<h4>Filesystem support / limitations<a class="headerlink" href="#filesystem-support-limitations" title="Permalink to this heading"></a></h4>
 <p>Apptainer supports most filesystems, but there are some limitations
 when installing Apptainer on, or running containers from, common
 parallel / network filesystems. In general:</p>
@@ -258,7 +268,7 @@ view of a container. You will not see these mounts from a host shell,
 as they are made in a separate mount namespace.</p>
 </div>
 <section id="overlay-support">
-<h5>Overlay support<a class="headerlink" href="#overlay-support" title="Permalink to this headline"></a></h5>
+<h5>Overlay support<a class="headerlink" href="#overlay-support" title="Permalink to this heading"></a></h5>
 <p>Various features of Apptainer, such as the <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> and
 <code class="docutils literal notranslate"><span class="pre">--overlay</span></code>, options use the Linux <code class="docutils literal notranslate"><span class="pre">overlay</span></code> filesystem driver to
 construct a container root filesystem that combines files from different
@@ -284,7 +294,7 @@ location, which should generally be on a local filesystem that supports
 overlay.</p>
 </section>
 <section id="fakeroot-sub-uid-gid-mapping">
-<h5>Fakeroot / (sub)uid/gid mapping<a class="headerlink" href="#fakeroot-sub-uid-gid-mapping" title="Permalink to this headline"></a></h5>
+<h5>Fakeroot / (sub)uid/gid mapping<a class="headerlink" href="#fakeroot-sub-uid-gid-mapping" title="Permalink to this heading"></a></h5>
 <p>When Apptainer is run using the <a class="reference internal" href="user_namespace.html#fakeroot"><span class="std std-ref">fakeroot</span></a> option it
 creates a user namespace for the container, and UIDs / GIDs in that user
 namespace are mapped to different host UID / GIDs.</p>
@@ -297,7 +307,7 @@ errors. This is currently a generic problem for rootless container
 runtimes.</p>
 </section>
 <section id="apptainer-cache-atomic-rename">
-<h5>Apptainer cache / atomic rename<a class="headerlink" href="#apptainer-cache-atomic-rename" title="Permalink to this headline"></a></h5>
+<h5>Apptainer cache / atomic rename<a class="headerlink" href="#apptainer-cache-atomic-rename" title="Permalink to this heading"></a></h5>
 <p>Apptainer will cache SIF container images generated from remote
 sources, and any OCI/docker layers used to create them. The cache is
 created at <code class="docutils literal notranslate"><span class="pre">$HOME/.apptainer/cache</span></code> by default. The location of the
@@ -331,7 +341,7 @@ result in each Apptainer instance independently fetching the
 container from the remote source, into a temporary location.</p>
 </section>
 <section id="nfs">
-<h5>NFS<a class="headerlink" href="#nfs" title="Permalink to this headline"></a></h5>
+<h5>NFS<a class="headerlink" href="#nfs" title="Permalink to this heading"></a></h5>
 <p>NFS filesystems support overlay mounts as a <code class="docutils literal notranslate"><span class="pre">lowerdir</span></code> only, and do
 not support user-namespace (sub)uid/gid mapping.</p>
 <ul class="simple">
@@ -348,7 +358,7 @@ NFS location.</p></li>
 </ul>
 </section>
 <section id="lustre-gpfs">
-<h5>Lustre / GPFS<a class="headerlink" href="#lustre-gpfs" title="Permalink to this headline"></a></h5>
+<h5>Lustre / GPFS<a class="headerlink" href="#lustre-gpfs" title="Permalink to this heading"></a></h5>
 <p>Lustre and GPFS do not have sufficient <code class="docutils literal notranslate"><span class="pre">upperdir</span></code> or <code class="docutils literal notranslate"><span class="pre">lowerdir</span></code>
 overlay support for certain Apptainer features, and do not support
 user-namespace (sub)uid/gid mapping.</p>
@@ -369,7 +379,7 @@ Lustre or GPFS location.</p></li>
 </section>
 </section>
 <section id="install-from-source">
-<span id="install-dependencies"></span><h3>Install from Source<a class="headerlink" href="#install-from-source" title="Permalink to this headline"></a></h3>
+<span id="install-dependencies"></span><h3>Install from Source<a class="headerlink" href="#install-from-source" title="Permalink to this heading"></a></h3>
 <p>To use the latest version of Apptainer from GitHub you will need to
 build and install it from source. This may sound daunting, but the
 process is straightforward, and detailed below.</p>
@@ -378,7 +388,7 @@ process is straightforward, and detailed below.</p>
 installation commands. You will also need to install some dependencies
 and install <a class="reference external" href="https://golang.org/">Go</a>.</p>
 <section id="id1">
-<h4>Install Dependencies<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h4>
+<h4>Install Dependencies<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
 <p>On Red Hat Enterprise Linux or CentOS install the following
 dependencies:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo yum update -y <span class="o">&amp;&amp;</span> <span class="se">\</span>
@@ -413,7 +423,7 @@ on your system.</p>
 </div>
 </section>
 <section id="install-go">
-<span id="id2"></span><h4>Install Go<a class="headerlink" href="#install-go" title="Permalink to this headline"></a></h4>
+<span id="id2"></span><h4>Install Go<a class="headerlink" href="#install-go" title="Permalink to this heading"></a></h4>
 <p>Apptainer is written primarily in Go, and you will need Go 1.16
 or above installed to compile it from source.</p>
 <p>This is one of several ways to <a class="reference external" href="https://golang.org/doc/install">install and configure Go</a>.</p>
@@ -444,7 +454,7 @@ instructions on go installation page).</p>
 </div>
 </section>
 <section id="download-apptainer-from-a-release">
-<h4>Download Apptainer from a release<a class="headerlink" href="#download-apptainer-from-a-release" title="Permalink to this headline"></a></h4>
+<h4>Download Apptainer from a release<a class="headerlink" href="#download-apptainer-from-a-release" title="Permalink to this heading"></a></h4>
 <p>You can download Apptainer from one of the releases. To see a full
 list, visit <a class="reference external" href="https://github.com/apptainer/apptainer/releases">the GitHub release page</a>. After deciding on a
 release to install, you can run the following commands to proceed with
@@ -457,7 +467,7 @@ the installation.</p>
 </div>
 </section>
 <section id="checkout-code-from-git">
-<h4>Checkout Code from Git<a class="headerlink" href="#checkout-code-from-git" title="Permalink to this headline"></a></h4>
+<h4>Checkout Code from Git<a class="headerlink" href="#checkout-code-from-git" title="Permalink to this heading"></a></h4>
 <p>The following commands will install Apptainer from the <a class="reference external" href="https://github.com/apptainer/apptainer">GitHub repo</a> to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>. This method
 will work for &gt;=v1.0.0. To install an older tagged
 release see <a class="reference external" href="https://apptainer.org/docs/">older versions of the docs</a>.</p>
@@ -488,7 +498,7 @@ appropriate directory use these commands.</p>
 </div>
 </section>
 <section id="compile-apptainer">
-<h4>Compile Apptainer<a class="headerlink" href="#compile-apptainer" title="Permalink to this headline"></a></h4>
+<h4>Compile Apptainer<a class="headerlink" href="#compile-apptainer" title="Permalink to this heading"></a></h4>
 <p>Apptainer uses a custom build system called <code class="docutils literal notranslate"><span class="pre">makeit</span></code>. <code class="docutils literal notranslate"><span class="pre">mconfig</span></code>
 is called to generate a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> and then <code class="docutils literal notranslate"><span class="pre">make</span></code> is used to
 compile and install.</p>
@@ -531,7 +541,7 @@ each individual node.</p></li>
 </ul>
 </section>
 <section id="unprivileged-non-setuid-installation">
-<span id="install-nonsetuid"></span><h4>Unprivileged (non-setuid) Installation<a class="headerlink" href="#unprivileged-non-setuid-installation" title="Permalink to this headline"></a></h4>
+<span id="install-nonsetuid"></span><h4>Unprivileged (non-setuid) Installation<a class="headerlink" href="#unprivileged-non-setuid-installation" title="Permalink to this heading"></a></h4>
 <p>If you need to install Apptainer as a non-root user, or do not wish
 to allow the use of a setuid root binary, you can configure
 Apptainer with the <code class="docutils literal notranslate"><span class="pre">--without-suid</span></code> option to mconfig:</p>
@@ -550,7 +560,7 @@ the <a class="reference internal" href="user_namespace.html#userns-requirements"
 this guide.</p>
 </section>
 <section id="relocatable-installation">
-<h4>Relocatable Installation<a class="headerlink" href="#relocatable-installation" title="Permalink to this headline"></a></h4>
+<h4>Relocatable Installation<a class="headerlink" href="#relocatable-installation" title="Permalink to this heading"></a></h4>
 <p>An unprivileged (non-setuid) Apptainer installation is
 relocatable. As long as the structure inside the installation directory
 (<code class="docutils literal notranslate"><span class="pre">--prefix</span></code>) is maintained, it can be moved to a different location
@@ -560,7 +570,7 @@ restricted location / ownership of configuration files is important to
 security.</p>
 </section>
 <section id="source-bash-completion-file">
-<h4>Source bash completion file<a class="headerlink" href="#source-bash-completion-file" title="Permalink to this headline"></a></h4>
+<h4>Source bash completion file<a class="headerlink" href="#source-bash-completion-file" title="Permalink to this heading"></a></h4>
 <p>To enjoy bash shell completion with Apptainer commands and options,
 source the bash completion file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ . /usr/local/etc/bash_completion.d/apptainer
@@ -572,7 +582,7 @@ Apptainer to a different location.)</p>
 </section>
 </section>
 <section id="build-and-install-an-rpm">
-<span id="install-rpm"></span><h3>Build and install an RPM<a class="headerlink" href="#build-and-install-an-rpm" title="Permalink to this headline"></a></h3>
+<span id="install-rpm"></span><h3>Build and install an RPM<a class="headerlink" href="#build-and-install-an-rpm" title="Permalink to this heading"></a></h3>
 <p>If you use RHEL, CentOS or SUSE, building and installing an Apptainer
 RPM allows your Apptainer installation be more easily managed,
 upgraded and removed.  You can build an RPM
@@ -611,7 +621,7 @@ that physically exists on nodes within a cluster when installing
 Apptainer in an HPC environment with a shared file system.</p>
 </div>
 <section id="build-an-rpm-from-git-source">
-<h4>Build an RPM from Git source<a class="headerlink" href="#build-an-rpm-from-git-source" title="Permalink to this headline"></a></h4>
+<h4>Build an RPM from Git source<a class="headerlink" href="#build-an-rpm-from-git-source" title="Permalink to this heading"></a></h4>
 <p>Alternatively, to build an RPM from a branch of the Git repository you
 can clone the repository, directly <code class="docutils literal notranslate"><span class="pre">make</span></code> an rpm, and use it to
 install Apptainer:</p>
@@ -631,7 +641,7 @@ the make step, for example:</p>
 </section>
 </section>
 <section id="remove-an-old-version">
-<span id="id3"></span><h3>Remove an old version<a class="headerlink" href="#remove-an-old-version" title="Permalink to this headline"></a></h3>
+<span id="id3"></span><h3>Remove an old version<a class="headerlink" href="#remove-an-old-version" title="Permalink to this heading"></a></h3>
 <p>In a standard installation of Apptainer (when
 building from source), the command <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code> lists all the
 files as they are installed. You must remove all of these files and
@@ -653,7 +663,7 @@ Apptainer <a class="reference internal" href="#install-rpm"><span class="std std
 can be updated and/or uninstalled with ease in the future.</p>
 </section>
 <section id="testing-checking-the-build-configuration">
-<h3>Testing &amp; Checking the Build Configuration<a class="headerlink" href="#testing-checking-the-build-configuration" title="Permalink to this headline"></a></h3>
+<h3>Testing &amp; Checking the Build Configuration<a class="headerlink" href="#testing-checking-the-build-configuration" title="Permalink to this heading"></a></h3>
 <p>After installation you can perform a basic test of Apptainer
 functionality by executing a simple alpine container:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine cat /etc/alpine-release
@@ -663,7 +673,7 @@ functionality by executing a simple alpine container:</p>
 <p>See the <a class="reference external" href="https://apptainer.org/docs/user/1.0">user guide</a> for more
 information about how to use Apptainer.</p>
 <section id="apptainer-buildcfg">
-<h4>apptainer buildcfg<a class="headerlink" href="#apptainer-buildcfg" title="Permalink to this headline"></a></h4>
+<h4>apptainer buildcfg<a class="headerlink" href="#apptainer-buildcfg" title="Permalink to this heading"></a></h4>
 <p>Running <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">buildcfg</span></code> will show the build configuration of an
 installed version of Apptainer, and lists the paths used by
 Apptainer. Use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">buildcfg</span></code> to confirm paths are set
@@ -701,7 +711,7 @@ Apptainer can be found in the <a class="reference internal" href="appendix.html#
 section</span></a>.</p>
 </section>
 <section id="test-suite">
-<h4>Test Suite<a class="headerlink" href="#test-suite" title="Permalink to this headline"></a></h4>
+<h4>Test Suite<a class="headerlink" href="#test-suite" title="Permalink to this heading"></a></h4>
 <p>The Apptainer codebase includes a test suite that is run during
 development using CI services.</p>
 <p>If you would like to run the test suite locally you can run the test
@@ -732,7 +742,7 @@ tests in an isolated development or build environment.</p>
 </section>
 </section>
 <section id="installation-on-windows-or-mac">
-<h2>Installation on Windows or Mac<a class="headerlink" href="#installation-on-windows-or-mac" title="Permalink to this headline"></a></h2>
+<h2>Installation on Windows or Mac<a class="headerlink" href="#installation-on-windows-or-mac" title="Permalink to this heading"></a></h2>
 <p>Linux container runtimes like Apptainer cannot run natively on
 Windows or Mac because of basic incompatibilities with the host kernel.
 (Contrary to a popular misconception, MacOS does not run on a Linux
@@ -744,7 +754,7 @@ source tools, by following the instructions below. Then you can install
 Apptainer in the base VM of your choice by following the linux
 <a class="reference internal" href="#installation"><span class="std std-ref">installation instructions</span></a> above.</p>
 <section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline"></a></h3>
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading"></a></h3>
 <p>Install the following programs:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://git-for-windows.github.io/">Git for Windows</a></p></li>
@@ -754,7 +764,7 @@ Apptainer in the base VM of your choice by following the linux
 </ul>
 </section>
 <section id="mac">
-<h3>Mac<a class="headerlink" href="#mac" title="Permalink to this headline"></a></h3>
+<h3>Mac<a class="headerlink" href="#mac" title="Permalink to this heading"></a></h3>
 <p>Apptainer is available via Vagrant (installable with <a class="reference external" href="https://brew.sh">Homebrew</a> or manually)</p>
 <p>To use Vagrant via Homebrew:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
@@ -791,6 +801,7 @@ $ brew install --cask virtualbox vagrant vagrant-manager
 
 </footer>
         </div>
+
       </div>
     </section>
   </div>
