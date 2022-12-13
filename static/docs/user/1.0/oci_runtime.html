@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -113,11 +115,19 @@
       </nav>
 
       <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/user/latest/">https://apptainer.org/docs/user/latest/</a></p>
+    </div>
+</div>
+
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>OCI Runtime Support</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">OCI Runtime Support</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/oci_runtime.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -128,9 +138,9 @@
            <div itemprop="articleBody">
              
   <span class="target" id="oci-runtime"></span><section id="oci-runtime-support">
-<h1>OCI Runtime Support<a class="headerlink" href="#oci-runtime-support" title="Permalink to this headline"></a></h1>
+<h1>OCI Runtime Support<a class="headerlink" href="#oci-runtime-support" title="Permalink to this heading"></a></h1>
 <section id="overview">
-<span id="sec-oci-runtime-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<span id="sec-oci-runtime-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p>OCI is an acronym for the <a class="reference external" href="https://www.opencontainers.org/">Open Containers Initiative</a> - an independent organization whose
 mandate is to develop open standards relating to containerization. To
 date, standardization efforts have focused on container formats and
@@ -147,9 +157,9 @@ privileges.</p>
 </div>
 </section>
 <section id="mounted-oci-filesystem-bundles">
-<h2>Mounted OCI Filesystem Bundles<a class="headerlink" href="#mounted-oci-filesystem-bundles" title="Permalink to this headline"></a></h2>
+<h2>Mounted OCI Filesystem Bundles<a class="headerlink" href="#mounted-oci-filesystem-bundles" title="Permalink to this heading"></a></h2>
 <section id="mounting-an-oci-filesystem-bundle">
-<h3>Mounting an OCI Filesystem Bundle<a class="headerlink" href="#mounting-an-oci-filesystem-bundle" title="Permalink to this headline"></a></h3>
+<h3>Mounting an OCI Filesystem Bundle<a class="headerlink" href="#mounting-an-oci-filesystem-bundle" title="Permalink to this heading"></a></h3>
 <p><a class="reference external" href="https://busybox.net/about.html">BusyBox</a> is used here for the purpose
 of illustration.</p>
 <p>Suppose the Singularity Image Format (SIF) file <code class="docutils literal notranslate"><span class="pre">busybox_latest.sif</span></code>
@@ -198,7 +208,7 @@ drwx------ 4 root root 4096 Apr  4 14:30 /var/tmp/busybox
 </div>
 </section>
 <section id="content-of-an-oci-compliant-filesystem-bundle">
-<h3>Content of an OCI Compliant Filesystem Bundle<a class="headerlink" href="#content-of-an-oci-compliant-filesystem-bundle" title="Permalink to this headline"></a></h3>
+<h3>Content of an OCI Compliant Filesystem Bundle<a class="headerlink" href="#content-of-an-oci-compliant-filesystem-bundle" title="Permalink to this heading"></a></h3>
 <p>The <em>expected</em> contents of the mounted filesystem are as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo ls -la /var/tmp/busybox
 total 28
@@ -866,7 +876,7 @@ this extensibility is evident.</p>
 </section>
 </section>
 <section id="creating-oci-compliant-container-instances">
-<h2>Creating OCI Compliant Container Instances<a class="headerlink" href="#creating-oci-compliant-container-instances" title="Permalink to this headline"></a></h2>
+<h2>Creating OCI Compliant Container Instances<a class="headerlink" href="#creating-oci-compliant-container-instances" title="Permalink to this heading"></a></h2>
 <p>SIF files encapsulate the OCI runtime. By ‘OCI mounting’ a SIF file (see
 above), this encapsulated runtime is revealed; please refer to the note
 below for additional details. Once revealed, the filesystem bundle can
@@ -919,7 +929,7 @@ real-time logging to a file is likely to be of particular value - e.g.,
 in deployments where auditing requirements exist.</p>
 </section>
 <section id="unmounting-oci-filesystem-bundles">
-<h2>Unmounting OCI Filesystem Bundles<a class="headerlink" href="#unmounting-oci-filesystem-bundles" title="Permalink to this headline"></a></h2>
+<h2>Unmounting OCI Filesystem Bundles<a class="headerlink" href="#unmounting-oci-filesystem-bundles" title="Permalink to this heading"></a></h2>
 <p>To unmount a mounted OCI filesystem bundle, the following command should
 be issued:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer oci umount /var/tmp/busybox
@@ -960,6 +970,7 @@ the overlay filesystem, <code class="docutils literal notranslate"><span class="
 
 </footer>
         </div>
+
       </div>
     </section>
   </div>

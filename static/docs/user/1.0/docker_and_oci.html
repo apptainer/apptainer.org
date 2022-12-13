@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -162,11 +164,19 @@
       </nav>
 
       <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/user/latest/">https://apptainer.org/docs/user/latest/</a></p>
+    </div>
+</div>
+
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Support for Docker and OCI Containers</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Support for Docker and OCI Containers</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/docker_and_oci.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -177,7 +187,7 @@
            <div itemprop="articleBody">
              
   <section id="support-for-docker-and-oci-containers">
-<span id="docker-and-oci"></span><h1>Support for Docker and OCI Containers<a class="headerlink" href="#support-for-docker-and-oci-containers" title="Permalink to this headline"></a></h1>
+<span id="docker-and-oci"></span><h1>Support for Docker and OCI Containers<a class="headerlink" href="#support-for-docker-and-oci-containers" title="Permalink to this heading"></a></h1>
 <p>The Open Containers Initiative (OCI) container format, which grew out of
 Docker, is the dominant standard for cloud-focused containerized
 deployments of software. Although Apptainer’s own container format
@@ -199,12 +209,12 @@ local Docker daemon.</p></li>
 and best practices to keep in mind when creating containers targeting
 both Docker and Apptainer.</p>
 <section id="containers-from-docker-hub">
-<h2>Containers From Docker Hub<a class="headerlink" href="#containers-from-docker-hub" title="Permalink to this headline"></a></h2>
+<h2>Containers From Docker Hub<a class="headerlink" href="#containers-from-docker-hub" title="Permalink to this heading"></a></h2>
 <p>Docker Hub is the most common place that projects publish public
 container images. At some point, it’s likely that you will want to run
 or build from containers that are hosted there.</p>
 <section id="public-containers">
-<h3>Public Containers<a class="headerlink" href="#public-containers" title="Permalink to this headline"></a></h3>
+<h3>Public Containers<a class="headerlink" href="#public-containers" title="Permalink to this heading"></a></h3>
 <p>It’s easy to run a public Docker Hub container with Apptainer. Just
 put <code class="docutils literal notranslate"><span class="pre">docker://</span></code> in front of the container repository and tag. To run
 the container that’s called <code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow:latest</span></code>:</p>
@@ -259,7 +269,7 @@ give you an exact copy of the image.</p>
 </div>
 </section>
 <section id="docker-hub-limits">
-<h3>Docker Hub Limits<a class="headerlink" href="#docker-hub-limits" title="Permalink to this headline"></a></h3>
+<h3>Docker Hub Limits<a class="headerlink" href="#docker-hub-limits" title="Permalink to this heading"></a></h3>
 <p>Docker Hub introduced limits on anonymous access to its API in November
 2020. Every time you use a <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI to run, pull etc. a
 container Apptainer will make requests to Docker Hub in order to
@@ -273,12 +283,12 @@ SIF, and then always run from the SIF file, rather than using
 that you authenticate before using <code class="docutils literal notranslate"><span class="pre">docker://</span></code> container URIs.</p>
 </section>
 <section id="authentication-private-containers">
-<h3>Authentication / Private Containers<a class="headerlink" href="#authentication-private-containers" title="Permalink to this headline"></a></h3>
+<h3>Authentication / Private Containers<a class="headerlink" href="#authentication-private-containers" title="Permalink to this heading"></a></h3>
 <p>To make use of the API limits under a Docker Hub account, or to access
 private containers, you’ll need to authenticate to Docker Hub. There are
 a number of ways to do this with Apptainer.</p>
 <section id="apptainer-cli-remote-command">
-<h4>Apptainer CLI Remote Command<a class="headerlink" href="#apptainer-cli-remote-command" title="Permalink to this headline"></a></h4>
+<h4>Apptainer CLI Remote Command<a class="headerlink" href="#apptainer-cli-remote-command" title="Permalink to this heading"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span></code> command supports logging into Docker
 Hub and other OCI registries. For Docker Hub, the registry hostname is
 <code class="docutils literal notranslate"><span class="pre">docker.io</span></code>, so you will need to login as below, specifying your
@@ -301,7 +311,7 @@ INFO:    Logout succeeded
 </div>
 </section>
 <section id="docker-cli-authentication">
-<h4>Docker CLI Authentication<a class="headerlink" href="#docker-cli-authentication" title="Permalink to this headline"></a></h4>
+<h4>Docker CLI Authentication<a class="headerlink" href="#docker-cli-authentication" title="Permalink to this heading"></a></h4>
 <p>If you have the <code class="docutils literal notranslate"><span class="pre">docker</span></code> CLI installed on your machine, you can
 <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span></code> to your account. This stores authentication information
 in <code class="docutils literal notranslate"><span class="pre">~/.docker/config.json</span></code>. The process that Apptainer uses to
@@ -315,7 +325,7 @@ Docker credential helpers.</p>
 </div>
 </section>
 <section id="interactive-login">
-<h4>Interactive Login<a class="headerlink" href="#interactive-login" title="Permalink to this headline"></a></h4>
+<h4>Interactive Login<a class="headerlink" href="#interactive-login" title="Permalink to this heading"></a></h4>
 <p>To perform a one-off interactive login, which will not store your
 credentials, use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull --docker-login docker://myuser/private
@@ -325,7 +335,7 @@ Enter Docker Password:
 </div>
 </section>
 <section id="environment-variables">
-<h4>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline"></a></h4>
+<h4>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this heading"></a></h4>
 <p>When calling Apptainer in a CI/CD workflow, or other non-interactive
 scenario, it may be useful to specify Docker Hub login credentials using
 environment variables. These are often the default way of passing
@@ -343,7 +353,7 @@ $ apptainer pull docker://myuser/private
 </section>
 </section>
 <section id="containers-from-other-registries">
-<h2>Containers From Other Registries<a class="headerlink" href="#containers-from-other-registries" title="Permalink to this headline"></a></h2>
+<h2>Containers From Other Registries<a class="headerlink" href="#containers-from-other-registries" title="Permalink to this heading"></a></h2>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URIs with Apptainer to pull and run
 containers from OCI registries other than Docker Hub. To do this, you’ll
 need to include the hostname or IP address of the registry in your
@@ -355,7 +365,7 @@ Service Provider environments.</p>
 registries follow a similar pattern for pulling public images, and
 authenticating to access private images.</p>
 <section id="quay-io">
-<h3>Quay.io<a class="headerlink" href="#quay-io" title="Permalink to this headline"></a></h3>
+<h3>Quay.io<a class="headerlink" href="#quay-io" title="Permalink to this heading"></a></h3>
 <p>Quay is an OCI container registry used by a large number of projects,
 and hosted at <code class="docutils literal notranslate"><span class="pre">https://quay.io</span></code>. To pull public containers from Quay,
 just include the <code class="docutils literal notranslate"><span class="pre">quay.io</span></code> hostname in your <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI:</p>
@@ -384,7 +394,7 @@ to store your credentials for Apptainer.</p></li>
 </ul>
 </section>
 <section id="nvidia-ngc">
-<h3>NVIDIA NGC<a class="headerlink" href="#nvidia-ngc" title="Permalink to this headline"></a></h3>
+<h3>NVIDIA NGC<a class="headerlink" href="#nvidia-ngc" title="Permalink to this heading"></a></h3>
 <p>The NVIDIA NGC catalog at <a class="reference external" href="https://ngc.nvidia.com">https://ngc.nvidia.com</a> contains various GPU
 software, packaged in containers. Many of these containers are
 specifically documented by NVIDIA as supported by Apptainer, with
@@ -415,7 +425,7 @@ your NGC API key.</p>
 <a class="reference external" href="https://docs.nvidia.com/ngc/ngc-private-registry-user-guide/index.html">https://docs.nvidia.com/ngc/ngc-private-registry-user-guide/index.html</a></p>
 </section>
 <section id="github-container-registry">
-<h3>GitHub Container Registry<a class="headerlink" href="#github-container-registry" title="Permalink to this headline"></a></h3>
+<h3>GitHub Container Registry<a class="headerlink" href="#github-container-registry" title="Permalink to this heading"></a></h3>
 <p>GitHub Container Registry is increasingly used to provide Docker
 containers alongside the source code of hosted projects. You can pull a
 public container from GitHub Container Registry using a <code class="docutils literal notranslate"><span class="pre">ghcr.io</span></code> URI:</p>
@@ -440,7 +450,7 @@ to store your credentials for Apptainer.</p></li>
 </ul>
 </section>
 <section id="aws-ecr">
-<h3>AWS ECR<a class="headerlink" href="#aws-ecr" title="Permalink to this headline"></a></h3>
+<h3>AWS ECR<a class="headerlink" href="#aws-ecr" title="Permalink to this heading"></a></h3>
 <p>To work with an AWS hosted Elastic Container Registry (ECR) generally
 requires authentication. There are various ways to generate credentials.
 You should follow one of the approaches in <a class="reference external" href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html">the ECR guide</a>
@@ -475,7 +485,7 @@ machine.</p></li>
 <code class="docutils literal notranslate"><span class="pre">docker://&lt;accountid&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com</span></code>.</p>
 </section>
 <section id="azure-acr">
-<h3>Azure ACR<a class="headerlink" href="#azure-acr" title="Permalink to this headline"></a></h3>
+<h3>Azure ACR<a class="headerlink" href="#azure-acr" title="Permalink to this heading"></a></h3>
 <p>An Azure hosted Azure Container Registry (ACR) will generally hold
 private images and require authentication to pull from. There are
 several ways to authenticate to ACR, depending on the account type you
@@ -504,7 +514,7 @@ methods.</p>
 </section>
 </section>
 <section id="building-from-docker-oci-containers">
-<h2>Building From Docker / OCI Containers<a class="headerlink" href="#building-from-docker-oci-containers" title="Permalink to this headline"></a></h2>
+<h2>Building From Docker / OCI Containers<a class="headerlink" href="#building-from-docker-oci-containers" title="Permalink to this heading"></a></h2>
 <p>If you wish to use an existing Docker or OCI container as the basis for
 a new container, you will need to specify it as the <em>bootstrap</em> source
 in an Apptainer definition file.</p>
@@ -513,13 +523,13 @@ in an Apptainer definition file.</p>
 instruct Apptainer where to find the container you want to use as
 the starting point for your build.</p>
 <section id="registries-in-definition-files">
-<h3>Registries In Definition Files<a class="headerlink" href="#registries-in-definition-files" title="Permalink to this headline"></a></h3>
+<h3>Registries In Definition Files<a class="headerlink" href="#registries-in-definition-files" title="Permalink to this heading"></a></h3>
 <p>When you wish to build from a Docker or OCI container that’s hosted in a
 registry, such as Docker Hub, your definition file should begin with
 <code class="docutils literal notranslate"><span class="pre">Bootstrap:</span> <span class="pre">docker</span></code>, followed with a <code class="docutils literal notranslate"><span class="pre">From:</span></code> line which specifies
 the location of the container you wish to pull.</p>
 <section id="docker-hub">
-<h4>Docker Hub<a class="headerlink" href="#docker-hub" title="Permalink to this headline"></a></h4>
+<h4>Docker Hub<a class="headerlink" href="#docker-hub" title="Permalink to this heading"></a></h4>
 <p>Docker Hub is the default registry, so when building from Docker Hub the
 <code class="docutils literal notranslate"><span class="pre">From:</span></code> header only needs to specify the container repository and
 tag:</p>
@@ -532,7 +542,7 @@ Apptainer will fetch the <code class="docutils literal notranslate"><span class=
 Docker Hub, and extract it as the basis for your new container.</p>
 </section>
 <section id="other-registries">
-<h4>Other Registries<a class="headerlink" href="#other-registries" title="Permalink to this headline"></a></h4>
+<h4>Other Registries<a class="headerlink" href="#other-registries" title="Permalink to this heading"></a></h4>
 <p>To pull from a different Docker registry, you can either specify the
 hostname in the <code class="docutils literal notranslate"><span class="pre">From:</span></code> header, or use the separate <code class="docutils literal notranslate"><span class="pre">Registry:</span></code>
 header. The following two examples are equivalent:</p>
@@ -547,7 +557,7 @@ header. The following two examples are equivalent:</p>
 </div>
 </section>
 <section id="authentication-during-a-build">
-<h4>Authentication During a Build<a class="headerlink" href="#authentication-during-a-build" title="Permalink to this headline"></a></h4>
+<h4>Authentication During a Build<a class="headerlink" href="#authentication-during-a-build" title="Permalink to this heading"></a></h4>
 <p>If you are building from an image in a private registry you will need to
 ensure that the credentials needed to access the image are available to
 Apptainer.</p>
@@ -575,13 +585,13 @@ feature you do not need to specially set credentials for the root user.</p>
 </section>
 </section>
 <section id="archives-docker-daemon">
-<h3>Archives &amp; Docker Daemon<a class="headerlink" href="#archives-docker-daemon" title="Permalink to this headline"></a></h3>
+<h3>Archives &amp; Docker Daemon<a class="headerlink" href="#archives-docker-daemon" title="Permalink to this heading"></a></h3>
 <p>As well as being hosted in a registry, Docker / OCI containers might be
 found inside a running Docker daemon, or saved as an archive.
 Apptainer can build from these locations by using specialized
 bootstrap agents.</p>
 <section id="containers-cached-by-the-docker-daemon">
-<h4>Containers Cached by the Docker Daemon<a class="headerlink" href="#containers-cached-by-the-docker-daemon" title="Permalink to this headline"></a></h4>
+<h4>Containers Cached by the Docker Daemon<a class="headerlink" href="#containers-cached-by-the-docker-daemon" title="Permalink to this heading"></a></h4>
 <p>If you have pulled or run a container on your machine under <code class="docutils literal notranslate"><span class="pre">docker</span></code>,
 it will be cached locally by the Docker daemon. The <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code>
 command will list containers that are available:</p>
@@ -636,7 +646,7 @@ use <code class="docutils literal notranslate"><span class="pre">Bootstrap:</spa
 </div>
 </section>
 <section id="containers-in-docker-archive-files">
-<h4>Containers in Docker Archive Files<a class="headerlink" href="#containers-in-docker-archive-files" title="Permalink to this headline"></a></h4>
+<h4>Containers in Docker Archive Files<a class="headerlink" href="#containers-in-docker-archive-files" title="Permalink to this heading"></a></h4>
 <p>Docker allows containers to be exported into single file tar archives.
 These cannot be run directly, but are intended to be imported into
 Docker to run at a later date, or another location. Apptainer can
@@ -701,7 +711,7 @@ filename in the <code class="docutils literal notranslate"><span class="pre">Fro
 </section>
 </section>
 <section id="differences-and-limitations-vs-docker">
-<span id="sec-optional-headers-def-files"></span><h2>Differences and Limitations vs Docker<a class="headerlink" href="#differences-and-limitations-vs-docker" title="Permalink to this headline"></a></h2>
+<span id="sec-optional-headers-def-files"></span><h2>Differences and Limitations vs Docker<a class="headerlink" href="#differences-and-limitations-vs-docker" title="Permalink to this heading"></a></h2>
 <p>Though Docker / OCI container compatibility is a goal of Apptainer,
 there are some differences and limitations due to the way Apptainer
 was designed to work well on shared systems and HPC clusters. If you are
@@ -709,7 +719,7 @@ having difficulty running a specific Docker container, check through the
 list of differences below. There are workarounds for many of the issues
 that you are most likely to face.</p>
 <section id="read-only-by-default">
-<h3>Read-only by Default<a class="headerlink" href="#read-only-by-default" title="Permalink to this headline"></a></h3>
+<h3>Read-only by Default<a class="headerlink" href="#read-only-by-default" title="Permalink to this heading"></a></h3>
 <p>Apptainer’s container image format (SIF) is generally read-only.
 This permits containers to be run in parallel from a shared location on
 a network filesystem, support in-built signing and verification, and
@@ -746,7 +756,7 @@ Apptainer will refuse to run concurrently using the same SIF
 writable overlay partition.</p>
 </section>
 <section id="dockerfile-user">
-<h3>Dockerfile <code class="docutils literal notranslate"><span class="pre">USER</span></code><a class="headerlink" href="#dockerfile-user" title="Permalink to this headline"></a></h3>
+<h3>Dockerfile <code class="docutils literal notranslate"><span class="pre">USER</span></code><a class="headerlink" href="#dockerfile-user" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> used to build a Docker container may contain a
 <code class="docutils literal notranslate"><span class="pre">USER</span></code> statement. This tells the container runtime that it should run
 the container under the specified user account.</p>
@@ -767,7 +777,7 @@ expecting a fixed user account manually inside a <code class="docutils literal n
 if your adminstrator has configured the system for <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
 </section>
 <section id="default-mounts-home">
-<h3>Default Mounts / $HOME<a class="headerlink" href="#default-mounts-home" title="Permalink to this headline"></a></h3>
+<h3>Default Mounts / $HOME<a class="headerlink" href="#default-mounts-home" title="Permalink to this heading"></a></h3>
 <p>A default installation of Apptainer will mount the user’s home
 directory, <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> directory, and the current working directory, into
 each container that is run. Administrators may also configure e.g. HPC
@@ -805,7 +815,7 @@ wheel      0.37.0
 </div>
 </section>
 <section id="environment-propagation">
-<h3>Environment Propagation<a class="headerlink" href="#environment-propagation" title="Permalink to this headline"></a></h3>
+<h3>Environment Propagation<a class="headerlink" href="#environment-propagation" title="Permalink to this heading"></a></h3>
 <p>Apptainer propagates most environment variables set on the host into
 the container, by default. Docker does not propagate any host
 environment variables into the container. Environment variables may
@@ -848,7 +858,7 @@ $ apptainer run docker://openjdk:latest echo \$JAVA_HOME
 </div>
 </section>
 <section id="namespace-device-isolation">
-<h3>Namespace &amp; Device Isolation<a class="headerlink" href="#namespace-device-isolation" title="Permalink to this headline"></a></h3>
+<h3>Namespace &amp; Device Isolation<a class="headerlink" href="#namespace-device-isolation" title="Permalink to this heading"></a></h3>
 <p>Because Apptainer favors an integration over isolation approach it
 does not, by default, use all the methods through which a container can
 be isolated from the host system. This makes it much easier to run a
@@ -881,7 +891,7 @@ in the container even when <code class="docutils literal notranslate"><span clas
 </div>
 </section>
 <section id="init-shim-process">
-<h3>Init Shim Process<a class="headerlink" href="#init-shim-process" title="Permalink to this headline"></a></h3>
+<h3>Init Shim Process<a class="headerlink" href="#init-shim-process" title="Permalink to this heading"></a></h3>
 <p>When an Apptainer container is run using the <code class="docutils literal notranslate"><span class="pre">--pid</span> <span class="pre">/</span> <span class="pre">p</span></code> option, or
 started as an instance (which implies <code class="docutils literal notranslate"><span class="pre">--pid</span></code>), a shim init process is
 executed that will run the container payload itself.</p>
@@ -906,7 +916,7 @@ $ apptainer run --pid --no-init tini_example.sif
 </section>
 </section>
 <section id="docker-like-compat-flag">
-<h2>Docker-like <code class="docutils literal notranslate"><span class="pre">--compat</span></code> Flag<a class="headerlink" href="#docker-like-compat-flag" title="Permalink to this headline"></a></h2>
+<h2>Docker-like <code class="docutils literal notranslate"><span class="pre">--compat</span></code> Flag<a class="headerlink" href="#docker-like-compat-flag" title="Permalink to this heading"></a></h2>
 <p>If Docker-like behavior is important, Apptainer can be started with
 the <code class="docutils literal notranslate"><span class="pre">--compat</span></code> flag. This flag is a convenient short-hand alternative
 to using all of:</p>
@@ -937,7 +947,7 @@ namespace are not used, as these negate benefits of SIF and direct
 access to high performance cluster networks.</p>
 </section>
 <section id="cmd-entrypoint-behaviour">
-<h2>CMD / ENTRYPOINT Behaviour<a class="headerlink" href="#cmd-entrypoint-behaviour" title="Permalink to this headline"></a></h2>
+<h2>CMD / ENTRYPOINT Behaviour<a class="headerlink" href="#cmd-entrypoint-behaviour" title="Permalink to this heading"></a></h2>
 <p>When a container is run using <code class="docutils literal notranslate"><span class="pre">docker</span></code>, its default behavior depends
 on the <code class="docutils literal notranslate"><span class="pre">CMD</span></code> and/or <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> set in the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> that was
 used to build it, along with any arguments on the command line. The
@@ -993,7 +1003,7 @@ Wed, 06 Oct 2021 14:49:07 -0500
 container. Instead, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">exec</span></code> to run an arbitrary program
 inside a container.</p>
 <section id="argument-handling">
-<h3>Argument Handling<a class="headerlink" href="#argument-handling" title="Permalink to this headline"></a></h3>
+<h3>Argument Handling<a class="headerlink" href="#argument-handling" title="Permalink to this heading"></a></h3>
 <p>Because Apptainer runscripts are evaluated shell scripts
 arguments can behave slightly differently than in Docker/OCI
 runtimes, if they contain shell code that may be evaluated. To
@@ -1015,7 +1025,7 @@ runtimes as there is no evaluated runscript.</p>
 </section>
 </section>
 <section id="best-practices-for-docker-apptainer-compatibility">
-<span id="sec-best-practices"></span><h2>Best Practices for Docker &amp; Apptainer Compatibility<a class="headerlink" href="#best-practices-for-docker-apptainer-compatibility" title="Permalink to this headline"></a></h2>
+<span id="sec-best-practices"></span><h2>Best Practices for Docker &amp; Apptainer Compatibility<a class="headerlink" href="#best-practices-for-docker-apptainer-compatibility" title="Permalink to this heading"></a></h2>
 <p>As detailed previously, Apptainer can make use of most Docker and
 OCI images without issues, or via simple workarounds. In general,
 however, there are some best practices that should be applied when
@@ -1073,9 +1083,9 @@ symbolic links and the the <code class="docutils literal notranslate"><span clas
 </div></blockquote>
 </section>
 <section id="troubleshooting">
-<span id="sec-troubleshooting"></span><h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline"></a></h2>
+<span id="sec-troubleshooting"></span><h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
 <section id="registry-authentication-issues">
-<h3>Registry Authentication Issues<a class="headerlink" href="#registry-authentication-issues" title="Permalink to this headline"></a></h3>
+<h3>Registry Authentication Issues<a class="headerlink" href="#registry-authentication-issues" title="Permalink to this heading"></a></h3>
 <p>If you experience problems pulling containers from a private registry,
 check your credentials carefully. You can <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> with the
 <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag to perform an interactive login. This may be
@@ -1089,7 +1099,7 @@ Look for instructions that detail how to login via <code class="docutils literal
 without external helper programs, if possible.</p>
 </section>
 <section id="container-doesn-t-start">
-<h3>Container Doesn’t Start<a class="headerlink" href="#container-doesn-t-start" title="Permalink to this headline"></a></h3>
+<h3>Container Doesn’t Start<a class="headerlink" href="#container-doesn-t-start" title="Permalink to this heading"></a></h3>
 <p>If a Docker container fails to start, the most common cause is that it
 needs to write files, while Apptainer runs read-only by default.</p>
 <p>Try running with the <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> option, or the <code class="docutils literal notranslate"><span class="pre">--compat</span></code>
@@ -1101,7 +1111,7 @@ system into that location. This will allow the container to write the
 needed files, which will appear in the directory you bind in.</p>
 </section>
 <section id="unexpected-container-behaviour">
-<h3>Unexpected Container Behaviour<a class="headerlink" href="#unexpected-container-behaviour" title="Permalink to this headline"></a></h3>
+<h3>Unexpected Container Behaviour<a class="headerlink" href="#unexpected-container-behaviour" title="Permalink to this heading"></a></h3>
 <p>If a Docker container runs, but exhibits unexpected behavior, the most
 likely cause is the different level of isolation that Apptainer
 provides vs Docker.</p>
@@ -1112,7 +1122,7 @@ software in the container loads configuration or packages that may be
 present there.</p>
 </section>
 <section id="getting-help">
-<h3>Getting Help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h3>
+<h3>Getting Help<a class="headerlink" href="#getting-help" title="Permalink to this heading"></a></h3>
 <p>The community Slack channels and mailing list are excellent places to
 ask for help with running a specific Docker container. Other users may
 have already had success running the same container or software. Please
@@ -1121,7 +1131,7 @@ you believe they are due to a bug in Apptainer.</p>
 </section>
 </section>
 <section id="apptainer-definition-file-vs-dockerfile">
-<span id="sec-deffile-vs-dockerfile"></span><h2>Apptainer Definition file vs. Dockerfile<a class="headerlink" href="#apptainer-definition-file-vs-dockerfile" title="Permalink to this headline"></a></h2>
+<span id="sec-deffile-vs-dockerfile"></span><h2>Apptainer Definition file vs. Dockerfile<a class="headerlink" href="#apptainer-definition-file-vs-dockerfile" title="Permalink to this heading"></a></h2>
 <p>An alternative to running Docker containers with Apptainer is to
 re-write the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> as a definition file, and build a native SIF
 image.</p>
@@ -1368,6 +1378,7 @@ Apptainer definition files. For more detail please see
 
 </footer>
         </div>
+
       </div>
     </section>
   </div>

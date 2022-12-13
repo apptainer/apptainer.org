@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -102,11 +104,19 @@
       </nav>
 
       <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/user/latest/">https://apptainer.org/docs/user/latest/</a></p>
+    </div>
+</div>
+
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Apptainer User Guide</li>
+      <li><a href="#" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Apptainer User Guide</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/index.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -117,7 +127,7 @@
            <div itemprop="articleBody">
              
   <section id="apptainer-user-guide">
-<h1>Apptainer User Guide<a class="headerlink" href="#apptainer-user-guide" title="Permalink to this headline"></a></h1>
+<h1>Apptainer User Guide<a class="headerlink" href="#apptainer-user-guide" title="Permalink to this heading"></a></h1>
 <p>Welcome to the Apptainer User Guide!</p>
 <p>This guide aims to give an introduction to Apptainer, brief
 installation instructions, and cover topics relevant to users building
@@ -125,7 +135,7 @@ and running containers.</p>
 <p>For a detailed guide to installation and configuration, please see the
 separate <a class="reference external" href="https://apptainer.org/docs/admin/1.0">Admin Guide</a> for this version of Apptainer.</p>
 <section id="getting-started-background-information">
-<h2>Getting Started &amp; Background Information<a class="headerlink" href="#getting-started-background-information" title="Permalink to this headline"></a></h2>
+<h2>Getting Started &amp; Background Information<a class="headerlink" href="#getting-started-background-information" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a><ul>
@@ -156,7 +166,7 @@ separate <a class="reference external" href="https://apptainer.org/docs/admin/1.
 </div>
 </section>
 <section id="building-containers">
-<h2>Building Containers<a class="headerlink" href="#building-containers" title="Permalink to this headline"></a></h2>
+<h2>Building Containers<a class="headerlink" href="#building-containers" title="Permalink to this heading"></a></h2>
 <p>Learn how to write a definition file that can be used to build a
 container. Understand the environment within a build, how to perform
 remote builds, and how to use the <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> feature to build as a
@@ -171,7 +181,7 @@ non-root user.</p>
 </div>
 </section>
 <section id="container-signing-encryption">
-<h2>Container Signing &amp; Encryption<a class="headerlink" href="#container-signing-encryption" title="Permalink to this headline"></a></h2>
+<h2>Container Signing &amp; Encryption<a class="headerlink" href="#container-signing-encryption" title="Permalink to this heading"></a></h2>
 <p>Apptainer allows containers to be signed using a PGP key. The
 signature travels with the container image, allowing you to verify that
 the image is unmodified at any time. Encryption of containers using
@@ -186,7 +196,7 @@ decrypting them to disk first.</p>
 </div>
 </section>
 <section id="sharing-online-services">
-<h2>Sharing &amp; Online Services<a class="headerlink" href="#sharing-online-services" title="Permalink to this headline"></a></h2>
+<h2>Sharing &amp; Online Services<a class="headerlink" href="#sharing-online-services" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
@@ -195,7 +205,7 @@ decrypting them to disk first.</p>
 </div>
 </section>
 <section id="advanced-usage">
-<h2>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Permalink to this headline"></a></h2>
+<h2>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Permalink to this heading"></a></h2>
 <p>Once you’ve understood the basics, explore all the options which
 Apptainer provides for accessing data, running persistent services
 in containers, manipulating the container environment, and applying
@@ -215,7 +225,7 @@ networking and security configuration.</p>
 </div>
 </section>
 <section id="compatibility">
-<h2>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline"></a></h2>
+<h2>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this heading"></a></h2>
 <p>Apptainer has unique benefits and supports easy access to GPUs and
 other hardware. It also strives for compatibility with Docker/OCI
 container formats. Understand the differences between Apptainer and
@@ -231,7 +241,7 @@ Docker, as well as how to use containerized MPI and GPU applications.</p>
 </div>
 </section>
 <section id="get-involved">
-<h2>Get Involved<a class="headerlink" href="#get-involved" title="Permalink to this headline"></a></h2>
+<h2>Get Involved<a class="headerlink" href="#get-involved" title="Permalink to this heading"></a></h2>
 <p>We’d love you to get involved in the Apptainer community! Whether
 through contributing feature and fixes, helping to answer questions from
 other users, or simply testing new releases.</p>
@@ -242,7 +252,7 @@ other users, or simply testing new releases.</p>
 </div>
 </section>
 <section id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline"></a></h2>
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a><ul>
@@ -286,6 +296,7 @@ other users, or simply testing new releases.</p>
 
 </footer>
         </div>
+
       </div>
     </section>
   </div>

@@ -16,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script src="../_static/js/ga.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -199,12 +201,20 @@
       </nav>
 
       <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/user/latest/">https://apptainer.org/docs/user/latest/</a></p>
+    </div>
+</div>
+
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../cli.html">Command Line Interface</a> &raquo;</li>
-      <li>apptainer inspect</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../cli.html">Command Line Interface</a></li>
+      <li class="breadcrumb-item active">apptainer inspect</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/cli/apptainer_inspect.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -215,10 +225,10 @@
            <div itemprop="articleBody">
              
   <section id="apptainer-inspect">
-<span id="id1"></span><h1>apptainer inspect<a class="headerlink" href="#apptainer-inspect" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>apptainer inspect<a class="headerlink" href="#apptainer-inspect" title="Permalink to this heading"></a></h1>
 <p>Show metadata for an image</p>
 <section id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline"></a></h2>
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
 <blockquote>
 <div><p>Inspect will show you labels, environment variables, apps and scripts associated
 with the image determined by the flags you pass. By default, they will be shown in
@@ -229,7 +239,7 @@ plain text. If you would like to list them in json format, you should use the �
 </div>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer inspect ubuntu.sif
 
 If you want to list the applications (apps) installed in a container (located at
@@ -282,7 +292,7 @@ $ apptainer inspect --app &lt;appname&gt; ubuntu.sif
 </div>
 </section>
 <section id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline"></a></h2>
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">--</span><span class="nb">all</span>           <span class="n">show</span> <span class="nb">all</span> <span class="n">available</span> <span class="n">data</span> <span class="p">(</span><span class="n">imply</span> <span class="o">--</span><span class="n">json</span> <span class="n">option</span><span class="p">)</span>
     <span class="o">--</span><span class="n">app</span> <span class="n">string</span>    <span class="n">inspect</span> <span class="n">a</span> <span class="n">specific</span> <span class="n">app</span>
 <span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="o">--</span><span class="n">deffile</span>       <span class="n">show</span> <span class="n">the</span> <span class="n">Apptainer</span> <span class="n">recipe</span> <span class="n">file</span> <span class="n">that</span> <span class="n">was</span> <span class="n">used</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">the</span> <span class="n">image</span>
@@ -299,13 +309,13 @@ $ apptainer inspect --app &lt;appname&gt; ubuntu.sif
 </div>
 </section>
 <section id="see-also">
-<h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this headline"></a></h2>
+<h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="apptainer.html#apptainer"><span class="std std-ref">apptainer</span></a>   -</p></li>
 </ul>
 <p>Linux container platform optimized for High Performance Computing (HPC) and
 Enterprise Performance Computing (EPC)</p>
-<p><em>Auto generated by spf13/cobra on 22-Mar-2022</em></p>
+<p><em>Auto generated by spf13/cobra on 13-Dec-2022</em></p>
 </section>
 </section>
 
@@ -335,6 +345,7 @@ Enterprise Performance Computing (EPC)</p>
 
 </footer>
         </div>
+
       </div>
     </section>
   </div>

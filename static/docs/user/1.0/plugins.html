@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -108,11 +110,19 @@
       </nav>
 
       <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/user/latest/">https://apptainer.org/docs/user/latest/</a></p>
+    </div>
+</div>
+
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Plugins</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Plugins</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/plugins.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -123,9 +133,9 @@
            <div itemprop="articleBody">
              
   <section id="plugins">
-<span id="id1"></span><h1>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Plugins<a class="headerlink" href="#plugins" title="Permalink to this heading"></a></h1>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p>An Apptainer plugin is a package that can be dynamically loaded by
 the Apptainer runtime, augmenting Apptainer with experimental,
 non-standard and/or vendor-specific functionality. Currently, plugins
@@ -134,7 +144,7 @@ plugins will also be able to interface with more complex subsystems of
 the Apptainer runtime.</p>
 </section>
 <section id="using-plugins">
-<h2>Using Plugins<a class="headerlink" href="#using-plugins" title="Permalink to this headline"></a></h2>
+<h2>Using Plugins<a class="headerlink" href="#using-plugins" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> command prints the currently installed plugins.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer plugin list
 There are no plugins installed.
@@ -216,7 +226,7 @@ There are no plugins installed.
 </div>
 </section>
 <section id="writing-a-plugin">
-<h2>Writing a Plugin<a class="headerlink" href="#writing-a-plugin" title="Permalink to this headline"></a></h2>
+<h2>Writing a Plugin<a class="headerlink" href="#writing-a-plugin" title="Permalink to this heading"></a></h2>
 <p>Developers interested in writing Apptainer plugins can get started
 by reading the <a class="reference external" href="https://godoc.org/github.com/apptainer/apptainer/pkg/plugin">Go documentation</a> for the
 plugin package. Furthermore, reading through the <a class="reference external" href="https://github.com/apptainer/apptainer/tree/master/examples/plugins">source code</a>
@@ -252,6 +262,7 @@ future date.</p>
 
 </footer>
         </div>
+
       </div>
     </section>
   </div>

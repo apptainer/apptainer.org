@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -120,11 +122,19 @@
       </nav>
 
       <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/user/latest/">https://apptainer.org/docs/user/latest/</a></p>
+    </div>
+</div>
+
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Limiting Container Resources with Cgroups</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Limiting Container Resources with Cgroups</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/cgroups.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -135,7 +145,7 @@
            <div itemprop="articleBody">
              
   <section id="limiting-container-resources-with-cgroups">
-<span id="cgroups"></span><h1>Limiting Container Resources with Cgroups<a class="headerlink" href="#limiting-container-resources-with-cgroups" title="Permalink to this headline"></a></h1>
+<span id="cgroups"></span><h1>Limiting Container Resources with Cgroups<a class="headerlink" href="#limiting-container-resources-with-cgroups" title="Permalink to this heading"></a></h1>
 <p>The cgroups (control groups) functionality of the Linux kernel allows
 you to limit and meter the resources used by a process, or group of
 processes. Using cgroups you can limit memory and CPU usage. You can
@@ -153,7 +163,7 @@ processes.</p>
 <a class="reference external" href="https://www.kernel.org/doc/Documentation/cgroup-v2.txt">https://www.kernel.org/doc/Documentation/cgroup-v2.txt</a></p></li>
 </ul>
 <section id="running-apptainer-inside-a-cgroup">
-<h2>Running Apptainer Inside a Cgroup<a class="headerlink" href="#running-apptainer-inside-a-cgroup" title="Permalink to this headline"></a></h2>
+<h2>Running Apptainer Inside a Cgroup<a class="headerlink" href="#running-apptainer-inside-a-cgroup" title="Permalink to this heading"></a></h2>
 <p>Because Apptainer starts a container as a simple process, rather
 than using a daemon, you can limit resource usage by running the
 <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> command inside an existing cgroup. This is convenient
@@ -161,7 +171,7 @@ where, for example, a job scheduler uses cgroups to control job limits.
 By running <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> inside your batch script, your container will
 respect the limits set by the scheduler on the job’s cgroup.</p>
 <section id="systemd-run">
-<h3>systemd-run<a class="headerlink" href="#systemd-run" title="Permalink to this headline"></a></h3>
+<h3>systemd-run<a class="headerlink" href="#systemd-run" title="Permalink to this heading"></a></h3>
 <p>As well as schedulers you can use tools such as <code class="docutils literal notranslate"><span class="pre">systemd-run</span></code> to
 create a cgroup, and run Apptainer inside of it. This is convenient
 on modern cgroups v2 systems, where the creation of cgroups can be
@@ -194,7 +204,7 @@ link below, which details the properties you can set using
 </section>
 </section>
 <section id="using-apptainer-to-create-a-cgroup">
-<h2>Using Apptainer to Create a Cgroup<a class="headerlink" href="#using-apptainer-to-create-a-cgroup" title="Permalink to this headline"></a></h2>
+<h2>Using Apptainer to Create a Cgroup<a class="headerlink" href="#using-apptainer-to-create-a-cgroup" title="Permalink to this heading"></a></h2>
 <p>Apptainer allows you to directly apply resource limitations to
 systems configured for both cgroups v1 and the v2 unified hierarchy.
 Resource limits are specified using a TOML file that represents the
@@ -214,7 +224,7 @@ which will be translated to v2 format when applied on a cgroups v2
 system.</p>
 </div>
 <section id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h3>
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h3>
 <p>To apply resource limits to a container, use the <code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code>
 flag, which takes a path to a TOML file specifying the cgroups
 configuration to be applied:</p>
@@ -226,7 +236,7 @@ configuration to be applied:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code> option can only be used with root privileges.</p>
 </div>
 <section id="limiting-memory">
-<h4>Limiting Memory<a class="headerlink" href="#limiting-memory" title="Permalink to this headline"></a></h4>
+<h4>Limiting Memory<a class="headerlink" href="#limiting-memory" title="Permalink to this heading"></a></h4>
 <p>To limit the amount of memory that your container uses to 500MB
 (524288000 bytes), set a <code class="docutils literal notranslate"><span class="pre">limit</span></code> value inside the <code class="docutils literal notranslate"><span class="pre">[memory]</span></code> section
 of your cgroups TOML file:</p>
@@ -253,7 +263,7 @@ $ cat /sys/fs/cgroup/apptainer/*/memory.max
 </div>
 </section>
 <section id="limiting-cpu">
-<h4>Limiting CPU<a class="headerlink" href="#limiting-cpu" title="Permalink to this headline"></a></h4>
+<h4>Limiting CPU<a class="headerlink" href="#limiting-cpu" title="Permalink to this heading"></a></h4>
 <p>CPU usage can be limited using different strategies, with limits
 specified in the <code class="docutils literal notranslate"><span class="pre">[cpu]</span></code> section of the TOML file.</p>
 <p><strong>shares</strong></p>
@@ -296,7 +306,7 @@ memory nodes by using <code class="docutils literal notranslate"><span class="pr
 </div>
 </section>
 <section id="limiting-io">
-<h4>Limiting IO<a class="headerlink" href="#limiting-io" title="Permalink to this headline"></a></h4>
+<h4>Limiting IO<a class="headerlink" href="#limiting-io" title="Permalink to this heading"></a></h4>
 <p>To control block device I/O, applying limits to competing container, use
 the <code class="docutils literal notranslate"><span class="pre">[blockIO]</span></code> section of the TOML file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">blockIO</span><span class="p">]</span>
@@ -343,7 +353,7 @@ is specified in bytes per second.</p>
 </div>
 </section>
 <section id="limiting-device-access">
-<h4>Limiting Device Access<a class="headerlink" href="#limiting-device-access" title="Permalink to this headline"></a></h4>
+<h4>Limiting Device Access<a class="headerlink" href="#limiting-device-access" title="Permalink to this heading"></a></h4>
 <p>You can limit read (<code class="docutils literal notranslate"><span class="pre">r</span></code>), write (<code class="docutils literal notranslate"><span class="pre">w</span></code>), or creation (<code class="docutils literal notranslate"><span class="pre">c</span></code>) of
 devices by a container. Like applying I/O limits to devices, you must
 use device node major and minor numbers to create rules for specific
@@ -363,7 +373,7 @@ or write to <code class="docutils literal notranslate"><span class="pre">/dev/nu
 </div>
 </section>
 <section id="other-limits">
-<h4>Other limits<a class="headerlink" href="#other-limits" title="Permalink to this headline"></a></h4>
+<h4>Other limits<a class="headerlink" href="#other-limits" title="Permalink to this heading"></a></h4>
 <p>Apptainer can apply all resource limits that are valid in the OCI
 runtime-spec <code class="docutils literal notranslate"><span class="pre">resources</span></code> section, <strong>except</strong> native <code class="docutils literal notranslate"><span class="pre">unified</span></code>
 cgroups v2 constraints. Use the cgroups v1 limits, which will be
@@ -402,6 +412,7 @@ TOML format for the configuration file, rather than JSON.</p>
 
 </footer>
         </div>
+
       </div>
     </section>
   </div>
