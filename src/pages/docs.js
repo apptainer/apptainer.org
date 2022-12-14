@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 const docsVersions = [
+    { version: 'latest' },
     { version: 'main' },
     { version: '1.1'  },
     { version: '1.0'  },
@@ -20,6 +21,10 @@ const DocsPage = () => (
                 </h2>
                 <p className="text-base text-gray-700 md:text-lg">
                     Looking for Singularity documentation? <Link className="text-blue-900" to="/docs-legacy">Click here!</Link>
+                </p>
+                <p className="text-base text-gray-700 md:text-lg">
+                    "latest" below is the latest released version
+                    <br>and "main" is the current development version.
                 </p>
             </div>
         </div>
