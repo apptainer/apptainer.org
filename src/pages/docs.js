@@ -24,7 +24,8 @@ const DocsPage = () => (
                 </p>
                 <p className="text-base text-gray-700 md:text-lg">
                     "latest" below is the latest released version
-                    <br>and "main" is the current development version.
+                    <br></br>
+                    and "main" is the current development version.
                 </p>
             </div>
         </div>
