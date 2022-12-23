@@ -66,7 +66,8 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#install-from-pre-built-packages">Install from Pre-built packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-unprivileged-from-pre-built-binaries">Install unprivileged from pre-built binaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-from-pre-built-packages">Install from pre-built packages</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#install-rpm-from-epel-or-fedora">Install RPM from EPEL or Fedora</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#install-from-github-release-rpms">Install from GitHub release RPMs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#install-debian-ubuntu-packages">Install Debian/Ubuntu packages</a></li>
@@ -342,8 +343,32 @@ It does work in non-setuid mode with fuse-overlayfs.</p>
 </section>
 </section>
 </section>
+<section id="install-unprivileged-from-pre-built-binaries">
+<h3>Install unprivileged from pre-built binaries<a class="headerlink" href="#install-unprivileged-from-pre-built-binaries" title="Permalink to this heading"></a></h3>
+<p>A script is available to make a relocatable unprivileged binary installation
+of Apptainer, including all dependencies that are not normally installed
+on Linux systems.  The script works on Red Hat Enterprise Linux-derived
+systems, Fedora, Debian, and Ubuntu.</p>
+<p>This is the easiest way to use it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -s https://raw.githubusercontent.com/apptainer/apptainer/main/tools/install-unprivileged.sh | \
+    bash -s - install-dir
+</pre></div>
+</div>
+<p>where install-dir is the directory you want to install it into.
+Once installed, you can run it with <code class="docutils literal notranslate"><span class="pre">install-dir/bin/apptainer</span></code>.</p>
+<p>The script requires a few tools to be in the user’s PATH that aren’t
+always available: <code class="docutils literal notranslate"><span class="pre">curl</span></code>, <code class="docutils literal notranslate"><span class="pre">rpm2cpio</span></code>, and <code class="docutils literal notranslate"><span class="pre">cpio</span></code>.  If they are
+not available and you do not have privileges to install them, you can
+copy them from another compatible machine or you can run the script
+on another machine and copy the installed files to the machine you
+want them on.</p>
+<p>Multiple architectures can be installed into the same directory on a
+shared filesystem and it will automatically pick the correct
+architecture when it runs.
+Architectures supported by EPEL and Fedora are supported.</p>
+</section>
 <section id="install-from-pre-built-packages">
-<h3>Install from Pre-built packages<a class="headerlink" href="#install-from-pre-built-packages" title="Permalink to this heading"></a></h3>
+<h3>Install from pre-built packages<a class="headerlink" href="#install-from-pre-built-packages" title="Permalink to this heading"></a></h3>
 <p>Prebuilt packages are available for released versions of Apptainer on
 a variety of host operating systems.</p>
 <section id="install-rpm-from-epel-or-fedora">

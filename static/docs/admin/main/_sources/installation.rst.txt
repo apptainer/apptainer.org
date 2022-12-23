@@ -245,7 +245,39 @@ The kernel overlay driver does not allow the upperdir to be a FUSE-based
 filesystem, so in setuid mode that is disallowed.
 It does work in non-setuid mode with fuse-overlayfs.
 
-Install from Pre-built packages
+
+Install unprivileged from pre-built binaries
+============================================
+
+A script is available to make a relocatable unprivileged binary installation 
+of {Project}, including all dependencies that are not normally installed
+on Linux systems.  The script works on Red Hat Enterprise Linux-derived
+systems, Fedora, Debian, and Ubuntu.
+
+This is the easiest way to use it:
+
+.. code::
+
+    $ curl -s https://raw.githubusercontent.com/{orgrepo}/main/tools/install-unprivileged.sh | \
+        bash -s - install-dir
+
+where install-dir is the directory you want to install it into.
+Once installed, you can run it with ``install-dir/bin/{command}``.
+
+The script requires a few tools to be in the user's PATH that aren't
+always available: ``curl``, ``rpm2cpio``, and ``cpio``.  If they are
+not available and you do not have privileges to install them, you can
+copy them from another compatible machine or you can run the script
+on another machine and copy the installed files to the machine you
+want them on.
+
+Multiple architectures can be installed into the same directory on a
+shared filesystem and it will automatically pick the correct
+architecture when it runs.  
+Architectures supported by EPEL and Fedora are supported.
+
+
+Install from pre-built packages
 ===============================
 
 Prebuilt packages are available for released versions of {Project} on
