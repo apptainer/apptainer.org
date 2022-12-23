@@ -178,6 +178,19 @@ guide</a> for more details.</p>
 <p>Installation instructions for DMTCP can be found on their git <a class="reference external" href="https://github.com/dmtcp/dmtcp/blob/master/INSTALL.md">repository</a>.
 In order to maximize the portability of the DMTCP build, we recommend using the
 <code class="docutils literal notranslate"><span class="pre">--enable-static-libstdcxx</span></code> configure option.</p>
+<p>A build and install of DMTCP from source will generally place libraries at
+<code class="docutils literal notranslate"><span class="pre">/usr/local/lib/dmtcp</span></code>, which is not a standard path for the linker. You can
+configure your linker to find these libraries and update its cache with the
+following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># echo /usr/local/lib/dmtcp &gt; /etc/ld.so.conf.d/dmtcp.conf</span>
+<span class="c1"># ldconfig</span>
+</pre></div>
+</div>
+<p>Verify that the libraries are in the cache by ensuring there is output from the
+following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ldconfig -p | grep dmtcp
+</pre></div>
+</div>
 <p>The DMTCP project is currently working towards a <code class="docutils literal notranslate"><span class="pre">3.0</span></code> release. If you
 encounter issues using a <code class="docutils literal notranslate"><span class="pre">2.x</span></code> installation of DMTCP, we recommend trying the
 tip of the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch to see if the issue has been resolved in the code
@@ -231,7 +244,7 @@ EOF
 </pre></div>
 </div>
 <p>We can build this container using:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --fakeroot server.sif server.def
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build server.sif server.def
 </pre></div>
 </div>
 <p>First things first, we need to create a <code class="docutils literal notranslate"><span class="pre">checkpoint</span></code> using the <code class="docutils literal notranslate"><span class="pre">checkpoint</span></code>
