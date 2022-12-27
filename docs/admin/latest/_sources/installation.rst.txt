@@ -194,30 +194,29 @@ NFS
 ^^^
 
 NFS filesystems support overlay mounts as a ``lowerdir`` only, and do
-not support user-namespace (sub)uid/gid mapping.
+not support ``--fakeroot``.
 
 -  Containers run from SIF files located on an NFS filesystem do not
    have restrictions.
 
--  In setuid mode, you cannot use ``--overlay mynfsdir/`` to overlay a
+-  In setuid mode, you cannot use ``--overlay`` to overlay a
    directory onto a container when the overlay (upperdir) directory is
    on an NFS filesystem.  
-   In non-setuid mode and fuse-overlayfs it is allowed but will be read-only.
+   In non-setuid mode with fuse-overlayfs it is allowed but will be read-only.
 
--  When using ``--fakeroot`` and ``/etc/subuid`` mappings to build or run a
-   container, your
+-  When building a container, or running a container with ``--fakeroot``, your
    ``TMPDIR`` / ``{ENVPREFIX}_TMPDIR`` should not be set to an NFS
    location.
 
--  You should not run a sandbox container with ``--fakeroot`` and 
-   ``/etc/subuid`` mappings from an NFS location.
+-  You should not run a sandbox container with ``--fakeroot`` 
+   from an NFS location.
 
 Lustre / GPFS
 ^^^^^^^^^^^^^
 
 Lustre and GPFS do not have sufficient ``upperdir`` or ``lowerdir``
 overlay support for certain {Project} features, and do not support
-user-namespace (sub)uid/gid mapping.
+``--fakeroot``.
 
 -  In setuid mode, you cannot use ``--overlay`` or ``--writable-tmpfs`` with a
    sandbox container that is located on a Lustre or GPFS filesystem. SIF
@@ -225,17 +224,15 @@ user-namespace (sub)uid/gid mapping.
    It works with fuse-overlayfs in non-setuid mode.
 
 -  In setuid mode, you cannot use ``--overlay`` to overlay a directory onto
-   a container, when the overlay (upperdir) directory is on a Lustre or GPFS
+   a container when the overlay (upperdir) directory is on a Lustre or GPFS
    filesystem.
-   In non-setuid mode and fuse-overlayfs it is allowed but will be read-only.
+   In non-setuid mode with fuse-overlayfs it is allowed but will be read-only.
 
--  When using ``--fakeroot`` and ``/etc/subuid`` mappings to build or run a
-   container, your
-   ``TMPDIR/{ENVPREFIX}_TMPDIR`` should not be a Lustre or GPFS
+-  When building a container, or running a container with ``--fakeroot``, your
+   ``TMPDIR / {ENVPREFIX}_TMPDIR`` should not be a Lustre or GPFS
    location.
 
--  You should not run a sandbox container with ``--fakeroot`` and 
-   ``/etc/subuid`` mappings from a
+-  You should not run a sandbox container with ``--fakeroot`` from a
    Lustre or GPFS location.
 
 FUSE-based filesystems
