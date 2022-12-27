@@ -296,42 +296,39 @@ container from the remote source, into a temporary location.</p>
 <section id="nfs">
 <h5>NFS<a class="headerlink" href="#nfs" title="Permalink to this heading"></a></h5>
 <p>NFS filesystems support overlay mounts as a <code class="docutils literal notranslate"><span class="pre">lowerdir</span></code> only, and do
-not support user-namespace (sub)uid/gid mapping.</p>
+not support <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
 <ul class="simple">
 <li><p>Containers run from SIF files located on an NFS filesystem do not
 have restrictions.</p></li>
-<li><p>In setuid mode, you cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span> <span class="pre">mynfsdir/</span></code> to overlay a
+<li><p>In setuid mode, you cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> to overlay a
 directory onto a container when the overlay (upperdir) directory is
 on an NFS filesystem.
-In non-setuid mode and fuse-overlayfs it is allowed but will be read-only.</p></li>
-<li><p>When using <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> mappings to build or run a
-container, your
+In non-setuid mode with fuse-overlayfs it is allowed but will be read-only.</p></li>
+<li><p>When building a container, or running a container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>, your
 <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> / <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> should not be set to an NFS
 location.</p></li>
-<li><p>You should not run a sandbox container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> and
-<code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> mappings from an NFS location.</p></li>
+<li><p>You should not run a sandbox container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>
+from an NFS location.</p></li>
 </ul>
 </section>
 <section id="lustre-gpfs">
 <h5>Lustre / GPFS<a class="headerlink" href="#lustre-gpfs" title="Permalink to this heading"></a></h5>
 <p>Lustre and GPFS do not have sufficient <code class="docutils literal notranslate"><span class="pre">upperdir</span></code> or <code class="docutils literal notranslate"><span class="pre">lowerdir</span></code>
 overlay support for certain Apptainer features, and do not support
-user-namespace (sub)uid/gid mapping.</p>
+<code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
 <ul class="simple">
 <li><p>In setuid mode, you cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> or <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> with a
 sandbox container that is located on a Lustre or GPFS filesystem. SIF
 containers on Lustre / GPFS will work correctly with these options.
 It works with fuse-overlayfs in non-setuid mode.</p></li>
 <li><p>In setuid mode, you cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> to overlay a directory onto
-a container, when the overlay (upperdir) directory is on a Lustre or GPFS
+a container when the overlay (upperdir) directory is on a Lustre or GPFS
 filesystem.
-In non-setuid mode and fuse-overlayfs it is allowed but will be read-only.</p></li>
-<li><p>When using <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> mappings to build or run a
-container, your
-<code class="docutils literal notranslate"><span class="pre">TMPDIR/APPTAINER_TMPDIR</span></code> should not be a Lustre or GPFS
+In non-setuid mode with fuse-overlayfs it is allowed but will be read-only.</p></li>
+<li><p>When building a container, or running a container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>, your
+<code class="docutils literal notranslate"><span class="pre">TMPDIR</span> <span class="pre">/</span> <span class="pre">APPTAINER_TMPDIR</span></code> should not be a Lustre or GPFS
 location.</p></li>
-<li><p>You should not run a sandbox container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> and
-<code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> mappings from a
+<li><p>You should not run a sandbox container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> from a
 Lustre or GPFS location.</p></li>
 </ul>
 </section>
