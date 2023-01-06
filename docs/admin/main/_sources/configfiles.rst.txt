@@ -1043,11 +1043,26 @@ This flag controls HTTP vs HTTPS for service discovery only. The
 protocol used to access individual library, build and keyserver URLs is
 set by the service discovery file.
 
+.. _no_default_remote:
+
 Restoring pre-{Project} library behavior
 ----------------------------------------
 
-These are the commands to restore the library behavior from before
-{Project}, where using the `library://` URI would download from the
+{Project}'s default remote endpoint configures only a public key
+server, it does not support the ``library://`` protocol.
+Formerly the default was set to point to Sylabs servers, but the 
+read/write support of the ``oras://`` protocol by for example the
+`GitHub Container Registry
+<{userdocs}/docker_and_oci.html#github-container-registry>`_
+makes it unnecessary.
+The remote endpoint was also formerly used for builds using the
+build ``--remote`` option, but {Project} does not support that.
+Instead, it supports
+`unprivileged local builds <{userdocs}/fakeroot.html#build>`_.
+
+If you would still like to have the previous default for all users,
+these are the commands to restore the library behavior from before
+{Project}, where using the ``library://`` URI would download from the
 Sylabs Cloud anonymously:
 
 .. code::
