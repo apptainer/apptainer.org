@@ -177,50 +177,62 @@ constraint of a name change to the project, it has been a goal of the
 project to minimize the impact to the user base. If you experience issues making
 the move, please reach out to the <a class="reference external" href="https://apptainer.org/help">community</a> so
 we can help you!</p>
-<p>When migrating to Apptainer from Singularity, Administrators that have
+<p>When migrating to Apptainer from Singularity, administrators that have
 modified the system configurations of their installation and want Apptainer
-to have identical configuration will need to migrate the configurations they have
-in place for Singularity to Apptainer either manually or with configuration
-management tools.</p>
-<p>All system configuration files are typically located in <code class="docutils literal notranslate"><span class="pre">/etc/singularity</span></code> or
-<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity</span></code> when installed from a RPM/Deb package or source
-respectively, but options passed during source installations could cause this to
-be in another location. Apptainer will store its configurations in similar
-locations, but within a directory named <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> directory instead of
-<code class="docutils literal notranslate"><span class="pre">singularity</span></code>.</p>
+to have identical configuration will need to migrate the configurations they
+have in place for Singularity to Apptainer.
+An exception is an RPM update from an already-installed singularity package;
+in that case, the RPM will automatically import the old configuration,
+but an administrator should verify the conversion.</p>
+<p>All singularity system configuration files are typically located under
+<code class="docutils literal notranslate"><span class="pre">/etc/singularity</span></code> or <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity</span></code>
+when installed from a RPM/Deb package or source respectively,
+but options passed during source installations could cause this to
+be in another location.
+Apptainer will store its configurations in similar locations, but within
+a directory named <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> instead of <code class="docutils literal notranslate"><span class="pre">singularity</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">singularity</span></code> configuration directory at the prefix corresponding to
+your <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> configuration directory (e.g. <code class="docutils literal notranslate"><span class="pre">/etc/singularity</span></code> or
+<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity</span></code>) needs to be manually removed to prevent
+Apptainer from producing a message at runtime about the cleanup being
+incomplete.</p>
+</div>
 <p>All system configuration names, file formats, and parameters for Apptainer are
 identical to their Singularity counterparts with the exception of
 <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>, which has been renamed to <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> as a part of
-the project renaming. It is important to note that comments within some of the
-configuration files have been changed with the rename as well. So, while you can
-copy files around, we <strong>recommend</strong> applying the same configuration changes to
-the new files instead of simply copying contents.</p>
+the project renaming.  It is important to note that comments within
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> have been changed and the default contents of
+<code class="docutils literal notranslate"><span class="pre">remote.yaml</span></code> has changed.
+So, while you can copy files around, we <strong>recommend</strong> applying the same
+configuration changes to the new files instead of simply copying
+contents.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Take care to not wipe out all configuration in the Apptainer config
 directory as a part of your migration because it will remove configuration
 files that are new to the project like configurations for
-<a class="reference internal" href="configfiles.html#dmtcp-configuration"><span class="std std-ref">checkpointing</span></a></p>
+<a class="reference internal" href="configfiles.html#dmtcp-configuration"><span class="std std-ref">checkpointing</span></a>.</p>
 </div>
-<p>If you are migrating from an installation with default configuration, you do not
-need to perform any configuration migration as Apptainer defaults have not been
-changed.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">singularity</span></code> configuration directory at the prefix corresponding to
-your <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> configuration directory (e.g. <code class="docutils literal notranslate"><span class="pre">/etc/singularity</span></code> or
-<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity</span></code>) needs to be removed to prevent Apptainer
-from producing a warning at runtime about the migration being incomplete.</p>
-</div>
+<p>If you are migrating from an installation with default configuration,
+there is no need to perform any configuration migration.</p>
 <p>However, a big change from Singularity is that Apptainer does not
 install a setuid-root component by default.  That means that either
 user namespaces needs to be enabled or the setuid-root component needs
 to be installed separately.  See the
-<a class="reference internal" href="user_namespace.html#userns"><span class="std std-ref">User Namespaces &amp; Fakeroot</span></a> section
+<a class="reference internal" href="user_namespace.html#userns"><span class="std std-ref">User Namespaces &amp; Fakeroot</span></a> section,
 or to find out about how to install the setuid-root component see the
-<a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installation</span></a> section.</p>
+<a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installation</span></a> section.
+An exception is with RPM packaging when updating from the
+<code class="docutils literal notranslate"><span class="pre">singularity</span></code> package: that case installs the <code class="docutils literal notranslate"><span class="pre">apptainer-suid</span></code>
+package by default, but since setuid-root is a higher security risk,
+consider removing that package after upgrade.</p>
 <p>Also see the user guide documentation about <a class="reference external" href="https://apptainer.org/docs/user/1.1/singularity_compatibility.html">Singularity compatibility</a> for information about how the
-migration to Apptainer will impact users.</p>
+migration to Apptainer will impact users.
+In particular the system administrator may want to
+<a class="reference internal" href="configfiles.html#no-default-remote"><span class="std std-ref">restore pre-Apptainer library behavior</span></a>
+for all users.</p>
 </section>
 
 
