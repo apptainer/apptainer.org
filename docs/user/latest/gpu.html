@@ -1,43 +1,79 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
   <title>GPU Support (NVIDIA CUDA &amp; AMD ROCm) &mdash; Apptainer User Guide 1.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
-    <script src="_static/js/theme.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Contributing" href="contributing.html" />
     <link rel="prev" title="Apptainer and MPI applications" href="mpi.html" /> 
 </head>
 
-<body class="wy-body-for-nav"> 
+<body class="wy-body-for-nav">
+
+   
   <div class="wy-grid-for-nav">
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
+          
+
+          
             <a href="index.html" class="icon icon-home"> Apptainer User Guide
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+
+          
           </a>
+
+          
+            
+            
               <div class="version">
                 1.1
               </div>
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -45,7 +81,18 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
@@ -123,32 +170,75 @@
 <li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
 </ul>
 
+            
+          
         </div>
+        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Apptainer User Guide</a>
+        
       </nav>
 
+
       <div class="wy-nav-content">
+        
         <div class="rst-content style-external-links">
-          <div role="navigation" aria-label="Page navigation">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
-      <li class="breadcrumb-item active">GPU Support (NVIDIA CUDA &amp; AMD ROCm)</li>
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>GPU Support (NVIDIA CUDA &amp; AMD ROCm)</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
+        
+          
+            
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/gpu.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-             
+            
   <section id="gpu-support-nvidia-cuda-amd-rocm">
-<span id="gpu"></span><h1>GPU Support (NVIDIA CUDA &amp; AMD ROCm)<a class="headerlink" href="#gpu-support-nvidia-cuda-amd-rocm" title="Permalink to this heading"></a></h1>
+<span id="gpu"></span><h1>GPU Support (NVIDIA CUDA &amp; AMD ROCm)<a class="headerlink" href="#gpu-support-nvidia-cuda-amd-rocm" title="Permalink to this heading">¶</a></h1>
 <p>Apptainer natively supports running application containers that use
 NVIDIA’s CUDA GPU compute framework, or AMD’s ROCm solution. This allows
 easy access to users of GPU-enabled machine learning frameworks such as
@@ -164,7 +254,7 @@ functionality, accessible via the new <code class="docutils literal notranslate"
 compatibility with OCI runtimes and exposes additional container
 configuration options.</p>
 <section id="nvidia-gpus-cuda-standard">
-<h2>NVIDIA GPUs &amp; CUDA (Standard)<a class="headerlink" href="#nvidia-gpus-cuda-standard" title="Permalink to this heading"></a></h2>
+<h2>NVIDIA GPUs &amp; CUDA (Standard)<a class="headerlink" href="#nvidia-gpus-cuda-standard" title="Permalink to this heading">¶</a></h2>
 <p>Commands that <code class="docutils literal notranslate"><span class="pre">run</span></code>, or otherwise execute containers (<code class="docutils literal notranslate"><span class="pre">shell</span></code>,
 <code class="docutils literal notranslate"><span class="pre">exec</span></code>) can take an <code class="docutils literal notranslate"><span class="pre">--nv</span></code> option, which will setup the container’s
 environment to use an NVIDIA GPU and the basic CUDA libraries to run a
@@ -180,7 +270,7 @@ version of the CUDA libraries are used by applications run inside the
 container.</p></li>
 </ul>
 <section id="requirements">
-<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h3>
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">¶</a></h3>
 <p>To use the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> flag to run a CUDA application inside a container
 you must ensure that:</p>
 <ul class="simple">
@@ -207,7 +297,7 @@ add additional libraries if necessary. See the admin guide for more
 details.</p>
 </section>
 <section id="example-tensorflow-gpu">
-<h3>Example - tensorflow-gpu<a class="headerlink" href="#example-tensorflow-gpu" title="Permalink to this heading"></a></h3>
+<h3>Example - tensorflow-gpu<a class="headerlink" href="#example-tensorflow-gpu" title="Permalink to this heading">¶</a></h3>
 <p>Tensorflow is commonly used for machine learning projects but can be
 difficult to install on older systems, and is updated frequently.
 Running tensorflow from a container removes installation problems and
@@ -263,7 +353,7 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 </div>
 </section>
 <section id="multiple-gpus">
-<h3>Multiple GPUs<a class="headerlink" href="#multiple-gpus" title="Permalink to this heading"></a></h3>
+<h3>Multiple GPUs<a class="headerlink" href="#multiple-gpus" title="Permalink to this heading">¶</a></h3>
 <p>By default, Apptainer makes all host devices available in the
 container. When the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> option is used a minimal <code class="docutils literal notranslate"><span class="pre">/dev</span></code> tree
 is created in the container, but the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> option will ensure that
@@ -289,12 +379,12 @@ $ apptainer run tensorflow_latest-gpu.sif
 </div>
 </section>
 <section id="troubleshooting">
-<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h3>
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading">¶</a></h3>
 <p>If the host installation of the NVIDIA / CUDA driver and libraries is
 working and up-to-date there are rarely issues running CUDA programs
 inside of Apptainer containers. The most common issue seen is:</p>
 <section id="cuda-error-unknown-when-everything-seems-to-be-correctly-configured">
-<h4>CUDA_ERROR_UNKNOWN when everything seems to be correctly configured<a class="headerlink" href="#cuda-error-unknown-when-everything-seems-to-be-correctly-configured" title="Permalink to this heading"></a></h4>
+<h4>CUDA_ERROR_UNKNOWN when everything seems to be correctly configured<a class="headerlink" href="#cuda-error-unknown-when-everything-seems-to-be-correctly-configured" title="Permalink to this heading">¶</a></h4>
 <p>CUDA depends on multiple kernel modules being loaded. Not all of the
 modules are loaded at system startup. Some portions of the NVIDA driver
 stack are initialized when first needed. This is done using a setuid
@@ -309,7 +399,7 @@ avoid driver unload.</p>
 </section>
 </section>
 <section id="nvidia-gpus-cuda-nvidia-container-cli">
-<h2>NVIDIA GPUs &amp; CUDA (nvidia-container-cli)<a class="headerlink" href="#nvidia-gpus-cuda-nvidia-container-cli" title="Permalink to this heading"></a></h2>
+<h2>NVIDIA GPUs &amp; CUDA (nvidia-container-cli)<a class="headerlink" href="#nvidia-gpus-cuda-nvidia-container-cli" title="Permalink to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option instructs
 Apptainer to perform GPU container setup using the
 <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> utility. This utility must be installed
@@ -335,7 +425,7 @@ container, e.g. compute, graphics, and display functionality.</p></li>
 OCI containers.</p></li>
 </ul>
 <section id="requirements-limitations">
-<h3>Requirements &amp; Limitations<a class="headerlink" href="#requirements-limitations" title="Permalink to this heading"></a></h3>
+<h3>Requirements &amp; Limitations<a class="headerlink" href="#requirements-limitations" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> must be installed on your host.
 It must be able to be found by the <code class="docutils literal notranslate"><span class="pre">binary</span> <span class="pre">path</span></code> set in
@@ -356,7 +446,7 @@ GitHub issue</a></p></li>
 </ul>
 </section>
 <section id="id1">
-<h3>Example - tensorflow-gpu<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<h3>Example - tensorflow-gpu<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
 <p>Tensorflow can be run using <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> in a similar manner as the
 standard <code class="docutils literal notranslate"><span class="pre">--nv</span></code> binding approach when run unprivleged. Build the
 large container into a sandbox:</p>
@@ -406,7 +496,7 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 </div>
 </section>
 <section id="gpu-selection">
-<h3>GPU Selection<a class="headerlink" href="#gpu-selection" title="Permalink to this heading"></a></h3>
+<h3>GPU Selection<a class="headerlink" href="#gpu-selection" title="Permalink to this heading">¶</a></h3>
 <p>When running with <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code>, by default Apptainer will expose all
 GPUs on the host inside the container. This mirrors the functionality of
 the standard GPU support for the most common use-case.</p>
@@ -454,7 +544,7 @@ setup dynamically by a job scheduler / workflow system according to the
 requirements of the job.</p>
 </section>
 <section id="other-gpu-options">
-<h3>Other GPU Options<a class="headerlink" href="#other-gpu-options" title="Permalink to this heading"></a></h3>
+<h3>Other GPU Options<a class="headerlink" href="#other-gpu-options" title="Permalink to this heading">¶</a></h3>
 <p>In <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> mode, Apptainer understands the following additional
 environment variables. Note that these environment variables are read
 from the environment where <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> is run. Apptainer does
@@ -482,7 +572,7 @@ be found in the container-toolkit guide:</p>
 </section>
 </section>
 <section id="amd-gpus-rocm">
-<h2>AMD GPUs &amp; ROCm<a class="headerlink" href="#amd-gpus-rocm" title="Permalink to this heading"></a></h2>
+<h2>AMD GPUs &amp; ROCm<a class="headerlink" href="#amd-gpus-rocm" title="Permalink to this heading">¶</a></h2>
 <p>Apptainer has a <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> flag to support GPU compute with the
 ROCm framework using AMD Radeon GPU cards.</p>
 <p>Commands that <code class="docutils literal notranslate"><span class="pre">run</span></code>, or otherwise execute containers (<code class="docutils literal notranslate"><span class="pre">shell</span></code>,
@@ -500,7 +590,7 @@ version of the ROCm libraries are used by application run inside the
 container.</p></li>
 </ul>
 <section id="id2">
-<h3>Requirements<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<h3>Requirements<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
 <p>To use the <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> flag to run a CUDA application inside a container
 you must ensure that:</p>
 <ul class="simple">
@@ -519,7 +609,7 @@ with ROCm 2.8/2.9 and the upstream kernel driver, and Ubuntu 18.04 with
 ROCm 2.9 and the DKMS driver.</p>
 </section>
 <section id="example-tensorflow-rocm">
-<h3>Example - tensorflow-rocm<a class="headerlink" href="#example-tensorflow-rocm" title="Permalink to this heading"></a></h3>
+<h3>Example - tensorflow-rocm<a class="headerlink" href="#example-tensorflow-rocm" title="Permalink to this heading">¶</a></h3>
 <p>Tensorflow is commonly used for machine learning projects, but can be
 difficult to install on older systems, and is updated frequently.
 Running tensorflow from a container removes installation problems and
@@ -560,7 +650,7 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 </section>
 </section>
 <section id="opencl-applications">
-<h2>OpenCL Applications<a class="headerlink" href="#opencl-applications" title="Permalink to this heading"></a></h2>
+<h2>OpenCL Applications<a class="headerlink" href="#opencl-applications" title="Permalink to this heading">¶</a></h2>
 <p>Both the <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> and <code class="docutils literal notranslate"><span class="pre">--nv</span></code> flags will bind the vendor OpenCL
 implementation libraries into a container that is being run. However,
 these libraries will not be used by OpenCL applications unless a vendor
@@ -570,7 +660,7 @@ to use the vendor library.</p>
 <span class="pre">/etc/OpenCL</span></code> so that the icd files from the host (which match the
 bound-in libraries) are present in the container.</p>
 <section id="example-blender-opencl">
-<h3>Example - Blender OpenCL<a class="headerlink" href="#example-blender-opencl" title="Permalink to this heading"></a></h3>
+<h3>Example - Blender OpenCL<a class="headerlink" href="#example-blender-opencl" title="Permalink to this heading">¶</a></h3>
 <p>The <a class="reference external" href="https://github.com/sylabs/examples">Sylabs examples repository</a>
 contains an example container definition for the 3D modelling
 application ‘Blender’.</p>
@@ -589,22 +679,29 @@ batch rendering (which can also use OpenCL).</p>
 
 
            </div>
+           
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="mpi.html" class="btn btn-neutral float-left" title="Apptainer and MPI applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mpi.html" class="btn btn-neutral float-left" title="Apptainer and MPI applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p></p>
-  </div>
+    <p>
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
-  
     <br>
     &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
     <br>
@@ -614,13 +711,22 @@ batch rendering (which can also use OpenCL).</p>
 </footer>
         </div>
       </div>
+
     </section>
+
   </div>
-  <script>
+  
+
+  <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
