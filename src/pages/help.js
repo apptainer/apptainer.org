@@ -70,7 +70,7 @@ const HelpPage = () => (
             aria-label=""
             className="inline-flex items-center font-semibold transition-colors duration-200 text-blue-900 hover:text-blue-700"
           >
-            Discussion and Announcements
+            Discussion&nbsp;and&nbsp;Announcements
           </Link>
           <Link
             to="https://groups.google.com/u/4/a/apptainer.org/g/announce"
