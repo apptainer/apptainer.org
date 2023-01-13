@@ -70,14 +70,14 @@ const HelpPage = () => (
             aria-label=""
             className="inline-flex items-center font-semibold transition-colors duration-200 text-blue-900 hover:text-blue-700"
           >
-            Discussion&nbsp;and&nbsp;Announcements
+            Discuss+announce
           </Link>
           <Link
             to="https://groups.google.com/u/4/a/apptainer.org/g/announce"
             aria-label=""
             className="inline-flex items-center font-semibold transition-colors duration-200 text-blue-900 hover:text-blue-700"
           >
-            Announcements-only
+            Announce-only
           </Link>
         </div>
         <div className="flex flex-col justify-between p-5 border rounded shadow-sm">
