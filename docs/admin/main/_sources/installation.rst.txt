@@ -325,24 +325,22 @@ For the setuid installation do above command first and then this one:
 Install Debian/Ubuntu packages
 ------------------------------
 
-Pre-built Debian/Ubuntu packages are only available on GitHub and only
-for the amd64 architecture.
+Pre-built Debian/Ubuntu packages are available on PPA (Personal Package Archive) and for the amd64 and arm64 architecture.
 For the non-setuid installation use these commands:
 
 .. code::
 
-    $ sudo apt-get update
-    $ sudo apt-get install -y wget
-    $ cd /tmp
-    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}_{InstallationVersion}_amd64.deb
-    $ sudo apt-get install -y ./{command}_{InstallationVersion}_amd64.deb
+    $ sudo add-apt-repository -y ppa:apptainer/ppa
+    $ sudo apt update
+    $ sudo apt install -y apptainer
 
 For the setuid installation do above commands first and then these:
 
 .. code::
 
-    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid_{InstallationVersion}_amd64.deb
-    $ sudo dpkg -i ./{command}-suid_{InstallationVersion}_amd64.deb
+    $ sudo add-apt-repository -y ppa:apptainer/ppa
+    $ sudo apt update
+    $ sudo apt install -y apptainer-suid
 
 Install from Source
 ===================
