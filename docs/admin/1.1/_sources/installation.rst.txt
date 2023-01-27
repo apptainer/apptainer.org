@@ -322,20 +322,18 @@ For the setuid installation do above command first and then this one:
 
    $ sudo yum install -y https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid-{GitHubDownloadVersion}.x86_64.rpm
 
-Install Debian/Ubuntu packages
+Install Debian packages
 ------------------------------
 
-Pre-built Debian/Ubuntu packages are only available on GitHub and only
-for the amd64 architecture.
-For the non-setuid installation use these commands:
+Pre-built Debian packages are only available on GitHub and only for the amd64 architecture. For the non-setuid installation use these commands:
 
 .. code::
 
-    $ sudo apt-get update
-    $ sudo apt-get install -y wget
+    $ sudo apt update
+    $ sudo apt install -y wget
     $ cd /tmp
     $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}_{InstallationVersion}_amd64.deb
-    $ sudo apt-get install -y ./{command}_{InstallationVersion}_amd64.deb
+    $ sudo apt install -y ./{command}_{InstallationVersion}_amd64.deb
 
 For the setuid installation do above commands first and then these:
 
@@ -343,6 +341,35 @@ For the setuid installation do above commands first and then these:
 
     $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid_{InstallationVersion}_amd64.deb
     $ sudo dpkg -i ./{command}-suid_{InstallationVersion}_amd64.deb
+
+Install Ubuntu packages
+------------------------------
+
+Pre-built Ubuntu packages are available on PPA (Personal Package Archive) for the amd64 and arm64 architectures. 
+
+First, on Ubuntu based containers install `software-properties-common` package to obtain `add-apt-repository` command. On Ubuntu Desktop/Server derived systems skip this step.
+
+.. code::
+
+    $ sudo apt update
+    $ sudo apt install -y software-properties-common
+
+
+For the non-setuid installation use these commands:
+
+.. code::
+
+    $ sudo add-apt-repository -y ppa:apptainer/ppa
+    $ sudo apt update
+    $ sudo apt install -y apptainer
+
+For the setuid installation do above commands first and then these:
+
+.. code::
+
+    $ sudo add-apt-repository -y ppa:apptainer/ppa
+    $ sudo apt update
+    $ sudo apt install -y apptainer-suid
 
 Install from Source
 ===================
