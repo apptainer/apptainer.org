@@ -425,7 +425,7 @@ It does work in non-setuid mode with fuse-overlayfs.</p>
 <p>A script is available to make a relocatable unprivileged binary installation
 of Apptainer, including all dependencies that are not normally installed
 on Linux systems.  The script works on current Red Hat Enterprise Linux-derived
-systems, Fedora, SUSE/OpenSUSE, Debian, and Ubuntu.</p>
+systems, Fedora, SUSE/OpenSUSE, Debian, and Ubuntu (except 18.04).</p>
 <p>This is the easiest way to use it:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -s https://raw.githubusercontent.com/apptainer/apptainer/main/tools/install-unprivileged.sh | \
     bash -s - install-dir
@@ -497,7 +497,7 @@ $ sudo dpkg -i ./apptainer-suid_1.1.5_amd64.deb
 </section>
 <section id="install-ubuntu-packages">
 <h4>Install Ubuntu packages<a class="headerlink" href="#install-ubuntu-packages" title="Permalink to this heading">¶</a></h4>
-<p>Pre-built Ubuntu packages are available on PPA (Personal Package Archive) for the amd64 and arm64 architectures.</p>
+<p>Pre-built Ubuntu packages are available on PPA (Personal Package Archive) for the amd64 and arm64 architectures on all current Ubuntu releases except 18.04.</p>
 <p>First, on Ubuntu based containers install <cite>software-properties-common</cite> package to obtain <cite>add-apt-repository</cite> command. On Ubuntu Desktop/Server derived systems skip this step.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt update
 $ sudo apt install -y software-properties-common
