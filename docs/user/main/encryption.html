@@ -1,79 +1,42 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Encrypted Containers &mdash; Apptainer User Guide main documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Remote Endpoints" href="endpoint.html" />
     <link rel="prev" title="Key commands" href="key_commands.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> Apptainer User Guide
-          
-
-          
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
               <div class="version">
                 main
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -81,18 +44,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
@@ -171,79 +123,36 @@
 <li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Apptainer User Guide</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-      <li>Encrypted Containers</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Encrypted Containers</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
-            
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/encryption.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <section id="encrypted-containers">
-<span id="encryption"></span><h1>Encrypted Containers<a class="headerlink" href="#encrypted-containers" title="Permalink to this heading">¶</a></h1>
+             
+  <div class="section" id="encrypted-containers">
+<span id="encryption"></span><h1>Encrypted Containers<a class="headerlink" href="#encrypted-containers" title="Permalink to this heading"></a></h1>
 <p>Users can build a secure, confidential container environment by
 encrypting the root file system.</p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p>Apptainer provides a feature to build and run encrypted
 containers to allow users to encrypt the file system
 image within a SIF. This encryption can be performed using either a
@@ -263,9 +172,9 @@ This version should be standard with recent Linux versions such as
 Ubuntu 18.04, Debian 10 and CentOS/RHEL 7, but users of older Linux
 versions may have to update.</p>
 </div>
-</section>
-<section id="encrypting-a-container">
-<h2>Encrypting a container<a class="headerlink" href="#encrypting-a-container" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="encrypting-a-container">
+<h2>Encrypting a container<a class="headerlink" href="#encrypting-a-container" title="Permalink to this heading"></a></h2>
 <p>A container can be encrypted either by supplying a plaintext passphrase
 or a PEM file containing an asymmetric RSA public key. Of these two
 methods the PEM file is more secure and is therefore recommended for
@@ -275,6 +184,11 @@ that the container needs to be encrypted.</p>
 <p>A passphrase or a key-file used to perform the encryption is supplied at
 build time via an environment variable or a command line option.</p>
 <table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 46%" />
+<col style="width: 28%" />
+</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><strong>Encryption Method</strong></p></td>
 <td><p><strong>Environment Variable</strong></p></td>
@@ -300,8 +214,8 @@ following precedence is respected.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PEM_PATH</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PASSPHRASE</span></code></p></li>
 </ol>
-<section id="passphrase-encryption">
-<h3>Passphrase Encryption<a class="headerlink" href="#passphrase-encryption" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="passphrase-encryption">
+<h3>Passphrase Encryption<a class="headerlink" href="#passphrase-encryption" title="Permalink to this heading"></a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Passphrase encryption is less secure than encrypting containers using
@@ -312,16 +226,16 @@ containers in production are encouraged to use asymmetric keys.</p>
 </div>
 <p>In case of plaintext passphrase encryption, a passphrase is supplied by
 one of the following methods.</p>
-<section id="encrypting-with-a-passphrase-interactively">
-<h4>Encrypting with a passphrase interactively<a class="headerlink" href="#encrypting-with-a-passphrase-interactively" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="encrypting-with-a-passphrase-interactively">
+<h4>Encrypting with a passphrase interactively<a class="headerlink" href="#encrypting-with-a-passphrase-interactively" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --passphrase encrypted.sif encrypted.def
 Enter encryption passphrase: &lt;secret&gt;
 INFO:    Starting build...
 </pre></div>
 </div>
-</section>
-<section id="using-an-environment-variable">
-<h4>Using an environment variable<a class="headerlink" href="#using-an-environment-variable" title="Permalink to this heading">¶</a></h4>
+</div>
+<div class="section" id="using-an-environment-variable">
+<h4>Using an environment variable<a class="headerlink" href="#using-an-environment-variable" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo APPTAINER_ENCRYPTION_PASSPHRASE=&lt;secret&gt; apptainer build --encrypt encrypted.sif encrypted.def
 Starting build...
 </pre></div>
@@ -340,10 +254,10 @@ $ sudo -E apptainer build --encrypt encrypted.sif encrypted.def
 Starting build...
 </pre></div>
 </div>
-</section>
-</section>
-<section id="pem-file-encryption">
-<h3>PEM File Encryption<a class="headerlink" href="#pem-file-encryption" title="Permalink to this heading">¶</a></h3>
+</div>
+</div>
+<div class="section" id="pem-file-encryption">
+<h3>PEM File Encryption<a class="headerlink" href="#pem-file-encryption" title="Permalink to this heading"></a></h3>
 <p>Apptainer currently supports RSA encryption using a public/private
 key-pair. Keys are supplied in PEM format. The public key is used to
 encrypt containers that can be decrypted on a host that has access to
@@ -367,15 +281,15 @@ $ mv rsa rsa_pri.pem
 <p>You would use the <code class="docutils literal notranslate"><span class="pre">rsa_pub.pem</span></code> file to encrypt your container and the
 <code class="docutils literal notranslate"><span class="pre">rsa_pri.pem</span></code> file to run it.  Be sure to keep the private key safe
 and private, because it is not encrypted itself.</p>
-<section id="encrypting-with-a-command-line-option">
-<h4>Encrypting with a command line option<a class="headerlink" href="#encrypting-with-a-command-line-option" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="encrypting-with-a-command-line-option">
+<h4>Encrypting with a command line option<a class="headerlink" href="#encrypting-with-a-command-line-option" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --pem-path=rsa_pub.pem encrypted.sif encrypted.def
 Starting build...
 </pre></div>
 </div>
-</section>
-<section id="encrypting-with-an-environment-variable">
-<h4>Encrypting with an environment variable<a class="headerlink" href="#encrypting-with-an-environment-variable" title="Permalink to this heading">¶</a></h4>
+</div>
+<div class="section" id="encrypting-with-an-environment-variable">
+<h4>Encrypting with an environment variable<a class="headerlink" href="#encrypting-with-an-environment-variable" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo APPTAINER_ENCRYPTION_PEM_PATH=rsa_pub.pem apptainer build --encrypt encrypted.sif encrypted.def
 Starting build...
 </pre></div>
@@ -383,27 +297,27 @@ Starting build...
 <p>In this case it is necessary to use the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag since the
 presence of an environment variable alone will not trigger the encrypted
 build workflow.</p>
-</section>
-</section>
-</section>
-<section id="running-an-encrypted-container">
-<h2>Running an encrypted container<a class="headerlink" href="#running-an-encrypted-container" title="Permalink to this heading">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="section" id="running-an-encrypted-container">
+<h2>Running an encrypted container<a class="headerlink" href="#running-an-encrypted-container" title="Permalink to this heading"></a></h2>
 <p>To <code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">shell</span></code>, or <code class="docutils literal notranslate"><span class="pre">exec</span></code> an encrypted image, credentials to
 decrypt the image need to be supplied at runtime either in a key-file or
 a plaintext passphrase.</p>
-<section id="running-a-container-encrypted-with-a-passphrase">
-<h3>Running a container encrypted with a passphrase<a class="headerlink" href="#running-a-container-encrypted-with-a-passphrase" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="running-a-container-encrypted-with-a-passphrase">
+<h3>Running a container encrypted with a passphrase<a class="headerlink" href="#running-a-container-encrypted-with-a-passphrase" title="Permalink to this heading"></a></h3>
 <p>A passphrase can be supplied at runtime by either of the ways listed in
 the sections above.</p>
-<section id="running-with-a-passphrase-interactively">
-<h4>Running with a passphrase interactively<a class="headerlink" href="#running-with-a-passphrase-interactively" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="running-with-a-passphrase-interactively">
+<h4>Running with a passphrase interactively<a class="headerlink" href="#running-with-a-passphrase-interactively" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --passphrase encrypted.sif
 Enter passphrase for encrypted container: &lt;secret&gt;
 </pre></div>
 </div>
-</section>
-<section id="running-with-a-passphrase-in-an-environment-variable">
-<h4>Running with a passphrase in an environment variable<a class="headerlink" href="#running-with-a-passphrase-in-an-environment-variable" title="Permalink to this heading">¶</a></h4>
+</div>
+<div class="section" id="running-with-a-passphrase-in-an-environment-variable">
+<h4>Running with a passphrase in an environment variable<a class="headerlink" href="#running-with-a-passphrase-in-an-environment-variable" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINER_ENCRYPTION_PASSPHRASE=&quot;secret&quot; apptainer run encrypted.sif
 </pre></div>
 </div>
@@ -417,53 +331,46 @@ like so.</p>
 $ apptainer run encrypted.sif
 </pre></div>
 </div>
-</section>
-</section>
-<section id="running-a-container-encrypted-with-a-pem-file">
-<h3>Running a container encrypted with a PEM file<a class="headerlink" href="#running-a-container-encrypted-with-a-pem-file" title="Permalink to this heading">¶</a></h3>
+</div>
+</div>
+<div class="section" id="running-a-container-encrypted-with-a-pem-file">
+<h3>Running a container encrypted with a PEM file<a class="headerlink" href="#running-a-container-encrypted-with-a-pem-file" title="Permalink to this heading"></a></h3>
 <p>A private key is supplied using either of the methods listed in the
 Encryption section above.</p>
-<section id="running-using-a-command-line-option">
-<h4>Running using a command line option<a class="headerlink" href="#running-using-a-command-line-option" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="running-using-a-command-line-option">
+<h4>Running using a command line option<a class="headerlink" href="#running-using-a-command-line-option" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --pem-path=rsa_pri.pem encrypted.sif
 </pre></div>
 </div>
-</section>
-<section id="running-using-an-environment-variable">
-<h4>Running using an environment variable<a class="headerlink" href="#running-using-an-environment-variable" title="Permalink to this heading">¶</a></h4>
+</div>
+<div class="section" id="running-using-an-environment-variable">
+<h4>Running using an environment variable<a class="headerlink" href="#running-using-an-environment-variable" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINER_ENCRYPTION_PEM_PATH=rsa_pri.pem apptainer run encrypted.sif
 </pre></div>
 </div>
-</section>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
+</div>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="endpoint.html" class="btn btn-neutral float-right" title="Remote Endpoints" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="key_commands.html" class="btn btn-neutral float-left" title="Key commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="endpoint.html" class="btn btn-neutral float-right" title="Remote Endpoints" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-
-    </p>
+    <p></p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
     <br>
     &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
     <br>
@@ -473,22 +380,13 @@ Encryption section above.</p>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
