@@ -1,79 +1,42 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Apptainer and MPI applications &mdash; Apptainer User Guide 1.1 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="GPU Support (NVIDIA CUDA &amp; AMD ROCm)" href="gpu.html" />
     <link rel="prev" title="OCI Runtime Support" href="oci_runtime.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> Apptainer User Guide
-          
-
-          
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
               <div class="version">
                 1.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -81,18 +44,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
@@ -160,75 +112,32 @@
 <li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Apptainer User Guide</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-      <li>Apptainer and MPI applications</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Apptainer and MPI applications</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
-            
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/mpi.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <section id="apptainer-and-mpi-applications">
-<span id="mpi"></span><h1>Apptainer and MPI applications<a class="headerlink" href="#apptainer-and-mpi-applications" title="Permalink to this heading">¶</a></h1>
+             
+  <div class="section" id="apptainer-and-mpi-applications">
+<span id="mpi"></span><h1>Apptainer and MPI applications<a class="headerlink" href="#apptainer-and-mpi-applications" title="Permalink to this heading"></a></h1>
 <p id="sec-mpi">The <a class="reference external" href="https://mpi-forum.org">Message Passing Interface (MPI)</a> is a
 standard extensively used by HPC applications to implement various
 communication across compute nodes of a single system or across compute
@@ -253,8 +162,8 @@ files from the host into the container. This ability is sometimes
 disabled by system administrators for operational reasons. If this is
 the case on your system please follow the <em>hybrid</em> approach.</p>
 </div>
-<section id="hybrid-model">
-<h2>Hybrid model<a class="headerlink" href="#hybrid-model" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="hybrid-model">
+<h2>Hybrid model<a class="headerlink" href="#hybrid-model" title="Permalink to this heading"></a></h2>
 <p>The basic idea behind the <em>Hybrid Approach</em> is when you execute a
 Apptainer container with MPI code, you will call <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> or a
 similar launcher on the <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> command itself. The MPI process
@@ -294,8 +203,8 @@ critical.</p></li>
 version available on the host system, a standard approach is to build
 your own MPI container, including building the same MPI framework
 installed on the host from source.</p>
-<section id="test-application">
-<h3>Test Application<a class="headerlink" href="#test-application" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="test-application">
+<h3>Test Application<a class="headerlink" href="#test-application" title="Permalink to this heading"></a></h3>
 <p>To illustrate how Apptainer can be used to execute MPI applications,
 we will assume for a moment that the application is <code class="docutils literal notranslate"><span class="pre">mpitest.c</span></code>, a
 simple Hello World:</p>
@@ -348,9 +257,9 @@ support applications in many languages like Python, R, etc.</p>
 <p>The next step is to create the definition file used to build the
 container, which will depend on the MPI implementation available on the
 host.</p>
-</section>
-<section id="mpich-hybrid-container">
-<h3>MPICH Hybrid Container<a class="headerlink" href="#mpich-hybrid-container" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="mpich-hybrid-container">
+<h3>MPICH Hybrid Container<a class="headerlink" href="#mpich-hybrid-container" title="Permalink to this heading"></a></h3>
 <p>If the host MPI is MPICH, a definition file such as the following
 example can be used:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
@@ -402,9 +311,9 @@ as used on the host.</p>
 Consult your system documentation, or ask your support staff for
 details.</p>
 </div>
-</section>
-<section id="open-mpi-hybrid-container">
-<h3>Open MPI Hybrid Container<a class="headerlink" href="#open-mpi-hybrid-container" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="open-mpi-hybrid-container">
+<h3>Open MPI Hybrid Container<a class="headerlink" href="#open-mpi-hybrid-container" title="Permalink to this heading"></a></h3>
 <p>If the host MPI is Open MPI, the definition file looks like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
 From: ubuntu:18.04
@@ -455,9 +364,9 @@ PMI2 / PMIx, as used on the host.</p>
 Consult your system documentation, or ask your support staff for
 details.</p>
 </div>
-</section>
-<section id="running-an-mpi-application">
-<h3>Running an MPI Application<a class="headerlink" href="#running-an-mpi-application" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="running-an-mpi-application">
+<h3>Running an MPI Application<a class="headerlink" href="#running-an-mpi-application" title="Permalink to this heading"></a></h3>
 <p>The standard way to execute MPI applications with hybrid Apptainer
 containers is to run the native <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> command from the host, which
 will start Apptainer containers and ultimately MPI ranks within the
@@ -482,10 +391,10 @@ Hello, I am rank 1/8
 Hello, I am rank 7/8
 </pre></div>
 </div>
-</section>
-</section>
-<section id="bind-model">
-<h2>Bind model<a class="headerlink" href="#bind-model" title="Permalink to this heading">¶</a></h2>
+</div>
+</div>
+<div class="section" id="bind-model">
+<h2>Bind model<a class="headerlink" href="#bind-model" title="Permalink to this heading"></a></h2>
 <p>Similar to the <em>Hybrid Approach</em>, the basic idea behind the <em>Bind
 Approach</em> is to start the MPI application by calling the MPI launcher
 (e.g., <cite>mpirun</cite>) from the host. The main difference between the hybrid
@@ -536,8 +445,8 @@ you want to run your containers. For example, a container where the
 application has been compiled with MPICH will not be able to run on a
 system where only Open MPI is available, even if you mount the directory
 where Open MPI is installed.</p>
-<section id="bind-mode-definition-file">
-<h3>Bind Mode Definition File<a class="headerlink" href="#bind-mode-definition-file" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="bind-mode-definition-file">
+<h3>Bind Mode Definition File<a class="headerlink" href="#bind-mode-definition-file" title="Permalink to this heading"></a></h3>
 <p>A definition file for a container in bind mode is fairly straight
 forward. The following example shows the definition file for the test
 program, which in this case has been compiled on the host to
@@ -558,9 +467,9 @@ into <code class="docutils literal notranslate"><span class="pre">/opt</span></c
 container.</p>
 <p>The environment section adds paths for binaries and libraries under
 <code class="docutils literal notranslate"><span class="pre">$MPI_DIR</span></code> - which we will need to set when running the container.</p>
-</section>
-<section id="id1">
-<h3>Running an MPI Application<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="id1">
+<h3>Running an MPI Application<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
 <p>When running our bind mode container we need to <code class="docutils literal notranslate"><span class="pre">--bind</span></code> our host’s
 MPI installation into the container. We also need to set the environment
 variable <code class="docutils literal notranslate"><span class="pre">$MPI_DIR</span></code> in the container to point to the location where
@@ -588,10 +497,10 @@ Hello, I am rank 4/8
 Hello, I am rank 6/8
 </pre></div>
 </div>
-</section>
-</section>
-<section id="batch-scheduler-slurm">
-<h2>Batch Scheduler / Slurm<a class="headerlink" href="#batch-scheduler-slurm" title="Permalink to this heading">¶</a></h2>
+</div>
+</div>
+<div class="section" id="batch-scheduler-slurm">
+<h2>Batch Scheduler / Slurm<a class="headerlink" href="#batch-scheduler-slurm" title="Permalink to this heading"></a></h2>
 <p>If your target system is setup with a batch system such as SLURM, a
 standard way to execute MPI applications is through a batch script. The
 following example illustrates the context of a batch script for Slurm
@@ -616,9 +525,9 @@ is based on the bind model, please add the appropriate bind options.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sbatch my_job.sh
 </pre></div>
 </div>
-</section>
-<section id="alternative-launchers">
-<h2>Alternative Launchers<a class="headerlink" href="#alternative-launchers" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="alternative-launchers">
+<h2>Alternative Launchers<a class="headerlink" href="#alternative-launchers" title="Permalink to this heading"></a></h2>
 <p>On many systems it is common to use an alternative launcher to start MPI
 applications, e.g. Slurm’s <code class="docutils literal notranslate"><span class="pre">srun</span></code> rather than the <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> provided
 by the MPI installation. This approach is supported with Apptainer
@@ -627,9 +536,9 @@ management interface (e.g. PMI2 / PMIx) and version as is used by the
 launcher.</p>
 <p>In the bind mode the host MPI is used in the container, and should
 interact correctly with the same launchers as it does on the host.</p>
-</section>
-<section id="interconnects-networking">
-<h2>Interconnects / Networking<a class="headerlink" href="#interconnects-networking" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="interconnects-networking">
+<h2>Interconnects / Networking<a class="headerlink" href="#interconnects-networking" title="Permalink to this heading"></a></h2>
 <p>High performance interconnects such as Infiniband and Omnipath require
 that MPI implementations are built to support them. You may need to
 install or bind Infiniband/Omnipath libraries into your containers when
@@ -639,9 +548,9 @@ container. If you run a container using the <code class="docutils literal notran
 <code class="docutils literal notranslate"><span class="pre">--containall</span></code> flags a minimal <code class="docutils literal notranslate"><span class="pre">/dev</span></code> is used instead. You may need
 to bind in additional <code class="docutils literal notranslate"><span class="pre">/dev/</span></code> entries manually to support the
 operation of your interconnect drivers in the container in this case.</p>
-</section>
-<section id="troubleshooting-tips">
-<h2>Troubleshooting Tips<a class="headerlink" href="#troubleshooting-tips" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="troubleshooting-tips">
+<h2>Troubleshooting Tips<a class="headerlink" href="#troubleshooting-tips" title="Permalink to this heading"></a></h2>
 <p>If your containers run N rank 0 processes, instead of operating
 correctly as an MPI application, it is likely that the MPI stack used to
 launch the containerized application is not compatible with, or cannot
@@ -688,34 +597,27 @@ ask for MPI advice from the Apptainer community. HPC cluster
 configurations vary greatly and most MPI problems are related to MPI /
 interconnect configuration, and not caused by issues in Apptainer
 itself.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="gpu.html" class="btn btn-neutral float-right" title="GPU Support (NVIDIA CUDA &amp; AMD ROCm)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="oci_runtime.html" class="btn btn-neutral float-left" title="OCI Runtime Support" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gpu.html" class="btn btn-neutral float-right" title="GPU Support (NVIDIA CUDA &amp; AMD ROCm)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-
-    </p>
+    <p></p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
     <br>
     &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
     <br>
@@ -725,22 +627,13 @@ itself.</p>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
