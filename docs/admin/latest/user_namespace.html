@@ -1,79 +1,42 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>User Namespaces &amp; Fakeroot &mdash; Apptainer Admin Guide 1.1 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Security in Apptainer" href="security.html" />
     <link rel="prev" title="Apptainer Configuration Files" href="configfiles.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> Apptainer Admin Guide
-          
-
-          
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
               <div class="version">
                 1.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -81,18 +44,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="admin_quickstart.html">Admin Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Apptainer</a></li>
@@ -123,75 +75,32 @@
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Apptainer Admin Guide</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-      <li>User Namespaces &amp; Fakeroot</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">User Namespaces &amp; Fakeroot</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
-            
               <a href="https://github.com/apptainer/apptainer-admindocs/blob/master/user_namespace.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <section id="user-namespaces-fakeroot">
-<span id="userns"></span><h1>User Namespaces &amp; Fakeroot<a class="headerlink" href="#user-namespaces-fakeroot" title="Permalink to this heading">¶</a></h1>
+             
+  <div class="section" id="user-namespaces-fakeroot">
+<span id="userns"></span><h1>User Namespaces &amp; Fakeroot<a class="headerlink" href="#user-namespaces-fakeroot" title="Permalink to this heading"></a></h1>
 <p>User namespaces are an isolation feature that allow processes to run
 with different user identifiers and/or privileges inside that namespace
 than are permitted outside. A user may have a <code class="docutils literal notranslate"><span class="pre">uid</span></code> of <code class="docutils literal notranslate"><span class="pre">1001</span></code> on a
@@ -208,8 +117,8 @@ component.
 Pros and cons of a setuid-root installation are discussed in the
 <a class="reference external" href="https://apptainer.org/docs/user/1.1/security.html#setuid-user-namespaces">Security section</a>
 of the user guide.</p>
-<section id="user-namespace-requirements">
-<span id="userns-requirements"></span><h2>User Namespace Requirements<a class="headerlink" href="#user-namespace-requirements" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="user-namespace-requirements">
+<span id="userns-requirements"></span><h2>User Namespace Requirements<a class="headerlink" href="#user-namespace-requirements" title="Permalink to this heading"></a></h2>
 <p>To allow unprivileged creation of user namespaces a kernel &gt;=3.8 is
 required, with &gt;=4.18 being recommended due to support for unprivileged
 mounting of FUSE filesystems (needed for example for mounting SIF files).
@@ -223,26 +132,26 @@ namespace creation is enabled using a <code class="docutils literal notranslate"
 parameter. Please consult your distribution documentation or vendor to
 confirm the steps necessary to ‘enable unprivileged user namespace
 creation’.</p>
-<section id="debian">
-<h3>Debian<a class="headerlink" href="#debian" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="debian">
+<h3>Debian<a class="headerlink" href="#debian" title="Permalink to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;echo kernel.unprivileged_userns_clone=1 </span><span class="se">\</span>
 <span class="s1">    &gt;/etc/sysctl.d/90-unprivileged_userns.conf&#39;</span>
 <span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">90</span><span class="o">-</span><span class="n">unprivileged_userns</span><span class="o">.</span><span class="n">conf</span>
 </pre></div>
 </div>
-</section>
-<section id="rhel-centos-7">
-<h3>RHEL/CentOS 7<a class="headerlink" href="#rhel-centos-7" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="rhel-centos-7">
+<h3>RHEL/CentOS 7<a class="headerlink" href="#rhel-centos-7" title="Permalink to this heading"></a></h3>
 <p>From 7.4, kernel support is included but must be enabled with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;echo user.max_user_namespaces=15000 </span><span class="se">\</span>
 <span class="s1">    &gt;/etc/sysctl.d/90-max_user_namespaces.conf&#39;</span>
 <span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">90</span><span class="o">-</span><span class="n">max_user_namespaces</span><span class="o">.</span><span class="n">conf</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="disabling-network-namespaces">
-<h2>Disabling network namespaces<a class="headerlink" href="#disabling-network-namespaces" title="Permalink to this heading">¶</a></h2>
+</div>
+</div>
+<div class="section" id="disabling-network-namespaces">
+<h2>Disabling network namespaces<a class="headerlink" href="#disabling-network-namespaces" title="Permalink to this heading"></a></h2>
 <p>There have been many Linux kernel exploits that have made use of
 unprivileged user namespaces as a point of entry, but almost all of them
 in the last few years have been in combination with network namespaces.
@@ -289,9 +198,9 @@ systemctl<span class="w"> </span>restart<span class="w"> </span>systemd-hostname
 systemctl<span class="w"> </span>status<span class="w"> </span>systemd-hostnamed
 </pre></div>
 </div>
-</section>
-<section id="rootless-fakeroot-feature">
-<span id="fakeroot"></span><h2>“Rootless” Fakeroot feature<a class="headerlink" href="#rootless-fakeroot-feature" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="rootless-fakeroot-feature">
+<span id="fakeroot"></span><h2>“Rootless” Fakeroot feature<a class="headerlink" href="#rootless-fakeroot-feature" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option available on many Apptainer functions allows an
 unprivileged user to run a container with the appearance of running as
 root.
@@ -324,8 +233,8 @@ configured range of UIDs/GIDs in the container, which map back to
 unprivileged user UIDs/GIDs on the host. This allows a user
 to be <code class="docutils literal notranslate"><span class="pre">root</span> <span class="pre">(uid</span> <span class="pre">0)</span></code> in a container, install packages etc., but have
 no privilege on the host.</p>
-<section id="requirements">
-<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h3>
 <p>In addition to user namespace support, for rootless fakeroot mode Apptainer
 must manipulate <code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code> maps for the user namespace it
 creates.
@@ -335,9 +244,9 @@ With non-suid installations of Apptainer or where <code class="docutils literal 
 <span class="pre">no</span></code> is set in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>, Apptainer attempts to use
 external setuid binaries <code class="docutils literal notranslate"><span class="pre">newuidmap</span></code> and <code class="docutils literal notranslate"><span class="pre">newgidmap</span></code>, so you need to
 install those binaries on your system.</p>
-</section>
-<section id="basics">
-<h3>Basics<a class="headerlink" href="#basics" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="basics">
+<h3>Basics<a class="headerlink" href="#basics" title="Permalink to this heading"></a></h3>
 <p>Rootless fakeroot relies on <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> files to find
 configured mappings from real user and group IDs, to a range of
 otherwise vacant IDs for each user on the host system that can be
@@ -382,6 +291,11 @@ and GIDs on the host system.</p>
 </div>
 <p>Resulting in the following allocation:</p>
 <table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 26%" />
+<col style="width: 58%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>User</p></th>
 <th class="head"><p>Host UID</p></th>
@@ -415,12 +329,16 @@ and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</sp
 this case it is recommended to use UIDs instead of login names.
 Benchmarks have shown speed-ups up to 20x.”</p>
 </div>
-</section>
-<section id="filesystem-considerations">
-<h3>Filesystem considerations<a class="headerlink" href="#filesystem-considerations" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="filesystem-considerations">
+<h3>Filesystem considerations<a class="headerlink" href="#filesystem-considerations" title="Permalink to this heading"></a></h3>
 <p>Based on the above range, here we can see what happens when the user
 <code class="docutils literal notranslate"><span class="pre">foo</span></code> create files with the rootless <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> feature:</p>
 <table class="docutils align-default">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 52%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Create file with container UID</p></th>
 <th class="head"><p>Created host file owned by UID</p></th>
@@ -442,9 +360,9 @@ Benchmarks have shown speed-ups up to 20x.”</p>
 directories and files created with a subuid, as they do not match with
 the user’s UID on the host. The user can remove these files by using a
 container shell running with fakeroot.</p>
-</section>
-<section id="network-configuration">
-<h3>Network configuration<a class="headerlink" href="#network-configuration" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="network-configuration">
+<h3>Network configuration<a class="headerlink" href="#network-configuration" title="Permalink to this heading"></a></h3>
 <p>With rootless fakeroot, users can request a container network named
 <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code>.
 Other networks are restricted and can only be used by the real host root
@@ -462,9 +380,9 @@ the security implications.</p>
 network as it requires privilege during container creation to set up
 the network.</p>
 </div>
-</section>
-<section id="configuration-with-config-fakeroot">
-<span id="config-fakeroot"></span><h3>Configuration with <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code><a class="headerlink" href="#configuration-with-config-fakeroot" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="configuration-with-config-fakeroot">
+<span id="config-fakeroot"></span><h3>Configuration with <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code><a class="headerlink" href="#configuration-with-config-fakeroot" title="Permalink to this heading"></a></h3>
 <p>Apptainer provides a <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> command that
 can be used by a root user to administer local system <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code>
 and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> files in a simple manner. This allows users to be
@@ -486,8 +404,8 @@ mapping files to all nodes.</p>
 support subuid or subgid mappings, so they cannot be defined in a
 central directory such as LDAP.</p>
 </div>
-<section id="adding-a-fakeroot-mapping">
-<h4>Adding a fakeroot mapping<a class="headerlink" href="#adding-a-fakeroot-mapping" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="adding-a-fakeroot-mapping">
+<h4>Adding a fakeroot mapping<a class="headerlink" href="#adding-a-fakeroot-mapping" title="Permalink to this heading"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">-a/--add</span> <span class="pre">&lt;user&gt;</span></code> option to <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> to create new
 mapping entries so that <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> can use the fakeroot feature of
 Apptainer:</p>
@@ -514,9 +432,9 @@ format for faster lookups when configuring a large number of
 mappings, and the command can be used to manipulate these by
 username.</p>
 </div>
-</section>
-<section id="deleting-disabling-enabling-mappings">
-<h4>Deleting, disabling, enabling mappings<a class="headerlink" href="#deleting-disabling-enabling-mappings" title="Permalink to this heading">¶</a></h4>
+</div>
+<div class="section" id="deleting-disabling-enabling-mappings">
+<h4>Deleting, disabling, enabling mappings<a class="headerlink" href="#deleting-disabling-enabling-mappings" title="Permalink to this heading"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">-r/--remove</span> <span class="pre">&lt;user&gt;</span></code> option to <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> to
 completely remove mapping entries. The <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> will no longer be able
 to use the fakeroot feature of Apptainer:</p>
@@ -551,36 +469,29 @@ $ cat /etc/subuid
 1000:4294836224:65536
 </pre></div>
 </div>
-</section>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
+</div>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="security.html" class="btn btn-neutral float-right" title="Security in Apptainer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="configfiles.html" class="btn btn-neutral float-left" title="Apptainer Configuration Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="security.html" class="btn btn-neutral float-right" title="Security in Apptainer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-
-    </p>
+    <p></p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
     <br>
     &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
     <br>
@@ -590,22 +501,13 @@ $ cat /etc/subuid
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
