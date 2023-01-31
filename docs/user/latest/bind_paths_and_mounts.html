@@ -1,79 +1,42 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Bind Paths and Mounts &mdash; Apptainer User Guide 1.1 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Persistent Overlays" href="persistent_overlays.html" />
     <link rel="prev" title="Library API Registries" href="library_api.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> Apptainer User Guide
-          
-
-          
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
               <div class="version">
                 1.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -81,18 +44,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
@@ -173,90 +125,47 @@
 <li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Apptainer User Guide</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-      <li>Bind Paths and Mounts</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Bind Paths and Mounts</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
-            
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/bind_paths_and_mounts.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <section id="bind-paths-and-mounts">
-<span id="id1"></span><h1>Bind Paths and Mounts<a class="headerlink" href="#bind-paths-and-mounts" title="Permalink to this heading">¶</a></h1>
+             
+  <div class="section" id="bind-paths-and-mounts">
+<span id="id1"></span><h1>Bind Paths and Mounts<a class="headerlink" href="#bind-paths-and-mounts" title="Permalink to this heading"></a></h1>
 <p id="sec-bindpaths">Unless <a class="reference external" href="https://apptainer.org/docs/admin/1.1/configfiles.html#bind-mount-management">disabled by the system administrator</a>,
 Apptainer allows you to map directories on your host system to
 directories within your container using bind mounts. This allows you to
 read and write data on the host system with ease.</p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p>When Apptainer ‘swaps’ the host operating system for the one inside
 your container, the host file systems becomes inaccessible. However, you
 may want to read and write files on the host system from within the
 container. To enable this functionality, Apptainer will bind
 directories back into the container via two primary methods:
 system-defined bind paths and user-defined bind paths.</p>
-</section>
-<section id="system-defined-bind-paths">
-<h2>System-defined bind paths<a class="headerlink" href="#system-defined-bind-paths" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="system-defined-bind-paths">
+<h2>System-defined bind paths<a class="headerlink" href="#system-defined-bind-paths" title="Permalink to this heading"></a></h2>
 <p>The system administrator has the ability to define what bind paths will
 be included automatically inside each container. Some bind paths are
 automatically derived (e.g. a user’s home directory) and some are
@@ -267,8 +176,8 @@ file). In the default configuration, the system default bind points are
 <code class="docutils literal notranslate"><span class="pre">/etc/passwd:/etc/passwd</span></code>, and <code class="docutils literal notranslate"><span class="pre">$PWD</span></code>. Where the first path before
 <code class="docutils literal notranslate"><span class="pre">:</span></code> is the path from the host and the second path is the path in the
 container.</p>
-<section id="disabling-system-binds">
-<h3>Disabling System Binds<a class="headerlink" href="#disabling-system-binds" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="disabling-system-binds">
+<h3>Disabling System Binds<a class="headerlink" href="#disabling-system-binds" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--no-mount</span></code> flag allows specific
 system mounts to be disabled, even if they are set in the
 <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> configuration file by the administrator.</p>
@@ -284,10 +193,10 @@ running, you can disable the <code class="docutils literal notranslate"><span cl
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-mount<span class="w"> </span>tmp,sys,dev<span class="w"> </span>mycontainer.sif
 </pre></div>
 </div>
-</section>
-</section>
-<section id="user-defined-bind-paths">
-<span id="id2"></span><h2>User-defined bind paths<a class="headerlink" href="#user-defined-bind-paths" title="Permalink to this heading">¶</a></h2>
+</div>
+</div>
+<div class="section" id="user-defined-bind-paths">
+<span id="id2"></span><h2>User-defined bind paths<a class="headerlink" href="#user-defined-bind-paths" title="Permalink to this heading"></a></h2>
 <p>Unless the system administrator has <a class="reference external" href="https://apptainer.org/docs/admin/1.1/configfiles.html#bind-mount-management">disabled user control of binds</a>,
 you will be able to request your own bind paths within your container.</p>
 <p>The Apptainer action commands (<code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code>, <code class="docutils literal notranslate"><span class="pre">shell</span></code>, and
@@ -307,8 +216,8 @@ longer-form method of specifying binds in <code class="docutils literal notransl
 <span class="pre">type=bind,src=&lt;source&gt;,dst=&lt;destination&gt;[,&lt;option&gt;]...</span></code> format. This is
 compatible with the <code class="docutils literal notranslate"><span class="pre">--mount</span></code> syntax for binds in Docker and other OCI
 runtimes.</p>
-<section id="bind-examples">
-<h3><code class="docutils literal notranslate"><span class="pre">--bind</span></code> Examples<a class="headerlink" href="#bind-examples" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="bind-examples">
+<h3><code class="docutils literal notranslate"><span class="pre">--bind</span></code> Examples<a class="headerlink" href="#bind-examples" title="Permalink to this heading"></a></h3>
 <p>Here’s an example of using the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option and binding <code class="docutils literal notranslate"><span class="pre">/data</span></code>
 on the host to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> in the container (<code class="docutils literal notranslate"><span class="pre">/mnt</span></code> does not need to
 already exist in the container):</p>
@@ -337,9 +246,9 @@ even when you are running your container as an executable file with a
 runscript. If you bind many directories into your Apptainer
 containers and they don’t change, you could even benefit by setting this
 variable in your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file.</p>
-</section>
-<section id="mount-examples">
-<h3><code class="docutils literal notranslate"><span class="pre">--mount</span></code> Examples<a class="headerlink" href="#mount-examples" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="mount-examples">
+<h3><code class="docutils literal notranslate"><span class="pre">--mount</span></code> Examples<a class="headerlink" href="#mount-examples" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--mount</span></code> flag takes a mount specification in the format
 <code class="docutils literal notranslate"><span class="pre">type=bind,src=&lt;source&gt;,dst=&lt;dest&gt;</span></code>. Additional options can be
 specified, comma delimited.</p>
@@ -389,9 +298,9 @@ $ apptainer run \
 <p>Mount specifications are also read from then environment variable
 <code class="docutils literal notranslate"><span class="pre">$APPTAINER_MOUNT</span></code>. Multiple bind mounts set via this environment
 variable should be separated by newlines (<code class="docutils literal notranslate"><span class="pre">\n</span></code>).</p>
-</section>
-<section id="using-bind-or-mount-with-the-writable-flag">
-<h3>Using <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag<a class="headerlink" href="#using-bind-or-mount-with-the-writable-flag" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="using-bind-or-mount-with-the-writable-flag">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag<a class="headerlink" href="#using-bind-or-mount-with-the-writable-flag" title="Permalink to this heading"></a></h3>
 <p>To mount a bind path inside the container, a <em>bind point</em> must be
 defined within the container. The bind point is a directory within the
 container that Apptainer can use as a destination to bind a
@@ -407,11 +316,11 @@ bind paths in combination with the <code class="docutils literal notranslate"><s
 that the appropriate bind points exist within the container. If they do
 not already exist, it will be necessary to modify the container and
 create them.</p>
-</section>
-<section id="using-no-home-and-containall-flags">
-<h3>Using <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> and <code class="docutils literal notranslate"><span class="pre">--containall</span></code> flags<a class="headerlink" href="#using-no-home-and-containall-flags" title="Permalink to this heading">¶</a></h3>
-<section id="no-home">
-<h4><code class="docutils literal notranslate"><span class="pre">--no-home</span></code><a class="headerlink" href="#no-home" title="Permalink to this heading">¶</a></h4>
+</div>
+<div class="section" id="using-no-home-and-containall-flags">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> and <code class="docutils literal notranslate"><span class="pre">--containall</span></code> flags<a class="headerlink" href="#using-no-home-and-containall-flags" title="Permalink to this heading"></a></h3>
+<div class="section" id="no-home">
+<h4><code class="docutils literal notranslate"><span class="pre">--no-home</span></code><a class="headerlink" href="#no-home" title="Permalink to this heading"></a></h4>
 <p>When shelling into your container image, Apptainer allows you to
 mount your current working directory (<code class="docutils literal notranslate"><span class="pre">CWD</span></code>) without mounting your
 host <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory with the <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> flag.</p>
@@ -423,9 +332,9 @@ host <code class="docutils literal notranslate"><span class="pre">$HOME</span></
 <p>Beware that if it is the case that your <code class="docutils literal notranslate"><span class="pre">CWD</span></code> is your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>
 directory, it will still mount your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory.</p>
 </div>
-</section>
-<section id="containall">
-<h4><code class="docutils literal notranslate"><span class="pre">--containall</span></code><a class="headerlink" href="#containall" title="Permalink to this heading">¶</a></h4>
+</div>
+<div class="section" id="containall">
+<h4><code class="docutils literal notranslate"><span class="pre">--containall</span></code><a class="headerlink" href="#containall" title="Permalink to this heading"></a></h4>
 <blockquote>
 <div><p>Using the <code class="docutils literal notranslate"><span class="pre">--containall</span></code> (or <code class="docutils literal notranslate"><span class="pre">-C</span></code> for short) flag, <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> is
 not mounted and a dummy bind mount is created at the <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> point.
@@ -437,11 +346,11 @@ will hide them all.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --containall my_container.sif
 </pre></div>
 </div>
-</section>
-</section>
-</section>
-<section id="fuse-mounts">
-<h2>FUSE mounts<a class="headerlink" href="#fuse-mounts" title="Permalink to this heading">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="section" id="fuse-mounts">
+<h2>FUSE mounts<a class="headerlink" href="#fuse-mounts" title="Permalink to this heading"></a></h2>
 <p>Filesystem in Userspace (FUSE) is an interface to allow filesystems to
 be mounted using code that runs in userspace, rather than in the Linux
 Kernel. Unprivileged (non-root) users can mount filesystems that have
@@ -457,8 +366,8 @@ $ ythel:/home/dave on /home/dave/other_host type fuse.sshfs (rw,nosuid,nodev,rel
 you to directly expose FUSE filesystems inside a container. The FUSE
 command / driver that mounts a particular type of filesystem can be
 located on the host, or in the container.</p>
-<section id="requirements">
-<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h3>
 <p>The FUSE command invoked with the <code class="docutils literal notranslate"><span class="pre">--fusemount</span></code> option
 <em>must</em> be based on libfuse3 3.3.0 or greater to work
 correctly with Apptainer. Older versions do not support the way in
@@ -468,9 +377,9 @@ into the container.</p>
 as <code class="docutils literal notranslate"><span class="pre">sshfs</span></code> based on FUSE 2 then you can install FUSE 3 versions of the
 commands you need inside your container. EL7 distributions can install a
 compatible version of FUSE 3 from the EPEL repository.</p>
-</section>
-<section id="fuse-mount-definitions">
-<h3>FUSE mount definitions<a class="headerlink" href="#fuse-mount-definitions" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="fuse-mount-definitions">
+<h3>FUSE mount definitions<a class="headerlink" href="#fuse-mount-definitions" title="Permalink to this heading"></a></h3>
 <p>A fusemount definition for Apptainer consists of 3 parts:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">fusemount</span> <span class="o">&lt;</span><span class="nb">type</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">fuse</span> <span class="n">command</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">container</span> <span class="n">mountpoint</span><span class="o">&gt;</span>
 </pre></div>
@@ -498,9 +407,9 @@ for mounting a remote filesystem over SSH, where the remote source is
 <li><p><strong>container mountpoint</strong> is an <em>absolute path</em> at which the FUSE
 filesystem will be mounted in the container.</p></li>
 </ul>
-</section>
-<section id="fuse-mount-with-a-host-executable">
-<h3>FUSE mount with a host executable<a class="headerlink" href="#fuse-mount-with-a-host-executable" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="fuse-mount-with-a-host-executable">
+<h3>FUSE mount with a host executable<a class="headerlink" href="#fuse-mount-with-a-host-executable" title="Permalink to this heading"></a></h3>
 <p>To use a FUSE <code class="docutils literal notranslate"><span class="pre">sshfs</span></code> mount in a container, where the <code class="docutils literal notranslate"><span class="pre">fuse-sshfs</span></code>
 package has been installed on my host, I run with the <code class="docutils literal notranslate"><span class="pre">host</span></code> mount
 type:</p>
@@ -511,9 +420,9 @@ Apptainer&gt; cat /server/etc/hostname
 server
 </pre></div>
 </div>
-</section>
-<section id="fuse-mount-with-a-container-executable">
-<h3>FUSE mount with a container executable<a class="headerlink" href="#fuse-mount-with-a-container-executable" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="fuse-mount-with-a-container-executable">
+<h3>FUSE mount with a container executable<a class="headerlink" href="#fuse-mount-with-a-container-executable" title="Permalink to this heading"></a></h3>
 <p>If the FUSE driver / command that you want to use for the mount has been
 added to your container, you can use the <code class="docutils literal notranslate"><span class="pre">container</span></code> mount type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --fusemount &quot;container:sshfs server:/ /server&quot; sshfs.sif
@@ -523,10 +432,10 @@ Apptainer&gt; cat /server/etc/hostname
 server
 </pre></div>
 </div>
-</section>
-</section>
-<section id="image-mounts">
-<h2>Image Mounts<a class="headerlink" href="#image-mounts" title="Permalink to this heading">¶</a></h2>
+</div>
+</div>
+<div class="section" id="image-mounts">
+<h2>Image Mounts<a class="headerlink" href="#image-mounts" title="Permalink to this heading"></a></h2>
 <p>In Apptainer you can mount a directory contained in an
 image file into a container. This may be useful if you want to
 distribute directories containing a large number of data files as a
@@ -551,8 +460,8 @@ format:</p>
 <code class="docutils literal notranslate"><span class="pre">&lt;dest&gt;</span></code> in the container.</p>
 <p>If you do not add <code class="docutils literal notranslate"><span class="pre">:image-src=&lt;source&gt;</span></code> to your bind specification,
 then the <code class="docutils literal notranslate"><span class="pre">&lt;image-file&gt;</span></code> itself will be bound to <code class="docutils literal notranslate"><span class="pre">&lt;dest&gt;</span></code> instead.</p>
-<section id="ext3-image-files">
-<h3>Ext3 Image Files<a class="headerlink" href="#ext3-image-files" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="ext3-image-files">
+<h3>Ext3 Image Files<a class="headerlink" href="#ext3-image-files" title="Permalink to this heading"></a></h3>
 <p>If you have a directory called <code class="docutils literal notranslate"><span class="pre">inputs/</span></code> that holds data files you
 wish to distribute in an image file that allows read/write:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an image file &#39;inputs.img&#39; of size 100MB and put the</span>
@@ -584,9 +493,9 @@ $<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </
 <span class="w">    </span>mycontainer.sif
 </pre></div>
 </div>
-</section>
-<section id="squashfs-image-files">
-<h3>SquashFS Image Files<a class="headerlink" href="#squashfs-image-files" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="squashfs-image-files">
+<h3>SquashFS Image Files<a class="headerlink" href="#squashfs-image-files" title="Permalink to this heading"></a></h3>
 <p>If you have a directory called <code class="docutils literal notranslate"><span class="pre">inputs/</span></code> that holds data files you
 wish to distribute in an image file that is read-only, and compressed,
 then the squashfs format is appropriate:</p>
@@ -609,9 +518,9 @@ $<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </
 <span class="w">    </span>mycontainer.sif
 </pre></div>
 </div>
-</section>
-<section id="sif-image-files">
-<h3>SIF Image Files<a class="headerlink" href="#sif-image-files" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="sif-image-files">
+<h3>SIF Image Files<a class="headerlink" href="#sif-image-files" title="Permalink to this heading"></a></h3>
 <p>Advanced users may wish to create a standalone SIF image, which contains
 an <code class="docutils literal notranslate"><span class="pre">ext3</span></code> or <code class="docutils literal notranslate"><span class="pre">squashfs</span></code> data partition holding files, by using the
 <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">sif</span></code> commands similarly to the <a class="reference internal" href="persistent_overlays.html#overlay-sif"><span class="std std-ref">persistent overlays
@@ -636,35 +545,28 @@ instructions</span></a>:</p>
 <p>If your bind source is a SIF then Apptainer will bind from the first
 data partition in the SIF, or you may specify an alternative descriptor
 by ID with the additional option <code class="docutils literal notranslate"><span class="pre">id=n</span></code>, where n is the descriptor ID.</p>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="persistent_overlays.html" class="btn btn-neutral float-right" title="Persistent Overlays" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="library_api.html" class="btn btn-neutral float-left" title="Library API Registries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="persistent_overlays.html" class="btn btn-neutral float-right" title="Persistent Overlays" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-
-    </p>
+    <p></p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
     <br>
     &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
     <br>
@@ -674,22 +576,13 @@ by ID with the additional option <code class="docutils literal notranslate"><spa
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
