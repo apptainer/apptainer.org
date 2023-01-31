@@ -1,79 +1,42 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Running Services &mdash; Apptainer User Guide main documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Environment and Metadata" href="environment_and_metadata.html" />
     <link rel="prev" title="Persistent Overlays" href="persistent_overlays.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> Apptainer User Guide
-          
-
-          
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
               <div class="version">
                 main
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -81,18 +44,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
@@ -154,75 +106,32 @@
 <li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Apptainer User Guide</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-      <li>Running Services</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Running Services</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
-            
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/running_services.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <section id="running-services">
-<span id="id1"></span><h1>Running Services<a class="headerlink" href="#running-services" title="Permalink to this heading">¶</a></h1>
+             
+  <div class="section" id="running-services">
+<span id="id1"></span><h1>Running Services<a class="headerlink" href="#running-services" title="Permalink to this heading"></a></h1>
 <p>There are <a class="reference internal" href="quick_start.html#runcontainer"><span class="std std-ref">different ways</span></a> in which you can run
 Apptainer containers. If you use commands like <code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code> and
 <code class="docutils literal notranslate"><span class="pre">shell</span></code> to interact with processes in the container, you are running
@@ -233,8 +142,8 @@ in the background that multiple different clients can use. For example,
 a web server or a database. To run services in an Apptainer container
 one should use <em>instances</em>. A container instance is a persistent and
 isolated version of the container image that runs in the background.</p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p id="sec-instances">Apptainer has the concept of <em>instances</em> allowing users
 to run services in Apptainer. This page will help you understand
 instances using an elementary example followed by a more useful example
@@ -256,9 +165,9 @@ unreachable mount namespace. The process would still be running, but you
 couldn’t easily kill or interface with it. This is a called an orphan
 process. Apptainer instances give you the ability to handle services
 properly.</p>
-</section>
-<section id="container-instances-in-apptainer">
-<h2>Container Instances in Apptainer<a class="headerlink" href="#container-instances-in-apptainer" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="container-instances-in-apptainer">
+<h2>Container Instances in Apptainer<a class="headerlink" href="#container-instances-in-apptainer" title="Permalink to this heading"></a></h2>
 <p>For demonstration, let’s use an easy (though somewhat useless) example
 of <code class="docutils literal notranslate"><span class="pre">alpine_latest.sif</span></code> from Apptainer’s github container registry:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull oras://ghcr.io/apptainer/alpine:latest
@@ -344,9 +253,9 @@ $ apptainer instance stop -a
 <p>Note that you must escape the wildcard with a backslash like this
 <code class="docutils literal notranslate"><span class="pre">\*</span></code> to pass it properly.</p>
 </div>
-</section>
-<section id="nginx-hello-world-in-apptainer">
-<h2>Nginx “Hello-world” in Apptainer<a class="headerlink" href="#nginx-hello-world-in-apptainer" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="nginx-hello-world-in-apptainer">
+<h2>Nginx “Hello-world” in Apptainer<a class="headerlink" href="#nginx-hello-world-in-apptainer" title="Permalink to this heading"></a></h2>
 <p>The above example, although not very useful, should serve as a fair
 introduction to the concept of Apptainer instances and running
 services in the background. The following illustrates a more useful
@@ -409,9 +318,9 @@ Commercial support is available at
 </pre></div>
 </div>
 <p>Visit localhost on your browser, you should see a Welcome message!</p>
-</section>
-<section id="putting-all-together">
-<h2>Putting all together<a class="headerlink" href="#putting-all-together" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="putting-all-together">
+<h2>Putting all together<a class="headerlink" href="#putting-all-together" title="Permalink to this heading"></a></h2>
 <p>In this section, we will demonstrate an example of packaging a service
 into a container and running it. The service we will be packaging is an
 API server that converts a web page into a PDF, and can be found <a class="reference external" href="https://github.com/alvarcarto/url-to-pdf-api">here</a>. You can build the
@@ -420,8 +329,8 @@ the final image directly from the container registry, simply run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull url-to-pdf.sif oras://ghcr.io/apptainer/doc-examples/url-to-pdf:latest
 </pre></div>
 </div>
-<section id="building-the-image">
-<h3>Building the image<a class="headerlink" href="#building-the-image" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="building-the-image">
+<h3>Building the image<a class="headerlink" href="#building-the-image" title="Permalink to this heading"></a></h3>
 <p>This section will describe the requirements for creating the definition
 file (url-to-pdf.def) that will be used to build the container image.
 <code class="docutils literal notranslate"><span class="pre">url-to-pdf-api</span></code> is based on a Node 8 server that uses a headless
@@ -512,9 +421,9 @@ be set, which we can do in the environment section:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build url-to-pdf.sif url-to-pdf.def
 </pre></div>
 </div>
-</section>
-<section id="running-the-service">
-<h3>Running the Service<a class="headerlink" href="#running-the-service" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="running-the-service">
+<h3>Running the Service<a class="headerlink" href="#running-the-service" title="Permalink to this heading"></a></h3>
 <p>We can now start an instance and run the service:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start url-to-pdf.sif pdf
 </pre></div>
@@ -557,9 +466,9 @@ running instance.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance stop pdf
 </pre></div>
 </div>
-</section>
-<section id="making-it-fancy">
-<h3>Making it Fancy<a class="headerlink" href="#making-it-fancy" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="making-it-fancy">
+<h3>Making it Fancy<a class="headerlink" href="#making-it-fancy" title="Permalink to this heading"></a></h3>
 <p>Now that we have confirmation that the server is working, let’s make it
 a little cleaner. It’s difficult to remember the exact <code class="docutils literal notranslate"><span class="pre">curl</span></code> command
 and URL syntax each time you want to request a PDF, so let’s automate
@@ -693,10 +602,10 @@ the container you could do:</p>
 </pre></div>
 </div>
 </div>
-</section>
-</section>
-<section id="system-integration-pid-files">
-<h2>System integration / PID files<a class="headerlink" href="#system-integration-pid-files" title="Permalink to this heading">¶</a></h2>
+</div>
+</div>
+<div class="section" id="system-integration-pid-files">
+<h2>System integration / PID files<a class="headerlink" href="#system-integration-pid-files" title="Permalink to this heading"></a></h2>
 <p>If you are running services in containers you may want them to be
 started on boot, and shutdown gracefully automatically. This is usually
 performed by an init process, or another supervisor daemon installed on
@@ -732,34 +641,27 @@ systemd.</p>
 </div>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">Type=forking</span></code> is required here, since <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code>
 starts an instance and then exits.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="environment_and_metadata.html" class="btn btn-neutral float-right" title="Environment and Metadata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="persistent_overlays.html" class="btn btn-neutral float-left" title="Persistent Overlays" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="environment_and_metadata.html" class="btn btn-neutral float-right" title="Environment and Metadata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-
-    </p>
+    <p></p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
     <br>
     &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
     <br>
@@ -769,22 +671,13 @@ starts an instance and then exits.</p>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
