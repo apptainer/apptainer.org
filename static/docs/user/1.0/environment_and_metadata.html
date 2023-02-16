@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Environment and Metadata &mdash; Apptainer User Guide 1.0 documentation</title>
@@ -13,10 +13,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
@@ -32,15 +30,19 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Apptainer User Guide
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -158,7 +160,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Environment and Metadata</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/environment_and_metadata.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -248,10 +250,10 @@ of a definition file to set a container environment variable:</p>
 <span class="k">From</span>: alpine
 
 <span class="gh">%environment</span>
-    <span class="nb">export</span> <span class="nv">MYVAR</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MYVAR</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span>
 
 <span class="gh">%runscript</span>
-    <span class="nb">echo</span> <span class="nv">$MYVAR</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$MYVAR</span>
 </pre></div>
 </div>
 <p>Now the value of <code class="docutils literal notranslate"><span class="pre">MYVAR</span></code> is <code class="docutils literal notranslate"><span class="pre">Hello</span></code> when the container is launched.
@@ -644,7 +646,7 @@ section in a definition file:</p>
 <span class="k">From</span>: ubuntu:latest
 
 <span class="gh">%labels</span>
-  OWNER Joana
+<span class="w">  </span>OWNER<span class="w"> </span>Joana
 </pre></div>
 </div>
 </section>
@@ -658,16 +660,16 @@ building.</p>
 file defined by the <code class="docutils literal notranslate"><span class="pre">APPTAINER_LABELS</span></code> environment variable in the
 <code class="docutils literal notranslate"><span class="pre">%post</span></code> section:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
-<span class="k">From</span>: ubuntu:latest<span class="c"></span>
+<span class="k">From</span>: ubuntu:latest
 
 <span class="c"># These labels take a fixed value in the definition</span>
 <span class="gh">%labels</span>
-  OWNER Joana
+<span class="w">  </span>OWNER<span class="w"> </span>Joana
 
 <span class="c1"># We can now also set labels to a value at build time</span>
 <span class="gh">%post</span>
-  <span class="nv">VAL</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>myprog --version<span class="k">)</span><span class="s2">&quot;</span>
-  <span class="nb">echo</span> <span class="s2">&quot;my.label </span><span class="nv">$VAL</span><span class="s2">&quot;</span> &gt;&gt; <span class="s2">&quot;</span><span class="nv">$APPTAINER_LABELS</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">VAL</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>myprog<span class="w"> </span>--version<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;my.label </span><span class="nv">$VAL</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$APPTAINER_LABELS</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
 <p>Labels must be added to the file one per line, in a <code class="docutils literal notranslate"><span class="pre">NAME</span> <span class="pre">VALUE</span></code>
@@ -681,7 +683,7 @@ other metadata that were added to your container when it was built.</p>
 <h4><code class="docutils literal notranslate"><span class="pre">-l</span></code>/ <code class="docutils literal notranslate"><span class="pre">--labels</span></code><a class="headerlink" href="#l-labels" title="Permalink to this heading"></a></h4>
 <p>Running inspect without any options, or with the <code class="docutils literal notranslate"><span class="pre">-l</span></code> or <code class="docutils literal notranslate"><span class="pre">--labels</span></code>
 options will display any labels set on the container</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer inspect ubuntu.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>inspect<span class="w"> </span>ubuntu.sif
 <span class="go">my.label: version 1.2.3</span>
 <span class="go">OWNER: Joana</span>
 <span class="go">org.label-schema.build-arch: amd64</span>
@@ -709,57 +711,57 @@ used to build the container.</p>
 <span class="k">From</span>: debian:<span class="m">9</span>
 
 <span class="gh">%help</span>
-    Container with Anaconda <span class="m">2</span> <span class="o">(</span>Conda <span class="m">4</span>.5.11 Canary<span class="o">)</span> and Jupyter Notebook <span class="m">5</span>.6.0 <span class="k">for</span> Debian <span class="m">9</span>.x <span class="o">(</span>Stretch<span class="o">)</span>.
-    This installation is based on Python <span class="m">2</span>.7.15
+<span class="w">    </span>Container<span class="w"> </span>with<span class="w"> </span>Anaconda<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">(</span>Conda<span class="w"> </span><span class="m">4</span>.5.11<span class="w"> </span>Canary<span class="o">)</span><span class="w"> </span>and<span class="w"> </span>Jupyter<span class="w"> </span>Notebook<span class="w"> </span><span class="m">5</span>.6.0<span class="w"> </span><span class="k">for</span><span class="w"> </span>Debian<span class="w"> </span><span class="m">9</span>.x<span class="w"> </span><span class="o">(</span>Stretch<span class="o">)</span>.
+<span class="w">    </span>This<span class="w"> </span>installation<span class="w"> </span>is<span class="w"> </span>based<span class="w"> </span>on<span class="w"> </span>Python<span class="w"> </span><span class="m">2</span>.7.15
 
 <span class="gh">%environment</span>
-    <span class="nv">JUP_PORT</span><span class="o">=</span><span class="m">8888</span>
-    <span class="nv">JUP_IPNAME</span><span class="o">=</span>localhost
-    <span class="nb">export</span> JUP_PORT JUP_IPNAME
+<span class="w">    </span><span class="nv">JUP_PORT</span><span class="o">=</span><span class="m">8888</span>
+<span class="w">    </span><span class="nv">JUP_IPNAME</span><span class="o">=</span>localhost
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span>JUP_PORT<span class="w"> </span>JUP_IPNAME
 
 <span class="gh">%startscript</span>
-    <span class="nv">PORT</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-    <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$JUP_PORT</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nv">PORT</span><span class="o">=</span><span class="s2">&quot;--port=</span><span class="si">${</span><span class="nv">JUP_PORT</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="k">fi</span>
+<span class="w">    </span><span class="nv">PORT</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JUP_PORT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">PORT</span><span class="o">=</span><span class="s2">&quot;--port=</span><span class="si">${</span><span class="nv">JUP_PORT</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
 
-    <span class="nv">IPNAME</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-    <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$JUP_IPNAME</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nv">IPNAME</span><span class="o">=</span><span class="s2">&quot;--ip=</span><span class="si">${</span><span class="nv">JUP_IPNAME</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="k">fi</span>
+<span class="w">    </span><span class="nv">IPNAME</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JUP_IPNAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">IPNAME</span><span class="o">=</span><span class="s2">&quot;--ip=</span><span class="si">${</span><span class="nv">JUP_IPNAME</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
 
-    <span class="nb">exec</span> jupyter notebook --allow-root <span class="si">${</span><span class="nv">PORT</span><span class="si">}</span> <span class="si">${</span><span class="nv">IPNAME</span><span class="si">}</span>
+<span class="w">    </span><span class="nb">exec</span><span class="w"> </span>jupyter<span class="w"> </span>notebook<span class="w"> </span>--allow-root<span class="w"> </span><span class="si">${</span><span class="nv">PORT</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">IPNAME</span><span class="si">}</span>
 
 <span class="gh">%setup</span>
-    <span class="c1">#Create the .condarc file where the environments/channels from conda are specified, these are pulled with preference to root</span>
-    <span class="nb">cd</span> /
-    touch .condarc
+<span class="w">    </span><span class="c1">#Create the .condarc file where the environments/channels from conda are specified, these are pulled with preference to root</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/
+<span class="w">    </span>touch<span class="w"> </span>.condarc
 
 <span class="gh">%post</span>
-    <span class="nb">echo</span> <span class="s1">&#39;export RANDOM=123456&#39;</span> &gt;&gt;<span class="nv">$APPTAINER_ENVIRONMENT</span>
-    <span class="c1">#Installing all dependencies</span>
-    apt-get update <span class="o">&amp;&amp;</span> apt-get -y upgrade
-    apt-get -y install <span class="se">\</span>
-    build-essential <span class="se">\</span>
-    wget <span class="se">\</span>
-    bzip2 <span class="se">\</span>
-    ca-certificates <span class="se">\</span>
-    libglib2.0-0 <span class="se">\</span>
-    libxext6 <span class="se">\</span>
-    libsm6 <span class="se">\</span>
-    libxrender1 <span class="se">\</span>
-    git
-    rm -rf /var/lib/apt/lists/*
-    apt-get clean
-    <span class="c1">#Installing Anaconda 2 and Conda 4.5.11</span>
-    wget -c https://repo.continuum.io/archive/Anaconda2-5.3.0-Linux-x86_64.sh
-    /bin/bash Anaconda2-5.3.0-Linux-x86_64.sh -bfp /usr/local
-    <span class="c1">#Conda configuration of channels from .condarc file</span>
-    conda config --file /.condarc --add channels defaults
-    conda config --file /.condarc --add channels conda-forge
-    conda update conda
-    <span class="c1">#List installed environments</span>
-    conda list
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export RANDOM=123456&#39;</span><span class="w"> </span>&gt;&gt;<span class="nv">$APPTAINER_ENVIRONMENT</span>
+<span class="w">    </span><span class="c1">#Installing all dependencies</span>
+<span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>-y<span class="w"> </span>upgrade
+<span class="w">    </span>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>build-essential<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>wget<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>bzip2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>ca-certificates<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libglib2.0-0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libxext6<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libsm6<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libxrender1<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git
+<span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+<span class="w">    </span>apt-get<span class="w"> </span>clean
+<span class="w">    </span><span class="c1">#Installing Anaconda 2 and Conda 4.5.11</span>
+<span class="w">    </span>wget<span class="w"> </span>-c<span class="w"> </span>https://repo.continuum.io/archive/Anaconda2-5.3.0-Linux-x86_64.sh
+<span class="w">    </span>/bin/bash<span class="w"> </span>Anaconda2-5.3.0-Linux-x86_64.sh<span class="w"> </span>-bfp<span class="w"> </span>/usr/local
+<span class="w">    </span><span class="c1">#Conda configuration of channels from .condarc file</span>
+<span class="w">    </span>conda<span class="w"> </span>config<span class="w"> </span>--file<span class="w"> </span>/.condarc<span class="w"> </span>--add<span class="w"> </span>channels<span class="w"> </span>defaults
+<span class="w">    </span>conda<span class="w"> </span>config<span class="w"> </span>--file<span class="w"> </span>/.condarc<span class="w"> </span>--add<span class="w"> </span>channels<span class="w"> </span>conda-forge
+<span class="w">    </span>conda<span class="w"> </span>update<span class="w"> </span>conda
+<span class="w">    </span><span class="c1">#List installed environments</span>
+<span class="w">    </span>conda<span class="w"> </span>list
 </pre></div>
 </div>
 <p>Which is the definition file for the <code class="docutils literal notranslate"><span class="pre">jupyter.sif</span></code> container.</p>
@@ -775,28 +777,28 @@ used to build the container.</p>
 <span class="nv">OCI_ENTRYPOINT</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 <span class="nv">OCI_CMD</span><span class="o">=</span><span class="s2">&quot;bash&quot;</span>
 <span class="c1"># ENTRYPOINT only - run entrypoint plus args</span>
-<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$OCI_CMD</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OCI_CMD</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
 <span class="k">fi</span>
 
 <span class="c1"># CMD only - run CMD or override with args</span>
-<span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$OCI_CMD</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OCI_CMD</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
 <span class="k">else</span>
-    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="k">fi</span>
 <span class="k">fi</span>
 
 <span class="c1"># ENTRYPOINT and CMD - run ENTRYPOINT with CMD as default args</span>
 <span class="c1"># override with user provided args</span>
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
 <span class="k">else</span>
-    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="k">fi</span>
 
-<span class="nb">exec</span> <span class="nv">$SINGULARITY_OCI_RUN</span>
+<span class="nb">exec</span><span class="w"> </span><span class="nv">$SINGULARITY_OCI_RUN</span>
 </pre></div>
 </div>
 </section>
@@ -823,7 +825,7 @@ more environment files, depending on how the container was built.</p>
 
 <span class="nv">JUP_PORT</span><span class="o">=</span><span class="m">8888</span>
 <span class="nv">JUP_IPNAME</span><span class="o">=</span>localhost
-<span class="nb">export</span> JUP_PORT JUP_IPNAME
+<span class="nb">export</span><span class="w"> </span>JUP_PORT<span class="w"> </span>JUP_IPNAME
 </pre></div>
 </div>
 </section>
@@ -846,7 +848,7 @@ in the <code class="docutils literal notranslate"><span class="pre">%help</span>
 <p>This flag gives you the possibility to output your labels in a JSON
 format.</p>
 <p>You can call it this way:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer inspect --json ubuntu.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>inspect<span class="w"> </span>--json<span class="w"> </span>ubuntu.sif
 </pre></div>
 </div>
 <p>And the output would look like:</p>

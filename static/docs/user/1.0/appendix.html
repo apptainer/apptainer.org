@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Appendix &mdash; Apptainer User Guide 1.0 documentation</title>
@@ -13,10 +13,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
@@ -32,15 +30,19 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Apptainer User Guide
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -211,7 +213,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Appendix</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/appendix.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -944,11 +946,11 @@ docker image present in docker’s daemon internal storage.</p>
 <h4>Overview<a class="headerlink" href="#id26" title="Permalink to this heading"></a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> allows you to build a SIF from any docker image
 currently residing in docker’s daemon internal storage:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker images alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>images<span class="w"> </span>alpine
 <span class="go">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span>
 <span class="go">alpine              latest              965ea09ff2eb        7 weeks ago         5.55MB</span>
 
-<span class="gp">$ </span>apptainer run docker-daemon:alpine:latest
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker-daemon:alpine:latest
 <span class="go">INFO:    Converting OCI blobs to SIF format</span>
 <span class="go">INFO:    Starting build...</span>
 <span class="go">Getting image source signatures</span>
@@ -963,9 +965,9 @@ currently residing in docker’s daemon internal storage:</p>
 </div>
 <p>while <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> permits you to do the same thing starting from
 a docker image stored in a <code class="docutils literal notranslate"><span class="pre">docker-save</span></code> formatted tar file:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker save -o alpine.tar alpine:latest
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>save<span class="w"> </span>-o<span class="w"> </span>alpine.tar<span class="w"> </span>alpine:latest
 
-<span class="gp">$ </span>apptainer run docker-archive:<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/alpine.tar
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker-archive:<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/alpine.tar
 <span class="go">INFO:    Converting OCI blobs to SIF format</span>
 <span class="go">INFO:    Starting build...</span>
 <span class="go">Getting image source signatures</span>
@@ -1011,17 +1013,17 @@ simple application / static binaries.</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
 
 <span class="gh">%setup</span>
-    <span class="c1"># Runs on host - fetch static busybox binary</span>
-    curl -o /tmp/busybox https://www.busybox.net/downloads/binaries/1.31.0-i686-uclibc/busybox
-    <span class="c1"># It needs to be executable</span>
-    chmod +x /tmp/busybox
+<span class="w">    </span><span class="c1"># Runs on host - fetch static busybox binary</span>
+<span class="w">    </span>curl<span class="w"> </span>-o<span class="w"> </span>/tmp/busybox<span class="w"> </span>https://www.busybox.net/downloads/binaries/1.31.0-i686-uclibc/busybox
+<span class="w">    </span><span class="c1"># It needs to be executable</span>
+<span class="w">    </span>chmod<span class="w"> </span>+x<span class="w"> </span>/tmp/busybox
 
 <span class="gh">%files</span>
-    <span class="c1"># Copy from host into empty container</span>
-    /tmp/busybox /bin/sh
+<span class="w">    </span><span class="c1"># Copy from host into empty container</span>
+<span class="w">    </span>/tmp/busybox<span class="w"> </span>/bin/sh
 
 <span class="gh">%runscript</span>
-   /bin/sh
+<span class="w">   </span>/bin/sh
 </pre></div>
 </div>
 <p>The resulting container provides a shell, and is 696KiB in size:</p>

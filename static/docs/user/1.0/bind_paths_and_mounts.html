@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bind Paths and Mounts &mdash; Apptainer User Guide 1.0 documentation</title>
@@ -13,10 +13,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
@@ -32,15 +30,19 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Apptainer User Guide
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -147,7 +149,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Bind Paths and Mounts</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/bind_paths_and_mounts.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -195,11 +197,11 @@ system mounts to be disabled, even if they are set in the
 container by default. If, e.g. a <code class="docutils literal notranslate"><span class="pre">/project</span></code> filesystem on your host
 conflicts with a <code class="docutils literal notranslate"><span class="pre">/project</span></code> directory in the container you are
 running, you can disable the <code class="docutils literal notranslate"><span class="pre">hostfs</span></code> binds:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer run --no-mount hostfs mycontainer.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-mount<span class="w"> </span>hostfs<span class="w"> </span>mycontainer.sif
 </pre></div>
 </div>
 <p>Multiple mounts can be disabled by specifying them separated by commas:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer run --no-mount tmp,sys,dev mycontainer.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-mount<span class="w"> </span>tmp,sys,dev<span class="w"> </span>mycontainer.sif
 </pre></div>
 </div>
 </section>
@@ -477,31 +479,31 @@ then the <code class="docutils literal notranslate"><span class="pre">&lt;image-
 wish to distribute in an image file that allows read/write:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an image file &#39;inputs.img&#39; of size 100MB and put the</span>
 <span class="c1"># files inputs/ into it&#39;s root directory</span>
-$ mkfs.ext3 -d inputs/ inputs.img 100M
-mke2fs <span class="m">1</span>.45.6 <span class="o">(</span><span class="m">20</span>-Mar-2020<span class="o">)</span>
-Creating regular file inputs.img
-Creating filesystem with <span class="m">102400</span> 1k blocks and <span class="m">25688</span> inodes
-Filesystem UUID: e23c29c9-7a49-4b82-89bf-2faf36b5a781
-Superblock backups stored on blocks:
-    <span class="m">8193</span>, <span class="m">24577</span>, <span class="m">40961</span>, <span class="m">57345</span>, <span class="m">73729</span>
+$<span class="w"> </span>mkfs.ext3<span class="w"> </span>-d<span class="w"> </span>inputs/<span class="w"> </span>inputs.img<span class="w"> </span>100M
+mke2fs<span class="w"> </span><span class="m">1</span>.45.6<span class="w"> </span><span class="o">(</span><span class="m">20</span>-Mar-2020<span class="o">)</span>
+Creating<span class="w"> </span>regular<span class="w"> </span>file<span class="w"> </span>inputs.img
+Creating<span class="w"> </span>filesystem<span class="w"> </span>with<span class="w"> </span><span class="m">102400</span><span class="w"> </span>1k<span class="w"> </span>blocks<span class="w"> </span>and<span class="w"> </span><span class="m">25688</span><span class="w"> </span>inodes
+Filesystem<span class="w"> </span>UUID:<span class="w"> </span>e23c29c9-7a49-4b82-89bf-2faf36b5a781
+Superblock<span class="w"> </span>backups<span class="w"> </span>stored<span class="w"> </span>on<span class="w"> </span>blocks:
+<span class="w">    </span><span class="m">8193</span>,<span class="w"> </span><span class="m">24577</span>,<span class="w"> </span><span class="m">40961</span>,<span class="w"> </span><span class="m">57345</span>,<span class="w"> </span><span class="m">73729</span>
 
-Allocating group tables: <span class="k">done</span>
-Writing inode tables: <span class="k">done</span>
-Creating journal <span class="o">(</span><span class="m">4096</span> blocks<span class="o">)</span>: <span class="k">done</span>
-Copying files into the device: <span class="k">done</span>
-Writing superblocks and filesystem accounting information: <span class="k">done</span>
+Allocating<span class="w"> </span>group<span class="w"> </span>tables:<span class="w"> </span><span class="k">done</span>
+Writing<span class="w"> </span>inode<span class="w"> </span>tables:<span class="w"> </span><span class="k">done</span>
+Creating<span class="w"> </span>journal<span class="w"> </span><span class="o">(</span><span class="m">4096</span><span class="w"> </span>blocks<span class="o">)</span>:<span class="w"> </span><span class="k">done</span>
+Copying<span class="w"> </span>files<span class="w"> </span>into<span class="w"> </span>the<span class="w"> </span>device:<span class="w"> </span><span class="k">done</span>
+Writing<span class="w"> </span>superblocks<span class="w"> </span>and<span class="w"> </span>filesystem<span class="w"> </span>accounting<span class="w"> </span>information:<span class="w"> </span><span class="k">done</span>
 
 <span class="c1"># Run Apptainer, mounting my input data to &#39;/input-data&#39; in</span>
 <span class="c1"># the container.</span>
-$ apptainer run -B inputs.img:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
-Apptainer&gt; ls /input-data
-<span class="m">1</span>           <span class="m">3</span>           <span class="m">5</span>           <span class="m">7</span>           <span class="m">9</span>
-<span class="m">2</span>           <span class="m">4</span>           <span class="m">6</span>           <span class="m">8</span>           lost+found
+$<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>-B<span class="w"> </span>inputs.img:/input-data:image-src<span class="o">=</span>/<span class="w"> </span>mycontainer.sif
+Apptainer&gt;<span class="w"> </span>ls<span class="w"> </span>/input-data
+<span class="m">1</span><span class="w">           </span><span class="m">3</span><span class="w">           </span><span class="m">5</span><span class="w">           </span><span class="m">7</span><span class="w">           </span><span class="m">9</span>
+<span class="m">2</span><span class="w">           </span><span class="m">4</span><span class="w">           </span><span class="m">6</span><span class="w">           </span><span class="m">8</span><span class="w">           </span>lost+found
 
 <span class="c1"># Or with --mount instead of -B</span>
-$ apptainer run <span class="se">\</span>
-    --mount <span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>inputs.img,dst<span class="o">=</span>/input-data,image-src<span class="o">=</span>/ <span class="se">\</span>
-    mycontainer.sif
+$<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>inputs.img,dst<span class="o">=</span>/input-data,image-src<span class="o">=</span>/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mycontainer.sif
 </pre></div>
 </div>
 </section>
@@ -512,21 +514,21 @@ wish to distribute in an image file that is read-only, and compressed,
 then the squashfs format is appropriate:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an image file &#39;inputs.squashfs&#39; and put the files from</span>
 <span class="c1"># inputs/ into it&#39;s root directory</span>
-$ mksquashfs inputs/ inputs.squashfs
-Parallel mksquashfs: Using <span class="m">16</span> processors
-Creating <span class="m">4</span>.0 filesystem on inputs.squashfs, block size <span class="m">131072</span>.
+$<span class="w"> </span>mksquashfs<span class="w"> </span>inputs/<span class="w"> </span>inputs.squashfs
+Parallel<span class="w"> </span>mksquashfs:<span class="w"> </span>Using<span class="w"> </span><span class="m">16</span><span class="w"> </span>processors
+Creating<span class="w"> </span><span class="m">4</span>.0<span class="w"> </span>filesystem<span class="w"> </span>on<span class="w"> </span>inputs.squashfs,<span class="w"> </span>block<span class="w"> </span>size<span class="w"> </span><span class="m">131072</span>.
 ...
 
 <span class="c1"># Run Apptainer, mounting my input data to &#39;/input-data&#39; in</span>
 <span class="c1"># the container.</span>
-$ apptainer run -B inputs.squashfs:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
-Apptainer&gt; ls /input-data/
-<span class="m">1</span>  <span class="m">2</span>  <span class="m">3</span>  <span class="m">4</span>  <span class="m">5</span>  <span class="m">6</span>  <span class="m">7</span>  <span class="m">8</span>  <span class="m">9</span>
+$<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>-B<span class="w"> </span>inputs.squashfs:/input-data:image-src<span class="o">=</span>/<span class="w"> </span>mycontainer.sif
+Apptainer&gt;<span class="w"> </span>ls<span class="w"> </span>/input-data/
+<span class="m">1</span><span class="w">  </span><span class="m">2</span><span class="w">  </span><span class="m">3</span><span class="w">  </span><span class="m">4</span><span class="w">  </span><span class="m">5</span><span class="w">  </span><span class="m">6</span><span class="w">  </span><span class="m">7</span><span class="w">  </span><span class="m">8</span><span class="w">  </span><span class="m">9</span>
 
 <span class="c1"># Or with --mount instead of -B</span>
-$ apptainer run <span class="se">\</span>
-    --mount <span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>src-inputs.squashfs,dst<span class="o">=</span>/input-data,image-src<span class="o">=</span>/ <span class="se">\</span>
-    mycontainer.sif
+$<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>src-inputs.squashfs,dst<span class="o">=</span>/input-data,image-src<span class="o">=</span>/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mycontainer.sif
 </pre></div>
 </div>
 </section>
@@ -536,21 +538,21 @@ $ apptainer run <span class="se">\</span>
 an <code class="docutils literal notranslate"><span class="pre">ext3</span></code> or <code class="docutils literal notranslate"><span class="pre">squashfs</span></code> data partition holding files, by using the
 <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">sif</span></code> commands similarly to the <a class="reference internal" href="persistent_overlays.html#overlay-sif"><span class="std std-ref">persistent overlays
 instructions</span></a>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Create a new empty SIF file
-<span class="gp">$ </span>apptainer sif new inputs.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Create<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>empty<span class="w"> </span>SIF<span class="w"> </span>file
+<span class="gp">$ </span>apptainer<span class="w"> </span>sif<span class="w"> </span>new<span class="w"> </span>inputs.sif
 
-<span class="gp"># </span>Add the squashfs data image from above to the SIF
-<span class="gp">$ </span>apptainer sif add --datatype <span class="m">4</span> --partarch <span class="m">2</span> --partfs <span class="m">1</span> --parttype <span class="m">3</span> inputs.sif inputs.squashfs
+<span class="gp"># </span>Add<span class="w"> </span>the<span class="w"> </span>squashfs<span class="w"> </span>data<span class="w"> </span>image<span class="w"> </span>from<span class="w"> </span>above<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>SIF
+<span class="gp">$ </span>apptainer<span class="w"> </span>sif<span class="w"> </span>add<span class="w"> </span>--datatype<span class="w"> </span><span class="m">4</span><span class="w"> </span>--partarch<span class="w"> </span><span class="m">2</span><span class="w"> </span>--partfs<span class="w"> </span><span class="m">1</span><span class="w"> </span>--parttype<span class="w"> </span><span class="m">3</span><span class="w"> </span>inputs.sif<span class="w"> </span>inputs.squashfs
 
-<span class="gp"># </span>Run Apptainer, binding data from the SIF file
-<span class="gp">$ </span>apptainer run -B inputs.sif:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
+<span class="gp"># </span>Run<span class="w"> </span>Apptainer,<span class="w"> </span>binding<span class="w"> </span>data<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>SIF<span class="w"> </span>file
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>-B<span class="w"> </span>inputs.sif:/input-data:image-src<span class="o">=</span>/<span class="w"> </span>mycontainer.sif
 <span class="go">Apptainer&gt; ls /input-data</span>
 <span class="go">1  2  3  4  5  6  7  8  9</span>
 
-<span class="gp"># </span>Or with --mount instead of -B
-<span class="gp">$ </span>apptainer run <span class="se">\</span>
-    --mount <span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>inputs.sif,dst<span class="o">=</span>/input-data,image-src<span class="o">=</span>/ <span class="se">\</span>
-    mycontainer.sif
+<span class="gp"># </span>Or<span class="w"> </span>with<span class="w"> </span>--mount<span class="w"> </span>instead<span class="w"> </span>of<span class="w"> </span>-B
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>inputs.sif,dst<span class="o">=</span>/input-data,image-src<span class="o">=</span>/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mycontainer.sif
 </pre></div>
 </div>
 <p>If your bind source is a SIF then Apptainer will bind from the first

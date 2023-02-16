@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quick Start &mdash; Apptainer User Guide 1.0 documentation</title>
@@ -13,10 +13,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
@@ -32,15 +30,19 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Apptainer User Guide
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -146,7 +148,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Quick Start</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/quick_start.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -680,18 +682,18 @@ setup, and copying files into the container from host system, etc.</p>
 <span class="k">From</span>: ubuntu:<span class="m">16.04</span>
 
 <span class="gh">%post</span>
-    apt-get -y update
-    apt-get -y install cowsay lolcat
+<span class="w">    </span>apt-get<span class="w"> </span>-y<span class="w"> </span>update
+<span class="w">    </span>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>cowsay<span class="w"> </span>lolcat
 
 <span class="gh">%environment</span>
-    <span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>C
-    <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/usr/games:<span class="nv">$PATH</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">LC_ALL</span><span class="o">=</span>C
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/usr/games:<span class="nv">$PATH</span>
 
 <span class="gh">%runscript</span>
-    date <span class="p">|</span> cowsay <span class="p">|</span> lolcat
+<span class="w">    </span>date<span class="w"> </span><span class="p">|</span><span class="w"> </span>cowsay<span class="w"> </span><span class="p">|</span><span class="w"> </span>lolcat
 
 <span class="gh">%labels</span>
-    Author Alice
+<span class="w">    </span>Author<span class="w"> </span>Alice
 </pre></div>
 </div>
 <p>To build a container from this definition file (assuming it is a file
