@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Running Services &mdash; Apptainer User Guide 1.0 documentation</title>
@@ -13,10 +13,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
@@ -32,15 +30,19 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Apptainer User Guide
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -128,7 +130,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Running Services</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/running_services.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -283,7 +285,7 @@ call it nginx.def):</p>
 <span class="k">Includecmd</span>: no
 
 <span class="gh">%startscript</span>
-   nginx
+<span class="w">   </span>nginx
 </pre></div>
 </div>
 <p>This downloads the official NGINX Docker container, converts it to a
@@ -363,38 +365,38 @@ in addition to Node 8, so we can add those into the <code class="docutils litera
 well as the installation script for the <code class="docutils literal notranslate"><span class="pre">url-to-pdf</span></code>:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%post</span>
 
-    apt-get update <span class="o">&amp;&amp;</span> apt-get install -yq gconf-service libasound2 <span class="se">\</span>
-        libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 <span class="se">\</span>
-        libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 <span class="se">\</span>
-        libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 <span class="se">\</span>
-        libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 <span class="se">\</span>
-        libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 <span class="se">\</span>
-        libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates <span class="se">\</span>
-        fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils <span class="se">\</span>
-        wget curl <span class="o">&amp;&amp;</span> rm -r /var/lib/apt/lists/*
-    git clone https://github.com/alvarcarto/url-to-pdf-api.git pdf_server
-    <span class="nb">cd</span> pdf_server
-    npm install
-    chmod -R <span class="m">0755</span> .
+<span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-yq<span class="w"> </span>gconf-service<span class="w"> </span>libasound2<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libatk1.0-0<span class="w"> </span>libc6<span class="w"> </span>libcairo2<span class="w"> </span>libcups2<span class="w"> </span>libdbus-1-3<span class="w"> </span>libexpat1<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libfontconfig1<span class="w"> </span>libgcc1<span class="w"> </span>libgconf-2-4<span class="w"> </span>libgdk-pixbuf2.0-0<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libglib2.0-0<span class="w"> </span>libgtk-3-0<span class="w"> </span>libnspr4<span class="w"> </span>libpango-1.0-0<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libpangocairo-1.0-0<span class="w"> </span>libstdc++6<span class="w"> </span>libx11-6<span class="w"> </span>libx11-xcb1<span class="w"> </span>libxcb1<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libxcomposite1<span class="w"> </span>libxcursor1<span class="w"> </span>libxdamage1<span class="w"> </span>libxext6<span class="w"> </span>libxfixes3<span class="w"> </span>libxi6<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libxrandr2<span class="w"> </span>libxrender1<span class="w"> </span>libxss1<span class="w"> </span>libxtst6<span class="w"> </span>ca-certificates<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>fonts-liberation<span class="w"> </span>libappindicator1<span class="w"> </span>libnss3<span class="w"> </span>lsb-release<span class="w"> </span>xdg-utils<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>wget<span class="w"> </span>curl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>/var/lib/apt/lists/*
+<span class="w">    </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/alvarcarto/url-to-pdf-api.git<span class="w"> </span>pdf_server
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>pdf_server
+<span class="w">    </span>npm<span class="w"> </span>install
+<span class="w">    </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">0755</span><span class="w"> </span>.
 </pre></div>
 </div>
 <p>And now we need to define what happens when we start an instance of the
 container. In this situation, we want to run the commands that starts up
 the url-to-pdf service:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%startscript</span>
-    <span class="nb">cd</span> /pdf_server
-    <span class="c1"># Use nohup and /dev/null to completely detach server process from terminal</span>
-    nohup npm start &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> &lt; /dev/null <span class="p">&amp;</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/pdf_server
+<span class="w">    </span><span class="c1"># Use nohup and /dev/null to completely detach server process from terminal</span>
+<span class="w">    </span>nohup<span class="w"> </span>npm<span class="w"> </span>start<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span>&lt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p>Also, the <code class="docutils literal notranslate"><span class="pre">url-to-pdf</span></code> service requires some environment variables to
 be set, which we can do in the environment section:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%environment</span>
-    <span class="nv">NODE_ENV</span><span class="o">=</span>development
-    <span class="nv">PORT</span><span class="o">=</span><span class="m">9000</span>
-    <span class="nv">ALLOW_HTTP</span><span class="o">=</span><span class="nb">true</span>
-    <span class="nv">URL</span><span class="o">=</span>localhost
-    <span class="nb">export</span> NODE_ENV PORT ALLOW_HTTP URL
+<span class="w">    </span><span class="nv">NODE_ENV</span><span class="o">=</span>development
+<span class="w">    </span><span class="nv">PORT</span><span class="o">=</span><span class="m">9000</span>
+<span class="w">    </span><span class="nv">ALLOW_HTTP</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">    </span><span class="nv">URL</span><span class="o">=</span>localhost
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span>NODE_ENV<span class="w"> </span>PORT<span class="w"> </span>ALLOW_HTTP<span class="w"> </span>URL
 </pre></div>
 </div>
 <p>The complete definition file will look like this:</p>
@@ -404,31 +406,31 @@ be set, which we can do in the environment section:</p>
 
 <span class="gh">%post</span>
 
-    apt-get update <span class="o">&amp;&amp;</span> apt-get install -yq gconf-service libasound2 <span class="se">\</span>
-        libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 <span class="se">\</span>
-        libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 <span class="se">\</span>
-        libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 <span class="se">\</span>
-        libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 <span class="se">\</span>
-        libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 <span class="se">\</span>
-        libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates <span class="se">\</span>
-        fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils <span class="se">\</span>
-        wget curl <span class="o">&amp;&amp;</span> rm -r /var/lib/apt/lists/*
-    git clone https://github.com/alvarcarto/url-to-pdf-api.git pdf_server
-    <span class="nb">cd</span> pdf_server
-    npm install
-    chmod -R <span class="m">0755</span> .
+<span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-yq<span class="w"> </span>gconf-service<span class="w"> </span>libasound2<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libatk1.0-0<span class="w"> </span>libc6<span class="w"> </span>libcairo2<span class="w"> </span>libcups2<span class="w"> </span>libdbus-1-3<span class="w"> </span>libexpat1<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libfontconfig1<span class="w"> </span>libgcc1<span class="w"> </span>libgconf-2-4<span class="w"> </span>libgdk-pixbuf2.0-0<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libglib2.0-0<span class="w"> </span>libgtk-3-0<span class="w"> </span>libnspr4<span class="w"> </span>libpango-1.0-0<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libpangocairo-1.0-0<span class="w"> </span>libstdc++6<span class="w"> </span>libx11-6<span class="w"> </span>libx11-xcb1<span class="w"> </span>libxcb1<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libxcomposite1<span class="w"> </span>libxcursor1<span class="w"> </span>libxdamage1<span class="w"> </span>libxext6<span class="w"> </span>libxfixes3<span class="w"> </span>libxi6<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libxrandr2<span class="w"> </span>libxrender1<span class="w"> </span>libxss1<span class="w"> </span>libxtst6<span class="w"> </span>ca-certificates<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>fonts-liberation<span class="w"> </span>libappindicator1<span class="w"> </span>libnss3<span class="w"> </span>lsb-release<span class="w"> </span>xdg-utils<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>wget<span class="w"> </span>curl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>/var/lib/apt/lists/*
+<span class="w">    </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/alvarcarto/url-to-pdf-api.git<span class="w"> </span>pdf_server
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>pdf_server
+<span class="w">    </span>npm<span class="w"> </span>install
+<span class="w">    </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">0755</span><span class="w"> </span>.
 
 <span class="gh">%startscript</span>
-    <span class="nb">cd</span> /pdf_server
-    <span class="c1"># Use nohup and /dev/null to completely detach server process from terminal</span>
-    nohup npm start &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> &lt; /dev/null <span class="p">&amp;</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/pdf_server
+<span class="w">    </span><span class="c1"># Use nohup and /dev/null to completely detach server process from terminal</span>
+<span class="w">    </span>nohup<span class="w"> </span>npm<span class="w"> </span>start<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span>&lt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="p">&amp;</span>
 
 <span class="gh">%environment</span>
-    <span class="nv">NODE_ENV</span><span class="o">=</span>development
-    <span class="nv">PORT</span><span class="o">=</span><span class="m">9000</span>
-    <span class="nv">ALLOW_HTTP</span><span class="o">=</span><span class="nb">true</span>
-    <span class="nv">URL</span><span class="o">=</span>localhost
-    <span class="nb">export</span> NODE_ENV PORT ALLOW_HTTP URL
+<span class="w">    </span><span class="nv">NODE_ENV</span><span class="o">=</span>development
+<span class="w">    </span><span class="nv">PORT</span><span class="o">=</span><span class="m">9000</span>
+<span class="w">    </span><span class="nv">ALLOW_HTTP</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">    </span><span class="nv">URL</span><span class="o">=</span>localhost
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span>NODE_ENV<span class="w"> </span>PORT<span class="w"> </span>ALLOW_HTTP<span class="w"> </span>URL
 </pre></div>
 </div>
 <p>The container can be built like so:</p>
@@ -504,28 +506,28 @@ the project site: &lt;<a class="reference external" href="https://sci-f.github.i
 an app, so that there is a designated spot to place output files. To do
 that, we want to add a section to our definition file to build the
 server:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%appinstall</span> pdf_server
-    git clone https://github.com/alvarcarto/url-to-pdf-api.git pdf_server
-    <span class="nb">cd</span> pdf_server
-    npm install
-    chmod -R <span class="m">0755</span> .
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%appinstall</span><span class="w"> </span>pdf_server
+<span class="w">    </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/alvarcarto/url-to-pdf-api.git<span class="w"> </span>pdf_server
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>pdf_server
+<span class="w">    </span>npm<span class="w"> </span>install
+<span class="w">    </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">0755</span><span class="w"> </span>.
 </pre></div>
 </div>
 <p>And update our <code class="docutils literal notranslate"><span class="pre">startscript</span></code> to point to the app location:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%startscript</span>
-    <span class="nb">cd</span> /scif/apps/pdf_server/scif/pdf_server
-    <span class="c1"># Use nohup and /dev/null to completely detach server process from terminal</span>
-    nohup npm start &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> &lt; /dev/null <span class="p">&amp;</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/scif/apps/pdf_server/scif/pdf_server
+<span class="w">    </span><span class="c1"># Use nohup and /dev/null to completely detach server process from terminal</span>
+<span class="w">    </span>nohup<span class="w"> </span>npm<span class="w"> </span>start<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span>&lt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p>Now we want to define the pdf_client app, which we will run to send the
 requests to the server:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%apprun</span> pdf_client
-    <span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nb">echo</span> <span class="s2">&quot;Usage: apptainer run --app pdf &lt;instance://name&gt; &lt;URL&gt; [output file]&quot;</span>
-        <span class="nb">exit</span> <span class="m">1</span>
-    <span class="k">fi</span>
-    curl -o <span class="s2">&quot;</span><span class="si">${</span><span class="nv">APPTAINER_APPDATA</span><span class="si">}</span><span class="s2">/output/</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">output</span><span class="p">.pdf</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">URL</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">PORT</span><span class="si">}</span><span class="s2">/api/render?url=</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%apprun</span><span class="w"> </span>pdf_client
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: apptainer run --app pdf &lt;instance://name&gt; &lt;URL&gt; [output file]&quot;</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span>curl<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">APPTAINER_APPDATA</span><span class="si">}</span><span class="s2">/output/</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">output</span><span class="p">.pdf</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">URL</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">PORT</span><span class="si">}</span><span class="s2">/api/render?url=</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
 <p>As you can see, the <code class="docutils literal notranslate"><span class="pre">pdf_client</span></code> app checks to make sure that the user
@@ -537,40 +539,40 @@ provides at least one argument.</p>
 
 <span class="gh">%post</span>
 
-    apt-get update <span class="o">&amp;&amp;</span> apt-get install -yq gconf-service libasound2 <span class="se">\</span>
-        libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 <span class="se">\</span>
-        libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 <span class="se">\</span>
-        libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 <span class="se">\</span>
-        libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 <span class="se">\</span>
-        libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 <span class="se">\</span>
-        libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates <span class="se">\</span>
-        fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils <span class="se">\</span>
-        wget curl <span class="o">&amp;&amp;</span> rm -r /var/lib/apt/lists/*
+<span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-yq<span class="w"> </span>gconf-service<span class="w"> </span>libasound2<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libatk1.0-0<span class="w"> </span>libc6<span class="w"> </span>libcairo2<span class="w"> </span>libcups2<span class="w"> </span>libdbus-1-3<span class="w"> </span>libexpat1<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libfontconfig1<span class="w"> </span>libgcc1<span class="w"> </span>libgconf-2-4<span class="w"> </span>libgdk-pixbuf2.0-0<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libglib2.0-0<span class="w"> </span>libgtk-3-0<span class="w"> </span>libnspr4<span class="w"> </span>libpango-1.0-0<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libpangocairo-1.0-0<span class="w"> </span>libstdc++6<span class="w"> </span>libx11-6<span class="w"> </span>libx11-xcb1<span class="w"> </span>libxcb1<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libxcomposite1<span class="w"> </span>libxcursor1<span class="w"> </span>libxdamage1<span class="w"> </span>libxext6<span class="w"> </span>libxfixes3<span class="w"> </span>libxi6<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libxrandr2<span class="w"> </span>libxrender1<span class="w"> </span>libxss1<span class="w"> </span>libxtst6<span class="w"> </span>ca-certificates<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>fonts-liberation<span class="w"> </span>libappindicator1<span class="w"> </span>libnss3<span class="w"> </span>lsb-release<span class="w"> </span>xdg-utils<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>wget<span class="w"> </span>curl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>/var/lib/apt/lists/*
 
-<span class="gh">%appinstall</span> pdf_server
-    git clone https://github.com/alvarcarto/url-to-pdf-api.git pdf_server
-    <span class="nb">cd</span> pdf_server
-    npm install
-    chmod -R <span class="m">0755</span> .
+<span class="gh">%appinstall</span><span class="w"> </span>pdf_server
+<span class="w">    </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/alvarcarto/url-to-pdf-api.git<span class="w"> </span>pdf_server
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>pdf_server
+<span class="w">    </span>npm<span class="w"> </span>install
+<span class="w">    </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">0755</span><span class="w"> </span>.
 
 <span class="gh">%startscript</span>
-    <span class="nb">cd</span> /scif/apps/pdf_server/scif/pdf_server
-    <span class="c1"># Use nohup and /dev/null to completely detach server process from terminal</span>
-    nohup npm start &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> &lt; /dev/null <span class="p">&amp;</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/scif/apps/pdf_server/scif/pdf_server
+<span class="w">    </span><span class="c1"># Use nohup and /dev/null to completely detach server process from terminal</span>
+<span class="w">    </span>nohup<span class="w"> </span>npm<span class="w"> </span>start<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span>&lt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="p">&amp;</span>
 
 <span class="gh">%environment</span>
-    <span class="nv">NODE_ENV</span><span class="o">=</span>development
-    <span class="nv">PORT</span><span class="o">=</span><span class="m">9000</span>
-    <span class="nv">ALLOW_HTTP</span><span class="o">=</span><span class="nb">true</span>
-    <span class="nv">URL</span><span class="o">=</span>localhost
-    <span class="nb">export</span> NODE_ENV PORT ALLOW_HTTP URL
+<span class="w">    </span><span class="nv">NODE_ENV</span><span class="o">=</span>development
+<span class="w">    </span><span class="nv">PORT</span><span class="o">=</span><span class="m">9000</span>
+<span class="w">    </span><span class="nv">ALLOW_HTTP</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">    </span><span class="nv">URL</span><span class="o">=</span>localhost
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span>NODE_ENV<span class="w"> </span>PORT<span class="w"> </span>ALLOW_HTTP<span class="w"> </span>URL
 
-<span class="gh">%apprun</span> pdf_client
-    <span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nb">echo</span> <span class="s2">&quot;Usage: apptainer run --app pdf &lt;instance://name&gt; &lt;URL&gt; [output file]&quot;</span>
-        <span class="nb">exit</span> <span class="m">1</span>
-    <span class="k">fi</span>
-    curl -o <span class="s2">&quot;</span><span class="si">${</span><span class="nv">APPTAINER_APPDATA</span><span class="si">}</span><span class="s2">/output/</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">output</span><span class="p">.pdf</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">URL</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">PORT</span><span class="si">}</span><span class="s2">/api/render?url=</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="gh">%apprun</span><span class="w"> </span>pdf_client
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: apptainer run --app pdf &lt;instance://name&gt; &lt;URL&gt; [output file]&quot;</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span>curl<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">APPTAINER_APPDATA</span><span class="si">}</span><span class="s2">/output/</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">output</span><span class="p">.pdf</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">URL</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">PORT</span><span class="si">}</span><span class="s2">/api/render?url=</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
 <p>Create the container as before. The <code class="docutils literal notranslate"><span class="pre">--force</span></code> option will overwrite

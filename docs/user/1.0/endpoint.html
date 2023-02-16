@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Remote Endpoints &mdash; Apptainer User Guide 1.0 documentation</title>
@@ -13,10 +13,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/js/ga.js"></script>
@@ -32,15 +30,19 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Apptainer User Guide
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -129,7 +131,7 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Remote Endpoints</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/endpoint.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -235,14 +237,14 @@ Apptainer installation location.</p>
 </div>
 <p>To <code class="docutils literal notranslate"><span class="pre">login</span></code> to a remote, for the first time or if your token expires or
 was revoked:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Login to the default remote endpoint
-<span class="gp">$ </span>apptainer remote login
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Login<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>default<span class="w"> </span>remote<span class="w"> </span>endpoint
+<span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>login
 
-<span class="gp"># </span>Login to another remote endpoint
-<span class="gp">$ </span>apptainer remote login &lt;remote_name&gt;
+<span class="gp"># </span>Login<span class="w"> </span>to<span class="w"> </span>another<span class="w"> </span>remote<span class="w"> </span>endpoint
+<span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>login<span class="w"> </span>&lt;remote_name&gt;
 
 <span class="gp"># </span>example...
-<span class="gp">$ </span>apptainer remote login myremote
+<span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>login<span class="w"> </span>myremote
 <span class="go">apptainer remote login myremote</span>
 <span class="go">INFO:    Authenticating with remote: myremote</span>
 <span class="go">Generate an API Key at https://enterprise.example.com/auth/tokens, and paste here:</span>
@@ -254,14 +256,14 @@ was revoked:</p>
 you will be prompted, and the new token will be verified, before it
 replaces your existing credential. If you enter an incorrect token your
 existing token will not be replaced:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer remote login
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>login
 <span class="go">An access token is already set for this remote. Replace it? [N/y]y</span>
 <span class="go">Generate an access token at https://enterprise.example.com/auth/tokens, and paste it here.</span>
 <span class="go">Token entered will be hidden for security.</span>
 <span class="go">Access Token:</span>
 <span class="go">FATAL:   while verifying token: error response from server: Invalid Credentials</span>
 
-<span class="gp"># </span>Previous token is still <span class="k">in</span> place
+<span class="gp"># </span>Previous<span class="w"> </span>token<span class="w"> </span>is<span class="w"> </span>still<span class="w"> </span><span class="k">in</span><span class="w"> </span>place
 </pre></div>
 </div>
 <div class="admonition note">
