@@ -74,11 +74,18 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Persistent Overlays</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#file-system-image-overlay">File system image overlay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filesystem-image-overlay">Filesystem image overlay</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sparse-overlay-images">Sparse overlay images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-an-overlay-image-manually">Create an overlay image manually</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#fakeroot-with-overlay">Fakeroot with overlay</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#directory-overlay">Directory overlay</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#readonly-overlay">Readonly overlay</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#overlay-embedded-in-sif">Overlay embedded in SIF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overlay-embedded-in-sif">Overlay embedded in SIF</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#embed-an-overlay-image-in-sif">Embed an overlay image in SIF</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#final-note">Final note</a></li>
 </ul>
 </li>
@@ -155,17 +162,26 @@ the overlay embedded in SIF.</p>
 persist, use the <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> option. This stores all changes in
 an in-memory temporary filesystem which is discarded as soon as the
 container finishes executing.</p>
-<p>You can use persistent overlays with the following commands: <code class="docutils literal notranslate"><span class="pre">run</span></code>,
-<code class="docutils literal notranslate"><span class="pre">exec</span></code>, <code class="docutils literal notranslate"><span class="pre">shell</span></code>, and <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> size is controlled by <code class="docutils literal notranslate"><span class="pre">sessiondir</span> <span class="pre">max</span> <span class="pre">size</span></code> in
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>. This defaults to 64MiB, and may need to be increased if
+your workflows create larger temporary files.</p>
+</div>
+<p>You can use persistent overlays with the following commands:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">run</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exec</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shell</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code></p></li>
+</ul>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
-<div class="section" id="file-system-image-overlay">
-<h3>File system image overlay<a class="headerlink" href="#file-system-image-overlay" title="Permalink to this heading"></a></h3>
+<div class="section" id="filesystem-image-overlay">
+<h3>Filesystem image overlay<a class="headerlink" href="#filesystem-image-overlay" title="Permalink to this heading"></a></h3>
 <p>Apptainer provides a command <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">overlay</span>
-<span class="pre">create</span></code> to create persistent overlay images. You can create a single
-EXT3 overlay image or adding a EXT3 writable overlay partition to an
-existing SIF image.</p>
+<span class="pre">create</span></code> to create persistent overlay images.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">dd</span></code> and <code class="docutils literal notranslate"><span class="pre">mkfs.ext3</span></code> must be installed on your system.
@@ -176,18 +192,6 @@ create an overlay directory tree usable by a regular user.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer overlay create --size 1024 /tmp/ext3_overlay.img
 </pre></div>
 </div>
-<p>To add a 1 GiB writable overlay partition to an existing SIF image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build ubuntu.sif library://ubuntu
-...
-$ apptainer overlay create --size 1024 ubuntu.sif
-</pre></div>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>It is not possible to add a writable overlay partition to a
-<strong>signed</strong>, <strong>encrypted</strong> SIF image or if the SIF image already
-contain a writable overlay partition.</p>
-</div>
 <p><code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">overlay</span> <span class="pre">create</span></code> also provides an option <code class="docutils literal notranslate"><span class="pre">--create-dir</span></code>
 to create additional directories owned by the calling user, it can be
 specified multiple times to create many directories. This is
@@ -196,9 +200,38 @@ user.</p>
 <p>So for example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build /tmp/nginx.sif docker://nginx
 ...
-$ apptainer overlay create --size 1024 --create-dir /var/cache/nginx /tmp/nginx.sif
-$ echo &quot;test&quot; | apptainer exec /tmp/nginx.sif sh -c &quot;cat &gt; /var/cache/nginx/test&quot;
+$ apptainer overlay create --size 1024 --create-dir /var/cache/nginx /tmp/nginx_overlay.img
+$ echo &quot;test&quot; | apptainer exec --overlay /tmp/nginx_overlay.img /tmp/nginx.sif sh -c &quot;cat &gt; /var/cache/nginx/test&quot;
 </pre></div>
+</div>
+<div class="section" id="sparse-overlay-images">
+<h4>Sparse overlay images<a class="headerlink" href="#sparse-overlay-images" title="Permalink to this heading"></a></h4>
+<p>Apptainer allows the creation of overlay images as sparse files.
+A sparse overlay image only takes up space on disk as data is written to it. A
+standard overlay image will use an amount of disk space equal to its size, from
+the time that it is created.</p>
+<p>To create a sparse overlay image, use the <code class="docutils literal notranslate"><span class="pre">--sparse</span></code> flag.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer overlay create --sparse --size 1024 /tmp/ext3_overlay.img
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">ls</span></code> will show the full size of the file, while <code class="docutils literal notranslate"><span class="pre">du</span></code> will show the
+space on disk that the file is currently using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls -lah /tmp/ext3_overlay.img
+-rw-------. 1 user user 1.0G Jan 27 11:47 /tmp/ext3_overlay.img
+
+$ du -h /tmp/ext3_overlay.img
+33M     /tmp/ext3_overlay.img
+</pre></div>
+</div>
+<p>If you copy or move the sparse image you should ensure that the tool you use to
+do so supports sparse files, which may require enabling an option. Failure to
+copy or move the file with sparse file support will lead to it taking its full
+size on disk in the new location.</p>
+</div>
+<div class="section" id="create-an-overlay-image-manually">
+<h4>Create an overlay image manually<a class="headerlink" href="#create-an-overlay-image-manually" title="Permalink to this heading"></a></h4>
+<p>You can use tools like <code class="docutils literal notranslate"><span class="pre">dd</span></code> and <code class="docutils literal notranslate"><span class="pre">mkfs.ext3</span></code> to create and format an
+empty ext3 file system image that will be used as an overlay.</p>
 </div>
 </div>
 <div class="section" id="fakeroot-with-overlay">
@@ -242,8 +275,9 @@ sections of the admin guide).
 It is supported, however, and this section describes how to use it.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For security reasons, with setuid mode only root may use a bare
-directory as an overlay.
+<p>For security reasons, if Apptainer is installed in setuid mode, you must
+be root to use a bare directory as an overlay. ext3 file system images can be
+used as overlays without root privileges.
 If unprivileged user namespaces are also available, however, the
 <code class="docutils literal notranslate"><span class="pre">--userns</span></code> or <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> options should make it work.</p>
 </div>
@@ -295,13 +329,35 @@ touch: cannot touch &#39;/usr/bin/more&#39;: Read-only file system
 </div>
 <div class="section" id="overlay-embedded-in-sif">
 <span id="overlay-sif"></span><h3>Overlay embedded in SIF<a class="headerlink" href="#overlay-embedded-in-sif" title="Permalink to this heading"></a></h3>
-<p>It is possible to embed an overlay image in the SIF file that holds a
+<p>It is possible to embed an overlay image into the SIF file that holds a
 container. This allows the read-only container image and your
-modifications to it to be managed as a single file.
-An example of doing that directly with the <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">overlay</span> <span class="pre">create</span></code>
-command was shown above,
-but an external image file can also be added to a SIF file with the
-<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">sif</span> <span class="pre">add</span></code> command like this:</p>
+modifications to it to be managed as a single file.</p>
+<p>To add a 1 GiB writable overlay partition to an existing SIF image:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer overlay create --size 1024 ubuntu.sif
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is not possible to add a writable overlay partition to a
+<strong>signed</strong>, <strong>encrypted</strong> SIF image or if the SIF image already
+contains a writable overlay partition.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">overlay</span> <span class="pre">create</span></code> also provides an option <code class="docutils literal notranslate"><span class="pre">--create-dir</span></code>
+to create additional directories owned by the calling user, it can be
+specified multiple times to create many directories. This is
+particularly useful when you need to make a directory writable by your
+user.</p>
+<p>So for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build /tmp/nginx.sif docker://nginx
+$ apptainer overlay create --size 1024 --create-dir /var/cache/nginx /tmp/nginx.sif
+$ echo &quot;test&quot; | apptainer exec /tmp/nginx.sif sh -c &quot;cat &gt; /var/cache/nginx/test&quot;
+</pre></div>
+</div>
+<div class="section" id="embed-an-overlay-image-in-sif">
+<h4>Embed an overlay image in SIF<a class="headerlink" href="#embed-an-overlay-image-in-sif" title="Permalink to this heading"></a></h4>
+<p>To embed an existing overlay in a SIF image, or to create an empty overlay,
+use the <code class="docutils literal notranslate"><span class="pre">sif</span> <span class="pre">add</span></code> subcommand.</p>
+<p>In order to do this, you must first create a file system image:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sif add --datatype 4 --partfs 2 --parttype 4 --partarch 2 --groupid 1 ubuntu.sif overlay.img
 $ apptainer sif list ubuntu.sif | grep -i ext3
 5    |1       |NONE    |29810688-1103552512       |FS (Ext3/Overlay/amd64)
@@ -334,6 +390,7 @@ Apptainer&gt; exit
 $ apptainer exec ubuntu.sif which vim
 /usr/bin/vim
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="final-note">
