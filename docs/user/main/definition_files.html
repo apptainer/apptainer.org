@@ -502,6 +502,21 @@ executable, you can do this in your test:</p>
 <p>Because the <code class="docutils literal notranslate"><span class="pre">%test</span></code> section is a shell scriptlet, complex tests are
 possible. Your scriptlet should usually be written so it will exit with
 a non-zero error code if there is a problem during the tests.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">%test</span></code> scriptlet will run under <code class="docutils literal notranslate"><span class="pre">sh</span></code> or <code class="docutils literal notranslate"><span class="pre">bash</span></code> by default. You can
+change the shell or interpreter that the test runs under by using a custom
+hashbang (<code class="docutils literal notranslate"><span class="pre">#!</span></code>) as the first line in your <code class="docutils literal notranslate"><span class="pre">%test</span></code> section:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%test</span>
+<span class="w">   </span><span class="c1">#!/usr/bin/zsh</span>
+
+<span class="w">   </span>cat<span class="w"> </span>/proc/<span class="nv">$$</span>/cmdline
+</pre></div>
+</div>
+<p>In the <code class="docutils literal notranslate"><span class="pre">%test</span></code> section above, the <code class="docutils literal notranslate"><span class="pre">#!/usr/bin/zsh</span></code> means that the test code
+will be run by the zsh shell installed at <code class="docutils literal notranslate"><span class="pre">/usr/bin/zsh</span></code>. The <code class="docutils literal notranslate"><span class="pre">cat</span>
+<span class="pre">/proc/$$/cmdline</span></code> will display the shell that is running the script, confirming
+that this works. Note that <code class="docutils literal notranslate"><span class="pre">/usr/bin/zsh</span></code> must be installed in the
+<em>container</em>. A custom hashbang runs the specified shell from the container
+filesystem, not the host.</p>
 <p>Now, the following sections are all inserted into the container
 filesystem in single step:</p>
 </div>
@@ -613,6 +628,21 @@ Arguments received: this that and the other
 this that and the other
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> scriptlet will run under <code class="docutils literal notranslate"><span class="pre">sh</span></code> or <code class="docutils literal notranslate"><span class="pre">bash</span></code> by default. You
+can change the shell or interpreter that the test runs under by using a custom
+hashbang (<code class="docutils literal notranslate"><span class="pre">#!</span></code>) as the first line in your <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> section:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%runscript</span>
+<span class="w">   </span><span class="c1">#!/usr/bin/zsh</span>
+
+<span class="w">   </span>cat<span class="w"> </span>/proc/<span class="nv">$$</span>/cmdline
+</pre></div>
+</div>
+<p>In the <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> section above, the <code class="docutils literal notranslate"><span class="pre">#!/usr/bin/zsh</span></code> means that the
+runscript code will be run by the zsh shell installed at <code class="docutils literal notranslate"><span class="pre">/usr/bin/zsh</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/proc/$$/cmdline</span></code> will display the shell that is running the script,
+confirming that this works. Note that <code class="docutils literal notranslate"><span class="pre">/usr/bin/zsh</span></code> must be installed in the
+<em>container</em>. A custom hashbang runs the specified shell from the container
+filesystem, not the host.</p>
 </div>
 <div class="section" id="labels">
 <h3>%labels<a class="headerlink" href="#labels" title="Permalink to this heading"></a></h3>
