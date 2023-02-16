@@ -182,9 +182,9 @@ file). In the default configuration, the system default bind points are
 container.</p>
 <div class="section" id="disabling-system-binds">
 <h3>Disabling System Binds<a class="headerlink" href="#disabling-system-binds" title="Permalink to this heading"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">--no-mount</span></code> flag allows specific
-system mounts to be disabled, even if they are set in the
-<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> configuration file by the administrator.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--no-mount</span></code> flag allows specific system mounts to be disabled, even if
+they are set in the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> configuration file by the
+administrator.</p>
 <p>For example, if Apptainer has been configured with <code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">hostfs</span> <span class="pre">=</span>
 <span class="pre">yes</span></code> then every filesystem on the host will be bind mounted to the
 container by default. If, e.g. a <code class="docutils literal notranslate"><span class="pre">/project</span></code> filesystem on your host
@@ -193,8 +193,22 @@ running, you can disable the <code class="docutils literal notranslate"><span cl
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-mount<span class="w"> </span>hostfs<span class="w"> </span>mycontainer.sif
 </pre></div>
 </div>
-<p>Multiple mounts can be disabled by specifying them separated by commas:</p>
+<p>Multiple system mounts can be disabled by specifying them separated by commas:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-mount<span class="w"> </span>tmp,sys,dev<span class="w"> </span>mycontainer.sif
+</pre></div>
+</div>
+<p>When the administrator has configured custom <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">path</span></code> entries in
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>, to mount specific paths into the container by default, you
+can disable them individually. To do this, specify the path(s) to disable with
+the <code class="docutils literal notranslate"><span class="pre">--no-mount</span></code> flag. For example, if the adminstrator has configured
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> to always mount <code class="docutils literal notranslate"><span class="pre">/data2</span></code>. you can disable this with
+<code class="docutils literal notranslate"><span class="pre">--no-mount</span> <span class="pre">/data2</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-mount<span class="w"> </span>/data2<span class="w"> </span>mycontainer.sif
+</pre></div>
+</div>
+<p>To disable all <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">path</span></code> entries set in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>, use
+<code class="docutils literal notranslate"><span class="pre">--no-mount</span> <span class="pre">bind-paths</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-mount<span class="w"> </span>bind-paths<span class="w"> </span>mycontainer.sif
 </pre></div>
 </div>
 </div>
