@@ -757,6 +757,12 @@ parallel runs do not interfere.</p>
 <p>A writable overlay file in a SIF partition cannot be used in parallel.
 Apptainer will refuse to run concurrently using the same SIF
 writable overlay partition.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> size is controlled by <code class="docutils literal notranslate"><span class="pre">sessiondir</span> <span class="pre">max</span> <span class="pre">size</span></code> in
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>. This defaults to 64MiB, and may need to be increased if
+your workflows create larger temporary files.</p>
+</div>
 </div>
 <div class="section" id="dockerfile-user">
 <h3>Dockerfile <code class="docutils literal notranslate"><span class="pre">USER</span></code><a class="headerlink" href="#dockerfile-user" title="Permalink to this heading"></a></h3>
