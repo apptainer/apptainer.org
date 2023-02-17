@@ -174,13 +174,19 @@
 <li class="toctree-l4"><a class="reference internal" href="#id25">Keywords</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#docker-daemon-and-docker-archive-bootstrap-agents"><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> and <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#docker-daemon-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> bootstrap agent</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id26">Overview</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id27">Keywords</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-archive-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id29">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id30">Keywords</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#scratch-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">scratch</span></code> bootstrap agent</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id28">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id32">Keywords</a></li>
 </ul>
 </li>
 </ul>
@@ -295,12 +301,17 @@ library, oras, etc. downloads and built SIFs. Default is set to
 false.</p></li>
 <li><p><strong>APPTAINER_DNS</strong>: A list of the DNS server addresses separated by
 commas to be added in <code class="docutils literal notranslate"><span class="pre">resolv.conf</span></code>.</p></li>
+<li><p><strong>APPTAINER_DOCKER_HOST</strong>: Host address / socket to use when pulling images
+from a <code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> source. <code class="docutils literal notranslate"><span class="pre">DOCKER_HOST</span></code> without the
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_</span></code> prefix is also accepted.</p></li>
 <li><p><strong>APPTAINER_DOCKER_LOGIN</strong>: To specify the interactive prompt for
 docker authentication.</p></li>
-<li><p><strong>APPTAINER_DOCKER_USERNAME</strong>: To specify a username for docker
-authentication.</p></li>
 <li><p><strong>APPTAINER_DOCKER_PASSWORD</strong>: To specify the password for docker
-authentication.</p></li>
+authentication. <code class="docutils literal notranslate"><span class="pre">DOCKER_PASSWORD</span></code> without the <code class="docutils literal notranslate"><span class="pre">APPTAINER_</span></code> prefix is
+also accepted.</p></li>
+<li><p><strong>APPTAINER_DOCKER_USERNAME</strong>: To specify the username for docker
+authentication. <code class="docutils literal notranslate"><span class="pre">DOCKER_USERNAME</span></code> without the <code class="docutils literal notranslate"><span class="pre">APPTAINER_</span></code> prefix is
+also accepted.</p></li>
 <li><p><strong>APPTAINER_DOWNLOAD_CONCURRENCY</strong>: To specify how many concurrent streams
 when downloading (pulling) an image from cloud library.</p></li>
 <li><p><strong>APPTAINER_DOWNLOAD_PART_SIZE</strong>: To specify the size of each part (bytes)
@@ -965,16 +976,12 @@ needs to properly complete the build. One common package you may want to
 install when using the zypper build module is <code class="docutils literal notranslate"><span class="pre">zypper</span></code> itself.</p>
 </div>
 </div>
-<div class="section" id="docker-daemon-and-docker-archive-bootstrap-agents">
-<span id="docker-daemon-archive"></span><h3><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> and <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agents<a class="headerlink" href="#docker-daemon-and-docker-archive-bootstrap-agents" title="Permalink to this heading"></a></h3>
-<p>If you are using docker locally there are two options for creating
-Apptainer images without the need for a repository. You can either
-build a SIF from a <code class="docutils literal notranslate"><span class="pre">docker-save</span></code> tar file or you can convert any
-docker image present in docker’s daemon internal storage.</p>
+<div class="section" id="docker-daemon-bootstrap-agent">
+<span id="docker-daemon"></span><h3><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> bootstrap agent<a class="headerlink" href="#docker-daemon-bootstrap-agent" title="Permalink to this heading"></a></h3>
 <div class="section" id="id26">
 <h4>Overview<a class="headerlink" href="#id26" title="Permalink to this heading"></a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> allows you to build a SIF from any docker image
-currently residing in docker’s daemon internal storage:</p>
+<p><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> allows you to build a SIF from any Docker image
+currently residing in the Docker daemon’s internal storage:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>images<span class="w"> </span>alpine
 <span class="go">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span>
 <span class="go">alpine              latest              965ea09ff2eb        7 weeks ago         5.55MB</span>
@@ -992,8 +999,32 @@ currently residing in docker’s daemon internal storage:</p>
 <span class="go">Apptainer&gt;</span>
 </pre></div>
 </div>
-<p>while <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> permits you to do the same thing starting from
-a docker image stored in a <code class="docutils literal notranslate"><span class="pre">docker-save</span></code> formatted tar file:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_HOST</span></code> or <code class="docutils literal notranslate"><span class="pre">DOCKER_HOST</span></code> environment variables may be
+set to instruct {Apptainer} to pull images from a Docker daemon that is not
+running at the default location. For example, when using a virtualized Docker you may be instructed to set <code class="docutils literal notranslate"><span class="pre">DOCKER_HOST</span></code> e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">To</span> <span class="n">connect</span> <span class="n">the</span> <span class="n">Docker</span> <span class="n">client</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Docker</span> <span class="n">daemon</span><span class="p">,</span> <span class="n">please</span> <span class="nb">set</span>
+<span class="n">export</span> <span class="n">DOCKER_HOST</span><span class="o">=</span><span class="n">tcp</span><span class="p">:</span><span class="o">//</span><span class="mf">192.168.59.103</span><span class="p">:</span><span class="mi">2375</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id27">
+<h4>Keywords<a class="headerlink" href="#id27" title="Permalink to this heading"></a></h4>
+<p>In a definition file, the <code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> bootstrap agent requires the source container reference to
+be provided with the <code class="docutils literal notranslate"><span class="pre">From:</span></code> keyword:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker-daemon
+<span class="k">From</span>: &lt;image&gt;:&lt;tag&gt;
+</pre></div>
+</div>
+<p>where both <code class="docutils literal notranslate"><span class="pre">&lt;image&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;tag&gt;</span></code> are mandatory fields that must be
+written explicitly.</p>
+</div>
+</div>
+<div class="section" id="docker-archive-bootstrap-agent">
+<span id="id28"></span><h3><code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent<a class="headerlink" href="#docker-archive-bootstrap-agent" title="Permalink to this heading"></a></h3>
+<div class="section" id="id29">
+<h4>Overview<a class="headerlink" href="#id29" title="Permalink to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> boostrap agent allows you to create a Apptainer image
+from a docker image stored in a <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">save</span></code> formatted tar file:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>save<span class="w"> </span>-o<span class="w"> </span>alpine.tar<span class="w"> </span>alpine:latest
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker-archive:<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/alpine.tar
@@ -1010,22 +1041,14 @@ a docker image stored in a <code class="docutils literal notranslate"><span clas
 </pre></div>
 </div>
 </div>
-<div class="section" id="id27">
-<h4>Keywords<a class="headerlink" href="#id27" title="Permalink to this heading"></a></h4>
-<p>The <code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> bootstrap agent can be used in an Apptainer
-definition file as follows:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: docker-daemon:&lt;image&gt;:&lt;tag&gt;
+<div class="section" id="id30">
+<h4>Keywords<a class="headerlink" href="#id30" title="Permalink to this heading"></a></h4>
+<p>In a definition file, the <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent requires the path
+to the tar file containing the image to be specified with the <code class="docutils literal notranslate"><span class="pre">From:</span></code> keyword.</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker-archive
+<span class="k">From</span>: &lt;path-to-tar-file&gt;
 </pre></div>
 </div>
-<p>where both <code class="docutils literal notranslate"><span class="pre">&lt;image&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;tag&gt;</span></code> are mandatory fields that must be
-written explicitly. The <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent requires
-instead the path to the tar file containing the image:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">From</span>: docker-archive:&lt;path-to-tar-file&gt;
-</pre></div>
-</div>
-<p>Note that differently from the <code class="docutils literal notranslate"><span class="pre">docker://</span></code> bootstrap agent both
-<code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> and <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> don’t require a double slash
-<code class="docutils literal notranslate"><span class="pre">//</span></code> after the colon in the agent name.</p>
 </div>
 </div>
 <div class="section" id="scratch-bootstrap-agent">
@@ -1035,8 +1058,8 @@ container. You are then responsible for adding any and all executables,
 libraries etc. that are required. Starting with a scratch container can
 be useful when you are aiming to minimize container size, and have a
 simple application / static binaries.</p>
-<div class="section" id="id28">
-<h4>Overview<a class="headerlink" href="#id28" title="Permalink to this heading"></a></h4>
+<div class="section" id="id31">
+<h4>Overview<a class="headerlink" href="#id31" title="Permalink to this heading"></a></h4>
 <p>A minimal container providing a shell can be created by copying the
 <code class="docutils literal notranslate"><span class="pre">busybox</span></code> static binary into an empty scratch container:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
@@ -1066,7 +1089,9 @@ Apptainer&gt; echo &quot;Hello from a 696KiB container&quot;
 Hello from a 696KiB container
 </pre></div>
 </div>
-<p>Keywords</p>
+</div>
+<div class="section" id="id32">
+<h4>Keywords<a class="headerlink" href="#id32" title="Permalink to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
 </pre></div>
 </div>
