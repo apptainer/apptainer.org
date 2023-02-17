@@ -340,6 +340,10 @@ secrets into jobs within CI pipelines.</p>
 <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code>
 respectively. These environment variables will override any stored
 credentials.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">DOCKER_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">DOCKER_PASSWORD</span></code>, without the <code class="docutils literal notranslate"><span class="pre">APPTAINER_</span></code>
+prefix, are set they will also be used provided the <code class="docutils literal notranslate"><span class="pre">APPTAINER_</span></code> equivalent
+is not overriding them. This allows a single set of environment variables to be
+set for both <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> and <code class="docutils literal notranslate"><span class="pre">docker</span></code> operations.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_DOCKER_USERNAME=myuser
 $ export APPTAINER_DOCKER_PASSWORD=mytoken
 $ apptainer pull docker://myuser/private
