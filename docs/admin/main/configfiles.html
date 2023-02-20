@@ -708,6 +708,8 @@ filesystem and by checking against a list of signing entities.</p>
 down execution fully you should disable execution of other container
 types (squashfs/extfs/dir) via the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> file <code class="docutils literal notranslate"><span class="pre">allow</span>
 <span class="pre">container</span></code> settings.</p>
+<p>In an unprivileged installation of Apptainer, a user can specify their
+own <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> via <code class="docutils literal notranslate"><span class="pre">--config</span></code>, and bypass ECL restrictions.</p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">execgroup</span><span class="p">]]</span>
   <span class="n">tagname</span> <span class="o">=</span> <span class="s2">&quot;group2&quot;</span>

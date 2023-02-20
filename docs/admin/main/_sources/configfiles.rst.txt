@@ -677,6 +677,9 @@ filesystem and by checking against a list of signing entities.
    types (squashfs/extfs/dir) via the ``{command}.conf`` file ``allow
    container`` settings.
 
+   In an unprivileged installation of {Project}, a user can specify their
+   own ``{command}.conf`` via ``--config``, and bypass ECL restrictions.
+
 .. code::
 
    [[execgroup]]
