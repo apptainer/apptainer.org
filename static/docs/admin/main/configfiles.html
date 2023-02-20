@@ -244,14 +244,17 @@ automatically bind the host’s <code class="docutils literal notranslate"><span
 </div>
 <div class="section" id="session-directory-and-system-mounts">
 <h3>Session Directory and System Mounts<a class="headerlink" href="#session-directory-and-system-mounts" title="Permalink to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">sessiondir</span> <span class="pre">max</span> <span class="pre">size</span></code>: In order for the Apptainer runtime to run a
-container it needs to create a temporary in-memory <code class="docutils literal notranslate"><span class="pre">sessiondir</span></code> as a
-location to assemble various components of the container, including
-mounting filesystems over the base image. This option specifies how
-large the default <code class="docutils literal notranslate"><span class="pre">sessiondir</span></code> should be (in MB). It should be set
-large enough to accommodate files that will be created in a
-<code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code>, or the empty <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> and other paths provided
-when <code class="docutils literal notranslate"><span class="pre">--contain</span></code> is used.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sessiondir</span> <span class="pre">max</span> <span class="pre">size</span></code>: In order for the Apptainer runtime to run
+a container it needs to create a temporary in-memory <code class="docutils literal notranslate"><span class="pre">sessiondir</span></code> as
+a location to assemble various components of the container, including
+mounting filesystems over the base image. In addition, this sessiondir
+will hold files that are written to the container when
+<code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> is used, plus isolated temporary filesystems in
+<code class="docutils literal notranslate"><span class="pre">--contain</span></code> mode. The default value is
+64MiB. If users commonly run containers with <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> or
+<code class="docutils literal notranslate"><span class="pre">--contain</span></code>, this value should be increased to
+accommodate their workflows. The tmpfs will grow to the specified
+maximum size, as required. Memory is not allocated ahead of usage.</p>
 <p><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">proc</span></code>: This option determines if Apptainer should
 automatically bind mount <code class="docutils literal notranslate"><span class="pre">/proc</span></code> within the container.</p>
 <p><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">sys</span></code>: This option determines if Apptainer should

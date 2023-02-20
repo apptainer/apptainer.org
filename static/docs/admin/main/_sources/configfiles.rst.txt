@@ -116,14 +116,17 @@ automatically bind the host's ``/etc/resolv.conf`` within the container.
 Session Directory and System Mounts
 ===================================
 
-``sessiondir max size``: In order for the {Project} runtime to run a
-container it needs to create a temporary in-memory ``sessiondir`` as a
-location to assemble various components of the container, including
-mounting filesystems over the base image. This option specifies how
-large the default ``sessiondir`` should be (in MB). It should be set
-large enough to accommodate files that will be created in a
-``--writable-tmpfs``, or the empty ``/tmp`` and other paths provided
-when ``--contain`` is used.
+``sessiondir max size``: In order for the {Project} runtime to run
+a container it needs to create a temporary in-memory ``sessiondir`` as
+a location to assemble various components of the container, including
+mounting filesystems over the base image. In addition, this sessiondir
+will hold files that are written to the container when
+``--writable-tmpfs`` is used, plus isolated temporary filesystems in
+``--contain`` mode. The default value is
+64MiB. If users commonly run containers with ``--writable-tmpfs`` or
+``--contain``, this value should be increased to
+accommodate their workflows. The tmpfs will grow to the specified
+maximum size, as required. Memory is not allocated ahead of usage.
 
 ``mount proc``: This option determines if {Project} should
 automatically bind mount ``/proc`` within the container.
