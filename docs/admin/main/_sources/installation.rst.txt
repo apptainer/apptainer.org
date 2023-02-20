@@ -211,29 +211,27 @@ not support ``--fakeroot``.
 -  You should not run a sandbox container with ``--fakeroot`` 
    from an NFS location.
 
-Lustre / GPFS
-^^^^^^^^^^^^^
+Lustre / GPFS / PanFS
+^^^^^^^^^^^^^^^^^^^^^
 
-Lustre and GPFS do not have sufficient ``upperdir`` or ``lowerdir``
-overlay support for certain {Project} features, and do not support
-``--fakeroot``.
+Lustre, GPFS, and PanFS do not have sufficient ``upperdir`` or
+``lowerdir`` overlay support for certain {Project} features, and
+do not support ``--fakeroot``.
 
--  In setuid mode, you cannot use ``--overlay`` or ``--writable-tmpfs`` with a
-   sandbox container that is located on a Lustre or GPFS filesystem. SIF
-   containers on Lustre / GPFS will work correctly with these options.
-   It works with fuse-overlayfs in non-setuid mode.
+- In setuid mode, you cannot use ``--overlay`` or ``--writable-tmpfs`` with a
+  sandbox container that is located on a Lustre, GPFS, or PanFS
+  filesystem. SIF containers on Lustre, GPFS, and PanFS will work
+  correctly with these options.
+  It works with fuse-overlayfs in non-setuid mode.
 
--  In setuid mode, you cannot use ``--overlay`` to overlay a directory onto
-   a container when the overlay (upperdir) directory is on a Lustre or GPFS
-   filesystem.
-   In non-setuid mode with fuse-overlayfs it is allowed but will be read-only.
+- In setuid mode, you cannot use ``--overlay`` to overlay a directory onto a
+  container, when the overlay (upperdir) directory is on a Lustre,
+  GPFS, or PanFS filesystem.
+  In non-setuid mode with fuse-overlayfs it is allowed but will be read-only.
 
--  When building a container, or running a container with ``--fakeroot``, your
-   ``TMPDIR / {ENVPREFIX}_TMPDIR`` should not be a Lustre or GPFS
-   location.
-
--  You should not run a sandbox container with ``--fakeroot`` from a
-   Lustre or GPFS location.
+- When building a container, or running a container with ``--fakeroot``, your
+  ``TMPDIR / {ENVPREFIX}_TMPDIR`` should not be a Lustre, GPFS, or
+  PanFS location.
 
 FUSE-based filesystems
 ^^^^^^^^^^^^^^^^^^^^^^

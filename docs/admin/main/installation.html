@@ -63,7 +63,7 @@
 <li class="toctree-l5"><a class="reference internal" href="#fakeroot-with-uid-gid-mapping-on-network-filesystems">Fakeroot with uid/gid mapping on Network filesystems</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#apptainer-cache-atomic-rename">Apptainer cache / atomic rename</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#nfs">NFS</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#lustre-gpfs">Lustre / GPFS</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#lustre-gpfs-panfs">Lustre / GPFS / PanFS</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#fuse-based-filesystems">FUSE-based filesystems</a></li>
 </ul>
 </li>
@@ -315,25 +315,24 @@ location.</p></li>
 from an NFS location.</p></li>
 </ul>
 </div>
-<div class="section" id="lustre-gpfs">
-<h5>Lustre / GPFS<a class="headerlink" href="#lustre-gpfs" title="Permalink to this heading"></a></h5>
-<p>Lustre and GPFS do not have sufficient <code class="docutils literal notranslate"><span class="pre">upperdir</span></code> or <code class="docutils literal notranslate"><span class="pre">lowerdir</span></code>
-overlay support for certain Apptainer features, and do not support
-<code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
+<div class="section" id="lustre-gpfs-panfs">
+<h5>Lustre / GPFS / PanFS<a class="headerlink" href="#lustre-gpfs-panfs" title="Permalink to this heading"></a></h5>
+<p>Lustre, GPFS, and PanFS do not have sufficient <code class="docutils literal notranslate"><span class="pre">upperdir</span></code> or
+<code class="docutils literal notranslate"><span class="pre">lowerdir</span></code> overlay support for certain Apptainer features, and
+do not support <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
 <ul class="simple">
 <li><p>In setuid mode, you cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> or <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> with a
-sandbox container that is located on a Lustre or GPFS filesystem. SIF
-containers on Lustre / GPFS will work correctly with these options.
+sandbox container that is located on a Lustre, GPFS, or PanFS
+filesystem. SIF containers on Lustre, GPFS, and PanFS will work
+correctly with these options.
 It works with fuse-overlayfs in non-setuid mode.</p></li>
-<li><p>In setuid mode, you cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> to overlay a directory onto
-a container when the overlay (upperdir) directory is on a Lustre or GPFS
-filesystem.
+<li><p>In setuid mode, you cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> to overlay a directory onto a
+container, when the overlay (upperdir) directory is on a Lustre,
+GPFS, or PanFS filesystem.
 In non-setuid mode with fuse-overlayfs it is allowed but will be read-only.</p></li>
 <li><p>When building a container, or running a container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>, your
-<code class="docutils literal notranslate"><span class="pre">TMPDIR</span> <span class="pre">/</span> <span class="pre">APPTAINER_TMPDIR</span></code> should not be a Lustre or GPFS
-location.</p></li>
-<li><p>You should not run a sandbox container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> from a
-Lustre or GPFS location.</p></li>
+<code class="docutils literal notranslate"><span class="pre">TMPDIR</span> <span class="pre">/</span> <span class="pre">APPTAINER_TMPDIR</span></code> should not be a Lustre, GPFS, or
+PanFS location.</p></li>
 </ul>
 </div>
 <div class="section" id="fuse-based-filesystems">
