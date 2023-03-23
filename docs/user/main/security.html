@@ -134,34 +134,34 @@
 <span id="security"></span><h1>Security in Apptainer<a class="headerlink" href="#security-in-apptainer" title="Permalink to this heading"></a></h1>
 <div class="section" id="security-policy">
 <h2>Security Policy<a class="headerlink" href="#security-policy" title="Permalink to this heading"></a></h2>
-<p>If you suspect you have found a vulnerability in Apptainer we want
+<p>If you suspect you have found a vulnerability in Apptainer, we want
 to work with you so that it can be investigated, fixed, and disclosed in
 a responsible manner. Please follow the steps in our published <a class="reference external" href="https://apptainer.org/security-policy/">Security
 Policy</a>, which begins with
-contacting us privately via <a class="reference external" href="mailto:security&#37;&#52;&#48;apptainer&#46;org">security<span>&#64;</span>apptainer<span>&#46;</span>org</a></p>
+contacting us privately via <a class="reference external" href="mailto:security&#37;&#52;&#48;apptainer&#46;org">security<span>&#64;</span>apptainer<span>&#46;</span>org</a>.</p>
 <p>We disclose vulnerabilities found in Apptainer through public
-CVE reports, and notifications on our community channels. We encourage
-all users to monitor new releases of Apptainer for security
-information. Security patches are applied to the latest open-source
+CVE reports, as well as notifications on our community channels. We
+encourage all users to monitor new releases of Apptainer for
+security information. Security patches are applied to the latest
 release.</p>
 </div>
 <div class="section" id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h2>
 <p>Apptainer grew out of the need to implement a container platform
 that was suitable for use on shared systems, such as HPC clusters. In
-these environments multiple people access a shared resource. User
-accounts, groups, and standard file permissions limit their access to
-data, devices, and prevent them from disrupting or accessing others’
-work.</p>
+these environments, multiple people typically need to access the same
+shared resource. User accounts, groups, and standard file permissions
+limit their access to data and devices, and prevent them from disrupting
+or accessing others’ work.</p>
 <p>To provide security in these environments a container needs to run as
 the user who starts it on the system. Before the widespread adoption of
 Linux user namespaces, only a privileged user could perform the
 operations which are needed to run a container. A default Docker
-installation uses a root-owned daemon to start containers. Users can
-request that the daemon starts a container on their behalf. However,
+installation uses a root-owned daemon to start containers, and users can
+request that the daemon start a container on their behalf. However,
 coordinating a daemon with other schedulers is difficult and, since the
 daemon is privileged, users can ask it to carry out actions that they
-wouldn’t normally have permission to do.</p>
+wouldn’t normally have permission to carry out themselves.</p>
 <p>When a user runs a container with Apptainer, it is started as a
 normal process running under the user’s account. Standard file
 permissions and other security controls based on user accounts, groups,
@@ -217,8 +217,8 @@ Metadata operations are still moved to the node running the
 container, which is a big advantage over having many files directly
 on networked filesystems.</p></li>
 <li><p>Encryption is not yet supported. In suid mode, Apptainer uses kernel LUKS2
-mounts to run encrypted containers without decrypting their content
-to disk.
+mounts to run encrypted containers without writing a decrypted
+version of their content to disk.
 An unprivileged FUSE filesystem will hopefully be able to perform this
 operation in a future release.</p></li>
 <li><p>Some little used <a class="reference internal" href="security_options.html#security-options"><span class="std std-ref">security options</span></a> and
@@ -244,20 +244,20 @@ namespace vulnerabilities through disabling network namespaces.</p></li>
 </div>
 <div class="section" id="runtime-user-privilege-model">
 <h2>Runtime &amp; User Privilege Model<a class="headerlink" href="#runtime-user-privilege-model" title="Permalink to this heading"></a></h2>
-<p>While other runtimes have aimed to safely sandbox containers executing
-as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user, so that they cannot affect the host system,
-Apptainer has adopted an alternative security model that protects
-against attacks even with the setuid-root mode:</p>
+<p>While other runtimes have aimed to tackle security concerns by
+sandboxing containers executing as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user so that they cannot
+affect the host system, Apptainer has adopted a different security
+model that protects against attacks even with the setuid-root mode:</p>
 <ul class="simple">
 <li><p>Containers should be run as an unprivileged user.</p></li>
 <li><p>The user should never be able to elevate their privileges inside the
 container to gain control over the host.</p></li>
 <li><p>All permission restrictions on the user outside of a container should
-apply inside the container.</p></li>
-<li><p>Favor integration over isolation. Allow a user to use host resources
-such as GPUs, network filesystems, high speed interconnects easily.
-The process ID space, network etc. are not isolated in separate
-namespaces by default.</p></li>
+apply inside the container, as well.</p></li>
+<li><p>Favor integration over isolation: a user is allowed to easily use
+host resources such as GPUs, network filesystems, and high speed
+interconnects. The process ID space, network, etc., are not isolated
+in separate namespaces by default.</p></li>
 </ul>
 <p>To accomplish this, Apptainer uses a number of Linux kernel
 features. The container file system is mounted using the <code class="docutils literal notranslate"><span class="pre">nosuid</span></code>
@@ -265,8 +265,8 @@ option, and processes are started with the <code class="docutils literal notrans
 This means that even if you run <code class="docutils literal notranslate"><span class="pre">sudo</span></code> inside your container, you
 won’t be able to change to another user, or gain root privileges by
 other means.</p>
-<p>If you do require the additional isolation of the network, devices, PIDs
-etc. provided by other runtimes, Apptainer can make use of
+<p>If you do require the additional isolation of the network, devices,
+PIDs, etc., which other runtimes provide, Apptainer can make use of
 additional namespaces and functionality such as seccomp and cgroups.</p>
 </div>
 <div class="section" id="singularity-image-format-sif">
@@ -276,42 +276,43 @@ is a single file, which makes it easy to manage and distribute. Inside
 the SIF file, the container filesystem is held in a SquashFS object. When
 in suid mode, Apptainer mounts the container filesystem directly using SquashFS,
 otherwise it mounts the filesystem with squashfuse. In either case, on a
-network filesystem this means that reads from the container are
+network filesystem, this means that reads from the container are
 data-only. Metadata operations happen locally, speeding up workloads
-with many small files.</p>
-<p>Holding the container image in a single file also enables unique security
-features. The container filesystem is immutable, and can be signed. The
-signature travels in the SIF image itself so that it is always possible
-to verify that the image has not been tampered with or corrupted.</p>
-<p>Apptainer uses private PGP keys to create a container signature, and the corresponding
-public key in order to verify the container signature. Verification of signed
-containers can be done at any time by a user and happens automatically in
-<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> commands against Library API registries. The prevalence
+that involve many small files.</p>
+<p>Holding the container image in a single file also enables unique
+security features. The container filesystem is immutable, and can be
+signed. The signature travels as part of the SIF image itself so that it
+is always possible to verify that the image has not been tampered with
+or corrupted.</p>
+<p>Apptainer uses private PGP keys to create a container signature, and the
+corresponding public keys to verify the container. Verification of
+signed containers can be done at any time by a user and happens automatically in
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> commands against the Library API registries. The prevalence
 of PGP key servers, (like <a class="reference external" href="https://keys.openpgp.org/">https://keys.openpgp.org/</a>), make sharing and obtaining
 public keys for container verification relatively simple.</p>
-<p>A container may be signed once, by a trusted individual who approves its
-use. It could also be signed with multiple keys to signify it has passed
-each step in a CI/CD QA &amp; Security process. Apptainer can be
+<p>A container could be signed once, by a trusted individual who approves
+its use. It could also be signed with multiple keys, to signify it has
+passed each step in a CI/CD QA &amp; Security process. Apptainer can be
 configured with an execution control list (ECL), which requires the
 presence of one or more valid signatures, to limit execution to approved
 containers.</p>
-<p>In addition, the root filesystem of a container (stored in the squashFS
+<p>In addition, the root filesystem of a container (stored in the SquashFS
 partition of SIF) can be encrypted. As a result, everything inside the container
 becomes inaccessible without the correct key or passphrase. The content of the
-container is private, even if the SIF file is shared in public.</p>
+container then remains private, even if the SIF file is shared in public.</p>
 <p>When in suid mode,
 encryption and decryption are performed using the Linux kernel’s LUKS2
 feature. This is the same technology routinely used for full disk
 encryption. The encrypted container is mounted directly through the
-kernel. Unlike other container formats, an encrypted container is not
-decrypted to disk in order to run it.
+kernel. Unlike other container formats, the encrypted container is run
+without ever decrypting its contents to disk.
 Encryption and decryption is not currently supported in non-suid mode.</p>
 </div>
 <div class="section" id="configuration-runtime-options">
 <h2>Configuration &amp; Runtime Options<a class="headerlink" href="#configuration-runtime-options" title="Permalink to this heading"></a></h2>
 <p>System administrators who manage Apptainer can use configuration
 files to set security restrictions, grant or revoke a user’s
-capabilities, manage resources and authorize containers etc.</p>
+capabilities, manage resources, authorize containers, etc.</p>
 <p>For details see the <a class="reference external" href="https://apptainer.org/docs/admin/main/security.html">Security section</a>
 of the admin guide.</p>
 </div>
