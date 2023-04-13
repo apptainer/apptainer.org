@@ -150,8 +150,8 @@
 <div class="section" id="overview">
 <span id="sec-buildenv"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p>You may wish to customize your build environment by doing things such as
-specifying a custom cache directory for images or sending your Docker
-Credentials to the registry endpoint. Here we will discuss these and
+specifying a custom cache directory for images, or sending your Docker
+Credentials to the registry endpoint. In this section, we will discuss these and
 other topics related to the build environment.</p>
 </div>
 <div class="section" id="cache-folders">
@@ -161,10 +161,10 @@ sources, and any OCI/docker layers used to create them. The cache is
 created at <code class="docutils literal notranslate"><span class="pre">$HOME/.apptainer/cache</span></code> by default. The location of the
 cache can be changed by setting the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> environment
 variable.</p>
-<p>If you run builds as root, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, images will be cached in
-root’s home at <code class="docutils literal notranslate"><span class="pre">/root</span></code> and not your user’s home. Use the <code class="docutils literal notranslate"><span class="pre">-E</span></code> option
-to sudo to pass through the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> environment
-variable, if you set it.</p>
+<p>If you run builds as root, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, images will be cached in root’s
+home directory at <code class="docutils literal notranslate"><span class="pre">/root</span></code>, rather than your user’s home directory. Use the
+<code class="docutils literal notranslate"><span class="pre">-E</span></code> option to <code class="docutils literal notranslate"><span class="pre">sudo</span></code> to pass through the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code>
+environment variable, if you have set it.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_CACHEDIR=/tmp/user/temporary-cache
 
 # Running a build under your user account
