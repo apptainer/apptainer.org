@@ -497,6 +497,9 @@ $<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </
 <span class="w">    </span>mycontainer.sif
 </pre></div>
 </div>
+<p>By default for security reasons the ext3 format is only supported in
+unprivileged user namespace mode, so unless that default is changed a
+<code class="docutils literal notranslate"><span class="pre">-u/--userns</span></code> option may be needed with a setuid-root installation.</p>
 </div>
 <div class="section" id="squashfs-image-files">
 <h3>SquashFS Image Files<a class="headerlink" href="#squashfs-image-files" title="Permalink to this heading"></a></h3>
