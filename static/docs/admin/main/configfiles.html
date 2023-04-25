@@ -357,7 +357,7 @@ mode and the user is non-root. By default this is set to <code class="docutils l
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">${type}</span></code>: This set of options allows admins to limit the
 types of image formats that can be leveraged by users with
-Apptainer of the following types:</p>
+Apptainer, with the following types:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">sif</span></code> permits / denies execution of unencrypted SIF
 containers.</p></li>
@@ -374,6 +374,27 @@ directory containers.</p></li>
 <p class="admonition-title">Note</p>
 <p>These limitations do not apply to the root user.</p>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid-mount</span> <span class="pre">${type}</span></code>: This set of options allows admins to limit the
+types of image formats that can be mounted by Apptainer in setuid-root
+mode, with the following types:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid-mount</span> <span class="pre">encrypted</span></code> permits/denies execution of</dt><dd><p>encrypted SIF files in setuid-root mode.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid-mount</span> <span class="pre">squashfs</span></code> permits/denies execution of squashfs</dt><dd><p>filesystems in setuid-root mode, both inside and outside of SIF files.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid-mount</span> <span class="pre">extfs</span></code> permits/denies execution of ext3</dt><dd><p>filesystems in setuid-root mode, both inside and outside of SIF files.
+For security reasons, unlike the others this defaults to <code class="docutils literal notranslate"><span class="pre">no</span></code>.</p>
+</dd>
+</dl>
+</li>
+</ul>
 </div>
 <div class="section" id="networking-options">
 <h3>Networking Options<a class="headerlink" href="#networking-options" title="Permalink to this heading"></a></h3>

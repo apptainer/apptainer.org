@@ -249,7 +249,7 @@ allow containers that are located within the specified path prefix.
 
 ``allow container ${type}``: This set of options allows admins to limit the
 types of image formats that can be leveraged by users with
-{Project} of the following types:
+{Project}, with the following types:
 
 -  ``allow container sif`` permits / denies execution of unencrypted SIF
    containers.
@@ -265,6 +265,18 @@ types of image formats that can be leveraged by users with
 .. note::
 
    These limitations do not apply to the root user.
+
+``allow setuid-mount ${type}``: This set of options allows admins to limit the
+types of image formats that can be mounted by {Project} in setuid-root
+mode, with the following types:
+
+-  ``allow setuid-mount encrypted`` permits/denies execution of
+    encrypted SIF files in setuid-root mode.
+-  ``allow setuid-mount squashfs`` permits/denies execution of squashfs
+    filesystems in setuid-root mode, both inside and outside of SIF files.
+-  ``allow setuid-mount extfs`` permits/denies execution of ext3
+    filesystems in setuid-root mode, both inside and outside of SIF files.
+    For security reasons, unlike the others this defaults to ``no``.
 
 Networking Options
 ==================
