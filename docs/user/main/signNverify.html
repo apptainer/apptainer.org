@@ -70,6 +70,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#advanced-signing-sif-ids-and-groups">Advanced Signing - SIF IDs and Groups</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#pem-key-x-509-certificate-support">PEM Key / X.509 Certificate Support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#signing-with-a-pem-key">Signing with a PEM key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verifying-with-a-pem-key">Verifying with a PEM key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verifying-with-an-x-509-certificate">Verifying with an X.509 certificate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#oscp-certificate-revocation-checks">OSCP Certificate Revocation Checks</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
@@ -134,11 +141,26 @@
              
   <div class="section" id="signing-and-verifying-containers">
 <span id="signnverify"></span><h1>Signing and Verifying Containers<a class="headerlink" href="#signing-and-verifying-containers" title="Permalink to this heading"></a></h1>
-<p id="sec-signnverify">Apptainer has the ability to create and manage PGP keys
-and use them to sign and verify containers. This provides a trusted
-method for Apptainer users to share containers. It ensures a
-bit-for-bit reproduction of the original container as the author
-intended it.</p>
+<p id="sec-signnverify">Apptainer’s SIF images can be signed, and subsequently verified, so that a
+user can be confident that an image they have obtained is a bit-for-bit
+reproduction of the original container as the author intended it. The signature,
+over the metadata and content of the container, is created using a private key,
+and directly added to the SIF file. This means that a signed container carries
+it’s signature with it, avoiding the need for extra infrastructure to distribute
+signatures to end users of the container.</p>
+<p>A user verifies the container has not been modified since signing using a public
+key or certificate. By default, Apptainer uses PGP keys to sign and verify
+containers. Signing and verifying containers with X.509 key material
+/ certificates is also supported.</p>
+<p>PGP Public keys for verification can be distributed manually, or can be uploaded
+to and automatically retrieved from a keyserver.</p>
+<p>As well as indicating a container has not been modified, a valid signature may
+be used to indicate a container has undergone testing or review, and is approved
+for execution. Multiple signatures can be added to a container, to document its
+progress through an approval process. Apptainer’s Execution Control List
+(ECL) feature can be enable by administrators of privileged installations to
+restrict execution of containers based on their signatures (see the admin guide
+for more information).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To verify containers signed with Singularity versions older than
@@ -147,7 +169,7 @@ intended it.</p>
 </div>
 <div class="section" id="verifying-containers-from-remote-sources">
 <span id="verify-container-from-remote-sources"></span><h2>Verifying containers from remote sources<a class="headerlink" href="#verifying-containers-from-remote-sources" title="Permalink to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">verify</span></code> command will allow you to verify that a container has
+<p>The <code class="docutils literal notranslate"><span class="pre">verify</span></code> command will allow you to verify that a SIF container image has
 been signed using a PGP key. This ensures that the container image on your disk
 is a bit-for-bit reproduction of the original image.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify alpine_latest.sif
@@ -434,6 +456,108 @@ ID  |GROUP   |LINK    |TYPE
 3   |1       |NONE    |JSON.Generic
 4   |1       |NONE    |FS
 Container verified: my_container.sif
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="pem-key-x-509-certificate-support">
+<h2>PEM Key / X.509 Certificate Support<a class="headerlink" href="#pem-key-x-509-certificate-support" title="Permalink to this heading"></a></h2>
+<p>Apptainer also supports signing SIF container images
+using a PEM format private key, and verifying with a PEM format public key, or
+X.509 certificate. Non-PGP signatures are implemented using the <a class="reference external" href="https://github.com/secure-systems-lab/dsse">Dead Simple
+Signing Envelope</a> (DSSE)
+standard.</p>
+<div class="section" id="signing-with-a-pem-key">
+<h3>Signing with a PEM key<a class="headerlink" href="#signing-with-a-pem-key" title="Permalink to this heading"></a></h3>
+<p>To sign a container using a private key in PEM format, provide the key material
+to the <code class="docutils literal notranslate"><span class="pre">sign</span></code> command using the <code class="docutils literal notranslate"><span class="pre">--key</span></code> flag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sign --key mykey.pem lolcow.sif
+INFO:    Signing image with key material from &#39;mykey.pem&#39;
+INFO:    Signature created and applied to image &#39;lolcow.sif&#39;
+</pre></div>
+</div>
+<p>The DSSE signature descriptor can now be seen by inspecting the SIF file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sif list lolcow.sif
+------------------------------------------------------------------------------
+ID   |GROUP   |LINK    |SIF POSITION (start-end)  |TYPE
+------------------------------------------------------------------------------
+1    |1       |NONE    |32176-32393               |Def.FILE
+2    |1       |NONE    |32393-33522               |JSON.Generic
+3    |1       |NONE    |33522-33718               |JSON.Generic
+4    |1       |NONE    |36864-84656128            |FS (Squashfs/*System/amd64)
+5    |NONE    |1   (G) |84656128-84658191         |Signature (SHA-256)
+
+$ apptainer sif dump 5 lolcow.sif | jq
+{
+&quot;payloadType&quot;: &quot;application/vnd.apptainer.sif-metadata+json&quot;,
+...
+</pre></div>
+</div>
+<p>Attempting to <code class="docutils literal notranslate"><span class="pre">verify</span></code> the image without options will fail, as it is not signed with a PGP key:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify lolcow.sif
+INFO:    Verifying image with PGP key material
+FATAL:   Failed to verify container: integrity: key material not provided for DSSE envelope signature
+</pre></div>
+</div>
+<p>Note that the error message shows that the container image has a DSSE signature present.</p>
+</div>
+<div class="section" id="verifying-with-a-pem-key">
+<h3>Verifying with a PEM key<a class="headerlink" href="#verifying-with-a-pem-key" title="Permalink to this heading"></a></h3>
+<p>To verify a container using a PEM public key directly, provide the key material
+to the <code class="docutils literal notranslate"><span class="pre">verify</span></code> command using the <code class="docutils literal notranslate"><span class="pre">key</span></code> flag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify --key mypublic.pem lolcow.sif
+INFO:    Verifying image with key material from &#39;mypublic.pem&#39;
+Objects verified:
+ID  |GROUP   |LINK    |TYPE
+------------------------------------------------
+1   |1       |NONE    |Def.FILE
+2   |1       |NONE    |JSON.Generic
+3   |1       |NONE    |JSON.Generic
+4   |1       |NONE    |FS
+INFO:    Verified signature(s) from image &#39;lolcow.sif&#39;
+</pre></div>
+</div>
+</div>
+<div class="section" id="verifying-with-an-x-509-certificate">
+<h3>Verifying with an X.509 certificate<a class="headerlink" href="#verifying-with-an-x-509-certificate" title="Permalink to this heading"></a></h3>
+<p>To verify a container that was signed with a PEM private key, using an X.509 certificate,
+pass the certificate to the <code class="docutils literal notranslate"><span class="pre">verify</span></code> command using the <code class="docutils literal notranslate"><span class="pre">--certificate</span></code> flag.
+If the certificate is part of a chain, provide intermediate and valid root
+certificates with the <code class="docutils literal notranslate"><span class="pre">--certificate-intermediates</span></code> and
+<code class="docutils literal notranslate"><span class="pre">--certificate-roots</span></code> flags:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify \
+   --certificate leaf.pem \
+   --certificate-intermediates intermediate.pem \
+   --certificate-roots root.pem \
+   lolcow.sif
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The certificate must have a usage field that allows code signing in order to
+verify container images.</p>
+</div>
+</div>
+<div class="section" id="oscp-certificate-revocation-checks">
+<h3>OSCP Certificate Revocation Checks<a class="headerlink" href="#oscp-certificate-revocation-checks" title="Permalink to this heading"></a></h3>
+<p>When verifying a container using X.509 certificates, Apptainer can perform
+online revocation checks using the Online Certificate Status Protocol (OCSP). To
+enable OCSP checks, add the <code class="docutils literal notranslate"><span class="pre">--ocsp-verify</span></code> flag to your <code class="docutils literal notranslate"><span class="pre">verify</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify \
+   --certificate leaf.pem \
+   --certificate-intermediates intermediate.pem \
+   --certificate-roots root.pem \
+   --ocsp-verify
+   lolcow.sif
+</pre></div>
+</div>
+<p>Apptainer will then attempt to contact the prescribed OCSP responder for
+each certificate in the chain, in order to check that the relevant certificate
+has not been revoked. In the event that an OCSP responder cannot be contacted,
+or a certificate has been revoked, verification will fail with a validation
+error:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span>    <span class="n">Validate</span><span class="p">:</span> <span class="n">cert</span><span class="p">:</span><span class="n">leaf</span>  <span class="n">issuer</span><span class="p">:</span><span class="n">intermediate</span>
+<span class="n">FATAL</span><span class="p">:</span>   <span class="n">Failed</span> <span class="n">to</span> <span class="n">verify</span> <span class="n">container</span><span class="p">:</span> <span class="n">OCSP</span> <span class="n">verification</span> <span class="n">has</span> <span class="n">failed</span>
 </pre></div>
 </div>
 </div>
