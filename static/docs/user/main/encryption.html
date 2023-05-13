@@ -67,13 +67,19 @@
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#encrypting-a-container">Encrypting a container</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#passphrase-encryption">Passphrase Encryption</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#encrypting-with-a-passphrase-interactively">Encrypting with a passphrase interactively</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#using-an-environment-variable">Using an environment variable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encrypting-with-a-passphrase-interactively-privileged-encryption">Encrypting with a passphrase interactively (<code class="docutils literal notranslate"><span class="pre">Privileged</span> <span class="pre">Encryption</span></code>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-an-environment-variable-privileged-encryption">Using an environment variable (<code class="docutils literal notranslate"><span class="pre">Privileged</span> <span class="pre">Encryption</span></code>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-info-verification-privileged-encryption">Image info verification (<code class="docutils literal notranslate"><span class="pre">Privileged</span> <span class="pre">Encryption</span></code>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encrypting-with-a-passphrase-interactively-unprivileged-encryption">Encrypting with a passphrase interactively (<code class="docutils literal notranslate"><span class="pre">Unprivileged</span> <span class="pre">Encryption</span></code>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-an-environment-variable-unprivileged-encryption">Using an environment variable (<code class="docutils literal notranslate"><span class="pre">Unprivileged</span> <span class="pre">Encryption</span></code>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-info-verification-unprivileged-encryption">Image info verification (<code class="docutils literal notranslate"><span class="pre">Unprivileged</span> <span class="pre">Encryption</span></code>)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pem-file-encryption">PEM File Encryption</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#encrypting-with-a-command-line-option">Encrypting with a command line option</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#encrypting-with-an-environment-variable">Encrypting with an environment variable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encrypting-with-a-command-line-option-privileged-encryption">Encrypting with a command line option (<code class="docutils literal notranslate"><span class="pre">Privileged</span> <span class="pre">Encryption</span></code>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encrypting-with-an-environment-variable-privileged-encryption">Encrypting with an environment variable (<code class="docutils literal notranslate"><span class="pre">Privileged</span> <span class="pre">Encryption</span></code>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encrypting-with-a-command-line-option-unprivileged-encryption">Encrypting with a command line option (<code class="docutils literal notranslate"><span class="pre">Unprivileged</span> <span class="pre">Encryption</span></code>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encrypting-with-an-environment-variable-unprivileged-encryption">Encrypting with an environment variable (<code class="docutils literal notranslate"><span class="pre">Unprivileged</span> <span class="pre">Encryption</span></code>)</a></li>
 </ul>
 </li>
 </ul>
@@ -164,10 +170,7 @@ passphrase or asymmetrically via an RSA key pair in Privacy Enhanced
 Mail (PEM/PKCS1) format. The container is encrypted in transit, at rest,
 and even while running. In other words, there is no intermediate,
 decrypted version of the container on disk. Container decryption occurs
-at runtime within kernel space.</p>
-<p>Unlike other container builds,
-at this time building an encrypted container requires being the root user.
-Also, decryption still requires a setuid installation of Apptainer.</p>
+at runtime in memory.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This feature utilizes the Linux <code class="docutils literal notranslate"><span class="pre">dm-crypt</span></code> library and
@@ -175,6 +178,17 @@ Also, decryption still requires a setuid installation of Apptainer.</p>
 This version should be standard with recent Linux versions such as
 Ubuntu 18.04, Debian 10 and CentOS/RHEL 7, but users of older Linux
 versions may have to update.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">Privileged</span> <span class="pre">Encryption</span></code> to represent the case of an encrypted image built by the
+root user and decrypted with a suid installation.  The partition type in a SIF image in this
+case wil be shown as <code class="docutils literal notranslate"><span class="pre">Encrypted</span> <span class="pre">squashfs</span></code>.</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">Unprivileged</span> <span class="pre">Encryption</span></code> to represent the case of an encrypted image built by
+normal unprivileged users and decrypted either without a suid installion or with the <code class="docutils literal notranslate"><span class="pre">--userns</span></code>
+option.  The partition type in a SIF image in this case will be shown as <code class="docutils literal notranslate"><span class="pre">Gocryptfs</span> <span class="pre">squashfs</span></code>.
+This case requires
+<a class="reference external" href="https://apptainer.org/docs/admin/main/user_namespace.html">unprivileged user namespaces</a>.</p>
 </div>
 </div>
 <div class="section" id="encrypting-a-container">
@@ -230,16 +244,16 @@ containers in production are encouraged to use asymmetric keys.</p>
 </div>
 <p>In case of plaintext passphrase encryption, a passphrase is supplied by
 one of the following methods.</p>
-<div class="section" id="encrypting-with-a-passphrase-interactively">
-<h4>Encrypting with a passphrase interactively<a class="headerlink" href="#encrypting-with-a-passphrase-interactively" title="Permalink to this heading"></a></h4>
+<div class="section" id="encrypting-with-a-passphrase-interactively-privileged-encryption">
+<h4>Encrypting with a passphrase interactively (<code class="docutils literal notranslate"><span class="pre">Privileged</span> <span class="pre">Encryption</span></code>)<a class="headerlink" href="#encrypting-with-a-passphrase-interactively-privileged-encryption" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --passphrase encrypted.sif encrypted.def
 Enter encryption passphrase: &lt;secret&gt;
 INFO:    Starting build...
 </pre></div>
 </div>
 </div>
-<div class="section" id="using-an-environment-variable">
-<h4>Using an environment variable<a class="headerlink" href="#using-an-environment-variable" title="Permalink to this heading"></a></h4>
+<div class="section" id="using-an-environment-variable-privileged-encryption">
+<h4>Using an environment variable (<code class="docutils literal notranslate"><span class="pre">Privileged</span> <span class="pre">Encryption</span></code>)<a class="headerlink" href="#using-an-environment-variable-privileged-encryption" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo APPTAINER_ENCRYPTION_PASSPHRASE=&lt;secret&gt; apptainer build --encrypt encrypted.sif encrypted.def
 Starting build...
 </pre></div>
@@ -258,6 +272,62 @@ $ sudo -E apptainer build --encrypt encrypted.sif encrypted.def
 Starting build...
 </pre></div>
 </div>
+</div>
+<div class="section" id="image-info-verification-privileged-encryption">
+<h4>Image info verification (<code class="docutils literal notranslate"><span class="pre">Privileged</span> <span class="pre">Encryption</span></code>)<a class="headerlink" href="#image-info-verification-privileged-encryption" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sif list encrypted.sif
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">------------------------------------------------------------------------------</span>
+<span class="n">ID</span>   <span class="o">|</span><span class="n">GROUP</span>   <span class="o">|</span><span class="n">LINK</span>    <span class="o">|</span><span class="n">SIF</span> <span class="n">POSITION</span> <span class="p">(</span><span class="n">start</span><span class="o">-</span><span class="n">end</span><span class="p">)</span>  <span class="o">|</span><span class="n">TYPE</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="mi">1</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">32176</span><span class="o">-</span><span class="mi">32223</span>               <span class="o">|</span><span class="n">Def</span><span class="o">.</span><span class="n">FILE</span>
+<span class="mi">2</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">32223</span><span class="o">-</span><span class="mi">34202</span>               <span class="o">|</span><span class="n">JSON</span><span class="o">.</span><span class="n">Generic</span>
+<span class="mi">3</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">34202</span><span class="o">-</span><span class="mi">34292</span>               <span class="o">|</span><span class="n">JSON</span><span class="o">.</span><span class="n">Generic</span>
+<span class="mi">4</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">36864</span><span class="o">-</span><span class="mi">17608704</span>            <span class="o">|</span><span class="n">FS</span> <span class="p">(</span><span class="n">Encrypted</span> <span class="n">squashfs</span><span class="o">/*</span><span class="n">System</span><span class="o">/</span><span class="n">arm64</span><span class="p">)</span>
+<span class="mi">5</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="mi">4</span>       <span class="o">|</span><span class="mi">17608704</span><span class="o">-</span><span class="mi">17609449</span>         <span class="o">|</span><span class="n">Cryptographic</span> <span class="n">Message</span> <span class="p">(</span><span class="n">PEM</span><span class="o">/</span><span class="n">RSA</span><span class="o">-</span><span class="n">OAEP</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that partition 4 is type <code class="docutils literal notranslate"><span class="pre">Encrypted</span> <span class="pre">squashfs</span></code>.</p>
+</div>
+<div class="section" id="encrypting-with-a-passphrase-interactively-unprivileged-encryption">
+<h4>Encrypting with a passphrase interactively (<code class="docutils literal notranslate"><span class="pre">Unprivileged</span> <span class="pre">Encryption</span></code>)<a class="headerlink" href="#encrypting-with-a-passphrase-interactively-unprivileged-encryption" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --passphrase encrypted.sif encrypted.def
+Enter encryption passphrase: &lt;secret&gt;
+INFO:    Starting build...
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-an-environment-variable-unprivileged-encryption">
+<h4>Using an environment variable (<code class="docutils literal notranslate"><span class="pre">Unprivileged</span> <span class="pre">Encryption</span></code>)<a class="headerlink" href="#using-an-environment-variable-unprivileged-encryption" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINER_ENCRYPTION_PASSPHRASE=&lt;secret&gt; apptainer build encrypted.sif encrypted.def
+Starting build...
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_ENCRYPTION_PASSPHRASE=$(cat secret.txt)
+
+$ apptainer build encrypted.sif encrypted.def
+Starting build...
+</pre></div>
+</div>
+</div>
+<div class="section" id="image-info-verification-unprivileged-encryption">
+<h4>Image info verification (<code class="docutils literal notranslate"><span class="pre">Unprivileged</span> <span class="pre">Encryption</span></code>)<a class="headerlink" href="#image-info-verification-unprivileged-encryption" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sif list encrypted.sif
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">------------------------------------------------------------------------------</span>
+<span class="n">ID</span>   <span class="o">|</span><span class="n">GROUP</span>   <span class="o">|</span><span class="n">LINK</span>    <span class="o">|</span><span class="n">SIF</span> <span class="n">POSITION</span> <span class="p">(</span><span class="n">start</span><span class="o">-</span><span class="n">end</span><span class="p">)</span>  <span class="o">|</span><span class="n">TYPE</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="mi">1</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">32176</span><span class="o">-</span><span class="mi">32215</span>               <span class="o">|</span><span class="n">Def</span><span class="o">.</span><span class="n">FILE</span>
+<span class="mi">2</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">32215</span><span class="o">-</span><span class="mi">36269</span>               <span class="o">|</span><span class="n">JSON</span><span class="o">.</span><span class="n">Generic</span>
+<span class="mi">3</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">36269</span><span class="o">-</span><span class="mi">36465</span>               <span class="o">|</span><span class="n">JSON</span><span class="o">.</span><span class="n">Generic</span>
+<span class="mi">4</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">36864</span><span class="o">-</span><span class="mi">26386432</span>            <span class="o">|</span><span class="n">FS</span> <span class="p">(</span><span class="n">Gocryptfs</span> <span class="n">squashfs</span><span class="o">/*</span><span class="n">System</span><span class="o">/</span><span class="n">arm64</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that partition 4 is type <code class="docutils literal notranslate"><span class="pre">Gocryptfs</span> <span class="pre">squashfs</span></code>.</p>
 </div>
 </div>
 <div class="section" id="pem-file-encryption">
@@ -285,15 +355,15 @@ $ mv rsa rsa_pri.pem
 <p>You would use the <code class="docutils literal notranslate"><span class="pre">rsa_pub.pem</span></code> file to encrypt your container and the
 <code class="docutils literal notranslate"><span class="pre">rsa_pri.pem</span></code> file to run it.  Be sure to keep the private key safe
 and private, because it is not encrypted itself.</p>
-<div class="section" id="encrypting-with-a-command-line-option">
-<h4>Encrypting with a command line option<a class="headerlink" href="#encrypting-with-a-command-line-option" title="Permalink to this heading"></a></h4>
+<div class="section" id="encrypting-with-a-command-line-option-privileged-encryption">
+<h4>Encrypting with a command line option (<code class="docutils literal notranslate"><span class="pre">Privileged</span> <span class="pre">Encryption</span></code>)<a class="headerlink" href="#encrypting-with-a-command-line-option-privileged-encryption" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer build --pem-path=rsa_pub.pem encrypted.sif encrypted.def
 Starting build...
 </pre></div>
 </div>
 </div>
-<div class="section" id="encrypting-with-an-environment-variable">
-<h4>Encrypting with an environment variable<a class="headerlink" href="#encrypting-with-an-environment-variable" title="Permalink to this heading"></a></h4>
+<div class="section" id="encrypting-with-an-environment-variable-privileged-encryption">
+<h4>Encrypting with an environment variable (<code class="docutils literal notranslate"><span class="pre">Privileged</span> <span class="pre">Encryption</span></code>)<a class="headerlink" href="#encrypting-with-an-environment-variable-privileged-encryption" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo APPTAINER_ENCRYPTION_PEM_PATH=rsa_pub.pem apptainer build --encrypt encrypted.sif encrypted.def
 Starting build...
 </pre></div>
@@ -301,6 +371,53 @@ Starting build...
 <p>In this case it is necessary to use the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag since the
 presence of an environment variable alone will not trigger the encrypted
 build workflow.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sif list encrypted.sif
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">------------------------------------------------------------------------------</span>
+<span class="n">ID</span>   <span class="o">|</span><span class="n">GROUP</span>   <span class="o">|</span><span class="n">LINK</span>    <span class="o">|</span><span class="n">SIF</span> <span class="n">POSITION</span> <span class="p">(</span><span class="n">start</span><span class="o">-</span><span class="n">end</span><span class="p">)</span>  <span class="o">|</span><span class="n">TYPE</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="mi">1</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">32176</span><span class="o">-</span><span class="mi">32215</span>               <span class="o">|</span><span class="n">Def</span><span class="o">.</span><span class="n">FILE</span>
+<span class="mi">2</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">32215</span><span class="o">-</span><span class="mi">36269</span>               <span class="o">|</span><span class="n">JSON</span><span class="o">.</span><span class="n">Generic</span>
+<span class="mi">3</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">36269</span><span class="o">-</span><span class="mi">36465</span>               <span class="o">|</span><span class="n">JSON</span><span class="o">.</span><span class="n">Generic</span>
+<span class="mi">4</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">36864</span><span class="o">-</span><span class="mi">42954752</span>            <span class="o">|</span><span class="n">FS</span> <span class="p">(</span><span class="n">Encrypted</span> <span class="n">squashfs</span><span class="o">/*</span><span class="n">System</span><span class="o">/</span><span class="n">arm64</span><span class="p">)</span>
+<span class="mi">5</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="mi">4</span>       <span class="o">|</span><span class="mi">42954752</span><span class="o">-</span><span class="mi">42955497</span>         <span class="o">|</span><span class="n">Cryptographic</span> <span class="n">Message</span> <span class="p">(</span><span class="n">PEM</span><span class="o">/</span><span class="n">RSA</span><span class="o">-</span><span class="n">OAEP</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that partition 4 is type <code class="docutils literal notranslate"><span class="pre">Encrypted</span> <span class="pre">squashfs</span></code>.</p>
+</div>
+<div class="section" id="encrypting-with-a-command-line-option-unprivileged-encryption">
+<h4>Encrypting with a command line option (<code class="docutils literal notranslate"><span class="pre">Unprivileged</span> <span class="pre">Encryption</span></code>)<a class="headerlink" href="#encrypting-with-a-command-line-option-unprivileged-encryption" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --pem-path=rsa_pub.pem encrypted.sif encrypted.def
+Starting build...
+</pre></div>
+</div>
+</div>
+<div class="section" id="encrypting-with-an-environment-variable-unprivileged-encryption">
+<h4>Encrypting with an environment variable (<code class="docutils literal notranslate"><span class="pre">Unprivileged</span> <span class="pre">Encryption</span></code>)<a class="headerlink" href="#encrypting-with-an-environment-variable-unprivileged-encryption" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINER_ENCRYPTION_PEM_PATH=rsa_pub.pem apptainer build --encrypt encrypted.sif encrypted.def
+Starting build...
+</pre></div>
+</div>
+<p>In this case it is necessary to use the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag since the
+presence of an environment variable alone will not trigger the encrypted
+build workflow.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sif list encrypted.sif
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">------------------------------------------------------------------------------</span>
+<span class="n">ID</span>   <span class="o">|</span><span class="n">GROUP</span>   <span class="o">|</span><span class="n">LINK</span>    <span class="o">|</span><span class="n">SIF</span> <span class="n">POSITION</span> <span class="p">(</span><span class="n">start</span><span class="o">-</span><span class="n">end</span><span class="p">)</span>  <span class="o">|</span><span class="n">TYPE</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="mi">1</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">32176</span><span class="o">-</span><span class="mi">32215</span>               <span class="o">|</span><span class="n">Def</span><span class="o">.</span><span class="n">FILE</span>
+<span class="mi">2</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">32215</span><span class="o">-</span><span class="mi">36269</span>               <span class="o">|</span><span class="n">JSON</span><span class="o">.</span><span class="n">Generic</span>
+<span class="mi">3</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">36269</span><span class="o">-</span><span class="mi">36465</span>               <span class="o">|</span><span class="n">JSON</span><span class="o">.</span><span class="n">Generic</span>
+<span class="mi">4</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="n">NONE</span>    <span class="o">|</span><span class="mi">36864</span><span class="o">-</span><span class="mi">26386432</span>            <span class="o">|</span><span class="n">FS</span> <span class="p">(</span><span class="n">Gocryptfs</span> <span class="n">squashfs</span><span class="o">/*</span><span class="n">System</span><span class="o">/</span><span class="n">arm64</span><span class="p">)</span>
+<span class="mi">5</span>    <span class="o">|</span><span class="mi">1</span>       <span class="o">|</span><span class="mi">4</span>       <span class="o">|</span><span class="mi">26386432</span><span class="o">-</span><span class="mi">26387177</span>         <span class="o">|</span><span class="n">Cryptographic</span> <span class="n">Message</span> <span class="p">(</span><span class="n">PEM</span><span class="o">/</span><span class="n">RSA</span><span class="o">-</span><span class="n">OAEP</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that partition 4 is type <code class="docutils literal notranslate"><span class="pre">Gocryptfs</span> <span class="pre">squashfs</span></code>.</p>
 </div>
 </div>
 </div>
@@ -350,6 +467,19 @@ Encryption section above.</p>
 <div class="section" id="running-using-an-environment-variable">
 <h4>Running using an environment variable<a class="headerlink" href="#running-using-an-environment-variable" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINER_ENCRYPTION_PEM_PATH=rsa_pri.pem apptainer run encrypted.sif
+</pre></div>
+</div>
+<p>When executing an <code class="docutils literal notranslate"><span class="pre">Unprivileged</span> <span class="pre">Encryption</span></code> encrypted image with an Apptainer suid
+installation, <code class="docutils literal notranslate"><span class="pre">--userns</span></code> is required.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --pem-path=rsa_pri.pem encrypted.sif
+</pre></div>
+</div>
+<p>The following error will be shown</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>FATAL:   container creation failed: mount hook function failure: mount /proc/self/fd/3-&gt;/usr/local/var/apptainer/mnt/session/rootfs error: while mounting image /proc/self/fd/3: gocryptfs requires user namespace, please add `--userns` option
+</pre></div>
+</div>
+<p>Add <code class="docutils literal notranslate"><span class="pre">--userns</span></code> option</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --pem-path=rsa_pri.pem --userns encrypted.sif
 </pre></div>
 </div>
 </div>
