@@ -222,16 +222,14 @@
              
   <div class="section" id="apptainer-verify">
 <span id="id1"></span><h1>apptainer verify<a class="headerlink" href="#apptainer-verify" title="Permalink to this heading"></a></h1>
-<p>Verify cryptographic signatures attached to an image</p>
+<p>Verify digital signature(s) within an image</p>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
 <blockquote>
-<div><p>The verify command allows a user to verify cryptographic signatures on SIF
-container files. There may be multiple signatures for data objects and
-multiple data objects signed. By default the command searches for the primary
-partition signature. If found, a list of all verification blocks applied on
-the primary partition is gathered so that data integrity (hashing) and
-signature verification is done for all those blocks.</p>
+<div><p>The verify command allows a user to verify one or more digital signatures
+within a SIF image.</p>
+<p>Key material can be provided via PEM-encoded file, or via the PGP keyring. To
+manage the PGP keyring, see ‘apptainer help key’.</p>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">verify</span> <span class="p">[</span><span class="n">verify</span> <span class="n">options</span><span class="o">...</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">image</span> <span class="n">path</span><span class="o">&gt;</span>
 </pre></div>
@@ -239,20 +237,29 @@ signature verification is done for all those blocks.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify container.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Verify with a public key:
+$ apptainer verify --key public.pem container.sif
+
+Verify with PGP:
+$ apptainer verify container.sif
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="o">--</span><span class="nb">all</span>               <span class="n">verify</span> <span class="nb">all</span> <span class="n">objects</span>
-<span class="o">-</span><span class="n">g</span><span class="p">,</span> <span class="o">--</span><span class="n">group</span><span class="o">-</span><span class="nb">id</span> <span class="n">uint32</span>   <span class="n">verify</span> <span class="n">objects</span> <span class="k">with</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">group</span> <span class="n">ID</span>
-<span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>              <span class="n">help</span> <span class="k">for</span> <span class="n">verify</span>
-<span class="o">-</span><span class="n">j</span><span class="p">,</span> <span class="o">--</span><span class="n">json</span>              <span class="n">output</span> <span class="n">json</span>
-    <span class="o">--</span><span class="n">legacy</span><span class="o">-</span><span class="n">insecure</span>   <span class="n">enable</span> <span class="n">verification</span> <span class="n">of</span> <span class="p">(</span><span class="n">insecure</span><span class="p">)</span> <span class="n">legacy</span> <span class="n">signatures</span>
-<span class="o">-</span><span class="n">l</span><span class="p">,</span> <span class="o">--</span><span class="n">local</span>             <span class="n">only</span> <span class="n">verify</span> <span class="k">with</span> <span class="n">local</span> <span class="n">key</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="n">keyring</span>
-<span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">--</span><span class="n">sif</span><span class="o">-</span><span class="nb">id</span> <span class="n">uint32</span>     <span class="n">verify</span> <span class="nb">object</span> <span class="k">with</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">ID</span>
-<span class="o">-</span><span class="n">u</span><span class="p">,</span> <span class="o">--</span><span class="n">url</span> <span class="n">string</span>        <span class="n">specify</span> <span class="n">a</span> <span class="n">URL</span> <span class="k">for</span> <span class="n">a</span> <span class="n">key</span> <span class="n">server</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="o">--</span><span class="nb">all</span>                                <span class="n">verify</span> <span class="nb">all</span> <span class="n">objects</span>
+    <span class="o">--</span><span class="n">certificate</span> <span class="n">string</span>                 <span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">certificate</span>
+    <span class="o">--</span><span class="n">certificate</span><span class="o">-</span><span class="n">intermediates</span> <span class="n">string</span>   <span class="n">path</span> <span class="n">to</span> <span class="n">pool</span> <span class="n">of</span> <span class="n">intermediate</span> <span class="n">certificates</span>
+    <span class="o">--</span><span class="n">certificate</span><span class="o">-</span><span class="n">roots</span> <span class="n">string</span>           <span class="n">path</span> <span class="n">to</span> <span class="n">pool</span> <span class="n">of</span> <span class="n">root</span> <span class="n">certificates</span>
+<span class="o">-</span><span class="n">g</span><span class="p">,</span> <span class="o">--</span><span class="n">group</span><span class="o">-</span><span class="nb">id</span> <span class="n">uint32</span>                    <span class="n">verify</span> <span class="n">objects</span> <span class="k">with</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">group</span> <span class="n">ID</span>
+<span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>                               <span class="n">help</span> <span class="k">for</span> <span class="n">verify</span>
+<span class="o">-</span><span class="n">j</span><span class="p">,</span> <span class="o">--</span><span class="n">json</span>                               <span class="n">output</span> <span class="n">json</span>
+    <span class="o">--</span><span class="n">key</span> <span class="n">string</span>                         <span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">public</span> <span class="n">key</span> <span class="n">file</span>
+    <span class="o">--</span><span class="n">legacy</span><span class="o">-</span><span class="n">insecure</span>                    <span class="n">enable</span> <span class="n">verification</span> <span class="n">of</span> <span class="p">(</span><span class="n">insecure</span><span class="p">)</span> <span class="n">legacy</span> <span class="n">signatures</span>
+<span class="o">-</span><span class="n">l</span><span class="p">,</span> <span class="o">--</span><span class="n">local</span>                              <span class="n">only</span> <span class="n">verify</span> <span class="k">with</span> <span class="n">local</span> <span class="n">key</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="n">keyring</span>
+    <span class="o">--</span><span class="n">ocsp</span><span class="o">-</span><span class="n">verify</span>                        <span class="n">enable</span> <span class="n">online</span> <span class="n">revocation</span> <span class="n">check</span> <span class="k">for</span> <span class="n">certificates</span>
+<span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">--</span><span class="n">sif</span><span class="o">-</span><span class="nb">id</span> <span class="n">uint32</span>                      <span class="n">verify</span> <span class="nb">object</span> <span class="k">with</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">ID</span>
+<span class="o">-</span><span class="n">u</span><span class="p">,</span> <span class="o">--</span><span class="n">url</span> <span class="n">string</span>                         <span class="n">specify</span> <span class="n">a</span> <span class="n">URL</span> <span class="k">for</span> <span class="n">a</span> <span class="n">key</span> <span class="n">server</span>
 </pre></div>
 </div>
 </div>
@@ -263,7 +270,7 @@ signature verification is done for all those blocks.</p>
 </ul>
 <p>Linux container platform optimized for High Performance Computing (HPC) and
 Enterprise Performance Computing (EPC)</p>
-<p><em>Auto generated by spf13/cobra on 1-May-2023</em></p>
+<p><em>Auto generated by spf13/cobra on 13-May-2023</em></p>
 </div>
 </div>
 
