@@ -181,13 +181,12 @@ When the fakeroot command is used, an INFO message is displayed.
 The combination of a root-mapped user namespace with the fakeroot command
 allows most package installations to work, but the fakeroot command is
 bound in from the host so if the host libc library is of a very
-different vintage than the corresponding container library the
-fakeroot command can fail.
-If that situation happens it can be worth trying to run apptainer
-under the <code class="docutils literal notranslate"><span class="pre">unshare</span> <span class="pre">-r</span></code> command which is essentially the same thing
-as running in a root-mapped user namespace; in that case Apptainer
-will not try to run the fakeroot command even if it is in the user’s
-PATH.</p></li>
+different vintage than the corresponding container the
+fakeroot command can fail with errors about a missing GLIBC version.
+If that situation happens the easiest solution is to first run a
+container with an operating system matching the target glibc version,
+<a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html#install-from-pre-built-packages">install Apptainer unprivileged</a>
+there, and do the build nested inside that container.</p></li>
 <li><p>If user namespaces are not available but Apptainer has been installed
 with setuid-root and also the “fakeroot” command is available, then
 the fakeroot command will be run by itself.
