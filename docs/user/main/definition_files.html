@@ -871,9 +871,17 @@ the same container using SCIF modules:</p>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span>SOFTWARE
 </pre></div>
 </div>
-<p>An <code class="docutils literal notranslate"><span class="pre">%appinstall</span></code> section is the equivalent of <code class="docutils literal notranslate"><span class="pre">%post</span></code> but for a
-particular app. Similarly, <code class="docutils literal notranslate"><span class="pre">%appenv</span></code> equates to the app version of
-<code class="docutils literal notranslate"><span class="pre">%environment</span></code> and so on.</p>
+<p>An <code class="docutils literal notranslate"><span class="pre">%appenv</span></code> section is the app-specific equivalent of <code class="docutils literal notranslate"><span class="pre">%environment</span></code>.</p>
+<p>Similarly, <code class="docutils literal notranslate"><span class="pre">%appinstall</span></code> is like <code class="docutils literal notranslate"><span class="pre">%post</span></code> but for a particular app. Note that
+just like the general <code class="docutils literal notranslate"><span class="pre">%post</span></code> section, <code class="docutils literal notranslate"><span class="pre">%appinstall</span></code> sections run at build
+time. Thus, when building a container from a definition file containing
+<code class="docutils literal notranslate"><span class="pre">%appinstall</span></code> sections, the content of all of these sections will be
+executed, even if later on the user ends up running only some of the apps
+defined in the file and not others. This is why the
+<a class="reference external" href="https://sci-f.github.io/specification">SCIF Standard</a> indicates that files &amp;
+directories that are app-specific, and are potentially mutually-exclusive with
+the files &amp; directories of other apps, be placed under the app-specific
+<code class="docutils literal notranslate"><span class="pre">/scif/apps/&lt;app-name&gt;</span></code> directory to avoid conflicts between different apps.</p>
 <p>Installing apps into modules using the <code class="docutils literal notranslate"><span class="pre">%app*</span></code> sections enables the
 <code class="docutils literal notranslate"><span class="pre">--app</span></code> option, allowing commands like the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">apptainer</span> <span class="n">run</span> <span class="o">--</span><span class="n">app</span> <span class="n">foo</span> <span class="n">my_container</span><span class="o">.</span><span class="n">sif</span>
