@@ -198,12 +198,12 @@ create an overlay directory tree usable by a regular user.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer overlay create --size 1024 /tmp/ext3_overlay.img
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">overlay</span> <span class="pre">create</span></code> also provides an option <code class="docutils literal notranslate"><span class="pre">--create-dir</span></code>
-to create additional directories owned by the calling user, it can be
-specified multiple times to create many directories. This is
-particularly useful when you need to make a directory writable by your
+<p><code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">overlay</span> <span class="pre">create</span></code> also provides an option <code class="docutils literal notranslate"><span class="pre">--create-dir</span></code> to
+create additional directories owned by the calling user. This option can be
+specified multiple times to create several such directories. This is
+particularly useful when you need to make a directory that is writable by your
 user.</p>
-<p>So for example:</p>
+<p>For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build /tmp/nginx.sif docker://nginx
 ...
 $ apptainer overlay create --size 1024 --create-dir /var/cache/nginx /tmp/nginx_overlay.img
@@ -378,7 +378,7 @@ definition file, environment variable, signature.</p></li>
 SquashFS, ext3, raw.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">parttype</span></code> determines the type of partition. In our case it is
 being set to overlay.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">partarch</span></code> must be set to the architecture against you’re building.
+<li><p><code class="docutils literal notranslate"><span class="pre">partarch</span></code> must be set to the architecture against which you’re building.
 In this case it’s <code class="docutils literal notranslate"><span class="pre">amd64</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">groupid</span></code> is the ID of the container image group. In most cases
 there’s no more than one group, therefore we can assume it is 1.</p></li>
@@ -401,15 +401,16 @@ $ apptainer exec ubuntu.sif which vim
 </div>
 <div class="section" id="final-note">
 <h3>Final note<a class="headerlink" href="#final-note" title="Permalink to this heading"></a></h3>
-<p>To resize an overlay, standard Linux tools which manipulate ext3 images
-can be used. For instance, to resize the 500MB file created above to
-700MB one could use the <code class="docutils literal notranslate"><span class="pre">e2fsck</span></code> and <code class="docutils literal notranslate"><span class="pre">resize2fs</span></code> utilities like so:</p>
+<p>To resize an overlay, standard Linux tools which manipulate ext3 images can be
+used. For instance, to resize the 500MB file created above to 700MB one could
+use the <code class="docutils literal notranslate"><span class="pre">e2fsck</span></code> and <code class="docutils literal notranslate"><span class="pre">resize2fs</span></code> utilities as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ e2fsck -f overlay.img &amp;&amp; \
     resize2fs overlay.img 700M
 </pre></div>
 </div>
-<p>Hints for creating and manipulating ext3 images on your distribution are
-readily available online and are not treated further in this manual.</p>
+<p>More information on creating and manipulating ext3 images on various Linux
+distribution are available where documentation for those respective
+distributions is found.</p>
 </div>
 </div>
 </div>
