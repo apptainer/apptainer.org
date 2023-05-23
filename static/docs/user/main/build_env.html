@@ -64,7 +64,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#cache-commands">Cache commands</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#listing-cache">Listing Cache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#listing-the-cache">Listing the Cache</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cleaning-the-cache">Cleaning the Cache</a></li>
 </ul>
 </li>
@@ -161,10 +161,12 @@ sources, and any OCI/docker layers used to create them. The cache is
 created at <code class="docutils literal notranslate"><span class="pre">$HOME/.apptainer/cache</span></code> by default. The location of the
 cache can be changed by setting the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> environment
 variable.</p>
-<p>If you run builds as root, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, images will be cached in root’s
-home directory at <code class="docutils literal notranslate"><span class="pre">/root</span></code>, rather than your user’s home directory. Use the
-<code class="docutils literal notranslate"><span class="pre">-E</span></code> option to <code class="docutils literal notranslate"><span class="pre">sudo</span></code> to pass through the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code>
-environment variable, if you have set it.</p>
+<p>If you run builds as root, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, images will be cached in root’s home
+directory at <code class="docutils literal notranslate"><span class="pre">/root</span></code>, rather than your user’s home directory. If you have set
+the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> environment variable, you may use <code class="docutils literal notranslate"><span class="pre">sudo</span></code>’s <code class="docutils literal notranslate"><span class="pre">-E</span></code>
+option to pass the value of <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> through to the root user’s
+environment. This allows you to control where images will be cached even when
+running builds under <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_CACHEDIR=/tmp/user/temporary-cache
 
 # Running a build under your user account
@@ -178,24 +180,23 @@ $ sudo -E apptainer build myimage.sif mydef.def
 location that is:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Unique to you. Permissions are set on the cache so that private
-images cached for one user are not exposed to another. This means
-that <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> cannot be shared.</p></li>
-<li><p>Located on a filesystem with sufficient space for the number and
-size of container images anticipated.</p></li>
+<li><p>Unique to you. Permissions are set on the cache so that private images
+cached for one user are not exposed to another. This means that
+Apptainer cache directories cannot be shared across users.</p></li>
+<li><p>Located on a filesystem with sufficient space for the number and size of
+container images you anticipate using.</p></li>
 <li><p>Located on a filesystem that supports atomic rename, if possible.</p></li>
 </ul>
 </div></blockquote>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If you are not certain that your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> or
-<code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> filesystems support atomic rename, do not
-run Apptainer in parallel using remote container URLs. Instead
-use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> to create a local SIF image, and then run
-this SIF image in a parallel step. An alternative is to use the
-<code class="docutils literal notranslate"><span class="pre">--disable-cache</span></code> option, but this will result in each
-Apptainer instance independently fetching the container from the
-remote source, into a temporary location.</p>
+<p>If you are not certain that your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> or <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code>
+filesystems support atomic rename, do not run Apptainer in parallel using
+remote container URLs. Instead, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> to create a local
+SIF image, and then run this SIF image in a parallel step. Alternatively, you
+may use the <code class="docutils literal notranslate"><span class="pre">--disable-cache</span></code> option, but this will result in each
+Apptainer instance independently fetching the container from the remote
+source, into a temporary location.</p>
 </div>
 <p>Inside the cache location you will find separate directories for the
 different kinds of data that are cached:</p>
@@ -209,20 +210,19 @@ $HOME/.apptainer/cache/shub
 <p>You can safely delete these directories, or content within them.
 Apptainer will re-create any directories and data that are needed in
 future runs.</p>
-<p>You should not add any additional files, or modify files in the cache,
-as this may cause checksum / integrity errors when you run or build
-containers. If you experience problems use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">clean</span></code>
-to reset the cache to a clean, empty state.</p>
+<p>You should not add any additional files, or modify files in the cache, as this
+may cause checksum / integrity errors when you run or build containers. If you
+experience problems use, <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">clean</span></code> to reset the cache to a
+clean, empty state.</p>
 <div class="section" id="boltdb-corruption-errors">
 <h3>BoltDB Corruption Errors<a class="headerlink" href="#boltdb-corruption-errors" title="Permalink to this heading"></a></h3>
 <p>The library that Apptainer uses to retrieve and cache Docker/OCI
-layers keeps track of them using a single file database. If your home
+layers keeps track of them using a single-file database. If your home
 directory is on a network filesystem which experiences interruptions, or
 you run out of storage, it is possible for this database to become
 inconsistent.</p>
-<p>If you observe error messages when trying to run Apptainer that
-mention <cite>github.com/etcd-io/bbolt</cite> then you should remove the database
-file:</p>
+<p>If you observe error messages that mention <cite>github.com/etcd-io/bbolt</cite> when
+trying to run Apptainer, then you should remove the database file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">~/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">containers</span><span class="o">/</span><span class="n">cache</span><span class="o">/</span><span class="n">blob</span><span class="o">-</span><span class="n">info</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">boltdb</span>
 </pre></div>
 </div>
@@ -230,24 +230,24 @@ file:</p>
 </div>
 <div class="section" id="cache-commands">
 <h2>Cache commands<a class="headerlink" href="#cache-commands" title="Permalink to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">cache</span></code> command for Apptainer allows you to view and clean up
-your cache, without manually inspecting the cache directories.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">cache</span></code> command for Apptainer allows you to view and clean up your
+cache, without needing to manually inspect the cache directories.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you have built images as root, directly or via <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, the cache
-location for those builds is <code class="docutils literal notranslate"><span class="pre">/root/.apptainer</span></code>. You will need to
-use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> when running <code class="docutils literal notranslate"><span class="pre">cache</span> <span class="pre">clean</span></code> or <code class="docutils literal notranslate"><span class="pre">cache</span> <span class="pre">list</span></code> to manage
-these cache entries.</p>
+<p>If you have built images as root, directly or via <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, the default cache
+location for those builds is <code class="docutils literal notranslate"><span class="pre">/root/.apptainer</span></code>. You will need to use
+<code class="docutils literal notranslate"><span class="pre">sudo</span></code> when running <code class="docutils literal notranslate"><span class="pre">cache</span> <span class="pre">clean</span></code> or <code class="docutils literal notranslate"><span class="pre">cache</span> <span class="pre">list</span></code> to manage these cache
+entries.</p>
 </div>
-<div class="section" id="listing-cache">
-<h3>Listing Cache<a class="headerlink" href="#listing-cache" title="Permalink to this heading"></a></h3>
+<div class="section" id="listing-the-cache">
+<h3>Listing the Cache<a class="headerlink" href="#listing-the-cache" title="Permalink to this heading"></a></h3>
 <p>To view a summary of cache usage, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">list</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache list
 There are 4 container file(s) using 59.45 MB and 23 oci blob file(s) using 379.10 MB of space
 Total space used: 438.55 MB
 </pre></div>
 </div>
-<p>To view detailed information, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">list</span> <span class="pre">-v</span></code>:</p>
+<p>To view more detailed information, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">list</span> <span class="pre">-v</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache list -v
 NAME                     DATE CREATED           SIZE             TYPE
 0ed5a98249068fe0592edb   2020-05-27 12:57:22    192.21 MB        blob
@@ -283,19 +283,19 @@ Total space used: 438.55 MB
 </pre></div>
 </div>
 <p>All cache entries are named using a content hash, so that identical
-layers or images that are pulled from different URIs do not consume more
-space than needed.</p>
-<p>Entries marked <code class="docutils literal notranslate"><span class="pre">blob</span></code> are OCI/docker layers and manifests, that are
-used to create SIF format images in the <code class="docutils literal notranslate"><span class="pre">oci-tmp</span></code> cache. Other caches
-are named for the source of the image e.g. <code class="docutils literal notranslate"><span class="pre">library</span></code> and <code class="docutils literal notranslate"><span class="pre">oras</span></code>.</p>
-<p>You can limit the cache list to a specific cache type with the <code class="docutils literal notranslate"><span class="pre">-type</span></code>
-/ <code class="docutils literal notranslate"><span class="pre">-t</span></code> option.</p>
+layers or images that are pulled from different URIs do not result in
+duplication within the cache.</p>
+<p>Entries marked <code class="docutils literal notranslate"><span class="pre">blob</span></code> are OCI/docker layers and manifests, which are used to
+create SIF format images in the <code class="docutils literal notranslate"><span class="pre">oci-tmp</span></code> cache. Other caches are named for
+the source of the image, e.g. <code class="docutils literal notranslate"><span class="pre">library</span></code> or <code class="docutils literal notranslate"><span class="pre">oras</span></code>.</p>
+<p>You can limit the cache list to a specific cache type with the <code class="docutils literal notranslate"><span class="pre">--type</span></code> /
+<code class="docutils literal notranslate"><span class="pre">-t</span></code> option.</p>
 </div>
 <div class="section" id="cleaning-the-cache">
 <h3>Cleaning the Cache<a class="headerlink" href="#cleaning-the-cache" title="Permalink to this heading"></a></h3>
 <p>To reclaim space used by the Apptainer cache, use <code class="docutils literal notranslate"><span class="pre">apptainer</span>
 <span class="pre">cache</span> <span class="pre">clean</span></code>.</p>
-<p>By default <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">clean</span></code> will remove all cache entries,
+<p>By default, <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">clean</span></code> will remove all cache entries,
 after asking you to confirm:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache clean
 This will delete everything in your cache (containers from all sources and OCI blobs).
@@ -321,22 +321,22 @@ use the <code class="docutils literal notranslate"><span class="pre">--type</spa
 </div>
 <div class="section" id="temporary-folders">
 <span id="sec-temporaryfolders"></span><h2>Temporary Folders<a class="headerlink" href="#temporary-folders" title="Permalink to this heading"></a></h2>
-<p>When building a container, or pulling/running an Apptainer container
-from a Docker/OCI source, a temporary working space is required. The
-container is constructed in this temporary space before being packaged
-into an Apptainer SIF image.</p>
+<p>When building a container, or pulling/running an Apptainer container from a
+Docker/OCI source, a temporary working space is required. The container is
+constructed in this temporary space before being packaged into an Apptainer
+SIF image.</p>
 <p>The location for temporary directories defaults to <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>.
-Apptainer will also respect the environment variable <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>, and
+However, Apptainer will respect the environment variable <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>, and
 both of these locations can be overridden by setting the environment
 variable <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code>.</p>
-<p>The temporary directory used during a build must be on a filesystem that
-has enough space to hold the entire container image, uncompressed,
-including any temporary files that are created and later removed during
-the build. You may need to set <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> when building a
-large container on a system which has a small <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> filesystem.</p>
-<p>Remember to use <code class="docutils literal notranslate"><span class="pre">-E</span></code> option to pass the value of
-<code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> to root’s environment when executing the
-<code class="docutils literal notranslate"><span class="pre">build</span></code> command with <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p>
+<p>The temporary directory used during a build must be on a filesystem that has
+enough space to hold the entire container image, uncompressed, including any
+temporary files that are created and later removed in the course of the build.
+You may therefore need to set <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> when building a large
+container on a system which has a small <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> filesystem.</p>
+<p>Remember to use <code class="docutils literal notranslate"><span class="pre">-E</span></code> option to pass the value of <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code>
+through to root’s environment when executing the <code class="docutils literal notranslate"><span class="pre">build</span></code> command with
+<code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Many modern Linux distributions use an in-memory <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> filesystem
@@ -345,62 +345,83 @@ RAM. This may limit the size of container you can build, as temporary
 directories under <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> share RAM with runniing programs etc. A
 <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> also uses default mount options that can interfere with
 some container builds.</p>
-<p>Set <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> to a disk location, or disable the
-<code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> mount on your system if you experience problems.</p>
+<p>If you experience problems, set <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> to a disk location, or
+disable the <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> mount on your system.</p>
 </div>
 </div>
 <div class="section" id="encrypted-containers">
 <h2>Encrypted Containers<a class="headerlink" href="#encrypted-containers" title="Permalink to this heading"></a></h2>
-<p>With an Apptainer setuid installation it is possible to build and run
-encrypted containers. The containers are decrypted at runtime entirely
-in kernel space, meaning that no intermediate decrypted data is ever
-present on disk.
-See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
+<p>With Apptainer it is possible to build and run encrypted
+containers. The containers are decrypted at runtime entirely in memory,
+meaning that no intermediate decrypted data is ever present on disk. See
+<a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
 </div>
 <div class="section" id="environment-variables">
 <h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
-<li><p>If a flag is represented by both a CLI option and an environment
-variable, and both are set, the CLI option will always take
-precedence. This is true for all environment variables except for
-<code class="docutils literal notranslate"><span class="pre">APPTAINER_BIND</span></code> and <code class="docutils literal notranslate"><span class="pre">APPTAINER_BINDPATH</span></code> which is combined
-with the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option, argument pair if both are present.</p></li>
-<li><p>Environment variables overwrite default values in the CLI code</p></li>
-<li><p>Any defaults in the CLI code are applied.</p></li>
+<li><p>If a flag is represented by both a CLI option and an environment variable,
+and both are set, the CLI option will take precedence. This is true for all
+environment variables with the exception for <code class="docutils literal notranslate"><span class="pre">APPTAINER_BIND</span></code> and
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_BINDPATH</span></code>, which are combined with the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option /
+argument pair, if both are present.</p></li>
+<li><p>Environment variables will override default values of CLI options that have
+not been explicitly set in the command line.</p></li>
+<li><p>Any default values for CLI options that have not been overridden on the
+command line, or by corresponding environment variables, will then take
+effect.</p></li>
 </ol>
 <div class="section" id="defaults">
 <h3>Defaults<a class="headerlink" href="#defaults" title="Permalink to this heading"></a></h3>
-<p>The following variables have defaults that can be customized by you via
-environment variables at runtime.</p>
+<p>The following variables have defaults that can be overridden by assigning your
+own values to the corresponding environment variables at runtime:</p>
 <div class="section" id="docker">
 <h4>Docker<a class="headerlink" href="#docker" title="Permalink to this heading"></a></h4>
-<p><strong>APPTAINER_DOCKER_LOGIN</strong> - Used for the interactive login for Docker
-Hub.</p>
-<p><strong>APPTAINER_DOCKER_USERNAME</strong> - Your Docker username.</p>
-<p><strong>APPTAINER_DOCKER_PASSWORD</strong> - Your Docker password.</p>
-<p><strong>RUNSCRIPT_COMMAND</strong> - Is not obtained from the environment, but is a
-hard coded default (“/bin/bash”. This is the fallback command used in
-the case that the docker image does not have a CMD or ENTRYPOINT.
-<strong>TAG</strong> Is the default tag, <code class="docutils literal notranslate"><span class="pre">latest</span></code>.</p>
-<p><strong>APPTAINER_NOHTTPS</strong> - This is relevant if you want to use a registry
-that doesn’t have https, and it speaks for itself. If you export the
-variable <code class="docutils literal notranslate"><span class="pre">APPTAINER_NOHTTPS</span></code> you can force the software to not use
-https when interacting with a Docker registry. This use case is
-typically for use of a local registry.</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_LOGIN</span></code> -</div>
+<div class="line">Set this to login to a Docker Repository interactively.</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME</span></code> -</div>
+<div class="line">Your Docker username.</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code> -</div>
+<div class="line">Your Docker password.</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RUNSCRIPT_COMMAND</span></code> -</div>
+<div class="line">Is not obtained from the environment, but is a hard coded default
+(“/bin/bash”). This is the fallback command used in the case that the docker
+image does not have a CMD or ENTRYPOINT. <code class="docutils literal notranslate"><span class="pre">TAG</span></code> Is the default tag,
+<code class="docutils literal notranslate"><span class="pre">latest</span></code>.</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_NOHTTPS</span></code> -</div>
+<div class="line">This is relevant if you want to use a registry that doesn’t support https. A
+typical use-case for this variable is when using local registry, running on
+the same machine as Apptainer itself.</div>
+</div>
 </div>
 <div class="section" id="library">
 <h4>Library<a class="headerlink" href="#library" title="Permalink to this heading"></a></h4>
-<p><strong>APPTAINER_LIBRARY</strong> - Used to specify the library to pull from.
-Default is the currently selected <a class="reference internal" href="endpoint.html#endpoints"><span class="std std-ref">remote endpoint</span></a>.</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_LIBRARY</span></code> -</div>
+<div class="line">Used to specify the library to pull from.</div>
+<div class="line">Default is set to Sylabs’ Cloud Library.</div>
+</div>
 </div>
 <div class="section" id="encryption">
 <h4>Encryption<a class="headerlink" href="#encryption" title="Permalink to this heading"></a></h4>
-<p><strong>APPTAINER_ENCRYPTION_PASSPHRASE</strong> - Used to pass a plaintext
-passphrase to encrypt a container file system (with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code>
-flag). The default is empty.</p>
-<p><strong>APPTAINER_ENCRYPTION_PEM_PATH</strong> - Used to specify the location of a
-public key to use for container encryption (with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code>
-flag). The default is empty.</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PASSPHRASE</span></code> -</div>
+<div class="line">Used to pass a plaintext passphrase to be used to encrypt a container file
+system (in conjunction with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag). The default is empty.</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PEM_PATH</span></code> -</div>
+<div class="line">Used to specify the location of a public key to use for container encryption
+(in conjunction with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag). The default is empty.</div>
+</div>
 </div>
 </div>
 </div>
