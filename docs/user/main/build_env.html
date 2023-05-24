@@ -376,52 +376,37 @@ effect.</p></li>
 own values to the corresponding environment variables at runtime:</p>
 <div class="section" id="docker">
 <h4>Docker<a class="headerlink" href="#docker" title="Permalink to this heading"></a></h4>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_LOGIN</span></code> -</div>
-<div class="line">Set this to login to a Docker Repository interactively.</div>
-</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME</span></code> -</div>
-<div class="line">Your Docker username.</div>
-</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code> -</div>
-<div class="line">Your Docker password.</div>
-</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">RUNSCRIPT_COMMAND</span></code> -</div>
-<div class="line">Is not obtained from the environment, but is a hard coded default
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_LOGIN</span></code> -
+Set this to login to a Docker Repository interactively.</p>
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME</span></code> -
+Your Docker username.</p>
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code> -
+Your Docker password.</p>
+<p><code class="docutils literal notranslate"><span class="pre">RUNSCRIPT_COMMAND</span></code> -
+Is not obtained from the environment, but is a hard coded default
 (“/bin/bash”). This is the fallback command used in the case that the docker
-image does not have a CMD or ENTRYPOINT. <code class="docutils literal notranslate"><span class="pre">TAG</span></code> Is the default tag,
-<code class="docutils literal notranslate"><span class="pre">latest</span></code>.</div>
-</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_NOHTTPS</span></code> -</div>
-<div class="line">This is relevant if you want to use a registry that doesn’t support https. A
+image does not have a CMD or ENTRYPOINT.</p>
+<p><code class="docutils literal notranslate"><span class="pre">TAG</span></code> -
+Is the default tag, <code class="docutils literal notranslate"><span class="pre">latest</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_NOHTTPS</span></code> -
+This is relevant if you want to use a registry that doesn’t support https. A
 typical use-case for this variable is when using local registry, running on
-the same machine as Apptainer itself.</div>
-</div>
+the same machine as Apptainer itself.</p>
 </div>
 <div class="section" id="library">
 <h4>Library<a class="headerlink" href="#library" title="Permalink to this heading"></a></h4>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_LIBRARY</span></code> -</div>
-<div class="line">Used to specify the library to pull from.</div>
-<div class="line">Default is set to Sylabs’ Cloud Library.</div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_LIBRARY</span></code> -
+Used to specify the library to pull from.
+Default is the currently selected <a class="reference internal" href="endpoint.html#endpoints"><span class="std std-ref">remote endpoint</span></a>.</p>
 </div>
 <div class="section" id="encryption">
 <h4>Encryption<a class="headerlink" href="#encryption" title="Permalink to this heading"></a></h4>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PASSPHRASE</span></code> -</div>
-<div class="line">Used to pass a plaintext passphrase to be used to encrypt a container file
-system (in conjunction with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag). The default is empty.</div>
-</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PEM_PATH</span></code> -</div>
-<div class="line">Used to specify the location of a public key to use for container encryption
-(in conjunction with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag). The default is empty.</div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PASSPHRASE</span></code> -
+Used to pass a plaintext passphrase to be used to encrypt a container file
+system (in conjunction with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag). The default is empty.</p>
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PEM_PATH</span></code> -
+Used to specify the location of a public key to use for container encryption
+(in conjunction with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag). The default is empty.</p>
 </div>
 </div>
 </div>
