@@ -267,14 +267,14 @@ host.</p>
 <p>If the host MPI is MPICH, a definition file such as the following
 example can be used:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
-From: ubuntu:18.04
+From: ubuntu:22.04
 
 %files
     mpitest.c /opt
 
 %environment
     # Point to MPICH binaries, libraries man pages
-    export MPICH_DIR=/opt/mpich-3.3.2
+    export MPICH_DIR=/opt/mpich
     export PATH=&quot;$MPICH_DIR/bin:$PATH&quot;
     export LD_LIBRARY_PATH=&quot;$MPICH_DIR/lib:$LD_LIBRARY_PATH&quot;
     export MANPATH=$MPICH_DIR/share/man:$MANPATH
@@ -282,10 +282,10 @@ From: ubuntu:18.04
 %post
     echo &quot;Installing required packages...&quot;
     export DEBIAN_FRONTEND=noninteractive
-    apt-get update &amp;&amp; apt-get install -y wget git bash gcc gfortran g++ make
+    apt-get update &amp;&amp; apt-get install -y wget git bash gcc gfortran g++ make python3-dev
 
     # Information about the version of MPICH to use
-    export MPICH_VERSION=3.3.2
+    export MPICH_VERSION=4.1.1
     export MPICH_URL=&quot;http://www.mpich.org/static/downloads/$MPICH_VERSION/mpich-$MPICH_VERSION.tar.gz&quot;
     export MPICH_DIR=/opt/mpich
 
@@ -295,7 +295,7 @@ From: ubuntu:18.04
     # Download
     cd /tmp/mpich &amp;&amp; wget -O mpich-$MPICH_VERSION.tar.gz $MPICH_URL &amp;&amp; tar xzf mpich-$MPICH_VERSION.tar.gz
     # Compile and install
-    cd /tmp/mpich/mpich-$MPICH_VERSION &amp;&amp; ./configure --prefix=$MPICH_DIR &amp;&amp; make install
+    cd /tmp/mpich/mpich-$MPICH_VERSION &amp;&amp; ./configure --prefix=$MPICH_DIR &amp;&amp; make -j$(nproc) install
 
     # Set env variables so we can compile our application
     export PATH=$MPICH_DIR/bin:$PATH
@@ -320,7 +320,7 @@ details.</p>
 <h3>Open MPI Hybrid Container<a class="headerlink" href="#open-mpi-hybrid-container" title="Permalink to this heading"></a></h3>
 <p>If the host MPI is Open MPI, the definition file looks like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
-From: ubuntu:18.04
+From: ubuntu:22.04
 
 %files
     mpitest.c /opt
@@ -337,18 +337,18 @@ From: ubuntu:18.04
 
 %post
     echo &quot;Installing required packages...&quot;
-    apt-get update &amp;&amp; apt-get install -y wget git bash gcc gfortran g++ make file
+    apt-get update &amp;&amp; apt-get install -y wget git bash gcc gfortran g++ make file bzip2
 
     echo &quot;Installing Open MPI&quot;
     export OMPI_DIR=/opt/ompi
-    export OMPI_VERSION=4.0.5
-    export OMPI_URL=&quot;https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-$OMPI_VERSION.tar.bz2&quot;
+    export OMPI_VERSION=4.1.5
+    export OMPI_URL=&quot;https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-$OMPI_VERSION.tar.bz2&quot;
     mkdir -p /tmp/ompi
     mkdir -p /opt
     # Download
     cd /tmp/ompi &amp;&amp; wget -O openmpi-$OMPI_VERSION.tar.bz2 $OMPI_URL &amp;&amp; tar -xjf openmpi-$OMPI_VERSION.tar.bz2
     # Compile and install
-    cd /tmp/ompi/openmpi-$OMPI_VERSION &amp;&amp; ./configure --prefix=$OMPI_DIR &amp;&amp; make -j8 install
+    cd /tmp/ompi/openmpi-$OMPI_VERSION &amp;&amp; ./configure --prefix=$OMPI_DIR &amp;&amp; make -j$(nproc) install
 
     # Set env variables so we can compile our application
     export PATH=$OMPI_DIR/bin:$PATH
@@ -456,7 +456,7 @@ forward. The following example shows the definition file for the test
 program, which in this case has been compiled on the host to
 <code class="docutils literal notranslate"><span class="pre">/tmp/mpitest</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Bootstrap</span><span class="p">:</span> <span class="n">docker</span>
-<span class="n">From</span><span class="p">:</span> <span class="n">ubuntu</span><span class="p">:</span><span class="mf">18.04</span>
+<span class="n">From</span><span class="p">:</span> <span class="n">ubuntu</span><span class="p">:</span><span class="mf">22.04</span>
 
 <span class="o">%</span><span class="n">files</span>
       <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mpitest</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">mpitest</span>
