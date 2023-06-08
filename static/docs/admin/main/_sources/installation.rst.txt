@@ -247,7 +247,7 @@ Install unprivileged from pre-built binaries
 A script is available to make a relocatable unprivileged binary installation 
 of {Project}, including all dependencies that are not normally installed
 on Linux systems.  The script works on current Red Hat Enterprise Linux-derived
-systems, Fedora, SUSE/OpenSUSE, Debian, and Ubuntu (except 18.04).
+systems, Fedora, SUSE/OpenSUSE, Debian, and Ubuntu.
 
 This is the easiest way to use it:
 
@@ -343,7 +343,7 @@ For the setuid installation do above commands first and then these:
 Install Ubuntu packages
 ------------------------------
 
-Pre-built Ubuntu packages are available on PPA (Personal Package Archive) for the amd64 and arm64 architectures on all current Ubuntu releases except 18.04. 
+Pre-built Ubuntu packages are available on PPA (Personal Package Archive) for the amd64 and arm64 architectures on all current Ubuntu releases. 
 
 First, on Ubuntu based containers install `software-properties-common` package to obtain `add-apt-repository` command. On Ubuntu Desktop/Server derived systems skip this step.
 
