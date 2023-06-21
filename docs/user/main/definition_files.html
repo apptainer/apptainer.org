@@ -837,6 +837,9 @@ the same container using SCIF modules:</p>
 <span class="gh">%apprun</span><span class="w"> </span>foo
 <span class="w">    </span><span class="nb">exec</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;RUNNING FOO&quot;</span>
 
+<span class="err">%</span>appstart foo
+    exec echo &quot;STARTING FOO&quot;
+
 <span class="gh">%applabels</span><span class="w"> </span>foo
 <span class="w">    </span>BESTAPP<span class="w"> </span>FOO
 
@@ -866,6 +869,9 @@ the same container using SCIF modules:</p>
 <span class="gh">%apprun</span><span class="w"> </span>bar
 <span class="w">    </span><span class="nb">exec</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;RUNNING BAR&quot;</span>
 
+<span class="err">%</span>appstart bar
+    exec echo &quot;STARTING BAR&quot;
+
 <span class="gh">%appenv</span><span class="w"> </span>bar
 <span class="w">    </span><span class="nv">SOFTWARE</span><span class="o">=</span>bar
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span>SOFTWARE
@@ -890,6 +896,10 @@ the files &amp; directories of other apps, be placed under the app-specific
 </div>
 <p>This runs a specific app, <code class="docutils literal notranslate"><span class="pre">foo</span></code>, from the multi-app container we
 built.</p>
+<p>You can also launch an app as a service using the <cite>instance start</cite> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">apptainer</span> <span class="n">instance</span> <span class="n">start</span> <span class="o">--</span><span class="n">app</span> <span class="n">foo</span> <span class="n">my_container</span><span class="o">.</span><span class="n">sif</span>
+</pre></div>
+</div>
 <p>The same environment variable, <code class="docutils literal notranslate"><span class="pre">$SOFTWARE</span></code> is defined for both apps in
 the def file above. You can execute the following command to search the
 list of active environment variables and <code class="docutils literal notranslate"><span class="pre">grep</span></code> to determine if the

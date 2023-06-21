@@ -160,31 +160,33 @@ Options
 
 ::
 
-  -B, --bind stringArray     a user-bind path specification. spec has the format src[:dest[:opts]],where src and dest are outside and inside paths. If dest is not given,it is set equal to src. Mount options ('opts') may be specified as 'ro'(read-only) or 'rw' (read/write, which is the default).Multiple bind paths can be given by a comma separated list.
-      --disable-cache        do not use cache or create cache
-      --docker-host string   specify a custom Docker daemon host
-      --docker-login         login to a Docker Repository interactively
-  -e, --encrypt              build an image with an encrypted file system
-  -f, --fakeroot             build with the appearance of running as root (default when building from a definition file unprivileged)
-      --fix-perms            ensure owner has rwX permissions on all container content for oci/docker sources
-  -F, --force                overwrite an image file if it exists
-  -h, --help                 help for build
-      --json                 interpret build definition as JSON
-      --library string       container Library URL
-      --mount stringArray    a mount specification e.g. 'type=bind,source=/opt,destination=/hostopt'.
-      --no-cleanup           do NOT clean up bundle after failed build, can be helpful for debugging
-      --no-https             use http instead of https for docker:// oras:// and library://<hostname>/... URIs
-  -T, --notest               build without running tests in %test section
-      --nv                   inject host Nvidia libraries during build for post and test sections
-      --nvccli               use nvidia-container-cli for GPU setup (experimental)
-      --passphrase           prompt for an encryption passphrase
-      --pem-path string      enter an path to a PEM formatted RSA key for an encrypted container
-      --rocm                 inject host Rocm libraries during build for post and test sections
-  -s, --sandbox              build image as sandbox format (chroot directory structure)
-      --section strings      only run specific section(s) of deffile (setup, post, files, environment, test, labels, none) (default [all])
-  -u, --update               run definition over existing container (skips header)
-      --userns               build without using setuid even if available
-      --writable-tmpfs       during the %test section, makes the file system accessible as read-write with non persistent data (with overlay support only)
+  -B, --bind stringArray        a user-bind path specification. spec has the format src[:dest[:opts]],where src and dest are outside and inside paths. If dest is not given,it is set equal to src. Mount options ('opts') may be specified as 'ro'(read-only) or 'rw' (read/write, which is the default).Multiple bind paths can be given by a comma separated list.
+      --build-arg strings       defines variable=value to replace {{ variable }} entries in build definition file
+      --build-arg-file string   specifies a file containing variable=value lines to replace '{{ variable }}' with value in build definition files
+      --disable-cache           do not use cache or create cache
+      --docker-host string      specify a custom Docker daemon host
+      --docker-login            login to a Docker Repository interactively
+  -e, --encrypt                 build an image with an encrypted file system
+  -f, --fakeroot                build with the appearance of running as root (default when building from a definition file unprivileged)
+      --fix-perms               ensure owner has rwX permissions on all container content for oci/docker sources
+  -F, --force                   overwrite an image file if it exists
+  -h, --help                    help for build
+      --json                    interpret build definition as JSON
+      --library string          container Library URL
+      --mount stringArray       a mount specification e.g. 'type=bind,source=/opt,destination=/hostopt'.
+      --no-cleanup              do NOT clean up bundle after failed build, can be helpful for debugging
+      --no-https                use http instead of https for docker:// oras:// and library://<hostname>/... URIs
+  -T, --notest                  build without running tests in %test section
+      --nv                      inject host Nvidia libraries during build for post and test sections
+      --nvccli                  use nvidia-container-cli for GPU setup (experimental)
+      --passphrase              prompt for an encryption passphrase
+      --pem-path string         enter an path to a PEM formatted RSA key for an encrypted container
+      --rocm                    inject host Rocm libraries during build for post and test sections
+  -s, --sandbox                 build image as sandbox format (chroot directory structure)
+      --section strings         only run specific section(s) of deffile (setup, post, files, environment, test, labels, none) (default [all])
+  -u, --update                  run definition over existing container (skips header)
+      --userns                  build without using setuid even if available
+      --writable-tmpfs          during the %test section, makes the file system accessible as read-write with non persistent data (with overlay support only)
 
 SEE ALSO
 ~~~~~~~~
@@ -193,4 +195,4 @@ SEE ALSO
 Linux container platform optimized for High Performance Computing (HPC) and
 Enterprise Performance Computing (EPC)
 
-*Auto generated by spf13/cobra on 8-Jun-2023*
+*Auto generated by spf13/cobra on 21-Jun-2023*
