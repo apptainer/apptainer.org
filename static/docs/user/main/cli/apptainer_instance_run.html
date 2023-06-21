@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>apptainer remote list &mdash; Apptainer User Guide main documentation</title>
+  <title>apptainer instance run &mdash; Apptainer User Guide main documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -22,8 +22,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="apptainer remote login" href="apptainer_remote_login.html" />
-    <link rel="prev" title="apptainer remote get-login-password" href="apptainer_remote_get-login-password.html" /> 
+    <link rel="next" title="apptainer instance start" href="apptainer_instance_start.html" />
+    <link rel="prev" title="apptainer instance list" href="apptainer_instance_list.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -118,7 +118,13 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_inspect.html">apptainer inspect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance.html">apptainer instance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance_list.html">apptainer instance list</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_instance_run.html">apptainer instance run</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">apptainer instance run</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#see-also">SEE ALSO</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance_start.html">apptainer instance start</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance_stats.html">apptainer instance stats</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance_stop.html">apptainer instance stop</a></li>
@@ -162,13 +168,7 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add.html">apptainer remote add</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add-keyserver.html">apptainer remote add-keyserver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_get-login-password.html">apptainer remote get-login-password</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">apptainer remote list</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#see-also">SEE ALSO</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_list.html">apptainer remote list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_login.html">apptainer remote login</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_logout.html">apptainer remote logout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove.html">apptainer remote remove</a></li>
@@ -212,9 +212,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../cli.html">Command Line Interface</a></li>
-      <li class="breadcrumb-item active">apptainer remote list</li>
+      <li class="breadcrumb-item active">apptainer instance run</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/cli/apptainer_remote_list.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/cli/apptainer_instance_run.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -222,37 +222,140 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="apptainer-remote-list">
-<span id="id1"></span><h1>apptainer remote list<a class="headerlink" href="#apptainer-remote-list" title="Permalink to this heading"></a></h1>
-<p>List all apptainer remote endpoints, keyservers, and OCI credentials that are configured</p>
+  <div class="section" id="apptainer-instance-run">
+<span id="id1"></span><h1>apptainer instance run<a class="headerlink" href="#apptainer-instance-run" title="Permalink to this heading"></a></h1>
+<p>Run a named instance of the given container image</p>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
 <blockquote>
-<div><p>The ‘remote list’ command lists all remote endpoints, keyservers, and OCI registry
-credentials configured for use.</p>
-<p>The current remote is indicated by ‘YES’ in the ‘ACTIVE’ column and can be changed
-with the ‘remote use’ command.</p>
+<div><p>The instance run command allows you to create a new named instance from an
+existing container image that will begin running in the background. If a
+runscript is defined in the container metadata the commands in that script
+will be executed with the instance run command as well. You can optionally
+pass arguments to runscript.</p>
+<p>NOTE: This command was added to Apptainer significantly later than the other
+action commands and will not work with older containers. In that case, you may
+need to rebuild the container.</p>
+<p>apptainer instance run accepts the following container formats</p>
+<dl class="simple">
+<dt><a href="#id2"><span class="problematic" id="id3">*</span></a>.sif               Singularity Image Format (SIF). Native to Singularity</dt><dd><p>(3.0+) and Apptainer (v1.0.0+)</p>
+</dd>
+</dl>
+<p><a href="#id4"><span class="problematic" id="id5">*</span></a>.sqsh              SquashFS format.  Native to Singularity 2.4+</p>
+<p><a href="#id6"><span class="problematic" id="id7">*</span></a>.img               ext3 format. Native to Singularity versions &lt; 2.4.</p>
+<dl class="simple">
+<dt>directory/          sandbox format. Directory containing a valid root file</dt><dd><p>system and optionally Apptainer meta-data.</p>
+</dd>
+<dt>instance://*        A local running instance of a container. (See the instance</dt><dd><p>command group.)</p>
+</dd>
+</dl>
+<p>library://*         A SIF container hosted on a Library (no default)</p>
+<dl class="simple">
+<dt>docker://*          A Docker/OCI container hosted on Docker Hub or another</dt><dd><p>OCI registry.</p>
+</dd>
+</dl>
+<p>shub://*            A container hosted on Singularity Hub.</p>
+<dl class="simple">
+<dt>oras://*            A SIF container hosted on an OCI registry that supports</dt><dd><p>the OCI Registry As Storage (ORAS) specification.</p>
+</dd>
+</dl>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">remote</span> <span class="nb">list</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">instance</span> <span class="n">run</span> <span class="p">[</span><span class="n">start</span> <span class="n">options</span><span class="o">...</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">container</span> <span class="n">path</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">instance</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">runscript</span> <span class="n">args</span><span class="o">...</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer remote list
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance run /tmp/my-sql.sif mysql
+
+$ apptainer shell instance://mysql
+Apptainer my-sql.sif&gt; pwd
+/home/mibauer/mysql
+Apptainer my-sql.sif&gt; ps
+PID TTY          TIME CMD
+  1 pts/0    00:00:00 appinit
+  2 pts/0    00:00:00 bash
+  3 pts/0    00:00:00 ps
+Apptainer my-sql.sif&gt;
+
+$ apptainer instance stop /tmp/my-sql.sif mysql
+Stopping /tmp/my-sql.sif mysql
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>   <span class="n">help</span> <span class="k">for</span> <span class="nb">list</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    --add-caps string               a comma separated capability list to add
+    --allow-setuid                  allow setuid binaries in container (root only)
+    --app string                    set an application to run inside a container
+    --apply-cgroups string          apply cgroups from file for container processes (root only)
+-B, --bind stringArray              a user-bind path specification.  spec has the format src[:dest[:opts]], where src and dest are outside and inside paths.  If dest is not given, it is set equal to src.  Mount options (&#39;opts&#39;) may be specified as &#39;ro&#39; (read-only) or &#39;rw&#39; (read/write, which is the default). Multiple bind paths can be given by a comma separated list.
+    --blkio-weight int              Block IO relative weight in range 10-1000, 0 to disable
+    --blkio-weight-device strings   Device specific block IO relative weight
+    --boot                          execute /sbin/init to boot container (root only)
+-e, --cleanenv                      clean environment before running container
+    --compat                        apply settings for increased OCI/Docker compatibility. Infers --containall, --no-init, --no-umask, --no-eval, --writable-tmpfs.
+-c, --contain                       use minimal /dev and empty other directories (e.g. /tmp and $HOME) instead of sharing filesystems from your host
+-C, --containall                    contain not only file systems, but also PID, IPC, and environment
+    --cpu-shares int                CPU shares for container (default -1)
+    --cpus string                   Number of CPUs available to container
+    --cpuset-cpus string            List of host CPUs available to container
+    --cpuset-mems string            List of host memory nodes available to container
+    --disable-cache                 do not use or create cache
+    --dmtcp-launch string           checkpoint for dmtcp to save container process state to (experimental)
+    --dmtcp-restart string          checkpoint for dmtcp to use to restart container process (experimental)
+    --dns string                    list of DNS server separated by commas to add in resolv.conf
+    --docker-host string            specify a custom Docker daemon host
+    --docker-login                  login to a Docker Repository interactively
+    --drop-caps string              a comma separated capability list to drop
+    --env stringToString            pass environment variable to contained process (default [])
+    --env-file string               pass environment variables from file to contained process
+-f, --fakeroot                      run container with the appearance of running as root
+    --fusemount strings             A FUSE filesystem mount specification of the form &#39;&lt;type&gt;:&lt;fuse command&gt; &lt;mountpoint&gt;&#39; - where &lt;type&gt; is &#39;container&#39; or &#39;host&#39;, specifying where the mount will be performed (&#39;container-daemon&#39; or &#39;host-daemon&#39; will run the FUSE process detached). &lt;fuse command&gt; is the path to the FUSE executable, plus options for the mount. &lt;mountpoint&gt; is the location in the container to which the FUSE mount will be attached. E.g. &#39;container:sshfs 10.0.0.1:/ /sshfs&#39;. Implies --pid.
+-h, --help                          help for run
+-H, --home string                   a home directory specification.  spec can either be a src path or src:dest pair.  src is the source path of the home directory outside the container and dest overrides the home directory within the container. (default &quot;/home/runner&quot;)
+    --hostname string               set container hostname
+-i, --ipc                           run container in a new IPC namespace
+    --keep-privs                    let root user keep privileges in container (root only)
+    --memory string                 Memory limit in bytes
+    --memory-reservation string     Memory soft limit in bytes
+    --memory-swap string            Swap limit, use -1 for unlimited swap
+    --mount stringArray             a mount specification e.g. &#39;type=bind,source=/opt,destination=/hostopt&#39;.
+-n, --net                           run container in a new network namespace (sets up a bridge network interface by default)
+    --network string                specify desired network type separated by commas, each network will bring up a dedicated interface inside container
+    --network-args strings          specify network arguments to pass to CNI plugins
+    --no-eval                       do not shell evaluate env vars or OCI container CMD/ENTRYPOINT/ARGS
+    --no-home                       do NOT mount users home directory if /home is not the current working directory
+    --no-https                      use http instead of https for docker:// oras:// and library://&lt;hostname&gt;/... URIs
+    --no-init                       do NOT start shim process with --pid
+    --no-mount strings              disable one or more &#39;mount xxx&#39; options set in apptainer.conf and/or specify absolute destination path to disable a bind path entry, or &#39;bind-paths&#39; to disable all bind path entries.
+    --no-privs                      drop all privileges from root user in container)
+    --no-umask                      do not propagate umask to the container, set default 0022 umask
+    --nv                            enable Nvidia support
+    --nvccli                        use nvidia-container-cli for GPU setup (experimental)
+    --oom-kill-disable              Disable OOM killer
+-o, --overlay strings               use an overlayFS image for persistent data storage or as read-only layer of container
+    --passphrase                    prompt for an encryption passphrase
+    --pem-path string               enter an path to a PEM formatted RSA key for an encrypted container
+    --pid-file string               write instance PID to the file with the given name
+    --pids-limit int                Limit number of container PIDs, use -1 for unlimited
+    --rocm                          enable experimental Rocm support
+-S, --scratch strings               include a scratch directory within the container that is linked to a temporary dir (use -W to force location)
+    --security strings              enable security features (SELinux, Apparmor, Seccomp)
+    --underlay                      use underlay
+    --unsquash                      Convert SIF file to temporary sandbox before running
+-u, --userns                        run container in a new user namespace
+    --uts                           run container in a new UTS namespace
+-W, --workdir string                working directory to be used for /tmp, /var/tmp and $HOME (if -c/--contain was also used)
+-w, --writable                      by default all Apptainer containers are available as read only. This option makes the file system accessible as read/write.
+    --writable-tmpfs                makes the file system accessible as read-write with non persistent data (with overlay support only)
 </pre></div>
 </div>
 </div>
 <div class="section" id="see-also">
 <h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="apptainer_remote.html#apptainer-remote"><span class="std std-ref">apptainer remote</span></a>     - Manage apptainer remote endpoints, keyservers and OCI/Docker registry credentials</p></li>
+<li><p><a class="reference internal" href="apptainer_instance.html#apptainer-instance"><span class="std std-ref">apptainer instance</span></a>         - Manage containers running as services</p></li>
 </ul>
 <p><em>Auto generated by spf13/cobra on 21-Jun-2023</em></p>
 </div>
@@ -262,8 +365,8 @@ with the ‘remote use’ command.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="apptainer_remote_get-login-password.html" class="btn btn-neutral float-left" title="apptainer remote get-login-password" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="apptainer_remote_login.html" class="btn btn-neutral float-right" title="apptainer remote login" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="apptainer_instance_list.html" class="btn btn-neutral float-left" title="apptainer instance list" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="apptainer_instance_start.html" class="btn btn-neutral float-right" title="apptainer instance start" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

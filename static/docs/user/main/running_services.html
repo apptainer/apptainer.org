@@ -186,15 +186,19 @@ registry:</p>
 <p>The above command will save the alpine image as <code class="docutils literal notranslate"><span class="pre">alpine_latest.sif</span></code>.</p>
 <div class="section" id="starting-instances">
 <h3>Starting Instances<a class="headerlink" href="#starting-instances" title="Permalink to this heading"></a></h3>
-<p>To start an instance, you should follow this procedure :</p>
+<p>To start an instance, you should follow this procedure:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[command]                      [image]              [name of instance]
 
 $ apptainer instance start   alpine_latest.sif     instance1
 </pre></div>
 </div>
-<p>This command causes Apptainer to create an isolated environment for
-the container services to live inside. You can confirm that an instance
-is running by using the <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">list</span></code> command:</p>
+<p>This command causes Apptainer to create an isolated environment for the
+container services to live inside. It will execute the contents of the
+<code class="docutils literal notranslate"><span class="pre">startscript</span></code> file which can be defined when you build the container via the
+def file. You can also use the <cite>instance run</cite> command if you want the container
+to execute the <code class="docutils literal notranslate"><span class="pre">runscript</span></code> when the instance initiates.</p>
+<p>You can confirm that an instance is running by using the <code class="docutils literal notranslate"><span class="pre">instance</span>
+<span class="pre">list</span></code> command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance list
 
 INSTANCE NAME    PID      IP              IMAGE
@@ -233,6 +237,14 @@ instance2        22443                    /home/dave/instances/alpine_latest.sif
 <p>When an instance is started, it will begin to run the <code class="docutils literal notranslate"><span class="pre">%startscript</span></code> from the
 container’s <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">definition file</span></a> in the background. If
 there is no <code class="docutils literal notranslate"><span class="pre">%startscript</span></code> the container will stay idle in the background.</p>
+<p>You can also define start scripts on a per app basis.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start --app myapp alpine_latest.sif myapp-instance
+</pre></div>
+</div>
+<p>When this app instance is started, it will begin to run the <code class="docutils literal notranslate"><span class="pre">%myappstart</span></code> from the
+container’s <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">definition file</span></a> in the background. If
+there is no <code class="docutils literal notranslate"><span class="pre">%myappstart</span></code> the container will stay idle in the background.</p>
+<p>Besides how they are started, app instances behave just like regular instances.</p>
 </div>
 <div class="section" id="interacting-with-instances">
 <h3>Interacting With Instances<a class="headerlink" href="#interacting-with-instances" title="Permalink to this heading"></a></h3>

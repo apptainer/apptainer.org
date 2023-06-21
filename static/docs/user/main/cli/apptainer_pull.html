@@ -118,6 +118,7 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_inspect.html">apptainer inspect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance.html">apptainer instance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance_list.html">apptainer instance list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_instance_run.html">apptainer instance run</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance_start.html">apptainer instance start</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance_stats.html">apptainer instance stats</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_instance_stop.html">apptainer instance stop</a></li>
@@ -166,6 +167,7 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote.html">apptainer remote</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add.html">apptainer remote add</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add-keyserver.html">apptainer remote add-keyserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_get-login-password.html">apptainer remote get-login-password</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_list.html">apptainer remote list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_login.html">apptainer remote login</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_logout.html">apptainer remote logout</a></li>
@@ -252,6 +254,7 @@ $ apptainer pull alpine.sif library://alpine:latest
 
 From Docker
 $ apptainer pull tensorflow.sif docker://tensorflow/tensorflow:latest
+$ apptainer pull --arch arm --arch-variant 6 alpine.sif docker://alpine:latest
 
 From Shub
 $ apptainer pull apptainer-images.sif shub://vsoch/apptainer-images
@@ -263,16 +266,17 @@ $ apptainer pull image.sif oras://&lt;username&gt;.azurecr.io/namespace/image:ta
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">--</span><span class="n">arch</span> <span class="n">string</span>          <span class="n">architecture</span> <span class="n">to</span> <span class="n">pull</span> <span class="kn">from</span> <span class="nn">library</span> <span class="p">(</span><span class="n">default</span> <span class="s2">&quot;amd64&quot;</span><span class="p">)</span>
-    <span class="o">--</span><span class="nb">dir</span> <span class="n">string</span>           <span class="n">download</span> <span class="n">images</span> <span class="n">to</span> <span class="n">the</span> <span class="n">specific</span> <span class="n">directory</span>
-    <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">cache</span>        <span class="n">do</span> <span class="ow">not</span> <span class="n">use</span> <span class="ow">or</span> <span class="n">create</span> <span class="n">cached</span> <span class="n">images</span><span class="o">/</span><span class="n">blobs</span>
-    <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">host</span> <span class="n">string</span>   <span class="n">specify</span> <span class="n">a</span> <span class="n">custom</span> <span class="n">Docker</span> <span class="n">daemon</span> <span class="n">host</span>
-    <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">login</span>         <span class="n">login</span> <span class="n">to</span> <span class="n">a</span> <span class="n">Docker</span> <span class="n">Repository</span> <span class="n">interactively</span>
-<span class="o">-</span><span class="n">F</span><span class="p">,</span> <span class="o">--</span><span class="n">force</span>                <span class="n">overwrite</span> <span class="n">an</span> <span class="n">image</span> <span class="n">file</span> <span class="k">if</span> <span class="n">it</span> <span class="n">exists</span>
-<span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>                 <span class="n">help</span> <span class="k">for</span> <span class="n">pull</span>
-    <span class="o">--</span><span class="n">library</span> <span class="n">string</span>       <span class="n">download</span> <span class="n">images</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">provided</span> <span class="n">library</span>
-    <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cleanup</span>           <span class="n">do</span> <span class="n">NOT</span> <span class="n">clean</span> <span class="n">up</span> <span class="n">bundle</span> <span class="n">after</span> <span class="n">failed</span> <span class="n">build</span><span class="p">,</span> <span class="n">can</span> <span class="n">be</span> <span class="n">helpful</span> <span class="k">for</span> <span class="n">debugging</span>
-    <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">https</span>             <span class="n">use</span> <span class="n">http</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">https</span> <span class="k">for</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span> <span class="n">oras</span><span class="p">:</span><span class="o">//</span> <span class="ow">and</span> <span class="n">library</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">hostname</span><span class="o">&gt;/...</span> <span class="n">URIs</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">--</span><span class="n">arch</span> <span class="n">string</span>           <span class="n">architecture</span> <span class="n">to</span> <span class="n">pull</span> <span class="kn">from</span> <span class="nn">library</span> <span class="p">(</span><span class="n">default</span> <span class="s2">&quot;amd64&quot;</span><span class="p">)</span>
+    <span class="o">--</span><span class="n">arch</span><span class="o">-</span><span class="n">variant</span> <span class="n">string</span>   <span class="n">architecture</span> <span class="n">variant</span> <span class="n">to</span> <span class="n">pull</span> <span class="kn">from</span> <span class="nn">library</span>
+    <span class="o">--</span><span class="nb">dir</span> <span class="n">string</span>            <span class="n">download</span> <span class="n">images</span> <span class="n">to</span> <span class="n">the</span> <span class="n">specific</span> <span class="n">directory</span>
+    <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">cache</span>         <span class="n">do</span> <span class="ow">not</span> <span class="n">use</span> <span class="ow">or</span> <span class="n">create</span> <span class="n">cached</span> <span class="n">images</span><span class="o">/</span><span class="n">blobs</span>
+    <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">host</span> <span class="n">string</span>    <span class="n">specify</span> <span class="n">a</span> <span class="n">custom</span> <span class="n">Docker</span> <span class="n">daemon</span> <span class="n">host</span>
+    <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">login</span>          <span class="n">login</span> <span class="n">to</span> <span class="n">a</span> <span class="n">Docker</span> <span class="n">Repository</span> <span class="n">interactively</span>
+<span class="o">-</span><span class="n">F</span><span class="p">,</span> <span class="o">--</span><span class="n">force</span>                 <span class="n">overwrite</span> <span class="n">an</span> <span class="n">image</span> <span class="n">file</span> <span class="k">if</span> <span class="n">it</span> <span class="n">exists</span>
+<span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>                  <span class="n">help</span> <span class="k">for</span> <span class="n">pull</span>
+    <span class="o">--</span><span class="n">library</span> <span class="n">string</span>        <span class="n">download</span> <span class="n">images</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">provided</span> <span class="n">library</span>
+    <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cleanup</span>            <span class="n">do</span> <span class="n">NOT</span> <span class="n">clean</span> <span class="n">up</span> <span class="n">bundle</span> <span class="n">after</span> <span class="n">failed</span> <span class="n">build</span><span class="p">,</span> <span class="n">can</span> <span class="n">be</span> <span class="n">helpful</span> <span class="k">for</span> <span class="n">debugging</span>
+    <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">https</span>              <span class="n">use</span> <span class="n">http</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">https</span> <span class="k">for</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span> <span class="n">oras</span><span class="p">:</span><span class="o">//</span> <span class="ow">and</span> <span class="n">library</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">hostname</span><span class="o">&gt;/...</span> <span class="n">URIs</span>
 </pre></div>
 </div>
 </div>
@@ -283,7 +287,7 @@ $ apptainer pull image.sif oras://&lt;username&gt;.azurecr.io/namespace/image:ta
 </ul>
 <p>Linux container platform optimized for High Performance Computing (HPC) and
 Enterprise Performance Computing (EPC)</p>
-<p><em>Auto generated by spf13/cobra on 8-Jun-2023</em></p>
+<p><em>Auto generated by spf13/cobra on 21-Jun-2023</em></p>
 </div>
 </div>
 
