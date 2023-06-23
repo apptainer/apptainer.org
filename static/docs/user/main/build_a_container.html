@@ -64,6 +64,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#building-containers-from-apptainer-definition-files">Building containers from Apptainer definition files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-encrypted-containers">Building encrypted containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#build-options">Build options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-arg"><code class="docutils literal notranslate"><span class="pre">--build-arg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-arg-file"><code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#warn-unused-build-args"><code class="docutils literal notranslate"><span class="pre">--warn-unused-build-args</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#encrypt"><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fakeroot"><code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#force"><code class="docutils literal notranslate"><span class="pre">--force</span></code></a></li>
@@ -288,6 +291,23 @@ meaning that no intermediate decrypted data is ever written to disk. See
 </div>
 <div class="section" id="build-options">
 <h2>Build options<a class="headerlink" href="#build-options" title="Permalink to this heading"></a></h2>
+<div class="section" id="build-arg">
+<h3><code class="docutils literal notranslate"><span class="pre">--build-arg</span></code><a class="headerlink" href="#build-arg" title="Permalink to this heading"></a></h3>
+<p>Specifies values of <a class="reference internal" href="definition_files.html#id2"><span class="std std-ref">defined template variables</span></a> in the
+definition file. Values passed via <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> follow the form of
+<code class="docutils literal notranslate"><span class="pre">variable=value</span></code>. Multiple <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> options are acceptable for build command.</p>
+</div>
+<div class="section" id="build-arg-file">
+<h3><code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code><a class="headerlink" href="#build-arg-file" title="Permalink to this heading"></a></h3>
+<p>Similar to <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> but specifiles values of defined template variables
+via a file, which contains multiple <code class="docutils literal notranslate"><span class="pre">variable=value</span></code> entries.</p>
+</div>
+<div class="section" id="warn-unused-build-args">
+<h3><code class="docutils literal notranslate"><span class="pre">--warn-unused-build-args</span></code><a class="headerlink" href="#warn-unused-build-args" title="Permalink to this heading"></a></h3>
+<p>By default, when users provide unused variables to the build process, fatal
+errors will return. This option makes the build process show warnings instead of
+returning fatal errors.</p>
+</div>
 <div class="section" id="encrypt">
 <h3><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code><a class="headerlink" href="#encrypt" title="Permalink to this heading"></a></h3>
 <p>Specifies that Apptainer should use a secret saved in either the

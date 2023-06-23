@@ -65,6 +65,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#sections">Sections</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#arguments">%arguments</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#setup">%setup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#files">%files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#app">%app*</a></li>
@@ -293,8 +294,11 @@ every section (or any sections at all) within a def file. Furthermore,
 multiple sections of the same name can be included and will be appended
 to one another during the build process.</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
-<span class="k">From</span>: ubuntu:<span class="m">22.04</span>
+<span class="k">From</span>: ubuntu:{{ VERSION }}
 Stage: build
+
+<span class="err">%</span>arguments
+    VERSION=<span class="m">22.04</span>
 
 <span class="gh">%setup</span>
 <span class="w">    </span>touch<span class="w"> </span>/file1
@@ -342,6 +346,32 @@ Stage: build
 <p>Although the order of the sections in the def file is unimportant, they
 have been documented below in the order of their execution during the
 build process for ease of understanding.</p>
+<div class="section" id="arguments">
+<h3>%arguments<a class="headerlink" href="#arguments" title="Permalink to this heading"></a></h3>
+<p id="id2">During the build process, variables defined via a matching pair of double curly
+brackets in the current definition file, i.e., the form of <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">variable</span> <span class="pre">}}</span></code>,
+will be replaced by a value defined by a <code class="docutils literal notranslate"><span class="pre">variable=value</span></code> entry in this section.
+Note that values defined in this section are only the default values for defined
+variables; if the same variables are passed with different values via the options
+<code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> or <code class="docutils literal notranslate"><span class="pre">-biuld-arg-file</span></code> they will overwrite values defined in
+this section.</p>
+<p>Consider the example from the definition file above:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: ubuntu:{{ VERSION }}
+Stage: build
+
+<span class="err">%</span>arguments
+   VERSION=<span class="m">22.04</span>
+</pre></div>
+</div>
+<p>The value in this entry <code class="docutils literal notranslate"><span class="pre">VERSION=22.04</span></code> will replace the template variable
+<code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">VERSION</span> <span class="pre">}}</span></code> during the build process by default.</p>
+<p>However, if a user builds the image with the command</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>apptainer build --build-arg VERSION=<span class="m">23.04</span> my_container.sif my_container.def
+</pre></div>
+</div>
+<p>then the From image tag will be overridden to <code class="docutils literal notranslate"><span class="pre">23.04</span></code> rather than <code class="docutils literal notranslate"><span class="pre">22.04</span></code>.</p>
+</div>
 <div class="section" id="setup">
 <h3>%setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h3>
 <p>During the build process, commands in the <code class="docutils literal notranslate"><span class="pre">%setup</span></code> section are first
@@ -604,7 +634,7 @@ the host, or <code class="docutils literal notranslate"><span class="pre">defaul
 information about the Apptainer container environment.</p>
 </div>
 <div class="section" id="startscript">
-<span id="id2"></span><h3>%startscript<a class="headerlink" href="#startscript" title="Permalink to this heading"></a></h3>
+<span id="id3"></span><h3>%startscript<a class="headerlink" href="#startscript" title="Permalink to this heading"></a></h3>
 <p>Similar to the <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> section, the contents of the
 <code class="docutils literal notranslate"><span class="pre">%startscript</span></code> section are written to a dedicated file within the
 container at build time. This file is executed when the <code class="docutils literal notranslate"><span class="pre">instance</span>
@@ -630,7 +660,7 @@ Stopping instance1 instance of /home/vagrant/my_container.sif (PID=19035)
 </div>
 </div>
 <div class="section" id="runscript">
-<span id="id3"></span><h3>%runscript<a class="headerlink" href="#runscript" title="Permalink to this heading"></a></h3>
+<span id="id4"></span><h3>%runscript<a class="headerlink" href="#runscript" title="Permalink to this heading"></a></h3>
 <p>The contents of the <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> section are written to a dedicated
 file within the container that is executed when the container image is
 run (either via the <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run</span></code> command or by <a class="reference internal" href="quick_start.html#runcontainer"><span class="std std-ref">executing
