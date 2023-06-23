@@ -1211,9 +1211,9 @@ Apptainer definition files. For more detail please see
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 18%" />
-<col style="width: 31%" />
+<col style="width: 30%" />
 <col style="width: 18%" />
-<col style="width: 33%" />
+<col style="width: 35%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head" colspan="2"><p>Apptainer        Definition file</p></th>
@@ -1259,7 +1259,25 @@ Apptainer definition files. For more detail please see
 </div>
 </td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%setup</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%arguments</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Section to set the</div>
+<div class="line">default values for</div>
+<div class="line">defined variables in</div>
+<div class="line">the definition file.</div>
+<div class="line">Used for image building</div>
+<div class="line">process.</div>
+</div>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ARG</span></code></p></td>
+<td><div class="line-block">
+<div class="line">Support templating build.</div>
+<div class="line">Users can change the variable</div>
+<div class="line">values among different builds.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%setup</span></code></p></td>
 <td><div class="line-block">
 <div class="line">Run setup commands</div>
 <div class="line">outside of the</div>
@@ -1274,7 +1292,7 @@ Apptainer definition files. For more detail please see
 </div>
 </td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%files</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%files</span></code></p></td>
 <td><div class="line-block">
 <div class="line">Copy files from</div>
 <div class="line">your host to</div>
@@ -1291,7 +1309,7 @@ Apptainer definition files. For more detail please see
 </div>
 </td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%environment</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%environment</span></code></p></td>
 <td><div class="line-block">
 <div class="line">Declare and set</div>
 <div class="line">container environment</div>
@@ -1306,7 +1324,7 @@ Apptainer definition files. For more detail please see
 </div>
 </td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%help</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%help</span></code></p></td>
 <td><div class="line-block">
 <div class="line">Provide a help</div>
 <div class="line">section for your</div>
@@ -1319,7 +1337,7 @@ Apptainer definition files. For more detail please see
 </div>
 </td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%post</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%post</span></code></p></td>
 <td><div class="line-block">
 <div class="line">Commands that will</div>
 <div class="line">be run at</div>
@@ -1334,7 +1352,7 @@ Apptainer definition files. For more detail please see
 </div>
 </td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%runscript`</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%runscript`</span></code></p></td>
 <td><div class="line-block">
 <div class="line">Commands that will</div>
 <div class="line">be run when you</div>
@@ -1351,7 +1369,7 @@ Apptainer definition files. For more detail please see
 </div>
 </td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%startscript</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%startscript</span></code></p></td>
 <td><div class="line-block">
 <div class="line">Commands that will</div>
 <div class="line">be run when</div>
@@ -1364,7 +1382,7 @@ Apptainer definition files. For more detail please see
 </div>
 </td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%test</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%test</span></code></p></td>
 <td><div class="line-block">
 <div class="line">Commands that run</div>
 <div class="line">at the very end</div>
@@ -1387,7 +1405,7 @@ Apptainer definition files. For more detail please see
 </div>
 </td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%apps</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%apps</span></code></p></td>
 <td><div class="line-block">
 <div class="line">Allows you to install</div>
 <div class="line">internal modules</div>
@@ -1401,7 +1419,7 @@ Apptainer definition files. For more detail please see
 </div>
 </td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%labels</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%labels</span></code></p></td>
 <td><div class="line-block">
 <div class="line">Section to add and</div>
 <div class="line">define metadata</div>
