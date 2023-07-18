@@ -219,7 +219,9 @@ the requested network namespace (see below).</p>
 <p>A “fake root” user can never access or modify files and directories for
 which they don’t already have access or rights on the host filesystem,
 so a “fake root” user won’t be able to access root-only host files
-such as <code class="docutils literal notranslate"><span class="pre">/etc/shadow</span></code> or the host <code class="docutils literal notranslate"><span class="pre">/root</span></code> directory.</p>
+such as <code class="docutils literal notranslate"><span class="pre">/etc/shadow</span></code> or the host <code class="docutils literal notranslate"><span class="pre">/root</span></code> directory.
+As a convenience, by default the original user’s home directory is bound
+to <code class="docutils literal notranslate"><span class="pre">/root</span></code> inside the container.</p>
 <p>Additionally, all files or directories created by the “fake root”
 user are owned by <code class="docutils literal notranslate"><span class="pre">root:root</span></code> inside the container but as <code class="docutils literal notranslate"><span class="pre">user:group</span></code>
 outside of the container.</p>
