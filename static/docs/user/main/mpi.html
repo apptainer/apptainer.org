@@ -331,9 +331,6 @@ From: ubuntu:22.04
     export PATH=&quot;$OMPI_DIR/bin:$PATH&quot;
     export LD_LIBRARY_PATH=&quot;$OMPI_DIR/lib:$LD_LIBRARY_PATH&quot;
     export MANPATH=&quot;$OMPI_DIR/share/man:$MANPATH&quot;
-    # Work around a problem that UCX has with unprivileged user namespaces
-    # See https://github.com/apptainer/apptainer/issues/769
-    export UCX_POSIX_USE_PROC_LINK=n
 
 %post
     echo &quot;Installing required packages...&quot;
@@ -367,6 +364,17 @@ PMI2 / PMIx, as used on the host.</p>
 <p>There are wide variations in MPI configuration across HPC systems.
 Consult your system documentation, or ask your support staff for
 details.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The MPI UCX library has a problem with unprivileged user namespaces.
+See <a href="#id2"><span class="problematic" id="id3">`apptainer issue 769
+&lt;https://github.com/apptainer/apptainer/issues/769 &gt;`__</span></a>
+for details and for now use the <code class="docutils literal notranslate"><span class="pre">UCX_TLS=sysv,ib</span></code> transport as a
+workaround, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mpirun -np 2 -mca pml ucx -x UCX_TLS=sysv,ib apptainer exec $MY_CONTAINER ./a.out
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="running-an-mpi-application">
