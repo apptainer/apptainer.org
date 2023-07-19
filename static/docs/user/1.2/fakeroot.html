@@ -156,7 +156,7 @@ This is also commonly referred to as “rootless mode” and is the
 method used for example by Podman.
 This mode requires user namespaces to be enabled.
 It is the most complete emulation but it requires administrator setup
-as described in the <a class="reference external" href="https://apptainer.org/docs/admin/main/user_namespace.html#rootless-fakeroot-feature">admin guide</a>.
+as described in the <a class="reference external" href="https://apptainer.org/docs/admin/1.2/user_namespace.html#rootless-fakeroot-feature">admin guide</a>.
 It also requires some elevated privilege assistance on the host as described
 there, which means that it will not be able to run nested inside another
 container that disallows elevating privileges, as Apptainer does.
@@ -185,7 +185,7 @@ different vintage than the corresponding container the
 fakeroot command can fail with errors about a missing GLIBC version.
 If that situation happens the easiest solution is to first run a
 container with an operating system matching the target glibc version,
-<a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html#install-from-pre-built-packages">install Apptainer unprivileged</a>
+<a class="reference external" href="https://apptainer.org/docs/admin/1.2/installation.html#install-from-pre-built-packages">install Apptainer unprivileged</a>
 there, and do the build nested inside that container.</p></li>
 <li><p>If user namespaces are not available but Apptainer has been installed
 with setuid-root and also the “fakeroot” command is available, then
