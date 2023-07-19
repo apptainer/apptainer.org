@@ -109,10 +109,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#n"><code class="docutils literal notranslate"><span class="pre">N</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#o"><code class="docutils literal notranslate"><span class="pre">O</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#p"><code class="docutils literal notranslate"><span class="pre">P</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q"><code class="docutils literal notranslate"><span class="pre">Q</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#r"><code class="docutils literal notranslate"><span class="pre">R</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#s"><code class="docutils literal notranslate"><span class="pre">S</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#t"><code class="docutils literal notranslate"><span class="pre">T</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#u"><code class="docutils literal notranslate"><span class="pre">U</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#v"><code class="docutils literal notranslate"><span class="pre">V</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#w"><code class="docutils literal notranslate"><span class="pre">W</span></code></a></li>
 </ul>
 </li>
@@ -270,6 +272,8 @@ cleaned or not before running the container. Default is set to false.</p></li>
 <li><p><strong>APPTAINER_COMPAT</strong>: Set to true to enable Docker/OCI compatibility mode.
 Equivalent to setting <code class="docutils literal notranslate"><span class="pre">--containall</span> <span class="pre">--no-eval</span> <span class="pre">--no-init</span> <span class="pre">--no-umask</span>
 <span class="pre">--writable-tmpfs</span></code>. Default is false.</p></li>
+<li><p><strong>APPTAINER_CONFIGDIR</strong>: Specifies the directory to use for
+per-user configuration.  The default is <code class="docutils literal notranslate"><span class="pre">$HOME/.apptainer</span></code>.</p></li>
 <li><p><strong>APPTAINER_CONTAIN</strong>: To use minimal <code class="docutils literal notranslate"><span class="pre">/dev</span></code> and empty other
 directories (e.g. <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> and <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>) instead of sharing
 filesystems from your host. Default is set to false.</p></li>
@@ -431,6 +435,8 @@ container.</p></li>
 pass to CNI plugins.</p></li>
 <li><p><strong>APPTAINER_NOCLEANUP</strong>: To not clean up the bundle after a failed
 build, this can be helpful for debugging. Default is set to false.</p></li>
+<li><p><strong>APPTAINER_NOCOLOR</strong>: Print mesages without color output.
+Default is set to false unless stderr is not a terminal.</p></li>
 <li><p><strong>APPTAINER_NOHTTPS</strong>: Sets to either false or true to avoid using
 HTTPS for communicating with the local docker registry. Default is
 set to false.</p></li>
@@ -476,6 +482,13 @@ the container may spawn. Default is 0 (no limit).</p></li>
 working directory for payload process inside the container.</p></li>
 </ol>
 </div>
+<div class="section" id="q">
+<h3><code class="docutils literal notranslate"><span class="pre">Q</span></code><a class="headerlink" href="#q" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>APPTAINER_QUIET</strong>: Suppresses all Info messages.
+Default is set to false.</p></li>
+</ol>
+</div>
 <div class="section" id="r">
 <h3><code class="docutils literal notranslate"><span class="pre">R</span></code><a class="headerlink" href="#r" title="Permalink to this heading"></a></h3>
 <ol class="arabic simple">
@@ -501,6 +514,8 @@ default which display the public ones.</p></li>
 <li><p><strong>APPTAINER_SHELL</strong>: The path to the program to be used as an
 interactive shell.</p></li>
 <li><p><strong>APPTAINER_SIGNAL</strong>: Specifies a signal sent to the instance.</p></li>
+<li><p><strong>APPTAINER_SILENT</strong>: Suppresses all Info and Warning messages.
+Default is set to false.</p></li>
 </ol>
 </div>
 <div class="section" id="t">
@@ -534,6 +549,13 @@ the given user.</p></li>
 that the container will run in a new user namespace, allowing
 Apptainer to run completely unprivileged even with a setuid
 installation.
+Default is set to false.</p></li>
+</ol>
+</div>
+<div class="section" id="v">
+<h3><code class="docutils literal notranslate"><span class="pre">V</span></code><a class="headerlink" href="#v" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>APPTAINER_VERBOSE</strong>: Print additional information.
 Default is set to false.</p></li>
 </ol>
 </div>
