@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-markdown-remark-frontmatter-slug-js",
+    "path": "/news/apptainer-1-2-0-20230718/",
+    "result": {"data":{"markdownRemark":{"html":"<p>We are happy to announce that\n<a href=\"https://github.com/apptainer/apptainer/releases/tag/v1.2.0\">Apptainer version 1.2.0</a>\nis now available.</p>\n<p>This release has many new features, changes, and bug fixes.</p>\n<p>The most significant new features are unprivileged encryption of SIF\nfiles and templating for build definition files.\nPlease see the above linked release announcement for all the details.</p>\n<p>As always, please report any problems as an\n<a href=\"https://github.com/apptainer/apptainer/issues\">issue on github</a>.</p>","frontmatter":{"date":"July 18, 2023","slug":"/news/apptainer-1-2-0-20230718","title":"Announcing Apptainer release 1.2.0"}}},"pageContext":{"id":"e0fbb2fe-6948-53af-9d71-070f7feb7e12","frontmatter__slug":"/news/apptainer-1-2-0-20230718","__params":{"frontmatter__slug":"news"}}},
+    "staticQueryHashes": ["3649515864","63159454"]}
