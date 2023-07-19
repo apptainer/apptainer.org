@@ -254,16 +254,25 @@ bar  foo
 <code class="docutils literal notranslate"><span class="pre">/data</span></code> on the host to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> in the container.</p>
 <p>Using the environment variable instead of the command line argument,
 this would be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_BIND=&quot;/opt,/data:/mnt&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_BINDPATH=&quot;/opt,/data:/mnt&quot;
 
 $ apptainer shell my_container.sif
 </pre></div>
 </div>
-<p>Using the environment variable <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BIND</span></code>, you can bind paths
+<p>Using the environment variable <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BINDPATH</span></code>, you can bind paths
 even when you are running your container as an executable file with a
 runscript. If you bind many directories into your Apptainer
 containers and they don’t change, you could even benefit by setting this
 variable in your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Inside an Apptainer container all the paths that were bound in are set
+in the <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BIND</span></code> variable.  That means they will be
+automatically bound in again by default if another apptainer command is
+run nested inside the first container.  You can change that variable
+if you choose before that point, but if you want to avoid interfering
+with nested containers it’s better to use <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BINDPATH</span></code>.</p>
+</div>
 </div>
 <div class="section" id="mount-examples">
 <h3><code class="docutils literal notranslate"><span class="pre">--mount</span></code> Examples<a class="headerlink" href="#mount-examples" title="Permalink to this heading"></a></h3>

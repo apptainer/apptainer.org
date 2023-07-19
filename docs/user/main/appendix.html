@@ -252,7 +252,10 @@ file for container processes. (it requires root privileges)</p></li>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_BIND</strong> and <strong>APPTAINER_BINDPATH</strong>: Comma separated
 string <code class="docutils literal notranslate"><span class="pre">source:&lt;dest&gt;</span></code> list of paths to bind between the host and
-the container.</p></li>
+the container, applied in that order.
+Note that <code class="docutils literal notranslate"><span class="pre">APPTAINER_BIND</span></code> is also automatically set inside a
+container to list all the paths bound to it, so that by default all
+the same binds will be applied to nested apptainer commands.</p></li>
 <li><p><strong>APPTAINER_BLKIO_WEIGHT</strong>: Specify a relative weight for block
 device access during contention. Range 10-1000. Default is 0 (disabled).</p></li>
 <li><p><strong>APPTAINER_BLKIO_WEIGHT_DEVICE</strong>: Specify a relative weight for
