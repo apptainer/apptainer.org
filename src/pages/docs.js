@@ -7,6 +7,7 @@ import Seo from "../components/seo"
 const docsVersions = [
     { version: 'latest' },
     { version: 'main' },
+    { version: '1.2'  },
     { version: '1.1'  },
     { version: '1.0'  },
 ]
