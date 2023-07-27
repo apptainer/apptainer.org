@@ -368,8 +368,7 @@ details.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The MPI UCX library has a problem with unprivileged user namespaces.
-See <a href="#id2"><span class="problematic" id="id3">`apptainer issue 769
-&lt;https://github.com/apptainer/apptainer/issues/769 &gt;`__</span></a>
+See <a class="reference external" href="https://github.com/apptainer/apptainer/issues/769">apptainer issue 769</a>
 for details and for now use the <code class="docutils literal notranslate"><span class="pre">UCX_TLS=sysv,ib</span></code> transport as a
 workaround, for example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mpirun -np 2 -mca pml ucx -x UCX_TLS=sysv,ib apptainer exec $MY_CONTAINER ./a.out
