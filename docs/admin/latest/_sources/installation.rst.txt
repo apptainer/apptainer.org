@@ -573,7 +573,7 @@ To use Vagrant via Homebrew:
 
 .. code::
 
-   $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+   $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    $ brew install --cask virtualbox vagrant vagrant-manager
 
 Use ``vagrant init`` to create a new Vagrantfile, or use this example:
@@ -611,7 +611,7 @@ To use Lima via Homebrew:
 
 .. code::
 
-   $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+   $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    $ brew install qemu lima
 
 Then do ``limactl start template://apptainer`` and ``limactl shell apptainer``.
