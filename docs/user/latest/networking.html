@@ -140,7 +140,8 @@ configure a virtualized network for a container.</p>
 <p>Many of these options are available only to the <code class="docutils literal notranslate"><span class="pre">root</span></code> user by
 default. Unrestricted ability to configure networking for containers
 would allow users to affect networking on the host, or in a cluster.</p>
-<p>Apptainer allows the administrator to permit a list of
+<p>The administrator of a setuid-root installation of Apptainer
+is able to permit a list of
 unprivileged users and/or groups to use specified network
 configurations. This is accomplished through settings in
 <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> and only work in setuid mode.
