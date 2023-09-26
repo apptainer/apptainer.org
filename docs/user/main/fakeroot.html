@@ -180,13 +180,13 @@ installations attempt to do additional setup that only works as root.
 When the fakeroot command is used, an INFO message is displayed.
 The combination of a root-mapped user namespace with the fakeroot command
 allows most package installations to work, but the fakeroot command is
-bound in from the host so if the host libc library is of a very
-different vintage than the corresponding container the
-fakeroot command can fail with errors about a missing GLIBC version.
-If that situation happens the easiest solution is to first run a
-container with an operating system matching the target glibc version,
-<a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html#install-from-pre-built-packages">install Apptainer unprivileged</a>
-there, and do the build nested inside that container.</p></li>
+bound in from the host so if the host libc library is a newer version
+than the corresponding library in the container the
+fakeroot command can fail with errors about missing GLIBC versions.
+If that situation happens the easiest solution is to use the
+<a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html#install-from-pre-built-packages">install-unprivileged.sh script</a>
+to install Apptainer because it downloads a fakeroot command
+built with as old a libc as possible.</p></li>
 <li><p>If user namespaces are not available but Apptainer has been installed
 with setuid-root and also the “fakeroot” command is available, then
 the fakeroot command will be run by itself.
