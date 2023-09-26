@@ -270,6 +270,9 @@ Multiple architectures can be installed into the same directory on a
 shared filesystem and it will automatically pick the correct
 architecture when it runs.  
 Architectures supported by EPEL and Fedora are supported.
+By default it installs from the oldest supported EPEL version available,
+for maximum compatibility when working with containers based on old
+or new operating system distributions.
 
 
 Install from pre-built packages
