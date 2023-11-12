@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build Environment &mdash; Apptainer User Guide 1.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/js/ga.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Fakeroot feature" href="fakeroot.html" />
+    <link rel="prev" title="Definition Files" href="definition_files.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Build Environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cache-folders">Cache Folders</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#boltdb-corruption-errors">BoltDB Corruption Errors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cache-commands">Cache commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#listing-the-cache">Listing the Cache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cleaning-the-cache">Cleaning the Cache</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#temporary-folders">Temporary Folders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#encrypted-containers">Encrypted Containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-variables">Environment Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#defaults">Defaults</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#docker">Docker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#library">Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encryption">Encryption</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Instances - Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Limiting Container Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Application Checkpointing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apptainer User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Build Environment</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/build_env.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="build-environment">
+<span id="id1"></span><h1>Build Environment<a class="headerlink" href="#build-environment" title="Permalink to this heading"></a></h1>
+<div class="section" id="overview">
+<span id="sec-buildenv"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>You may wish to customize your build environment by doing things such as
+specifying a custom cache directory for images, or sending your Docker
+Credentials to the registry endpoint. In this section, we will discuss these and
+other topics related to the build environment.</p>
+</div>
+<div class="section" id="cache-folders">
+<span id="sec-cache"></span><h2>Cache Folders<a class="headerlink" href="#cache-folders" title="Permalink to this heading"></a></h2>
+<p>Apptainer will cache SIF container images generated from remote
+sources, and any OCI/docker layers used to create them. The cache is
+created at <code class="docutils literal notranslate"><span class="pre">$HOME/.apptainer/cache</span></code> by default. The location of the
+cache can be changed by setting the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> environment
+variable.</p>
+<p>If you run builds as root, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, images will be cached in root’s home
+directory at <code class="docutils literal notranslate"><span class="pre">/root</span></code>, rather than your user’s home directory. If you have set
+the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> environment variable, you may use <code class="docutils literal notranslate"><span class="pre">sudo</span></code>’s <code class="docutils literal notranslate"><span class="pre">-E</span></code>
+option to pass the value of <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> through to the root user’s
+environment. This allows you to control where images will be cached even when
+running builds under <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_CACHEDIR=/tmp/user/temporary-cache
+
+# Running a build under your user account
+$ apptainer build --fakeroot myimage.sif mydef.def
+
+# Running a build with sudo, must use -E to pass env var
+$ sudo -E apptainer build myimage.sif mydef.def
+</pre></div>
+</div>
+<p>If you change the value of <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> be sure to choose a
+location that is:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Unique to you. Permissions are set on the cache so that private images
+cached for one user are not exposed to another. This means that
+Apptainer cache directories cannot be shared across users.</p></li>
+<li><p>Located on a filesystem with sufficient space for the number and size of
+container images you anticipate using.</p></li>
+<li><p>Located on a filesystem that supports atomic rename, if possible.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you are not certain that your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> or <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code>
+filesystems support atomic rename, do not run Apptainer in parallel using
+remote container URLs. Instead, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> to create a local
+SIF image, and then run this SIF image in a parallel step. Alternatively, you
+may use the <code class="docutils literal notranslate"><span class="pre">--disable-cache</span></code> option, but this will result in each
+Apptainer instance independently fetching the container from the remote
+source, into a temporary location.</p>
+</div>
+<p>Inside the cache location you will find separate directories for the
+different kinds of data that are cached:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$HOME/.apptainer/cache/blob
+$HOME/.apptainer/cache/library
+$HOME/.apptainer/cache/net
+$HOME/.apptainer/cache/oci-tmp
+$HOME/.apptainer/cache/shub
+</pre></div>
+</div>
+<p>You can safely delete these directories, or content within them.
+Apptainer will re-create any directories and data that are needed in
+future runs.</p>
+<p>You should not add any additional files, or modify files in the cache, as this
+may cause checksum / integrity errors when you run or build containers. If you
+experience problems use, <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">clean</span></code> to reset the cache to a
+clean, empty state.</p>
+<div class="section" id="boltdb-corruption-errors">
+<h3>BoltDB Corruption Errors<a class="headerlink" href="#boltdb-corruption-errors" title="Permalink to this heading"></a></h3>
+<p>The library that Apptainer uses to retrieve and cache Docker/OCI
+layers keeps track of them using a single-file database. If your home
+directory is on a network filesystem which experiences interruptions, or
+you run out of storage, it is possible for this database to become
+inconsistent.</p>
+<p>If you observe error messages that mention <cite>github.com/etcd-io/bbolt</cite> when
+trying to run Apptainer, then you should remove the database file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">~/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">containers</span><span class="o">/</span><span class="n">cache</span><span class="o">/</span><span class="n">blob</span><span class="o">-</span><span class="n">info</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">boltdb</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cache-commands">
+<h2>Cache commands<a class="headerlink" href="#cache-commands" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">cache</span></code> command for Apptainer allows you to view and clean up your
+cache, without needing to manually inspect the cache directories.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have built images as root, directly or via <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, the default cache
+location for those builds is <code class="docutils literal notranslate"><span class="pre">/root/.apptainer</span></code>. You will need to use
+<code class="docutils literal notranslate"><span class="pre">sudo</span></code> when running <code class="docutils literal notranslate"><span class="pre">cache</span> <span class="pre">clean</span></code> or <code class="docutils literal notranslate"><span class="pre">cache</span> <span class="pre">list</span></code> to manage these cache
+entries.</p>
+</div>
+<div class="section" id="listing-the-cache">
+<h3>Listing the Cache<a class="headerlink" href="#listing-the-cache" title="Permalink to this heading"></a></h3>
+<p>To view a summary of cache usage, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">list</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache list
+There are 4 container file(s) using 59.45 MB and 23 oci blob file(s) using 379.10 MB of space
+Total space used: 438.55 MB
+</pre></div>
+</div>
+<p>To view more detailed information, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">list</span> <span class="pre">-v</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache list -v
+NAME                     DATE CREATED           SIZE             TYPE
+0ed5a98249068fe0592edb   2020-05-27 12:57:22    192.21 MB        blob
+1d9cd1b99a7eca56d8f2be   2020-05-28 15:19:07    0.35 kB          blob
+219c332183ec3800bdfda4   2020-05-28 12:22:13    0.35 kB          blob
+2adae3950d4d0f11875568   2020-05-27 12:57:16    51.83 MB         blob
+376057ac6fa17f65688c56   2020-05-27 12:57:12    50.39 MB         blob
+496548a8c952b37bdf149a   2020-05-27 12:57:14    10.00 MB         blob
+5a63a0a859d859478f3046   2020-05-27 12:57:13    7.81 MB          blob
+5efaeecfa72afde779c946   2020-05-27 12:57:25    0.23 kB          blob
+6154df8ff9882934dc5bf2   2020-05-27 08:37:22    0.85 kB          blob
+70d0b3967cd8abe96c9719   2020-05-27 12:57:24    26.61 MB         blob
+8f5af4048c33630473b396   2020-05-28 15:19:07    0.57 kB          blob
+95c3f3755f37380edb2f8f   2020-05-28 14:07:20    2.48 kB          blob
+96878229af8adf91bcbf11   2020-05-28 14:07:20    0.81 kB          blob
+af88fdb253aac46693de78   2020-05-28 12:22:13    0.58 kB          blob
+bb94ffe723890b4d62d742   2020-05-27 12:57:23    6.15 MB          blob
+c080bf936f6a1fdd2045e3   2020-05-27 12:57:25    1.61 kB          blob
+cbdbe7a5bc2a134ca8ec91   2020-05-28 12:22:13    2.81 MB          blob
+d51af753c3d3a984351448   2020-05-27 08:37:21    28.56 MB         blob
+d9cbbca60e5f0fc028b13c   2020-05-28 15:19:06    760.85 kB        blob
+db8816f445487e48e1d614   2020-05-27 12:57:25    1.93 MB          blob
+fc878cd0a91c7bece56f66   2020-05-27 08:37:22    32.30 kB         blob
+fee5db0ff82f7aa5ace634   2020-05-27 08:37:22    0.16 kB          blob
+ff110406d51ca9ea722112   2020-05-27 12:57:25    7.78 kB          blob
+sha256.02ee8bf9dc335c2   2020-05-29 13:45:14    28.11 MB         library
+sha256.5111f59250ac94f   2020-05-28 13:14:39    782.34 kB        library
+747d2dbbaaee995098c979   2020-05-28 14:07:22    27.77 MB         oci-tmp
+9a839e63dad54c3a6d1834   2020-05-28 12:22:13    2.78 MB          oci-tmp
+
+There are 4 container file(s) using 59.45 MB and 23 oci blob file(s) using 379.10 MB of space
+Total space used: 438.55 MB
+</pre></div>
+</div>
+<p>All cache entries are named using a content hash, so that identical
+layers or images that are pulled from different URIs do not result in
+duplication within the cache.</p>
+<p>Entries marked <code class="docutils literal notranslate"><span class="pre">blob</span></code> are OCI/docker layers and manifests, which are used to
+create SIF format images in the <code class="docutils literal notranslate"><span class="pre">oci-tmp</span></code> cache. Other caches are named for
+the source of the image, e.g. <code class="docutils literal notranslate"><span class="pre">library</span></code> or <code class="docutils literal notranslate"><span class="pre">oras</span></code>.</p>
+<p>You can limit the cache list to a specific cache type with the <code class="docutils literal notranslate"><span class="pre">--type</span></code> /
+<code class="docutils literal notranslate"><span class="pre">-t</span></code> option.</p>
+</div>
+<div class="section" id="cleaning-the-cache">
+<h3>Cleaning the Cache<a class="headerlink" href="#cleaning-the-cache" title="Permalink to this heading"></a></h3>
+<p>To reclaim space used by the Apptainer cache, use <code class="docutils literal notranslate"><span class="pre">apptainer</span>
+<span class="pre">cache</span> <span class="pre">clean</span></code>.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">clean</span></code> will remove all cache entries,
+after asking you to confirm:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache clean
+This will delete everything in your cache (containers from all sources and OCI blobs).
+Hint: You can see exactly what would be deleted by canceling and using the --dry-run option.
+Do you want to continue? [N/y] n
+</pre></div>
+</div>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> / <code class="docutils literal notranslate"><span class="pre">-n</span></code> option to see the files that would be
+deleted, or the <code class="docutils literal notranslate"><span class="pre">--force</span></code> / <code class="docutils literal notranslate"><span class="pre">-f</span></code> option to clean without asking for
+confirmation.</p>
+<p>If you want to leave your most recent cached images in place, but remove
+images that were cached longer ago, you can use the <code class="docutils literal notranslate"><span class="pre">--days</span></code> / <code class="docutils literal notranslate"><span class="pre">-d</span></code>
+option. E.g. to clean cache entries older than 30 days:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache clean --days 30
+</pre></div>
+</div>
+<p>To remove only a specific kind of cache entry, e.g. only library images,
+use the <code class="docutils literal notranslate"><span class="pre">--type</span></code> / <code class="docutils literal notranslate"><span class="pre">-T</span></code> option:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache clean --type library
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="temporary-folders">
+<span id="sec-temporaryfolders"></span><h2>Temporary Folders<a class="headerlink" href="#temporary-folders" title="Permalink to this heading"></a></h2>
+<p>When building a container, or pulling/running an Apptainer container from a
+Docker/OCI source, a temporary working space is required. The container is
+constructed in this temporary space before being packaged into an Apptainer
+SIF image.</p>
+<p>The location for temporary directories defaults to <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>.
+However, Apptainer will respect the environment variable <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>, and
+both of these locations can be overridden by setting the environment
+variable <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code>.</p>
+<p>The temporary directory used during a build must be on a filesystem that has
+enough space to hold the entire container image, uncompressed, including any
+temporary files that are created and later removed in the course of the build.
+You may therefore need to set <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> when building a large
+container on a system which has a small <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> filesystem.</p>
+<p>Remember to use <code class="docutils literal notranslate"><span class="pre">-E</span></code> option to pass the value of <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code>
+through to root’s environment when executing the <code class="docutils literal notranslate"><span class="pre">build</span></code> command with
+<code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Many modern Linux distributions use an in-memory <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> filesystem
+for <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> when installed on a computer with a sufficient amount of
+RAM. This may limit the size of container you can build, as temporary
+directories under <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> share RAM with runniing programs etc. A
+<code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> also uses default mount options that can interfere with
+some container builds.</p>
+<p>If you experience problems, set <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> to a disk location, or
+disable the <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> mount on your system.</p>
+</div>
+</div>
+<div class="section" id="encrypted-containers">
+<h2>Encrypted Containers<a class="headerlink" href="#encrypted-containers" title="Permalink to this heading"></a></h2>
+<p>With Apptainer it is possible to build and run encrypted
+containers. The containers are decrypted at runtime entirely in memory,
+meaning that no intermediate decrypted data is ever present on disk. See
+<a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
+</div>
+<div class="section" id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>If a flag is represented by both a CLI option and an environment variable,
+and both are set, the CLI option will take precedence. This is true for all
+environment variables with the exception for <code class="docutils literal notranslate"><span class="pre">APPTAINER_BIND</span></code> and
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_BINDPATH</span></code>, which are combined with the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option /
+argument pair, if both are present.</p></li>
+<li><p>Environment variables will override default values of CLI options that have
+not been explicitly set in the command line.</p></li>
+<li><p>Any default values for CLI options that have not been overridden on the
+command line, or by corresponding environment variables, will then take
+effect.</p></li>
+</ol>
+<div class="section" id="defaults">
+<h3>Defaults<a class="headerlink" href="#defaults" title="Permalink to this heading"></a></h3>
+<p>The following variables have defaults that can be overridden by assigning your
+own values to the corresponding environment variables at runtime:</p>
+<div class="section" id="docker">
+<h4>Docker<a class="headerlink" href="#docker" title="Permalink to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_LOGIN</span></code> -
+Set this to login to a Docker Repository interactively.</p>
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME</span></code> -
+Your Docker username.</p>
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code> -
+Your Docker password.</p>
+<p><code class="docutils literal notranslate"><span class="pre">RUNSCRIPT_COMMAND</span></code> -
+Is not obtained from the environment, but is a hard coded default
+(“/bin/bash”). This is the fallback command used in the case that the docker
+image does not have a CMD or ENTRYPOINT.</p>
+<p><code class="docutils literal notranslate"><span class="pre">TAG</span></code> -
+Is the default tag, <code class="docutils literal notranslate"><span class="pre">latest</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_NOHTTPS</span></code> -
+This is relevant if you want to use a registry that doesn’t support https. A
+typical use-case for this variable is when using local registry, running on
+the same machine as Apptainer itself.</p>
+</div>
+<div class="section" id="library">
+<h4>Library<a class="headerlink" href="#library" title="Permalink to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_LIBRARY</span></code> -
+Used to specify the library to pull from.
+Default is the currently selected <a class="reference internal" href="endpoint.html#endpoints"><span class="std std-ref">remote endpoint</span></a>.</p>
+</div>
+<div class="section" id="encryption">
+<h4>Encryption<a class="headerlink" href="#encryption" title="Permalink to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PASSPHRASE</span></code> -
+Used to pass a plaintext passphrase to be used to encrypt a container file
+system (in conjunction with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag). The default is empty.</p>
+<p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PEM_PATH</span></code> -
+Used to specify the location of a public key to use for container encryption
+(in conjunction with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag). The default is empty.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="definition_files.html" class="btn btn-neutral float-left" title="Definition Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fakeroot.html" class="btn btn-neutral float-right" title="Fakeroot feature" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

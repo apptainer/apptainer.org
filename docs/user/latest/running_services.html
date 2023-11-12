@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instances - Running Services &mdash; Apptainer User Guide 1.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/js/ga.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Environment and Metadata" href="environment_and_metadata.html" />
+    <link rel="prev" title="Persistent Overlays" href="persistent_overlays.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Instances - Running Services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#container-instances-in-apptainer">Container Instances in Apptainer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#starting-instances">Starting Instances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interacting-with-instances">Interacting With Instances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stopping-instances">Stopping Instances</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nginx-hello-world-in-apptainer">Nginx “Hello-world” in Apptainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-server-example">API Server Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#building-the-image">Building the image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-the-service">Running the Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#instance-logs">Instance Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resource-usage-limits">Resource Usage / Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-integration-pid-files">System integration / PID files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Limiting Container Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Application Checkpointing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apptainer User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Instances - Running Services</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/running_services.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="instances-running-services">
+<span id="running-services"></span><h1>Instances - Running Services<a class="headerlink" href="#instances-running-services" title="Permalink to this heading"></a></h1>
+<p>Apptainer is most commonly used to run containers interactively, or in a
+batch job, where the container runs in the foreground, performs some work, and
+then exits. There are <a class="reference internal" href="quick_start.html#runcontainer"><span class="std std-ref">different ways</span></a> in which you can run
+Apptainer containers in the foreground. If you use  <code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code> and
+<code class="docutils literal notranslate"><span class="pre">shell</span></code> to interact with processes in the container, then you are running
+Apptainer containers in the foreground.</p>
+<p>Apptainer, also allows you to run containers in a “detached” or “daemon”
+mode where the container runs a service. A “service” is essentially a process
+running in the background that multiple different clients can use. For example,
+a web server or a database.</p>
+<p>A Apptainer container running a service in the background is called an
+<em>instance</em>, to distinguish it from the default mode which runs containers in the
+foreground.</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p id="sec-instances">This page will help you understand instances using an elementary example
+followed by a more useful example running an NGINX web server using instances.
+At the end, you will find a more detailed example of running an instance of a
+service exposing an API that converts URL to PDFs.</p>
+<p>To run a service, such as a web server, outside of a container you would
+typically install the package for the web server and then instruct systemd
+(which manages system services on most Linux distributions) to start it. E.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo yum install nginx
+$ sudo systemctl enable --now nginx
+</pre></div>
+</div>
+<p>If you were to attempt this in a container, it’s likely that it will not work as
+expected. You cannot use systemd to run services in a container, by default. It
+expects various conditions that are satisfied on the host system, but not inside
+containers.</p>
+<p>Instead, you should run NGINX in the foreground <em>inside</em> the container, but then
+run the container in the background, as an <em>instance</em>.</p>
+</div>
+<div class="section" id="container-instances-in-apptainer">
+<h2>Container Instances in Apptainer<a class="headerlink" href="#container-instances-in-apptainer" title="Permalink to this heading"></a></h2>
+<p>To demonstrate the basics of instances, let’s use an easy (though somewhat
+useless) example, using an Alpine Linux image from Apptainer’s github container
+registry:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull oras://ghcr.io/apptainer/alpine:latest
+</pre></div>
+</div>
+<p>The above command will save the alpine image as <code class="docutils literal notranslate"><span class="pre">alpine_latest.sif</span></code>.</p>
+<div class="section" id="starting-instances">
+<h3>Starting Instances<a class="headerlink" href="#starting-instances" title="Permalink to this heading"></a></h3>
+<p>To start an instance, you should follow this procedure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[command]                      [image]              [name of instance]
+
+$ apptainer instance start   alpine_latest.sif     instance1
+</pre></div>
+</div>
+<p>This command causes Apptainer to create an isolated environment for the
+container services to live inside. It will execute the contents of the
+<code class="docutils literal notranslate"><span class="pre">startscript</span></code> file which can be defined when you build the container via the
+def file. You can also use the <cite>instance run</cite> command if you want the container
+to execute the <code class="docutils literal notranslate"><span class="pre">runscript</span></code> when the instance initiates.</p>
+<p>You can confirm that an instance is running by using the <code class="docutils literal notranslate"><span class="pre">instance</span>
+<span class="pre">list</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance list
+
+INSTANCE NAME    PID      IP              IMAGE
+instance1        22084                    /home/dave/instances/alpine_latest.sif
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Instances are linked to the user account that started them. This means that
+if you use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> to start an instance as <code class="docutils literal notranslate"><span class="pre">root</span></code>, you will need to use
+<code class="docutils literal notranslate"><span class="pre">sudo</span></code> for all commands managing that instance. <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">list</span></code> will not
+show instances started by other users.</p>
+</div>
+<p>If you want to run multiple instances from the same image, it’s as
+simple as running the command multiple times with different instance
+names. The instance name uniquely identify instances, so they cannot be
+repeated.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start alpine_latest.sif instance2
+$ apptainer instance start alpine_latest.sif instance3
+</pre></div>
+</div>
+<p>We now have 3 instances, all using the same image:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance list
+INSTANCE NAME    PID      IP              IMAGE
+instance1        22084                    /home/dave/instances/alpine_latest.sif
+instance2        22443                    /home/dave/instances/alpine_latest.sif
+instance3        22493                    /home/dave/instances/alpine_latest.sif
+</pre></div>
+</div>
+<p>You can filter the instance list by supplying a pattern:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance list &#39;*2&#39;
+INSTANCE NAME    PID      IP              IMAGE
+instance2        22443                    /home/dave/instances/alpine_latest.sif
+</pre></div>
+</div>
+<p>When an instance is started, it will begin to run the <code class="docutils literal notranslate"><span class="pre">%startscript</span></code> from the
+container’s <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">definition file</span></a> in the background. If
+there is no <code class="docutils literal notranslate"><span class="pre">%startscript</span></code> the container will stay idle in the background.</p>
+<p>You can also define start scripts on a per app basis.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start --app myapp alpine_latest.sif myapp-instance
+</pre></div>
+</div>
+<p>When this app instance is started, it will begin to run the <code class="docutils literal notranslate"><span class="pre">%myappstart</span></code> from the
+container’s <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">definition file</span></a> in the background. If
+there is no <code class="docutils literal notranslate"><span class="pre">%myappstart</span></code> the container will stay idle in the background.</p>
+<p>Besides how they are started, app instances behave just like regular instances.</p>
+</div>
+<div class="section" id="interacting-with-instances">
+<h3>Interacting With Instances<a class="headerlink" href="#interacting-with-instances" title="Permalink to this heading"></a></h3>
+<p>Although an instance runs its <code class="docutils literal notranslate"><span class="pre">%startscript</span></code> (if there is one) in the
+background, you can also interact with it in the foreground, by referring to it
+with an <code class="docutils literal notranslate"><span class="pre">instance://&lt;name&gt;</span></code> URI, where <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> is replaced with the
+instance name.</p>
+<p>To run a specific command against an instance, in the foreground, use
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">exec</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec instance://instance1 cat /etc/os-release
+</pre></div>
+</div>
+<p>Similarly, you can use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run</span></code> to run the <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> for the
+container, against a running instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run instance://instance2
+</pre></div>
+</div>
+<p>If you want to poke around inside of your instance, you can use the normal
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">shell</span></code> command, but give it the instance URI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell instance://instance3
+Apptainer&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="stopping-instances">
+<h3>Stopping Instances<a class="headerlink" href="#stopping-instances" title="Permalink to this heading"></a></h3>
+<p>When you are finished with your instance you can clean it up with the
+<code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">stop</span></code> command as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance stop instance1
+</pre></div>
+</div>
+<p>If you have multiple instances running and you want to stop all of them,
+you can do so with a wildcard or the –all flag. The following three
+commands are identical.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance stop \*
+
+$ apptainer instance stop --all
+
+$ apptainer instance stop -a
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You must escape the wildcard with a backslash <code class="docutils literal notranslate"><span class="pre">\*</span></code> to pass it properly
+through your shell.</p>
+</div>
+</div>
+</div>
+<div class="section" id="nginx-hello-world-in-apptainer">
+<h2>Nginx “Hello-world” in Apptainer<a class="headerlink" href="#nginx-hello-world-in-apptainer" title="Permalink to this heading"></a></h2>
+<p>The above example, although not very useful, should serve as a fair
+introduction to the concept of Apptainer instances and running
+containers in the background. We will now look at a more useful
+example of setting up an NGINX web server using instances. First
+we will create a basic <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">definition file</span></a> (let’s
+call it nginx.def):</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: nginx
+
+<span class="gh">%startscript</span>
+<span class="w">   </span>nginx
+</pre></div>
+</div>
+<p>This downloads the official NGINX Docker container, converts it to a
+Apptainer image, and tells it to run the <code class="docutils literal notranslate"><span class="pre">nginx</span></code> command when you start
+the instance. Because we are running a web server, which defaults to listening
+on privileged port 80, we’re going to run the following instance commands as
+root, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build nginx.sif nginx.def
+...
+$ sudo apptainer instance start --writable-tmpfs nginx.sif web
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> option is needed, because NGINX will attempt to write
+some files when it starts up. <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> allows these to be written
+to a temporary, in-memory location, that will be removed when the instance is
+stopped.</p>
+<p>Just like that we’ve downloaded, built, and run an NGINX Apptainer image. We
+can confirm it’s running using the curl tool, to fetch the web page that is now
+being hosted by NGINX.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl localhost
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+&lt;style&gt;
+ body {
+     width: 35em;
+     margin: 0 auto;
+     font-family: Tahoma, Verdana, Arial, sans-serif;
+ }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.&lt;/p&gt;
+
+&lt;p&gt;For online documentation and support please refer to
+&lt;a href=&quot;http://nginx.org/&quot;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+Commercial support is available at
+&lt;a href=&quot;http://nginx.com/&quot;&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+</div>
+<p>You could also visit <code class="docutils literal notranslate"><span class="pre">http://localhost</span></code> in a web browser, if you are running
+the instance from a desktop session.</p>
+</div>
+<div class="section" id="api-server-example">
+<h2>API Server Example<a class="headerlink" href="#api-server-example" title="Permalink to this heading"></a></h2>
+<p>Let’s now package a useful service into a SIF container, and run it as an
+instance. The service we will be packaging is an API server that converts a web
+page into a PDF, and can be found <a class="reference external" href="https://github.com/alvarcarto/url-to-pdf-api">here</a>.</p>
+<div class="section" id="building-the-image">
+<h3>Building the image<a class="headerlink" href="#building-the-image" title="Permalink to this heading"></a></h3>
+<p>To package the Web to PDF service into a SIF container, we must create a
+definition file. Let’s first choose a base from which to build our container. In
+this case the docker image <code class="docutils literal notranslate"><span class="pre">node:8</span></code> which comes pre-installed with Node 8 has
+been used:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: node:<span class="m">8</span>
+</pre></div>
+</div>
+<p>The service also requires a slew of dependencies to be manually installed
+in addition to Node 8, so we can add those into the <code class="docutils literal notranslate"><span class="pre">post</span></code> section as
+well as calling the installation script for the <code class="docutils literal notranslate"><span class="pre">url-to-pdf</span></code>:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%post</span>
+
+<span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-yq<span class="w"> </span>gconf-service<span class="w"> </span>libasound2<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libatk1.0-0<span class="w"> </span>libc6<span class="w"> </span>libcairo2<span class="w"> </span>libcups2<span class="w"> </span>libdbus-1-3<span class="w"> </span>libexpat1<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libfontconfig1<span class="w"> </span>libgcc1<span class="w"> </span>libgconf-2-4<span class="w"> </span>libgdk-pixbuf2.0-0<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libglib2.0-0<span class="w"> </span>libgtk-3-0<span class="w"> </span>libnspr4<span class="w"> </span>libpango-1.0-0<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libpangocairo-1.0-0<span class="w"> </span>libstdc++6<span class="w"> </span>libx11-6<span class="w"> </span>libx11-xcb1<span class="w"> </span>libxcb1<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libxcomposite1<span class="w"> </span>libxcursor1<span class="w"> </span>libxdamage1<span class="w"> </span>libxext6<span class="w"> </span>libxfixes3<span class="w"> </span>libxi6<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libxrandr2<span class="w"> </span>libxrender1<span class="w"> </span>libxss1<span class="w"> </span>libxtst6<span class="w"> </span>ca-certificates<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>fonts-liberation<span class="w"> </span>libappindicator1<span class="w"> </span>libnss3<span class="w"> </span>lsb-release<span class="w"> </span>xdg-utils<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>wget<span class="w"> </span>curl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>/var/lib/apt/lists/*
+<span class="w">    </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/alvarcarto/url-to-pdf-api.git<span class="w"> </span>pdf_server
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>pdf_server
+<span class="w">    </span>npm<span class="w"> </span>install
+<span class="w">    </span>touch<span class="w"> </span>.env
+<span class="w">    </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">0755</span><span class="w"> </span>.
+<span class="w">    </span>cp<span class="w"> </span>.env.sample<span class="w"> </span>.env
+</pre></div>
+</div>
+<p>We need to define what happens when we start an instance of the container by
+writing a <code class="docutils literal notranslate"><span class="pre">%startscript</span></code>. In this situation, we want to run the commands that
+start up the url-to-pdf service:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%startscript</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/pdf_server
+<span class="w">    </span>npm<span class="w"> </span>start
+</pre></div>
+</div>
+<p>Also, the <code class="docutils literal notranslate"><span class="pre">url-to-pdf</span></code> service requires some environment variables to
+be set, which we can do in the environment section:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%environment</span>
+<span class="w">    </span><span class="nv">NODE_ENV</span><span class="o">=</span>development
+<span class="w">    </span><span class="nv">PORT</span><span class="o">=</span><span class="m">9000</span>
+<span class="w">    </span><span class="nv">ALLOW_HTTP</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">    </span><span class="nv">URL</span><span class="o">=</span>localhost
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span>NODE_ENV<span class="w"> </span>PORT<span class="w"> </span>ALLOW_HTTP<span class="w"> </span>URL
+</pre></div>
+</div>
+<p>The complete definition file will look like this:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: node:<span class="m">8</span>
+
+<span class="gh">%post</span>
+
+<span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-yq<span class="w"> </span>gconf-service<span class="w"> </span>libasound2<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libatk1.0-0<span class="w"> </span>libc6<span class="w"> </span>libcairo2<span class="w"> </span>libcups2<span class="w"> </span>libdbus-1-3<span class="w"> </span>libexpat1<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libfontconfig1<span class="w"> </span>libgcc1<span class="w"> </span>libgconf-2-4<span class="w"> </span>libgdk-pixbuf2.0-0<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libglib2.0-0<span class="w"> </span>libgtk-3-0<span class="w"> </span>libnspr4<span class="w"> </span>libpango-1.0-0<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libpangocairo-1.0-0<span class="w"> </span>libstdc++6<span class="w"> </span>libx11-6<span class="w"> </span>libx11-xcb1<span class="w"> </span>libxcb1<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libxcomposite1<span class="w"> </span>libxcursor1<span class="w"> </span>libxdamage1<span class="w"> </span>libxext6<span class="w"> </span>libxfixes3<span class="w"> </span>libxi6<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>libxrandr2<span class="w"> </span>libxrender1<span class="w"> </span>libxss1<span class="w"> </span>libxtst6<span class="w"> </span>ca-certificates<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>fonts-liberation<span class="w"> </span>libappindicator1<span class="w"> </span>libnss3<span class="w"> </span>lsb-release<span class="w"> </span>xdg-utils<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>wget<span class="w"> </span>curl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>/var/lib/apt/lists/*
+<span class="w">    </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/alvarcarto/url-to-pdf-api.git<span class="w"> </span>pdf_server
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>pdf_server
+<span class="w">    </span>npm<span class="w"> </span>install
+<span class="w">    </span>touch<span class="w"> </span>.env
+<span class="w">    </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">0755</span><span class="w"> </span>.
+<span class="w">    </span>cp<span class="w"> </span>.env.sample<span class="w"> </span>.env
+
+<span class="gh">%startscript</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/pdf_server
+<span class="w">    </span>npm<span class="w"> </span>start
+
+<span class="gh">%environment</span>
+<span class="w">    </span><span class="nv">NODE_ENV</span><span class="o">=</span>development
+<span class="w">    </span><span class="nv">PORT</span><span class="o">=</span><span class="m">9000</span>
+<span class="w">    </span><span class="nv">ALLOW_HTTP</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">    </span><span class="nv">URL</span><span class="o">=</span>localhost
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span>NODE_ENV<span class="w"> </span>PORT<span class="w"> </span>ALLOW_HTTP<span class="w"> </span>URL
+</pre></div>
+</div>
+<p>We can now build the container image from the definition file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build url-to-pdf.sif url-to-pdf.def
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-the-service">
+<h3>Running the Service<a class="headerlink" href="#running-the-service" title="Permalink to this heading"></a></h3>
+<p>We can now start an instance to run the service:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start url-to-pdf.sif pdf
+</pre></div>
+</div>
+<p>Because the service listens on port 9000, which is not a privileged port, we
+don’t need to run it with <code class="docutils literal notranslate"><span class="pre">sudo</span></code> this time.</p>
+<p>We can confirm it’s working by sending the server an http request using
+curl:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -o apptainer.pdf localhost:9000/api/render?url=http://apptainer.org/docs
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 64753  100 64753    0     0  19663      0  0:00:03  0:00:03 --:--:-- 19669
+</pre></div>
+</div>
+<p>You should see a PDF file being generated like the one shown below:</p>
+<img alt="Screenshot of the PDF generated!" src="_images/docpage.png" />
+<p>If you shell into the instance, you can see the processes that are running, to
+provide the service:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell instance://pdf
+Apptainer&gt; ps aux
+USER     PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+user       1  0.0  0.0 1178984 20700 ?       Sl   11:40   0:00 sinit
+user      13  0.0  0.0   4284   696 ?        S    11:40   0:00 /bin/sh /.singularity.d/startscript
+user      15  1.0  0.0 984908 41508 ?        Sl   11:40   0:00 npm
+user      25  0.0  0.0   4292   716 ?        S    11:40   0:00 sh -c env-cmd nodemon --watch ./src -e js src/index.js
+user      26  0.1  0.0 876908 31084 ?        Sl   11:40   0:00 node /pdf_server/node_modules/.bin/env-cmd nodemon --watch ./src -e js src/index
+user      32  0.7  0.0 1113984 39976 ?       Sl   11:40   0:00 node /pdf_server/node_modules/.bin/nodemon --watch ./src -e js src/index.js
+user      44  1.7  0.0 941556 53804 ?        Sl   11:40   0:00 /usr/local/bin/node src/index.js
+user     124  0.0  0.0  18372  3592 pts/1    S    11:41   0:00 /bin/bash --norc
+user     130  0.0  0.0  36640  2836 pts/1    R+   11:41   0:00 ps aux
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="instance-logs">
+<h2>Instance Logs<a class="headerlink" href="#instance-logs" title="Permalink to this heading"></a></h2>
+<p>Generally, when running services using instances, we write the <code class="docutils literal notranslate"><span class="pre">%startscript</span></code>
+so that the service will run in the foreground, and would write any log messages
+to the terminal. When an instance container is started there is no terminal.
+Apptainer moves the container into the background, and collects output and
+error messages into log files.</p>
+<p>You can view the location of log files for running instances using the <code class="docutils literal notranslate"><span class="pre">--log</span></code>
+option of the <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">list</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance list --logs
+INSTANCE NAME    PID       LOGS
+pdf              935864    /home/user/.apptainer/instances/logs/mini/user/pdf.err
+                           /home/user/.apptainer/instances/logs/mini/user/pdf.out
+</pre></div>
+</div>
+<p>Note that the log files are located under <code class="docutils literal notranslate"><span class="pre">.apptainer/instances</span></code> in the
+user’s home directory, and are grouped by the hostname, and instance name.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.out</span></code> log collects standard output. The <code class="docutils literal notranslate"><span class="pre">.err</span></code> log collects standard
+error. You can look at the content of the log files to check how your service is
+running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat /home/user/.apptainer/instances/logs/mini/user/pdf.out
+
+&gt; url-to-pdf-api@1.0.0 start /pdf_server
+&gt; env-cmd nodemon --watch ./src -e js src/index.js
+
+[nodemon] 1.19.0
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching: /pdf_server/src/**/*
+[nodemon] starting `node src/index.js`
+2023-02-01T11:14:58.185Z - info: [app.js] ALLOW_HTTP=true, unsafe requests are allowed. Don&#39;t use this in production.
+2023-02-01T11:14:58.187Z - info: [app.js] ALLOW_URLS set! Allowed urls patterns are:
+2023-02-01T11:14:58.187Z - info: [app.js] Using CORS options: origin=*, methods=[GET, POST, PUT, DELETE, OPTIONS, HEAD, PATCH]
+2023-02-01T11:14:58.206Z - warn: [router.js] Warning: no authentication required to use the API
+2023-02-01T11:14:58.209Z - info: [index.js] Express server listening on http://localhost:9000/ in development mode
+2023-02-01T11:15:17.269Z - info: [render-core.js] Rendering with opts: {
+...
+</pre></div>
+</div>
+</div>
+<div class="section" id="resource-usage-limits">
+<h2>Resource Usage / Limits<a class="headerlink" href="#resource-usage-limits" title="Permalink to this heading"></a></h2>
+<p>If you are running a container as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user, or your system supports
+cgroups v2, then all instances will be started inside a cgroup. A cgroup allows
+the resources used by the instance to be monitored, and limited.</p>
+<p>To monitor the resource usage of an instance, use the <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">stats</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> $ apptainer instance stats pdf
+INSTANCE NAME    CPU USAGE    MEM USAGE / LIMIT     MEM %    BLOCK I/O            PIDS
+pdf              0.00%        479.8MiB / 62.2GiB    0.75%    470MiB / 131.6MiB    45
+</pre></div>
+</div>
+<p>We can see that the instance is currently idle (0.00% CPU), and is using
+479.8MiB of RAM. No limits have been applied, so the total RAM size of the
+machine is shown.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">stats</span></code> is interactive when run from a terminal, and will
+update every second. To obtain point-in-time usage details use the
+<code class="docutils literal notranslate"><span class="pre">--no-stream</span></code> or <code class="docutils literal notranslate"><span class="pre">--json</span></code> options.</p>
+<p>Where supported by the system’s cgroups configuration, resource limits can be
+applied to instances using the same <a class="reference internal" href="cgroups.html#cgroup-flags"><span class="std std-ref">command line flags</span></a>
+that are available for interactive containers. E.g. to limit memory usage to
+1GiB, we can use the <code class="docutils literal notranslate"><span class="pre">--memory</span></code> flag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">instance</span> <span class="n">start</span> <span class="o">--</span><span class="n">memory</span> <span class="mi">1</span><span class="n">G</span> <span class="n">url</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">pdf</span><span class="o">.</span><span class="n">sif</span> <span class="n">pdf</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="system-integration-pid-files">
+<h2>System integration / PID files<a class="headerlink" href="#system-integration-pid-files" title="Permalink to this heading"></a></h2>
+<p>If you are running services in containers you may want them to be
+started on boot, and shutdown gracefully automatically. This is usually
+performed by an init process, or another supervisor daemon installed on
+your host. Many init and supervisor daemons support managing processes
+via pid files.</p>
+<p>You can specify a <code class="docutils literal notranslate"><span class="pre">--pid-file</span></code> option to <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">instance</span> <span class="pre">start</span></code> to
+write the PID for an instance to the specified file, e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start --pid-file /home/dave/alpine.pid alpine_latest.sif instanceA
+
+$ cat /home/dave/alpine.pid
+23727
+</pre></div>
+</div>
+<p>An example service file for an instance controlled by systemd is below.
+This can be used as a template to setup containerized services under
+systemd.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Unit</span><span class="p">]</span>
+<span class="n">Description</span><span class="o">=</span><span class="n">Web</span> <span class="n">Instance</span>
+<span class="n">After</span><span class="o">=</span><span class="n">network</span><span class="o">.</span><span class="n">target</span>
+
+<span class="p">[</span><span class="n">Service</span><span class="p">]</span>
+<span class="n">Type</span><span class="o">=</span><span class="n">forking</span>
+<span class="n">Restart</span><span class="o">=</span><span class="n">always</span>
+<span class="n">User</span><span class="o">=</span><span class="n">www</span><span class="o">-</span><span class="n">data</span>
+<span class="n">Group</span><span class="o">=</span><span class="n">www</span><span class="o">-</span><span class="n">data</span>
+<span class="n">PIDFile</span><span class="o">=/</span><span class="n">run</span><span class="o">/</span><span class="n">web</span><span class="o">-</span><span class="n">instance</span><span class="o">.</span><span class="n">pid</span>
+<span class="n">ExecStart</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">apptainer</span> <span class="n">instance</span> <span class="n">start</span> <span class="o">--</span><span class="n">pid</span><span class="o">-</span><span class="n">file</span> <span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">web</span><span class="o">-</span><span class="n">instance</span><span class="o">.</span><span class="n">pid</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">containers</span><span class="o">/</span><span class="n">web</span><span class="o">.</span><span class="n">sif</span> <span class="n">web</span><span class="o">-</span><span class="n">instance</span>
+<span class="n">ExecStop</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">apptainer</span> <span class="n">instance</span> <span class="n">stop</span> <span class="n">web</span><span class="o">-</span><span class="n">instance</span>
+
+<span class="p">[</span><span class="n">Install</span><span class="p">]</span>
+<span class="n">WantedBy</span><span class="o">=</span><span class="n">multi</span><span class="o">-</span><span class="n">user</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">Type=forking</span></code> is required here, since <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code>
+starts an instance and then exits.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="persistent_overlays.html" class="btn btn-neutral float-left" title="Persistent Overlays" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="environment_and_metadata.html" class="btn btn-neutral float-right" title="Environment and Metadata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
