@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="description" content="Astro description"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"><meta name="generator" content="Astro v3.4.2"><title>Technical Charter  | Apptainer - Portable, Reproducible Containers</title><link rel="stylesheet" href="/_astro/contact-us.2f25bf55.css" /></head><body><style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();;(()=>{var b=Object.defineProperty;var f=(c,o,i)=>o in c?b(c,o,{enumerable:!0,configurable:!0,writable:!0,value:i}):c[o]=i;var l=(c,o,i)=>(f(c,typeof o!="symbol"?o+"":o,i),i);var p;{let c={0:t=>m(t),1:t=>i(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(i(t)),5:t=>new Set(i(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t)},o=t=>{let[e,r]=t;return e in c?c[e](r):void 0},i=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([e,r])=>[e,o(r)]));customElements.get("astro-island")||customElements.define("astro-island",(p=class extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var d;if(!this.hydrator||!this.isConnected)return;let e=(d=this.parentElement)==null?void 0:d.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),a={},h=this.querySelectorAll("template[data-astro-template]");for(let n of h){let s=n.closest(this.tagName);s!=null&&s.isSameNode(this)&&(a[n.getAttribute("data-astro-template")||"default"]=n.innerHTML,n.remove())}for(let n of r){let s=n.closest(this.tagName);s!=null&&s.isSameNode(this)&&(a[n.getAttribute("name")||"default"]=n.innerHTML)}let u;try{u=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(n){let s=this.getAttribute("component-url")||"<unknown>",y=this.getAttribute("component-export");throw y&&(s+=` (export ${y})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),n),n}await this.hydrator(this)(this.Component,u,a,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var a;((a=this.lastChild)==null?void 0:a.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}Astro[r](async()=>{let a=this.getAttribute("renderer-url"),[h,{default:u}]=await Promise.all([import(this.getAttribute("component-url")),a?import(a):()=>()=>{}]),d=this.getAttribute("component-export")||"default";if(!d.includes("."))this.Component=h[d];else{this.Component=h;for(let n of d.split("."))this.Component=this.Component[n]}return this.hydrator=u,this.hydrate},e,this)}attributeChangedCallback(){this.hydrate()}},l(p,"observedAttributes",["props"]),p))}})();</script><astro-island uid="ZD7KI8" prefix="r0" component-url="/_astro/Header.d61d29b6.js" component-export="default" renderer-url="/_astro/client.42581730.js" props="{}" ssr="" client="load" opts="{&quot;name&quot;:&quot;Header&quot;,&quot;value&quot;:true}" await-children=""><header class="absolute inset-x-0 top-0 z-50"><nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global"><div class="flex lg:flex-1"><a href="/" class="-m-1.5 p-1.5"><span class="sr-only">Apptainer</span><img class="h-14 w-auto" src="/apptainer.svg" alt="Apptainer"/></a></div><div class="flex lg:hidden"><button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"><span class="sr-only">Open main menu</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg></button></div><div class="hidden lg:flex lg:gap-x-12"><a href="/documentation" class="text-sm font-semibold uppercase leading-6 text-gray-900">Documentation</a><a href="/support" class="text-sm font-semibold uppercase leading-6 text-gray-900">Support</a><a href="/news" class="text-sm font-semibold uppercase leading-6 text-gray-900">News</a><a href="/showcases" class="text-sm font-semibold uppercase leading-6 text-gray-900">Showcases</a></div><div class="hidden lg:flex lg:flex-1 lg:justify-end"><a href="/get-started" class="text-sm font-semibold uppercase leading-6 text-gray-900">Get Started <span aria-hidden="true">→</span></a></div></nav><div style="position:fixed;top:1px;left:1px;width:1px;height:0;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border-width:0;display:none"></div></header><!--astro:end--></astro-island><div class="bg-white px-6 py-40 lg:px-8"><div class="mx-auto max-w-3xl text-base leading-7 text-gray-700"><h1 class="mt-2 text-center text-3xl font-bold uppercase tracking-tight text-gray-900 sm:text-4xl">
+Technical Charter (the "Charter") for Apptainer a Series of LF Projects, LLC
+</h1><article class="prose my-14 max-w-7xl prose-h1:uppercase prose-h2:uppercase prose-h3:uppercase prose-a:font-semibold prose-a:text-blue-500 prose-code:rounded-lg prose-code:bg-blue-900 prose-code:p-1 prose-code:text-blue-50"><p>
+This Charter sets forth the responsibilities and procedures for technical contribution to, and oversight of, the Apptainer open
+					source project, which has been established as Apptainer a Series of LF Projects, LLC (the “Project”). LF Projects, LLC (“LF
+					Projects”) is a Delaware series limited liability company. All contributors (including committers, maintainers, and other
+					technical positions) and other participants in the Project (collectively, “Collaborators”) must comply with the terms of this
+					Charter.
+</p><h2>1. Mission and Scope of the Project</h2><ol type="a"><li>The mission of the Project is to maintain and enhance the source code of the Apptainer open source container platform.</li><li>
+The scope of the Project includes collaborative development under the Project License (as defined herein) supporting the
+						mission, including documentation, testing, integration and the creation of other artifacts that aid the development,
+						deployment, operation or adoption of the open source project.
+</li></ol><h2>2. Technical Steering Committee</h2><ol type="a"><li>The Technical Steering Committee (the "TSC") will be responsible for all technical oversight of the open source Project.</li><li>
+The TSC voting members are initially the Project's Committers. At the inception of the project, the Committers of the Project
+						will be as set forth within the "CONTRIBUTING" file within the Project's code repository. The TSC may choose an alternative
+						approach for determining the voting members of the TSC, and any such alternative approach will be documented in the
+						CONTRIBUTING file. Any meetings of the Technical Steering Committee are intended to be open to the public, and can be
+						conducted electronically, via teleconference, or in person.
+</li><li>
+TSC projects generally will involve Contributors and Committers. The TSC may adopt or modify roles so long as the roles are
+						documented in the CONTRIBUTING file. Unless otherwise documented:
+<ol type="i"><li>
+Contributors include anyone in the technical community that contributes code, documentation, or other technical
+								artifacts to the Project.
+</li><li>
+Committers are Contributors who have earned the ability to modify ("commit") source code, documentation or other
+								technical artifacts in a project's repository; and
+</li><li>
+A Contributor may become a Committer by a majority approval of the existing Committers. A Committer may be removed by
+								a majority approval of the other existing Committers.
+</li></ol></li><li>
+Participation in the Project through becoming a Contributor and Committer is open to anyone so long as they abide by the terms
+						of this Charter.
+</li><li>
+The TSC may (1) establish work flow procedures for the submission, approval, and closure/archiving of projects, (2) set
+						requirements for the promotion of Contributors to Committer status, as applicable, and (3) amend, adjust, refine and/or
+						eliminate the roles of Contributors, and Committers, and create new roles, and publicly document any TSC roles, as it sees
+						fit.
+</li><li>
+The TSC may elect a TSC Chair, who will preside over meetings of the TSC and will serve until their resignation or replacement
+						by the TSC. The TSC Chair, or any other TSC member so designated by the TSC, will serve as the primary communication contact
+						between the Project and any other project of the Linux Foundation that has decided to support the Project.
+</li><li>
+Responsibilities: The TSC will be responsible for all aspects of oversight relating to the Project, which may include:
+<ol type="i"><li>coordinating the technical direction of the Project;</li><li>
+approving project or system proposals (including, but not limited to, incubation, deprecation, and changes to a
+								sub-project's scope);
+</li><li>organizing sub-projects and removing sub-projects;</li><li>creating sub-committees or working groups to focus on cross-project technical issues and requirements;</li><li>appointing representatives to work with other open source or open standards communities;</li><li>establishing community norms, workflows, issuing releases, and security reporting policies;</li><li>
+approving and implementing policies and processes for contributing (to be published in the CONTRIBUTING file) and
+								coordinating with the series manager of the Project (as provided for in the Series Agreement, the "Series Manager") to
+								resolve matters or concerns that may arise as set forth in Section 7 of this Charter;
+</li><li>
+discussions, seeking consensus, and where necessary, voting on technical matters relating to the code base that affect
+								multiple projects; and
+</li><li>coordinating any marketing, events, or communications regarding the Project.</li></ol></li></ol><h2>3. TSC Voting</h2><ol type="a"><li>
+While the Project aims to operate as a consensus-based community, if any TSC decision requires a vote to move the Project
+						forward, the voting members of the TSC will vote on a one vote per voting member basis.
+</li><li>
+Quorum for TSC meetings requires at least fifty percent of all voting members of the TSC to be present. The TSC may continue
+						to meet if quorum is not met but will be prevented from making any decisions at the meeting.
+</li><li>
+Except as provided in Section 7.c. and 8.a., decisions by vote at a meeting require a majority vote of those in attendance,
+						provided quorum is met. Decisions made by electronic vote without a meeting require a majority vote of all voting members of
+						the TSC.
+</li><li>
+In the event a vote cannot be resolved by the TSC, any voting members of the TSC may refer the matter to the Series Manager
+						for assistance in reaching a resolution.
+</li></ol><h2>4. Compliance with Policies</h2><ol type="a"><li>
+This Charter is subject to the Series Agreement for the Project and the Operating Agreement of LF Projects. Contributors will
+						comply with the policies of LF Projects as may be adopted and amended by LF Projects, including, without limitation the
+						policies listed at https://lfprojects.org/policies/.
+</li><li>
+The TSC may adopt a code of conduct ("CoC") for the Project, which is subject to approval by the Series Manager. In the event
+						that a Project-specific CoC has not been approved, the LF Projects Code of Conduct listed at https://lfprojects.org/policies
+						will apply for all Collaborators in the Project.
+</li><li>
+When amending or adopting any policy applicable to the Project, LF Projects will publish such policy, as to be amended or
+						adopted, on its web site at least 30 days prior to such policy taking effect; provided, however, that in the case of any
+						amendment of the Trademark Policy or Terms of Use of LF Projects, any such amendment is effective upon publication on LF
+						Project's web site.
+</li><li>
+All Collaborators must allow open participation from any individual or organization meeting the requirements for contributing
+						under this Charter and any policies adopted for all Collaborators by the TSC, regardless of competitive interests. Put another
+						way, the Project community must not seek to exclude any participant based on any criteria, requirement, or reason other than
+						those that are reasonable and applied on a non-discriminatory basis to all Collaborators in the Project community.
+</li><li>
+The Project will operate in a transparent, open, collaborative, and ethical manner at all times. The output of all Project
+						discussions, proposals, timelines, decisions, and status should be made open and easily visible to all. Any potential
+						violations of this requirement should be reported immediately to the Series Manager.
+</li></ol><h2>5. Community Assets</h2><ol type="a"><li>
+LF Projects will hold title and all trade or service marks used by the Project ("Project Trademarks"), whether bases on common
+						law or registered rights. Project Trademarks will be transferred and assigned to LF Projects to hold on behalf of the Project.
+						Any use of any Project Trademarks by Collaborators in the Project will be in accordance with the license from LF Projects and
+						inure to the benefit of LF Projects.
+</li><li>
+The Project will, as permitted and in accordance with such license from LF Projects, develop and own all Project GitHub and
+						social media accounts, and domain name registrations created by the Project community.
+</li><li>
+Under no circumstances will LF Projects be expected or required to undertake any action on behalf of the Project that is
+						inconsistent with the tax-exempt status or purpose, as applicable, of the Joint Development Foundation or LF Projects, LLC.
+</li></ol><h2>6. General Rules and Operations</h2><ol type="a"><li>
+The Project will:
+<ol type="i"><li>
+engage in the work of the Project in a professional manner consistent with maintaining a cohesive community, while
+								also maintaining the goodwill and esteem of LF Projects, Joint Development Foundation and other partner organizations
+								in the open source community; and
+</li><li>respect the rights of all trademark owners, including any branding and trademark usage guidelines.</li></ol></li></ol><h2>7. Intellectual Property Policy</h2><ol type="a"><li>
+Collaborators acknowledge that the copyright in all new contributions will be retained by the copyright holder as independent
+						works of authorship and that no contributor or copyright holder will be required to assign copyright to the Project.
+</li><li>
+Except as described in Section 7.c., all contributions to the Project are subject to the following:
+<ol type="i"><li>
+All new inbound code contributions to the Project must be made using the 3-clause BSD License (the "Project License").
+</li><li>
+All new inbound code contributions must also be accompanied by a Developer Certificate of Origin
+								(http://developercertificate.org) sign-off in the source code system that is submitted through a TSC-approved
+								contribution process which will bind the authorized contributor and, if not self-employed, their employer to the
+								applicable license;
+</li><li>All outbound code will be made available under the Project License.</li><li>
+Documentation will be received and made available by the Project under the Creative Commons Attribution 4.0
+								International License (available at http://creativecommons.org/licenses/by/4.0/).
+</li><li>
+To the extent a contributino includes or consists of data, any rights in such data shall be made available under the
+								CDLA-Permissive 2.0 License, available at https://cdla.dev/permissive-2.0.
+</li><li>
+The Project may seek to integrate and contribute back to other open source projects ("Upstream Projects"). In such
+								cases, the Project will conform to all license requirements of the Upstream Projects, including dependencies,
+								leveraged by the Project. Upstream Project code contributions not stored within the Project's main code repository
+								will comply with the contribution process and license terms for the applicable Upstream Project.
+</li></ol></li><li>
+The TSC may approve the use of an alternative license or licenses for inbound or outbound contributions on an exception basis.
+						To request an exception, please describe the contribution, the alternative open source license(s), and the justification for
+						using an alternative open source license for the Project. License exceptions must be approved by a two-thirds vote of the
+						entire TSC.
+</li><li>
+Contributed files should contain license information, such as SPDX short form identifiers, indicating the open source license
+						or licenses pertaining to the file.
+</li></ol><h2>8. Amendments</h2><ol type="a"><li>This charter may be amended by a two-thirds vote of the entire TSC and is subject to approval by LF Projects.</li></ol></article></div></div><footer class="bg-white"><div class="mx-auto max-w-7xl overflow-hidden px-6 py-10 lg:px-8"><nav class="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer"><div class="pb-6"><a href="/documentation" class="text-sm uppercase leading-6 text-gray-600 hover:text-gray-900">Documentation</a></div><div class="pb-6"><a href="/support" class="text-sm uppercase leading-6 text-gray-600 hover:text-gray-900">Support</a></div><div class="pb-6"><a href="/security-policy" class="text-sm uppercase leading-6 text-gray-600 hover:text-gray-900">Security Policy</a></div><div class="pb-6"><a href="/contact-us" class="text-sm uppercase leading-6 text-gray-600 hover:text-gray-900">Contact Us</a></div><div class="pb-6"><a href="/technical-charter" class="text-sm uppercase leading-6 text-gray-600 hover:text-gray-900">Technical Charter</a></div></nav><p class="mt-10 text-center text-xs leading-5 text-gray-500">
+Copyright © Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC.<br>For website terms of use,
+			trademark policy, privacy policy and other project policies please see <a class="text-blue-500 underline" href="https://lfprojects.org/policies">
+https://lfprojects.org/policies
+</a>.
+</p></div></footer></body></html>
