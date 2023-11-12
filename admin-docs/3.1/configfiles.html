@@ -1,0 +1,530 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Singularity Configuration Files &mdash; Singularity container 3.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Admin Quick Start" href="admin_quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Singularity container
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="admin_quickstart.html">Admin Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#singularity-conf">singularity.conf</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#limiting-containers">Limiting containers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cgroups-toml">cgroups.toml</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#limiting-memory">Limiting memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limiting-cpu">Limiting CPU</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limiting-io">Limiting IO</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ecl-toml">ecl.toml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nvliblist-conf">nvliblist.conf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#capability-json">capability.json</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seccomp-profiles">seccomp-profiles</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Singularity container</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Singularity Configuration Files</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/sylabs/singularity-admindocs/blob/3.0/configfiles.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="singularity-configuration-files">
+<span id="singularity-configfiles"></span><h1>Singularity Configuration Files<a class="headerlink" href="#singularity-configuration-files" title="Permalink to this headline">¶</a></h1>
+<p>As a Singularity Administrator, you will have access to various configuration
+files, that will let you manage container resources, set security restrictions
+and configure network options etc, when installing Singularity across the system.
+All these files can be found in <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity</span></code> by default (though
+its location will obviously differ based on options passed during the
+installation). This page will describe the following configuration files and
+the various parameters contained by them. They are usually self documenting
+but here are several things to pay special attention to:</p>
+<div class="section" id="singularity-conf">
+<h2>singularity.conf<a class="headerlink" href="#singularity-conf" title="Permalink to this headline">¶</a></h2>
+<p>Most of the configuration options are set using the file <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>
+that defines the global configuration for Singularity across the entire system.
+Using this file, system administrators can have direct say as to what functions
+the users can utilize. As a security measure, it must be owned by root and must
+not be writable by users or Singularity will refuse to run.</p>
+<p>The following are some of the configurable options:</p>
+<p><code class="docutils literal notranslate"><span class="pre">ALLOW</span> <span class="pre">SETUID</span></code>:
+To use containers, your users will have to have access to some privileged system
+calls. One way singularity achieves this is by using binaries with the <cite>setuid</cite>
+bit enabled. This variable lets you enable/disable users ability to utilize
+these binaries within Singularity. By default, it is set to “Yes”, but when
+disabled, various Singularity features will not function (e.g. mounting of the
+Singularity image file format).</p>
+<p><code class="docutils literal notranslate"><span class="pre">USER</span> <span class="pre">BIND</span> <span class="pre">CONTROL</span></code>:
+This allows admins to enable/disable users to define bind points at runtime.
+By Default, its “YES”, which means users can specify bind points, scratch and
+tmp locations.</p>
+<p><code class="docutils literal notranslate"><span class="pre">BIND</span> <span class="pre">PATH</span></code>:
+Used for setting of  automatic <cite>bind points</cite> entries. You can define a list
+of files/directories that should be made available from within the container.
+If the file exists within the container on which to attach to use the path
+like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>bind path = /etc/localtime
+</pre></div>
+</div>
+<p>You can specify different source and destination locations using:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>bind path = /etc/singularity/default-nsswitch.conf:/etc/nsswitch.conf
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">MOUNT</span> <span class="pre">DEV</span></code>:
+Should be set to “YES”, if you want to automatically bind mount <cite>/dev</cite>
+within the container. If set to ‘minimal’, then only ‘null’, ‘zero’,
+‘random’, ‘urandom’, and ‘shm’ will be included.</p>
+<p><code class="docutils literal notranslate"><span class="pre">MOUNT</span> <span class="pre">HOME</span></code>:
+To automatically determine the calling of user’s home directory and
+attempt to mount it’s base path into the container.</p>
+<div class="section" id="limiting-containers">
+<h3>Limiting containers<a class="headerlink" href="#limiting-containers" title="Permalink to this headline">¶</a></h3>
+<p>There are several ways in which you can limit the running of containers in your
+system:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">LIMIT</span> <span class="pre">CONTAINER</span> <span class="pre">OWNERS</span></code>: Only allow containers to be used that are owned by a
+given user.</p>
+<p><code class="docutils literal notranslate"><span class="pre">LIMIT</span> <span class="pre">CONTAINER</span> <span class="pre">GROUPS</span></code>: Only allow containers to be used that are owned by
+a given group.</p>
+<p><code class="docutils literal notranslate"><span class="pre">LIMIT</span> <span class="pre">CONTAINER</span> <span class="pre">PATHS</span></code>: Only allow containers to be used that are located
+within an allowed path prefix.</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These features will only apply when Singularity is running in SUID mode and the
+user is non-root. By default they all are set to <cite>NULL</cite>.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> file is well documented and most information can be
+gleaned by consulting it directly.</p>
+</div>
+</div>
+<div class="section" id="cgroups-toml">
+<h2>cgroups.toml<a class="headerlink" href="#cgroups-toml" title="Permalink to this headline">¶</a></h2>
+<p>Cgroups or Control groups let you implement metering and limiting on the
+resources used by processes. You can limit memory, CPU. You can block IO,
+network IO, set SEL permissions for device nodes etc.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code> option can only be used with root privileges.</p>
+</div>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>When you are limiting resources, apply the settings in the TOML file by using
+the path as an argument to the <code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code> option like so:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity shell --apply-cgroups /path/to/cgroups.toml my_container.sif
+</pre></div>
+</div>
+<div class="section" id="limiting-memory">
+<h4>Limiting memory<a class="headerlink" href="#limiting-memory" title="Permalink to this headline">¶</a></h4>
+<p>To limit the amount of memory that your container uses to 500MB (524288000 bytes):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[memory]
+    limit = 524288000
+</pre></div>
+</div>
+<p>Start your container like so:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity instance start --apply-cgroups path/to/cgroups.toml my_container.sif instance1
+</pre></div>
+</div>
+<p>After that, you can verify that the container is only using 500MB of memory.
+(This example assumes that <code class="docutils literal notranslate"><span class="pre">instance1</span></code> is the only running instance.)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cat /sys/fs/cgroup/memory/singularity/*/memory.limit_in_bytes
+  524288000
+</pre></div>
+</div>
+<p>Do not forget to stop your instances after configuring the options.</p>
+<p>Similarly, the remaining examples can be tested by starting instances and
+examining the contents of the appropriate subdirectories of <code class="docutils literal notranslate"><span class="pre">/sys/fs/cgroup/</span></code>.</p>
+</div>
+<div class="section" id="limiting-cpu">
+<h4>Limiting CPU<a class="headerlink" href="#limiting-cpu" title="Permalink to this headline">¶</a></h4>
+<p>Limit CPU resources using one of the following strategies. The <code class="docutils literal notranslate"><span class="pre">cpu</span></code> section
+of the configuration file can limit memory with the following:</p>
+<p><strong>shares</strong></p>
+<p>This corresponds to a ratio versus other cgroups with cpu shares. Usually the
+default value is <code class="docutils literal notranslate"><span class="pre">1024</span></code>. That means if you want to allow to use 50% of a
+single CPU, you will set <code class="docutils literal notranslate"><span class="pre">512</span></code> as value.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[cpu]
+    shares = 512
+</pre></div>
+</div>
+<p>A cgroup can get more than its share of CPU if there are enough idle CPU cycles
+available in the system, due to the work conserving nature of the scheduler, so
+a contained process can consume all CPU cycles even with a ratio of 50%. The
+ratio is only applied when two or more processes conflicts with their needs of
+CPU cycles.</p>
+<p><strong>quota/period</strong></p>
+<p>You can enforce hard limits on the CPU cycles a cgroup can consume, so
+contained processes can’t use more than the amount of CPU time set for the
+cgroup. <code class="docutils literal notranslate"><span class="pre">quota</span></code> allows you to configure the amount of CPU time that a cgroup
+can use per period. The default is 100ms (100000us). So if you want to limit
+amount of CPU time to 20ms during period of 100ms:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[cpu]
+    period = 100000
+    quota = 20000
+</pre></div>
+</div>
+<p><strong>cpus/mems</strong></p>
+<p>You can also restrict access to specific CPUs and associated memory nodes by
+using <code class="docutils literal notranslate"><span class="pre">cpus/mems</span></code> fields:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[cpu]
+    cpus = &quot;0-1&quot;
+    mems = &quot;0-1&quot;
+</pre></div>
+</div>
+<p>Where container has limited access to CPU 0 and CPU 1.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It’s important to set identical values for both <code class="docutils literal notranslate"><span class="pre">cpus</span></code> and <code class="docutils literal notranslate"><span class="pre">mems</span></code>.</p>
+</div>
+</div>
+<div class="section" id="limiting-io">
+<h4>Limiting IO<a class="headerlink" href="#limiting-io" title="Permalink to this headline">¶</a></h4>
+<p>You can limit and monitor access to I/O for block devices.  Use the
+<code class="docutils literal notranslate"><span class="pre">[blockIO]</span></code> section of the configuration file to do this like so:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[blockIO]
+    weight = 1000
+    leafWeight = 1000
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">weight</span></code> and <code class="docutils literal notranslate"><span class="pre">leafWeight</span></code> accept values between <code class="docutils literal notranslate"><span class="pre">10</span></code> and <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">weight</span></code> is the default weight of the group on all the devices until and
+unless overridden by a per device rule.</p>
+<p><code class="docutils literal notranslate"><span class="pre">leafWeight</span></code> relates to weight for the purpose of deciding how heavily to
+weigh tasks in the given cgroup while competing with the cgroup’s child cgroups.</p>
+<p>To override <code class="docutils literal notranslate"><span class="pre">weight/leafWeight</span></code> for <code class="docutils literal notranslate"><span class="pre">/dev/loop0</span></code> and <code class="docutils literal notranslate"><span class="pre">/dev/loop1</span></code> block
+devices you would do something like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[blockIO]
+    [[blockIO.weightDevice]]
+        major = 7
+        minor = 0
+        weight = 100
+        leafWeight = 50
+    [[blockIO.weightDevice]]
+        major = 7
+        minor = 1
+        weight = 100
+        leafWeight = 50
+</pre></div>
+</div>
+<p>You could limit the IO read/write rate to 16MB per second for the <code class="docutils literal notranslate"><span class="pre">/dev/loop0</span></code>
+block device with the following configuration.  The rate is specified in bytes
+per second.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[blockIO]
+    [[blockIO.throttleReadBpsDevice]]
+        major = 7
+        minor = 0
+        rate = 16777216
+    [[blockIO.throttleWriteBpsDevice]]
+        major = 7
+        minor = 0
+        rate = 16777216
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="ecl-toml">
+<h2>ecl.toml<a class="headerlink" href="#ecl-toml" title="Permalink to this headline">¶</a></h2>
+<p>The execution control list is defined here. You can authorize the containers by
+validating both the location of the SIF file in the file system and by
+checking against a list of signing entities.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[execgroup]]
+  tagname = &quot;group2&quot;
+  mode = &quot;whitelist&quot;
+  dirpath = &quot;/tmp/containers&quot;
+  keyfp = [&quot;7064B1D6EFF01B1262FED3F03581D99FE87EAFD1&quot;]
+</pre></div>
+</div>
+<p>Only the containers running from and signed with above-mentioned path and keys
+will be authorized to run.</p>
+<p>Three possible list modes you can choose from:</p>
+<p><strong>Whitestrict</strong>: The SIF must be signed by <em>ALL</em> of the keys mentioned.</p>
+<p><strong>Whitelist</strong>: As long as the SIF is signed by one or more of the keys, the
+container is allowed to run.</p>
+<p><strong>Blacklist</strong>: Only the containers whose keys are not mentioned in the group
+are allowed to run.</p>
+</div>
+<div class="section" id="nvliblist-conf">
+<h2>nvliblist.conf<a class="headerlink" href="#nvliblist-conf" title="Permalink to this headline">¶</a></h2>
+<p>When a container includes a GPU enabled application and libraries, Singularity
+(with the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> option) can properly inject the required Nvidia GPU driver
+libraries into the container, to match the host’s kernel. This config file is
+the place where it searches for NVIDIA libraries in your host system.
+However, <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> will be ignored in case of having <a class="reference external" href="https://github.com/NVIDIA/libnvidia-container">nvidia-container-cli</a>
+installed, which will be used to locate any nvidia libraries and binaries on
+the host system.</p>
+<p>For GPU and CUDA support –nv option works like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity exec --nv ubuntu.sif gpu_program.exec
+$ singularity run --nv docker://tensorflow/tensorflow:gpu_latest
+</pre></div>
+</div>
+<p>You can also mention libraries/binaries and they will be mounted into the
+container when the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> option is passed.</p>
+</div>
+<div class="section" id="capability-json">
+<h2>capability.json<a class="headerlink" href="#capability-json" title="Permalink to this headline">¶</a></h2>
+<p>Singularity provides full support for granting and revoking Linux capabilities
+on a user or group basis. By default, all Linux capabilities are dropped when a
+user enters the container system. When you decide to add/revoke some capabilities,
+you can do so using the <code class="docutils literal notranslate"><span class="pre">Singularity</span> <span class="pre">capability</span></code> options: <code class="docutils literal notranslate"><span class="pre">Add</span></code>, <code class="docutils literal notranslate"><span class="pre">Drop</span></code>
+and <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
+<p>For example, if you do:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity capability add --user david CAP_SYS_RAWIO
+</pre></div>
+</div>
+<p>You’ve let the user David to perform I/O port operations, perform a range of
+device-specific operations on other devices etc.
+To perform the same for a group of users do:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity capability add --group mygroup audit_write
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">drop</span></code> in the same format for revoking their capabilities.</p>
+<p>To see a list of all users and their capabilities, simply do:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity capability list --all
+</pre></div>
+</div>
+<p><em>capability.json</em> is the file maintained by Singularity where the <code class="docutils literal notranslate"><span class="pre">capability</span></code>
+commands create/delete entries accordingly.</p>
+<p>To know more about the capabilities you can add do:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity capability add --help
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The above commands can only be issued by root user(admin).</p>
+</div>
+<p>The <a class="reference external" href="https://www.sylabs.io/guides/3.0/user-guide/security_options.html?highlight=seccomp#security-related-action-options">–add-caps</a> and
+related options will let the user request the capability when executing a container.</p>
+</div>
+<div class="section" id="seccomp-profiles">
+<h2>seccomp-profiles<a class="headerlink" href="#seccomp-profiles" title="Permalink to this headline">¶</a></h2>
+<p>Secure Computing (seccomp) Mode is a feature of the Linux kernel that allows an
+administrator to filter system calls being made from a container. Profiles made
+up of allowed and restricted calls can be passed to different containers.
+<em>Seccomp</em> provides more control than <em>capabilities</em> alone, giving a smaller
+attack surface for an attacker to work from within a container.</p>
+<p>You can set the default action with <code class="docutils literal notranslate"><span class="pre">defaultAction</span></code> for a non-listed system
+call. Example: <code class="docutils literal notranslate"><span class="pre">SCMP_ACT_ALLOW</span></code> filter will allow all the system calls if it
+matches the filter rule and you can set it to <code class="docutils literal notranslate"><span class="pre">SCMP_ACT_ERRNO</span></code> which will have
+the thread receive a return value of <em>errno</em> if it calls a system call that matches
+the filter rule.
+The file is formatted in a way that it can take a list of additional system calls
+for different architecture and Singularity will automatically take syscalls
+related to the current architecture where it’s been executed.
+The <code class="docutils literal notranslate"><span class="pre">include</span></code>/<code class="docutils literal notranslate"><span class="pre">exclude</span></code>-&gt; <code class="docutils literal notranslate"><span class="pre">caps</span></code> section will include/exclude the listed
+system calls if the user has the associated capability.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">--security</span></code> option to invoke the container like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity shell --security seccomp:/home/david/my.json my_container.sif
+</pre></div>
+</div>
+<p>For more insight into security options, network options, cgroups, capabilities,
+etc, please check the <a class="reference external" href="https://www.sylabs.io/guides/3.0/user-guide/">Userdocs</a>
+and it’s <a class="reference external" href="https://www.sylabs.io/guides/3.0/user-guide/appendix.html">Appendix</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="admin_quickstart.html" class="btn btn-neutral float-left" title="Admin Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017-2019, Sylabs Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

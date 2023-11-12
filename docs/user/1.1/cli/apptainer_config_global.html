@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>apptainer config global &mdash; Apptainer User Guide 1.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/js/ga.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="apptainer delete" href="apptainer_delete.html" />
+    <link rel="prev" title="apptainer config fakeroot" href="apptainer_config_fakeroot.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security in Apptainer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library_api.html">Library API Registries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_services.html">Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cgroups.html">Limiting Container Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../checkpoint.html">Application Checkpointing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../singularity_compatibility.html">Singularity Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docker_and_oci.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mpi.html">Apptainer and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix.html">Appendix</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../cli.html">Command Line Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="apptainer.html">apptainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_build.html">apptainer build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_cache.html">apptainer cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_cache_clean.html">apptainer cache clean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_cache_list.html">apptainer cache list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_capability.html">apptainer capability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_capability_add.html">apptainer capability add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_capability_avail.html">apptainer capability avail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_capability_drop.html">apptainer capability drop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_capability_list.html">apptainer capability list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint.html">apptainer checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_create.html">apptainer checkpoint create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_delete.html">apptainer checkpoint delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_instance.html">apptainer checkpoint instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_checkpoint_list.html">apptainer checkpoint list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_config.html">apptainer config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_config_fakeroot.html">apptainer config fakeroot</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">apptainer config global</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_delete.html">apptainer delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_exec.html">apptainer exec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_inspect.html">apptainer inspect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_instance.html">apptainer instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_instance_list.html">apptainer instance list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_instance_start.html">apptainer instance start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_instance_stats.html">apptainer instance stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_instance_stop.html">apptainer instance stop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_key.html">apptainer key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_key_export.html">apptainer key export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_key_import.html">apptainer key import</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_key_list.html">apptainer key list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_key_newpair.html">apptainer key newpair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_key_pull.html">apptainer key pull</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_key_push.html">apptainer key push</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_key_remove.html">apptainer key remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_key_search.html">apptainer key search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci.html">apptainer oci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci_attach.html">apptainer oci attach</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci_create.html">apptainer oci create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci_delete.html">apptainer oci delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci_exec.html">apptainer oci exec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci_kill.html">apptainer oci kill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci_mount.html">apptainer oci mount</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci_pause.html">apptainer oci pause</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci_resume.html">apptainer oci resume</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci_run.html">apptainer oci run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci_start.html">apptainer oci start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci_state.html">apptainer oci state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci_umount.html">apptainer oci umount</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_oci_update.html">apptainer oci update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_overlay.html">apptainer overlay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_overlay_create.html">apptainer overlay create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_plugin.html">apptainer plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_compile.html">apptainer plugin compile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_create.html">apptainer plugin create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_disable.html">apptainer plugin disable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_enable.html">apptainer plugin enable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_inspect.html">apptainer plugin inspect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_install.html">apptainer plugin install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_list.html">apptainer plugin list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_uninstall.html">apptainer plugin uninstall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_pull.html">apptainer pull</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_push.html">apptainer push</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote.html">apptainer remote</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add.html">apptainer remote add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add-keyserver.html">apptainer remote add-keyserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_list.html">apptainer remote list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_login.html">apptainer remote login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_logout.html">apptainer remote logout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove.html">apptainer remote remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove-keyserver.html">apptainer remote remove-keyserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_status.html">apptainer remote status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_use.html">apptainer remote use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_run.html">apptainer run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_run-help.html">apptainer run-help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_search.html">apptainer search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_shell.html">apptainer shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_sif.html">apptainer sif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_sif_add.html">apptainer sif add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_sif_del.html">apptainer sif del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_sif_dump.html">apptainer sif dump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_sif_header.html">apptainer sif header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_sif_info.html">apptainer sif info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_sif_list.html">apptainer sif list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_sif_new.html">apptainer sif new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_sif_setprim.html">apptainer sif setprim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_sign.html">apptainer sign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_test.html">apptainer test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_verify.html">apptainer verify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_version.html">apptainer version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Apptainer User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../cli.html">Command Line Interface</a></li>
+      <li class="breadcrumb-item active">apptainer config global</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/cli/apptainer_config_global.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="apptainer-config-global">
+<span id="id1"></span><h1>apptainer config global<a class="headerlink" href="#apptainer-config-global" title="Permalink to this heading"></a></h1>
+<p>Edit apptainer.conf from command line (root user only or unprivileged installation)</p>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><p>The config global command allow administrators to set/unset/get/reset configuration
+directives of apptainer.conf from command line.</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">config</span> <span class="k">global</span> <span class="o">&lt;</span><span class="n">option</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">directive</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">value</span><span class="p">,</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>To add a path to &quot;bind path&quot; directive:
+$ apptainer config global --set &quot;bind path&quot; /etc/resolv.conf
+
+To remove a path from &quot;bind path&quot; directive:
+$ apptainer config global --unset &quot;bind path&quot; /etc/resolv.conf
+
+To set &quot;bind path&quot; to the default value:
+$ apptainer config global --reset &quot;bind path&quot;
+
+To get &quot;bind path&quot; directive value:
+$ apptainer config global --get &quot;bind path&quot;
+
+To display the resulting configuration instead of writing it to file:
+$ apptainer config global --dry-run --set &quot;bind path&quot; /etc/resolv.conf
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="o">--</span><span class="n">dry</span><span class="o">-</span><span class="n">run</span>   <span class="n">dump</span> <span class="n">resulting</span> <span class="n">configuration</span> <span class="n">on</span> <span class="n">stdout</span> <span class="n">but</span> <span class="n">doesn</span><span class="s1">&#39;t write it to apptainer.conf</span>
+<span class="o">-</span><span class="n">g</span><span class="p">,</span> <span class="o">--</span><span class="n">get</span>       <span class="n">get</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="n">configuration</span> <span class="n">directive</span>
+<span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>      <span class="n">help</span> <span class="k">for</span> <span class="k">global</span>
+<span class="o">-</span><span class="n">r</span><span class="p">,</span> <span class="o">--</span><span class="n">reset</span>     <span class="n">reset</span> <span class="n">the</span> <span class="n">configuration</span> <span class="n">directive</span> <span class="n">value</span> <span class="n">to</span> <span class="n">its</span> <span class="n">default</span> <span class="n">value</span>
+<span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="nb">set</span>       <span class="nb">set</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="n">configuration</span> <span class="n">directive</span> <span class="p">(</span><span class="k">for</span> <span class="n">multi</span><span class="o">-</span><span class="n">value</span> <span class="n">directives</span><span class="p">,</span> <span class="n">it</span> <span class="n">will</span> <span class="n">add</span> <span class="n">it</span><span class="p">)</span>
+<span class="o">-</span><span class="n">u</span><span class="p">,</span> <span class="o">--</span><span class="n">unset</span>     <span class="n">unset</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="n">configuration</span> <span class="n">directive</span> <span class="p">(</span><span class="k">for</span> <span class="n">multi</span><span class="o">-</span><span class="n">value</span> <span class="n">directives</span><span class="p">,</span> <span class="n">it</span> <span class="n">will</span> <span class="n">remove</span> <span class="n">matching</span> <span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="see-also">
+<h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="apptainer_config.html#apptainer-config"><span class="std std-ref">apptainer config</span></a>     - Manage various apptainer configuration (root user only)</p></li>
+</ul>
+<p><em>Auto generated by spf13/cobra on 7-Jun-2023</em></p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="apptainer_config_fakeroot.html" class="btn btn-neutral float-left" title="apptainer config fakeroot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="apptainer_delete.html" class="btn btn-neutral float-right" title="apptainer delete" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

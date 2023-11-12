@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkpoint Feature &mdash; Apptainer User Guide 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/js/ga.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Singularity Compatibility" href="singularity_compatibility.html" />
+    <link rel="prev" title="Limiting Container Resources" href="cgroups.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Limiting Container Resources</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Application Checkpointing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dmtcp-installation">DMTCP Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apptainer User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Checkpoint Feature</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/checkpoint.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="checkpoint-feature">
+<span id="checkpoint"></span><h1>Checkpoint Feature<a class="headerlink" href="#checkpoint-feature" title="Permalink to this heading"></a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The checkpoint feature allows users to transparently save the state of
+containerized applications while they are executing and then restart them from
+the saved state.</p>
+<p>This is valuable for use cases that need to minimize the impact of ephemeral
+environment failures, random hardware failures or job premption.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This feature is marked as <strong>experimental</strong> to allow flexibility as community
+feedback may warrant breaking changes to improve the overall usability for
+this feature set as it matures.</p>
+</div>
+<p>In order to enable checkpointing as a feature, the <a class="reference external" href="https://dmtcp.sourceforge.io/">DMTCP</a> project has been chosen as the basis for an
+integration. Apptainer injects an installation of DMTCP from the host into the
+container at container creation and uses it to wrap the launching of the
+container process. When launching a process, DMTCP will monitor the spawned
+application process and its children in order to fully checkpoint the state
+of the application when triggered.</p>
+<p>For interested readers, more detailed information about the technology can be
+found in the publications listed on the <a class="reference external" href="https://dmtcp.sourceforge.io/publications.html">DMTCP website</a>.</p>
+<div class="section" id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h3>
+<p>Due to the architecture of DMTCP, there are a couple requirements that must be
+met to allow this integration to work correctly:</p>
+<ul class="simple">
+<li><p>Applications that are the intended to be checkpointed must be dynamically
+linked.</p></li>
+<li><p>dmtcp uses <code class="docutils literal notranslate"><span class="pre">dladdr1()</span></code> which is a GNU extension that requires <code class="docutils literal notranslate"><span class="pre">glibc</span></code> or
+<code class="docutils literal notranslate"><span class="pre">glibc</span></code> compatibility inside the container.</p></li>
+</ul>
+<p>In addition to these requirements, the Apptainer integration with DMTCP
+requires that either:</p>
+<ul class="simple">
+<li><p>The binaries and libraries required by DMTCP are within the user <code class="docutils literal notranslate"><span class="pre">PATH</span></code> and
+the <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> cache respectively.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">dmtcp-conf.yaml</span></code> configuration file has been modified to contain
+the absolute paths of the listed binaries and libraries.</p></li>
+</ul>
+<p>At time of release, the list of libraries and binaries in this configuration
+is appropriate for the latest master branch of DMTCP. It can be modified by the
+system administrator to add additional libraries if necessary. See the <a class="reference external" href="https://apptainer.org/docs/admin/1.1/configfiles.html#dmtcp-conf-yaml">admin
+guide</a> for more details.</p>
+</div>
+<div class="section" id="dmtcp-installation">
+<h3>DMTCP Installation<a class="headerlink" href="#dmtcp-installation" title="Permalink to this heading"></a></h3>
+<p>Installation instructions for DMTCP can be found on their git <a class="reference external" href="https://github.com/dmtcp/dmtcp/blob/master/INSTALL.md">repository</a>.
+In order to maximize the portability of the DMTCP build, we recommend using the
+<code class="docutils literal notranslate"><span class="pre">--enable-static-libstdcxx</span></code> configure option.</p>
+<p>A build and install of DMTCP from source will generally place libraries at
+<code class="docutils literal notranslate"><span class="pre">/usr/local/lib/dmtcp</span></code>, which is not a standard path for the linker. You can
+configure your linker to find these libraries and update its cache with the
+following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># echo /usr/local/lib/dmtcp &gt; /etc/ld.so.conf.d/dmtcp.conf</span>
+<span class="c1"># ldconfig</span>
+</pre></div>
+</div>
+<p>Verify that the libraries are in the cache by ensuring there is output from the
+following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ldconfig -p | grep dmtcp
+</pre></div>
+</div>
+<p>The DMTCP project is currently working towards a <code class="docutils literal notranslate"><span class="pre">3.0</span></code> release. If you
+encounter issues using a <code class="docutils literal notranslate"><span class="pre">2.x</span></code> installation of DMTCP, we recommend trying the
+tip of the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch to see if the issue has been resolved in the code
+that will become the next release.</p>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h3>
+<p>The following container (referred to as <code class="docutils literal notranslate"><span class="pre">server.sif</span></code> below) contains a simple
+http server that allows a variable to be read and written with <code class="docutils literal notranslate"><span class="pre">GET</span></code> and
+<code class="docutils literal notranslate"><span class="pre">POST</span></code> requests respectively. This is not typical of applications packaged by
+the Apptainer community, but gives us an easy way to check that application
+state has been successfully restored upon restart.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
+From: python:3.10-buster
+
+%post
+    mkdir /app
+    cat &gt; /app/server.py &lt;&lt;EOF
+import argparse
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+state = &quot;0&quot;
+
+parser = argparse.ArgumentParser(description=&#39;Optional app description&#39;)
+parser.add_argument(&#39;port&#39;, type=int, help=&#39;A required integer port argument&#39;)
+args = parser.parse_args()
+
+class handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header(&#39;Content-type&#39;,&#39;text/plain&#39;)
+        self.end_headers()
+
+        self.wfile.write(bytes(state, &quot;utf8&quot;))
+    def do_POST(self):
+        self.send_response(200)
+        self.send_header(&#39;Content-type&#39;,&#39;text/plain&#39;)
+        self.end_headers()
+
+        global state
+        state = self.rfile.read(1).decode(&quot;utf8&quot;)
+        self.wfile.write(bytes(state, &quot;utf8&quot;))
+
+
+with HTTPServer((&#39;&#39;, args.port), handler) as server:
+    server.serve_forever()
+EOF
+
+%startscript
+    python3 /app/server.py $@
+</pre></div>
+</div>
+<p>We can build this container using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build server.sif server.def
+</pre></div>
+</div>
+<p>First things first, we need to create a <code class="docutils literal notranslate"><span class="pre">checkpoint</span></code> using the <code class="docutils literal notranslate"><span class="pre">checkpoint</span></code>
+command group. This initializes a location in your user home directory for
+Apptainer to store state related to DMTCP and the checkpoint images it will
+generate.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer checkpoint create example-checkpoint
+INFO:    Checkpoint &quot;example-checkpoint&quot; created.
+</pre></div>
+</div>
+<p>Now we can start an instance of our application with the <code class="docutils literal notranslate"><span class="pre">--dmtcp-launch</span></code> flag
+naming the <code class="docutils literal notranslate"><span class="pre">checkpoint</span></code> we want to use to store state for this instance.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start --dmtcp-launch example-checkpoint server.sif server 8888 # this last arg is the port the server will listen to.
+INFO:    instance started successfully
+</pre></div>
+</div>
+<p>Once we have our application up and running, we can <code class="docutils literal notranslate"><span class="pre">curl</span></code> against it and read
+the state of a variable on the server.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl localhost:8888; echo
+0
+</pre></div>
+</div>
+<p>We can see that it is set to <code class="docutils literal notranslate"><span class="pre">0</span></code> by default when this application is started
+normally. We can now update the state of the server from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span></code> with
+the following <code class="docutils literal notranslate"><span class="pre">POST</span></code> request:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -X POST localhost:8888 -d &#39;1&#39;; echo
+1
+$ curl localhost:8888; echo
+1
+</pre></div>
+</div>
+<p>Now that variable on our server is in a new state, <code class="docutils literal notranslate"><span class="pre">1</span></code>, we can use the
+<code class="docutils literal notranslate"><span class="pre">checkpoint</span> <span class="pre">instance</span></code> command and reference the instance via the
+<code class="docutils literal notranslate"><span class="pre">instance://</span></code> URI format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer checkpoint instance server
+INFO:    Using checkpoint &quot;example-checkpoint&quot;
+</pre></div>
+</div>
+<p>Now that we have checkpointed the state of our application, we can safely
+stop the instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance stop server
+INFO:    Stopping server instance of /home/ian/server.sif (PID=209072)
+</pre></div>
+</div>
+<p>We can restart our server and restore its state by starting a new instance using
+the <code class="docutils literal notranslate"><span class="pre">--dmtcp-restart</span></code> flag and specifying the checkpoint to be used to restore
+our application’s state:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start --dmtcp-restart example-checkpoint server.sif restarted-server 8888
+INFO:    instance started successfully
+</pre></div>
+</div>
+<p>And now we can verify the variable on the server has been properly restored to
+a value of <code class="docutils literal notranslate"><span class="pre">1</span></code>, instead of the default of <code class="docutils literal notranslate"><span class="pre">0</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl localhost:8888; echo
+1
+</pre></div>
+</div>
+<p>Finally, we can stop our instance running our restored application and delete our
+checkpoint if we no longer need it to restart our application from this state:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance stop restarted-server
+INFO:    Stopping restarted-server instance of /home/ian/server.sif (PID=247679)
+$ apptainer checkpoint delete example-checkpoint
+INFO:    Checkpoint &quot;example-checkpoint&quot; deleted.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cgroups.html" class="btn btn-neutral float-left" title="Limiting Container Resources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="singularity_compatibility.html" class="btn btn-neutral float-right" title="Singularity Compatibility" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

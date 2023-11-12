@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Security in Singularity &mdash; Singularity container 3.6 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/js/ga.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Build a Container" href="build_a_container.html" />
+    <link rel="prev" title="Quick Start" href="quick_start.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Singularity container
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Security in Singularity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#security-policy">Security Policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#singularity-pro-long-term-support-security-patches">Singularity PRO - Long Term Support &amp; Security Patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#singularity-runtime-user-privilege">Singularity Runtime &amp; User Privilege</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#singularity-image-format-sif">Singularity Image Format (SIF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin-configurable-files">Admin Configurable Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cgroups-support">cgroups support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security-options"><code class="docutils literal notranslate"><span class="pre">--security</span></code> options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#security-in-the-sylabs-cloud">Security in the Sylabs Cloud</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#remote-builder">Remote Builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#container-library">Container Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#key-store">Key Store</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#authentication-and-encryption">Authentication and encryption</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Singularity and Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_library.html">Cloud Library</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Singularity container</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Security in Singularity</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/sylabs/singularity-userdocs/blob/master/security.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="security-in-singularity">
+<span id="security"></span><h1>Security in Singularity<a class="headerlink" href="#security-in-singularity" title="Permalink to this headline">¶</a></h1>
+<p>Containers are popular for many good reasons. They are light weight,
+easy to spin-up and require reduced IT management resources as
+compared to hardware VM environments. More importantly, container
+technology facilitates advanced research computing by granting the
+ability to package software in highly portable and reproducible
+environments encapsulating all dependencies, including the operating
+system. But there are still some challenges to container security.</p>
+<p>Singularity addresses some core missions of containers : Mobility of
+Compute, Reproducibility, HPC support, and <strong>Security</strong>. This section
+gives an overview of security features supported by Singularity,
+especially where they differ from other container runtimes.</p>
+<div class="section" id="security-policy">
+<h2>Security Policy<a class="headerlink" href="#security-policy" title="Permalink to this headline">¶</a></h2>
+<p>Security is not a check box that one can tick and forget.  Ensuring
+security is a ongoing process that begins with software architecture,
+and continues all the way through to ongoing security practices.  In
+addition to ensuring that containers are run without elevated
+privileges where appropriate, and that containers are produced by
+trusted sources, users must monitor their containers for newly
+discovered vulnerabilities and update when necessary just as they
+would with any other software. Sylabs is constantly probing to find
+and patch vulnerabilities within Singularity, and will continue to do
+so.</p>
+<p>If you suspect you have found a vulnerability in Singularity, please
+follow the steps in our published <a class="reference external" href="https://sylabs.io/security-policy">Security Policy</a>.</p>
+<p>so that it can be disclosed, investigated, and fixed in an appropriate
+manner.</p>
+</div>
+<div class="section" id="singularity-pro-long-term-support-security-patches">
+<h2>Singularity PRO - Long Term Support &amp; Security Patches<a class="headerlink" href="#singularity-pro-long-term-support-security-patches" title="Permalink to this headline">¶</a></h2>
+<p>Security patches for Singularity are applied to the latest open-source
+version, so it is important to follow new releases and upgrade when
+neccessary.</p>
+<p>SingularityPRO is a professionally curated and licensed version of
+Singularity that provides added security, stability, and support
+beyond that offered by the open source project. Security and bug-fix
+patches are backported to select versions of Singularity PRO, so that
+they can be deployed long-term where required. PRO users receive
+security fixes (without specific notification or detail) prior to
+public disclosure, as detailed in the <a class="reference external" href="https://sylabs.io/security-policy">Sylabs Security Policy</a>.</p>
+</div>
+<div class="section" id="singularity-runtime-user-privilege">
+<h2>Singularity Runtime &amp; User Privilege<a class="headerlink" href="#singularity-runtime-user-privilege" title="Permalink to this headline">¶</a></h2>
+<p>The Singularity Runtime enforces a unique security model that makes it
+appropriate for <em>untrusted users</em> to run <em>untrusted containers</em> safely
+on multi-tenant resources. When you run a container, the processes in
+the container will run as your user account. Singularity dynamically
+writes UID and GID information to the appropriate files within the
+container, and the user remains the same <em>inside</em> and <em>outside</em>
+the container, i.e., if you’re an unprivileged user while entering the
+container you’ll remain an unprivileged user inside the container.</p>
+<p>Additional blocks are in place to prevent users from escalating
+privileges once they are inside of a container. The container file
+system is mounted using the <code class="docutils literal notranslate"><span class="pre">nosuid</span></code> option, and processes are
+started with the <code class="docutils literal notranslate"><span class="pre">PR_NO_NEW_PRIVS</span></code> flag set. This means that even if
+you run <cite>sudo</cite> inside your container, you won’t be able to change to
+another user, or gain root priveleges by other means. This approach
+provides a secure way for users to run containers and greatly
+simplifies things like reading and writing data to the host system
+with appropriate ownership.</p>
+<p>It is also important to note that the philosophy of Singularity is
+<em>Integration</em> over <em>Isolation</em>. Most container run times strive to
+isolate your container from the host system and other containers as
+much as possible. Singularity, on the other hand, assumes that the
+user’s primary goals are portability, reproducibility, and ease of use
+and that isolation is often a tertiary concern. Therefore, Singularity
+only isolates the mount namespace by default, and will bind mount
+several host directories such as <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> and <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> into the
+container at runtime. If needed, additional levels of isolation can be
+achieved by passing options causing Singularity to enter any or all of
+the other kernel namespaces and to prevent automatic bind mounting.
+These measures allow users to interact with the host system from
+within the container in sensible ways.</p>
+</div>
+<div class="section" id="singularity-image-format-sif">
+<h2>Singularity Image Format (SIF)<a class="headerlink" href="#singularity-image-format-sif" title="Permalink to this headline">¶</a></h2>
+<p>Ensuring container security as a continuous process. Singularity
+provides ways to ensure integrity throughout the lifecyle of a
+container, i.e. at rest, in transit and while running. The SIF
+Singularity Image Format has been designed to achieve these goals.</p>
+<p>A SIF file is an immutable container image that packages the container
+environment into a single file. SIF supports security and integrity
+through the ability to cryptographically sign a container, creating a
+signature block within the SIF file which can guarantee immutability
+and provide accountability as to who signed it. Singularity follows
+the <a class="reference external" href="https://www.openpgp.org/">OpenPGP</a> standard to create and
+manage these signatures, and the keys used to create them. After
+building an image with Singularity, a user can <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">sign</span></code>
+the container and push it to the Library along with its public PGP key
+(stored in <a class="reference internal" href="#keystore"><span class="std std-ref">Keystore</span></a>). The signature can be verified
+(<code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">verify</span></code>) while pulling or downloading the
+image. <a class="reference internal" href="signNverify.html#signnverify"><span class="std std-ref">This feature</span></a> makes it easy to to establish
+trust in collaborations within and between teams.</p>
+<p>In Singularity 3.4 and above, the root file system of a container
+(stored in the squashFS partition of SIF) can be encrypted. As a
+result, everything inside the container becomes inaccessible without
+the correct key or passphrase. Other users on the system will be able
+to look inside your container files. The content of the container is
+private, even if the SIF file is shared in public.</p>
+<p>Unlike other container platforms where execution requires a number of
+layers to be extracted to a rootfs directory on the host, Singularity
+executes containers in a single step, directly from the immutable
+<code class="docutils literal notranslate"><span class="pre">.sif</span></code>. This reduces the attack surface and allows the container to
+be easily verified at runtime, to ensure it has not been tampered with.</p>
+</div>
+<div class="section" id="admin-configurable-files">
+<h2>Admin Configurable Files<a class="headerlink" href="#admin-configurable-files" title="Permalink to this headline">¶</a></h2>
+<p>System administrators who manage Singularity can use configuration
+files, to set security restrictions, grant or revoke a user’s
+capabilities, manage resources and authorize containers etc.</p>
+<p>For example, the <a class="reference external" href="https://sylabs.io/guides/3.6/admin-guide/configfiles.html#ecl-toml">ecl.toml</a>
+file allows blacklisting and whitelisting of containers.</p>
+<p>Configuration files and their parameters are documented for administrators
+documented <a class="reference external" href="https://sylabs.io/guides/3.6/admin-guide/configfiles.html">here</a>.</p>
+<div class="section" id="cgroups-support">
+<h3>cgroups support<a class="headerlink" href="#cgroups-support" title="Permalink to this headline">¶</a></h3>
+<p>Starting with v3.0, Singularity added native support for <code class="docutils literal notranslate"><span class="pre">cgroups</span></code>,
+allowing users to limit the resources their containers consume without
+the help of a separate program like a batch scheduling system. This
+feature can help to prevent DoS attacks where one container seizes
+control of all available system resources in order to stop other
+containers from operating properly.  To use this feature, a user first
+creates a cgroups configuration file. An example configuration file is
+installed by default with Singularity as a guide. At runtime, the
+<code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code> option is used to specify the location of the
+configuration file to apply to the container and cgroups are
+configured accordingly. More about cgroups support <a class="reference external" href="https://sylabs.io/guides/3.6/admin-guide/configfiles.html#cgroups-toml">here</a>.</p>
+</div>
+<div class="section" id="security-options">
+<h3><code class="docutils literal notranslate"><span class="pre">--security</span></code> options<a class="headerlink" href="#security-options" title="Permalink to this headline">¶</a></h3>
+<p>Singularity supports a number of methods for further modifying the
+security scope and context when running Singularity containers.  Flags
+can be passed to the action commands; <code class="docutils literal notranslate"><span class="pre">shell</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code>, and <code class="docutils literal notranslate"><span class="pre">run</span></code>
+allowing fine grained control of security. Details about them are
+documented <a class="reference external" href="https://sylabs.io/guides/3.6/user-guide/security_options.html">here</a>.</p>
+</div>
+</div>
+<div class="section" id="security-in-the-sylabs-cloud">
+<h2>Security in the Sylabs Cloud<a class="headerlink" href="#security-in-the-sylabs-cloud" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://cloud.sylabs.io/home">Sylabs Cloud</a> consists of a Remote
+Builder, a Container Library, and a Keystore. Together, theses
+services provide an end-to-end solution for packaging and distributing
+applications in secure and trusted containers.</p>
+<div class="section" id="remote-builder">
+<h3>Remote Builder<a class="headerlink" href="#remote-builder" title="Permalink to this headline">¶</a></h3>
+<p>As mentioned earlier, the Singularity runtime prevents executing code
+with root-level permissions on the host system. However, building a
+container requires elevated privileges that most shared environments
+do not grant their users. The <a class="reference external" href="https://cloud.sylabs.io/builder">Build Service</a> aims to address this by allowing
+unprivileged users to build containers remotely, with root level
+permissions inside the secured service. System administrators can use
+the system to monitor which users are building containers, and the
+contents of those containers. The Singularity CLI has native
+integration with the Build Service from version 3.0 onwards. In
+addition, a browser interface to the Build Service also exists, which
+allows users to build containers using only a web browser.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please also see the <a class="reference internal" href="fakeroot.html#fakeroot"><span class="std std-ref">Fakeroot feature</span></a> which is a
+secure option for admins in multi-tenant HPC environments and
+similar use cases where they might want to grant a user special
+privileges inside a container.</p>
+<p>Fakeroot has some limitations, and requires unpriveleged user
+namespace support in the host kernel.</p>
+</div>
+</div>
+<div class="section" id="container-library">
+<h3>Container Library<a class="headerlink" href="#container-library" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="https://cloud.sylabs.io/library">Container Library</a> allows
+users to store and share Singularity container images in the
+Singularity Image Format (SIF). A web front-end allows users to create
+new projects within the Container Library, edit documentation
+associated with container images, and discover container images
+published by their peers.</p>
+</div>
+<div class="section" id="key-store">
+<span id="keystore"></span><h3>Key Store<a class="headerlink" href="#key-store" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="https://cloud.sylabs.io/keystore">Key Store</a> is a key
+management system offered by Sylabs that uses an <a class="reference external" href="https://gnupg.org/">OpenPGP
+implementation</a> to permit sharing and discovery
+of PGP public keys used to sign and verify Singularity container
+images. This service is based on the OpenPGP HTTP Keyserver Protocol
+(HKP), with several enhancements:</p>
+<ul class="simple">
+<li><p>The Service requires connections to be secured with Transport Layer
+Security (TLS).</p></li>
+<li><p>The Service implements token-based authentication, allowing only
+authenticated users to add or modify PGP keys.</p></li>
+<li><p>A web front-end allows users to view and search for PGP keys using a
+web browser.</p></li>
+</ul>
+</div>
+<div class="section" id="authentication-and-encryption">
+<h3>Authentication and encryption<a class="headerlink" href="#authentication-and-encryption" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Communication between users, the authentication service other
+services is secured via TLS encryption.</p></li>
+<li><p>The services support authentication of users via signed and encrypted authentication
+tokens.</p></li>
+<li><p>There is no implicit trust relationship between each service. Each
+request between the services is authenticated using the
+authentication token supplied by the user in the associated
+request.</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="build_a_container.html" class="btn btn-neutral float-right" title="Build a Container" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="quick_start.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017-2020, Sylabs Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

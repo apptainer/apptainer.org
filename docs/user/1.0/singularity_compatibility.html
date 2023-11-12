@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Singularity Compatibility &mdash; Apptainer User Guide 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/js/ga.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Support for Docker and OCI Containers" href="docker_and_oci.html" />
+    <link rel="prev" title="Checkpoint Feature" href="checkpoint.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Application Checkpointing</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Singularity Compatibility</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sif-image-compatibility">SIF Image Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#singularity-prefixed-environment-variable-support">Singularity Prefixed Environment Variable Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#singularity-command-symlink">Singularity Command Symlink</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#automatic-user-configuration-migration">Automatic User Configuration Migration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apptainer User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+<div class="rst-content style-external-links">
+    <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>You're browsing the documentation for an old version of Apptainer. Consider upgrading to the latest version of Apptainer.</p>
+        <p>Documentation for the latest version can always be found at: <br><a class="reference external" href="https://apptainer.org/docs/user/latest/">https://apptainer.org/docs/user/latest/</a></p>
+    </div>
+</div>
+
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Singularity Compatibility</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/singularity_compatibility.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="singularity-compatibility">
+<span id="id1"></span><h1>Singularity Compatibility<a class="headerlink" href="#singularity-compatibility" title="Permalink to this heading"></a></h1>
+<p>Since the community decided to <a class="reference external" href="https://apptainer.org/news/community-announcement-20211130">move the project into the Linux Foundation</a> with the
+constraint of a name change to the project, it has been a goal of the
+project to minimize the impact to the user base. If you experience issues making
+the move, please reach out to the <a class="reference external" href="https://apptainer.org/help">community</a> so
+we can help you!</p>
+<section id="sif-image-compatibility">
+<h2>SIF Image Compatibility<a class="headerlink" href="#sif-image-compatibility" title="Permalink to this heading"></a></h2>
+<p>The Apptainer project has decided to make no changes related to the project
+renaming at the image format level. This means that default metadata within
+SIF images and their filesystems will retain the <code class="docutils literal notranslate"><span class="pre">singularity</span></code> name without
+change. This will ensure that containers built with Apptainer will continue
+to work with installations of Singularity.</p>
+<p>This decision was made to ensure that users can continue to package their
+applications and data with Apptainer without concerns of image format
+incompatibility when running in a different computing environment or
+collaborating with colleagues that still use a Singularity installation.</p>
+</section>
+<section id="singularity-prefixed-environment-variable-support">
+<span id="singularity-environment-variable-compatibility"></span><h2>Singularity Prefixed Environment Variable Support<a class="headerlink" href="#singularity-prefixed-environment-variable-support" title="Permalink to this heading"></a></h2>
+<p>Apptainer respects environment variables with the <code class="docutils literal notranslate"><span class="pre">SINGULARITY_</span></code> and
+<code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> prefixes when their respective <code class="docutils literal notranslate"><span class="pre">APPTAINER_</span></code> and
+<code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> counterparts are not set.</p>
+<p>This first command does not use any environment variable compatibility behavior
+as it is using the <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> prefix to command Apptainer to create an
+environment variable in the container with the name <code class="docutils literal notranslate"><span class="pre">FOO</span></code> and the value
+<code class="docutils literal notranslate"><span class="pre">BAR</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINERENV_FOO=BAR apptainer exec docker://alpine env
+[...]
+FOO=BAR
+</pre></div>
+</div>
+<p>We can see from the <code class="docutils literal notranslate"><span class="pre">env</span></code> output that this environment variable was properly
+set inside the container.</p>
+<p>Next we can use the <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> prefix to do the same thing, but this
+time we wil have the intended value be <code class="docutils literal notranslate"><span class="pre">BAZ</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ SINGULARITYENV_FOO=BAZ apptainer exec  docker://alpine env
+WARNING: DEPRECATED USAGE: Forwarding SINGULARITYENV_FOO as environment variable will not be supported in the future, use APPTAINERENV_FOO instead
+[...]
+FOO=BAZ
+</pre></div>
+</div>
+<p>Notice that we have a warning for <code class="docutils literal notranslate"><span class="pre">DEPRECATED</span> <span class="pre">USAGE</span></code> when doing so. This is
+because a future version of Apptainer may stop supporting environment variable
+compatibility once it is past this current period of transition.</p>
+<p>Finally, if both are set, the value set by the <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> variable will
+take priority over the <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> variable.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINERENV_FOO=BAR SINGULARITYENV_FOO=BAZ apptainer exec iqube_latest.sif env
+WARNING: Skipping environment variable [SINGULARITYENV_FOO=BAZ], FOO is already overridden with different value [BAR]
+[...]
+FOO=BAR
+</pre></div>
+</div>
+<p>In this case a warning is emitted to let the user know that two variables were
+set to create the same environment variable in the container in case they were
+unaware of one of them existing in their environment.</p>
+</section>
+<section id="singularity-command-symlink">
+<h2>Singularity Command Symlink<a class="headerlink" href="#singularity-command-symlink" title="Permalink to this heading"></a></h2>
+<p>With the same intention as the environment variable handling, Apptainer
+installations will include a symlink to the <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> binary named
+<code class="docutils literal notranslate"><span class="pre">singularity</span></code>. This will allow existing tooling and scripts using the
+<code class="docutils literal notranslate"><span class="pre">singularity</span></code> command to continue to operate after a migration to Apptainer
+has taken place. Below is an example of running the <code class="docutils literal notranslate"><span class="pre">version</span></code> command using
+either program name and getting the same output because we are running the same
+underlying binary:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer --version
+apptainer version 1.0.0
+$ singularity --version
+apptainer version 1.0.0
+</pre></div>
+</div>
+</section>
+<section id="automatic-user-configuration-migration">
+<h2>Automatic User Configuration Migration<a class="headerlink" href="#automatic-user-configuration-migration" title="Permalink to this heading"></a></h2>
+<p>Apptainer stores user configuration in files and directories under
+<code class="docutils literal notranslate"><span class="pre">~/.apptainer</span></code>. Invocation of the <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> command will automatically
+trigger Apptainer to create this directory, if it doesn’t exist. In order to
+ease the transition of users from Singularity to Apptainer, Apptainer will look
+for a <code class="docutils literal notranslate"><span class="pre">~/.singularity</span></code> directory when the <code class="docutils literal notranslate"><span class="pre">~/.apptainer</span></code> directory is being
+created and will migrate user configuration files and keyrings automatically.
+The following data will be migrated if it is found:</p>
+<ul class="simple">
+<li><p>Remote endpoint configurations</p></li>
+<li><p>OCI registry configurations stored in the Docker config format</p></li>
+<li><p>Singularity Public PGP keyring</p></li>
+<li><p>Singularity Private PGP keyring</p></li>
+</ul>
+<p>Below we can see example output from when user configuration is being migrated:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine echo
+INFO:    Detected Singularity user configuration directory
+INFO:    Detected Singularity remote configuration, migrating...
+INFO:    Detected Singularity docker configuration, migrating...
+INFO:    Detected public Singularity pgp keyring, migrating...
+INFO:    Detected private Singularity pgp keyring, migrating...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+[...]
+</pre></div>
+</div>
+<p>We can also see that subsequent use of Apptainer will not perform this
+migration again:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine echo
+WARNING: /usr/local/etc/singularity/ exists, migration to apptainer by system administrator is not complete
+INFO:    Using cached SIF image
+[...]
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Apptainer will not migrate cached container data such as OCI blobs and SIF
+images. User caches will need to be manually migrated or reconstructed through
+normal use of Apptainer.</p>
+</div>
+<p>The default remote configuration has changed in Apptainer, so if you did
+not previously set any remotes and want to continue to use the previous
+default for <code class="docutils literal notranslate"><span class="pre">library://</span></code> and/or pgp keys, see
+<a class="reference internal" href="endpoint.html#restoring-pre-apptainer-library-behavior"><span class="std std-ref">Restoring pre-Apptainer library behavior</span></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="checkpoint.html" class="btn btn-neutral float-left" title="Checkpoint Feature" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="docker_and_oci.html" class="btn btn-neutral float-right" title="Support for Docker and OCI Containers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

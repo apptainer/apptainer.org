@@ -1,0 +1,884 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Environment and Metadata &mdash; Singularity container 3.6 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/js/ga.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="OCI Runtime Support" href="oci_runtime.html" />
+    <link rel="prev" title="Running Services" href="running_services.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Singularity container
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Singularity and Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_library.html">Cloud Library</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Environment and Metadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#changes-in-singularity-3-6">Changes in Singularity 3.6</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#summary-of-changes">Summary of changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-overview">Environment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-from-a-base-image">Environment from a base image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-from-a-definition-file">Environment from a definition file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-from-the-host">Environment from the host</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-from-the-singularity-runtime">Environment from the Singularity runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overriding-environment-variables">Overriding environment variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#env-option"><code class="docutils literal notranslate"><span class="pre">--env</span></code> option</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#env-file-option"><code class="docutils literal notranslate"><span class="pre">--env-file</span></code> option</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#singularityenv-prefix"><code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> prefix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manipulating-path">Manipulating <code class="docutils literal notranslate"><span class="pre">PATH</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#evaluating-container-variables">Evaluating container variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#environment-variable-precedence">Environment Variable Precedence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#container-metadata">Container Metadata</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#custom-labels">Custom Labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inspecting-metadata">Inspecting Metadata</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#l-labels"><code class="docutils literal notranslate"><span class="pre">-l</span></code>/  <code class="docutils literal notranslate"><span class="pre">--labels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#d-deffile"><code class="docutils literal notranslate"><span class="pre">-d</span></code> / <code class="docutils literal notranslate"><span class="pre">--deffile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#r-runscript"><code class="docutils literal notranslate"><span class="pre">-r</span></code> / <code class="docutils literal notranslate"><span class="pre">--runscript</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#t-test"><code class="docutils literal notranslate"><span class="pre">-t</span></code> / <code class="docutils literal notranslate"><span class="pre">--test</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#e-environment"><code class="docutils literal notranslate"><span class="pre">-e</span></code> / <code class="docutils literal notranslate"><span class="pre">--environment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#h-helpfile"><code class="docutils literal notranslate"><span class="pre">-h</span></code> / <code class="docutils literal notranslate"><span class="pre">--helpfile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#j-json"><code class="docutils literal notranslate"><span class="pre">-j</span></code> / <code class="docutils literal notranslate"><span class="pre">--json</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#singularity-d-directory">/.singularity.d directory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Singularity container</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Environment and Metadata</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/sylabs/singularity-userdocs/blob/master/environment_and_metadata.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="environment-and-metadata">
+<span id="id1"></span><h1>Environment and Metadata<a class="headerlink" href="#environment-and-metadata" title="Permalink to this headline">¶</a></h1>
+<p id="sec-envandmetadata">Environment variables are values you can set in a session, which can
+be used to influence the behavior of programs. It’s often considered
+best practice to use environment variables to pass settings to a
+program in a container, because they are easily set and don’t rely on
+writing and binding in program-specific configuration files. When
+building a container you may need to set fixed or default environment
+variables. When running containers you may need to set or override
+environment variables.</p>
+<p>The <a class="reference internal" href="#sec-metadata"><span class="std std-ref">metadata</span></a> of a container is information that
+describes the container. Singularity automatically records important
+information such as the definition file used to build a
+container. Other details such as the version of Singularity used are
+present as <a class="reference internal" href="#sec-labels"><span class="std std-ref">labels</span></a> on a container. You can also
+specify your own to be recorded against your container.</p>
+<div class="section" id="changes-in-singularity-3-6">
+<h2>Changes in Singularity 3.6<a class="headerlink" href="#changes-in-singularity-3-6" title="Permalink to this headline">¶</a></h2>
+<p>Singularity 3.6 has modified the ways in which environment variables
+are handled to allow long-term stability and consistency that has
+been lacking in prior versions. It also introduces new ways of setting
+environment variables, such as the <code class="docutils literal notranslate"><span class="pre">--env</span></code> and <code class="docutils literal notranslate"><span class="pre">--env-file</span></code>
+options.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you have containers built with Singularity &lt;3.6, and frequently
+set and override environment variables, please review this section
+carefully. Some behavior has changed.</p>
+</div>
+<div class="section" id="summary-of-changes">
+<h3>Summary of changes<a class="headerlink" href="#summary-of-changes" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>When building a container, the environment defined in the base
+image (e.g. a Docker image) is available during the <code class="docutils literal notranslate"><span class="pre">%post</span></code>
+section of the build.</p></li>
+<li><p>An environment variable set in a container image, from the
+bootstrap base image, or in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section of a
+definition file <em>will not</em> be overridden by a host environment
+variable of the same name. The <code class="docutils literal notranslate"><span class="pre">--env</span></code>, <code class="docutils literal notranslate"><span class="pre">--env-file</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> methods must be used to explicitly override a
+environment variable set by the container image.</p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="environment-overview">
+<h2>Environment Overview<a class="headerlink" href="#environment-overview" title="Permalink to this headline">¶</a></h2>
+<p>When you run a program in a container with Singularity, the
+environment variables that the program sees are a combination of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The environment variables set in the base image (e.g. Docker image)
+used to build the container.</p></li>
+<li><p>The environment variables set in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section of
+the definition file used to build the container.</p></li>
+<li><p><em>Most</em> of the environment variables set on your host, which are
+passed into the container.</p></li>
+<li><p>Any variables you set specifically for the container at runtime,
+using the <code class="docutils literal notranslate"><span class="pre">--env</span></code>, <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> options, or by setting
+<code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> variables outside of the container.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable can be manipulated to add entries.</p></li>
+<li><p>Runtime variables <code class="docutils literal notranslate"><span class="pre">SINGULARITY_xxx</span></code> set by Singularity to provide
+information about the container.</p></li>
+</ul>
+</div></blockquote>
+<p>The environment variables from the base image or definition file used
+to build a container always apply, but can be overridden.</p>
+<p>You can choose to exclude passing environment variables from the host
+into the container with the <code class="docutils literal notranslate"><span class="pre">-e</span></code> or <code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code>
+option.</p>
+<p>We’ll go through each place environment variables can be defined, so
+that you can understand how the final environment in a container is
+created, and can be manipulated.</p>
+<p>If you are interested in variables available when you are <em>building</em> a
+container, rather than when running a container, see <a class="reference internal" href="build_env.html#build-environment"><span class="std std-ref">build
+environment section</span></a>.</p>
+</div>
+<div class="section" id="environment-from-a-base-image">
+<h2>Environment from a base image<a class="headerlink" href="#environment-from-a-base-image" title="Permalink to this headline">¶</a></h2>
+<p>When you build a container with Singularity you might <em>bootstrap</em> from
+a library or Docker image, or using Linux distribution bootstrap tools
+such as <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code>, <code class="docutils literal notranslate"><span class="pre">yum</span></code> etc.</p>
+<p>When using <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code>, <code class="docutils literal notranslate"><span class="pre">yum</span></code> etc. you are starting from a fresh
+install of a Linux distribution into your container. No specific
+environment variables will be set. If you are using a <code class="docutils literal notranslate"><span class="pre">library</span></code> or
+<code class="docutils literal notranslate"><span class="pre">Docker</span></code> source then you may inherit environment variables from your
+base image.</p>
+<p>If I build a singularity container from the image
+<code class="docutils literal notranslate"><span class="pre">docker://python:3.7</span></code> then when I run the container I can see that
+the <code class="docutils literal notranslate"><span class="pre">PYTHON_VERSION</span></code> variable is set in the container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec python.sif env | grep PYTHON_VERSION
+PYTHON_VERSION=3.7.7
+</pre></div>
+</div>
+<p>This happens because  the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> used to build  that container has
+<code class="docutils literal notranslate"><span class="pre">ENV</span> <span class="pre">PYTHON_VERSION</span> <span class="pre">3.7.7</span></code> set inside it.</p>
+<p>You can always override the value of these base image environment
+variables, if needed. See below.</p>
+</div>
+<div class="section" id="environment-from-a-definition-file">
+<h2>Environment from a definition file<a class="headerlink" href="#environment-from-a-definition-file" title="Permalink to this headline">¶</a></h2>
+<p>Environment variables can be included in your container by adding them
+to your definition file. Use <code class="docutils literal notranslate"><span class="pre">export</span></code> in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code>
+section of a definition file to set a container environment variable:</p>
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
+<span class="k">From</span>: default/alpine
+
+<span class="gh">%environment</span>
+    <span class="nb">export</span> <span class="nv">MYVAR</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span>
+
+<span class="gh">%runscript</span>
+    <span class="nb">echo</span> <span class="nv">$MYVAR</span>
+</pre></div>
+</div>
+<p>Now the value of <code class="docutils literal notranslate"><span class="pre">MYVAR</span></code> is <code class="docutils literal notranslate"><span class="pre">Hello</span></code> when the container
+is launched. The <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> is set to echo the value.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run env.sif
+Hello
+</pre></div>
+</div>
+</div>
+<div class="section" id="environment-from-the-host">
+<h2>Environment from the host<a class="headerlink" href="#environment-from-the-host" title="Permalink to this headline">¶</a></h2>
+<p>If you have environment variables set outside of your container, on
+the host, then by default they will be available inside the
+container. Except that:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">PS1</span></code> shell prompt is reset for a container specific prompt.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable will be modified to contain default values.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> is modified to a default
+<code class="docutils literal notranslate"><span class="pre">/.singularity.d/libs</span></code>, that will include NVIDIA / ROCm libraries
+if applicable.</p></li>
+</ul>
+</div></blockquote>
+<p>Also, an environment variable set on the host <em>will not</em> override a
+variable of the same name that has been set inside the container image.</p>
+<p>If you <em>do not want</em> the host environment variables to pass into the
+container you can use the <code class="docutils literal notranslate"><span class="pre">-e</span></code> or <code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code> option. This gives
+a clean environment inside the container, with a minimal set of
+environment variables for correct operation of most software.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec --cleanenv env.sif env
+HOME=/home/dave
+LANG=C
+LD_LIBRARY_PATH=/.singularity.d/libs
+PATH=/startpath:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PROMPT_COMMAND=PS1=&quot;Singularity&gt; &quot;; unset PROMPT_COMMAND
+PS1=Singularity&gt;
+PWD=/home/dave/doc-tesrts
+SINGULARITY_COMMAND=exec
+SINGULARITY_CONTAINER=/home/dave/doc-tesrts/env.sif
+SINGULARITY_ENVIRONMENT=/.singularity.d/env/91-environment.sh
+SINGULARITY_NAME=env.sif
+TERM=xterm-256color
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you work on a host system that sets a lot of environment
+variables, e.g. because you use software made available through
+environment modules / lmod, you may see strange behavior in your
+container. Check your host environment with <code class="docutils literal notranslate"><span class="pre">env</span></code> for variables
+such as <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> that can change the way code runs, and
+consider using <code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code>.</p>
+</div>
+</div>
+<div class="section" id="environment-from-the-singularity-runtime">
+<h2>Environment from the Singularity runtime<a class="headerlink" href="#environment-from-the-singularity-runtime" title="Permalink to this headline">¶</a></h2>
+<p>It can be useful for a program to know when it is running in a
+Singularity container, and some basic information about the container
+environment. Singularity will automatically set a number of
+environment variables in a container that can be inspected by any
+program running in the container.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_COMMAND</span></code> - how the container was started,
+e.g. <code class="docutils literal notranslate"><span class="pre">exec</span></code> / <code class="docutils literal notranslate"><span class="pre">run</span></code> / <code class="docutils literal notranslate"><span class="pre">shell</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_CONTAINER</span></code> - the full path to the container image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENVIRONMENT</span></code> - path inside the container to the
+shell script holding the container image environment settings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_NAME</span></code> - name of the container image,
+e.g. <code class="docutils literal notranslate"><span class="pre">myfile.sif</span></code> or <code class="docutils literal notranslate"><span class="pre">docker://ubuntu</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="overriding-environment-variables">
+<h2>Overriding environment variables<a class="headerlink" href="#overriding-environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>You can override variables that have been set in the container image,
+or define additional variables, in various ways as appropriate for
+your workflow.</p>
+<div class="section" id="env-option">
+<h3><code class="docutils literal notranslate"><span class="pre">--env</span></code> option<a class="headerlink" href="#env-option" title="Permalink to this headline">¶</a></h3>
+<p><em>New in Singularity 3.6</em></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--env</span></code> option on the <code class="docutils literal notranslate"><span class="pre">run/exec/shell</span></code> commands allows you to
+specify environment variables as <code class="docutils literal notranslate"><span class="pre">NAME=VALUE</span></code> pairs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run env.sif
+Hello
+
+$ singularity run --env MYVAR=Goodbye env.sif
+Goodbye
+</pre></div>
+</div>
+<p>Separate multiple variables with commas, e.g. <code class="docutils literal notranslate"><span class="pre">--env</span>
+<span class="pre">MYVAR=A,MYVAR2=B</span></code>, and use shell quoting / shell escape if your
+variables include special characters.</p>
+</div>
+<div class="section" id="env-file-option">
+<h3><code class="docutils literal notranslate"><span class="pre">--env-file</span></code> option<a class="headerlink" href="#env-file-option" title="Permalink to this headline">¶</a></h3>
+<p><em>New in Singularity 3.6</em></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> option lets you provide a file that contains
+environment variables as <code class="docutils literal notranslate"><span class="pre">NAME=VALUE</span></code> pairs, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat myenvs
+MYVAR=&quot;Hello from a file&quot;
+
+$ singularity run --env-file myenvs env.sif
+Hello from a file
+</pre></div>
+</div>
+</div>
+<div class="section" id="singularityenv-prefix">
+<h3><code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> prefix<a class="headerlink" href="#singularityenv-prefix" title="Permalink to this headline">¶</a></h3>
+<p>If you export an environment variable on your host called
+<code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_xxx</span></code> <em>before</em> you run a container, then it will set
+the environment variable <code class="docutils literal notranslate"><span class="pre">xxx</span></code> inside the container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity run env.sif
+Hello
+
+$ export SINGULARITYENV_MYVAR=&quot;Overridden&quot;
+$ singularity run env.sif
+Overridden
+</pre></div>
+</div>
+</div>
+<div class="section" id="manipulating-path">
+<h3>Manipulating <code class="docutils literal notranslate"><span class="pre">PATH</span></code><a class="headerlink" href="#manipulating-path" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">PATH</span></code> is a special environment variable that tells a system where
+to look for programs that can be run. <code class="docutils literal notranslate"><span class="pre">PATH</span></code> contains multiple
+filesytem locations (paths) separated by colons. When you ask to run a
+program <code class="docutils literal notranslate"><span class="pre">myprog</span></code>, the system looks through these locations one by
+one, until it finds <code class="docutils literal notranslate"><span class="pre">myprog</span></code>.</p>
+<p>To ensure containers work correctly, when a host <code class="docutils literal notranslate"><span class="pre">PATH</span></code> might
+contain a lot of host-specific locations that are not present in the
+container, Singularity will ensure <code class="docutils literal notranslate"><span class="pre">PATH</span></code> in the container is set to
+a default.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span>
+</pre></div>
+</div>
+<p>This covers the standard locations for software installed using a
+system package manager in most Linux distributions. If you have
+software installed elsewhere in the container, then you can override
+this by setting <code class="docutils literal notranslate"><span class="pre">PATH</span></code> in the container definition <code class="docutils literal notranslate"><span class="pre">%environment</span></code>
+block.</p>
+<p>If your container depends on things that are bind mounted into it, or
+you have another need to modify the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable when starting a
+container, you can do so with <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_APPEND_PATH</span></code> or
+<code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_PREPEND_PATH</span></code>.</p>
+<p>If you set a variable on your host called
+<code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_APPEND_PATH</span></code> then its value will be appended
+(added to the end) of the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable in the container.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec env.sif sh -c &#39;echo $PATH&#39;
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+$ export SINGULARITYENV_APPEND_PATH=&quot;/endpath&quot;
+$ singularity exec env.sif sh -c &#39;echo $PATH&#39;
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/endpath
+</pre></div>
+</div>
+<p>Alternatively you could use the <code class="docutils literal notranslate"><span class="pre">--env</span></code> option to set a
+<code class="docutils literal notranslate"><span class="pre">APPEND_PATH</span></code> variable, e.g. <code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">APPEND_PATH=/endpath</span></code>.</p>
+<p>If you set a variable on your host called
+<code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_PREPEND_PATH</span></code> then its value will be prepended
+(added to the start) of the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable in the container.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec env.sif sh -c &#39;echo $PATH&#39;
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+$ export SINGULARITYENV_PREPEND_PATH=&quot;/startpath&quot;
+$ singularity exec env.sif sh -c &#39;echo $PATH&#39;
+/startpath:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+</pre></div>
+</div>
+<p>Alternatively you could use the <code class="docutils literal notranslate"><span class="pre">--env</span></code> option to set a
+<code class="docutils literal notranslate"><span class="pre">PREPEND_PATH</span></code> variable, e.g. <code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">PREPEND_PATH=/startpath</span></code>.</p>
+</div>
+<div class="section" id="evaluating-container-variables">
+<h3>Evaluating container variables<a class="headerlink" href="#evaluating-container-variables" title="Permalink to this headline">¶</a></h3>
+<p>When setting environment variables with <code class="docutils literal notranslate"><span class="pre">--env</span></code> etc. you can specify
+an escaped variable name, e.g. <code class="docutils literal notranslate"><span class="pre">\$PATH</span></code> to evaluate the value of
+that variable in the container.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">PATH=&quot;\$PATH:/endpath&quot;</span></code> would have the same
+effect as <code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">APPEND_PATH=&quot;/endpath&quot;</span></code>.</p>
+</div>
+<div class="section" id="environment-variable-precedence">
+<h3>Environment Variable Precedence<a class="headerlink" href="#environment-variable-precedence" title="Permalink to this headline">¶</a></h3>
+<p>When a container is run with Singularity 3.6, the container
+environment is constructed in the following order:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Clear the environment, keeping just <code class="docutils literal notranslate"><span class="pre">HOME</span></code> and <code class="docutils literal notranslate"><span class="pre">SINGULARITY_APPNAME</span></code>.</p></li>
+<li><p>Take Docker defined environment variables, where Docker was the base image source.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">PATH</span></code> is not defined set the Singularity default <code class="docutils literal notranslate"><span class="pre">PATH</span></code> <em>or</em></p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">PATH</span></code> is defined, add any missing path parts from Singularity defaults</p></li>
+<li><p>Take environment variables defined explicitly in the image
+(<code class="docutils literal notranslate"><span class="pre">%environment</span></code>). These can override any previously set values.</p></li>
+<li><p>Set SCIF (<code class="docutils literal notranslate"><span class="pre">--app</span></code>) environment variables</p></li>
+<li><p>Set base environment essential vars (<code class="docutils literal notranslate"><span class="pre">PS1</span></code> and <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code>)</p></li>
+<li><p>Inject <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> / <code class="docutils literal notranslate"><span class="pre">--env</span></code> / <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> variables
+so they can override or modify any previous values:</p></li>
+<li><p>Source any remaining scripts from <code class="docutils literal notranslate"><span class="pre">/singularity.d/env</span></code></p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="container-metadata">
+<span id="sec-metadata"></span><h2>Container Metadata<a class="headerlink" href="#container-metadata" title="Permalink to this headline">¶</a></h2>
+<p>Each Singularity container has metadata describing the container, how
+it was built, etc. This metadata includes the definition file used to
+build the container and labels, which are specific pieces of
+information set automatically or explicitly when the container is
+built.</p>
+<p>For containers that are generated with Singularity version 3.0 and
+later, default labels are represented using the <a class="reference external" href="http://label-schema.org/rc1/">rc1 Label Schema</a>.</p>
+<div class="section" id="custom-labels">
+<span id="sec-labels"></span><h3>Custom Labels<a class="headerlink" href="#custom-labels" title="Permalink to this headline">¶</a></h3>
+<p>You can add custom labels to your container using the <code class="docutils literal notranslate"><span class="pre">%labels</span></code>
+section in a definition file:</p>
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: ubuntu: latest
+
+<span class="gh">%labels</span>
+  OWNER Joana
+</pre></div>
+</div>
+</div>
+<div class="section" id="inspecting-metadata">
+<h3>Inspecting Metadata<a class="headerlink" href="#inspecting-metadata" title="Permalink to this headline">¶</a></h3>
+<p id="inspect-command">The <code class="docutils literal notranslate"><span class="pre">inspect</span></code> command gives you the ability to view the labels and/or
+other metadata that were added to your container when it was built.</p>
+<div class="section" id="l-labels">
+<h4><code class="docutils literal notranslate"><span class="pre">-l</span></code>/  <code class="docutils literal notranslate"><span class="pre">--labels</span></code><a class="headerlink" href="#l-labels" title="Permalink to this headline">¶</a></h4>
+<p>Running inspect without any options, or with the <code class="docutils literal notranslate"><span class="pre">-l</span></code> or
+<code class="docutils literal notranslate"><span class="pre">--labels</span></code> options will display any labels set on the container</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity inspect jupyter.sif
+    {
+        &quot;OWNER&quot;: &quot;Joana&quot;
+        &quot;org.label-schema.build-date&quot;: &quot;Friday_21_December_2018_0:49:50_CET&quot;,
+        &quot;org.label-schema.schema-version&quot;: &quot;1.0&quot;,
+        &quot;org.label-schema.usage&quot;: &quot;/.singularity.d/runscript.help&quot;,
+        &quot;org.label-schema.usage.singularity.deffile.bootstrap&quot;: &quot;library&quot;,
+        &quot;org.label-schema.usage.singularity.deffile.from&quot;: &quot;debian:9&quot;,
+        &quot;org.label-schema.usage.singularity.runscript.help&quot;: &quot;/.singularity.d/runscript.help&quot;,
+        &quot;org.label-schema.usage.singularity.version&quot;: &quot;3.0.1-236.g2453fdfe&quot;
+    }
+</pre></div>
+</div>
+<p>We can easily see when the container was built, the source of the base
+image, and the exact version of Singularity that was used to build it.</p>
+<p>The custom label <code class="docutils literal notranslate"><span class="pre">OWNER</span></code> that we set in our definition file is also visible.</p>
+</div>
+<div class="section" id="d-deffile">
+<h4><code class="docutils literal notranslate"><span class="pre">-d</span></code> / <code class="docutils literal notranslate"><span class="pre">--deffile</span></code><a class="headerlink" href="#d-deffile" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">-d</span></code> or <code class="docutils literal notranslate"><span class="pre">-deffile</span></code> flag shows the definition file(s) that were
+used to build the container.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity inspect --deffile jupyter.sif
+</pre></div>
+</div>
+<p>And the output would look like:</p>
+<div class="highlight-singularity notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
+<span class="k">From</span>: debian:<span class="m">9</span>
+
+<span class="gh">%help</span>
+    Container with Anaconda <span class="m">2</span> <span class="o">(</span>Conda <span class="m">4</span>.5.11 Canary<span class="o">)</span> and Jupyter Notebook <span class="m">5</span>.6.0 <span class="k">for</span> Debian <span class="m">9</span>.x <span class="o">(</span>Stretch<span class="o">)</span>.
+    This installation is based on Python <span class="m">2</span>.7.15
+
+<span class="gh">%environment</span>
+    <span class="nv">JUP_PORT</span><span class="o">=</span><span class="m">8888</span>
+    <span class="nv">JUP_IPNAME</span><span class="o">=</span>localhost
+    <span class="nb">export</span> JUP_PORT JUP_IPNAME
+
+<span class="gh">%startscript</span>
+    <span class="nv">PORT</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$JUP_PORT</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">PORT</span><span class="o">=</span><span class="s2">&quot;--port=</span><span class="si">${</span><span class="nv">JUP_PORT</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">fi</span>
+
+    <span class="nv">IPNAME</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$JUP_IPNAME</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">IPNAME</span><span class="o">=</span><span class="s2">&quot;--ip=</span><span class="si">${</span><span class="nv">JUP_IPNAME</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">fi</span>
+
+    <span class="nb">exec</span> jupyter notebook --allow-root <span class="si">${</span><span class="nv">PORT</span><span class="si">}</span> <span class="si">${</span><span class="nv">IPNAME</span><span class="si">}</span>
+
+<span class="gh">%setup</span>
+    <span class="c1">#Create the .condarc file where the environments/channels from conda are specified, these are pulled with preference to root</span>
+    <span class="nb">cd</span> /
+    touch .condarc
+
+<span class="gh">%post</span>
+    <span class="nb">echo</span> <span class="s1">&#39;export RANDOM=123456&#39;</span> &gt;&gt;<span class="nv">$SINGULARITY_ENVIRONMENT</span>
+    <span class="c1">#Installing all dependencies</span>
+    apt-get update <span class="o">&amp;&amp;</span> apt-get -y upgrade
+    apt-get -y install <span class="se">\</span>
+    build-essential <span class="se">\</span>
+    wget <span class="se">\</span>
+    bzip2 <span class="se">\</span>
+    ca-certificates <span class="se">\</span>
+    libglib2.0-0 <span class="se">\</span>
+    libxext6 <span class="se">\</span>
+    libsm6 <span class="se">\</span>
+    libxrender1 <span class="se">\</span>
+    git
+    rm -rf /var/lib/apt/lists/*
+    apt-get clean
+    <span class="c1">#Installing Anaconda 2 and Conda 4.5.11</span>
+    wget -c https://repo.continuum.io/archive/Anaconda2-5.3.0-Linux-x86_64.sh
+    /bin/bash Anaconda2-5.3.0-Linux-x86_64.sh -bfp /usr/local
+    <span class="c1">#Conda configuration of channels from .condarc file</span>
+    conda config --file /.condarc --add channels defaults
+    conda config --file /.condarc --add channels conda-forge
+    conda update conda
+    <span class="c1">#List installed environments</span>
+    conda list
+</pre></div>
+</div>
+<p>Which is the definition file for the <code class="docutils literal notranslate"><span class="pre">jupyter.sif</span></code> container.</p>
+</div>
+<div class="section" id="r-runscript">
+<h4><code class="docutils literal notranslate"><span class="pre">-r</span></code> / <code class="docutils literal notranslate"><span class="pre">--runscript</span></code><a class="headerlink" href="#r-runscript" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">-r</span></code> or <code class="docutils literal notranslate"><span class="pre">--runscript</span></code> option shows the runscript for the image.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity inspect --runscript jupyter.sif
+</pre></div>
+</div>
+<p>And the output would look like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+<span class="nv">OCI_ENTRYPOINT</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">OCI_CMD</span><span class="o">=</span><span class="s2">&quot;bash&quot;</span>
+<span class="c1"># ENTRYPOINT only - run entrypoint plus args</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$OCI_CMD</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+<span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># CMD only - run CMD or override with args</span>
+<span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$OCI_CMD</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+<span class="k">fi</span>
+
+<span class="c1"># ENTRYPOINT and CMD - run ENTRYPOINT with CMD as default args</span>
+<span class="c1"># override with user provided args</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+    <span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+<span class="nb">exec</span> <span class="nv">$SINGULARITY_OCI_RUN</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="t-test">
+<h4><code class="docutils literal notranslate"><span class="pre">-t</span></code> / <code class="docutils literal notranslate"><span class="pre">--test</span></code><a class="headerlink" href="#t-test" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">-t</span></code> or <code class="docutils literal notranslate"><span class="pre">--test</span></code> flag shows the test script for the image.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity inspect --test jupyter.sif
+</pre></div>
+</div>
+<p>This will output the corresponding <code class="docutils literal notranslate"><span class="pre">%test</span></code> section from the definition file.</p>
+</div>
+<div class="section" id="e-environment">
+<h4><code class="docutils literal notranslate"><span class="pre">-e</span></code> / <code class="docutils literal notranslate"><span class="pre">--environment</span></code><a class="headerlink" href="#e-environment" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">-e</span></code> or <code class="docutils literal notranslate"><span class="pre">--environment</span></code> flag shows the environment variables
+that are defined in the container image. These may be set from
+one or more environment files, depending on how the container was built.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity inspect --environment jupyter.sif
+</pre></div>
+</div>
+<p>And the output would look like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">==</span><span class="m">90</span>-environment.sh<span class="o">==</span>
+<span class="c1">#!/bin/sh</span>
+
+<span class="nv">JUP_PORT</span><span class="o">=</span><span class="m">8888</span>
+<span class="nv">JUP_IPNAME</span><span class="o">=</span>localhost
+<span class="nb">export</span> JUP_PORT JUP_IPNAME
+</pre></div>
+</div>
+</div>
+<div class="section" id="h-helpfile">
+<h4><code class="docutils literal notranslate"><span class="pre">-h</span></code> / <code class="docutils literal notranslate"><span class="pre">--helpfile</span></code><a class="headerlink" href="#h-helpfile" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">-helpfile</span></code> flag will show the container’s description
+in the <code class="docutils literal notranslate"><span class="pre">%help</span></code> section of its definition file.</p>
+<p>You can call it this way:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity inspect --helpfile jupyter.sif
+</pre></div>
+</div>
+<p>And the output would look like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Container with Anaconda 2 (Conda 4.5.11 Canary) and Jupyter Notebook 5.6.0 for Debian 9.x (Stretch).
+This installation is based on Python 2.7.15
+</pre></div>
+</div>
+</div>
+<div class="section" id="j-json">
+<h4><code class="docutils literal notranslate"><span class="pre">-j</span></code> / <code class="docutils literal notranslate"><span class="pre">--json</span></code><a class="headerlink" href="#j-json" title="Permalink to this headline">¶</a></h4>
+<p>This flag gives you the possibility to output your labels in a JSON format.</p>
+<p>You can call it this way:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity inspect --json jupyter.sif
+</pre></div>
+</div>
+<p>And the output would look like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{
+         &quot;attributes&quot;: {
+                 &quot;labels&quot;: &quot;{\n\t\&quot;org.label-schema.build-date\&quot;: \&quot;Friday_21_December_2018_0:49:50_CET\&quot;,\n\t\&quot;org.label-schema.schema-version\&quot;: \&quot;1.0\&quot;,\n\t\&quot;org.label-schema.usage\&quot;: \&quot;/.singularity.d/runscript.help\&quot;,\n\t\&quot;org.label-schema.usage.singularity.deffile.bootstrap\&quot;: \&quot;library\&quot;,\n\t\&quot;org.label-schema.usage.singularity.deffile.from\&quot;: \&quot;debian:9\&quot;,\n\t\&quot;org.label-schema.usage.singularity.runscript.help\&quot;: \&quot;/.singularity.d/runscript.help\&quot;,\n\t\&quot;org.label-schema.usage.singularity.version\&quot;: \&quot;3.0.1-236.g2453fdfe\&quot;\n}&quot;
+         },
+         &quot;type&quot;: &quot;container&quot;
+}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="singularity-d-directory">
+<h2>/.singularity.d directory<a class="headerlink" href="#singularity-d-directory" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">/.singularity.d</span></code> directory in a container contains scripts and
+environment files that are used when a container is executed.</p>
+<p><em>You should not manually modify</em> files under <code class="docutils literal notranslate"><span class="pre">/.singularity.d</span></code>, from
+your definition file during builds, or directly within your container
+image. Recent 3.x versions of Singularity replace older action scripts
+dynamically, at runtime, to support new features. In the longer term,
+metadata will be moved outside of the container, and stored only in
+the SIF file metadata descriptor.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/.singularity.d/
+
+├── actions
+│   ├── exec
+│   ├── run
+│   ├── shell
+│   ├── start
+│   └── test
+├── env
+│   ├── 01-base.sh
+|   ├── 10-docker2singularity.sh
+│   ├── 90-environment.sh
+│   ├── 91-environment.sh
+|   ├── 94-appsbase.sh
+│   ├── 95-apps.sh
+│   └── 99-base.sh
+├── labels.json
+├── libs
+├── runscript
+├── runscript.help
+├── Singularity
+└── startscript
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>actions</strong>: This directory contains helper scripts to allow the container to
+carry out the action commands. (e.g. <code class="docutils literal notranslate"><span class="pre">exec</span></code> , <code class="docutils literal notranslate"><span class="pre">run</span></code> or <code class="docutils literal notranslate"><span class="pre">shell</span></code>). In
+later versions of Singularity, these files may be dynamically written at
+runtime, <em>and should not be modified</em> in the container.</p></li>
+<li><p><strong>env</strong>: All <code class="docutils literal notranslate"><span class="pre">*.sh</span></code> files in this directory are sourced in
+alpha-numeric order when the container is started. For legacy
+purposes there is a symbolic link called <code class="docutils literal notranslate"><span class="pre">/environment</span></code> that
+points to <code class="docutils literal notranslate"><span class="pre">/.singularity.d/env/90-environment.sh</span></code>. Whenever
+possible, avoid modifying or creating environment files manually to
+prevent potential issues building &amp; running containers with future
+versions of Singularity. Beginning with Singularity 3.6, additional
+facilities such as <code class="docutils literal notranslate"><span class="pre">--env</span></code> and <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> are available to
+allow manipulation of the container environment at runtime.</p></li>
+<li><p><strong>labels.json</strong>: The json file that stores a containers labels described
+above.</p></li>
+<li><p><strong>libs</strong>: At runtime the user may request some host-system libraries to be
+mapped into the container (with the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> option for example). If so, this
+is their destination.</p></li>
+<li><p><strong>runscript</strong>: The commands in this file will be executed when the container
+is invoked with the <code class="docutils literal notranslate"><span class="pre">run</span></code> command or called as an executable. For legacy
+purposes there is a symbolic link called <code class="docutils literal notranslate"><span class="pre">/singularity</span></code> that points to this
+file.</p></li>
+<li><p><strong>runscript.help</strong>: Contains the description that was added in the <code class="docutils literal notranslate"><span class="pre">%help</span></code>
+section.</p></li>
+<li><p><strong>Singularity</strong>: This is the definition file that was used to generate the
+container. If more than 1 definition file was used to generate the container
+additional Singularity files will appear in numeric order in a sub-directory
+called <code class="docutils literal notranslate"><span class="pre">bootstrap_history</span></code>.</p></li>
+<li><p><strong>startscript</strong>: The commands in this file will be executed when the
+container is invoked with the <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code> command.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="oci_runtime.html" class="btn btn-neutral float-right" title="OCI Runtime Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="running_services.html" class="btn btn-neutral float-left" title="Running Services" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017-2020, Sylabs Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Encrypted Containers &mdash; Singularity container 3.4 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/js/ga.js"></script>
+        <script src="_static/js/footer.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Cloud Library" href="cloud_library.html" />
+    <link rel="prev" title="Build Environment" href="build_env.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Singularity container
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Container Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Encrypted Containers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#encrypting-a-container">Encrypting a container</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#passphrase-encryption">Passphrase Encryption</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#encrypting-with-a-passphrase-interactively">Encrypting with a passphrase interactively</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-an-environment-variable">Using an environment variable</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pem-file-encryption">PEM File Encryption</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#encrypting-with-a-command-line-option">Encrypting with a command line option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encrypting-with-an-environment-variable">Encrypting with an environment variable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-an-encrypted-container">Running an encrypted container</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-a-container-encrypted-with-a-passphrase">Running a container encrypted with a passphrase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#running-with-a-passphrase-interactively">Running with a passphrase interactively</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-with-a-passphrase-in-an-environment-variable">Running with a passphrase in an environment variable</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#running-a-container-encrypted-with-a-pem-file">Running a container encrypted with a PEM file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#running-using-a-command-line-option">Running using a command line option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-using-an-environment-variable">Running using an environment variable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_library.html">Cloud Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Singularity and Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Container Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Singularity container</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Encrypted Containers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/sylabs/singularity-userdocs/blob/master/encryption.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="encrypted-containers">
+<span id="encryption"></span><h1>Encrypted Containers<a class="headerlink" href="#encrypted-containers" title="Permalink to this headline">¶</a></h1>
+<p>Users can build a secure, confidential container environment by encrypting the
+root file system.</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>In Singularity &gt;= v3.4.0 a new feature to build and run encrypted containers has
+been added to allow users to encrypt the file system image within a SIF.  This
+encryption can be performed using either a passphrase or asymmetrically via an
+RSA key pair in Privacy Enhanced Mail (PEM/PKCS1) format. The container is encrypted
+in transit, at rest, and even while running. In other words, there is no
+intermediate, decrypted version of the container on disk.  Container decryption
+occurs at runtime completely within kernel space.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This feature utilizes the Linux <code class="docutils literal notranslate"><span class="pre">dm-crypt</span></code> library and <code class="docutils literal notranslate"><span class="pre">cryptsetup</span></code>
+utility and requires cryptsetup version of &gt;= 2.0.0.  This version
+should be standard with recent Linux versions such as Ubuntu 18.04,
+Debian 10 and CentOS/RHEL 7, but users of older Linux versions may have
+to update.</p>
+</div>
+</div>
+<div class="section" id="encrypting-a-container">
+<h2>Encrypting a container<a class="headerlink" href="#encrypting-a-container" title="Permalink to this headline">¶</a></h2>
+<p>A container can be encrypted either by supplying a plaintext passphrase or a
+PEM file containing an asymmetric RSA public key.  Of these two methods the PEM
+file is more secure and is therefore recommended for production use.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In Singularity 3.4, the definition file stored with the container will
+not be encrypted. If it contains sensitive information you should remove
+it before encryption via <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">sif</span> <span class="pre">del</span> <span class="pre">1</span> <span class="pre">myimage.sif</span></code>. Metadata
+encryption will be addressed in a future release.</p>
+</div>
+<p>An <code class="docutils literal notranslate"><span class="pre">-e|--encrypt</span></code> flag to <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">build</span></code> is used to indicate that the container needs to
+be encrypted.</p>
+<p>A passphrase or a key-file used to perform the encryption is supplied at build time
+via an environment variable or a command line option.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 46%" />
+<col style="width: 28%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Encryption Method</strong></p></td>
+<td><p><strong>Environment Variable</strong></p></td>
+<td><p><strong>Commandline Option</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Passphrase</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENCRYPTION_PASSPHRASE</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--passphrase</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Asymmetric Key (PEM)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENCRYPTION_PEM_PATH</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--pem-path</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">-e|--encrypt</span></code> flag is implicitly set when the <code class="docutils literal notranslate"><span class="pre">--passphrase</span></code> or
+<code class="docutils literal notranslate"><span class="pre">--pem-path</span></code> flags are passed with the build command.  If multiple encryption
+related flags and/or environment variables are set, the following precedence is
+respected.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--pem-path</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--passphrase</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENCRYPTION_PEM_PATH</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SINGULARITY_ENCRYPTION_PASSPHRASE</span></code></p></li>
+</ol>
+<div class="section" id="passphrase-encryption">
+<h3>Passphrase Encryption<a class="headerlink" href="#passphrase-encryption" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Passphrase encryption is less secure than encrypting containers using an
+RSA key pair (detailed below).  Passphrase encryption is provided as a
+convenience, and as a way for users to familiarize themselves with the
+encrypted container workflow, but users running encrypted containers in
+production are encouraged to use asymmetric keys.</p>
+</div>
+<p>In case of plaintext passphrase encryption, a passphrase is supplied by one of
+the following methods.</p>
+<div class="section" id="encrypting-with-a-passphrase-interactively">
+<h4>Encrypting with a passphrase interactively<a class="headerlink" href="#encrypting-with-a-passphrase-interactively" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build --passphrase encrypted.sif encrypted.def
+Enter encryption passphrase: &lt;secret&gt;
+INFO:    Starting build...
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-an-environment-variable">
+<h4>Using an environment variable<a class="headerlink" href="#using-an-environment-variable" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo SINGULARITY_ENCRYPTION_PASSPHRASE=&lt;secret&gt; singularity build --encrypt encrypted.sif encrypted.def
+Starting build...
+</pre></div>
+</div>
+<p>In this case it is necessary to use the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag since the presence of
+an environment variable alone will not trigger the encrypted build workflow.</p>
+<p>While this example shows how an environment variable can be used to set a
+passphrase, you should set the environment variable in a way that will not
+record your passphrase on the command line.  For instance, you could save a
+plain text passphrase in a file (e.g. <code class="docutils literal notranslate"><span class="pre">secret.txt</span></code>) and use it like so.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export SINGULARITY_ENCRYPTION_PASSPHRASE=$(cat secret.txt)
+
+$ sudo -E singularity build --encrypt encrypted.sif encrypted.def
+Starting build...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="pem-file-encryption">
+<h3>PEM File Encryption<a class="headerlink" href="#pem-file-encryption" title="Permalink to this headline">¶</a></h3>
+<p>Singularity currently supports RSA encryption using a public/private key-pair.
+Keys are supplied in PEM format. The public key is used to encrypt containers that
+can be decrypted on a host that has access to the secret private key.</p>
+<p>You can create a pair of RSA keys suitable for encrypting your container with
+the <code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code> command, and then create a PEM file with a few specific flags
+like so:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Generate a keypair
+$ ssh-keygen -t rsa -b 2048
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/vagrant/.ssh/id_rsa): rsa
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+[snip...]
+
+# Convert the public key to PEM PKCS1 format
+$ ssh-keygen -f ./rsa.pub -e -m pem &gt;rsa_pub.pem
+
+# Rename the private key (already PEM PKCS1) to a nice name
+$ mv rsa rsa_pri.pem
+</pre></div>
+</div>
+<p>You would use the <code class="docutils literal notranslate"><span class="pre">rsa_pub.pem</span></code> file to encrypt your container and the <code class="docutils literal notranslate"><span class="pre">rsa_pri.pem</span></code>
+file to run it.</p>
+<div class="section" id="encrypting-with-a-command-line-option">
+<h4>Encrypting with a command line option<a class="headerlink" href="#encrypting-with-a-command-line-option" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo singularity build --pem-path=rsa_pub.pem encrypted.sif encrypted.def
+Starting build...
+</pre></div>
+</div>
+</div>
+<div class="section" id="encrypting-with-an-environment-variable">
+<h4>Encrypting with an environment variable<a class="headerlink" href="#encrypting-with-an-environment-variable" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo SINGULARITY_ENCRYPTION_PEM_PATH=rsa_pub.pem singularity build --encrypt encrypted.sif encrypted.def
+Starting build...
+</pre></div>
+</div>
+<p>In this case it is necessary to use the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag since the presence of
+an environment variable alone will not trigger the encrypted build workflow.</p>
+</div>
+</div>
+</div>
+<div class="section" id="running-an-encrypted-container">
+<h2>Running an encrypted container<a class="headerlink" href="#running-an-encrypted-container" title="Permalink to this headline">¶</a></h2>
+<p>To <code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">shell</span></code>, or <code class="docutils literal notranslate"><span class="pre">exec</span></code> an encrypted image, credentials to decrypt
+the image need to be supplied at runtime either in a key-file or a plaintext
+passphrase.</p>
+<div class="section" id="running-a-container-encrypted-with-a-passphrase">
+<h3>Running a container encrypted with a passphrase<a class="headerlink" href="#running-a-container-encrypted-with-a-passphrase" title="Permalink to this headline">¶</a></h3>
+<p>A passphrase can be supplied at runtime by either of the ways listed in the
+sections above.</p>
+<div class="section" id="running-with-a-passphrase-interactively">
+<h4>Running with a passphrase interactively<a class="headerlink" href="#running-with-a-passphrase-interactively" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run --passphrase encrypted.sif
+Enter passphrase for encrypted container: &lt;secret&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-with-a-passphrase-in-an-environment-variable">
+<h4>Running with a passphrase in an environment variable<a class="headerlink" href="#running-with-a-passphrase-in-an-environment-variable" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ SINGULARITY_ENCRYPTION_PASSPHRASE=&quot;secret&quot; singularity run encrypted.sif
+</pre></div>
+</div>
+<p>While this example shows how an environment variable can be used to set a
+passphrase, you should set the environment variable in a way that will not
+record your passphrase on the command line.  For instance, you could save a
+plain text passphrase in a file (e.g. <code class="docutils literal notranslate"><span class="pre">secret.txt</span></code>) and use it like so.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export SINGULARITY_ENCRYPTION_PASSPHRASE=$(cat secret.txt)
+
+$ singularity run encrypted.sif
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="running-a-container-encrypted-with-a-pem-file">
+<h3>Running a container encrypted with a PEM file<a class="headerlink" href="#running-a-container-encrypted-with-a-pem-file" title="Permalink to this headline">¶</a></h3>
+<p>A private key is supplied using either of the methods listed in the Encryption
+section above.</p>
+<div class="section" id="running-using-a-command-line-option">
+<h4>Running using a command line option<a class="headerlink" href="#running-using-a-command-line-option" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run --pem-path=rsa_pri.pem encrypted.sif
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-using-an-environment-variable">
+<h4>Running using an environment variable<a class="headerlink" href="#running-using-an-environment-variable" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ SINGULARITY_ENCRYPTION_PEM_PATH=rsa_pri.pem singularity run encrypted.sif
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="cloud_library.html" class="btn btn-neutral float-right" title="Cloud Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="build_env.html" class="btn btn-neutral float-left" title="Build Environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017-2019, Sylabs Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
