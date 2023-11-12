@@ -1,0 +1,83 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const contacts = [
+	{
+		name: "Project Leads",
+		email: "tsc@apptainer.org",
+	},
+	{
+		name: "Web",
+		email: "webmaster@apptainer.org",
+	},
+	{
+		name: "Security",
+		email: "security@apptainer.org",
+	},
+];
+---
+
+<Layout title="Contact Us | Apptainer - Portable, Reproducible Containers">
+	<div class="mt-20 bg-white px-6 py-24 sm:py-32 lg:px-8">
+		<div class="mx-auto max-w-2xl text-center">
+			<h2 class="text-4xl font-bold uppercase tracking-tight text-gray-900 sm:text-6xl">Contact Us</h2>
+		</div>
+	</div>
+
+	<div class="mb-10 max-w-3xl md:mx-auto md:mb-12 lg:max-w-4xl">
+		<div class="flex flex-col">
+			<div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+				<div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+					<div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
+						<table class="min-w-full divide-y divide-gray-200">
+							<thead class="bg-gray-50">
+								<tr>
+									<th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Team</th>
+									<th scope="col" class="relative px-6 py-3">
+										<span class="sr-only">Email</span>
+									</th>
+								</tr>
+							</thead>
+							<tbody class="divide-y divide-gray-200 bg-white">
+								{
+									contacts.map((contact) => (
+										<tr>
+											<td class="whitespace-nowrap px-6 py-4">
+												<div class="flex items-center">
+													<div>
+														<div class="text-sm font-medium text-gray-900">{contact.name}</div>
+														<a href={`mailto:${contact.email}`}>
+															<div class="text-sm text-gray-500">{contact.email}</div>
+														</a>
+													</div>
+												</div>
+											</td>
+											<td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
+												<a href={`mailto:${contact.email}`} class="text-blue-700 hover:text-blue-500">
+													Send Email
+												</a>
+											</td>
+										</tr>
+									))
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="mb-24 mt-20 max-w-2xl text-center md:mx-auto lg:max-w-3xl">
+		<h2 class="mb-6 font-sans text-2xl font-extrabold uppercase leading-none tracking-tight text-gray-900 md:mx-auto">
+			Looking for the mailing list?
+		</h2>
+
+		<a
+			href="https://groups.google.com/u/4/a/apptainer.org/g/discuss"
+			class="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold uppercase text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+			aria-label="Join Mailing List"
+			title="Join Mailing List">
+			Join Mailing List
+		</a>
+	</div>
+</Layout>

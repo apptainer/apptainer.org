@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Shared/Cta.astro';
+import showcasesData from '../data/showcases.json';
+---
+
+<Layout title="Showcases | Apptainer - Portable, Reproducible Containers">
+	<div class="bg-white px-6 py-24 sm:py-32 lg:px-8 mt-20">
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl uppercase">Showcases</h2>
+          <p class="mt-6 text-lg leading-8 text-gray-600">Learn some knowledge from those who have their hands on the wheel with Apptainer. Learn their ways, techniques, or even get some enlightenment about where to use Apptainer.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white pb-40">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mx-auto">
+            <div class="space-y-20 lg:mt-20 lg:space-y-20">
+              {showcasesData.map((article: any) => (
+                <article class="relative isolate flex flex-col gap-8 lg:flex-row">
+                <div>
+                  <div class="group relative">
+                    <h3 class="text-lg font-bold leading-6 text-blue-900 group-hover:text-blue-600 uppercase">
+                      <a href={article.link}>
+                        <span class="absolute inset-0"></span>
+                        {article.title}
+                      </a>
+                    </h3>
+                    <p class="mt-5 text-sm leading-6 text-gray-600">{article.description}</p>
+                  </div>
+                  <div class="mt-4 flex border-t border-gray-900/5 pt-4">
+                    <div class="relative flex items-center gap-x-4">
+                      <div class="text-sm leading-6">
+                        <p class="font-semibold text-gray-900 uppercase">
+                            <span class="absolute inset-0"></span>
+                            {article.author}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+	<Cta />
+</Layout>
+  

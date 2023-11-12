@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from "astro:content";
+
+const options = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+} as Intl.DateTimeFormatOptions;
+
+const allPosts = await getCollection("news") as Array<{ data: { pubDate: Date, description: string, title: string }, slug: string}>;
+
+allPosts.sort((a, b) => new Date(b.data.pubDate) > new Date(a.data.pubDate) ? 1 : -1);
+---
+
+<Layout title="Apptainer - Portable, Reproducible Containers">
+	<div class="bg-white py-40">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div>
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl uppercase text-center">News</h2>
+            <div class="mt-10 space-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16">
+                {
+                    allPosts.map((post) => (
+                    <article class="flex flex-col items-start justify-between">
+                        <div class="flex items-center gap-x-4 text-xs">
+                        <time class="text-gray-500">{post.data.pubDate.toLocaleDateString('en-US', options)}</time>
+                        </div>
+                        <div class="group relative">
+                        <h3 class="mt-3 text-lg font-semibold leading-6 text-blue-900 group-hover:text-blue-600 uppercase">
+                            <a href={`/news/${post.slug}/`}>
+                            <span class="absolute inset-0"></span>
+                            {post.data.title}
+                            </a>
+                        </h3>
+                        <p class="mt-3 line-clamp-3 text-sm leading-6 text-gray-600">{post.data.description}</p>
+                        </div>
+                    </article>
+                    ))
+                }
+            </div>
+          </div>
+        </div>
+      </div>      
+</Layout>

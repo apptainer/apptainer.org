@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const { frontmatter } = Astro.props;
+
+const options = {
+	weekday: "long",
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+};
+---
+
+<Layout title={`${frontmatter.title}  | Apptainer - Portable, Reproducible Containers`}>
+	<div class="bg-white px-6 py-40 lg:px-8">
+		<div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+			<p class="text-center text-base font-semibold leading-7 text-blue-500">{frontmatter.pubDate.toLocaleDateString("en-US", options)}</p>
+			<h1 class="mt-2 text-center text-3xl font-bold uppercase tracking-tight text-gray-900 sm:text-4xl">{frontmatter.title}</h1>
+			<article
+				class="prose my-14 max-w-7xl prose-a:font-semibold prose-a:text-blue-500 prose-code:rounded-lg prose-code:bg-blue-900 prose-code:p-1 prose-code:text-blue-50">
+				<slot />
+			</article>
+		</div>
+	</div>
+</Layout>

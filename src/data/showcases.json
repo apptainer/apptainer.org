@@ -1,0 +1,86 @@
+[
+	{
+		"title": "Apptainer 1.1.0 Has Been Released",
+		"link": "https://youtu.be/lZENN9LVqY8",
+		"description": "A discussion of the new features and updated security posture of the groundbreaking Apptainer 1.1.0 release.",
+		"author": "Ctrl IQ Weekly Webinar Series"
+	},
+	{
+		"title": "Singularity: Containers for Science, Reproducibility, and HPC",
+		"link": "https://youtu.be/lZENN9LVqY8",
+		"description": "This talk explores how Singularity combines software packaging models with minimalistic containers to create very lightweight application bundles.",
+		"author": "2017 HPC Advisory Council Stanford Conference"
+	},
+	{
+		"title": "Container Education Series: Building Apptainer Containers",
+		"link": "https://youtu.be/DmrkxzW_F1Q",
+		"description": "A deep dive starting generally and venturing into the obscure and dark corners of container building with Apptainer.",
+		"author": "Ctrl IQ Weekly Webinar Series"
+	},
+	{
+		"title": "Building Containers with Singularity",
+		"link": "https://www.youtube.com/watch?v=nrgO3Q8-6hQ",
+		"description": "Learn how to use Singularity to create containers both in interactive mode and using definition files to automate the build.",
+		"author": "Daniel Persson"
+	},
+	{
+		"title": "Introduction to Singularity: Containers for Scientific and High-Performance Computing",
+		"link": "https://www.youtube.com/watch?v=vEjLuX0ClN0",
+		"description": "In this webinar, we provide an overview of Singularity and how you might incorporate the use of containers in your own research. We also show you how to access and use some of the containerized applications that we make available to users on the XSEDE systems like Comet and Expanse at SDSC.",
+		"author": "San Diego Supercomputer Center"
+	},
+	{
+		"title": "Singularity: Containers for High-Performance Computing",
+		"link": "https://www.youtube.com/watch?v=a2Yh0t1Azd0",
+		"description": "This session will provide an overview of the main features and benefits of Singularity, as well as a demonstration of how to run Singularity on WestGrid and Compute Canada systems, how to access filesystems from the container, and how to convert Docker containers to Singularity applications.",
+		"author": "Westgrid"
+	},
+	{
+		"title": "Run NVIDIA GPU Cloud Containers in Singularity",
+		"link": "https://www.youtube.com/watch?v=iOLVqqHQsBU",
+		"description": "This video covers installing and configuring Singularity, pulling and saving NGC containers and running NGC containers in an HPC environment.",
+		"author": "NVIDIA Developer"
+	},
+	{
+		"title": "Singularity Introduction",
+		"link": "https://www.youtube.com/watch?v=29NLgM9fnh4",
+		"description": "Michael Bauer provides and introduction into the HPC container runtime Singularity.",
+		"author": "ISC High Performance"
+	},
+	{
+		"title": "Containers Using Singularity on HPC",
+		"link": "https://www.youtube.com/watch?v=2Aap7pstFog",
+		"description": "In this video from the 2018 Swiss HPC Conference, Abhinav Thota, from Indiana University presents: Containers Using Singularity on HPC.",
+		"author": "2018 Swiss HPC Conference"
+	},
+	{
+		"title": "Easy-Build Singularity Containers",
+		"link": "https://www.youtube.com/watch?v=34SFF5Ow7Og",
+		"description": "In this hands on tutorial we will build 2 containers: a simple one to give users an understanding of how the set of scripts are working and how we can build for example Debian or CentOS containers without much knowledge of the background mechanisms. In the second, more advanced part, we show how to open up the containers and give users a chance to install their bespoke pipelines and use the power of the containers to run that on virtually any suitable platform.",
+		"author": "EUM '21"
+	},
+	{
+		"title": "Singularity in High Performance Computing (HPC)",
+		"link": "https://www.youtube.com/watch?v=z-RtotX0i_0",
+		"description": "In this webinar, we cover the basics of using Singularity and best practices of using it on Compute Canada HPC systems. We then discuss the common use cases and our experience with Singularity, and review the recent developments and changes in the newest versions of Singularity 3. The webinar is intended for everyone with basic skills in the Linux command line.",
+		"author": "Westgrid"
+	},
+	{
+		"title": "Singularity: Simple, Secure Containers for HPC",
+		"link": "https://www.youtube.com/watch?v=cWncCvFM2ak",
+		"description": "Singularity is the most widely used container solution in high-performance computing (HPC). Instead of a layered filesystem, a Singularity container is stored in a single file. This simplifies the container management lifecycle and facilitates features such as image signing and verification to produce trusted containers.",
+		"author": "Computational Biomedicine"
+	},
+	{
+		"title": "Benchmarking MPI Applications in Singularity Containers on Traditional HPC and Cloud Infrastructures",
+		"link": "https://www.youtube.com/watch?v=3Q-IS6MFgb4",
+		"description": "In this presentation, Benchmarking over traditional HPC is presented.",
+		"author": "HPC-CH"
+	},
+	{
+		"title": "Software Containers with Singularity",
+		"link": "https://www.youtube.com/watch?v=xty42A05Wg0",
+		"description": "An overview of software containers and how to use Singularity to create and run containers for research and high-performance computing tasks.",
+		"author": "USC Advanced Research Computing"
+	}
+]

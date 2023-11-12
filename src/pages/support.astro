@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Shared/Cta.astro';
+---
+
+<Layout title="Support | Apptainer - Portable, Reproducible Containers">
+	<div class="bg-white px-6 py-24 sm:py-32 lg:px-8 mt-20">
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl uppercase">Support</h2>
+          <p class="mt-6 text-lg leading-8 text-gray-600">Apptainer has both freely available support resources, as well as commercial support offerings through our partners.</p>
+        </div>
+      </div>
+      <div class="max-w-7xl mx-auto mb-40">
+      <ul role="list" class="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8 mx-2 sm:mx-0">
+        <li class="overflow-hidden rounded-xl border border-gray-200">
+          <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
+            <img src="/slack.png" alt="Slack" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10 p-2">
+            <div class="text-sm font-medium leading-6 text-gray-900 uppercase">Slack Community</div>
+            <div class="relative ml-auto">
+                <a href="https://join.slack.com/t/apptainer/shared_invite/zt-z95o8dg3-_URQItov5W_8djlR2hNZWw">
+                  <button type="button" class="uppercase rounded-md bg-green-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500">Join</button>
+                </a>                
+            </div>
+          </div>
+          <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+            <div class="flex justify-between gap-x-4 py-3">
+              <dt class="text-gray-500">Questions? Feel free to reach out to our knowledgeable and friendly Slack community, who's always willing to help.</dt>
+            </div>
+          </dl>
+        </li>
+        <li class="overflow-hidden rounded-xl border border-gray-200">
+            <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
+              <img src="/googlegroups.webp" alt="Google Groups" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10 p-2">
+              <div class="text-sm font-medium leading-6 text-gray-900 uppercase">Mailing List</div>
+              <div class="relative ml-auto">
+                  <a href="https://groups.google.com/u/0/a/apptainer.org/g/discuss?pli=1">
+                    <button type="button" class="uppercase rounded-md bg-green-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500">Join</button>
+                  </a>
+              </div>
+            </div>
+            <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500">The Apptainer project uses Google Groups. Click the Join button to engage in discussions and/or receive announcements from the project.</dt>
+              </div>
+            </dl>
+          </li>
+        <li class="overflow-hidden rounded-xl border border-gray-200">
+            <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
+              <img src="/github.png" alt="GitHub" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10 p-2">
+              <div class="text-sm font-medium leading-6 text-gray-900 uppercase">GitHub</div>
+              <div class="relative ml-auto">
+                  <a href="https://github.com/apptainer/apptainer">
+                    <button type="button" class="uppercase rounded-md bg-green-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500">Visit</button>
+                  </a>
+              </div>
+            </div>
+            <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500">Want the source code or to contribute? Found an issue? Head over to the Apptainer GitHub repo (and don't forget to give the project a star).</dt>
+              </div>
+            </dl>
+          </li>
+      </ul>
+      <ul role="list" class="grid grid-cols-1 gap-x-6 gap-y-8 xl:gap-x-8 mt-8 mx-2 sm:mx-0">
+        <li class="overflow-hidden rounded-xl border-2 border-blue-500">
+          <div class="flex items-center gap-x-4 border-b border-blue-900/5 bg-blue-50 p-6">
+            <img src="/ciq.png" alt="CIQ Commercial Support" class="h-12 flex-none rounded-lg bg-white object-cover ring-1 ring-blue-900/10 p-2">
+            <div class="text-sm font-medium leading-6 text-blue-900 uppercase">Commercial Support</div>
+            <div class="relative ml-auto">
+                <a href="https://ciq.co/">
+                  <button type="button" class="uppercase rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500">Get Support</button>
+                </a>
+            </div>
+          </div>
+          <dl class="-my-3 divide-y divide-blue-100 px-6 py-4 text-sm leading-6">
+            <div class="flex justify-between gap-x-4 py-3">
+              <dt class="text-blue-500">Support, services, and other commercial needs for Apptainer are available by the project lead and founder along with the primary core developers through CIQ (Ctrl IQ, Inc.). CIQ is the leading innovator of modernization of high-performance infrastructures and cloud-native computing and directly offers support and services of several open-source projects like Apptainer, Warewulf, and Rocky Linux.</dt>
+            </div>
+          </dl>
+        </li>
+    </ul>
+    </div>
+	<Cta />
+</Layout>
+  
