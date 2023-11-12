@@ -8,7 +8,7 @@
 		"build": "astro check && astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"deploy": "gh-pages -t -d public -r git@github.com:apptainer/apptainer.org.git"
+		"deploy": "gh-pages -t -d dist -r git@github.com:apptainer/apptainer.org.git"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.3.0",
