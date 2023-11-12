@@ -21,11 +21,6 @@ jobs:
               uses: withastro/action@v1
               with:
                   node-version: 20
-
-    deploy:
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
             - name: Install SSH key
               env:
                   SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -45,3 +40,4 @@ jobs:
             - name: Deploy website
               run: |
                   npm run deploy
+            
