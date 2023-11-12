@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Key commands &mdash; Singularity container 3.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Signing and Verifying Containers" href="signNverify.html" />
+    <link rel="prev" title="OCI Runtime Support" href="oci_runtime.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Singularity container
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_library.html">Cloud Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Singularity and Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Key commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#key-import-command">Key import command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-export-command">Key export command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-remove-command">Key remove command</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Singularity container</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Key commands</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/sylabs/singularity-userdocs/blob/master/key_commands.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="key-commands">
+<span id="id1"></span><h1>Key commands<a class="headerlink" href="#key-commands" title="Permalink to this headline">¶</a></h1>
+<p id="sec-key-commands">Singularity 3.2 introduces the abilities to import, export and remove PGP keys following the OpenPGP standard via <a class="reference external" href="https://www.gnupg.org/gph/en/manual.html">GnuPGP (GPG)</a>.
+These commands only modify the local keyring and are not related to the cloud keystore.</p>
+<div class="section" id="key-import-command">
+<span id="key-import"></span><h2>Key import command<a class="headerlink" href="#key-import-command" title="Permalink to this headline">¶</a></h2>
+<p>Singularity 3.2 allows you import keys reading either from binary or armored key format and automatically detect if it is a private or public key and add it to the correspondent local keystore.</p>
+<p>To give a quick view on how it works, we will first consider the case in which a user wants to import a secret (private) key to the local keystore.</p>
+<p>First we will check what’s the status of the local keystore (which keys are stored by the moment before importing a new key).</p>
+<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key list --secret
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember that using <code class="docutils literal notranslate"><span class="pre">--secret</span></code> flag or <code class="docutils literal notranslate"><span class="pre">-s</span></code> flag will return the secret or private local keyring as output.</p>
+</div>
+<p>The output will look as it follows:</p>
+<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>Private key listing (/home/joana/.singularity/sypgp/pgp-secret):
+
+<span class="m">0</span>) U: Johnny Cash (none) &lt;cash@sylabs.io&gt;
+C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">22</span>:<span class="m">22</span>:<span class="m">28</span> +<span class="m">0200</span> CEST
+F: 47282BDC661F58FA4BEBEF47CA576CBD8EF1A2B4
+L: <span class="m">3072</span>
+--------
+<span class="m">1</span>) U: John Green (none) &lt;john@sylabs.io&gt;
+C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">13</span>:<span class="m">08</span>:<span class="m">45</span> +<span class="m">0200</span> CEST
+F: 5720799FE7B048CF36FAB8445EE1E2BD7B6342C5
+L: <span class="m">1024</span>
+--------
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember that running that same command but with sudo privilege, will give you a totally different list since it will be the correspondent keystore from user <code class="docutils literal notranslate"><span class="pre">root</span></code></p>
+</div>
+<p>After this, you can simply import the key you need by adding the exact location to the file, let’s say you own a gpg key file named <code class="docutils literal notranslate"><span class="pre">pinkie-pie.asc</span></code> which is a secret GPG key you want to import.
+Then you will just need to run the following command to import your key:</p>
+<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key import $HOME/pinkie-pie.asc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This location is considering your key was located on the <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory. You can specify any location to the file.</p>
+</div>
+<p>Since you’re importing a private (secret) key, you will need to specify the passphrase related to it and then a new passphrase to be added on your local keystore.</p>
+<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>Enter your old password :
+Enter a new password for this key :
+Retype your passphrase :
+Key with fingerprint 8C10B902F438E4D504C3ACF689FCFFAED5F34A77 successfully added to the keyring
+</pre></div>
+</div>
+<p>After this you can see if that key was correctly added to your local keystore by running <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">list</span> <span class="pre">-s</span></code> command:</p>
+<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>Private key listing (/home/joana/.singularity/sypgp/pgp-secret):
+
+  <span class="m">0</span>) U: Johnny Cash (none) &lt;cash@sylabs.io&gt;
+  C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">22</span>:<span class="m">22</span>:<span class="m">28</span> +<span class="m">0200</span> CEST
+  F: 47282BDC661F58FA4BEBEF47CA576CBD8EF1A2B4
+  L: <span class="m">3072</span>
+  --------
+  <span class="m">1</span>) U: John Green (none) &lt;john@sylabs.io&gt;
+  C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">13</span>:<span class="m">08</span>:<span class="m">45</span> +<span class="m">0200</span> CEST
+  F: 5720799FE7B048CF36FAB8445EE1E2BD7B6342C5
+  L: <span class="m">1024</span>
+  --------
+  <span class="m">3</span>) U: Pinkie Pie (Eternal chaos comes with chocolate rain!) &lt;balloons@sylabs.io&gt;
+  C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">26</span> <span class="m">12</span>:<span class="m">07</span>:<span class="m">07</span> +<span class="m">0200</span> CEST
+  F: 8C10B902F438E4D504C3ACF689FCFFAED5F34A77
+  L: <span class="m">1024</span>
+  --------
+</pre></div>
+</div>
+<p>You will see the imported key at the bottom of the list. Remember you can also import an <code class="docutils literal notranslate"><span class="pre">ascii</span></code> armored key and this will be automatically detected by the <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">import</span></code> command (no need to specify the format).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In case you would like to import a public key the process remains the same, as the import command will automatically detect whether this key to be imported is either public or private.</p>
+</div>
+</div>
+<div class="section" id="key-export-command">
+<span id="key-export"></span><h2>Key export command<a class="headerlink" href="#key-export-command" title="Permalink to this headline">¶</a></h2>
+<p>The key export command allows you to export a key that is on your local keystore. This key could be either private or public, and the key can be exported on <code class="docutils literal notranslate"><span class="pre">ASCII</span></code> armored format or on binary format.
+Of course to identify the keystore and the format the syntax varies from the <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">import</span></code> command.</p>
+<p>For example to export a public key in binary format you can run:</p>
+<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key export 8C10B902F438E4D504C3ACF689FCFFAED5F34A77 $HOME/mykey.asc
+</pre></div>
+</div>
+<p>This will export a public binary key named <code class="docutils literal notranslate"><span class="pre">mykey.asc</span></code> and will save it under the home folder. If you would like to export the same public key but in an <code class="docutils literal notranslate"><span class="pre">ASCII</span></code> armored format, you would need to run the following command:</p>
+<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key export --armor 8C10B902F438E4D504C3ACF689FCFFAED5F34A77 $HOME/mykey.asc
+</pre></div>
+</div>
+<p>And in the case in which you may need to export a secret key on <code class="docutils literal notranslate"><span class="pre">ASCII</span></code> armored format, you would need to specify from where to find the key, since the fingerprint is the same.</p>
+<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key export --armor --secret 8C10B902F438E4D504C3ACF689FCFFAED5F34A77 $HOME/mykey.asc
+</pre></div>
+</div>
+<p>and on binary format instead:</p>
+<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key export --secret 8C10B902F438E4D504C3ACF689FCFFAED5F34A77 $HOME/mykey.asc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Exporting keys will not change the status of your local keystore or keyring. This will just obtain the content of the keys and save it on a local file on your host.</p>
+</div>
+</div>
+<div class="section" id="key-remove-command">
+<span id="key-remove"></span><h2>Key remove command<a class="headerlink" href="#key-remove-command" title="Permalink to this headline">¶</a></h2>
+<p>In case you would want to remove a public key from your public local keystore, you can do so by running the following command:</p>
+<div class="highlight-Singularity notranslate"><div class="highlight"><pre><span></span>$ singularity key remove 8C10B902F438E4D504C3ACF689FCFFAED5F34A77
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember that this will only delete the public key and not the private one with the same matching fingerprint.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="signNverify.html" class="btn btn-neutral float-right" title="Signing and Verifying Containers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="oci_runtime.html" class="btn btn-neutral float-left" title="OCI Runtime Support" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017-2019, Sylabs Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

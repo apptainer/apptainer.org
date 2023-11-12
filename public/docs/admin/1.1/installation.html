@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installing Apptainer &mdash; Apptainer Admin Guide 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Migrating From Singularity" href="singularity_migration.html" />
+    <link rel="prev" title="Admin Quick Start" href="admin_quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer Admin Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="admin_quickstart.html">Admin Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installing Apptainer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation-on-linux">Installation on Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-requirements">System Requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#non-standard-ldconfig-nix-guix-environments">Non-standard ldconfig / Nix &amp; Guix Environments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filesystem-support-limitations">Filesystem support / limitations</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#overlay-support">Overlay support</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#fakeroot-with-uid-gid-mapping-on-network-filesystems">Fakeroot with uid/gid mapping on Network filesystems</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#apptainer-cache-atomic-rename">Apptainer cache / atomic rename</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#nfs">NFS</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#lustre-gpfs">Lustre / GPFS</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#fuse-based-filesystems">FUSE-based filesystems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#install-unprivileged-from-pre-built-binaries">Install unprivileged from pre-built binaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-from-pre-built-packages">Install from pre-built packages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-rpm-from-epel-or-fedora">Install RPM from EPEL or Fedora</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-from-github-release-rpms">Install from GitHub release RPMs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-debian-packages">Install Debian packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-ubuntu-packages">Install Ubuntu packages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#install-from-source">Install from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#relocatable-installation">Relocatable Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#source-bash-completion-file">Source bash completion file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-an-rpm">Build an RPM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-a-debian-package">Build a Debian package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-checking-the-build-configuration">Testing &amp; Checking the Build Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#apptainer-buildcfg">apptainer buildcfg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test-suite">Test Suite</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-on-windows-or-mac">Installation on Windows or Mac</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_migration.html">Migrating from Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configfiles.html">Configuration files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_namespace.html">User Namespaces &amp; Fakeroot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apptainer Admin Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installing Apptainer</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-admindocs/blob/master/installation.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="installing-apptainer">
+<span id="installation"></span><h1>Installing Apptainer<a class="headerlink" href="#installing-apptainer" title="Permalink to this heading"></a></h1>
+<p>This section will guide you through the process of installing
+Apptainer 1.1.9 via several different methods. (For
+instructions on installing earlier versions of Apptainer please see
+<a class="reference external" href="https://apptainer.org/docs/">earlier versions of the docs</a>.)</p>
+<div class="section" id="installation-on-linux">
+<h2>Installation on Linux<a class="headerlink" href="#installation-on-linux" title="Permalink to this heading"></a></h2>
+<p>Apptainer can be installed on any modern Linux distribution, on
+bare-metal or inside a Virtual Machine.
+It can even often be run nested inside another Apptainer container
+or inside some other container system.</p>
+<div class="section" id="system-requirements">
+<h3>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading"></a></h3>
+<p>Apptainer requires ~150MiB disk space once compiled and installed.</p>
+<p>There are no specific CPU or memory requirements at runtime, though
+at least 2GB of RAM is recommended when building from source.</p>
+<p>Full functionality of Apptainer requires that the kernel supports:</p>
+<ul class="simple">
+<li><p><strong>Unprivileged user namespaces</strong> - (minimum kernel &gt;=3.8, &gt;=4.18
+or 3.10.0-1127 on RHEL7 recommended)
+Required to run containers without root or setuid privilege.
+The recommended versions are required for unprivileged SIF file
+mounts.</p></li>
+<li><p><strong>OverlayFS mounts</strong> - (minimum kernel &gt;=3.18, &gt;=5.11 recommended)
+Required for full flexibility in bind mounts to containers in suid
+mode, and to support persistent overlays for writable containers
+in suid mode.  Kernel 5.11 enables support for persistent overlay
+unprivileged, but otherwise fuse-overlayfs will be used for that.</p></li>
+</ul>
+<p>Instructions to install without or with setuid privileges are below.
+Please make sure you are familiar with the discussion on
+<a class="reference external" href="https://apptainer.org/docs/user/1.1/security.html#setuid-user-namespaces">Setuid &amp; User Namespaces</a>
+in the Security section of the user guide, and the
+<a class="reference internal" href="user_namespace.html#userns-requirements"><span class="std std-ref">User Namespace Requirements</span></a>
+in this guide.</p>
+<div class="section" id="non-standard-ldconfig-nix-guix-environments">
+<h4>Non-standard ldconfig / Nix &amp; Guix Environments<a class="headerlink" href="#non-standard-ldconfig-nix-guix-environments" title="Permalink to this heading"></a></h4>
+<p>If Apptainer is installed under a package manager such as Nix or
+Guix, but on top of a standard Linux distribution (e.g. RHEL or
+Debian), it may be unable to correctly find the libraries for <code class="docutils literal notranslate"><span class="pre">--nv</span></code>
+and <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> GPU support. This issue occurs as the package manager
+supplies an alternative <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code>, which does not identify GPU
+libraries installed from host packages.</p>
+<p>To allow Apptainer to locate the host (i.e. RHEL / Debian) GPU
+libraries correctly, set <code class="docutils literal notranslate"><span class="pre">binary</span> <span class="pre">path</span></code> in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> to
+point to the directory of the host’s <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> before the
+<code class="docutils literal notranslate"><span class="pre">$PATH:</span></code> which is replaced by the user’s PATH.
+I.E., <code class="docutils literal notranslate"><span class="pre">/sbin</span></code> should be before any Nix or Guix
+related path or the user’s PATH.</p>
+</div>
+<div class="section" id="filesystem-support-limitations">
+<h4>Filesystem support / limitations<a class="headerlink" href="#filesystem-support-limitations" title="Permalink to this heading"></a></h4>
+<p>Apptainer supports most filesystems, but there are some limitations
+when installing Apptainer on, or running containers from, common
+parallel / network filesystems. In general:</p>
+<ul class="simple">
+<li><p>We recommend installing Apptainer on local disk on each
+compute node.</p></li>
+<li><p>If Apptainer is installed to a network location, a
+<code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> should be provided on each node, and Apptainer
+configured to use it.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> filesystem should support overlay mounts.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> / <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> should be on a local filesystem
+wherever possible.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Set the <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> location by by providing
+<code class="docutils literal notranslate"><span class="pre">--localstatedir</span> <span class="pre">my/dir</span></code> as an option when you configure your
+Apptainer build with <code class="docutils literal notranslate"><span class="pre">./mconfig</span></code>.</p>
+<p>Disk usage at the <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> location is negligible (&lt;1MiB).
+The directory is used as a location to mount the container root
+filesystem, overlays, bind mounts etc. that construct the runtime
+view of a container. You will not see these mounts from a host shell,
+as they are made in a separate mount namespace.</p>
+</div>
+<div class="section" id="overlay-support">
+<h5>Overlay support<a class="headerlink" href="#overlay-support" title="Permalink to this heading"></a></h5>
+<p>Some features of Apptainer, such as the <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> and
+<code class="docutils literal notranslate"><span class="pre">--overlay</span></code> options, try to use the Linux <code class="docutils literal notranslate"><span class="pre">overlay</span></code> filesystem driver to
+construct a container root filesystem that combines files from different
+locations.
+Not all filesystems can be used with the <code class="docutils literal notranslate"><span class="pre">overlay</span></code> driver,
+so when containers are run from these filesystems some Apptainer
+features may not be available.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">overlay</span></code> kernel driver does not work, but the setuid flow
+is not being used and unprivileged user namespaces are available, then
+Apptainer will use the <code class="docutils literal notranslate"><span class="pre">fuse-overlayfs</span></code> command if it can be found.
+That works with additional filesystem types than the <code class="docutils literal notranslate"><span class="pre">overlay</span></code>
+kernel driver does not work with, and also works in cases where
+older kernels do not support using the <code class="docutils literal notranslate"><span class="pre">overlay</span></code> driver unprivileged.</p>
+<p>Overlay support has two aspects, referenced below:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lowerdir</span></code> support for a filesystem allows a directory on that
+filesystem to act as the ‘base’ of a container. A filesystem must
+support overlay <code class="docutils literal notranslate"><span class="pre">lowerdir</span></code> for you be able to run an Apptainer
+sandbox container on it, while using functionality such as
+<code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> / <code class="docutils literal notranslate"><span class="pre">--overlay</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upperdir</span></code> support for a filesystem allows a directory on that
+filesystem to be merged on top of a <code class="docutils literal notranslate"><span class="pre">lowerdir</span></code> to construct a
+container. If you use the <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> option to overlay a directory
+onto a container, then the filesystem holding the overlay directory
+must support <code class="docutils literal notranslate"><span class="pre">upperdir</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="fakeroot-with-uid-gid-mapping-on-network-filesystems">
+<h5>Fakeroot with uid/gid mapping on Network filesystems<a class="headerlink" href="#fakeroot-with-uid-gid-mapping-on-network-filesystems" title="Permalink to this heading"></a></h5>
+<p>When Apptainer is run using the <a class="reference internal" href="user_namespace.html#fakeroot"><span class="std std-ref">fakeroot</span></a> option and
+mappings are available in <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> then uids / gids
+inside the container are mapped to different host uids / gids.</p>
+<p>Most local filesystems (ext4/xfs etc.) have no problem with this
+uid/gid mapping.
+Most network filesystems (NFS/Lustre/GPFS etc.), however, only
+support a single uid for each user.
+When additional user ids are attempted to be used the fileserver
+will deny many operations, with ‘permission denied’ errors.
+This is currently a generic problem for rootless container
+runtimes.</p>
+<p>This is only a problem when sandbox images are stored on the network
+filesystems.
+For that case it is probably better to use one of the other fakeroot
+modes that Apptainer supports.
+Alternatively, use SIF images instead of sandbox images because they
+don’t have the problem.</p>
+</div>
+<div class="section" id="apptainer-cache-atomic-rename">
+<h5>Apptainer cache / atomic rename<a class="headerlink" href="#apptainer-cache-atomic-rename" title="Permalink to this heading"></a></h5>
+<p>Apptainer will cache SIF container images generated from remote
+sources, and any OCI/docker layers used to create them. The cache is
+created at <code class="docutils literal notranslate"><span class="pre">$HOME/.apptainer/cache</span></code> by default. The location of the
+cache can be changed by setting the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> environment
+variable.</p>
+<p>The directory used for <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> should be:</p>
+<ul class="simple">
+<li><p>A unique location for each user. Permissions are set on the cache so
+that private images cached for one user are not exposed to another.
+This means that <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> cannot be shared.</p></li>
+<li><p>Located on a filesystem with sufficient space for the number and size
+of container images anticipated.</p></li>
+<li><p>Located on a filesystem that supports atomic rename, if possible.</p></li>
+</ul>
+<p>The Apptainer cache is concurrency safe.
+Parallel runs of Apptainer that would create overlapping cache
+entries will not conflict, as long as the filesystem used by
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> supports atomic rename operations.</p>
+<p>Support for atomic rename operations is expected on local POSIX
+filesystems, but varies for network / parallel filesystems and may be
+affected by topology and configuration. For example, Lustre supports
+atomic rename of files only on a single MDT. Rename on NFS is only
+atomic to a single client, not across systems accessing the same NFS
+share.</p>
+<p>If you are not certain that your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> or <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code>
+filesystems support atomic rename, do not run <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> in parallel
+using remote container URLs. Instead use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> to create
+a local SIF image, and then run this SIF image in a parallel step. An
+alternative is to use the <code class="docutils literal notranslate"><span class="pre">--disable-cache</span></code> option, but this will
+result in each Apptainer instance independently fetching the
+container from the remote source, into a temporary location.</p>
+</div>
+<div class="section" id="nfs">
+<h5>NFS<a class="headerlink" href="#nfs" title="Permalink to this heading"></a></h5>
+<p>NFS filesystems support overlay mounts as a <code class="docutils literal notranslate"><span class="pre">lowerdir</span></code> only, and do
+not support <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
+<ul class="simple">
+<li><p>Containers run from SIF files located on an NFS filesystem do not
+have restrictions.</p></li>
+<li><p>In setuid mode, you cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> to overlay a
+directory onto a container when the overlay (upperdir) directory is
+on an NFS filesystem.
+In non-setuid mode with fuse-overlayfs it is allowed but will be read-only.</p></li>
+<li><p>When building a container, or running a container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>, your
+<code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> / <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> should not be set to an NFS
+location.</p></li>
+<li><p>You should not run a sandbox container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>
+from an NFS location.</p></li>
+</ul>
+</div>
+<div class="section" id="lustre-gpfs">
+<h5>Lustre / GPFS<a class="headerlink" href="#lustre-gpfs" title="Permalink to this heading"></a></h5>
+<p>Lustre and GPFS do not have sufficient <code class="docutils literal notranslate"><span class="pre">upperdir</span></code> or <code class="docutils literal notranslate"><span class="pre">lowerdir</span></code>
+overlay support for certain Apptainer features, and do not support
+<code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
+<ul class="simple">
+<li><p>In setuid mode, you cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> or <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> with a
+sandbox container that is located on a Lustre or GPFS filesystem. SIF
+containers on Lustre / GPFS will work correctly with these options.
+It works with fuse-overlayfs in non-setuid mode.</p></li>
+<li><p>In setuid mode, you cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> to overlay a directory onto
+a container when the overlay (upperdir) directory is on a Lustre or GPFS
+filesystem.
+In non-setuid mode with fuse-overlayfs it is allowed but will be read-only.</p></li>
+<li><p>When building a container, or running a container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>, your
+<code class="docutils literal notranslate"><span class="pre">TMPDIR</span> <span class="pre">/</span> <span class="pre">APPTAINER_TMPDIR</span></code> should not be a Lustre or GPFS
+location.</p></li>
+<li><p>You should not run a sandbox container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> from a
+Lustre or GPFS location.</p></li>
+</ul>
+</div>
+<div class="section" id="fuse-based-filesystems">
+<h5>FUSE-based filesystems<a class="headerlink" href="#fuse-based-filesystems" title="Permalink to this heading"></a></h5>
+<p>The kernel overlay driver does not allow the upperdir to be a FUSE-based
+filesystem, so in setuid mode that is disallowed.
+It does work in non-setuid mode with fuse-overlayfs.</p>
+</div>
+</div>
+</div>
+<div class="section" id="install-unprivileged-from-pre-built-binaries">
+<h3>Install unprivileged from pre-built binaries<a class="headerlink" href="#install-unprivileged-from-pre-built-binaries" title="Permalink to this heading"></a></h3>
+<p>A script is available to make a relocatable unprivileged binary installation
+of Apptainer, including all dependencies that are not normally installed
+on Linux systems.  The script works on current Red Hat Enterprise Linux-derived
+systems, Fedora, SUSE/OpenSUSE, Debian, and Ubuntu (except 18.04).</p>
+<p>This is the easiest way to use it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -s https://raw.githubusercontent.com/apptainer/apptainer/main/tools/install-unprivileged.sh | \
+    bash -s - install-dir
+</pre></div>
+</div>
+<p>where install-dir is the directory you want to install it into.
+Once installed, you can run it with <code class="docutils literal notranslate"><span class="pre">install-dir/bin/apptainer</span></code>.</p>
+<p>The script requires a few tools to be in the user’s PATH that aren’t
+always available: <code class="docutils literal notranslate"><span class="pre">curl</span></code>, <code class="docutils literal notranslate"><span class="pre">rpm2cpio</span></code>, and <code class="docutils literal notranslate"><span class="pre">cpio</span></code>.  If they are
+not available and you do not have privileges to install them, you can
+copy them from another compatible machine or you can run the script
+on another machine and copy the installed files to the machine you
+want them on.</p>
+<p>Multiple architectures can be installed into the same directory on a
+shared filesystem and it will automatically pick the correct
+architecture when it runs.
+Architectures supported by EPEL and Fedora are supported.</p>
+</div>
+<div class="section" id="install-from-pre-built-packages">
+<h3>Install from pre-built packages<a class="headerlink" href="#install-from-pre-built-packages" title="Permalink to this heading"></a></h3>
+<p>Prebuilt packages are available for released versions of Apptainer on
+a variety of host operating systems.</p>
+<div class="section" id="install-rpm-from-epel-or-fedora">
+<h4>Install RPM from EPEL or Fedora<a class="headerlink" href="#install-rpm-from-epel-or-fedora" title="Permalink to this heading"></a></h4>
+<p>Multiple architectures of RPMs are available for Red Hat Enterprise
+Linux and Fedora.</p>
+<p>First, on Red Hat Enterprise Linux derived systems enable the EPEL
+repositories like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo yum install -y epel-release
+</pre></div>
+</div>
+<p>Then to install a non-setuid installation of Apptainer do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo yum install -y apptainer
+</pre></div>
+</div>
+<p>or for a setuid installation do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo yum install -y apptainer-suid
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-from-github-release-rpms">
+<h4>Install from GitHub release RPMs<a class="headerlink" href="#install-from-github-release-rpms" title="Permalink to this heading"></a></h4>
+<p>Alternatively, x86_64 RPMs are available on GitHub immediately after each
+Apptainer release and they can be installed directly from there.  For the
+non-setuid installation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo yum install -y https://github.com/apptainer/apptainer/releases/download/v1.1.9/apptainer-1.1.9-1.x86_64.rpm
+</pre></div>
+</div>
+<p>For the setuid installation do above command first and then this one:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo yum install -y https://github.com/apptainer/apptainer/releases/download/v1.1.9/apptainer-suid-1.1.9-1.x86_64.rpm
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-debian-packages">
+<h4>Install Debian packages<a class="headerlink" href="#install-debian-packages" title="Permalink to this heading"></a></h4>
+<p>Pre-built Debian packages are only available on GitHub and only for the amd64 architecture. For the non-setuid installation use these commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt update
+$ sudo apt install -y wget
+$ cd /tmp
+$ wget https://github.com/apptainer/apptainer/releases/download/v1.1.9/apptainer_1.1.9_amd64.deb
+$ sudo apt install -y ./apptainer_1.1.9_amd64.deb
+</pre></div>
+</div>
+<p>For the setuid installation do above commands first and then these:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://github.com/apptainer/apptainer/releases/download/v1.1.9/apptainer-suid_1.1.9_amd64.deb
+$ sudo dpkg -i ./apptainer-suid_1.1.9_amd64.deb
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-ubuntu-packages">
+<h4>Install Ubuntu packages<a class="headerlink" href="#install-ubuntu-packages" title="Permalink to this heading"></a></h4>
+<p>Pre-built Ubuntu packages are available on PPA (Personal Package Archive) for the amd64 and arm64 architectures on all current Ubuntu releases except 18.04.</p>
+<p>First, on Ubuntu based containers install <cite>software-properties-common</cite> package to obtain <cite>add-apt-repository</cite> command. On Ubuntu Desktop/Server derived systems skip this step.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt update
+$ sudo apt install -y software-properties-common
+</pre></div>
+</div>
+<p>For the non-setuid installation use these commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo add-apt-repository -y ppa:apptainer/ppa
+$ sudo apt update
+$ sudo apt install -y apptainer
+</pre></div>
+</div>
+<p>For the setuid installation do above commands first and then these:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo add-apt-repository -y ppa:apptainer/ppa
+$ sudo apt update
+$ sudo apt install -y apptainer-suid
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="install-from-source">
+<h3>Install from Source<a class="headerlink" href="#install-from-source" title="Permalink to this heading"></a></h3>
+<p>To install from source, follow the instructions in <a class="reference external" href="https://github.com/apptainer/apptainer/blob/release-1.1/INSTALL.md">INSTALL.md</a>
+on GitHub.</p>
+<div class="section" id="relocatable-installation">
+<h4>Relocatable Installation<a class="headerlink" href="#relocatable-installation" title="Permalink to this heading"></a></h4>
+<p>An unprivileged (non-setuid) Apptainer installation built from source is
+relocatable. As long as the structure inside the installation directory
+(<code class="docutils literal notranslate"><span class="pre">--prefix</span></code>) is maintained, it can be moved to a different location
+and Apptainer will continue to run normally.</p>
+<p>Relocation of a setuid installation is not supported, as
+restricted location / ownership of configuration files is important to
+security.</p>
+</div>
+<div class="section" id="source-bash-completion-file">
+<h4>Source bash completion file<a class="headerlink" href="#source-bash-completion-file" title="Permalink to this heading"></a></h4>
+<p>If you installed from source, then
+to enjoy bash shell completion with Apptainer commands and options,
+source the bash completion file (assuming the default installation prefix):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ . /usr/local/share/bash-completion/completions/apptainer
+</pre></div>
+</div>
+<p>Add this command to your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file so that bash completion
+continues to work in new shells. (Adjust the path if you installed
+Apptainer to a different location.)</p>
+</div>
+<div class="section" id="build-an-rpm">
+<h4>Build an RPM<a class="headerlink" href="#build-an-rpm" title="Permalink to this heading"></a></h4>
+<p>If you use RHEL, CentOS or SUSE, building and installing an Apptainer
+RPM allows your Apptainer installation be more easily managed,
+upgraded and removed.</p>
+<p>The instructions on how to build the RPM from source are in a
+<a class="reference external" href="https://github.com/apptainer/apptainer/blob/main/INSTALL.md#building--installing-from-rpm">INSTALL.md section</a>
+on GitHub.</p>
+</div>
+<div class="section" id="build-a-debian-package">
+<h4>Build a Debian package<a class="headerlink" href="#build-a-debian-package" title="Permalink to this heading"></a></h4>
+<p>Packaging for Debian and Ubuntu can also be built from source.
+The instructions on how to do that are in a separate file <a class="reference external" href="https://github.com/apptainer/apptainer/blob/main/dist/debian/DEBIAN_PACKAGE.md">DEBIAN_PACKAGE.md</a>
+on GitHub.</p>
+</div>
+</div>
+<div class="section" id="testing-checking-the-build-configuration">
+<h3>Testing &amp; Checking the Build Configuration<a class="headerlink" href="#testing-checking-the-build-configuration" title="Permalink to this heading"></a></h3>
+<p>After installation you can perform a basic test of Apptainer
+functionality by executing a simple alpine container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine cat /etc/alpine-release
+3.9.2
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="https://apptainer.org/docs/user/1.1">user guide</a> for more
+information about how to use Apptainer.</p>
+<div class="section" id="apptainer-buildcfg">
+<h4>apptainer buildcfg<a class="headerlink" href="#apptainer-buildcfg" title="Permalink to this heading"></a></h4>
+<p>Running <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">buildcfg</span></code> will show the build configuration of an
+installed version of Apptainer, and lists the paths used by
+Apptainer. Use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">buildcfg</span></code> to confirm paths are set
+correctly for your installation, and troubleshoot any ‘not-found’ errors
+at runtime.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer buildcfg
+PACKAGE_NAME=apptainer
+PACKAGE_VERSION=1.1.9
+BUILDDIR=/home/dtrudg/Sylabs/Git/apptainer/builddir
+PREFIX=/usr/local
+EXECPREFIX=/usr/local
+BINDIR=/usr/local/bin
+SBINDIR=/usr/local/sbin
+LIBEXECDIR=/usr/local/libexec
+DATAROOTDIR=/usr/local/share
+DATADIR=/usr/local/share
+SYSCONFDIR=/usr/local/etc
+SHAREDSTATEDIR=/usr/local/com
+LOCALSTATEDIR=/usr/local/var
+RUNSTATEDIR=/usr/local/var/run
+INCLUDEDIR=/usr/local/include
+DOCDIR=/usr/local/share/doc/apptainer
+INFODIR=/usr/local/share/info
+LIBDIR=/usr/local/lib
+LOCALEDIR=/usr/local/share/locale
+MANDIR=/usr/local/share/man
+APPTAINER_CONFDIR=/usr/local/etc/apptainer
+SESSIONDIR=/usr/local/var/apptainer/mnt/session
+PLUGIN_ROOTDIR=/usr/local/libexec/apptainer/plugin
+APPTAINER_CONF_FILE=/usr/local/etc/apptainer/apptainer.conf
+APPTAINER_SUID_INSTALL=0
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">LOCALSTATEDIR</span></code> and <code class="docutils literal notranslate"><span class="pre">SESSIONDIR</span></code> should be on local,
+non-shared storage.</p>
+</div>
+<div class="section" id="test-suite">
+<h4>Test Suite<a class="headerlink" href="#test-suite" title="Permalink to this heading"></a></h4>
+<p>The Apptainer codebase includes a test suite that is run during
+development using CI services.</p>
+<p>If you would like to run the test suite locally you can run the test
+targets from the <code class="docutils literal notranslate"><span class="pre">builddir</span></code> directory in the source tree:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code> runs source code linting and dependency checks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">unit-test</span></code> runs basic unit tests</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">integration-test</span></code> runs integration tests</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">e2e-test</span></code> runs end-to-end tests, which exercise a large
+number of operations by calling the Apptainer CLI with different
+execution profiles.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Running the full test suite requires a <code class="docutils literal notranslate"><span class="pre">docker</span></code> installation, and
+<code class="docutils literal notranslate"><span class="pre">nc</span></code> in order to test docker and instance/networking functionality.</p>
+<p>Apptainer must be installed with suid in order to run the full test suite,
+as it must run the CLI with setuid privilege for the <code class="docutils literal notranslate"><span class="pre">starter-suid</span></code>
+binary.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span></code> privilege is required to run the full tests, and you should
+not run the tests on a production system. We recommend running the
+tests in an isolated development or build environment.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="installation-on-windows-or-mac">
+<h2>Installation on Windows or Mac<a class="headerlink" href="#installation-on-windows-or-mac" title="Permalink to this heading"></a></h2>
+<p>Linux container runtimes like Apptainer cannot run natively on
+Windows or Mac because of basic incompatibilities with the host kernel.
+(Contrary to a popular misconception, MacOS does not run on a Linux
+kernel. It runs on a kernel called Darwin originally forked from BSD.)</p>
+<p>In order to use Apptainer on these platforms, you can install Vagrant
+Boxes via <a class="reference external" href="https://www.vagrantup.com/">Vagrant Cloud</a>, one of
+<a class="reference external" href="https://www.hashicorp.com/#open-source-tools">Hashicorp’s</a> open
+source tools, by following the instructions below. Then you can install
+Apptainer in the base VM of your choice by following the linux
+<a class="reference internal" href="#installation"><span class="std std-ref">installation instructions</span></a> above.</p>
+<div class="section" id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading"></a></h3>
+<p>Install the following programs:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://git-for-windows.github.io/">Git for Windows</a></p></li>
+<li><p><a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">VirtualBox for Windows</a></p></li>
+<li><p><a class="reference external" href="https://www.vagrantup.com/downloads.html">Vagrant for Windows</a></p></li>
+<li><p><a class="reference external" href="http://vagrantmanager.com/downloads/">Vagrant Manager for Windows</a></p></li>
+</ul>
+</div>
+<div class="section" id="mac">
+<h3>Mac<a class="headerlink" href="#mac" title="Permalink to this heading"></a></h3>
+<p>Apptainer is available via Vagrant (installable with <a class="reference external" href="https://brew.sh">Homebrew</a> or manually)</p>
+<p>To use Vagrant via Homebrew:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+$ brew install --cask virtualbox vagrant vagrant-manager
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="admin_quickstart.html" class="btn btn-neutral float-left" title="Admin Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="singularity_migration.html" class="btn btn-neutral float-right" title="Migrating From Singularity" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

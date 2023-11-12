@@ -1,0 +1,601 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Bind Paths and Mounts &mdash; Singularity User Guide 3.7 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/js/ga.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Persistent Overlays" href="persistent_overlays.html" />
+    <link rel="prev" title="Cloud Library" href="cloud_library.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Singularity User Guide
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Singularity and Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_library.html">Cloud Library</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bind Paths and Mounts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-defined-bind-paths">System-defined bind paths</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#disabling-system-binds">Disabling System Binds</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#user-defined-bind-paths">User-defined bind paths</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#specifying-bind-paths">Specifying bind paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-note-on-using-bind-with-the-writable-flag">A note on using <code class="docutils literal notranslate"><span class="pre">--bind</span></code> with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-no-home-and-containall-flags">Using <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> and <code class="docutils literal notranslate"><span class="pre">--containall</span></code> flags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#no-home"><code class="docutils literal notranslate"><span class="pre">--no-home</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#containall"><code class="docutils literal notranslate"><span class="pre">--containall</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fuse-mounts">FUSE mounts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fuse-mount-definitions">FUSE mount definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fuse-mount-with-a-host-executable">FUSE mount with a host executable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fuse-mount-with-a-container-executable">FUSE mount with a container executable</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#image-mounts">Image Mounts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ext3-image-files">Ext3 Image Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#squashfs-image-files">SquashFS Image Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sif-image-files">SIF Image Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Singularity User Guide</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Bind Paths and Mounts</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/hpcng/singularity-userdocs/blob/master/bind_paths_and_mounts.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bind-paths-and-mounts">
+<span id="id1"></span><h1>Bind Paths and Mounts<a class="headerlink" href="#bind-paths-and-mounts" title="Permalink to this headline">¶</a></h1>
+<p id="sec-bindpaths">If <a class="reference external" href="https://singularity-admindoc.readthedocs.io/en/latest/the_singularity_config_file.html#user-bind-control-boolean-default-yes">enabled by the system administrator</a>,
+Singularity allows you to map directories on your host system to directories
+within your container using bind mounts. This allows you to read and write data
+on the host system with ease.</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>When Singularity ‘swaps’ the host operating system for the one inside your
+container, the host file systems becomes inaccessible. But you may want to read
+and write files on the host system from within the container. To enable this
+functionality, Singularity will bind directories back into the container via two
+primary methods: system-defined bind paths and user-defined bind paths.</p>
+</div>
+<div class="section" id="system-defined-bind-paths">
+<h2>System-defined bind paths<a class="headerlink" href="#system-defined-bind-paths" title="Permalink to this headline">¶</a></h2>
+<p>The system administrator has the ability to define what bind paths will be
+included automatically inside each container. Some bind paths are automatically
+derived (e.g. a user’s home directory) and some are statically defined (e.g.
+bind paths in the Singularity configuration file). In the default
+configuration, the system default bind points are <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> , <code class="docutils literal notranslate"><span class="pre">/sys:/sys</span></code> ,
+<code class="docutils literal notranslate"><span class="pre">/proc:/proc</span></code>, <code class="docutils literal notranslate"><span class="pre">/tmp:/tmp</span></code>, <code class="docutils literal notranslate"><span class="pre">/var/tmp:/var/tmp</span></code>, <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf:/etc/resolv.conf</span></code>,
+<code class="docutils literal notranslate"><span class="pre">/etc/passwd:/etc/passwd</span></code>, and <code class="docutils literal notranslate"><span class="pre">$PWD</span></code>. Where the first path before <code class="docutils literal notranslate"><span class="pre">:</span></code>
+is the path from the host and the second path is the path in the container.</p>
+<div class="section" id="disabling-system-binds">
+<h3>Disabling System Binds<a class="headerlink" href="#disabling-system-binds" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">--no-mount</span></code> flag, added in Singularity 3.7, allows specific
+system mounts to be disabled, even if they are set in the
+<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> configuration file by the administrator.</p>
+<p>For example, if Singularity has been configured with <code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">hostfs</span> <span class="pre">=</span>
+<span class="pre">yes</span></code> then every filesystem on the host will be bind mounted to the
+container by default. If, e.g. a <code class="docutils literal notranslate"><span class="pre">/project</span></code> filesystem on your host
+conflicts with a <code class="docutils literal notranslate"><span class="pre">/project</span></code> directory in the container you are
+running, you can disable the <code class="docutils literal notranslate"><span class="pre">hostfs</span></code> binds:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>singularity run --no-mount hostfs mycontainer.sif
+</pre></div>
+</div>
+<p>Multiple mounts can be disabled by specifying them separated by
+commas:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>singularity run --no-mount tmp,sys,dev mycontainer.sif
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="user-defined-bind-paths">
+<span id="id2"></span><h2>User-defined bind paths<a class="headerlink" href="#user-defined-bind-paths" title="Permalink to this headline">¶</a></h2>
+<p>If the system administrator has <a class="reference external" href="https://singularity-admindoc.readthedocs.io/en/latest/the_singularity_config_file.html#user-bind-control-boolean-default-yes">enabled user control of binds</a>,
+you will be able to request your own bind paths within your container.</p>
+<p>The Singularity action commands (<code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code>, <code class="docutils literal notranslate"><span class="pre">shell</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code>) will accept the <code class="docutils literal notranslate"><span class="pre">--bind/-B</span></code> command-line option to specify
+bind paths, and will also honor the <code class="docutils literal notranslate"><span class="pre">$SINGULARITY_BIND</span></code> (or
+<code class="docutils literal notranslate"><span class="pre">$SINGULARITY_BINDPATH</span></code>) environment variable. The argument for this option is
+a comma-delimited string of bind path specifications in the format
+<code class="docutils literal notranslate"><span class="pre">src[:dest[:opts]]</span></code>, where <code class="docutils literal notranslate"><span class="pre">src</span></code> and <code class="docutils literal notranslate"><span class="pre">dest</span></code> are paths outside and inside
+of the container respectively. If <code class="docutils literal notranslate"><span class="pre">dest</span></code> is not given, it is set equal to
+<code class="docutils literal notranslate"><span class="pre">src</span></code>. Mount options (<code class="docutils literal notranslate"><span class="pre">opts</span></code>) may be specified as <code class="docutils literal notranslate"><span class="pre">ro</span></code> (read-only) or
+<code class="docutils literal notranslate"><span class="pre">rw</span></code> (read/write, which is the default). The <code class="docutils literal notranslate"><span class="pre">--bind/-B</span></code> option can be
+specified multiple times, or a comma-delimited string of bind path
+specifications can be used.</p>
+<div class="section" id="specifying-bind-paths">
+<h3>Specifying bind paths<a class="headerlink" href="#specifying-bind-paths" title="Permalink to this headline">¶</a></h3>
+<p>Here’s an example of using the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option and binding <code class="docutils literal notranslate"><span class="pre">/data</span></code> on the
+host to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> in the container (<code class="docutils literal notranslate"><span class="pre">/mnt</span></code> does not need to already exist in
+the container):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ls /data
+bar  foo
+
+$ singularity exec --bind /data:/mnt my_container.sif ls /mnt
+bar  foo
+</pre></div>
+</div>
+<p>You can bind multiple directories in a single command with this syntax:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity shell --bind /opt,/data:/mnt my_container.sif
+</pre></div>
+</div>
+<p>This will bind <code class="docutils literal notranslate"><span class="pre">/opt</span></code> on the host to <code class="docutils literal notranslate"><span class="pre">/opt</span></code> in the container and <code class="docutils literal notranslate"><span class="pre">/data</span></code>
+on the host to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> in the container.</p>
+<p>Using the environment variable instead of the command line argument, this would
+be:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export SINGULARITY_BIND=&quot;/opt,/data:/mnt&quot;
+
+$ singularity shell my_container.sif
+</pre></div>
+</div>
+<p>Using the environment variable <code class="docutils literal notranslate"><span class="pre">$SINGULARITY_BIND</span></code>, you can bind paths even
+when you are running your container as an executable file with a runscript. If
+you bind many directories into your Singularity containers and they don’t
+change, you could even benefit by setting this variable in your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>
+file.</p>
+</div>
+<div class="section" id="a-note-on-using-bind-with-the-writable-flag">
+<h3>A note on using <code class="docutils literal notranslate"><span class="pre">--bind</span></code> with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag<a class="headerlink" href="#a-note-on-using-bind-with-the-writable-flag" title="Permalink to this headline">¶</a></h3>
+<p>To mount a bind path inside the container, a <em>bind point</em> must be defined
+within the container. The bind point is a directory within the container that
+Singularity can use as a destination to bind a directory on the host system.</p>
+<p>Starting in version 3.0, Singularity will do its best to bind mount requested
+paths into a container regardless of whether the appropriate bind point exists
+within the container.  Singularity can often carry out this operation even in
+the absence of the “overlay fs” feature.</p>
+<p>However, binding paths to non-existent points within the container can result in
+unexpected behavior when used in conjuction with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag, and is
+therefore disallowed. If you need to specify bind paths in combination with the
+<code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag, please ensure that the appropriate bind points exist within
+the container. If they do not already exist, it will be necessary to modify the
+container and create them.</p>
+</div>
+<div class="section" id="using-no-home-and-containall-flags">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> and <code class="docutils literal notranslate"><span class="pre">--containall</span></code> flags<a class="headerlink" href="#using-no-home-and-containall-flags" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="no-home">
+<h4><code class="docutils literal notranslate"><span class="pre">--no-home</span></code><a class="headerlink" href="#no-home" title="Permalink to this headline">¶</a></h4>
+<p>When shelling into your container image, Singularity allows you to mount your current working directory (<code class="docutils literal notranslate"><span class="pre">CWD</span></code>)
+without mounting your host <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory with the <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> flag.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity shell --no-home my_container.sif
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Beware that if it is the case that your <code class="docutils literal notranslate"><span class="pre">CWD</span></code> is your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory, it will still mount your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory.</p>
+</div>
+</div>
+<div class="section" id="containall">
+<h4><code class="docutils literal notranslate"><span class="pre">--containall</span></code><a class="headerlink" href="#containall" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><p>Using the <code class="docutils literal notranslate"><span class="pre">--containall</span></code> (or <code class="docutils literal notranslate"><span class="pre">-C</span></code> for short) flag, <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> is not  mounted and a dummy bind mount is created at the <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> point.
+You cannot use <code class="docutils literal notranslate"><span class="pre">-B`</span></code> (or <code class="docutils literal notranslate"><span class="pre">--bind</span></code>) to bind your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory because it creates an empty mount. So if you have files located in
+the image at <code class="docutils literal notranslate"><span class="pre">/home/user</span></code>, the <code class="docutils literal notranslate"><span class="pre">--containall</span></code> flag will hide them all.</p>
+</div></blockquote>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity shell --containall my_container.sif
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="fuse-mounts">
+<h2>FUSE mounts<a class="headerlink" href="#fuse-mounts" title="Permalink to this headline">¶</a></h2>
+<p>Filesystem in Userspace (FUSE) is an interface to allow filesystems to
+be mounted using code that runs in userspace, rather than in the Linux
+Kernel. Unprivileged (non-root) users can mount filesystems that have
+FUSE drivers. For example, the <code class="docutils literal notranslate"><span class="pre">fuse-sshfs</span></code> package allows you to
+mount a remote computer’s filesystem to your local host, over ssh:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ mount.fuse sshfs#ythel:/home/dave other_host/
+
+# Now mounted to my local machine:
+$ ythel:/home/dave on /home/dave/other_host type fuse.sshfs (rw,nosuid,nodev,relatime,user_id=1000,group_id=1000)
+</pre></div>
+</div>
+<p>Singularity 3.6 introduces the <code class="docutils literal notranslate"><span class="pre">--fusemount</span></code> option, which allows
+you directly expose FUSE filesystems inside a container. The FUSE
+command / driver that mounts a particular type of filesystem can be
+located on the host, or in the container.</p>
+<p>The FUSE command <em>must</em> be based on libfuse3 to work correctly with
+Singularity <code class="docutils literal notranslate"><span class="pre">--fusemount</span></code>. If you are using an older distribution
+that provides FUSE commands such as <code class="docutils literal notranslate"><span class="pre">sshfs</span></code> based on FUSE 2 then you
+can install FUSE 3 versions of the commands you need inside your
+container.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">--fusemount</span></code> functionality was present in a hidden preview state
+from Singularity 3.4. The behavior has changed for the final
+supported version introduced in Singularity 3.6.</p>
+</div>
+<div class="section" id="fuse-mount-definitions">
+<h3>FUSE mount definitions<a class="headerlink" href="#fuse-mount-definitions" title="Permalink to this headline">¶</a></h3>
+<p>A fusemount definition for Singularity consists of 3 parts:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--fusemount &lt;type&gt;:&lt;fuse command&gt; &lt;container mountpoint&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>type</strong> specifies how and where the FUSE mount will be run. The options are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">container</span></code> - use a FUSE command on the host, to mount a
+filesystem into the container, with the fuse process attached.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">host</span></code> - use a FUSE command inside the container, to mount a
+filesystem into the container, with the fuse process attached.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">container-daemon</span></code> - use a FUSE command on the host, to mount a
+filesystem into the container, with the fuse process detached.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">host-daemon</span></code> - use a FUSE command inside the container, to
+mount a filesystem into the container, with the fuse process
+detached.</p></li>
+</ul>
+</li>
+<li><p><strong>fuse command</strong> specifies the name of the executable that
+implements the FUSE mount, and any arguments. E.g. <code class="docutils literal notranslate"><span class="pre">sshfs</span>
+<span class="pre">server:over-there/</span></code> for mounting a remote filesystem over SSH,
+where the remote source is <code class="docutils literal notranslate"><span class="pre">over-there/</span></code> in my home directory on
+the machine called <code class="docutils literal notranslate"><span class="pre">server</span></code>.</p></li>
+<li><p><strong>container mountpoint</strong> is an <em>absolute path</em> at which the FUSE
+filesystem will be mounted in the container.</p></li>
+</ul>
+</div>
+<div class="section" id="fuse-mount-with-a-host-executable">
+<h3>FUSE mount with a host executable<a class="headerlink" href="#fuse-mount-with-a-host-executable" title="Permalink to this headline">¶</a></h3>
+<p>To use a FUSE <code class="docutils literal notranslate"><span class="pre">sshfs</span></code> mount in a container, where the <code class="docutils literal notranslate"><span class="pre">fuse-sshfs</span></code> package has
+been installed on my host, I run with the <code class="docutils literal notranslate"><span class="pre">host</span></code> mount type:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run --fusemount &quot;host:sshfs server:/ /server&quot; docker://ubuntu
+Singularity&gt; cat /etc/hostname
+localhost.localdomain
+Singularity&gt; cat /server/etc/hostname
+server
+</pre></div>
+</div>
+</div>
+<div class="section" id="fuse-mount-with-a-container-executable">
+<h3>FUSE mount with a container executable<a class="headerlink" href="#fuse-mount-with-a-container-executable" title="Permalink to this headline">¶</a></h3>
+<p>If the FUSE driver / command that you want to use for the mount has
+been added to your container, you can use the <code class="docutils literal notranslate"><span class="pre">container</span></code> mount
+type:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity run --fusemount &quot;container:sshfs server:/ /server&quot; sshfs.sif
+Singularity&gt; cat /etc/hostname
+localhost.localdomain
+Singularity&gt; cat /server/etc/hostname
+server
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="image-mounts">
+<h2>Image Mounts<a class="headerlink" href="#image-mounts" title="Permalink to this headline">¶</a></h2>
+<p>In Singularity 3.6 and above you can mount a directory contained in an
+image file into a container. This may be useful if you want to
+distribute directories containing a large number of data files as a
+single image file.</p>
+<p>You can mount from image files in ext3 format, squashfs format, or SIF
+format.</p>
+<p>The ext3 image file format allows you to mount it into the container
+read/write and make changes, while the other formats are
+read-only. Note that you can only use a read/write image in a single
+container. You cannot mount it to multiple container runs at the same
+time.</p>
+<p>To mount a directory from an image file, use the <code class="docutils literal notranslate"><span class="pre">-B/--bind</span></code> option
+and specify the bind in the format:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>-B &lt;image-file&gt;:&lt;dest&gt;:image-src=&lt;source&gt;
+</pre></div>
+</div>
+<p>This will bind the <code class="docutils literal notranslate"><span class="pre">&lt;source&gt;</span></code> inside <code class="docutils literal notranslate"><span class="pre">&lt;image-file&gt;</span></code> to <code class="docutils literal notranslate"><span class="pre">&lt;dest&gt;</span></code>
+in the container.</p>
+<p>If you do not add <code class="docutils literal notranslate"><span class="pre">:image-src=&lt;source&gt;</span></code> to your bind specification,
+then the <code class="docutils literal notranslate"><span class="pre">&lt;image-file&gt;</span></code> itself will be bound to <code class="docutils literal notranslate"><span class="pre">&lt;dest&gt;</span></code> instead.</p>
+<div class="section" id="ext3-image-files">
+<h3>Ext3 Image Files<a class="headerlink" href="#ext3-image-files" title="Permalink to this headline">¶</a></h3>
+<p>If you have a directory called <code class="docutils literal notranslate"><span class="pre">inputs/</span></code> that holds data files you wish
+to distribute in an image file that allows read/write:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an image file &#39;inputs.img&#39; of size 100MB and put the</span>
+<span class="c1"># files inputs/ into it&#39;s root directory</span>
+$ mkfs.ext3 -d inputs/ inputs.img 100M
+mke2fs <span class="m">1</span>.45.6 <span class="o">(</span><span class="m">20</span>-Mar-2020<span class="o">)</span>
+Creating regular file inputs.img
+Creating filesystem with <span class="m">102400</span> 1k blocks and <span class="m">25688</span> inodes
+Filesystem UUID: e23c29c9-7a49-4b82-89bf-2faf36b5a781
+Superblock backups stored on blocks:
+    <span class="m">8193</span>, <span class="m">24577</span>, <span class="m">40961</span>, <span class="m">57345</span>, <span class="m">73729</span>
+
+Allocating group tables: <span class="k">done</span>
+Writing inode tables: <span class="k">done</span>
+Creating journal <span class="o">(</span><span class="m">4096</span> blocks<span class="o">)</span>: <span class="k">done</span>
+Copying files into the device: <span class="k">done</span>
+Writing superblocks and filesystem accounting information: <span class="k">done</span>
+
+<span class="c1"># Run Singularity, mounting my input data to &#39;/input-data&#39; in</span>
+<span class="c1"># the container.</span>
+$ singularity run -B inputs.img:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
+Singularity&gt; ls /input-data
+<span class="m">1</span>           <span class="m">3</span>           <span class="m">5</span>           <span class="m">7</span>           <span class="m">9</span>
+<span class="m">2</span>           <span class="m">4</span>           <span class="m">6</span>           <span class="m">8</span>           lost+found
+</pre></div>
+</div>
+</div>
+<div class="section" id="squashfs-image-files">
+<h3>SquashFS Image Files<a class="headerlink" href="#squashfs-image-files" title="Permalink to this headline">¶</a></h3>
+<p>If you have a directory called <code class="docutils literal notranslate"><span class="pre">inputs/</span></code> that holds data files you wish
+to distribute in an image file that is read-only, and compressed, then
+the squashfs format is appropriate:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an image file &#39;inputs.squashfs&#39; and put the files from</span>
+<span class="c1"># inputs/ into it&#39;s root directory</span>
+$ mksquashfs inputs/ inputs.squashfs
+Parallel mksquashfs: Using <span class="m">16</span> processors
+Creating <span class="m">4</span>.0 filesystem on inputs.squashfs, block size <span class="m">131072</span>.
+...
+
+<span class="c1"># Run Singularity, mounting my input data to &#39;/input-data&#39; in</span>
+<span class="c1"># the container.</span>
+$ singularity run -B inputs.squashfs:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
+Singularity&gt; ls /input-data/
+<span class="m">1</span>  <span class="m">2</span>  <span class="m">3</span>  <span class="m">4</span>  <span class="m">5</span>  <span class="m">6</span>  <span class="m">7</span>  <span class="m">8</span>  <span class="m">9</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sif-image-files">
+<h3>SIF Image Files<a class="headerlink" href="#sif-image-files" title="Permalink to this headline">¶</a></h3>
+<p>Advanced users may wish to create a standalone SIF image, which contains
+an <code class="docutils literal notranslate"><span class="pre">ext3</span></code> or <code class="docutils literal notranslate"><span class="pre">squashfs</span></code> data partition holding files, by using the
+<code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">sif</span></code> commands similarly to the <a class="reference internal" href="persistent_overlays.html#overlay-sif"><span class="std std-ref">persistent
+overlays instructions</span></a>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Create a new empty SIF file
+<span class="gp">$ </span>singularity sif new inputs.sif
+
+<span class="gp"># </span>Add the squashfs data image from above to the SIF
+<span class="gp">$ </span>singularity sif add --datatype <span class="m">4</span> --partarch <span class="m">2</span> --partfs <span class="m">1</span> --parttype <span class="m">3</span> inputs.sif inputs.squashfs
+
+<span class="gp"># </span>Run Singularity, binding data from the SIF file
+<span class="gp">$ </span>singularity run -B inputs.sif:/input-data:image-src<span class="o">=</span>/ mycontainer.sif
+<span class="go">Singularity&gt; ls /input-data</span>
+<span class="go">1  2  3  4  5  6  7  8  9</span>
+</pre></div>
+</div>
+<p>If your bind source is a SIF then Singularity will bind from
+the first data partition in the SIF, or you may specify an
+alternative descriptor by ID with the additional bind option
+<code class="docutils literal notranslate"><span class="pre">:id=n</span></code>, where n is the descriptor ID.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="persistent_overlays.html" class="btn btn-neutral float-right" title="Persistent Overlays" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cloud_library.html" class="btn btn-neutral float-left" title="Cloud Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017-2020, Sylabs Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

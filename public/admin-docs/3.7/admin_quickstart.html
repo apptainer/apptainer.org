@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Admin Quick Start &mdash; Singularity Admin Guide 3.7 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installing Singularity" href="installation.html" />
+    <link rel="prev" title="Admin Guide" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Singularity Admin Guide
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Admin Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#architecture-of-singularity">Architecture of Singularity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#singularity-security">Singularity Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-from-source">Installation from Source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-dependencies">Install Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-go">Install Go</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-singularity-from-a-github-release">Download Singularity from a GitHub release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compile-install-singularity">Compile &amp; Install Singularity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-singularity">Test Singularity</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configfiles.html">Configuration files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_namespace.html">User Namespaces &amp; Fakeroot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Container Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Singularity Admin Guide</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Admin Quick Start</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/hpcng/singularity-admindocs/blob/master/admin_quickstart.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="admin-quick-start">
+<h1>Admin Quick Start<a class="headerlink" href="#admin-quick-start" title="Permalink to this headline">¶</a></h1>
+<p>This quick start gives an overview of installation of Singularity from
+source, a description of the architecture of Singularity, and
+pointers to configuration files. More information, including alternate
+installation options and detailed configuration options can be found
+later in this guide.</p>
+<div class="section" id="architecture-of-singularity">
+<span id="singularity-architecture"></span><h2>Architecture of Singularity<a class="headerlink" href="#architecture-of-singularity" title="Permalink to this headline">¶</a></h2>
+<p>Singularity is designed to allow containers to be executed as if they
+were native programs or scripts on a host system. No daemon is
+required to build or run containers, and the security model is compatible
+with shared systems.</p>
+<p>As a result, integration with clusters and schedulers such as Univa
+Grid Engine, Torque, SLURM, SGE, and many others is as simple as
+running any other command. All standard input, output, errors, pipes,
+IPC, and other communication pathways used by locally running programs
+are synchronized with the applications running locally within the
+container.</p>
+<p>Singularity favors an ‘integration over isolation’ approach to
+containers. By default only the mount namespace is isolated for
+containers, so that they have their own filesystem view. Access to
+hardware such as GPUs, high speed networks, and shared filesystems is
+easy and does not require special configuration. User home
+directories, <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> space, and installation specific mounts make it
+simple for users to benefit from the reproducibility of containerized
+applications without major changs to their existing workflows. Where
+more complete isolation is important, Singularity can use additional
+Linux namespaces and other security and resource limits to accomplish
+this.</p>
+</div>
+<div class="section" id="singularity-security">
+<span id="id1"></span><h2>Singularity Security<a class="headerlink" href="#singularity-security" title="Permalink to this headline">¶</a></h2>
+<p>Singularity uses a number of strategies to provide safety and
+ease-of-use on both single-user and shared systems. Notable security
+features include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The user inside a container is the same as the user who ran the
+container. This means access to files and devices from the
+container is easily controlled with standard POSIX permissions.</p></li>
+<li><p>Container filesystems are mounted <code class="docutils literal notranslate"><span class="pre">nosuid</span></code> and container
+applications run with the <code class="docutils literal notranslate"><span class="pre">PR_NO_NEW_PRIVS</span></code> flag set. This means
+that applications in a container cannot gain additional
+privileges. A regular user cannot <code class="docutils literal notranslate"><span class="pre">sudo</span></code> or otherwise gain root
+privilege on the host via a container.</p></li>
+<li><p>The Singularity Image Format (SIF) supports encryption of containers,
+as well as cryptographic signing and verification of their content.</p></li>
+<li><p>SIF containers are immutable and their payload is run directly,
+without extraction to disk. This means that the container can
+always be verified, even at runtime, and encrypted content is not
+exposed on disk.</p></li>
+<li><p>Restrictions can be configured to limit the ownership, location, and
+cryptographic signatures of containers that are permitted to be run.</p></li>
+</ul>
+</div></blockquote>
+<p>To support the SIF image format, automated networking setup etc., and
+older Linux distributions without user namespace support, Singularity
+runs small amounts of privileged container setup code via a
+<code class="docutils literal notranslate"><span class="pre">starter-setuid</span></code> binary. This is a ‘setuid root’ binary, so that
+Singularity can perform filesystem loop mounts and other operations
+that need privilege. The setuid flow is the default mode of operation,
+but <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">can be disabled</span></a> on build, or in the
+<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> configuration file if required.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Running Singularity in non-setuid mode requires unprivileged user
+namespace support in the operating system kernel and does not
+support all features, most notably direct mounts of SIF
+images. This impacts integrity/security guarantees of containers at
+runtime.</p>
+<p>See the <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">non-setuid installation section</span></a> for further
+detail on how to install singularity to run in non-setuid mode.</p>
+</div>
+</div>
+<div class="section" id="installation-from-source">
+<h2>Installation from Source<a class="headerlink" href="#installation-from-source" title="Permalink to this headline">¶</a></h2>
+<p>Singularity Community Edition can be installed from source directly,
+or by building an RPM package from the source. Various Linux
+distributions also package Singularity, but their packages may not be
+up-to-date with the upstream version on GitHub.</p>
+<p>To install Singularity directly from source, follow the procedure
+below. Other methods are discussed in the <a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installation</span></a> section.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This quick-start that you will install as <code class="docutils literal notranslate"><span class="pre">root</span></code> using
+<code class="docutils literal notranslate"><span class="pre">sudo</span></code>, so that Singularity uses the default <code class="docutils literal notranslate"><span class="pre">setuid</span></code>
+workflow, and all features are available. See the <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">non-setuid
+installation</span></a> section of this guide for detail
+of how to install as a non-root user, and how this affects the
+functionality of Singularity.</p>
+</div>
+<div class="section" id="install-dependencies">
+<h3>Install Dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>On Red Hat Enterprise Linux or CentOS install the following dependencies:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo yum update -y <span class="o">&amp;&amp;</span> <span class="se">\</span>
+     sudo yum groupinstall -y <span class="s1">&#39;Development Tools&#39;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+     sudo yum install -y <span class="se">\</span>
+     openssl-devel <span class="se">\</span>
+     libuuid-devel <span class="se">\</span>
+     libseccomp-devel <span class="se">\</span>
+     wget <span class="se">\</span>
+     squashfs-tools <span class="se">\</span>
+     cryptsetup
+</pre></div>
+</div>
+<p>On Ubuntu or Debian install the following dependencies:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install -y <span class="se">\</span>
+    build-essential <span class="se">\</span>
+    uuid-dev <span class="se">\</span>
+    libgpgme-dev <span class="se">\</span>
+    squashfs-tools <span class="se">\</span>
+    libseccomp-dev <span class="se">\</span>
+    wget <span class="se">\</span>
+    pkg-config <span class="se">\</span>
+    git <span class="se">\</span>
+    cryptsetup-bin
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-go">
+<h3>Install Go<a class="headerlink" href="#install-go" title="Permalink to this headline">¶</a></h3>
+<p>Singularity v3 is written primarily in Go, and you will need Go 1.13
+or above installed to compile it from source. Versions of Go packaged
+by your distribution may not be new enough to build Singularity.</p>
+<p>The method below is one of several ways to <a class="reference external" href="https://golang.org/doc/install">install and configure Go</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have previously installed Go from a download, rather than an
+operating system package, you should remove your <code class="docutils literal notranslate"><span class="pre">go</span></code> directory,
+e.g. <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">/usr/local/go</span></code> before installing a newer
+version. Extracting a new version of Go over an existing
+installation can lead to errors when building Go programs, as it
+may leave old files, which have been removed or replaced in newer
+versions.</p>
+</div>
+<p>Visit the <a class="reference external" href="https://golang.org/dl/">Go download page</a> and pick a package
+archive to download. Copy the link address and download with wget.  Then extract
+the archive to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> (or use other instructions on go installation
+page).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.14.12 OS=linux ARCH=amd64 &amp;&amp; \
+    wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \
+    sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \
+    rm go$VERSION.$OS-$ARCH.tar.gz
+</pre></div>
+</div>
+<p>Then, set up your environment for Go.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ echo &#39;export GOPATH=${HOME}/go&#39; &gt;&gt; ~/.bashrc &amp;&amp; \
+    echo &#39;export PATH=/usr/local/go/bin:${PATH}:${GOPATH}/bin&#39; &gt;&gt; ~/.bashrc &amp;&amp; \
+    source ~/.bashrc
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-singularity-from-a-github-release">
+<h3>Download Singularity from a GitHub release<a class="headerlink" href="#download-singularity-from-a-github-release" title="Permalink to this headline">¶</a></h3>
+<p>You can download Singularity from one of the releases. To see a full list, visit
+<a class="reference external" href="https://github.com/hpcng/singularity/releases">the GitHub release page</a>.
+After deciding on a release to install, you can run the following commands to
+proceed with the installation.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=3.7.0 &amp;&amp; # adjust this as necessary \
+    wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &amp;&amp; \
+    tar -xzf singularity-${VERSION}.tar.gz &amp;&amp; \
+    cd singularity
+</pre></div>
+</div>
+</div>
+<div class="section" id="compile-install-singularity">
+<h3>Compile &amp; Install Singularity<a class="headerlink" href="#compile-install-singularity" title="Permalink to this headline">¶</a></h3>
+<p>Singularity uses a custom build system called <code class="docutils literal notranslate"><span class="pre">makeit</span></code>.  <code class="docutils literal notranslate"><span class="pre">mconfig</span></code> is called
+to generate a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> and then <code class="docutils literal notranslate"><span class="pre">make</span></code> is used to compile and install.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./mconfig &amp;&amp; \
+    make -C ./builddir &amp;&amp; \
+    sudo make -C ./builddir install
+</pre></div>
+</div>
+<p>By default Singularity will be installed in the <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> directory
+hierarchy. You can specify a custom directory with the <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> option, to
+<code class="docutils literal notranslate"><span class="pre">mconfig</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./mconfig --prefix=/opt/singularity
+</pre></div>
+</div>
+<p>This option can be useful if you want to install multiple versions of
+Singularity, install a personal version of Singularity on a shared system, or if
+you want to remove Singularity easily after installing it.</p>
+<p>For a full list of <code class="docutils literal notranslate"><span class="pre">mconfig</span></code> options, run <code class="docutils literal notranslate"><span class="pre">mconfig</span> <span class="pre">--help</span></code>.  Here
+are some of the most common options that you may need to use when
+building Singularity from source.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--sysconfdir</span></code>: Install read-only config files in sysconfdir.
+This option is important if you need the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> file
+or other configuration files in a custom location.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code>: Set the state directory where containers are
+mounted. This is a particularly important option for administrators
+installing Singularity on a shared file system.  The
+<code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> should be set to a directory that is present on
+each individual node.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-b</span></code>: Build Singularity in a given directory. By default this is
+<code class="docutils literal notranslate"><span class="pre">./builddir</span></code>.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Singularity is configured using files under <code class="docutils literal notranslate"><span class="pre">etc/singularity</span></code> in
+your <code class="docutils literal notranslate"><span class="pre">--prefix</span></code>, or <code class="docutils literal notranslate"><span class="pre">--syconfdir</span></code> if you used that option with
+<code class="docutils literal notranslate"><span class="pre">mconfig</span></code>. In a default installation from source without a
+<code class="docutils literal notranslate"><span class="pre">--prefix</span></code> set you will find them under
+<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity</span></code>.</p>
+<p>You can edit these files directly, or using the <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">config</span>
+<span class="pre">global</span></code> command as the root user to manage them.</p>
+<p><code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> contains the majority of options controlling the
+runtime behaviour of Singularity. Additional files control security,
+network, and resource configuration. Head over to the
+<a class="reference internal" href="configfiles.html#singularity-configfiles"><span class="std std-ref">Configuration files</span></a> section where the
+files and configuration options are discussed.</p>
+</div>
+<div class="section" id="test-singularity">
+<h2>Test Singularity<a class="headerlink" href="#test-singularity" title="Permalink to this headline">¶</a></h2>
+<p>You can run a quick test of Singularity using a container in the
+Sylabs Container Library:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity exec library://alpine cat /etc/alpine-release
+3.9.2
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="https://www.sylabs.io/guides/3.7/user-guide/">user guide</a> for more
+information about how to use Singularity.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installing Singularity" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Admin Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017-2020, Sylabs Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

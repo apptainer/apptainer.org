@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Admin Quick Start &mdash; Singularity container 3.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Singularity Configuration Files" href="configfiles.html" />
+    <link rel="prev" title="Admin Guide" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Singularity container
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Admin Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-dependencies">Install Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-and-build-the-rpm">Download and Build the RPM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-localstatedir">Setting <code class="docutils literal notranslate"><span class="pre">localstatedir</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#singularity-architecture">Singularity Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#singularity-security">Singularity Security</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#security-of-the-container-runtime">Security of the Container Runtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security-of-the-container-itself">Security of the Container Itself</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#administrator-control-of-users-containers">Administrator Control of Users’ Containers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#updating-singularity">Updating Singularity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uninstalling-singularity">Uninstalling Singularity</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configfiles.html">Configuration files</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Singularity container</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Admin Quick Start</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/sylabs/singularity-admindocs/blob/master/admin_quickstart.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="admin-quick-start">
+<h1>Admin Quick Start<a class="headerlink" href="#admin-quick-start" title="Permalink to this headline">¶</a></h1>
+<p>This document will cover installation and administration points of Singularity
+on a Linux host. This will also cover an overview of <a class="reference internal" href="#configuring-overview"><span class="std std-ref">configuring
+Singularity</span></a>, <a class="reference internal" href="#singularity-architecture"><span class="std std-ref">Singularity architecture</span></a>, and <a class="reference internal" href="#singularity-security"><span class="std std-ref">the Singularity security model</span></a>.</p>
+<p>For any additional help or support contact the
+<a class="reference external" href="https://www.sylabs.io/contact/">Sylabs team</a>, or send a email to
+<a class="reference external" href="mailto:support&#37;&#52;&#48;sylabs&#46;io">support<span>&#64;</span>sylabs<span>&#46;</span>io</a>.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>This section will explain how to install Singularity from an RPM. If you want
+more information on installation, including alternate installation procedures
+and options for other operating systems, see the <a class="reference external" href="https://www.sylabs.io/guides/3.0/user-guide/installation.html">user guide instalation page</a>.</p>
+<div class="section" id="install-dependencies">
+<h3>Install Dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>Before we build the RPM, we need to install some dependencies:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo yum -y update &amp;&amp; sudo yum -y install \
+    wget \
+    rpm-build \
+    git \
+    gcc \
+    libuuid-devel \
+    openssl-devel \
+    libseccomp-devel \
+    squashfs-tools
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-and-build-the-rpm">
+<h3>Download and Build the RPM<a class="headerlink" href="#download-and-build-the-rpm" title="Permalink to this headline">¶</a></h3>
+<p>The Singularity tarball for building the RPM is available on <a class="reference external" href="https://github.com/sylabs/singularity/releases">the Github release
+page</a>.</p>
+<p>Go and all other build dependencies will be downloaded automatically just to
+build the RPM, and will then be automatically removed.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=3.0.2  # this is the singularity version, change as you need
+
+$ wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &amp;&amp; \
+    rpmbuild -tb singularity-${VERSION}.tar.gz &amp;&amp; \
+    sudo rpm --install -vh ~/rpmbuild/RPMS/x86_64/singularity-${VERSION}-1.el7.x86_64.rpm &amp;&amp; \
+    rm -rf ~/rpmbuild singularity-${VERSION}*.tar.gz
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-localstatedir">
+<h3>Setting <code class="docutils literal notranslate"><span class="pre">localstatedir</span></code><a class="headerlink" href="#setting-localstatedir" title="Permalink to this headline">¶</a></h3>
+<p>The local state directories used by <code class="docutils literal notranslate"><span class="pre">singularity</span></code> at runtime will be placed
+under the supplied <code class="docutils literal notranslate"><span class="pre">prefix</span></code> option. This will cause issues if that directory
+tree is read-only or if it is shared between several hosts or nodes that might
+run <code class="docutils literal notranslate"><span class="pre">singularity</span></code> simultaneously.</p>
+<p>In such cases, you should specify the <code class="docutils literal notranslate"><span class="pre">localstatedir</span></code> option. This will
+override the <code class="docutils literal notranslate"><span class="pre">prefix</span></code> option, instead placing the local state directories
+within the path explicitly provided. Ideally this should be within the local
+filesystem, specific to only a single host or node.</p>
+<p>In the case of a cluster, admins must ensure that the <code class="docutils literal notranslate"><span class="pre">localstatedir</span></code> exists
+on all nodes with <code class="docutils literal notranslate"><span class="pre">root:root</span></code> ownership and <code class="docutils literal notranslate"><span class="pre">0755</span></code> permissions</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>rpmbuild -tb --define=&#39;_localstatedir /mnt&#39; singularity-${VERSION}.tar.gz
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="configuration">
+<span id="configuring-overview"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>There are several ways to configuring Singularity. Head over to the
+<a class="reference internal" href="configfiles.html#singularity-configfiles"><span class="std std-ref">Configuration files</span></a> section where most of the
+conf files and setting of configuration options are discussed.</p>
+</div>
+<div class="section" id="singularity-architecture">
+<span id="id1"></span><h2>Singularity Architecture<a class="headerlink" href="#singularity-architecture" title="Permalink to this headline">¶</a></h2>
+<p>The architecture of Singularity allows containers to be executed as if they were
+native programs or scripts on a host system.</p>
+<p>As a result, integration with schedulers such as Univa Grid Engine, Torque,
+SLURM, SGE, and many others is as simple as running any other command. All
+standard input, output, errors, pipes, IPC, and other communication pathways
+used by locally running programs are synchronized with the applications running
+locally within the container.</p>
+</div>
+<div class="section" id="singularity-security">
+<span id="id2"></span><h2>Singularity Security<a class="headerlink" href="#singularity-security" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="security-of-the-container-runtime">
+<h3>Security of the Container Runtime<a class="headerlink" href="#security-of-the-container-runtime" title="Permalink to this headline">¶</a></h3>
+<p>The Singularity security model is unique among container platforms. The bottom
+line? <strong>Untrusted users</strong> (those who don’t have root access and aren’t getting
+it) can run <strong>untrusted containers</strong> (those that have not been vetted by admins)
+<strong>safely</strong>. There are a few pieces of the model to consider.</p>
+<p>First, Singularity’s design forces a user to have the same UID and GID context
+inside and outside of the container. This is accomplished by dynamically writing
+entries to <code class="docutils literal notranslate"><span class="pre">/etc/passwd</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/groups</span></code> at runtime. This design makes it
+trivially easy for a user inside the container to safely read and write data to
+the host system with correct ownership, and it’s also a cornerstone of the
+Singularity security context.</p>
+<p>Second, Singularity mounts the container file system with the <code class="docutils literal notranslate"><span class="pre">nosuid</span></code> flag
+and executes processes within the container with the <code class="docutils literal notranslate"><span class="pre">PR_SET_NO_NEW_PRIVS</span></code>
+bit set. Combined with the fact that the user is the same inside and outside of
+the container, this prevents a user from escalating privileges.</p>
+<p>Taken together, this design means your users can run whatever containers they
+want, and you don’t have to worry about them damaging your precious system.</p>
+</div>
+<div class="section" id="security-of-the-container-itself">
+<h3>Security of the Container Itself<a class="headerlink" href="#security-of-the-container-itself" title="Permalink to this headline">¶</a></h3>
+<p>A malicious container may not be able to damage your system, but it could still
+do harm in the user’s space without escalating privileges.</p>
+<p>Starting in Singularity 3.0, containers may be cryptographically signed when
+they are built and verified at runtime via PGP keys. This allows a user to
+ensure that a container is a bit-for-bit reproduction of the container produced
+by the original author before they run it. As long as the user trusts the
+individual or company that created the container, they can run the container
+without worrying.</p>
+<p>Key signing and verification is made easy using the <a class="reference external" href="https://cloud.sylabs.io/keystore">Sylabs Keystore
+infrastructure</a>. Join the party! And get
+more information about signing and verifying in the <a class="reference external" href="https://www.sylabs.io/guides/3.0/user-guide/signNverify.html">Singularity user guide</a>.</p>
+</div>
+<div class="section" id="administrator-control-of-users-containers">
+<h3>Administrator Control of Users’ Containers<a class="headerlink" href="#administrator-control-of-users-containers" title="Permalink to this headline">¶</a></h3>
+<p>Singularity provides several ways for administrators to control the specific
+containers that users can run.</p>
+<ul>
+<li><p>Admins can set directives in the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> file to limit container access.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>limit container owners</cite>: Only allow containers to be used when they are owned by a given user (default empty)</p></li>
+<li><p><cite>limit container groups</cite>: Only allow containers to be used when they are owned by a given group (default empty)</p></li>
+<li><p><cite>limit container paths</cite>: Only allow containers to be used that are located within an allowed path prefix (default empty)</p></li>
+<li><p><cite>allow container squashfs</cite>: Limit usage of image containing squashfs filesystem (default yes)</p></li>
+<li><p><cite>allow container extfs</cite>: Limit usage of image containing ext3 filesystem (default yes)</p></li>
+<li><p><cite>allow container dir</cite>: Limit usage of directory image (default yes)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Admins can also whitelist or blacklist containers through the ECL (Execution Control List) located in <code class="docutils literal notranslate"><span class="pre">ecl.toml</span></code>. This method is available in &gt;=3.0:</p>
+<blockquote>
+<div><p>This file describes execution groups in which SIF (default format since 3.0) images are checked for authorized loading/execution. The decision is made by validating both the location of the SIF file and by checking against a list of signing entities.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="updating-singularity">
+<span id="id3"></span><h2>Updating Singularity<a class="headerlink" href="#updating-singularity" title="Permalink to this headline">¶</a></h2>
+<p>Updating Singularity is just like installing it, but with the <code class="docutils literal notranslate"><span class="pre">--upgrade</span></code> flag
+instead of <code class="docutils literal notranslate"><span class="pre">--install</span></code>. Make sure you pick the latest tarball from the <a class="reference external" href="https://github.com/sylabs/singularity/releases">Github
+relese page</a>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export VERSION=3.0.2  # the newest singularity version, change as you need
+
+$ wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &amp;&amp; \
+    rpmbuild -tb singularity-${VERSION}.tar.gz &amp;&amp; \
+    sudo rpm --upgrade -vh ~/rpmbuild/RPMS/x86_64/singularity-${VERSION}-1.el7.x86_64.rpm &amp;&amp; \
+    rm -rf ~/rpmbuild singularity-${VERSION}*.tar.gz
+</pre></div>
+</div>
+</div>
+<div class="section" id="uninstalling-singularity">
+<span id="id4"></span><h2>Uninstalling Singularity<a class="headerlink" href="#uninstalling-singularity" title="Permalink to this headline">¶</a></h2>
+<p>If you install Singularity using RPM, you can uninstall it again in just a one
+command: (Just use <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, or do this as root)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo rpm --erase singularity
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="configfiles.html" class="btn btn-neutral float-right" title="Singularity Configuration Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Admin Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017-2019, Sylabs Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
