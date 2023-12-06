@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Installing Apptainer &mdash; Apptainer Admin Guide main documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
     <link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -642,7 +644,13 @@ $ brew install qemu lima
 </pre></div>
 </div>
 <p>Then do <code class="docutils literal notranslate"><span class="pre">limactl</span> <span class="pre">start</span> <span class="pre">template://apptainer</span></code> and <code class="docutils literal notranslate"><span class="pre">limactl</span> <span class="pre">shell</span> <span class="pre">apptainer</span></code>.</p>
-<p>See the <a class="reference external" href="https://github.com/lima-vm/lima/blob/master/examples/apptainer.yaml">lima apptainer template</a> for more details.</p>
+<p>To customize cpus and memory on the VM, you can use <code class="docutils literal notranslate"><span class="pre">--cpus</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">--memory</span> <span class="pre">1</span></code>.</p>
+<p>See the <a class="reference external" href="https://github.com/lima-vm/lima/blob/master/examples/apptainer.yaml">lima “apptainer” template</a>
+and the <a class="reference external" href="https://github.com/lima-vm/lima/blob/master/examples/default.yaml">lima “default” template</a>
+for more details.</p>
+<p>By default, the host home directory is mounted as read-only in the guest,
+but there is also a shared writable directory mounted in <code class="docutils literal notranslate"><span class="pre">/tmp/lima</span></code>
+that can be accessed both from the host and in the guest.</p>
 </div>
 </div>
 </div>

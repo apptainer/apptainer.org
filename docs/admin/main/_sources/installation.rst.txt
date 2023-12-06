@@ -619,4 +619,12 @@ To use Lima via Homebrew:
 
 Then do ``limactl start template://apptainer`` and ``limactl shell apptainer``.
 
-See the `lima apptainer template <https://github.com/lima-vm/lima/blob/master/examples/apptainer.yaml>`_ for more details.
+To customize cpus and memory on the VM, you can use ``--cpus 1`` and ``--memory 1``.
+
+See the `lima "apptainer" template <https://github.com/lima-vm/lima/blob/master/examples/apptainer.yaml>`_
+and the `lima "default" template <https://github.com/lima-vm/lima/blob/master/examples/default.yaml>`_
+for more details.
+
+By default, the host home directory is mounted as read-only in the guest,
+but there is also a shared writable directory mounted in ``/tmp/lima``
+that can be accessed both from the host and in the guest.
