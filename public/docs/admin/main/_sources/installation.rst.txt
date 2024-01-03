@@ -528,8 +528,8 @@ kernel. It runs on a kernel called Darwin originally forked from BSD.)
 
 In order to use {Project} on these platforms, you can install Vagrant
 Boxes via `Vagrant Cloud <https://www.vagrantup.com/>`__, one of
-`Hashicorp's <https://www.hashicorp.com/#open-source-tools>`_ open
-source tools, by following the instructions below. Then you can install
+`Hashicorp's <https://www.hashicorp.com/>`_
+tools, by following the instructions below. Then you can install
 {Project} in the base VM of your choice by following the linux
 :ref:`installation instructions <installation>` above.
 
