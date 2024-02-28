@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monitoring Support &mdash; Apptainer Admin Guide main documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="License" href="license.html" />
+    <link rel="prev" title="Security in Apptainer" href="security.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer Admin Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                main
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="admin_quickstart.html">Admin Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_migration.html">Migrating from Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configfiles.html">Configuration files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_namespace.html">User Namespaces &amp; Fakeroot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Monitoring</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apptainer Admin Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Monitoring Support</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-admindocs/blob/main/monitoring.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="monitoring-support">
+<span id="monitoring"></span><h1>Monitoring Support<a class="headerlink" href="#monitoring-support" title="Permalink to this heading"></a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>Apptainer does not provide a native way to collect metrics of containers. <a class="reference external" href="https://github.com/apptainer/apptheus">Apptheus</a> is a small
+agent tool that helps connect Apptainer to Prometheus.</p>
+<p>This tool is designed with several main considerations:</p>
+<ol class="arabic simple">
+<li><p>Less invasion. Developing a tool that is tightly bound to Apptainer will bring too much invasion to Apptainer itself. This should be avoided.</p></li>
+<li><p>Cgroup stats. Preferring using existing Linux feature for metrics collection.</p></li>
+<li><p>Security. Needing customized security policy to help verify whether the caller is trusted.</p></li>
+<li><p>Customized push policy. Allowing administrator to freely configure the push interval when sampling container metrics.</p></li>
+</ol>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>Apptheus requires root privilege. This is because Apptheus requires permissions to manipulate the cgroups when new Apptainer containers are created.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>First, the administrator needs to enable the monitoring feature inside Apptainer by editing <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>.
+Simply changing the value of <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">monitoring</span></code> to <code class="docutils literal notranslate"><span class="pre">yes</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ALLOW MONITORING: [BOOL]</span>
+<span class="c1"># DEFAULT: no</span>
+<span class="c1"># Allow to monitor the system resource usage of apptainer. To enable this option</span>
+<span class="c1"># additional tool, i.e. apptheus, is required.</span>
+<span class="n">allow</span> <span class="n">monitoring</span> <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+<p>Then the administrator starts the Apptheus</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apptheus</span> <span class="o">--</span><span class="n">trust</span><span class="o">.</span><span class="n">path</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span><span class="n">apptainer</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">starter</span><span class="p">;</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span><span class="n">apptainer</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">starter</span><span class="o">-</span><span class="n">suid</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">--trust.path</span></code> lists trusted callers to Apptheus. In this case, they are <code class="docutils literal notranslate"><span class="pre">starter</span></code> or <code class="docutils literal notranslate"><span class="pre">starter-suid</span></code> for Apptainer.</p>
+</div>
+<p>Prometheus can read the container’s metrics via the local http address, by default <code class="docutils literal notranslate"><span class="pre">localhost:9091/metrics</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="n">locahost</span><span class="p">:</span><span class="mi">9091</span><span class="o">/</span><span class="n">metrics</span>
+
+<span class="c1"># HELP apptheus_build_info A metric with a constant &#39;1&#39; value labeled by version, revision, branch, goversion from which apptheus was built, and the goos and goarch for the build.</span>
+<span class="c1"># TYPE apptheus_build_info gauge</span>
+<span class="n">apptheus_build_info</span><span class="p">{</span><span class="n">branch</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">goarch</span><span class="o">=</span><span class="s2">&quot;arm64&quot;</span><span class="p">,</span><span class="n">goos</span><span class="o">=</span><span class="s2">&quot;linux&quot;</span><span class="p">,</span><span class="n">goversion</span><span class="o">=</span><span class="s2">&quot;go1.21.1&quot;</span><span class="p">,</span><span class="n">revision</span><span class="o">=</span><span class="s2">&quot;284ead0316031c8c08e2081f0468ad83bfb82e20&quot;</span><span class="p">,</span><span class="n">tags</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">}</span> <span class="mi">1</span>
+<span class="c1"># HELP go_gc_duration_seconds A summary of the pause duration of garbage collection cycles.</span>
+<span class="c1"># TYPE go_gc_duration_seconds summary</span>
+<span class="n">go_gc_duration_seconds</span><span class="p">{</span><span class="n">quantile</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">}</span> <span class="mi">0</span>
+<span class="n">go_gc_duration_seconds</span><span class="p">{</span><span class="n">quantile</span><span class="o">=</span><span class="s2">&quot;0.25&quot;</span><span class="p">}</span> <span class="mi">0</span>
+<span class="n">go_gc_duration_seconds</span><span class="p">{</span><span class="n">quantile</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span><span class="p">}</span> <span class="mi">0</span>
+<span class="n">go_gc_duration_seconds</span><span class="p">{</span><span class="n">quantile</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">}</span> <span class="mi">0</span>
+<span class="n">go_gc_duration_seconds</span><span class="p">{</span><span class="n">quantile</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">}</span> <span class="mi">0</span>
+<span class="n">go_gc_duration_seconds_sum</span> <span class="mi">0</span>
+<span class="n">go_gc_duration_seconds_count</span> <span class="mi">0</span>
+<span class="c1"># HELP go_goroutines Number of goroutines that currently exist.</span>
+<span class="c1"># TYPE go_goroutines gauge</span>
+<span class="n">go_goroutines</span> <span class="mi">13</span>
+<span class="c1"># HELP go_info Information about the Go environment.</span>
+<span class="c1"># TYPE go_info gauge</span>
+<span class="n">go_info</span><span class="p">{</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;go1.21.1&quot;</span><span class="p">}</span> <span class="mi">1</span>
+<span class="c1"># HELP go_memstats_alloc_bytes Number of bytes allocated and still in use.</span>
+<span class="c1"># TYPE go_memstats_alloc_bytes gauge</span>
+<span class="n">go_memstats_alloc_bytes</span> <span class="mi">577680</span>
+<span class="c1"># HELP go_memstats_alloc_bytes_total Total number of bytes allocated, even if freed.</span>
+<span class="c1"># TYPE go_memstats_alloc_bytes_total counter</span>
+<span class="n">go_memstats_alloc_bytes_total</span> <span class="mi">577680</span>
+<span class="c1"># HELP go_memstats_buck_hash_sys_bytes Number of bytes used by the profiling bucket hash table.</span>
+<span class="c1"># TYPE go_memstats_buck_hash_sys_bytes gauge</span>
+<span class="n">go_memstats_buck_hash_sys_bytes</span> <span class="mi">5134</span>
+<span class="c1"># HELP go_memstats_frees_total Total number of frees.</span>
+<span class="c1"># TYPE go_memstats_frees_total counter</span>
+<span class="n">go_memstats_frees_total</span> <span class="mi">0</span>
+<span class="c1"># HELP go_memstats_gc_sys_bytes Number of bytes used for garbage collection system metadata.</span>
+<span class="c1"># TYPE go_memstats_gc_sys_bytes gauge</span>
+<span class="n">go_memstats_gc_sys_bytes</span> <span class="mf">2.563968e+06</span>
+<span class="c1"># HELP go_memstats_heap_alloc_bytes Number of heap bytes allocated and still in use.</span>
+<span class="c1"># TYPE go_memstats_heap_alloc_bytes gauge</span>
+<span class="n">go_memstats_heap_alloc_bytes</span> <span class="mi">577680</span>
+<span class="c1"># HELP go_memstats_heap_idle_bytes Number of heap bytes waiting to be used.</span>
+<span class="c1"># TYPE go_memstats_heap_idle_bytes gauge</span>
+<span class="n">go_memstats_heap_idle_bytes</span> <span class="mf">1.55648e+06</span>
+<span class="c1"># HELP go_memstats_heap_inuse_bytes Number of heap bytes that are in use.</span>
+<span class="c1"># TYPE go_memstats_heap_inuse_bytes gauge</span>
+<span class="n">go_memstats_heap_inuse_bytes</span> <span class="mf">2.146304e+06</span>
+<span class="c1"># HELP go_memstats_heap_objects Number of allocated objects.</span>
+<span class="c1"># TYPE go_memstats_heap_objects gauge</span>
+<span class="n">go_memstats_heap_objects</span> <span class="mi">2406</span>
+<span class="c1"># HELP go_memstats_heap_released_bytes Number of heap bytes released to OS.</span>
+<span class="c1"># TYPE go_memstats_heap_released_bytes gauge</span>
+<span class="n">go_memstats_heap_released_bytes</span> <span class="mf">1.55648e+06</span>
+<span class="c1"># HELP go_memstats_heap_sys_bytes Number of heap bytes obtained from system.</span>
+<span class="c1"># TYPE go_memstats_heap_sys_bytes gauge</span>
+<span class="n">go_memstats_heap_sys_bytes</span> <span class="mf">3.702784e+06</span>
+<span class="c1"># HELP go_memstats_last_gc_time_seconds Number of seconds since 1970 of last garbage collection.</span>
+<span class="c1"># TYPE go_memstats_last_gc_time_seconds gauge</span>
+<span class="n">go_memstats_last_gc_time_seconds</span> <span class="mi">0</span>
+<span class="c1"># HELP go_memstats_lookups_total Total number of pointer lookups.</span>
+<span class="c1"># TYPE go_memstats_lookups_total counter</span>
+<span class="n">go_memstats_lookups_total</span> <span class="mi">0</span>
+<span class="c1"># HELP go_memstats_mallocs_total Total number of mallocs.</span>
+<span class="c1"># TYPE go_memstats_mallocs_total counter</span>
+<span class="n">go_memstats_mallocs_total</span> <span class="mi">2406</span>
+<span class="c1"># HELP go_memstats_mcache_inuse_bytes Number of bytes in use by mcache structures.</span>
+<span class="c1"># TYPE go_memstats_mcache_inuse_bytes gauge</span>
+<span class="n">go_memstats_mcache_inuse_bytes</span> <span class="mi">2400</span>
+<span class="c1"># HELP go_memstats_mcache_sys_bytes Number of bytes used for mcache structures obtained from system.</span>
+<span class="c1"># TYPE go_memstats_mcache_sys_bytes gauge</span>
+<span class="n">go_memstats_mcache_sys_bytes</span> <span class="mi">15600</span>
+<span class="c1"># HELP go_memstats_mspan_inuse_bytes Number of bytes in use by mspan structures.</span>
+<span class="c1"># TYPE go_memstats_mspan_inuse_bytes gauge</span>
+<span class="n">go_memstats_mspan_inuse_bytes</span> <span class="mi">45528</span>
+<span class="c1"># HELP go_memstats_mspan_sys_bytes Number of bytes used for mspan structures obtained from system.</span>
+<span class="c1"># TYPE go_memstats_mspan_sys_bytes gauge</span>
+<span class="n">go_memstats_mspan_sys_bytes</span> <span class="mi">48888</span>
+<span class="c1"># HELP go_memstats_next_gc_bytes Number of heap bytes when next garbage collection will take place.</span>
+<span class="c1"># TYPE go_memstats_next_gc_bytes gauge</span>
+<span class="n">go_memstats_next_gc_bytes</span> <span class="mf">4.194304e+06</span>
+<span class="c1"># HELP go_memstats_other_sys_bytes Number of bytes used for other system allocations.</span>
+<span class="c1"># TYPE go_memstats_other_sys_bytes gauge</span>
+<span class="n">go_memstats_other_sys_bytes</span> <span class="mi">617626</span>
+<span class="c1"># HELP go_memstats_stack_inuse_bytes Number of bytes in use by the stack allocator.</span>
+<span class="c1"># TYPE go_memstats_stack_inuse_bytes gauge</span>
+<span class="n">go_memstats_stack_inuse_bytes</span> <span class="mi">491520</span>
+<span class="c1"># HELP go_memstats_stack_sys_bytes Number of bytes obtained from system for stack allocator.</span>
+<span class="c1"># TYPE go_memstats_stack_sys_bytes gauge</span>
+<span class="n">go_memstats_stack_sys_bytes</span> <span class="mi">491520</span>
+<span class="c1"># HELP go_memstats_sys_bytes Number of bytes obtained from system.</span>
+<span class="c1"># TYPE go_memstats_sys_bytes gauge</span>
+<span class="n">go_memstats_sys_bytes</span> <span class="mf">7.44552e+06</span>
+<span class="c1"># HELP go_threads Number of OS threads created.</span>
+<span class="c1"># TYPE go_threads gauge</span>
+<span class="n">go_threads</span> <span class="mi">9</span>
+<span class="c1"># HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.</span>
+<span class="c1"># TYPE process_cpu_seconds_total counter</span>
+<span class="n">process_cpu_seconds_total</span> <span class="mf">0.02</span>
+<span class="c1"># HELP process_max_fds Maximum number of open file descriptors.</span>
+<span class="c1"># TYPE process_max_fds gauge</span>
+<span class="n">process_max_fds</span> <span class="mf">1.048576e+06</span>
+<span class="c1"># HELP process_open_fds Number of open file descriptors.</span>
+<span class="c1"># TYPE process_open_fds gauge</span>
+<span class="n">process_open_fds</span> <span class="mi">13</span>
+<span class="c1"># HELP process_resident_memory_bytes Resident memory size in bytes.</span>
+<span class="c1"># TYPE process_resident_memory_bytes gauge</span>
+<span class="n">process_resident_memory_bytes</span> <span class="mf">1.1862016e+07</span>
+<span class="c1"># HELP process_start_time_seconds Start time of the process since unix epoch in seconds.</span>
+<span class="c1"># TYPE process_start_time_seconds gauge</span>
+<span class="n">process_start_time_seconds</span> <span class="mf">1.70902187483e+09</span>
+<span class="c1"># HELP process_virtual_memory_bytes Virtual memory size in bytes.</span>
+<span class="c1"># TYPE process_virtual_memory_bytes gauge</span>
+<span class="n">process_virtual_memory_bytes</span> <span class="mf">1.797275648e+09</span>
+<span class="c1"># HELP process_virtual_memory_max_bytes Maximum amount of virtual memory available in bytes.</span>
+<span class="c1"># TYPE process_virtual_memory_max_bytes gauge</span>
+<span class="n">process_virtual_memory_max_bytes</span> <span class="mf">1.8446744073709552e+19</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="security.html" class="btn btn-neutral float-left" title="Security in Apptainer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="license.html" class="btn btn-neutral float-right" title="License" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
