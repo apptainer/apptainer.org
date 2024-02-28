@@ -21,5 +21,6 @@ information about how to use {Project}.
    Configuration files <configfiles>
    User Namespaces & Fakeroot <user_namespace>
    Security in {Project} <security>
+   Monitoring <monitoring>
 
    License <license>
