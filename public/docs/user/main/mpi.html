@@ -91,6 +91,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#test-application">Test Application</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mpich-hybrid-container">MPICH Hybrid Container</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#open-mpi-hybrid-container">Open MPI Hybrid Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-sharens-mode">Using –sharens mode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#running-an-mpi-application">Running an MPI Application</a></li>
 </ul>
 </li>
@@ -367,7 +368,7 @@ PMI2 / PMIx, as used on the host.</p>
 Consult your system documentation, or ask your support staff for
 details.</p>
 </div>
-<div class="admonition note">
+<div class="admonition note" id="mpi-issue">
 <p class="admonition-title">Note</p>
 <p>The MPI UCX library has a problem with unprivileged user namespaces.
 See <a class="reference external" href="https://github.com/apptainer/apptainer/issues/769">apptainer issue 769</a>
@@ -376,6 +377,21 @@ a workaround, for example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mpirun -np 2 -mca pml ucx -x UCX_TLS=sysv,ib apptainer exec $MY_CONTAINER ./a.out
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="using-sharens-mode">
+<h3>Using –sharens mode<a class="headerlink" href="#using-sharens-mode" title="Permalink to this heading"></a></h3>
+<p>By default in unprivileged user namespace mode each apptainer command runs in its own user namespace.
+This causes problems for MPI runs, as observed <a class="reference internal" href="#mpi-issue"><span class="std std-ref">in this issue</span></a>. The new <code class="docutils literal notranslate"><span class="pre">--sharens</span></code> flag will
+move all spawned processes into the same user namespace, similar to what is done with Apptainer SUID mode.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mpirun -np 2 apptainer exec --sharens $MY_CONTAINER ./a.out
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">--sharens</span></code> flag requires all apptainer commands to have the same parent process. This is because these
+child processes will join the same namespace identified using the parent process id. To meet the requirement, Apptainer
+containers should be launched by the same process, e.g. mpirun, and all these containers should be running on the same host.</p>
 </div>
 </div>
 <div class="section" id="running-an-mpi-application">

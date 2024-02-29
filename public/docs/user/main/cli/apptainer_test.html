@@ -133,6 +133,12 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_push.html">apptainer key push</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_remove.html">apptainer key remove</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_search.html">apptainer key search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver.html">apptainer keyserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_add.html">apptainer keyserver add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_list.html">apptainer keyserver list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_login.html">apptainer keyserver login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_logout.html">apptainer keyserver logout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_remove.html">apptainer keyserver remove</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci.html">apptainer oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci_attach.html">apptainer oci attach</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci_create.html">apptainer oci create</a></li>
@@ -160,15 +166,17 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_uninstall.html">apptainer plugin uninstall</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_pull.html">apptainer pull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_push.html">apptainer push</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry.html">apptainer registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_list.html">apptainer registry list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_login.html">apptainer registry login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_logout.html">apptainer registry logout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote.html">apptainer remote</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add.html">apptainer remote add</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add-keyserver.html">apptainer remote add-keyserver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_get-login-password.html">apptainer remote get-login-password</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_list.html">apptainer remote list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_login.html">apptainer remote login</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_logout.html">apptainer remote logout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove.html">apptainer remote remove</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove-keyserver.html">apptainer remote remove-keyserver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_status.html">apptainer remote status</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_use.html">apptainer remote use</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_run.html">apptainer run</a></li>
@@ -278,6 +286,7 @@ found at:
     --cpus string                   Number of CPUs available to container
     --cpuset-cpus string            List of host CPUs available to container
     --cpuset-mems string            List of host memory nodes available to container
+    --cwd string                    initial working directory for payload process inside the container (synonym for --pwd)
     --disable-cache                 do not use or create cache
     --dns string                    list of DNS server separated by commas to add in resolv.conf
     --docker-host string            specify a custom Docker daemon host
@@ -304,6 +313,7 @@ found at:
     --no-https                      use http instead of https for docker:// oras:// and library://&lt;hostname&gt;/... URIs
     --no-init                       do NOT start shim process with --pid
     --no-mount strings              disable one or more &#39;mount xxx&#39; options set in apptainer.conf and/or specify absolute destination path to disable a bind path entry, or &#39;bind-paths&#39; to disable all bind path entries.
+    --no-pid                        do not run container in a new PID namespace
     --no-privs                      drop all privileges from root user in container)
     --no-umask                      do not propagate umask to the container, set default 0022 umask
     --nv                            enable Nvidia support
@@ -314,19 +324,13 @@ found at:
     --pem-path string               enter an path to a PEM formatted RSA key for an encrypted container
 -p, --pid                           run container in a new PID namespace
     --pids-limit int                Limit number of container PIDs, use -1 for unlimited
-    --pwd string                    initial working directory for payload process inside the container
     --rocm                          enable experimental Rocm support
 -S, --scratch strings               include a scratch directory within the container that is linked to a temporary dir (use -W to force location)
     --security strings              enable security features (SELinux, Apparmor, Seccomp)
-    --underlay                      use underlay
+    --sharens                       share the namespace and image with other containers launched from the same parent process
     --unsquash                      Convert SIF file to temporary sandbox before running
 -u, --userns                        run container in a new user namespace
     --uts                           run container in a new UTS namespace
-    --vm                            enable VM support
-    --vm-cpu string                 number of CPU cores to allocate to Virtual Machine (implies --vm) (default &quot;1&quot;)
-    --vm-err                        enable attaching stderr from VM
-    --vm-ip string                  IP Address to assign for container usage. Defaults to DHCP within bridge network. (default &quot;dhcp&quot;)
-    --vm-ram string                 amount of RAM in MiB to allocate to Virtual Machine (implies --vm) (default &quot;1024&quot;)
 -W, --workdir string                working directory to be used for /tmp, /var/tmp and $HOME (if -c/--contain was also used)
 -w, --writable                      by default all Apptainer containers are available as read only. This option makes the file system accessible as read/write.
     --writable-tmpfs                makes the file system accessible as read-write with non persistent data (with overlay support only)
@@ -340,7 +344,7 @@ found at:
 </ul>
 <p>Linux container platform optimized for High Performance Computing (HPC) and
 Enterprise Performance Computing (EPC)</p>
-<p><em>Auto generated by spf13/cobra on 27-Feb-2024</em></p>
+<p><em>Auto generated by spf13/cobra on 29-Feb-2024</em></p>
 </div>
 </div>
 

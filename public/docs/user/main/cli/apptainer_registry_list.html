@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>apptainer remote add-keyserver &mdash; Apptainer User Guide main documentation</title>
+  <title>apptainer registry list &mdash; Apptainer User Guide main documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
@@ -24,8 +24,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="apptainer remote get-login-password" href="apptainer_remote_get-login-password.html" />
-    <link rel="prev" title="apptainer remote add" href="apptainer_remote_add.html" /> 
+    <link rel="next" title="apptainer registry login" href="apptainer_registry_login.html" />
+    <link rel="prev" title="apptainer registry" href="apptainer_registry.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -133,6 +133,12 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_push.html">apptainer key push</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_remove.html">apptainer key remove</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_search.html">apptainer key search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver.html">apptainer keyserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_add.html">apptainer keyserver add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_list.html">apptainer keyserver list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_login.html">apptainer keyserver login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_logout.html">apptainer keyserver logout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_remove.html">apptainer keyserver remove</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci.html">apptainer oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci_attach.html">apptainer oci attach</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci_create.html">apptainer oci create</a></li>
@@ -160,21 +166,23 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_uninstall.html">apptainer plugin uninstall</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_pull.html">apptainer pull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_push.html">apptainer push</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_remote.html">apptainer remote</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add.html">apptainer remote add</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">apptainer remote add-keyserver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry.html">apptainer registry</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">apptainer registry list</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#see-also">SEE ALSO</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_login.html">apptainer registry login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_logout.html">apptainer registry logout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote.html">apptainer remote</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add.html">apptainer remote add</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_get-login-password.html">apptainer remote get-login-password</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_list.html">apptainer remote list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_login.html">apptainer remote login</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_logout.html">apptainer remote logout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove.html">apptainer remote remove</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove-keyserver.html">apptainer remote remove-keyserver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_status.html">apptainer remote status</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_use.html">apptainer remote use</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_run.html">apptainer run</a></li>
@@ -214,9 +222,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../cli.html">Command Line Interface</a></li>
-      <li class="breadcrumb-item active">apptainer remote add-keyserver</li>
+      <li class="breadcrumb-item active">apptainer registry list</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/cli/apptainer_remote_add-keyserver.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/master/cli/apptainer_registry_list.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -224,44 +232,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="apptainer-remote-add-keyserver">
-<span id="id1"></span><h1>apptainer remote add-keyserver<a class="headerlink" href="#apptainer-remote-add-keyserver" title="Permalink to this heading"></a></h1>
-<p>Add a keyserver (root user only)</p>
+  <div class="section" id="apptainer-registry-list">
+<span id="id1"></span><h1>apptainer registry list<a class="headerlink" href="#apptainer-registry-list" title="Permalink to this heading"></a></h1>
+<p>List all OCI credentials that are configured</p>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
 <blockquote>
-<div><p>The ‘remote add-keyserver’ command allows to define additional keyserver. The –order
-option can define the order of the keyserver for all related key operations, therefore
-when specifying ‘–order 1’ the keyserver is becoming the primary keyserver. If no endpoint
-is specified, it will use the default remote endpoint.</p>
+<div><p>The ‘registry list’ command lists all credentials for OCI/Docker registries
+that are configured for use.</p>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">remote</span> <span class="n">add</span><span class="o">-</span><span class="n">keyserver</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="p">[</span><span class="n">remoteName</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">keyserver_url</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">registry</span> <span class="nb">list</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer remote add-keyserver https://keys.example.com
-
-To add a keyserver to be used as the primary keyserver for the current endpoint
-$ apptainer remote add-keyserver --order 1 https://keys.example.com
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer registry list
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>           <span class="n">help</span> <span class="k">for</span> <span class="n">add</span><span class="o">-</span><span class="n">keyserver</span>
-<span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">--</span><span class="n">insecure</span>       <span class="n">allow</span> <span class="n">insecure</span> <span class="n">connection</span> <span class="n">to</span> <span class="n">keyserver</span>
-<span class="o">-</span><span class="n">o</span><span class="p">,</span> <span class="o">--</span><span class="n">order</span> <span class="n">uint32</span>   <span class="n">define</span> <span class="n">the</span> <span class="n">keyserver</span> <span class="n">order</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>   <span class="n">help</span> <span class="k">for</span> <span class="nb">list</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="see-also">
 <h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="apptainer_remote.html#apptainer-remote"><span class="std std-ref">apptainer remote</span></a>     - Manage apptainer remote endpoints, keyservers and OCI/Docker registry credentials</p></li>
+<li><p><a class="reference internal" href="apptainer_registry.html#apptainer-registry"><span class="std std-ref">apptainer registry</span></a>         - Manage authentication to OCI/Docker registries</p></li>
 </ul>
-<p><em>Auto generated by spf13/cobra on 27-Feb-2024</em></p>
+<p><em>Auto generated by spf13/cobra on 29-Feb-2024</em></p>
 </div>
 </div>
 
@@ -269,8 +270,8 @@ $ apptainer remote add-keyserver --order 1 https://keys.example.com
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="apptainer_remote_add.html" class="btn btn-neutral float-left" title="apptainer remote add" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="apptainer_remote_get-login-password.html" class="btn btn-neutral float-right" title="apptainer remote get-login-password" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="apptainer_registry.html" class="btn btn-neutral float-left" title="apptainer registry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="apptainer_registry_login.html" class="btn btn-neutral float-right" title="apptainer registry login" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

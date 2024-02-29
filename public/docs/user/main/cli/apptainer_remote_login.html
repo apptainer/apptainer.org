@@ -133,6 +133,12 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_push.html">apptainer key push</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_remove.html">apptainer key remove</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_search.html">apptainer key search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver.html">apptainer keyserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_add.html">apptainer keyserver add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_list.html">apptainer keyserver list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_login.html">apptainer keyserver login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_logout.html">apptainer keyserver logout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_remove.html">apptainer keyserver remove</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci.html">apptainer oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci_attach.html">apptainer oci attach</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci_create.html">apptainer oci create</a></li>
@@ -160,9 +166,12 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_uninstall.html">apptainer plugin uninstall</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_pull.html">apptainer pull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_push.html">apptainer push</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry.html">apptainer registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_list.html">apptainer registry list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_login.html">apptainer registry login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_logout.html">apptainer registry logout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote.html">apptainer remote</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add.html">apptainer remote add</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add-keyserver.html">apptainer remote add-keyserver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_get-login-password.html">apptainer remote get-login-password</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_list.html">apptainer remote list</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">apptainer remote login</a><ul>
@@ -174,7 +183,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_logout.html">apptainer remote logout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove.html">apptainer remote remove</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove-keyserver.html">apptainer remote remove-keyserver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_status.html">apptainer remote status</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_use.html">apptainer remote use</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_run.html">apptainer run</a></li>
@@ -226,33 +234,23 @@
              
   <div class="section" id="apptainer-remote-login">
 <span id="id1"></span><h1>apptainer remote login<a class="headerlink" href="#apptainer-remote-login" title="Permalink to this heading"></a></h1>
-<p>Login to an Apptainer remote endpoint, an OCI/Docker registry or a keyserver using credentials</p>
+<p>Login to an apptainer remote endpoint</p>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
 <blockquote>
-<div><p>The ‘remote login’ command allows you to set credentials for a specific endpoint,
-an OCI/Docker registry or a keyserver.</p>
+<div><p>The ‘remote login’ command allows you to set credentials for a specific
+endpoint.</p>
 <p>If no endpoint or registry is specified, the command will login to the currently
 active remote endpoint.</p>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">remote</span> <span class="n">login</span> <span class="p">[</span><span class="n">login</span> <span class="n">options</span><span class="o">...</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">remote_name</span><span class="o">|</span><span class="n">registry_uri</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">remote</span> <span class="n">login</span> <span class="p">[</span><span class="n">login</span> <span class="n">options</span><span class="o">...</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">remote_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>To log in to an endpoint:
-$ apptainer remote login
-
-To login in to a docker/OCI registry:
-$ apptainer remote login --username foo docker://docker.io
-$ apptainer remote login --username foo oras://myregistry.example.com
-
-Note that many cloud OCI registries use token based authentication. The token
-should be specified as the password for login. A username is still required. E.g.
-when using a standard Azure identity and token to login to an ACR registry the
-username &#39;00000000-0000-0000-0000-000000000000&#39; is required. Consult your provider
-documentation for detail of their login requirements.
+$ apptainer remote login SylabsCloud
 </pre></div>
 </div>
 </div>
@@ -263,16 +261,16 @@ documentation for detail of their login requirements.
 <span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="o">--</span><span class="n">password</span> <span class="n">string</span>    <span class="n">password</span> <span class="o">/</span> <span class="n">token</span> <span class="n">to</span> <span class="n">authenticate</span> <span class="k">with</span>
     <span class="o">--</span><span class="n">password</span><span class="o">-</span><span class="n">stdin</span>     <span class="n">take</span> <span class="n">password</span> <span class="kn">from</span> <span class="nn">standard</span> <span class="nb">input</span>
     <span class="o">--</span><span class="n">tokenfile</span> <span class="n">string</span>   <span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">file</span> <span class="n">holding</span> <span class="n">auth</span> <span class="n">token</span> <span class="k">for</span> <span class="n">login</span> <span class="p">(</span><span class="n">remote</span> <span class="n">endpoints</span> <span class="n">only</span><span class="p">)</span>
-<span class="o">-</span><span class="n">u</span><span class="p">,</span> <span class="o">--</span><span class="n">username</span> <span class="n">string</span>    <span class="n">username</span> <span class="n">to</span> <span class="n">authenticate</span> <span class="k">with</span> <span class="p">(</span><span class="n">required</span> <span class="k">for</span> <span class="n">Docker</span><span class="o">/</span><span class="n">OCI</span> <span class="n">registry</span> <span class="n">login</span><span class="p">)</span>
+<span class="o">-</span><span class="n">u</span><span class="p">,</span> <span class="o">--</span><span class="n">username</span> <span class="n">string</span>    <span class="n">username</span> <span class="n">to</span> <span class="n">authenticate</span> <span class="k">with</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="see-also">
 <h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="apptainer_remote.html#apptainer-remote"><span class="std std-ref">apptainer remote</span></a>     - Manage apptainer remote endpoints, keyservers and OCI/Docker registry credentials</p></li>
+<li><p><a class="reference internal" href="apptainer_remote.html#apptainer-remote"><span class="std std-ref">apptainer remote</span></a>     - Manage apptainer remote endpoints</p></li>
 </ul>
-<p><em>Auto generated by spf13/cobra on 27-Feb-2024</em></p>
+<p><em>Auto generated by spf13/cobra on 29-Feb-2024</em></p>
 </div>
 </div>
 

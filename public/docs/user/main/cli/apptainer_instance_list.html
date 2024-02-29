@@ -139,6 +139,12 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_push.html">apptainer key push</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_remove.html">apptainer key remove</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_search.html">apptainer key search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver.html">apptainer keyserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_add.html">apptainer keyserver add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_list.html">apptainer keyserver list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_login.html">apptainer keyserver login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_logout.html">apptainer keyserver logout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_remove.html">apptainer keyserver remove</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci.html">apptainer oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci_attach.html">apptainer oci attach</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci_create.html">apptainer oci create</a></li>
@@ -166,15 +172,17 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_uninstall.html">apptainer plugin uninstall</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_pull.html">apptainer pull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_push.html">apptainer push</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry.html">apptainer registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_list.html">apptainer registry list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_login.html">apptainer registry login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_logout.html">apptainer registry logout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote.html">apptainer remote</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add.html">apptainer remote add</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add-keyserver.html">apptainer remote add-keyserver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_get-login-password.html">apptainer remote get-login-password</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_list.html">apptainer remote list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_login.html">apptainer remote login</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_logout.html">apptainer remote logout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove.html">apptainer remote remove</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove-keyserver.html">apptainer remote remove-keyserver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_status.html">apptainer remote status</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_use.html">apptainer remote use</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_run.html">apptainer run</a></li>
@@ -259,7 +267,8 @@ test2              16219     /home/mibauer/apptainer/sinstance/test.sif
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>          <span class="n">help</span> <span class="k">for</span> <span class="nb">list</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="o">--</span><span class="nb">all</span>           <span class="n">display</span> <span class="nb">all</span> <span class="n">instances</span> <span class="p">(</span><span class="n">include</span> <span class="o">--</span><span class="n">sharens</span> <span class="n">instances</span><span class="p">)</span>
+<span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>          <span class="n">help</span> <span class="k">for</span> <span class="nb">list</span>
 <span class="o">-</span><span class="n">j</span><span class="p">,</span> <span class="o">--</span><span class="n">json</span>          <span class="nb">print</span> <span class="n">structured</span> <span class="n">json</span> <span class="n">instead</span> <span class="n">of</span> <span class="nb">list</span>
 <span class="o">-</span><span class="n">l</span><span class="p">,</span> <span class="o">--</span><span class="n">logs</span>          <span class="n">display</span> <span class="n">location</span> <span class="n">of</span> <span class="n">stdout</span> <span class="ow">and</span> <span class="n">sterr</span> <span class="n">log</span> <span class="n">files</span> <span class="k">for</span> <span class="n">instances</span>
 <span class="o">-</span><span class="n">u</span><span class="p">,</span> <span class="o">--</span><span class="n">user</span> <span class="n">string</span>   <span class="k">if</span> <span class="n">running</span> <span class="k">as</span> <span class="n">root</span><span class="p">,</span> <span class="nb">list</span> <span class="n">instances</span> <span class="kn">from</span> <span class="s2">&quot;&lt;username&gt;&quot;</span>
@@ -271,7 +280,7 @@ test2              16219     /home/mibauer/apptainer/sinstance/test.sif
 <ul class="simple">
 <li><p><a class="reference internal" href="apptainer_instance.html#apptainer-instance"><span class="std std-ref">apptainer instance</span></a>         - Manage containers running as services</p></li>
 </ul>
-<p><em>Auto generated by spf13/cobra on 27-Feb-2024</em></p>
+<p><em>Auto generated by spf13/cobra on 29-Feb-2024</em></p>
 </div>
 </div>
 
