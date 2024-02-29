@@ -25,7 +25,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="apptainer remote use" href="apptainer_remote_use.html" />
-    <link rel="prev" title="apptainer remote remove-keyserver" href="apptainer_remote_remove-keyserver.html" /> 
+    <link rel="prev" title="apptainer remote remove" href="apptainer_remote_remove.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -133,6 +133,12 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_push.html">apptainer key push</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_remove.html">apptainer key remove</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_search.html">apptainer key search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver.html">apptainer keyserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_add.html">apptainer keyserver add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_list.html">apptainer keyserver list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_login.html">apptainer keyserver login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_logout.html">apptainer keyserver logout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_remove.html">apptainer keyserver remove</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci.html">apptainer oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci_attach.html">apptainer oci attach</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci_create.html">apptainer oci create</a></li>
@@ -160,15 +166,17 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_uninstall.html">apptainer plugin uninstall</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_pull.html">apptainer pull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_push.html">apptainer push</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry.html">apptainer registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_list.html">apptainer registry list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_login.html">apptainer registry login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_logout.html">apptainer registry logout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote.html">apptainer remote</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add.html">apptainer remote add</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add-keyserver.html">apptainer remote add-keyserver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_get-login-password.html">apptainer remote get-login-password</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_list.html">apptainer remote list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_login.html">apptainer remote login</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_logout.html">apptainer remote logout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove.html">apptainer remote remove</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove-keyserver.html">apptainer remote remove-keyserver</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">apptainer remote status</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
@@ -231,10 +239,11 @@
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
 <blockquote>
 <div><p>The ‘remote status’ command checks the status of the specified remote endpoint
-and reports the availability of services and their versions. If no endpoint is
-specified, it will check the status of the default remote. If you
-have logged in with an authentication token the validity of that token will be
-checked.</p>
+and reports the availability of services and their versions, and reports the
+user’s logged-in status (or lack thereof) on that endpoint. If no endpoint is
+specified, it will check the status of the default remote. If
+you have logged in with an authentication token the validity of that token
+will be checked.</p>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">remote</span> <span class="n">status</span> <span class="p">[</span><span class="n">remote_name</span><span class="p">]</span>
 </pre></div>
@@ -255,9 +264,9 @@ checked.</p>
 <div class="section" id="see-also">
 <h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="apptainer_remote.html#apptainer-remote"><span class="std std-ref">apptainer remote</span></a>     - Manage apptainer remote endpoints, keyservers and OCI/Docker registry credentials</p></li>
+<li><p><a class="reference internal" href="apptainer_remote.html#apptainer-remote"><span class="std std-ref">apptainer remote</span></a>     - Manage apptainer remote endpoints</p></li>
 </ul>
-<p><em>Auto generated by spf13/cobra on 27-Feb-2024</em></p>
+<p><em>Auto generated by spf13/cobra on 29-Feb-2024</em></p>
 </div>
 </div>
 
@@ -265,7 +274,7 @@ checked.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="apptainer_remote_remove-keyserver.html" class="btn btn-neutral float-left" title="apptainer remote remove-keyserver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="apptainer_remote_remove.html" class="btn btn-neutral float-left" title="apptainer remote remove" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="apptainer_remote_use.html" class="btn btn-neutral float-right" title="apptainer remote use" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

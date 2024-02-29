@@ -133,6 +133,12 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_push.html">apptainer key push</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_remove.html">apptainer key remove</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_key_search.html">apptainer key search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver.html">apptainer keyserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_add.html">apptainer keyserver add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_list.html">apptainer keyserver list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_login.html">apptainer keyserver login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_logout.html">apptainer keyserver logout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_keyserver_remove.html">apptainer keyserver remove</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci.html">apptainer oci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci_attach.html">apptainer oci attach</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_oci_create.html">apptainer oci create</a></li>
@@ -160,9 +166,12 @@
 <li class="toctree-l2"><a class="reference internal" href="apptainer_plugin_uninstall.html">apptainer plugin uninstall</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_pull.html">apptainer pull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_push.html">apptainer push</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry.html">apptainer registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_list.html">apptainer registry list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_login.html">apptainer registry login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apptainer_registry_logout.html">apptainer registry logout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote.html">apptainer remote</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add.html">apptainer remote add</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_add-keyserver.html">apptainer remote add-keyserver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_get-login-password.html">apptainer remote get-login-password</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_list.html">apptainer remote list</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_login.html">apptainer remote login</a></li>
@@ -174,7 +183,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove.html">apptainer remote remove</a></li>
-<li class="toctree-l2"><a class="reference internal" href="apptainer_remote_remove-keyserver.html">apptainer remote remove-keyserver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_status.html">apptainer remote status</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_remote_use.html">apptainer remote use</a></li>
 <li class="toctree-l2"><a class="reference internal" href="apptainer_run.html">apptainer run</a></li>
@@ -226,25 +234,22 @@
              
   <div class="section" id="apptainer-remote-logout">
 <span id="id1"></span><h1>apptainer remote logout<a class="headerlink" href="#apptainer-remote-logout" title="Permalink to this heading"></a></h1>
-<p>Log out from an Apptainer remote endpoint, an OCI/Docker registry or a keyserver</p>
+<p>Log out from an apptainer remote endpoint</p>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
 <blockquote>
-<div><p>The ‘remote logout’ command allows you to log out from an Apptainer specific endpoint,
-an OCI/Docker registry or a keyserver. If no endpoint or service is specified, it will
-logout from the current active remote endpoint.</p>
+<div><p>The ‘remote logout’ command allows you to log out from an apptainer specific
+endpoint. If no endpoint or service is specified, it will logout from the
+currently active remote endpoint.</p>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">remote</span> <span class="n">logout</span> <span class="o">&lt;</span><span class="n">remote_name</span><span class="o">|</span><span class="n">registry_uri</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">remote</span> <span class="n">logout</span> <span class="o">&lt;</span><span class="n">remote_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>To log out from an endpoint
-$ apptainer remote logout
-
-To log out from a docker/OCI registry
-$ apptainer remote logout docker://docker.io
+$ apptainer remote logout SylabsCloud
 </pre></div>
 </div>
 </div>
@@ -257,9 +262,9 @@ $ apptainer remote logout docker://docker.io
 <div class="section" id="see-also">
 <h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="apptainer_remote.html#apptainer-remote"><span class="std std-ref">apptainer remote</span></a>     - Manage apptainer remote endpoints, keyservers and OCI/Docker registry credentials</p></li>
+<li><p><a class="reference internal" href="apptainer_remote.html#apptainer-remote"><span class="std std-ref">apptainer remote</span></a>     - Manage apptainer remote endpoints</p></li>
 </ul>
-<p><em>Auto generated by spf13/cobra on 27-Feb-2024</em></p>
+<p><em>Auto generated by spf13/cobra on 29-Feb-2024</em></p>
 </div>
 </div>
 

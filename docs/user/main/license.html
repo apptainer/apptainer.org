@@ -112,7 +112,9 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#dependency-licenses">Dependency Licenses</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-netflix-go-expect">github.com/Netflix/go-expect</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-containerd-containerd">github.com/containerd/containerd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-containerd-containerd-pkg-userns">github.com/containerd/containerd/pkg/userns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-containerd-log">github.com/containerd/log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-containerd-stargz-snapshotter-estargz">github.com/containerd/stargz-snapshotter/estargz</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-containernetworking-cni">github.com/containernetworking/cni</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-containernetworking-plugins">github.com/containernetworking/plugins</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-containers-image-v5">github.com/containers/image/v5</a></li>
@@ -122,6 +124,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#github-com-coreos-go-iptables-iptables">github.com/coreos/go-iptables/iptables</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-coreos-go-systemd-v22-dbus">github.com/coreos/go-systemd/v22/dbus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-cyberphone-json-canonicalization-go-src-webpki-org-jsoncanonicalizer">github.com/cyberphone/json-canonicalization/go/src/webpki.org/jsoncanonicalizer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-distribution-reference">github.com/distribution/reference</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-docker-cli-cli-config">github.com/docker/cli/cli/config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-docker-distribution">github.com/docker/distribution</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-docker-docker">github.com/docker/docker</a></li>
@@ -129,6 +132,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#github-com-docker-go-metrics">github.com/docker/go-metrics</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-docker-go-units">github.com/docker/go-units</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-docker-libtrust">github.com/docker/libtrust</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-go-jose-go-jose-v3">github.com/go-jose/go-jose/v3</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-go-logr-logr">github.com/go-logr/logr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-go-logr-stdr">github.com/go-logr/stdr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-go-openapi-analysis">github.com/go-openapi/analysis</a></li>
@@ -141,15 +145,14 @@
 <li class="toctree-l4"><a class="reference internal" href="#github-com-go-openapi-strfmt">github.com/go-openapi/strfmt</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-go-openapi-swag">github.com/go-openapi/swag</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-go-openapi-validate">github.com/go-openapi/validate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-google-go-containerregistry-pkg-name">github.com/google/go-containerregistry/pkg/name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-google-go-containerregistry">github.com/google/go-containerregistry</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-gosimple-unidecode">github.com/gosimple/unidecode</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-klauspost-compress">github.com/klauspost/compress</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-matttproud-golang-protobuf-extensions-pbutil">github.com/matttproud/golang_protobuf_extensions/pbutil</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-moby-locker">github.com/moby/locker</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-moby-patternmatcher">github.com/moby/patternmatcher</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-moby-sys-mountinfo">github.com/moby/sys/mountinfo</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-moby-sys-sequential">github.com/moby/sys/sequential</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-moby-term">github.com/moby/term</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-moby-sys-user">github.com/moby/sys/user</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-modern-go-concurrent">github.com/modern-go/concurrent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-modern-go-reflect2">github.com/modern-go/reflect2</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-oklog-ulid">github.com/oklog/ulid</a></li>
@@ -175,16 +178,15 @@
 <li class="toctree-l4"><a class="reference internal" href="#github-com-vishvananda-netlink">github.com/vishvananda/netlink</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-vishvananda-netns">github.com/vishvananda/netns</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#go-mongodb-org-mongo-driver">go.mongodb.org/mongo-driver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#go-opentelemetry-io-contrib-instrumentation-net-http-otelhttp">go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#go-opentelemetry-io-otel">go.opentelemetry.io/otel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#go-opentelemetry-io-otel-metric">go.opentelemetry.io/otel/metric</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#go-opentelemetry-io-otel-trace">go.opentelemetry.io/otel/trace</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#google-golang-org-genproto-googleapis-rpc-status">google.golang.org/genproto/googleapis/rpc/status</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#google-golang-org-grpc">google.golang.org/grpc</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gopkg-in-go-jose-go-jose-v2">gopkg.in/go-jose/go-jose.v2</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gopkg-in-square-go-jose-v2">gopkg.in/square/go-jose.v2</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gopkg-in-yaml-v2">gopkg.in/yaml.v2</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gotest-tools-v3">gotest.tools/v3</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#oras-land-oras-go-pkg">oras.land/oras-go/pkg</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-emirpasic-gods">github.com/emirpasic/gods</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-godbus-dbus-v5">github.com/godbus/dbus/v5</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-gorilla-handlers">github.com/gorilla/handlers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-pkg-errors">github.com/pkg/errors</a></li>
@@ -196,6 +198,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#github-com-apptainer-sif-v2">github.com/apptainer/sif/v2</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-cloudflare-circl">github.com/cloudflare/circl</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-cyphar-filepath-securejoin">github.com/cyphar/filepath-securejoin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-go-jose-go-jose-v3-json">github.com/go-jose/go-jose/v3/json</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-gogo-protobuf-proto">github.com/gogo/protobuf/proto</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-golang-protobuf">github.com/golang/protobuf</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-google-go-cmp-cmp">github.com/google/go-cmp/cmp</a></li>
@@ -207,10 +210,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#github-com-prometheus-common-internal-bitbucket-org-ww-goautoneg">github.com/prometheus/common/internal/bitbucket.org/ww/goautoneg</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-spf13-pflag">github.com/spf13/pflag</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-sylabs-json-resp">github.com/sylabs/json-resp</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-theupdateframework-go-tuf-encrypted">github.com/theupdateframework/go-tuf/encrypted</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-ulikunitz-xz">github.com/ulikunitz/xz</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-vbatts-go-mtree">github.com/vbatts/go-mtree</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-vbatts-tar-split-archive-tar">github.com/vbatts/tar-split/archive/tar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-vbatts-tar-split">github.com/vbatts/tar-split</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#golang-org-x-crypto">golang.org/x/crypto</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#golang-org-x-exp">golang.org/x/exp</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#golang-org-x-net">golang.org/x/net</a></li>
@@ -220,7 +222,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#golang-org-x-text">golang.org/x/text</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#google-golang-org-protobuf">google.golang.org/protobuf</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gopkg-in-go-jose-go-jose-v2-json">gopkg.in/go-jose/go-jose.v2/json</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gopkg-in-square-go-jose-v2-json">gopkg.in/square/go-jose.v2/json</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gotest-tools-v3-internal-difflib">gotest.tools/v3/internal/difflib</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mvdan-cc-sh-v3">mvdan.cc/sh/v3</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-burntsushi-toml">github.com/BurntSushi/toml</a></li>
@@ -229,6 +230,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#github-com-adigunhammedolalekan-registry-auth">github.com/adigunhammedolalekan/registry-auth</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-apex-log">github.com/apex/log</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-asaskevich-govalidator">github.com/asaskevich/govalidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-astromechza-etcpwdparse">github.com/astromechza/etcpwdparse</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-beorn7-perks-quantile">github.com/beorn7/perks/quantile</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-blang-semver-v4">github.com/blang/semver/v4</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-buger-goterm">github.com/buger/goterm</a></li>
@@ -250,16 +252,17 @@
 <li class="toctree-l4"><a class="reference internal" href="#github-com-mattn-go-colorable">github.com/mattn/go-colorable</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-mattn-go-isatty">github.com/mattn/go-isatty</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-mattn-go-runewidth">github.com/mattn/go-runewidth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-mattn-go-sqlite3">github.com/mattn/go-sqlite3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-mitchellh-go-homedir">github.com/mitchellh/go-homedir</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-mitchellh-mapstructure">github.com/mitchellh/mapstructure</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-morikuni-aec">github.com/morikuni/aec</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-pelletier-go-toml-v2">github.com/pelletier/go-toml/v2</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-rivo-uniseg">github.com/rivo/uniseg</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-secure-systems-lab-go-securesystemslib-dsse">github.com/secure-systems-lab/go-securesystemslib/dsse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-samber-lo">github.com/samber/lo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-secure-systems-lab-go-securesystemslib">github.com/secure-systems-lab/go-securesystemslib</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-shopspring-decimal">github.com/shopspring/decimal</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-sirupsen-logrus">github.com/sirupsen/logrus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-titanous-rocacheck">github.com/titanous/rocacheck</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-urfave-cli">github.com/urfave/cli</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#go-etcd-io-bbolt">go.etcd.io/bbolt</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#go-mozilla-org-pkcs7">go.mozilla.org/pkcs7</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gopkg-in-yaml-v3">gopkg.in/yaml.v3</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-gosimple-slug">github.com/gosimple/slug</a></li>
@@ -727,10 +730,20 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> Apache-2.0</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/Netflix/go-expect/blob/master/LICENSE">https://github.com/Netflix/go-expect/blob/master/LICENSE</a></p>
 </div>
-<div class="section" id="github-com-containerd-containerd">
-<h4>github.com/containerd/containerd<a class="headerlink" href="#github-com-containerd-containerd" title="Permalink to this heading"></a></h4>
+<div class="section" id="github-com-containerd-containerd-pkg-userns">
+<h4>github.com/containerd/containerd/pkg/userns<a class="headerlink" href="#github-com-containerd-containerd-pkg-userns" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> Apache-2.0</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/containerd/containerd/blob/master/LICENSE">https://github.com/containerd/containerd/blob/master/LICENSE</a></p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/containerd/containerd/blob/master/pkg/userns/LICENSE">https://github.com/containerd/containerd/blob/master/pkg/userns/LICENSE</a></p>
+</div>
+<div class="section" id="github-com-containerd-log">
+<h4>github.com/containerd/log<a class="headerlink" href="#github-com-containerd-log" title="Permalink to this heading"></a></h4>
+<p><strong>License:</strong> Apache-2.0</p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/containerd/log/blob/master/LICENSE">https://github.com/containerd/log/blob/master/LICENSE</a></p>
+</div>
+<div class="section" id="github-com-containerd-stargz-snapshotter-estargz">
+<h4>github.com/containerd/stargz-snapshotter/estargz<a class="headerlink" href="#github-com-containerd-stargz-snapshotter-estargz" title="Permalink to this heading"></a></h4>
+<p><strong>License:</strong> Apache-2.0</p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/containerd/stargz-snapshotter/blob/master/estargz/LICENSE">https://github.com/containerd/stargz-snapshotter/blob/master/estargz/LICENSE</a></p>
 </div>
 <div class="section" id="github-com-containernetworking-cni">
 <h4>github.com/containernetworking/cni<a class="headerlink" href="#github-com-containernetworking-cni" title="Permalink to this heading"></a></h4>
@@ -777,6 +790,11 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> Apache-2.0</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/cyberphone/json-canonicalization/blob/master/go/src/webpki.org/jsoncanonicalizer/LICENSE">https://github.com/cyberphone/json-canonicalization/blob/master/go/src/webpki.org/jsoncanonicalizer/LICENSE</a></p>
 </div>
+<div class="section" id="github-com-distribution-reference">
+<h4>github.com/distribution/reference<a class="headerlink" href="#github-com-distribution-reference" title="Permalink to this heading"></a></h4>
+<p><strong>License:</strong> Apache-2.0</p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/distribution/reference/blob/master/LICENSE">https://github.com/distribution/reference/blob/master/LICENSE</a></p>
+</div>
 <div class="section" id="github-com-docker-cli-cli-config">
 <h4>github.com/docker/cli/cli/config<a class="headerlink" href="#github-com-docker-cli-cli-config" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> Apache-2.0</p>
@@ -811,6 +829,11 @@ you may use a subset of them.</p>
 <h4>github.com/docker/libtrust<a class="headerlink" href="#github-com-docker-libtrust" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> Apache-2.0</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/docker/libtrust/blob/master/LICENSE">https://github.com/docker/libtrust/blob/master/LICENSE</a></p>
+</div>
+<div class="section" id="github-com-go-jose-go-jose-v3">
+<h4>github.com/go-jose/go-jose/v3<a class="headerlink" href="#github-com-go-jose-go-jose-v3" title="Permalink to this heading"></a></h4>
+<p><strong>License:</strong> Apache-2.0</p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/go-jose/go-jose/blob/master/v3/LICENSE">https://github.com/go-jose/go-jose/blob/master/v3/LICENSE</a></p>
 </div>
 <div class="section" id="github-com-go-logr-logr">
 <h4>github.com/go-logr/logr<a class="headerlink" href="#github-com-go-logr-logr" title="Permalink to this heading"></a></h4>
@@ -872,10 +895,10 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> Apache-2.0</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/go-openapi/validate/blob/master/LICENSE">https://github.com/go-openapi/validate/blob/master/LICENSE</a></p>
 </div>
-<div class="section" id="github-com-google-go-containerregistry-pkg-name">
-<h4>github.com/google/go-containerregistry/pkg/name<a class="headerlink" href="#github-com-google-go-containerregistry-pkg-name" title="Permalink to this heading"></a></h4>
+<div class="section" id="github-com-google-go-containerregistry">
+<h4>github.com/google/go-containerregistry<a class="headerlink" href="#github-com-google-go-containerregistry" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> Apache-2.0</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/google/go-containerregistry/blob/master/pkg/name/LICENSE">https://github.com/google/go-containerregistry/blob/master/pkg/name/LICENSE</a></p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/google/go-containerregistry/blob/master/LICENSE">https://github.com/google/go-containerregistry/blob/master/LICENSE</a></p>
 </div>
 <div class="section" id="github-com-gosimple-unidecode">
 <h4>github.com/gosimple/unidecode<a class="headerlink" href="#github-com-gosimple-unidecode" title="Permalink to this heading"></a></h4>
@@ -892,11 +915,6 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> Apache-2.0</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/matttproud/golang_protobuf_extensions/blob/master/pbutil/LICENSE">https://github.com/matttproud/golang_protobuf_extensions/blob/master/pbutil/LICENSE</a></p>
 </div>
-<div class="section" id="github-com-moby-locker">
-<h4>github.com/moby/locker<a class="headerlink" href="#github-com-moby-locker" title="Permalink to this heading"></a></h4>
-<p><strong>License:</strong> Apache-2.0</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/moby/locker/blob/master/LICENSE">https://github.com/moby/locker/blob/master/LICENSE</a></p>
-</div>
 <div class="section" id="github-com-moby-patternmatcher">
 <h4>github.com/moby/patternmatcher<a class="headerlink" href="#github-com-moby-patternmatcher" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> Apache-2.0</p>
@@ -912,10 +930,10 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> Apache-2.0</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/moby/sys/blob/master/sequential/LICENSE">https://github.com/moby/sys/blob/master/sequential/LICENSE</a></p>
 </div>
-<div class="section" id="github-com-moby-term">
-<h4>github.com/moby/term<a class="headerlink" href="#github-com-moby-term" title="Permalink to this heading"></a></h4>
+<div class="section" id="github-com-moby-sys-user">
+<h4>github.com/moby/sys/user<a class="headerlink" href="#github-com-moby-sys-user" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> Apache-2.0</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/moby/term/blob/master/LICENSE">https://github.com/moby/term/blob/master/LICENSE</a></p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/moby/sys/blob/master/user/LICENSE">https://github.com/moby/sys/blob/master/user/LICENSE</a></p>
 </div>
 <div class="section" id="github-com-modern-go-concurrent">
 <h4>github.com/modern-go/concurrent<a class="headerlink" href="#github-com-modern-go-concurrent" title="Permalink to this heading"></a></h4>
@@ -1042,10 +1060,20 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> Apache-2.0</p>
 <p><strong>Project URL:</strong> <a class="reference external" href="https://go.mongodb.org/mongo-driver">https://go.mongodb.org/mongo-driver</a></p>
 </div>
+<div class="section" id="go-opentelemetry-io-contrib-instrumentation-net-http-otelhttp">
+<h4>go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp<a class="headerlink" href="#go-opentelemetry-io-contrib-instrumentation-net-http-otelhttp" title="Permalink to this heading"></a></h4>
+<p><strong>License:</strong> Apache-2.0</p>
+<p><strong>Project URL:</strong> <a class="reference external" href="https://go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp">https://go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp</a></p>
+</div>
 <div class="section" id="go-opentelemetry-io-otel">
 <h4>go.opentelemetry.io/otel<a class="headerlink" href="#go-opentelemetry-io-otel" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> Apache-2.0</p>
 <p><strong>Project URL:</strong> <a class="reference external" href="https://go.opentelemetry.io/otel">https://go.opentelemetry.io/otel</a></p>
+</div>
+<div class="section" id="go-opentelemetry-io-otel-metric">
+<h4>go.opentelemetry.io/otel/metric<a class="headerlink" href="#go-opentelemetry-io-otel-metric" title="Permalink to this heading"></a></h4>
+<p><strong>License:</strong> Apache-2.0</p>
+<p><strong>Project URL:</strong> <a class="reference external" href="https://go.opentelemetry.io/otel/metric">https://go.opentelemetry.io/otel/metric</a></p>
 </div>
 <div class="section" id="go-opentelemetry-io-otel-trace">
 <h4>go.opentelemetry.io/otel/trace<a class="headerlink" href="#go-opentelemetry-io-otel-trace" title="Permalink to this heading"></a></h4>
@@ -1067,11 +1095,6 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> Apache-2.0</p>
 <p><strong>Project URL:</strong> <a class="reference external" href="https://gopkg.in/go-jose/go-jose.v2">https://gopkg.in/go-jose/go-jose.v2</a></p>
 </div>
-<div class="section" id="gopkg-in-square-go-jose-v2">
-<h4>gopkg.in/square/go-jose.v2<a class="headerlink" href="#gopkg-in-square-go-jose-v2" title="Permalink to this heading"></a></h4>
-<p><strong>License:</strong> Apache-2.0</p>
-<p><strong>Project URL:</strong> <a class="reference external" href="https://gopkg.in/square/go-jose.v2">https://gopkg.in/square/go-jose.v2</a></p>
-</div>
 <div class="section" id="gopkg-in-yaml-v2">
 <h4>gopkg.in/yaml.v2<a class="headerlink" href="#gopkg-in-yaml-v2" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> Apache-2.0</p>
@@ -1081,16 +1104,6 @@ you may use a subset of them.</p>
 <h4>gotest.tools/v3<a class="headerlink" href="#gotest-tools-v3" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> Apache-2.0</p>
 <p><strong>Project URL:</strong> <a class="reference external" href="https://gotest.tools/v3">https://gotest.tools/v3</a></p>
-</div>
-<div class="section" id="oras-land-oras-go-pkg">
-<h4>oras.land/oras-go/pkg<a class="headerlink" href="#oras-land-oras-go-pkg" title="Permalink to this heading"></a></h4>
-<p><strong>License:</strong> Apache-2.0</p>
-<p><strong>Project URL:</strong> <a class="reference external" href="https://oras.land/oras-go/pkg">https://oras.land/oras-go/pkg</a></p>
-</div>
-<div class="section" id="github-com-emirpasic-gods">
-<h4>github.com/emirpasic/gods<a class="headerlink" href="#github-com-emirpasic-gods" title="Permalink to this heading"></a></h4>
-<p><strong>License:</strong> BSD-2-Clause</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/emirpasic/gods/blob/master/LICENSE">https://github.com/emirpasic/gods/blob/master/LICENSE</a></p>
 </div>
 <div class="section" id="github-com-godbus-dbus-v5">
 <h4>github.com/godbus/dbus/v5<a class="headerlink" href="#github-com-godbus-dbus-v5" title="Permalink to this heading"></a></h4>
@@ -1147,6 +1160,11 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> BSD-3-Clause</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/cyphar/filepath-securejoin/blob/master/LICENSE">https://github.com/cyphar/filepath-securejoin/blob/master/LICENSE</a></p>
 </div>
+<div class="section" id="github-com-go-jose-go-jose-v3-json">
+<h4>github.com/go-jose/go-jose/v3/json<a class="headerlink" href="#github-com-go-jose-go-jose-v3-json" title="Permalink to this heading"></a></h4>
+<p><strong>License:</strong> BSD-3-Clause</p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/go-jose/go-jose/blob/master/v3/json/LICENSE">https://github.com/go-jose/go-jose/blob/master/v3/json/LICENSE</a></p>
+</div>
 <div class="section" id="github-com-gogo-protobuf-proto">
 <h4>github.com/gogo/protobuf/proto<a class="headerlink" href="#github-com-gogo-protobuf-proto" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> BSD-3-Clause</p>
@@ -1202,11 +1220,6 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> BSD-3-Clause</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/sylabs/json-resp/blob/master/LICENSE.md">https://github.com/sylabs/json-resp/blob/master/LICENSE.md</a></p>
 </div>
-<div class="section" id="github-com-theupdateframework-go-tuf-encrypted">
-<h4>github.com/theupdateframework/go-tuf/encrypted<a class="headerlink" href="#github-com-theupdateframework-go-tuf-encrypted" title="Permalink to this heading"></a></h4>
-<p><strong>License:</strong> BSD-3-Clause</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/theupdateframework/go-tuf/blob/master/encrypted/LICENSE">https://github.com/theupdateframework/go-tuf/blob/master/encrypted/LICENSE</a></p>
-</div>
 <div class="section" id="github-com-ulikunitz-xz">
 <h4>github.com/ulikunitz/xz<a class="headerlink" href="#github-com-ulikunitz-xz" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> BSD-3-Clause</p>
@@ -1217,10 +1230,10 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> BSD-3-Clause</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/vbatts/go-mtree/blob/master/LICENSE">https://github.com/vbatts/go-mtree/blob/master/LICENSE</a></p>
 </div>
-<div class="section" id="github-com-vbatts-tar-split-archive-tar">
-<h4>github.com/vbatts/tar-split/archive/tar<a class="headerlink" href="#github-com-vbatts-tar-split-archive-tar" title="Permalink to this heading"></a></h4>
+<div class="section" id="github-com-vbatts-tar-split">
+<h4>github.com/vbatts/tar-split<a class="headerlink" href="#github-com-vbatts-tar-split" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> BSD-3-Clause</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/vbatts/tar-split/blob/master/archive/tar/LICENSE">https://github.com/vbatts/tar-split/blob/master/archive/tar/LICENSE</a></p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/vbatts/tar-split/blob/master/LICENSE">https://github.com/vbatts/tar-split/blob/master/LICENSE</a></p>
 </div>
 <div class="section" id="golang-org-x-crypto">
 <h4>golang.org/x/crypto<a class="headerlink" href="#golang-org-x-crypto" title="Permalink to this heading"></a></h4>
@@ -1267,11 +1280,6 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> BSD-3-Clause</p>
 <p><strong>Project URL:</strong> <a class="reference external" href="https://gopkg.in/go-jose/go-jose.v2/json">https://gopkg.in/go-jose/go-jose.v2/json</a></p>
 </div>
-<div class="section" id="gopkg-in-square-go-jose-v2-json">
-<h4>gopkg.in/square/go-jose.v2/json<a class="headerlink" href="#gopkg-in-square-go-jose-v2-json" title="Permalink to this heading"></a></h4>
-<p><strong>License:</strong> BSD-3-Clause</p>
-<p><strong>Project URL:</strong> <a class="reference external" href="https://gopkg.in/square/go-jose.v2/json">https://gopkg.in/square/go-jose.v2/json</a></p>
-</div>
 <div class="section" id="gotest-tools-v3-internal-difflib">
 <h4>gotest.tools/v3/internal/difflib<a class="headerlink" href="#gotest-tools-v3-internal-difflib" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> BSD-3-Clause</p>
@@ -1311,6 +1319,11 @@ you may use a subset of them.</p>
 <h4>github.com/asaskevich/govalidator<a class="headerlink" href="#github-com-asaskevich-govalidator" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> MIT</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/asaskevich/govalidator/blob/master/LICENSE">https://github.com/asaskevich/govalidator/blob/master/LICENSE</a></p>
+</div>
+<div class="section" id="github-com-astromechza-etcpwdparse">
+<h4>github.com/astromechza/etcpwdparse<a class="headerlink" href="#github-com-astromechza-etcpwdparse" title="Permalink to this heading"></a></h4>
+<p><strong>License:</strong> MIT</p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/astromechza/etcpwdparse/blob/master/LICENSE.md">https://github.com/astromechza/etcpwdparse/blob/master/LICENSE.md</a></p>
 </div>
 <div class="section" id="github-com-beorn7-perks-quantile">
 <h4>github.com/beorn7/perks/quantile<a class="headerlink" href="#github-com-beorn7-perks-quantile" title="Permalink to this heading"></a></h4>
@@ -1417,15 +1430,20 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> MIT</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/mattn/go-runewidth/blob/master/LICENSE">https://github.com/mattn/go-runewidth/blob/master/LICENSE</a></p>
 </div>
+<div class="section" id="github-com-mattn-go-sqlite3">
+<h4>github.com/mattn/go-sqlite3<a class="headerlink" href="#github-com-mattn-go-sqlite3" title="Permalink to this heading"></a></h4>
+<p><strong>License:</strong> MIT</p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/mattn/go-sqlite3/blob/master/LICENSE">https://github.com/mattn/go-sqlite3/blob/master/LICENSE</a></p>
+</div>
+<div class="section" id="github-com-mitchellh-go-homedir">
+<h4>github.com/mitchellh/go-homedir<a class="headerlink" href="#github-com-mitchellh-go-homedir" title="Permalink to this heading"></a></h4>
+<p><strong>License:</strong> MIT</p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/mitchellh/go-homedir/blob/master/LICENSE">https://github.com/mitchellh/go-homedir/blob/master/LICENSE</a></p>
+</div>
 <div class="section" id="github-com-mitchellh-mapstructure">
 <h4>github.com/mitchellh/mapstructure<a class="headerlink" href="#github-com-mitchellh-mapstructure" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> MIT</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/mitchellh/mapstructure/blob/master/LICENSE">https://github.com/mitchellh/mapstructure/blob/master/LICENSE</a></p>
-</div>
-<div class="section" id="github-com-morikuni-aec">
-<h4>github.com/morikuni/aec<a class="headerlink" href="#github-com-morikuni-aec" title="Permalink to this heading"></a></h4>
-<p><strong>License:</strong> MIT</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/morikuni/aec/blob/master/LICENSE">https://github.com/morikuni/aec/blob/master/LICENSE</a></p>
 </div>
 <div class="section" id="github-com-pelletier-go-toml-v2">
 <h4>github.com/pelletier/go-toml/v2<a class="headerlink" href="#github-com-pelletier-go-toml-v2" title="Permalink to this heading"></a></h4>
@@ -1437,10 +1455,15 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> MIT</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/rivo/uniseg/blob/master/LICENSE.txt">https://github.com/rivo/uniseg/blob/master/LICENSE.txt</a></p>
 </div>
-<div class="section" id="github-com-secure-systems-lab-go-securesystemslib-dsse">
-<h4>github.com/secure-systems-lab/go-securesystemslib/dsse<a class="headerlink" href="#github-com-secure-systems-lab-go-securesystemslib-dsse" title="Permalink to this heading"></a></h4>
+<div class="section" id="github-com-samber-lo">
+<h4>github.com/samber/lo<a class="headerlink" href="#github-com-samber-lo" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> MIT</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/secure-systems-lab/go-securesystemslib/blob/master/dsse/LICENSE">https://github.com/secure-systems-lab/go-securesystemslib/blob/master/dsse/LICENSE</a></p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/samber/lo/blob/master/LICENSE">https://github.com/samber/lo/blob/master/LICENSE</a></p>
+</div>
+<div class="section" id="github-com-secure-systems-lab-go-securesystemslib">
+<h4>github.com/secure-systems-lab/go-securesystemslib<a class="headerlink" href="#github-com-secure-systems-lab-go-securesystemslib" title="Permalink to this heading"></a></h4>
+<p><strong>License:</strong> MIT</p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/secure-systems-lab/go-securesystemslib/blob/master/LICENSE">https://github.com/secure-systems-lab/go-securesystemslib/blob/master/LICENSE</a></p>
 </div>
 <div class="section" id="github-com-shopspring-decimal">
 <h4>github.com/shopspring/decimal<a class="headerlink" href="#github-com-shopspring-decimal" title="Permalink to this heading"></a></h4>
@@ -1461,11 +1484,6 @@ you may use a subset of them.</p>
 <h4>github.com/urfave/cli<a class="headerlink" href="#github-com-urfave-cli" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> MIT</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/urfave/cli/blob/master/LICENSE">https://github.com/urfave/cli/blob/master/LICENSE</a></p>
-</div>
-<div class="section" id="go-etcd-io-bbolt">
-<h4>go.etcd.io/bbolt<a class="headerlink" href="#go-etcd-io-bbolt" title="Permalink to this heading"></a></h4>
-<p><strong>License:</strong> MIT</p>
-<p><strong>Project URL:</strong> <a class="reference external" href="https://go.etcd.io/bbolt">https://go.etcd.io/bbolt</a></p>
 </div>
 <div class="section" id="go-mozilla-org-pkcs7">
 <h4>go.mozilla.org/pkcs7<a class="headerlink" href="#go-mozilla-org-pkcs7" title="Permalink to this heading"></a></h4>
