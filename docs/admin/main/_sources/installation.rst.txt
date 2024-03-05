@@ -586,7 +586,7 @@ Use ``vagrant init`` to create a new Vagrantfile, or use this example:
 
    Vagrant.configure("2") do |config|
      # Choose operating system distribution
-     config.vm.box = "fedora/36-cloud-base"
+     config.vm.box = "fedora/38-cloud-base"
 
      config.vm.provider "virtualbox" do |vb|
        # Customize the number of cpus on the VM:
