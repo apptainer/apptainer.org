@@ -154,7 +154,12 @@ It can even often be run nested inside another Apptainer container
 or inside some other container system.</p>
 <div class="section" id="system-requirements">
 <h3>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading"></a></h3>
-<p>Apptainer requires ~150MiB disk space once compiled and installed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a long section; navigation of this page is done most
+easily by expanding the menus on the left.</p>
+</div>
+<p>Apptainer requires ~200MiB disk space once compiled and installed.</p>
 <p>There are no specific CPU or memory requirements at runtime, though
 at least 2GB of RAM is recommended when building from source.</p>
 <p>Full functionality of Apptainer requires that the kernel supports:</p>
@@ -220,18 +225,10 @@ as they are made in a separate mount namespace.</p>
 <div class="section" id="overlay-support">
 <h5>Overlay support<a class="headerlink" href="#overlay-support" title="Permalink to this heading"></a></h5>
 <p>Some features of Apptainer, such as the <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> and
-<code class="docutils literal notranslate"><span class="pre">--overlay</span></code> options, try to use the Linux <code class="docutils literal notranslate"><span class="pre">overlay</span></code> filesystem driver to
-construct a container root filesystem that combines files from different
-locations.
-Not all filesystems can be used with the <code class="docutils literal notranslate"><span class="pre">overlay</span></code> driver,
-so when containers are run from these filesystems some Apptainer
-features may not be available.</p>
-<p>If the <code class="docutils literal notranslate"><span class="pre">overlay</span></code> kernel driver does not work, but the setuid flow
-is not being used and unprivileged user namespaces are available, then
-Apptainer will use the <code class="docutils literal notranslate"><span class="pre">fuse-overlayfs</span></code> command if it can be found.
-That works with additional filesystem types than the <code class="docutils literal notranslate"><span class="pre">overlay</span></code>
-kernel driver does not work with, and also works in cases where
-older kernels do not support using the <code class="docutils literal notranslate"><span class="pre">overlay</span></code> driver unprivileged.</p>
+<code class="docutils literal notranslate"><span class="pre">--overlay</span></code> options, use overlay mounts to construct a container root
+filesystem that combines files from different locations. Overlay mounts may use
+the Linux kernel overlay filesystem driver or the fuse-overlayfs userspace
+implementation, depending on the workflow and support from the host kernel.</p>
 <p>Overlay support has two aspects, referenced below:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">lowerdir</span></code> support for a filesystem allows a directory on that
@@ -245,6 +242,16 @@ container. If you use the <code class="docutils literal notranslate"><span class
 onto a container, then the filesystem holding the overlay directory
 must support <code class="docutils literal notranslate"><span class="pre">upperdir</span></code>.</p></li>
 </ul>
+<p>Overlays are mounted with the Linux kernel driver when:</p>
+<ul class="simple">
+<li><p>the upperdir is not an extfs image, and</p></li>
+<li><p>the upperdir is not a directory on an unsupported filesystem type
+(detailed later on this page), and</p></li>
+<li><p>Apptainer is running either in setuid mode or in unprivileged / non-setuid
+mode when the kernel supports unprivileged overlay mounts.</p></li>
+</ul>
+<p>Overlays are mounted with the fuse-overlayfs userspace implementation
+in all other cases.</p>
 </div>
 <div class="section" id="fakeroot-with-uid-gid-mapping-on-network-filesystems">
 <h5>Fakeroot with uid/gid mapping on Network filesystems<a class="headerlink" href="#fakeroot-with-uid-gid-mapping-on-network-filesystems" title="Permalink to this heading"></a></h5>
@@ -307,10 +314,10 @@ not support <code class="docutils literal notranslate"><span class="pre">--faker
 <ul class="simple">
 <li><p>Containers run from SIF files located on an NFS filesystem do not
 have restrictions.</p></li>
-<li><p>In setuid mode, you cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> to overlay a
+<li><p>You cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> to overlay a writable
 directory onto a container when the overlay (upperdir) directory is
 on an NFS filesystem.
-In non-setuid mode with fuse-overlayfs it is allowed but will be read-only.</p></li>
+It only works with a read-only overlay.</p></li>
 <li><p>When building a container, or running a container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>, your
 <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> / <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> should not be set to an NFS
 location.</p></li>
@@ -324,15 +331,14 @@ from an NFS location.</p></li>
 <code class="docutils literal notranslate"><span class="pre">lowerdir</span></code> overlay support for certain Apptainer features, and
 do not support <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>.</p>
 <ul class="simple">
-<li><p>In setuid mode, you cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> or <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> with a
-sandbox container that is located on a Lustre, GPFS, or PanFS
-filesystem. SIF containers on Lustre, GPFS, and PanFS will work
-correctly with these options.
-It works with fuse-overlayfs in non-setuid mode.</p></li>
-<li><p>In setuid mode, you cannot use <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> to overlay a directory onto a
-container, when the overlay (upperdir) directory is on a Lustre,
-GPFS, or PanFS filesystem.
-In non-setuid mode with fuse-overlayfs it is allowed but will be read-only.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--overlay</span></code> or <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> with a
+sandbox container (lowerdir) that is located on a Lustre, GPFS, or PanFS
+filesystem will use fuse-overlayfs.
+SIF containers on Lustre, GPFS, and PanFS will work
+correctly with the same overlay method as on any filesystem type.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--overlay</span></code> with an overlay (upperdir) directory on a Lustre,
+GPFS, or PanFS filesystem will use fuse-overlayfs, not the kernel
+overlay system.</p></li>
 <li><p>When building a container, or running a container with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>, your
 <code class="docutils literal notranslate"><span class="pre">TMPDIR</span> <span class="pre">/</span> <span class="pre">APPTAINER_TMPDIR</span></code> should not be a Lustre, GPFS, or
 PanFS location.</p></li>
@@ -341,8 +347,9 @@ PanFS location.</p></li>
 <div class="section" id="fuse-based-filesystems">
 <h5>FUSE-based filesystems<a class="headerlink" href="#fuse-based-filesystems" title="Permalink to this heading"></a></h5>
 <p>The kernel overlay driver does not allow the upperdir to be a FUSE-based
-filesystem, so in setuid mode that is disallowed.
-It does work in non-setuid mode with fuse-overlayfs.</p>
+filesystem, so those always use fuse-overlayfs.
+A FUSE-based filesystem is used by default when the upperdir is an extfs
+image.</p>
 </div>
 </div>
 </div>
