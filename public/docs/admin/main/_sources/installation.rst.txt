@@ -21,7 +21,12 @@ or inside some other container system.
 System Requirements
 ===================
 
-{Project} requires ~150MiB disk space once compiled and installed.
+.. note::
+
+    This is a long section; navigation of this page is done most
+    easily by expanding the menus on the left.
+
+{Project} requires ~200MiB disk space once compiled and installed.
 
 There are no specific CPU or memory requirements at runtime, though 
 at least 2GB of RAM is recommended when building from source.
@@ -99,19 +104,10 @@ Overlay support
 ^^^^^^^^^^^^^^^
 
 Some features of {Project}, such as the ``--writable-tmpfs`` and
-``--overlay`` options, try to use the Linux ``overlay`` filesystem driver to
-construct a container root filesystem that combines files from different
-locations.
-Not all filesystems can be used with the ``overlay`` driver,
-so when containers are run from these filesystems some {Project}
-features may not be available.
-
-If the ``overlay`` kernel driver does not work, but the setuid flow
-is not being used and unprivileged user namespaces are available, then
-{Project} will use the ``fuse-overlayfs`` command if it can be found.
-That works with additional filesystem types than the ``overlay``
-kernel driver does not work with, and also works in cases where
-older kernels do not support using the ``overlay`` driver unprivileged.
+``--overlay`` options, use overlay mounts to construct a container root
+filesystem that combines files from different locations. Overlay mounts may use
+the Linux kernel overlay filesystem driver or the fuse-overlayfs userspace
+implementation, depending on the workflow and support from the host kernel.
 
 Overlay support has two aspects, referenced below:
 
@@ -126,6 +122,17 @@ Overlay support has two aspects, referenced below:
    container. If you use the ``--overlay`` option to overlay a directory
    onto a container, then the filesystem holding the overlay directory
    must support ``upperdir``.
+
+Overlays are mounted with the Linux kernel driver when:
+
+- the upperdir is not an extfs image, and
+- the upperdir is not a directory on an unsupported filesystem type
+  (detailed later on this page), and
+- {Project} is running either in setuid mode or in unprivileged / non-setuid
+  mode when the kernel supports unprivileged overlay mounts.
+
+Overlays are mounted with the fuse-overlayfs userspace implementation
+in all other cases.
 
 Fakeroot with uid/gid mapping on Network filesystems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -199,10 +206,10 @@ not support ``--fakeroot``.
 -  Containers run from SIF files located on an NFS filesystem do not
    have restrictions.
 
--  In setuid mode, you cannot use ``--overlay`` to overlay a
+-  You cannot use ``--overlay`` to overlay a writable
    directory onto a container when the overlay (upperdir) directory is
    on an NFS filesystem.  
-   In non-setuid mode with fuse-overlayfs it is allowed but will be read-only.
+   It only works with a read-only overlay.
 
 -  When building a container, or running a container with ``--fakeroot``, your
    ``TMPDIR`` / ``{ENVPREFIX}_TMPDIR`` should not be set to an NFS
@@ -218,16 +225,15 @@ Lustre, GPFS, and PanFS do not have sufficient ``upperdir`` or
 ``lowerdir`` overlay support for certain {Project} features, and
 do not support ``--fakeroot``.
 
-- In setuid mode, you cannot use ``--overlay`` or ``--writable-tmpfs`` with a
-  sandbox container that is located on a Lustre, GPFS, or PanFS
-  filesystem. SIF containers on Lustre, GPFS, and PanFS will work
-  correctly with these options.
-  It works with fuse-overlayfs in non-setuid mode.
+- ``--overlay`` or ``--writable-tmpfs`` with a
+  sandbox container (lowerdir) that is located on a Lustre, GPFS, or PanFS
+  filesystem will use fuse-overlayfs.
+  SIF containers on Lustre, GPFS, and PanFS will work
+  correctly with the same overlay method as on any filesystem type.
 
-- In setuid mode, you cannot use ``--overlay`` to overlay a directory onto a
-  container, when the overlay (upperdir) directory is on a Lustre,
-  GPFS, or PanFS filesystem.
-  In non-setuid mode with fuse-overlayfs it is allowed but will be read-only.
+- ``--overlay`` with an overlay (upperdir) directory on a Lustre,
+  GPFS, or PanFS filesystem will use fuse-overlayfs, not the kernel
+  overlay system.
 
 - When building a container, or running a container with ``--fakeroot``, your
   ``TMPDIR / {ENVPREFIX}_TMPDIR`` should not be a Lustre, GPFS, or
@@ -237,8 +243,9 @@ FUSE-based filesystems
 ^^^^^^^^^^^^^^^^^^^^^^
 
 The kernel overlay driver does not allow the upperdir to be a FUSE-based
-filesystem, so in setuid mode that is disallowed.
-It does work in non-setuid mode with fuse-overlayfs.
+filesystem, so those always use fuse-overlayfs.
+A FUSE-based filesystem is used by default when the upperdir is an extfs
+image.
 
 
 Install unprivileged from pre-built binaries
