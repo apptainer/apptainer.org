@@ -334,6 +334,16 @@ means users can specify bind points, scratch and tmp locations.</p>
 </div>
 <div class="section" id="limiting-container-execution">
 <h3>Limiting Container Execution<a class="headerlink" href="#limiting-container-execution" title="Permalink to this heading"></a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The ‘limit container’ and ‘allow container’ directives are not effective if
+unprivileged user namespaces are enabled. They are only effectively applied
+when Apptainer is running in setuid mode and
+unprivileged container execution is not possible on the host.</p>
+<p><strong>You must disable unprivileged user namespace creation on the host if you
+rely on the these directives to limit container execution.</strong> This will
+disable Apptainer’s user namespace mode and most of its fakeroot modes.</p>
+</div>
 <p>There are several ways to limit container execution as an admin listed
 below. If stricter controls are required, check out the <a class="reference internal" href="#execution-control-list"><span class="std std-ref">Execution
 Control List</span></a>.</p>
@@ -731,12 +741,20 @@ containers by validating both the location of the SIF file in the
 filesystem and by checking against a list of signing entities.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
+<p>The ECL is not effective if unprivileged user namespaces are enabled. It is
+only effectively applied when Apptainer is running
+in setuid mode, and unprivileged container execution is not possible on the
+host.</p>
+<p><strong>You must disable unprivileged user namespace creation on the host if you
+rely on the ECL limit container execution.</strong> This will
+disable Apptainer’s user namespace mode and most of its fakeroot modes.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>The ECL configuration applies to SIF container images only. To lock
 down execution fully you should disable execution of other container
 types (squashfs/extfs/dir) via the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> file <code class="docutils literal notranslate"><span class="pre">allow</span>
 <span class="pre">container</span></code> settings.</p>
-<p>In an unprivileged installation of Apptainer, a user can specify their
-own <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> via <code class="docutils literal notranslate"><span class="pre">--config</span></code>, and bypass ECL restrictions.</p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">execgroup</span><span class="p">]]</span>
   <span class="n">tagname</span> <span class="o">=</span> <span class="s2">&quot;group2&quot;</span>

@@ -219,6 +219,17 @@ means users can specify bind points, scratch and tmp locations.
 Limiting Container Execution
 ============================
 
+.. warning::
+
+   The 'limit container' and 'allow container' directives are not effective if
+   unprivileged user namespaces are enabled. They are only effectively applied
+   when {Project} is running in setuid mode and
+   unprivileged container execution is not possible on the host.
+
+   **You must disable unprivileged user namespace creation on the host if you
+   rely on the these directives to limit container execution.** This will
+   disable {Project}'s user namespace mode and most of its fakeroot modes.
+
 There are several ways to limit container execution as an admin listed
 below. If stricter controls are required, check out the :ref:`Execution
 Control List <execution_control_list>`.
@@ -687,13 +698,21 @@ filesystem and by checking against a list of signing entities.
 
 .. warning::
 
+   The ECL is not effective if unprivileged user namespaces are enabled. It is
+   only effectively applied when {Project} is running
+   in setuid mode, and unprivileged container execution is not possible on the
+   host.
+
+   **You must disable unprivileged user namespace creation on the host if you
+   rely on the ECL limit container execution.** This will
+   disable {Project}'s user namespace mode and most of its fakeroot modes.
+
+.. warning::
+
    The ECL configuration applies to SIF container images only. To lock
    down execution fully you should disable execution of other container
    types (squashfs/extfs/dir) via the ``{command}.conf`` file ``allow
    container`` settings.
-
-   In an unprivileged installation of {Project}, a user can specify their
-   own ``{command}.conf`` via ``--config``, and bypass ECL restrictions.
 
 .. code::
 
