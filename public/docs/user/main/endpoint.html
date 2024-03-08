@@ -24,7 +24,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Library API Registries" href="library_api.html" />
+    <link rel="next" title="Keyserver Management" href="keyserver.html" />
     <link rel="prev" title="Encrypted Containers" href="encryption.html" /> 
 </head>
 
@@ -73,7 +73,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#managing-remote-endpoints">Managing Remote Endpoints</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#list-remotes">List Remotes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#add-login-to-remotes">Add &amp; Login To Remotes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#remove-remotes">Remove Remotes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#remove-remotes">Remove Remotes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#insecure-http-endpoints">Insecure (HTTP) Endpoints</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#set-the-default-remote">Set the Default Remote</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#restoring-pre-apptainer-library-behavior">Restoring pre-Apptainer library behavior</a></li>
 </ul>
@@ -82,7 +85,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#managing-oci-registries">Managing OCI Registries</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
@@ -138,7 +142,7 @@
            <div itemprop="articleBody">
              
   <div class="section" id="remote-endpoints">
-<span id="endpoints"></span><h1>Remote Endpoints<a class="headerlink" href="#remote-endpoints" title="Permalink to this heading"></a></h1>
+<span id="endpoint"></span><h1>Remote Endpoints<a class="headerlink" href="#remote-endpoints" title="Permalink to this heading"></a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group allows users to manage the service
@@ -176,23 +180,14 @@ the <code class="docutils literal notranslate"><span class="pre">apptainer</span
 configuration files directly.</p>
 <div class="section" id="list-remotes">
 <h3>List Remotes<a class="headerlink" href="#list-remotes" title="Permalink to this heading"></a></h3>
-<p>To <code class="docutils literal notranslate"><span class="pre">list</span></code> existing remote endpoints, run this:</p>
+<p>To <code class="docutils literal notranslate"><span class="pre">list</span></code> existing remote endpoints, run the following:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>list
 
-<span class="go">Cloud Services Endpoints</span>
-<span class="go">========================</span>
-
-<span class="go">NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE</span>
-<span class="go">DefaultRemote  cloud.apptainer.org  YES     YES     NO</span>
-
-<span class="go">Keyservers</span>
-<span class="go">==========</span>
-
-<span class="go">URI                       GLOBAL  INSECURE  ORDER</span>
-<span class="go">https://keys.openpgp.org  YES     NO        1*</span>
+<span class="go">NAME           URI                  DEFAULT?  GLOBAL?  EXCLUSIVE?  SECURE?</span>
+<span class="go">DefaultRemote  cloud.apptainer.org  ✓         ✓                    ✓</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">YES</span></code> in the <code class="docutils literal notranslate"><span class="pre">ACTIVE</span></code> column for <code class="docutils literal notranslate"><span class="pre">DefaultRemote</span></code> shows that this
+<p>The <code class="docutils literal notranslate"><span class="pre">✓</span></code> in the <code class="docutils literal notranslate"><span class="pre">DEFAULT?</span></code> column for <code class="docutils literal notranslate"><span class="pre">DefaultRemote</span></code> shows that this
 is the current default remote endpoint.</p>
 </div>
 <div class="section" id="add-login-to-remotes">
@@ -206,20 +201,20 @@ hosted at enterprise.example.com:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>myremote<span class="w"> </span>https://enterprise.example.com
 
 <span class="go">INFO:    Remote &quot;myremote&quot; added.</span>
-<span class="go">INFO:    Authenticating with remote: myremote</span>
-<span class="go">Generate an API Key at https://enterprise.example.com/auth/tokens, and paste here:</span>
-<span class="go">API Key:</span>
+<span class="go">Generate an access token at https://enterprise.example.com/auth/tokens, and paste it here.</span>
+<span class="go">Token entered will be hidden for security.</span>
+<span class="go">Access Token:</span>
 </pre></div>
 </div>
-<p>You will be prompted to setup an API key as the remote is added. The <code class="docutils literal notranslate"><span class="pre">add</span></code>
-subcommand will provide you with the web address you need to visit to generate
-your new key.</p>
+<p>You will be prompted to setup an API key as the remote is added. As the example
+above shows, the output of the <code class="docutils literal notranslate"><span class="pre">add</span></code> subcommand will provide you with the web
+address you need to visit in order to generate your new access token.</p>
 <p>To <code class="docutils literal notranslate"><span class="pre">add</span></code> a global remote endpoint (available to all users on the
-system) an administrative user should run:</p>
+system), an administrative user should run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--global<span class="w"> </span>&lt;remote_name&gt;<span class="w"> </span>&lt;remote_uri&gt;
 
 <span class="gp"># </span>example...
-<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--global<span class="w"> </span>company-remote<span class="w"> </span>https://enterprise.example.com
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--global<span class="w"> </span>company-remote<span class="w"> </span>https://enterprise7.example.com
 <span class="go">INFO:    Remote &quot;company-remote&quot; added.</span>
 <span class="go">INFO:    Global option detected. Will not automatically log into remote.</span>
 </pre></div>
@@ -276,8 +271,22 @@ directory.</p>
 </div>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">--global</span></code> option as the root user to remove a global
 endpoint:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer remote remove --global &lt;remote_name&gt;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>remove<span class="w"> </span>--global<span class="w"> </span>&lt;remote_name&gt;
 </pre></div>
+</div>
+<div class="section" id="insecure-http-endpoints">
+<h4>Insecure (HTTP) Endpoints<a class="headerlink" href="#insecure-http-endpoints" title="Permalink to this heading"></a></h4>
+<p>If you are using a endpoint that only exposes its service discovery file
+over an insecure HTTP connection, it can be added by specifying
+the <code class="docutils literal notranslate"><span class="pre">--insecure</span></code> flag:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--global<span class="w"> </span>--insecure<span class="w"> </span><span class="nb">test</span><span class="w"> </span>http://test.example.com
+<span class="go">INFO:    Remote &quot;test&quot; added.</span>
+<span class="go">INFO:    Global option detected. Will not automatically log into remote.</span>
+</pre></div>
+</div>
+<p>This flag causes HTTP to be used instead of HTTPS <em>for service discovery only</em>. The
+protocol used to access individual library-, build- and keyservice-URLs is
+determined by the contents of the service discovery file.</p>
 </div>
 </div>
 <div class="section" id="set-the-default-remote">
@@ -293,18 +302,11 @@ column in the output of <code class="docutils literal notranslate"><span class="
 <span class="go">Cloud Services Endpoints</span>
 <span class="go">========================</span>
 
-<span class="go">NAME            URI                     ACTIVE  GLOBAL  EXCLUSIVE</span>
-<span class="go">DefaultRemote   cloud.apptainer.org     YES     YES     NO</span>
-<span class="go">company-remote  enterprise.example.com  NO      YES     NO</span>
-<span class="go">myremote        enterprise.example.com  NO      NO      NO</span>
-
-<span class="go">Keyservers</span>
-<span class="go">==========</span>
-
-<span class="go">URI                       GLOBAL  INSECURE  ORDER</span>
-<span class="go">https://keys.openpgp.org  YES     NO        1*</span>
-
-<span class="go">* Active cloud services keyserver</span>
+<span class="go">NAME            URI                      DEFAULT?  GLOBAL?  EXCLUSIVE?  SECURE?</span>
+<span class="go">DefaultRemote   cloud.apptainer.org                ✓                    ✓</span>
+<span class="go">company-remote  enterprise7.example.com            ✓                    ✓</span>
+<span class="go">myremote        enterprise.example.com   ✓                              ✓</span>
+<span class="go">test            test.example.com                   ✓                    ✓</span>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>use<span class="w"> </span>myremote
 <span class="go">INFO:    Remote &quot;myremote&quot; now in use.</span>
@@ -313,18 +315,34 @@ column in the output of <code class="docutils literal notranslate"><span class="
 <span class="go">Cloud Services Endpoints</span>
 <span class="go">========================</span>
 
-<span class="go">NAME            URI                     ACTIVE  GLOBAL  EXCLUSIVE</span>
-<span class="go">DefaultRemote   cloud.apptainer.org     NO      YES     NO</span>
-<span class="go">company-remote  enterprise.example.com  NO      YES     NO</span>
-<span class="go">myremote        enterprise.example.com  YES     NO      NO</span>
+<span class="go">NAME            URI                      DEFAULT?  GLOBAL?  EXCLUSIVE?  SECURE?</span>
+<span class="go">DefaultRemote   cloud.apptainer.org      ✓         ✓                    ✓</span>
+<span class="go">company-remote  enterprise7.example.com            ✓                    ✓</span>
+<span class="go">myremote        enterprise.example.com                                  ✓</span>
+<span class="go">test            test.example.com                   ✓                    ✓</span>
+</pre></div>
+</div>
+<p>In the example above, the default remote at the start (before being changed to
+<code class="docutils literal notranslate"><span class="pre">DefaultRemote</span></code>) was <code class="docutils literal notranslate"><span class="pre">myremote</span></code>. That is because adding a new remote endpoint
+automatically makes the newly-added endpoint the default one, and the same user
+had previously used the <code class="docutils literal notranslate"><span class="pre">remote</span> <span class="pre">add</span></code> command to add the <code class="docutils literal notranslate"><span class="pre">myremote</span></code> endpoint.
+This behavior can be suppressed by passing the <code class="docutils literal notranslate"><span class="pre">--no-default</span></code> flag to the
+<code class="docutils literal notranslate"><span class="pre">remote</span> <span class="pre">add</span></code> command, which will then add a new remote endpoint but leave the
+default endpoint unchanged:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"> $ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--no-default<span class="w"> </span>myotherremote<span class="w"> </span>https://enterprise2.example.com
+<span class="go"> INFO:    Remote &quot;myotherremote&quot; added.</span>
+<span class="go"> Generate an access token at https://enterprise2.example.com/auth/tokens, and paste it here.</span>
+<span class="go"> Token entered will be hidden for security.</span>
+<span class="go"> Access Token:</span>
 
-<span class="go">Keyservers</span>
-<span class="go">==========</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>list
 
-<span class="go">URI                       GLOBAL  INSECURE  ORDER</span>
-<span class="go">https://keys.example.com  YES     NO        1*</span>
-
-<span class="go">* Active cloud services keyserver</span>
+<span class="go"> NAME            URI                      DEFAULT?  GLOBAL?  EXCLUSIVE?  SECURE?</span>
+<span class="go"> DefaultRemote   cloud.apptainer.org      ✓         ✓                    ✓</span>
+<span class="go"> company-remote  enterprise7.example.com            ✓                    ✓</span>
+<span class="go"> myotherremote   enterprise2.example.com                                 ✓</span>
+<span class="go"> myremote        enterprise.example.com                                  ✓</span>
+<span class="go"> test            test.example.com                   ✓                    ✓</span>
 </pre></div>
 </div>
 <p>An administrator can make a remote
@@ -335,18 +353,12 @@ the only usable remote for the system, using the <code class="docutils literal n
 <span class="go">Cloud Services Endpoints</span>
 <span class="go">========================</span>
 
-<span class="go">NAME            URI                     ACTIVE  GLOBAL  EXCLUSIVE</span>
-<span class="go">DefaultRemote   cloud.apptainer.org     NO      YES     NO</span>
-<span class="go">company-remote  enterprise.example.com  YES     YES     YES</span>
-<span class="go">myremote        enterprise.example.com  NO      NO      NO</span>
-
-<span class="go">Keyservers</span>
-<span class="go">==========</span>
-
-<span class="go">URI                       GLOBAL  INSECURE  ORDER</span>
-<span class="go">https://keys.example.com  YES     NO        1*</span>
-
-<span class="go">* Active cloud services keyserver</span>
+<span class="go">NAME            URI                      DEFAULT?  GLOBAL?  EXCLUSIVE?  SECURE?</span>
+<span class="go">DefaultRemote   cloud.apptainer.org                ✓                    ✓</span>
+<span class="go">company-remote  enterprise7.example.com  ✓         ✓        ✓           ✓</span>
+<span class="go">myotherremote   enterprise2.example.com                                 ✓</span>
+<span class="go">myremote        enterprise.example.com                                  ✓</span>
+<span class="go">test            test.example.com                   ✓                    ✓</span>
 </pre></div>
 </div>
 <p>This, in turn, prevents users from changing the remote they use:</p>
@@ -615,7 +627,7 @@ store the supplied credentials or tokens unencrypted in your home directory.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="encryption.html" class="btn btn-neutral float-left" title="Encrypted Containers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="library_api.html" class="btn btn-neutral float-right" title="Library API Registries" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="keyserver.html" class="btn btn-neutral float-right" title="Keyserver Management" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

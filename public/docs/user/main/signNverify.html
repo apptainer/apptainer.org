@@ -86,7 +86,8 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
@@ -509,13 +510,15 @@ $ apptainer sif dump 5 lolcow.sif | jq
 ...
 </pre></div>
 </div>
-<p>Attempting to <code class="docutils literal notranslate"><span class="pre">verify</span></code> the image without options will fail, as it is not signed with a PGP key:</p>
+<p>Attempting to <code class="docutils literal notranslate"><span class="pre">verify</span></code> the image without options will fail, as it is not
+signed with a PGP key:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify lolcow.sif
 INFO:    Verifying image with PGP key material
 FATAL:   Failed to verify container: integrity: key material not provided for DSSE envelope signature
 </pre></div>
 </div>
-<p>Note that the error message shows that the container image has a DSSE signature present.</p>
+<p>Note that the error message shows that the container image has a DSSE signature
+present.</p>
 </div>
 <div class="section" id="verifying-with-a-pem-key">
 <h3>Verifying with a PEM key<a class="headerlink" href="#verifying-with-a-pem-key" title="Permalink to this heading"></a></h3>
@@ -536,11 +539,11 @@ INFO:    Verified signature(s) from image &#39;lolcow.sif&#39;
 </div>
 <div class="section" id="verifying-with-an-x-509-certificate">
 <h3>Verifying with an X.509 certificate<a class="headerlink" href="#verifying-with-an-x-509-certificate" title="Permalink to this heading"></a></h3>
-<p>To verify a container that was signed with a PEM private key, using an X.509 certificate,
-pass the certificate to the <code class="docutils literal notranslate"><span class="pre">verify</span></code> command using the <code class="docutils literal notranslate"><span class="pre">--certificate</span></code> flag.
-If the certificate is part of a chain, provide intermediate and valid root
-certificates with the <code class="docutils literal notranslate"><span class="pre">--certificate-intermediates</span></code> and
-<code class="docutils literal notranslate"><span class="pre">--certificate-roots</span></code> flags:</p>
+<p>To verify a container that was signed with a PEM private key, using an X.509
+certificate, pass the certificate to the <code class="docutils literal notranslate"><span class="pre">verify</span></code> command using the
+<code class="docutils literal notranslate"><span class="pre">--certificate</span></code> flag. If the certificate is part of a chain, provide
+intermediate and valid root certificates with the
+<code class="docutils literal notranslate"><span class="pre">--certificate-intermediates</span></code> and <code class="docutils literal notranslate"><span class="pre">--certificate-roots</span></code> flags:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify \
    --certificate $CERTD/leaf.pem \
    --certificate-intermediates $CERTD/intermediate.pem \
