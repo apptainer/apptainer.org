@@ -95,15 +95,10 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#installation-on-windows-or-mac">Installation on Windows or Mac</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#vagrant">Vagrant</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Lima</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpu-support">GPU Support</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Vagrant</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">Lima</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a></li>
 </ul>
 </li>
 </ul>
@@ -578,73 +573,82 @@ tests in an isolated development or build environment.</p>
 <h2>Installation on Windows or Mac<a class="headerlink" href="#installation-on-windows-or-mac" title="Permalink to this heading"></a></h2>
 <p>Linux container runtimes like Apptainer cannot run natively on
 Windows or Mac because of basic incompatibilities with the host kernel.
-(Contrary to a popular misconception, MacOS does not run on a Linux
+(Contrary to a popular misconception, macOS does not run on a Linux
 kernel. It runs on a kernel called Darwin originally forked from BSD.)</p>
-<p>In order to use Apptainer on these platforms, you can install Vagrant
-Boxes via <a class="reference external" href="https://www.vagrantup.com/">Vagrant Cloud</a>, one of
-<a class="reference external" href="https://www.hashicorp.com/">Hashicorp’s</a>
-tools, by following the instructions below. Then you can install
-Apptainer in the base VM of your choice by following the linux
-<a class="reference internal" href="#installation"><span class="std std-ref">installation instructions</span></a> above.</p>
-<p>You can also use <a class="reference external" href="https://github.com/lima-vm/lima">Lima</a> to install
-both the Linux VM and Apptainer for access from the host operating system.
-It will install the “cloud” version of the selected VM operating system.</p>
+<p>To run Apptainer on a Windows or macOS computer, a Linux virtual machine
+(VM) is required. There are various ways to configure a VM on both Windows and
+macOS. On Windows, we recommend the Windows Subsystem for Linux (WSL2), and
+on macOS, we recommend Lima.</p>
 <div class="section" id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading"></a></h3>
-<div class="section" id="vagrant">
-<h4>Vagrant<a class="headerlink" href="#vagrant" title="Permalink to this heading"></a></h4>
-<p>Install the following programs:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://git-for-windows.github.io/">Git for Windows</a></p></li>
-<li><p><a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">VirtualBox for Windows</a></p></li>
-<li><p><a class="reference external" href="https://www.vagrantup.com/downloads.html">Vagrant for Windows</a></p></li>
-<li><p><a class="reference external" href="http://vagrantmanager.com/downloads/">Vagrant Manager for Windows</a></p></li>
-</ul>
-</div>
-<div class="section" id="id1">
-<h4>Lima<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
-<p>The Windows version of Lima (using Hyper-V) is still in development.</p>
-<p>You can use <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/">WSL</a> instead:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">wsl</span> <span class="o">--</span><span class="n">install</span>
+<p>Recent builds of Windows 10, and all builds of Windows 11, include version 2 of
+the Windows Subsystem for Linux. WSL2 provides a Linux virtual machine that is
+tightly integrated with the Windows environment. The default Linux distribution
+used by WSL2 is Ubuntu. It is straightforward to install Apptainer inside
+WSL2 Ubuntu, and use all of its features.</p>
+<p>Follow the <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install">WSL2 installation instructions</a> to enable WSL2 with
+the default Ubuntu 22.04 environment. On Windows 11 and the most recent builds
+of Windows 10 this is as easy as opening an administrator command prompt or
+Powershell window and entering:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span> <span class="o">--</span><span class="n">install</span>
 </pre></div>
 </div>
-<p>And use the Linux instructions.</p>
+<p>Follow the prompts. A restart is required, and when you open the ‘Ubuntu’ app
+for the first time you’ll be asked to set a username and password for the Linux
+environment.</p>
+<p>You can then install Apptainer from <a class="reference external" href="#install-from-source">source</a>,
+from the <a class="reference external" href="#install-debian-packages">Debian packages</a>
+on the Apptainer release page,
+or from the <a class="reference external" href="#install-ubuntu-packages">Ubuntu PPA</a>.</p>
+<div class="section" id="gpu-support">
+<h4>GPU Support<a class="headerlink" href="#gpu-support" title="Permalink to this heading"></a></h4>
+<p>WSL2 supports using an NVIDIA GPU from the Linux environment. To use a GPU from
+Apptainer in WSL2, you must first install <code class="docutils literal notranslate"><span class="pre">libnvidia-container-tools</span></code>,
+following the instructions in the <a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">libnvidia-container documentation</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">fsSL</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nvidia</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">libnvidia</span><span class="o">-</span><span class="n">container</span><span class="o">/</span><span class="n">gpgkey</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">gpg</span> <span class="o">--</span><span class="n">dearmor</span> <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">keyrings</span><span class="o">/</span><span class="n">nvidia</span><span class="o">-</span><span class="n">container</span><span class="o">-</span><span class="n">toolkit</span><span class="o">-</span><span class="n">keyring</span><span class="o">.</span><span class="n">gpg</span> \
+<span class="n">curl</span> <span class="o">-</span><span class="n">s</span> <span class="o">-</span><span class="n">L</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nvidia</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">libnvidia</span><span class="o">-</span><span class="n">container</span><span class="o">/</span><span class="n">stable</span><span class="o">/</span><span class="n">deb</span><span class="o">/</span><span class="n">nvidia</span><span class="o">-</span><span class="n">container</span><span class="o">-</span><span class="n">toolkit</span><span class="o">.</span><span class="n">list</span> <span class="o">|</span> \
+  <span class="n">sed</span> <span class="s1">&#39;s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g&#39;</span> <span class="o">|</span> \
+  <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">sources</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">nvidia</span><span class="o">-</span><span class="n">container</span><span class="o">-</span><span class="n">toolkit</span><span class="o">.</span><span class="n">list</span> \
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">nvidia</span><span class="o">-</span><span class="n">container</span><span class="o">-</span><span class="n">toolkit</span>
+</pre></div>
+</div>
+<p>Once this process has been completed, GPU containers can be run under WSL2 using
+the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> and <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> flags together:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://tensorflow/tensorflow:latest-gpu
+
+$  apptainer run --nv --nvccli tensorflow_latest-gpu.sif
+INFO:    Setting &#39;NVIDIA_VISIBLE_DEVICES=all&#39; to emulate legacy GPU binding.
+INFO:    Setting --writable-tmpfs (required by nvidia-container-cli)
+________                               _______________
+___  __/__________________________________  ____/__  /________      __
+__  /  _  _ \_  __ \_  ___/  __ \_  ___/_  /_   __  /_  __ \_ | /| / /
+_  /   /  __/  / / /(__  )/ /_/ /  /   _  __/   _  / / /_/ /_ |/ |/ /
+/_/    \___//_/ /_//____/ \____//_/    /_/      /_/  \____/____/|__/
+You are running this container as user with ID 1000 and group 1000,
+which should map to the ID and group for your user on the Docker host. Great!
+Apptainer&gt; python
+Python 3.8.10 (default, Nov 26 2021, 20:14:08)
+[GCC 9.3.0] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; import tensorflow as tf
+&gt;&gt;&gt; tf.config.list_physical_devices(&#39;GPU&#39;)
+2022-03-25 11:42:25.672088: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:922] could not open file to read NUMA node: /sys/bus/pci/devices/0000:01:00.0/numa_node
+Your kernel may have been built without NUMA support.
+2022-03-25 11:42:25.713295: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:922] could not open file to read NUMA node: /sys/bus/pci/devices/0000:01:00.0/numa_node
+Your kernel may have been built without NUMA support.
+2022-03-25 11:42:25.713892: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:922] could not open file to read NUMA node: /sys/bus/pci/devices/0000:01:00.0/numa_node
+Your kernel may have been built without NUMA support.
+[PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=&#39;GPU&#39;)]
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> flag is required to enable container setup using the
+<code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> utility. Apptainer’s simpler library binding
+approach (<code class="docutils literal notranslate"><span class="pre">--nv</span></code> only) is not sufficient for GPU support under WSL2.</p>
 </div>
 </div>
 <div class="section" id="mac">
 <h3>Mac<a class="headerlink" href="#mac" title="Permalink to this heading"></a></h3>
-<div class="section" id="id2">
-<h4>Vagrant<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
-<p>Apptainer is available via Vagrant (installable with <a class="reference external" href="https://brew.sh">Homebrew</a> or manually)</p>
-<p>To use Vagrant via Homebrew:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ /bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;
-$ brew install --cask virtualbox vagrant vagrant-manager
-</pre></div>
-</div>
-<p>Use <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">init</span></code> to create a new Vagrantfile, or use this example:</p>
-<div class="copy-button highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">config</span><span class="o">|</span>
-<span class="w">  </span><span class="c1"># Choose operating system distribution</span>
-<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;fedora/38-cloud-base&quot;</span>
-
-<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provider</span><span class="w"> </span><span class="s2">&quot;virtualbox&quot;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">vb</span><span class="o">|</span>
-<span class="w">    </span><span class="c1"># Customize the number of cpus on the VM:</span>
-<span class="w">    </span><span class="n">vb</span><span class="o">.</span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
-
-<span class="w">    </span><span class="c1"># Customize the amount of memory on the VM:</span>
-<span class="w">    </span><span class="n">vb</span><span class="o">.</span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1024&quot;</span>
-<span class="w">  </span><span class="k">end</span>
-
-<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">inline</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;&lt;-</span><span class="dl">SHELL</span>
-<span class="sh">    # Matching linux installation instructions</span>
-<span class="sh">    yum install -y apptainer</span>
-<span class="dl">  SHELL</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-<p>Then do <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>, and <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">ssh</span></code> to access the virtual machine.</p>
-</div>
-<div class="section" id="id3">
-<h4>Lima<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
 <p>Apptainer is available via Lima (installable with <a class="reference external" href="https://brew.sh">Homebrew</a> or manually)</p>
 <p>To use Lima via Homebrew:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ /bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;
@@ -659,7 +663,6 @@ for more details.</p>
 <p>By default, the host home directory is mounted as read-only in the guest,
 but there is also a shared writable directory mounted in <code class="docutils literal notranslate"><span class="pre">/tmp/lima</span></code>
 that can be accessed both from the host and in the guest.</p>
-</div>
 </div>
 </div>
 </div>
