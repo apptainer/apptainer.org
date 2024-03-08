@@ -106,6 +106,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#azure-acr">Azure ACR</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-an-architecture">Specifying an architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#arch-option"><code class="docutils literal notranslate"><span class="pre">--arch</span></code> option</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cpu-emulation">CPU emulation</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#building-from-docker-oci-containers">Building From Docker / OCI Containers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#registries-in-definition-files">Registries In Definition Files</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#docker-hub">Docker Hub</a></li>
@@ -521,6 +526,56 @@ convenient. See the <a class="reference external" href="https://docs.microsoft.c
 which details how to use <code class="docutils literal notranslate"><span class="pre">az</span> <span class="pre">acr</span> <span class="pre">token</span> <span class="pre">create</span></code> to obtain a token name
 and password pair that can be used to authenticate with the above
 methods.</p>
+</div>
+</div>
+<div class="section" id="specifying-an-architecture">
+<h2>Specifying an architecture<a class="headerlink" href="#specifying-an-architecture" title="Permalink to this heading"></a></h2>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> from a <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI will attempt to fetch
+a container that matches the architecture of your host system. If you need to
+retrieve a container that does not have the same architecture as your host (e.g.
+an <code class="docutils literal notranslate"><span class="pre">arm64</span></code> container on an <code class="docutils literal notranslate"><span class="pre">amd64</span></code> host), you can use the <code class="docutils literal notranslate"><span class="pre">--arch</span></code> options.</p>
+<div class="section" id="arch-option">
+<h3><code class="docutils literal notranslate"><span class="pre">--arch</span></code> option<a class="headerlink" href="#arch-option" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">--arch</span></code> option accepts a CPU architecture only. For example, to pull an
+Ubuntu image for a 64-bit ARM system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull --arch arm64 docker://ubuntu
+</pre></div>
+</div>
+</div>
+<div class="section" id="cpu-emulation">
+<h3>CPU emulation<a class="headerlink" href="#cpu-emulation" title="Permalink to this heading"></a></h3>
+<p>If you try to run a container that does not match the host CPU architecture, it
+will likely fail:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run ppc64le.sif
+FATAL:   While checking image: could not open image ppc64le.sif: the image&#39;s architecture (ppc64le) could not run on the host&#39;s (amd64)
+</pre></div>
+</div>
+<p>However, Apptainer is able to make use of CPU emulation with QEMU, and the Linux
+kernel’s binfmt_misc mechanism, to run containers that do not match the host CPU.</p>
+<p>An adminstrator can configure emulation support by installing distribution
+packages, or using the <a class="reference external" href="https://github.com/multiarch/qemu-user-static">multiarch/qemu-user-static</a> container from Docker Hub:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer run docker://multiarch/qemu-user-static --reset -p yes
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Running this container with sudo will modify system configuration files, and
+register binaries on the host.</p>
+</div>
+<p>It is now possible to run containers for other architectures:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># The host system is an AMD64 / x86_64 machine
+$ uname -m
+x86_64
+
+# A ppc64le container can be run using emulation
+$ apptainer run ppc64le.sif uname -m
+ppc64le
+</pre></div>
+</div>
+<p>Running a container in this manner, using emulation, will be many times slower
+than running on a system where the CPU architecture matches the container.
+Emulation is often useful for testing and development purposes, but rarely
+appropriate when deploying a container to an HPC system.</p>
 </div>
 </div>
 <div class="section" id="building-from-docker-oci-containers">
