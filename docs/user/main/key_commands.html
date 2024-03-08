@@ -164,16 +164,15 @@ secret or private local keyring as output.</p>
 <p>The output will look as it follows:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Private key listing (/home/joana/.apptainer/keys/pgp-secret):
 
-<span class="m">0</span>) U: Johnny Cash (none) &lt;cash@example.com&gt;
-C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">22</span>:<span class="m">22</span>:<span class="m">28</span> +<span class="m">0200</span> CEST
-F: 47282BDC661F58FA4BEBEF47CA576CBD8EF1A2B4
-L: <span class="m">3072</span>
---------
-<span class="m">1</span>) U: John Green (none) &lt;john@example.com&gt;
-C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">13</span>:<span class="m">08</span>:<span class="m">45</span> +<span class="m">0200</span> CEST
-F: 5720799FE7B048CF36FAB8445EE1E2BD7B6342C5
-L: <span class="m">1024</span>
---------
+<span class="m">0</span>)  User:              Johnny Cash (none) &lt;cash@example.com&gt;
+    Creation time:     <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">22</span>:<span class="m">22</span>:<span class="m">28</span> +<span class="m">0200</span> CEST
+    Fingerprint:       47282BDC661F58FA4BEBEF47CA576CBD8EF1A2B4
+    Length (in bits):  <span class="m">3072</span>
+
+<span class="m">1</span>)  User:              John Green (none) &lt;john@example.com&gt;
+    Creation time:     <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">13</span>:<span class="m">08</span>:<span class="m">45</span> +<span class="m">0200</span> CEST
+    Fingerprint:       5720799FE7B048CF36FAB8445EE1E2BD7B6342C5
+    Length (in bits):  <span class="m">1024</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -207,21 +206,20 @@ Key with fingerprint 8C10B902F438E4D504C3ACF689FCFFAED5F34A77 successfully added
 keystore by running <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">key</span> <span class="pre">list</span> <span class="pre">-s</span></code> command:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>Private key listing (/home/joana/.apptainer/keys/pgp-secret):
 
-  <span class="m">0</span>) U: Johnny Cash (none) &lt;cash@example.com&gt;
-  C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">22</span>:<span class="m">22</span>:<span class="m">28</span> +<span class="m">0200</span> CEST
-  F: 47282BDC661F58FA4BEBEF47CA576CBD8EF1A2B4
-  L: <span class="m">3072</span>
-  --------
-  <span class="m">1</span>) U: John Green (none) &lt;john@example.com&gt;
-  C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">13</span>:<span class="m">08</span>:<span class="m">45</span> +<span class="m">0200</span> CEST
-  F: 5720799FE7B048CF36FAB8445EE1E2BD7B6342C5
-  L: <span class="m">1024</span>
-  --------
-  <span class="m">3</span>) U: Pinkie Pie (Eternal chaos comes with chocolate rain!) &lt;balloons@example.com&gt;
-  C: <span class="m">2019</span>-<span class="m">04</span>-<span class="m">26</span> <span class="m">12</span>:<span class="m">07</span>:<span class="m">07</span> +<span class="m">0200</span> CEST
-  F: 8C10B902F438E4D504C3ACF689FCFFAED5F34A77
-  L: <span class="m">1024</span>
-  --------
+<span class="m">1</span>)  User:              Johnny Cash (none) &lt;cash@example.com&gt;
+    Creation time:     <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">22</span>:<span class="m">22</span>:<span class="m">28</span> +<span class="m">0200</span> CEST
+    Fingerprint:       47282BDC661F58FA4BEBEF47CA576CBD8EF1A2B4
+    Length (in bits):  <span class="m">3072</span>
+
+<span class="m">2</span>)  User:              John Green (none) &lt;john@example.com&gt;
+    Creation time:     <span class="m">2019</span>-<span class="m">04</span>-<span class="m">11</span> <span class="m">13</span>:<span class="m">08</span>:<span class="m">45</span> +<span class="m">0200</span> CEST
+    Fingerprint:       5720799FE7B048CF36FAB8445EE1E2BD7B6342C5
+    Length (in bits):  <span class="m">1024</span>
+
+<span class="m">3</span>)  User:              Pinkie Pie (Eternal chaos comes with chocolate rain!) &lt;balloons@example.com&gt;
+    Creation time:     <span class="m">2019</span>-<span class="m">04</span>-<span class="m">26</span> <span class="m">12</span>:<span class="m">07</span>:<span class="m">07</span> +<span class="m">0200</span> CEST
+    Fingerprint:       8C10B902F438E4D504C3ACF689FCFFAED5F34A77
+    Length (in bits):  <span class="m">1024</span>
 </pre></div>
 </div>
 <p>You will see the imported key at the bottom of the list. Remember you

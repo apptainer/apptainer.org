@@ -337,7 +337,7 @@ Stage: build
 <span class="w">    </span><span class="k">fi</span>
 
 <span class="gh">%labels</span>
-<span class="w">    </span>Author<span class="w"> </span>alice
+<span class="w">    </span>Author<span class="w"> </span>myuser@example.com
 <span class="w">    </span>Version<span class="w"> </span>v0.0.1
 
 <span class="gh">%help</span>
@@ -725,7 +725,7 @@ of the <code class="docutils literal notranslate"><span class="pre">%post</span>
 format is a name-value pair.</p>
 <p>Consider the <code class="docutils literal notranslate"><span class="pre">%labels</span></code> section from the example definition file above:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%labels</span>
-<span class="w">    </span>Author<span class="w"> </span>d@sylabs.io
+<span class="w">    </span>Author<span class="w"> </span>myuser@example.com
 <span class="w">    </span>Version<span class="w"> </span>v0.0.1
 <span class="w">    </span>MyLabel<span class="w"> </span>Hello<span class="w"> </span>World
 </pre></div>
@@ -735,14 +735,14 @@ line of text to the <code class="docutils literal notranslate"><span class="pre"
 first space will be taken as the label’s name, and the portion following
 it will be taken as the label’s value.</p>
 <p>In the previous example, the first label name is <code class="docutils literal notranslate"><span class="pre">Author</span></code> with a
-value of <code class="docutils literal notranslate"><span class="pre">alice</span></code>. The second label name is <code class="docutils literal notranslate"><span class="pre">Version</span></code> with a
+value of <code class="docutils literal notranslate"><span class="pre">myuser&#64;example.com</span></code>. The second label name is <code class="docutils literal notranslate"><span class="pre">Version</span></code> with a
 value of <code class="docutils literal notranslate"><span class="pre">v0.0.1</span></code>. Finally, the third label name is <code class="docutils literal notranslate"><span class="pre">MyLabel</span></code> with a
 value of <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World</span></code>.</p>
 <p>You can inspect the available labels on your image by running the
 following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer inspect my_container.sif
 
-Author: alice
+Author: myuser@example.com
 Version: v0.0.1
 MyLabel: Hello World
 org.label-schema.build-arch: amd64
