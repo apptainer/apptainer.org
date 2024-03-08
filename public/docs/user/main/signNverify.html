@@ -207,9 +207,9 @@ more keys.</p>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">newpair</span></code> subcommand in the <code class="docutils literal notranslate"><span class="pre">key</span></code> command group like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer key newpair
 
-Enter your name (e.g., John Doe) : Ian Kaneshiro
-Enter your email address (e.g., john.doe@example.com) : ikaneshiro@apptainer.org
-Enter optional comment (e.g., development keys) : example key
+Enter your name (e.g., John Doe) : Joe User
+Enter your email address (e.g., john.doe@example.com) : myuser@example.com
+Enter optional comment (e.g., development keys) : demo
 Enter a passphrase :
 Retype your passphrase :
 Generating Entity and OpenPGP Key Pair... done
@@ -221,23 +221,12 @@ or saved locally.</p>
 
 Public key listing (/home/ian/.apptainer/keys/pgp-public):
 
-0) U: Ian Kaneshiro (example key) &lt;ikaneshiro@apptainer.org&gt;
-   C: 2022-02-23 15:12:19 -0800 PST
-   F: 8232570480B868E1473AEEB03DBCBA1EE9D661E5
-   L: 4096
-   --------
+0)  User:              Joe User (demo) &lt;myuser@example.com&gt;
+    Creation time:     2019-11-15 09:54:54 -0600 CST
+    Fingerprint:       E5F780B2C22F59DF748524B435C3844412EE233B
+    Length (in bits):  4096
 </pre></div>
 </div>
-<p>In the output above the index of my key is <code class="docutils literal notranslate"><span class="pre">0</span></code> and the letters stand
-for the following:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>U: User</p></li>
-<li><p>C: Creation date and time</p></li>
-<li><p>F: Fingerprint</p></li>
-<li><p>L: Key length</p></li>
-</ul>
-</div></blockquote>
 <p>If you would like others in the community to easily be able to fetch your
 public key for image verification, you can push your key to a public keyserver.</p>
 <p>First we can check which key server we have configured using:</p>
@@ -284,8 +273,8 @@ download it again like so.</p>
 
 Showing 1 results
 
-FINGERPRINT                               ALGORITHM  BITS  CREATION DATE                  EXPIRATION DATE  STATUS     NAME/EMAIL
-8232570480B868E1473AEEB03DBCBA1EE9D661E5  RSA        4096  2022-02-23 15:12:19 -0800 PST                   [enabled]  Ian Kaneshiro (example key) &lt;ikaneshiro@apptainer.org&gt;
+KEY ID    BITS  NAME/EMAIL
+12EE233B  4096  Joe User (demo) &lt;myuser@example.com&gt;
 
 $ apptainer key pull 8232570480B868E1473AEEB03DBCBA1EE9D661E5
 1 key(s) added to keyring of trust /home/ian/.apptainer/keys/pgp-public
@@ -330,8 +319,8 @@ without needing to contact the key server.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify my_container.sif
 
 Verifying image: my_container.sif
-[LOCAL]   Signing entity: Ian Kaneshiro (example key) &lt;ikaneshiro@apptainer.org&gt;
-[LOCAL]   Fingerprint: 8232570480B868E1473AEEB03DBCBA1EE9D661E5
+[LOCAL]   Signing entity: Joe User (Demo keys) &lt;myuser@example.com&gt;
+[LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
 Objects verified:
 ID  |GROUP   |LINK    |TYPE
 ------------------------------------------------
@@ -351,8 +340,8 @@ command again.</p>
 $ apptainer verify my_container.sif
 
 Verifying image: my_container.sif
-[REMOTE]  Signing entity: Ian Kaneshiro (example key) &lt;ikaneshiro@apptainer.org&gt;
-[REMOTE]  Fingerprint: 8232570480B868E1473AEEB03DBCBA1EE9D661E5
+[REMOTE]   Signing entity: Joe User (Demo keys) &lt;myuser@example.com&gt;
+[REMOTE]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
 Objects verified:
 ID  |GROUP   |LINK    |TYPE
 ------------------------------------------------
@@ -407,8 +396,8 @@ Signature created and applied to my_container.sif
 $ apptainer verify --sif-id 1 my_container.sif
 
 Verifying image: my_container.sif
-[LOCAL]   Signing entity: Ian Kaneshiro (example key) &lt;ikaneshiro@apptainer.org&gt;
-[LOCAL]   Fingerprint: 8232570480B868E1473AEEB03DBCBA1EE9D661E5
+[LOCAL]   Signing entity: Joe User (Demo keys) &lt;myuser@example.com&gt;
+[LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
 Objects verified:
 ID  |GROUP   |LINK    |TYPE
 ------------------------------------------------
@@ -423,8 +412,8 @@ knowledge.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify my_container.sif
 
 Verifying image: my_container.sif
-[LOCAL]   Signing entity: Ian Kaneshiro (example key) &lt;ikaneshiro@apptainer.org&gt;
-[LOCAL]   Fingerprint: 8232570480B868E1473AEEB03DBCBA1EE9D661E5
+[LOCAL]   Signing entity: Joe User (Demo keys) &lt;myuser@example.com&gt;
+[LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
 
 Error encountered during signature verification: object 2: object not signed
 FATAL:   Failed to verify container: integrity: object 2: object not signed
@@ -444,8 +433,8 @@ the same <code class="docutils literal notranslate"><span class="pre">--group-id
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify --group-id 1 my_container.sif
 
 Verifying image: my_container.sif
-[LOCAL]   Signing entity: Ian Kaneshiro (example key) &lt;ikaneshiro@apptainer.org&gt;
-[LOCAL]   Fingerprint: 8232570480B868E1473AEEB03DBCBA1EE9D661E5
+[LOCAL]   Signing entity: Joe User (Demo keys) &lt;myuser@example.com&gt;
+[LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
 Objects verified:
 ID  |GROUP   |LINK    |TYPE
 ------------------------------------------------
@@ -462,8 +451,8 @@ specifying <code class="docutils literal notranslate"><span class="pre">--group-
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify my_container.sif
 
 Verifying image: my_container.sif
-[LOCAL]   Signing entity: Ian Kaneshiro (example key) &lt;ikaneshiro@apptainer.org&gt;
-[LOCAL]   Fingerprint: 8232570480B868E1473AEEB03DBCBA1EE9D661E5
+[LOCAL]   Signing entity: Joe User (Demo keys) &lt;myuser@example.com&gt;
+[LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
 Objects verified:
 ID  |GROUP   |LINK    |TYPE
 ------------------------------------------------
