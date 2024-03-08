@@ -530,89 +530,96 @@ targets from the ``builddir`` directory in the source tree:
 
 Linux container runtimes like {Project} cannot run natively on
 Windows or Mac because of basic incompatibilities with the host kernel.
-(Contrary to a popular misconception, MacOS does not run on a Linux
+(Contrary to a popular misconception, macOS does not run on a Linux
 kernel. It runs on a kernel called Darwin originally forked from BSD.)
 
-In order to use {Project} on these platforms, you can install Vagrant
-Boxes via `Vagrant Cloud <https://www.vagrantup.com/>`__, one of
-`Hashicorp's <https://www.hashicorp.com/>`_
-tools, by following the instructions below. Then you can install
-{Project} in the base VM of your choice by following the linux
-:ref:`installation instructions <installation>` above.
-
-You can also use `Lima <https://github.com/lima-vm/lima>`_ to install
-both the Linux VM and {Project} for access from the host operating system.
-It will install the "cloud" version of the selected VM operating system.
+To run {Project} on a Windows or macOS computer, a Linux virtual machine
+(VM) is required. There are various ways to configure a VM on both Windows and
+macOS. On Windows, we recommend the Windows Subsystem for Linux (WSL2), and
+on macOS, we recommend Lima.
 
 Windows
 =======
 
-Vagrant
--------
+Recent builds of Windows 10, and all builds of Windows 11, include version 2 of
+the Windows Subsystem for Linux. WSL2 provides a Linux virtual machine that is
+tightly integrated with the Windows environment. The default Linux distribution
+used by WSL2 is Ubuntu. It is straightforward to install {Project} inside
+WSL2 Ubuntu, and use all of its features.
 
-Install the following programs:
-
--  `Git for Windows <https://git-for-windows.github.io/>`_
--  `VirtualBox for Windows <https://www.virtualbox.org/wiki/Downloads>`_
--  `Vagrant for Windows <https://www.vagrantup.com/downloads.html>`_
--  `Vagrant Manager for Windows <http://vagrantmanager.com/downloads/>`_
-
-Lima
-----
-
-The Windows version of Lima (using Hyper-V) is still in development.
-
-You can use `WSL <https://docs.microsoft.com/en-us/windows/wsl/>`_ instead:
+Follow the `WSL2 installation instructions
+<https://docs.microsoft.com/en-us/windows/wsl/install>`__ to enable WSL2 with
+the default Ubuntu 22.04 environment. On Windows 11 and the most recent builds
+of Windows 10 this is as easy as opening an administrator command prompt or
+Powershell window and entering:
 
 .. code::
 
-   > wsl --install
+  wsl --install
 
-And use the Linux instructions.
+Follow the prompts. A restart is required, and when you open the 'Ubuntu' app
+for the first time you'll be asked to set a username and password for the Linux
+environment.
+
+You can then install {Project} from `source <#install-from-source>`_,
+from the `Debian packages <#install-debian-packages>`_
+on the {Project} release page,
+or from the `Ubuntu PPA <#install-ubuntu-packages>`_.
+
+GPU Support
+-----------
+
+WSL2 supports using an NVIDIA GPU from the Linux environment. To use a GPU from
+{Project} in WSL2, you must first install ``libnvidia-container-tools``,
+following the instructions in the `libnvidia-container documentation
+<https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html>`__:
+
+.. code::
+
+  curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list \
+  sudo apt-get update
+  sudo apt-get install -y nvidia-container-toolkit
+
+Once this process has been completed, GPU containers can be run under WSL2 using
+the ``--nv`` and ``--nvccli`` flags together:
+
+.. code::
+
+  $ {command} pull docker://tensorflow/tensorflow:latest-gpu
+
+  $  {command} run --nv --nvccli tensorflow_latest-gpu.sif
+  INFO:    Setting 'NVIDIA_VISIBLE_DEVICES=all' to emulate legacy GPU binding.
+  INFO:    Setting --writable-tmpfs (required by nvidia-container-cli)
+  ________                               _______________
+  ___  __/__________________________________  ____/__  /________      __
+  __  /  _  _ \_  __ \_  ___/  __ \_  ___/_  /_   __  /_  __ \_ | /| / /
+  _  /   /  __/  / / /(__  )/ /_/ /  /   _  __/   _  / / /_/ /_ |/ |/ /
+  /_/    \___//_/ /_//____/ \____//_/    /_/      /_/  \____/____/|__/
+  You are running this container as user with ID 1000 and group 1000,
+  which should map to the ID and group for your user on the Docker host. Great!
+  {Project}> python
+  Python 3.8.10 (default, Nov 26 2021, 20:14:08)
+  [GCC 9.3.0] on linux
+  Type "help", "copyright", "credits" or "license" for more information.
+  >>> import tensorflow as tf
+  >>> tf.config.list_physical_devices('GPU')
+  2022-03-25 11:42:25.672088: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:922] could not open file to read NUMA node: /sys/bus/pci/devices/0000:01:00.0/numa_node
+  Your kernel may have been built without NUMA support.
+  2022-03-25 11:42:25.713295: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:922] could not open file to read NUMA node: /sys/bus/pci/devices/0000:01:00.0/numa_node
+  Your kernel may have been built without NUMA support.
+  2022-03-25 11:42:25.713892: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:922] could not open file to read NUMA node: /sys/bus/pci/devices/0000:01:00.0/numa_node
+  Your kernel may have been built without NUMA support.
+  [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+
+Note that the ``--nvccli`` flag is required to enable container setup using the
+``nvidia-container-cli`` utility. {Project}'s simpler library binding
+approach (``--nv`` only) is not sufficient for GPU support under WSL2.
 
 Mac
 ===
-
-Vagrant
--------
-
-{Project} is available via Vagrant (installable with `Homebrew
-<https://brew.sh>`_ or manually)
-
-To use Vagrant via Homebrew:
-
-.. code::
-
-   $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-   $ brew install --cask virtualbox vagrant vagrant-manager
-
-Use ``vagrant init`` to create a new Vagrantfile, or use this example:
-
-.. code-block:: ruby
-   :class: copy-button
-
-   Vagrant.configure("2") do |config|
-     # Choose operating system distribution
-     config.vm.box = "fedora/38-cloud-base"
-
-     config.vm.provider "virtualbox" do |vb|
-       # Customize the number of cpus on the VM:
-       vb.cpus = "1"
-
-       # Customize the amount of memory on the VM:
-       vb.memory = "1024"
-     end
-
-     config.vm.provision "shell", inline: <<-SHELL
-       # Matching linux installation instructions
-       yum install -y {command}
-     SHELL
-   end
-
-Then do ``vagrant up``, and ``vagrant ssh`` to access the virtual machine.
-
-Lima
-----
 
 {Project} is available via Lima (installable with `Homebrew
 <https://brew.sh>`_ or manually)
