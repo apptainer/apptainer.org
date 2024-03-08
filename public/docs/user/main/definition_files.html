@@ -487,6 +487,22 @@ container at runtime.</p>
 <code class="docutils literal notranslate"><span class="pre">$APPTAINER_ENVIRONMENT</span></code> take precedence over those added via
 <code class="docutils literal notranslate"><span class="pre">%environment</span></code>.</p>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">%post</span></code> scriptlet will run under <code class="docutils literal notranslate"><span class="pre">sh</span></code> or <code class="docutils literal notranslate"><span class="pre">bash</span></code> by default. You can
+change the shell or interpreter that the scriptlet runs under by using a <code class="docutils literal notranslate"><span class="pre">-c</span>
+<span class="pre">&lt;shell&gt;</span></code> argument on the <code class="docutils literal notranslate"><span class="pre">%post</span></code> line, e.g:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%post</span><span class="w"> </span>-c<span class="w"> </span>/bin/zsh
+<span class="w">   </span>...
+</pre></div>
+</div>
+<p>In the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section above, the scriptlet will be run by the  zsh shell
+installed at <code class="docutils literal notranslate"><span class="pre">/bin/zsh</span></code> in the container. The requested shell must be present
+in the base image that was bootstrapped.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unlike the <code class="docutils literal notranslate"><span class="pre">%test</span></code> and <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> sections, the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section does
+not support hashbang lines (<code class="docutils literal notranslate"><span class="pre">#!</span></code>) for specifying a custom shell. The <code class="docutils literal notranslate"><span class="pre">-c</span>
+<span class="pre">&lt;shell&gt;</span></code> argument must be used instead.</p>
+</div>
 </div>
 <div class="section" id="test">
 <span id="def-test-section"></span><h3>%test<a class="headerlink" href="#test" title="Permalink to this heading"></a></h3>
