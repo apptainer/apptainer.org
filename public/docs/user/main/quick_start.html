@@ -486,9 +486,10 @@ $ apptainer exec lolcow_latest.sif cat $HOME/hostfile.txt
 Hello from inside the container
 </pre></div>
 </div>
-<p>This example works because <code class="docutils literal notranslate"><span class="pre">hostfile.txt</span></code> exists in the user’s home
-directory. By default, Apptainer bind mounts <code class="docutils literal notranslate"><span class="pre">/home/$USER</span></code>,
-<code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, and <code class="docutils literal notranslate"><span class="pre">$PWD</span></code> into your container at runtime.</p>
+<p>This example works because <code class="docutils literal notranslate"><span class="pre">hostfile.txt</span></code> exists in the user’s home directory
+(<code class="docutils literal notranslate"><span class="pre">$HOME</span></code>). By default, Apptainer bind mounts <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>, the current
+working directory, and additional system locations from the host into the
+container.</p>
 <p>You can specify additional directories to bind mount into your container
 with the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option. In this example, the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory on
 the host system is bind mounted to the <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> directory inside the

@@ -85,7 +85,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#using-bind-or-mount-with-the-writable-flag">Using <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-no-home-and-containall-flags">Using <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> and <code class="docutils literal notranslate"><span class="pre">--containall</span></code> flags</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#no-home"><code class="docutils literal notranslate"><span class="pre">--no-home</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#containall"><code class="docutils literal notranslate"><span class="pre">--containall</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#contain-containall"><code class="docutils literal notranslate"><span class="pre">--contain</span></code> / <code class="docutils literal notranslate"><span class="pre">--containall</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -173,15 +173,26 @@ system-defined bind paths and user-defined bind paths.</p>
 </div>
 <div class="section" id="system-defined-bind-paths">
 <h2>System-defined bind paths<a class="headerlink" href="#system-defined-bind-paths" title="Permalink to this heading"></a></h2>
-<p>The system administrator has the ability to define what bind paths will
-be included automatically inside each container. Some bind paths are
-automatically derived (e.g. a user’s home directory) and some are
-statically defined (e.g. bind paths in the Apptainer configuration
-file). In the default configuration, the system default bind points are
-<code class="docutils literal notranslate"><span class="pre">$HOME</span></code> , <code class="docutils literal notranslate"><span class="pre">/sys:/sys</span></code> , <code class="docutils literal notranslate"><span class="pre">/proc:/proc</span></code>, <code class="docutils literal notranslate"><span class="pre">/tmp:/tmp</span></code>,
-<code class="docutils literal notranslate"><span class="pre">/var/tmp:/var/tmp</span></code>, <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf:/etc/resolv.conf</span></code>,
-<code class="docutils literal notranslate"><span class="pre">/etc/passwd:/etc/passwd</span></code>, and <code class="docutils literal notranslate"><span class="pre">$PWD</span></code>. Where the first path before
-<code class="docutils literal notranslate"><span class="pre">:</span></code> is the path from the host and the second path is the path in the
+<p>The system administrator has the ability to define which bind paths will be
+included automatically inside each container. Some bind paths are derived (e.g.
+a user’s home directory), and some are statically defined with a <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">path</span></code>
+entry in the Apptainer configuration.</p>
+<p>In the default configuration, the default bind mounts are:</p>
+<ul class="simple">
+<li><p>The user’s home directory (<code class="docutils literal notranslate"><span class="pre">$HOME</span></code>)</p></li>
+<li><p>The current working directory (<code class="docutils literal notranslate"><span class="pre">CWD</span></code>), unless its path contains symlinks
+resolving to different locations on the host vs inside the container.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/dev</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/etc/localtime</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/proc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/sys</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/tmp</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code></p></li>
+</ul>
+<p>Additionally, customized system configuration files <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code>,
+<code class="docutils literal notranslate"><span class="pre">/etc/group</span></code>, and <code class="docutils literal notranslate"><span class="pre">/etc/passwd</span></code> are mounted into the container. These are
+adapted at container startup to match the requested configuration of the
 container.</p>
 <div class="section" id="disabling-system-binds">
 <h3>Disabling System Binds<a class="headerlink" href="#disabling-system-binds" title="Permalink to this heading"></a></h3>
@@ -351,29 +362,50 @@ create them.</p>
 <h3>Using <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> and <code class="docutils literal notranslate"><span class="pre">--containall</span></code> flags<a class="headerlink" href="#using-no-home-and-containall-flags" title="Permalink to this heading"></a></h3>
 <div class="section" id="no-home">
 <h4><code class="docutils literal notranslate"><span class="pre">--no-home</span></code><a class="headerlink" href="#no-home" title="Permalink to this heading"></a></h4>
-<p>When shelling into your container image, Apptainer allows you to
-mount your current working directory (<code class="docutils literal notranslate"><span class="pre">CWD</span></code>) without mounting your
-host <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory with the <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> flag.</p>
+<p>When starting a container, Apptainer allows you to mount your current
+working directory (<code class="docutils literal notranslate"><span class="pre">CWD</span></code>) without mounting your host <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory by
+using the <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> flag. This is equivalent to <code class="docutils literal notranslate"><span class="pre">--no-mount</span> <span class="pre">home</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --no-home my_container.sif
+
+-or-
+
+$ apptainer shell --no-mount home my_container.sif
 </pre></div>
 </div>
+<p>Disabling the mount of <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> may be useful if your container image has files
+at <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>, which would otherwise be hidden by the bind mount from the host.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Beware that if it is the case that your <code class="docutils literal notranslate"><span class="pre">CWD</span></code> is your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>
-directory, it will still mount your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory.</p>
+<p>If your current working directory is under <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>, and you do not want to
+mount it, you will need to disable both <code class="docutils literal notranslate"><span class="pre">cwd</span></code> and <code class="docutils literal notranslate"><span class="pre">home</span></code> mounts:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --no-mount home,cwd my_container.sif
+</pre></div>
 </div>
 </div>
-<div class="section" id="containall">
-<h4><code class="docutils literal notranslate"><span class="pre">--containall</span></code><a class="headerlink" href="#containall" title="Permalink to this heading"></a></h4>
-<blockquote>
-<div><p>Using the <code class="docutils literal notranslate"><span class="pre">--containall</span></code> (or <code class="docutils literal notranslate"><span class="pre">-C</span></code> for short) flag, <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> is
-not mounted and a dummy bind mount is created at the <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> point.
-You cannot use <code class="docutils literal notranslate"><span class="pre">-B`</span></code> (or <code class="docutils literal notranslate"><span class="pre">--bind</span></code>) to bind your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>
-directory because it creates an empty mount. So if you have files
-located in the image at <code class="docutils literal notranslate"><span class="pre">/home/user</span></code>, the <code class="docutils literal notranslate"><span class="pre">--containall</span></code> flag
-will hide them all.</p>
-</div></blockquote>
+</div>
+<div class="section" id="contain-containall">
+<h4><code class="docutils literal notranslate"><span class="pre">--contain</span></code> / <code class="docutils literal notranslate"><span class="pre">--containall</span></code><a class="headerlink" href="#contain-containall" title="Permalink to this heading"></a></h4>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> / <code class="docutils literal notranslate"><span class="pre">--containall</span></code> (or <code class="docutils literal notranslate"><span class="pre">-c</span></code> / <code class="docutils literal notranslate"><span class="pre">-C</span></code> for short)
+flags, <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> from the host is not mounted, and an in-memory temporary
+directory is created at the <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> point inside the container instead. An
+in-memory temporary directory is also used for <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> and <code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code> inside
+the container.</p>
+<p>If the container image includes files within <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>, the mounted temporary
+directory will hide them unless you also specify <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-mount</span>
+<span class="pre">home</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --containall my_container.sif
+Apptainer&gt; ls -lah $HOME
+total 4K
+drwxr-xr-x    2 user group      60 Sep  1 11:45 .
+drwxr-xr-x    1 user group      60 Sep  1 11:44 ..
+
+$ apptainer shell --containall --no-home my_container.sif
+Apptainer&gt; ls -lah $HOME
+total 52K
+drwxr-xr-x    2 user group        60 Sep  1 11:45 .
+drwxr-xr-x    1 user group        60 Sep  1 11:44 ..
+drwxr-xr-x    1 user group     38672 Sep  1 11:44 mydata.csv
+drwxr-xr-x    1 user group     14235 Sep  1 11:44 myimage.jpg
 </pre></div>
 </div>
 </div>
