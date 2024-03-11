@@ -90,7 +90,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#public-containers">Public Containers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#docker-hub-limits">Docker Hub Limits</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#authentication-private-containers">Authentication / Private Containers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#apptainer-cli-remote-command">Apptainer CLI Remote Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apptainer-cli-registry-command">Apptainer CLI <code class="docutils literal notranslate"><span class="pre">registry</span></code> Command</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#docker-cli-authentication">Docker CLI Authentication</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#interactive-login">Interactive Login</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#environment-variables">Environment Variables</a></li>
@@ -291,13 +291,13 @@ that you authenticate before using <code class="docutils literal notranslate"><s
 <p>To make use of the API limits under a Docker Hub account, or to access
 private containers, you’ll need to authenticate to Docker Hub. There are
 a number of ways to do this with Apptainer.</p>
-<div class="section" id="apptainer-cli-remote-command">
-<h4>Apptainer CLI Remote Command<a class="headerlink" href="#apptainer-cli-remote-command" title="Permalink to this heading"></a></h4>
-<p>The <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span></code> command supports logging into Docker
+<div class="section" id="apptainer-cli-registry-command">
+<h4>Apptainer CLI <code class="docutils literal notranslate"><span class="pre">registry</span></code> Command<a class="headerlink" href="#apptainer-cli-registry-command" title="Permalink to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">registry</span> <span class="pre">login</span></code> command supports logging into Docker
 Hub and other OCI registries. For Docker Hub, the registry hostname is
 <code class="docutils literal notranslate"><span class="pre">docker.io</span></code>, so you will need to login as below, specifying your
 username:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer remote login --username myuser docker://docker.io
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer registry login --username myuser docker://docker.io
 Password / Token:
 INFO:    Token stored in /home/myuser/.apptainer/remote.yaml
 </pre></div>
@@ -306,10 +306,10 @@ INFO:    Token stored in /home/myuser/.apptainer/remote.yaml
 which you should generate in the ‘Security’ section of your account
 profile page on Docker Hub.</p>
 <p>To check which Docker / OCI registries you are currently logged in to,
-use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">list</span></code>.</p>
+use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">registry</span> <span class="pre">list</span></code>.</p>
 <p>To logout of a registry, so that your credentials are forgotten, use
-<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">logout</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer remote logout docker://docker.io
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">registry</span> <span class="pre">logout</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer registry logout docker://docker.io
 INFO:    Logout succeeded
 </pre></div>
 </div>
@@ -393,7 +393,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 CLI token in the Quay web interface, then use it to login with
 Apptainer. Use the same methods as described for Docker Hub above:</p>
 <ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">docker://quay.io</span></code>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">registry</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">docker://quay.io</span></code>
 to store your credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">quay.io</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
@@ -422,7 +422,7 @@ key in the web interface in order to authenticate.</p>
 Docker Hub), with the username <code class="docutils literal notranslate"><span class="pre">$oauthtoken</span></code> and the password set to
 your NGC API key.</p>
 <ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">\$oauthtoken</span>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">registry</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">\$oauthtoken</span>
 <span class="pre">docker://nvcr.io</span></code> to store your credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">nvcr.io</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
@@ -449,7 +449,7 @@ documentation here.</a></p>
 <p>Use one of the following authentication methods (detailed above for
 Docker Hub), with your username and personal access token:</p>
 <ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">docker://ghcr.io</span></code>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">registry</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">docker://ghcr.io</span></code>
 to store your credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">ghcr.io</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.</p></li>
@@ -486,7 +486,7 @@ username used in conjunction with this password is always <code class="docutils 
 </div>
 <p>Then login using one of the following methods:</p>
 <ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">AWS</span>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">registry</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">AWS</span>
 <span class="pre">docker://&lt;accountid&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com</span></code> to store your
 credentials for Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">AWS</span>
@@ -512,7 +512,7 @@ Apptainer.</p>
 <p>Service Principle accounts will have an explicit username and password,
 and you should authenticate using one of the following methods:</p>
 <ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">registry</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span>
 <span class="pre">docker://myregistry.azurecr.io</span></code> to store your credentials for
 Apptainer.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">--username</span> <span class="pre">myuser</span> <span class="pre">myregistry.azurecr.io</span></code> if
@@ -639,7 +639,7 @@ I.E. run <code class="docutils literal notranslate"><span class="pre">sudo</span
 <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_PASSWORD</span></code> environment variables. Pass the
 environment variables through sudo to the <code class="docutils literal notranslate"><span class="pre">root</span></code> build process by
 running <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-E</span> <span class="pre">apptainer</span> <span class="pre">build</span> <span class="pre">...</span></code>.</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span> <span class="pre">...</span></code> to store your credentials
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apptainer</span> <span class="pre">registry</span> <span class="pre">login</span> <span class="pre">...</span></code> to store your credentials
 for the <code class="docutils literal notranslate"><span class="pre">root</span></code> user on your system. This is separate from storing
 the credentials under your own account.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">login</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine. This is
@@ -1218,7 +1218,7 @@ symbolic links and the the <code class="docutils literal notranslate"><span clas
 check your credentials carefully. You can <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> with the
 <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag to perform an interactive login. This may be
 useful if you are unsure whether you have stored credentials properly
-via <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">remote</span> <span class="pre">login</span></code> or <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span></code>.</p>
+via <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">registry</span> <span class="pre">login</span></code> or <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span></code>.</p>
 <p>OCI registries expect different values for username and password fields.
 Some require a token to be generated and used instead of your account
 password. Some take a generic username, and rely only on the token to
