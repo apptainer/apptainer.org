@@ -224,11 +224,10 @@ typical HPC workflows.
 Metadata operations are still moved to the node running the
 container, which is a big advantage over having many files directly
 on networked filesystems.</p></li>
-<li><p>Encryption is not yet supported. In suid mode, Apptainer uses kernel LUKS2
-mounts to run encrypted containers without writing a decrypted
-version of their content to disk.
-An unprivileged FUSE filesystem will hopefully be able to perform this
-operation in a future release.</p></li>
+<li><p>Non-suid mode SIF file encryption is incompatible with the older suid
+mode encryption.  It uses a kernel feature that does not have an exact
+uprivileged replacement, but encryption is available unprivileged by
+making use of a FUSE program.</p></li>
 <li><p>Some little used <a class="reference internal" href="security_options.html#security-options"><span class="std std-ref">security options</span></a> and
 <a class="reference internal" href="networking.html#networking"><span class="std std-ref">network options</span></a> of Apptainer that give users elevated
 privileges through configuration are only available in suid mode.</p></li>
@@ -314,7 +313,8 @@ feature. This is the same technology routinely used for full disk
 encryption. The encrypted container is mounted directly through the
 kernel. Unlike other container formats, the encrypted container is run
 without ever decrypting its contents to disk.
-Encryption and decryption is not currently supported in non-suid mode.</p>
+Non-suid encryption and decryption uses the FUSE gocryptfs program,
+which also avoids decrypting contents to disk.</p>
 </div>
 <div class="section" id="configuration-runtime-options">
 <h2>Configuration &amp; Runtime Options<a class="headerlink" href="#configuration-runtime-options" title="Permalink to this heading"></a></h2>
