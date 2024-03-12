@@ -80,6 +80,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#help">%help</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#templating-how-to-pass-values-into-definition-files">Templating: How to Pass Values into Definition Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basics">Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-multiple-variables">Working with multiple variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#precedence-among-multiple-value-sources">Precedence among multiple value sources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#default-variable-values-the-arguments-section">Default variable values: the %arguments section</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#multi-stage-builds">Multi-Stage Builds</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#scif-apps">SCIF Apps</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#scif-app-sections">SCIF %app* sections</a></li>
@@ -357,23 +364,7 @@ will be replaced by a value defined by a <code class="docutils literal notransla
 Note that values defined in this section are only the default values for defined
 variables; if the same variables are passed with different values via the options
 <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> or <code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code> they will overwrite values defined in
-this section.</p>
-<p>Consider the example from the definition file above:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
-<span class="k">From</span>: ubuntu:{{ VERSION }}
-Stage: build
-
-<span class="err">%</span>arguments
-   VERSION=<span class="m">22.04</span>
-</pre></div>
-</div>
-<p>The value in this entry <code class="docutils literal notranslate"><span class="pre">VERSION=22.04</span></code> will replace the template variable
-<code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">VERSION</span> <span class="pre">}}</span></code> during the build process by default.</p>
-<p>However, if a user builds the image with the command</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>apptainer build --build-arg VERSION=<span class="m">23.04</span> my_container.sif my_container.def
-</pre></div>
-</div>
-<p>then the From image tag will be overridden to <code class="docutils literal notranslate"><span class="pre">23.04</span></code> rather than <code class="docutils literal notranslate"><span class="pre">22.04</span></code>.</p>
+this section. See details and examples in the section <a class="reference internal" href="#template-arguments"><span class="std std-ref">template arguments</span></a>.</p>
 </div>
 <div class="section" id="setup">
 <h3>%setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h3>
@@ -794,6 +785,315 @@ then be displayed using the <code class="docutils literal notranslate"><span cla
     supported sections.
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="templating-how-to-pass-values-into-definition-files">
+<h2>Templating: How to Pass Values into Definition Files<a class="headerlink" href="#templating-how-to-pass-values-into-definition-files" title="Permalink to this heading"></a></h2>
+<p>Apptainer definition files support <em>templating</em>:
+definition files can include placeholders for values that will be passed at
+build time, either using command-line options or by specifying a file that
+contains the relevant values.</p>
+<div class="section" id="basics">
+<h3>Basics<a class="headerlink" href="#basics" title="Permalink to this heading"></a></h3>
+<p>To use templating, include a <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">placeholder</span> <span class="pre">}}</span></code> at the point in your
+definition file where you’d like the passed-in value to go. For example:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: ubuntu:<span class="m">22.04</span>
+Stage: build
+
+<span class="gh">%runscript</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_text<span class="w"> </span><span class="o">}}</span>
+</pre></div>
+</div>
+<p>When building a container from this definition file, a concrete value for
+<code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">some_text</span> <span class="pre">}}</span></code> can be passed via the <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> flag to the <code class="docutils literal notranslate"><span class="pre">build</span></code>
+command. This flag accepts a <code class="docutils literal notranslate"><span class="pre">varname=value</span></code> pair, as shown here:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --build-arg some_text=&quot;Hello world&quot; ./my_container.sif ./my_container.def
+INFO:    Starting build...
+Getting image source signatures
+Copying blob f4bb4e8dca02 skipped: already exists
+Copying config 2b7cc08dcd done   |
+Writing manifest to image destination
+2024/03/08 14:17:24  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
+INFO:    Adding runscript
+INFO:    Creating SIF file...
+INFO:    Build complete: ./my_container.sif
+
+$ apptainer run ./my_container.sif
+Hello world
+</pre></div>
+</div>
+<p>Alternatively, the <code class="docutils literal notranslate"><span class="pre">varname=value</span></code> assignments can be placed in a file, and
+the path to that file specified using the <code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code> flag to the
+<code class="docutils literal notranslate"><span class="pre">build</span></code> command, as shown here:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat &lt;&lt; EOF &gt; ./my_args_file.txt
+some_text=&quot;Hello again, world&quot;
+EOF
+
+$ apptainer build -F --build-arg-file ./my_args_file.txt ./my_container.sif ./my_container.def
+INFO:    Starting build...
+Getting image source signatures
+Copying blob f4bb4e8dca02 skipped: already exists
+Copying config 2b7cc08dcd done   |
+Writing manifest to image destination
+2024/03/08 14:17:24  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
+INFO:    Adding runscript
+INFO:    Creating SIF file...
+INFO:    Build complete: ./my_container.sif
+
+$ apptainer run ./my_container.sif
+Hello again, world
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-with-multiple-variables">
+<h3>Working with multiple variables<a class="headerlink" href="#working-with-multiple-variables" title="Permalink to this heading"></a></h3>
+<p>A single definition file can use multiple different templating variables, use a
+single variable more than once, and use variables in different sections of the
+definition file, as shown here:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: ubuntu:<span class="m">22.04</span>
+Stage: build
+
+<span class="gh">%setup</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>file_contents<span class="w"> </span><span class="o">}}</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/test_file
+
+<span class="gh">%environment</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">CUSTOM_VAR_ONE</span><span class="o">={{</span><span class="w"> </span>var_value1<span class="w"> </span><span class="o">}}</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">CUSTOM_VAR_TWO</span><span class="o">={{</span><span class="w"> </span>var_value2<span class="w"> </span><span class="o">}}</span>
+
+<span class="gh">%runscript</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;file contents:&quot;</span><span class="w"> </span><span class="sb">`</span>cat<span class="w"> </span>/tmp/test_file<span class="sb">`</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--&gt; this should, if I&#39;m not mistaken, equal:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>file_contents<span class="w"> </span><span class="o">}}</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;env var: </span><span class="si">${</span><span class="nv">CUSTOM_VAR_ONE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--&gt; this should, if I&#39;m not mistaken, equal:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>var_value1<span class="w"> </span><span class="o">}}</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;env var: </span><span class="si">${</span><span class="nv">CUSTOM_VAR_TWO</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--&gt; this should, if I&#39;m not mistaken, equal:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>var_value2<span class="w"> </span><span class="o">}}</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;and finally, here&#39;s some text:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_text<span class="o">}}</span>
+</pre></div>
+</div>
+<p>To use this definition file, one can pass values for all the different variables
+using <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> flags:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build -F --build-arg file_contents=&quot;&#39;I am in a file&#39;&quot; --build-arg var_value1=&quot;&#39;I am in an env var&#39;&quot; --build-arg var_value2=&quot;&#39;I am also in an env var&#39;&quot; --build-arg some_text=&quot;&#39;I am just some text&#39;&quot; ./my_container.sif ./my_container.def
+INFO:    Starting build...
+Getting image source signatures
+Copying blob f4bb4e8dca02 skipped: already exists
+Copying config 2b7cc08dcd done   |
+Writing manifest to image destination
+2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
+INFO:    Running setup scriptlet
++ echo I am in a file
+INFO:    Adding environment to container
+INFO:    Adding runscript
+INFO:    Creating SIF file...
+INFO:    Build complete: ./my_container.sif
+
+$ apptainer run ./my_container.sif
+file contents: I am in a file
+--&gt; this should, if I&#39;m not mistaken, equal: I am in a file
+
+env var: I am in an env var
+--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var
+
+env var: I am also in an env var
+--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var
+
+and finally, here&#39;s some text: I am just some text
+</pre></div>
+</div>
+<p>Or one can place the values for the different values in a file, and pass the
+path to that file using the <code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code> flag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat &lt;&lt; EOF &gt; ./my_args_file.txt
+file_contents=&quot;I am in a file&quot;
+var_value1=&quot;I am in an env var&quot;
+var_value2=&quot;I am also in an env var&quot;
+some_text=&quot;I am just some text&quot;
+EOF
+
+$ apptainer build -F --build-arg-file ./my_args_file.txt ./my_container.sif ./my_container.def
+INFO:    Starting build...
+Getting image source signatures
+Copying blob f4bb4e8dca02 skipped: already exists
+Copying config 2b7cc08dcd done   |
+Writing manifest to image destination
+2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
+INFO:    Running setup scriptlet
++ echo I am in a file
+INFO:    Adding environment to container
+INFO:    Adding runscript
+INFO:    Creating SIF file...
+INFO:    Build complete: ./my_container.sif
+
+$ apptainer run ./my_container.sif
+file contents: I am in a file
+--&gt; this should, if I&#39;m not mistaken, equal: I am in a file
+
+env var: I am in an env var
+--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var
+
+env var: I am also in an env var
+--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var
+
+and finally, here&#39;s some text: I am just some text
+</pre></div>
+</div>
+<p>Or one can use a combination of both strategies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat &lt;&lt; EOF &gt; ./my_args_file.txt
+var_value1=&quot;I am in an env var&quot;
+some_text=&quot;I am just some text&quot;
+EOF
+
+$ apptainer build -F --build-arg file_contents=&quot;&#39;I am in a file&#39;&quot; --build-arg var_value2=&quot;&#39;I am also in an env var&#39;&quot; --build-arg-file ./my_args_file.txt ./my_container.sif ./my_container.def
+INFO:    Starting build...
+Getting image source signatures
+Copying blob f4bb4e8dca02 skipped: already exists
+Copying config 2b7cc08dcd done   |
+Writing manifest to image destination
+2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
+INFO:    Running setup scriptlet
++ echo I am in a file
+INFO:    Adding environment to container
+INFO:    Adding runscript
+INFO:    Creating SIF file...
+INFO:    Build complete: ./my_container.sif
+
+$ apptainer run ./my_container.sif
+file contents: I am in a file
+--&gt; this should, if I&#39;m not mistaken, equal: I am in a file
+
+env var: I am in an env var
+--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var
+
+env var: I am also in an env var
+--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var
+
+and finally, here&#39;s some text: I am just some text
+</pre></div>
+</div>
+</div>
+<div class="section" id="precedence-among-multiple-value-sources">
+<h3>Precedence among multiple value sources<a class="headerlink" href="#precedence-among-multiple-value-sources" title="Permalink to this heading"></a></h3>
+<p>In the event that an argument is passed via <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> more than once, the
+last occurrence will take precedence:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build -F --build-arg file_contents=&quot;&#39;I am in a file (1st time)&#39;&quot; --build-arg var_value2=&quot;&#39;I am also in an env var&#39;&quot; --build-arg file_contents=&quot;&#39;I am in a file (2nd time)&#39;&quot; --build-arg-file ./my_args_file.txt ./my_container.sif ./my_container.def
+INFO:    Starting build...
+Getting image source signatures
+Copying blob f4bb4e8dca02 skipped: already exists
+Copying config 2b7cc08dcd done   |
+Writing manifest to image destination
+2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
+INFO:    Running setup scriptlet
++ echo &#39;I am in a file (2nd time)&#39;
+INFO:    Adding environment to container
+INFO:    Adding runscript
+INFO:    Creating SIF file...
+INFO:    Build complete: ./my_container.sif
+
+$ apptainer run ./my_container.sif
+file contents: I am in a file (2nd time)
+--&gt; this should, if I&#39;m not mistaken, equal: I am in a file (2nd time)
+
+env var: I am in an env var
+--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var
+
+env var: I am also in an env var
+--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var
+
+and finally, here&#39;s some text: I am just some text
+</pre></div>
+</div>
+<p>In the event that a variable is defined both in the file passed to
+<code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code> and via the command line using <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> flag, the value passed via the
+command line will take precedence:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat &lt;&lt; EOF &gt; ./my_args_file.txt
+var_value1=&quot;I am in an env var&quot;
+var_value2=&quot;I am also in an env var (from build arg file)&quot;
+some_text=&quot;I am just some text&quot;
+EOF
+
+$ apptainer build -F --build-arg file_contents=&quot;&#39;I am in a file&#39;&quot; --build-arg var_value2=&quot;&#39;I am also in an env var (from command line)&#39;&quot; --build-arg-file ./my_args_file.txt ./my_container.sif ./my_container.def
+INFO:    Starting build...
+Getting image source signatures
+Copying blob f4bb4e8dca02 skipped: already exists
+Copying config 2b7cc08dcd done   |
+Writing manifest to image destination
+2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
+INFO:    Running setup scriptlet
++ echo &#39;I am in a file&#39;
+INFO:    Adding environment to container
+INFO:    Adding runscript
+INFO:    Creating SIF file...
+INFO:    Build complete: ./my_container.sif
+
+$ apptainer run ./my_container.sif
+file contents: I am in a file
+--&gt; this should, if I&#39;m not mistaken, equal: I am in a file
+
+env var: I am in an env var
+--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var
+
+env var: I am also in an env var (from command line)
+--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var (from command line)
+
+and finally, here&#39;s some text: I am just some text
+</pre></div>
+</div>
+</div>
+<div class="section" id="default-variable-values-the-arguments-section">
+<h3>Default variable values: the %arguments section<a class="headerlink" href="#default-variable-values-the-arguments-section" title="Permalink to this heading"></a></h3>
+<p id="template-arguments">If a definition file contains a variable placeholder and no value for that
+variable is provided (via either <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> or <code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code>),
+Apptainer will generate an error:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: ubuntu:<span class="m">22.04</span>
+Stage: build
+
+<span class="gh">%runscript</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Here is some text:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_text<span class="w"> </span><span class="o">}}</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;And here is some more text:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_more_text<span class="w"> </span><span class="o">}}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build -F --build-arg some_more_text=&quot;more more more&quot; ./my_container.sif ./my_container.def
+FATAL:   Unable to build from ./my_container.def: build var some_text is not defined through either --build-arg (--build-arg-file) or &#39;arguments&#39; section
+</pre></div>
+</div>
+<p>However, definition files can provide default values for some or all variables
+using the <code class="docutils literal notranslate"><span class="pre">%arguments</span></code> section, as shown here:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: ubuntu:<span class="m">22.04</span>
+Stage: build
+
+<span class="gh">%runscript</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Here is some text:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_text<span class="w"> </span><span class="o">}}</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;And here is some more text:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_more_text<span class="w"> </span><span class="o">}}</span>
+
+<span class="err">%</span>arguments
+   some_text=&quot;Some default text&quot;
+   some_more_text=&quot;Some more default text&quot;
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build -F --build-arg some_more_text=&quot;more more more&quot; ./my_container.sif ./my_container.def
+INFO:    Starting build...
+Getting image source signatures
+Copying blob f4bb4e8dca02 skipped: already exists
+Copying config 2b7cc08dcd done   |
+Writing manifest to image destination
+2024/03/08 14:52:53  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
+INFO:    Adding runscript
+INFO:    Creating SIF file...
+INFO:    Build complete: ./my_container.sif
+
+$ apptainer run ./my_container.sif
+Here is some text: Some default text
+And here is some more text: more more more
+</pre></div>
+</div>
+<p>Note that in the event of a variable having both a default value <em>and</em> a value
+explicitly set via <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> or <code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code>, the explicitly-set
+value will take precedence (as the example above shows).</p>
 </div>
 </div>
 <div class="section" id="multi-stage-builds">
