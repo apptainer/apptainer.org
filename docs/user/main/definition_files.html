@@ -455,9 +455,13 @@ information on defining and using SCIF Apps can be found <a class="reference int
 <p>This section is where you can download files from the internet with
 tools like <code class="docutils literal notranslate"><span class="pre">git</span></code> and <code class="docutils literal notranslate"><span class="pre">wget</span></code>, install new software and libraries,
 write configuration files, create new directories, etc.</p>
+<p>The commands in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section run in a clean environment. Environment
+variables from the host are not passed into the build. To pass values into a
+build you should use the <span class="xref std std-ref">templating / build-args support</span>.</p>
 <p>Consider the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section from the example definition file above:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%post</span>
 <span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>netcat
+
 <span class="w">    </span><span class="nv">NOW</span><span class="o">=</span><span class="sb">`</span>date<span class="sb">`</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export NOW=\&quot;</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">\&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$APPTAINER_ENVIRONMENT</span>
 </pre></div>
@@ -465,13 +469,18 @@ write configuration files, create new directories, etc.</p>
 <p>This <code class="docutils literal notranslate"><span class="pre">%post</span></code> scriptlet uses the Ubuntu package manager <code class="docutils literal notranslate"><span class="pre">apt</span></code> to
 update the container and install the program <code class="docutils literal notranslate"><span class="pre">netcat</span></code> (that will be
 used in the <code class="docutils literal notranslate"><span class="pre">%startscript</span></code> section below).</p>
-<p>The script also sets an environment variable at build time. Note that
-the value of this variable cannot be anticipated, and therefore cannot
-be set earlier in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section. For situations like
-this, the <code class="docutils literal notranslate"><span class="pre">$APPTAINER_ENVIRONMENT</span></code> variable is provided. Assigning a
-value to this variable will cause it to be written to a file called
-<code class="docutils literal notranslate"><span class="pre">/.singularity.d/env/91-environment.sh</span></code> that will be sourced by the
-container at runtime.</p>
+<p>The scriptlet also sets an environment variable called <code class="docutils literal notranslate"><span class="pre">NOW</span></code> to the current
+date and time. It then writes an <code class="docutils literal notranslate"><span class="pre">export</span></code> statement for <code class="docutils literal notranslate"><span class="pre">NOW</span></code> into the file
+that is pointed to by <code class="docutils literal notranslate"><span class="pre">$APPTAINER_ENVIRONMENT</span></code>. This demonstrates how to set
+container environment variables (available when the container is run), that are
+not known when the definition file is written. Because the value of <code class="docutils literal notranslate"><span class="pre">$NOW</span></code> is
+only known when the <code class="docutils literal notranslate"><span class="pre">date</span></code> command in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> scriptlet is run, it
+cannot be added to the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section.</p>
+<p>Directing output into <code class="docutils literal notranslate"><span class="pre">$APPTAINER_ENVIRONMENT</span></code> will cause it to be written
+to a shell script file called <code class="docutils literal notranslate"><span class="pre">/.singularity.d/env/91-environment.sh</span></code> that
+will be sourced by the container at runtime. The <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">NAME=VALUE</span></code> syntax is
+needed to make the environment variable available to all processes that are
+started in the container.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Variables set in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section through
