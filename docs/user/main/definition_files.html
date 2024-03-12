@@ -107,6 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
@@ -457,7 +458,7 @@ tools like <code class="docutils literal notranslate"><span class="pre">git</spa
 write configuration files, create new directories, etc.</p>
 <p>The commands in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section run in a clean environment. Environment
 variables from the host are not passed into the build. To pass values into a
-build you should use the <span class="xref std std-ref">templating / build-args support</span>.</p>
+build you should use the <a class="reference internal" href="#sec-templating"><span class="std std-ref">templating / build-args support</span></a>.</p>
 <p>Consider the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section from the example definition file above:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%post</span>
 <span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>netcat
@@ -797,7 +798,7 @@ then be displayed using the <code class="docutils literal notranslate"><span cla
 </div>
 </div>
 <div class="section" id="templating-how-to-pass-values-into-definition-files">
-<h2>Templating: How to Pass Values into Definition Files<a class="headerlink" href="#templating-how-to-pass-values-into-definition-files" title="Permalink to this heading"></a></h2>
+<span id="sec-templating"></span><h2>Templating: How to Pass Values into Definition Files<a class="headerlink" href="#templating-how-to-pass-values-into-definition-files" title="Permalink to this heading"></a></h2>
 <p>Apptainer definition files support <em>templating</em>:
 definition files can include placeholders for values that will be passed at
 build time, either using command-line options or by specifying a file that
