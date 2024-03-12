@@ -36,14 +36,13 @@ Full functionality of {Project} requires that the kernel supports:
 -  **Unprivileged user namespaces** - (minimum kernel >=3.8, >=4.18
    or 3.10.0-1127 on RHEL7 recommended)
    Required to run containers without root or setuid privilege.
-   The recommended versions are required for unprivileged SIF file
-   mounts.
+   The recommended versions are required for unprivileged FUSE mounts.
 
 -  **OverlayFS mounts** - (minimum kernel >=3.18, >=5.11 recommended)
-   Required for full flexibility in bind mounts to containers in suid
-   mode, and to support persistent overlays for writable containers
-   in suid mode.  Kernel 5.11 enables support for persistent overlay
-   unprivileged, but otherwise fuse-overlayfs will be used for that.
+   Used for creating missing bind mount paths and for writable overlays.
+   Kernel 5.11 enables support for overlays unprivileged, but whenever
+   the kernel OverlayFS driver doesn't work, fuse-overlayfs will be used
+   instead.
 
 Instructions to install without or with setuid privileges are below.
 Please make sure you are familiar with the discussion on
