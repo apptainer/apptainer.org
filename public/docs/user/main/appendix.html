@@ -351,6 +351,10 @@ of capabilities to be dropped. Default is an empty string.</p></li>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_ENCRYPTION_PASSPHRASE</strong>: Used to specify the plaintext
 passphrase to encrypt the container.</p></li>
+<li><p><strong>APPTAINER_ENCRYPTION_PEM_DATA</strong>: If it contains data from a public PEM
+file, Apptainer can use those data to encrypt a container. If it contains
+data from a private PEM file, Apptainer will try to use the data to run an
+encrypted container.</p></li>
 <li><p><strong>APPTAINER_ENCRYPTION_PEM_PATH</strong>: Used to specify the path of the
 file containing public or private key to encrypt the container in PEM
 format.</p></li>
