@@ -34,9 +34,11 @@ required, with >=4.18 being recommended due to support for unprivileged
 mounting of FUSE filesystems (needed for example for mounting SIF files).
 The equivalent recommendation on RHEL7 is >=3.10.0-1127 from release
 7.8, where unprivileged mounting of FUSE filesystems was backported.
-To use unprivileged overlayFS for persistent overlays, kernel >=5.11 is
-recommended, but if that's not available then {Project} will use
-fuse-overlayfs instead.  That feature has not been backported to RHEL7.
+To use unprivileged overlayFS for creating missing bind mount paths and
+for writable overlays, kernel >=5.11 is recommended.
+That feature has not been backported to RHEL7.
+Whenever the kernel overlayFS doesn't work then {Project} will use
+fuse-overlayfs instead.  
 
 Additionally, some Linux distributions require that unprivileged user
 namespace creation is enabled using a ``sysctl`` or kernel command line
