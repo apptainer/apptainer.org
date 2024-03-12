@@ -162,12 +162,6 @@ system image in SIF to use as a persistent overlay. Then you can specify
 that you want to use the directory or image as an overlay at runtime
 with the <code class="docutils literal notranslate"><span class="pre">--overlay</span></code> option, or <code class="docutils literal notranslate"><span class="pre">--writable</span></code> if you want to modify
 the overlay embedded in SIF.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>By default for security reasons the ext3 format is only supported in
-unprivileged user namespace mode, so unless that default is changed a
-<code class="docutils literal notranslate"><span class="pre">-u/--userns</span></code> option may be needed with a setuid-root installation.</p>
-</div>
 <p>If you want to make changes to the image, but do not want them to
 persist, use the <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> option. This stores all changes in
 an in-memory temporary filesystem which is discarded as soon as the
@@ -280,7 +274,7 @@ On the other hand, a directory of modifications to a base container image
 cannot be transported or shared as easily as a single overlay file,
 and it generally does not work well on network file servers
 (see the <a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html#nfs">NFS</a> and
-<a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html#lustre-gpfs">Lustre / GPFS</a>
+<a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html#lustre-gpfs-panfs">Lustre / GPFS / PanFS</a>
 sections of the admin guide).
 It is supported, however, and this section describes how to use it.</p>
 <div class="admonition note">

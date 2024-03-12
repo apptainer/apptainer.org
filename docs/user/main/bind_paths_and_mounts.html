@@ -344,13 +344,11 @@ variable should be separated by newlines (<code class="docutils literal notransl
 <div class="section" id="using-bind-or-mount-with-the-writable-flag">
 <h3>Using <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag<a class="headerlink" href="#using-bind-or-mount-with-the-writable-flag" title="Permalink to this heading"></a></h3>
 <p>To mount a bind path inside the container, a <em>bind point</em> must be
-defined within the container. The bind point is a directory within the
+defined within the container. The bind point is a directory or file within the
 container that Apptainer can use as a destination to bind a
-directory on the host system.</p>
-<p>Apptainer will do its best to bind mount
-requested paths into a container regardless of whether the appropriate
-bind point exists within the container. Apptainer can often carry
-out this operation even in the absence of the “overlay fs” feature.</p>
+directory or file from the host system.
+Under most circumstances, Apptainer will automatically create any missing
+bind points within the container using an overlay.</p>
 <p>However, binding paths to non-existent points within the container can
 result in unexpected behavior when used in conjunction with the
 <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag, and is therefore disallowed. If you need to specify
@@ -556,9 +554,6 @@ $<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </
 <span class="w">    </span>mycontainer.sif
 </pre></div>
 </div>
-<p>By default for security reasons the ext3 format is only supported in
-unprivileged user namespace mode, so unless that default is changed a
-<code class="docutils literal notranslate"><span class="pre">-u/--userns</span></code> option may be needed with a setuid-root installation.</p>
 </div>
 <div class="section" id="squashfs-image-files">
 <h3>SquashFS Image Files<a class="headerlink" href="#squashfs-image-files" title="Permalink to this heading"></a></h3>
