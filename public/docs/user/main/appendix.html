@@ -816,6 +816,13 @@ module to use.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword is mandatory. It specifies the container to use as
 a base. Also,``tag`` is mandatory that refers to the version of image
 you want to use.</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Fingerprints</span>: 22045C8C0B1004D058DE4BEDA20C27EE7FF7BA84
+</pre></div>
+</div>
+<p>The Fingerprints keyword is optional. It specifies one or more comma separated
+fingerprints corresponding to PGP public keys. If present, the SIF file will be
+verified and the build will only proceed if it is signed by keys matching <em>all</em>
+of the specified fingerprints.</p>
 </div>
 </div>
 <div class="section" id="localimage-bootstrap-agent">
