@@ -361,6 +361,12 @@ meaning that no intermediate decrypted data is ever present on disk. See
 </div>
 <div class="section" id="environment-variables">
 <h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this heading"></a></h2>
+<p>You can set environment variables on the host to influence the behaviour of a
+build. Note that environment variables are not passed into the build itself, and
+cannot be accessed in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section of a definition file. To pass values
+into a build, use the <span class="xref std std-ref">templating / build-args support</span>.</p>
+<p>Environment variables that control a build are generally associated with an
+equivalent CLI option. The order of precendence is:</p>
 <ol class="arabic simple">
 <li><p>If a flag is represented by both a CLI option and an environment variable,
 and both are set, the CLI option will take precedence. This is true for all
