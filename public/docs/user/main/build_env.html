@@ -94,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
@@ -364,7 +365,7 @@ meaning that no intermediate decrypted data is ever present on disk. See
 <p>You can set environment variables on the host to influence the behaviour of a
 build. Note that environment variables are not passed into the build itself, and
 cannot be accessed in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section of a definition file. To pass values
-into a build, use the <span class="xref std std-ref">templating / build-args support</span>.</p>
+into a build, use the <a class="reference internal" href="definition_files.html#sec-templating"><span class="std std-ref">templating / build-args support</span></a>.</p>
 <p>Environment variables that control a build are generally associated with an
 equivalent CLI option. The order of precendence is:</p>
 <ol class="arabic simple">
