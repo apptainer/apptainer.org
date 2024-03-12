@@ -234,7 +234,7 @@ within containers to ease usage.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>These options will have no effect if the file does not exist within
-the container, or overlay or underlay support are enabled.</p>
+the container and overlay and underlay support are not enabled.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">passwd</span></code>: This option determines if Apptainer should
 automatically append an entry to <code class="docutils literal notranslate"><span class="pre">/etc/passwd</span></code> for the user running
@@ -378,7 +378,7 @@ containers.</p></li>
 containers with an encrypted root filesystem.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">squashfs</span></code> permits / denies execution of bare
 SquashFS image files. E.g. Singularity 2.x images.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">extfs</span></code> permits / denies execution of bare EXT
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">extfs</span></code> permits / denies execution of bare extfs
 image files.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">container</span> <span class="pre">dir</span></code> permits / denies execution of sandbox
 directory containers.</p></li>
@@ -388,25 +388,28 @@ directory containers.</p></li>
 <p>These limitations do not apply to the root user.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid-mount</span> <span class="pre">${type}</span></code>: This set of options allows admins to limit the
-types of image formats that can be mounted by Apptainer in setuid-root
+types of image formats that can be mounted using kernel drivers in SUID
 mode, with the following types:</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid-mount</span> <span class="pre">encrypted</span></code> permits/denies execution of</dt><dd><p>encrypted SIF files in setuid-root mode.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid-mount</span> <span class="pre">squashfs</span></code> permits/denies execution of squashfs</dt><dd><p>filesystems in setuid-root mode, both inside and outside of SIF files.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid-mount</span> <span class="pre">extfs</span></code> permits/denies execution of ext3</dt><dd><p>filesystems in setuid-root mode, both inside and outside of SIF files.
-For security reasons, unlike the others this defaults to <code class="docutils literal notranslate"><span class="pre">no</span></code>.</p>
-</dd>
-</dl>
-</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid-mount</span> <span class="pre">encrypted</span></code> permits/denies execution of
+encrypted SIF files in SUID mode using the kernel device-mapper.
+When set to <code class="docutils literal notranslate"><span class="pre">no</span></code>, gocryptfs FUSE-based encryption will be used
+instead, with the same format used in user namespace mode.
+This defaults to <code class="docutils literal notranslate"><span class="pre">yes</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid-mount</span> <span class="pre">squashfs</span></code> permits/denies execution of squashfs
+filesystems in SUID mode, both inside and outside of SIF files.
+When set to <code class="docutils literal notranslate"><span class="pre">no</span></code>, squashfuse_ll is used instead of the kernel
+squashfs driver.
+When set to <code class="docutils literal notranslate"><span class="pre">iflimited</span></code>, then if either a <code class="docutils literal notranslate"><span class="pre">limit</span> <span class="pre">container</span></code>
+option is used or the Execution Control List feature is activated,
+it will be treated as <code class="docutils literal notranslate"><span class="pre">yes</span></code>,
+and otherwise it will be treated as <code class="docutils literal notranslate"><span class="pre">no</span></code>.
+This defaults to <code class="docutils literal notranslate"><span class="pre">iflimited</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid-mount</span> <span class="pre">extfs</span></code> permits/denies execution of ext3
+filesystems in SUID mode using the kernel ext4 driver,
+both inside and outside of SIF files.
+When set to <code class="docutils literal notranslate"><span class="pre">no</span></code>, fuse2fs will be used instead.
+For security reasons this defaults to <code class="docutils literal notranslate"><span class="pre">no</span></code>.</p></li>
 </ul>
 </div>
 <div class="section" id="networking-options">
@@ -451,20 +454,29 @@ option implicitly added.</p>
 <p><code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">fusemount</span></code>: This will allow users to mount fuse filesystems
 inside containers using the <code class="docutils literal notranslate"><span class="pre">--fusemount</span></code> flag.</p>
 <p><code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">overlay</span></code>: This option will allow Apptainer to create bind
-mounts at paths that do not exist within the container image. This
-option can be set to <code class="docutils literal notranslate"><span class="pre">try</span></code> (the default), which will try to use an overlayfs.
-If it fails to create an overlayfs in this case the bind path will be
-silently ignored.
-If the option is set to <code class="docutils literal notranslate"><span class="pre">yes</span></code> then if overlayfs fails in SUID mode it
-will be a fatal error,
-but if overlayfs fails in non-SUID mode it will use fuse-overlayfs.
-Underlay is more efficient than fuse-overlayfs so setting this option
-to <code class="docutils literal notranslate"><span class="pre">yes</span></code> is generally not desirable.</p>
+mounts at paths that do not exist within the container image.
+If set to <code class="docutils literal notranslate"><span class="pre">yes</span></code> (the default), the kernel overlay driver will be tried,
+but if it doesn’t work then <code class="docutils literal notranslate"><span class="pre">fuse-overlayfs</span></code> will be used instead.
+A value of <code class="docutils literal notranslate"><span class="pre">try</span></code> is obsolete and is equivalent to <code class="docutils literal notranslate"><span class="pre">yes</span></code>.
+If set to <code class="docutils literal notranslate"><span class="pre">driver</span></code>, then <code class="docutils literal notranslate"><span class="pre">fuse-overlayfs</span></code> will always be used.
+If set to <code class="docutils literal notranslate"><span class="pre">no</span></code>, then no overlay will be used for missing bind
+mount paths, nor for any other purpose.
+Note that <code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">underlay</span> <span class="pre">=</span> <span class="pre">preferred</span></code> below overrides this option.</p>
 <p><code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">underlay</span></code>: This option will allow Apptainer to create bind
-mounts at paths that do not exist within the container image, just like
-<code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">overlay</span></code>, but instead using an underlay. This is suitable for
-systems where overlay is not possible or not working. If the overlay
-option is available and working, it will be used instead.</p>
+mounts at  paths that do not currently exist within the container,
+without using any overlay feature.
+The underlay feature works by creating a scratch space made up of only
+bind mounts, either from the host or from the container image,
+and using that as the container’s root filesystem.
+When set to <code class="docutils literal notranslate"><span class="pre">yes</span></code> (the default), then the underlay feature will be used
+either when the <code class="docutils literal notranslate"><span class="pre">--underlay</span></code> action option is given by the user or when
+the <code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">overlay</span></code> option above is set to <code class="docutils literal notranslate"><span class="pre">no</span></code>.
+When set to <code class="docutils literal notranslate"><span class="pre">preferred</span></code>, then the underlay feature will always be used
+instead of the overlay feature for creating bind mount paths.
+When set to <code class="docutils literal notranslate"><span class="pre">no</span></code>, then the underlay feature will never be used.
+This option is deprecated and will be removed in a future release,
+because the implementation is complicated and the performance is
+similar to the kernel overlay driver and to fuse-overlayfs.</p>
 </div>
 <div class="section" id="cni-configuration-and-plugins">
 <h3>CNI Configuration and Plugins<a class="headerlink" href="#cni-configuration-and-plugins" title="Permalink to this heading"></a></h3>

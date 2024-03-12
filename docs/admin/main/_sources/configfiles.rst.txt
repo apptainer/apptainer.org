@@ -100,7 +100,7 @@ within containers to ease usage.
 .. note::
 
    These options will have no effect if the file does not exist within
-   the container, or overlay or underlay support are enabled.
+   the container and overlay and underlay support are not enabled.
 
 ``config passwd``: This option determines if {Project} should
 automatically append an entry to ``/etc/passwd`` for the user running
@@ -268,7 +268,7 @@ types of image formats that can be leveraged by users with
    containers with an encrypted root filesystem.
 -  ``allow container squashfs`` permits / denies execution of bare
    SquashFS image files. E.g. Singularity 2.x images.
--  ``allow container extfs`` permits / denies execution of bare EXT
+-  ``allow container extfs`` permits / denies execution of bare extfs
    image files.
 -  ``allow container dir`` permits / denies execution of sandbox
    directory containers.
@@ -278,16 +278,28 @@ types of image formats that can be leveraged by users with
    These limitations do not apply to the root user.
 
 ``allow setuid-mount ${type}``: This set of options allows admins to limit the
-types of image formats that can be mounted by {Project} in setuid-root
+types of image formats that can be mounted using kernel drivers in SUID
 mode, with the following types:
 
 -  ``allow setuid-mount encrypted`` permits/denies execution of
-    encrypted SIF files in setuid-root mode.
+   encrypted SIF files in SUID mode using the kernel device-mapper.
+   When set to ``no``, gocryptfs FUSE-based encryption will be used
+   instead, with the same format used in user namespace mode.
+   This defaults to ``yes``.
 -  ``allow setuid-mount squashfs`` permits/denies execution of squashfs
-    filesystems in setuid-root mode, both inside and outside of SIF files.
+   filesystems in SUID mode, both inside and outside of SIF files.
+   When set to ``no``, squashfuse_ll is used instead of the kernel
+   squashfs driver.
+   When set to ``iflimited``, then if either a ``limit container``
+   option is used or the Execution Control List feature is activated,
+   it will be treated as ``yes``, 
+   and otherwise it will be treated as ``no``.
+   This defaults to ``iflimited``.
 -  ``allow setuid-mount extfs`` permits/denies execution of ext3
-    filesystems in setuid-root mode, both inside and outside of SIF files.
-    For security reasons, unlike the others this defaults to ``no``.
+   filesystems in SUID mode using the kernel ext4 driver,
+   both inside and outside of SIF files.
+   When set to ``no``, fuse2fs will be used instead.
+   For security reasons this defaults to ``no``.
 
 Networking Options
 ==================
@@ -343,21 +355,30 @@ Supplemental Filesystems
 inside containers using the ``--fusemount`` flag.
 
 ``enable overlay``: This option will allow {Project} to create bind
-mounts at paths that do not exist within the container image. This
-option can be set to ``try`` (the default), which will try to use an overlayfs.
-If it fails to create an overlayfs in this case the bind path will be
-silently ignored.
-If the option is set to ``yes`` then if overlayfs fails in SUID mode it
-will be a fatal error,
-but if overlayfs fails in non-SUID mode it will use fuse-overlayfs.
-Underlay is more efficient than fuse-overlayfs so setting this option
-to ``yes`` is generally not desirable.
+mounts at paths that do not exist within the container image.
+If set to ``yes`` (the default), the kernel overlay driver will be tried,
+but if it doesn't work then ``fuse-overlayfs`` will be used instead.
+A value of ``try`` is obsolete and is equivalent to ``yes``.
+If set to ``driver``, then ``fuse-overlayfs`` will always be used.
+If set to ``no``, then no overlay will be used for missing bind
+mount paths, nor for any other purpose.
+Note that ``enable underlay = preferred`` below overrides this option.
 
 ``enable underlay``: This option will allow {Project} to create bind
-mounts at paths that do not exist within the container image, just like
-``enable overlay``, but instead using an underlay. This is suitable for
-systems where overlay is not possible or not working. If the overlay
-option is available and working, it will be used instead.
+mounts at  paths that do not currently exist within the container,
+without using any overlay feature.
+The underlay feature works by creating a scratch space made up of only
+bind mounts, either from the host or from the container image,
+and using that as the container's root filesystem.
+When set to ``yes`` (the default), then the underlay feature will be used
+either when the ``--underlay`` action option is given by the user or when
+the ``enable overlay`` option above is set to ``no``.
+When set to ``preferred``, then the underlay feature will always be used
+instead of the overlay feature for creating bind mount paths.
+When set to ``no``, then the underlay feature will never be used.
+This option is deprecated and will be removed in a future release,
+because the implementation is complicated and the performance is
+similar to the kernel overlay driver and to fuse-overlayfs.
 
 CNI Configuration and Plugins
 =============================
