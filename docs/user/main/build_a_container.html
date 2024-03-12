@@ -194,6 +194,16 @@ development ( <code class="docutils literal notranslate"><span class="pre">--san
 <p>Because <code class="docutils literal notranslate"><span class="pre">build</span></code> can accept an existing container as a target and
 create a container in either supported format, you can use it to convert
 existing containers from one format to another.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Apptainer leverages the user namespace kernel feature to give the illusion
+of elevated privileges while building containers. On some systems, the user
+namespace may be incompletely configured for individual users. In this case,
+Apptainer may bind mount the <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code> program from the host into the
+container during the build, and this might fail in some containers with
+mismatching libraries. See the <a class="reference internal" href="fakeroot.html#fakeroot"><span class="std std-ref">fakeroot documentation</span></a> for
+more details.</p>
+</div>
 </div>
 <div class="section" id="downloading-an-existing-container-from-docker-hub">
 <h2>Downloading an existing container from Docker Hub<a class="headerlink" href="#downloading-an-existing-container-from-docker-hub" title="Permalink to this heading"></a></h2>
