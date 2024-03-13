@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security Options &mdash; Apptainer User Guide main documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/js/ga.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Network virtualization" href="networking.html" />
+    <link rel="prev" title="Plugins" href="plugins.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                main
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Instances - Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Security Options</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#linux-capabilities">Linux Capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-encrypted-containers">Building encrypted containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-related-action-options">Security related action options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#add-caps"><code class="docutils literal notranslate"><span class="pre">--add-caps</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#allow-setuid"><code class="docutils literal notranslate"><span class="pre">--allow-setuid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keep-privs"><code class="docutils literal notranslate"><span class="pre">--keep-privs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drop-caps"><code class="docutils literal notranslate"><span class="pre">--drop-caps</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security"><code class="docutils literal notranslate"><span class="pre">--security</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Limiting Container Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Application Checkpointing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apptainer User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Security Options</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/security_options.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="security-options">
+<span id="id1"></span><h1>Security Options<a class="headerlink" href="#security-options" title="Permalink to this heading"></a></h1>
+<p id="sec-security-options">Apptainer implements security related options in the
+container runtime. This document describes the methods users
+have for specifying the security scope and context when running
+Apptainer containers.</p>
+<div class="section" id="linux-capabilities">
+<h2>Linux Capabilities<a class="headerlink" href="#linux-capabilities" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is extremely important to recognize that <strong>granting users Linux
+capabilities with the</strong> <code class="docutils literal notranslate"><span class="pre">capability</span></code> <strong>command group is usually
+identical to granting those users root level access on the host
+system</strong>. Most if not all capabilities will allow users to “break
+out” of the container and become root on the host. This feature is
+targeted toward special use cases (like cloud-native architectures)
+where an admin/developer might want to limit the attack surface
+within a container that normally runs as root. This is not a good
+option in multi-tenant HPC environments where an admin wants to grant
+a user special privileges within a container. For that and similar
+use cases, the <a class="reference internal" href="fakeroot.html#fakeroot"><span class="std std-ref">fakeroot feature</span></a> is a better option.</p>
+</div>
+<p>Apptainer provides full support for granting and revoking Linux
+capabilities on a user or group basis. For example, let us suppose that
+an admin has decided to grant a user (named <code class="docutils literal notranslate"><span class="pre">pinger</span></code>) capabilities to
+open raw sockets so that they can use <code class="docutils literal notranslate"><span class="pre">ping</span></code> in a container where the
+binary is controlled via capabilities. For information about how to
+manage capabilities as an admin please refer to the <a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#capability-json">capability admin
+docs</a>.
+This feature requires a setuid-root installation of Apptainer.</p>
+<p>To take advantage of this granted capability as a user, <code class="docutils literal notranslate"><span class="pre">pinger</span></code> must
+also request the capability when executing a container with the
+<code class="docutils literal notranslate"><span class="pre">--add-caps</span></code> flag like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW oras://ghcr.io/apptainer/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=52 time=73.1 ms
+
+--- 8.8.8.8 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 73.178/73.178/73.178/0.000 ms
+</pre></div>
+</div>
+<p>If the admin decides that it is no longer necessary to allow the user
+<code class="docutils literal notranslate"><span class="pre">pinger</span></code> to open raw sockets within Apptainer containers, they can
+revoke the appropriate Linux capability and <code class="docutils literal notranslate"><span class="pre">pinger</span></code> will not be able
+to add that capability to their containers anymore:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW oras://ghcr.io/apptainer/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
+WARNING: not authorized to add capability: CAP_NET_RAW
+ping: socket: Operation not permitted
+</pre></div>
+</div>
+<p>Another scenario which is atypical of shared resource environments, but
+useful in cloud-native architectures is dropping capabilities when
+spawning containers as the root user to help minimize attack surfaces.
+With a default installation of Apptainer, containers created by the
+root user will maintain all capabilities. This behavior is configurable
+if desired. Check out the <a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#capability.json">capability configuration</a>
+and <a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#setuid-and-capabilities">root default capabilities</a>
+sections of the admin docs for more information.</p>
+<p>Assuming the root user will execute containers with the <code class="docutils literal notranslate"><span class="pre">CAP_NET_RAW</span></code>
+capability by default, executing the same container <code class="docutils literal notranslate"><span class="pre">pinger</span></code> executed
+above works without the need to grant capabilities:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># apptainer exec oras://ghcr.io/apptainer/ubuntu_ping:v1.0 ping -c 1 8.8.8.8</span>
+<span class="n">PING</span> <span class="mf">8.8.8.8</span> <span class="p">(</span><span class="mf">8.8.8.8</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="nb">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="o">.</span>
+<span class="mi">64</span> <span class="nb">bytes</span> <span class="kn">from</span> <span class="mf">8.8.8.8</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">52</span> <span class="n">time</span><span class="o">=</span><span class="mf">59.6</span> <span class="n">ms</span>
+
+<span class="o">---</span> <span class="mf">8.8.8.8</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">1</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">1</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span> <span class="n">time</span> <span class="mi">0</span><span class="n">ms</span>
+<span class="n">rtt</span> <span class="nb">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="nb">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">59.673</span><span class="o">/</span><span class="mf">59.673</span><span class="o">/</span><span class="mf">59.673</span><span class="o">/</span><span class="mf">0.000</span> <span class="n">ms</span>
+</pre></div>
+</div>
+<p>Now we can manually drop the <code class="docutils literal notranslate"><span class="pre">CAP_NET_RAW</span></code> capability like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># apptainer exec --drop-caps CAP_NET_RAW oras://ghcr.io/apptainer/ubuntu_ping:v1.0 ping -c 1 8.8.8.8</span>
+<span class="n">ping</span><span class="p">:</span> <span class="n">socket</span><span class="p">:</span> <span class="n">Operation</span> <span class="ow">not</span> <span class="n">permitted</span>
+</pre></div>
+</div>
+<p>And now the container will not have the ability to create new sockets,
+causing the <code class="docutils literal notranslate"><span class="pre">ping</span></code> command to fail.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--add-caps</span></code> and <code class="docutils literal notranslate"><span class="pre">--drop-caps</span></code> options will accept the <code class="docutils literal notranslate"><span class="pre">all</span></code>
+keyword. Of course appropriate caution should be exercised when using
+this keyword.</p>
+</div>
+<div class="section" id="building-encrypted-containers">
+<h2>Building encrypted containers<a class="headerlink" href="#building-encrypted-containers" title="Permalink to this heading"></a></h2>
+<p>Apptainer can build and run encrypted containers.
+The containers are decrypted at runtime entirely in memory, meaning
+that no intermediate decrypted data is ever present on disk. See
+<a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
+</div>
+<div class="section" id="security-related-action-options">
+<h2>Security related action options<a class="headerlink" href="#security-related-action-options" title="Permalink to this heading"></a></h2>
+<p>Apptainer has many security related flags that can be passed to the
+action commands; <code class="docutils literal notranslate"><span class="pre">shell</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code>, and <code class="docutils literal notranslate"><span class="pre">run</span></code> allowing fine grained
+control of security.</p>
+<div class="section" id="add-caps">
+<h3><code class="docutils literal notranslate"><span class="pre">--add-caps</span></code><a class="headerlink" href="#add-caps" title="Permalink to this heading"></a></h3>
+<p>As explained above, <code class="docutils literal notranslate"><span class="pre">--add-caps</span></code> will “activate” Linux capabilities
+when a container is initiated, providing those capabilities have been
+granted to the user by an administrator using the <code class="docutils literal notranslate"><span class="pre">capability</span> <span class="pre">add</span></code>
+command. This option will also accept the case insensitive keyword
+<code class="docutils literal notranslate"><span class="pre">all</span></code> to add every capability granted by the administrator.</p>
+</div>
+<div class="section" id="allow-setuid">
+<h3><code class="docutils literal notranslate"><span class="pre">--allow-setuid</span></code><a class="headerlink" href="#allow-setuid" title="Permalink to this heading"></a></h3>
+<p>The SetUID bit allows a program to be executed as the user that owns the
+binary. The most well-known SetUID binaries are owned by root and allow
+a user to execute a command with elevated privileges. But other SetUID
+binaries may allow a user to execute a command as a service account.</p>
+<p>By default SetUID is disallowed within Apptainer containers as a
+security precaution. But the root user can override this precaution and
+allow SetUID binaries to behave as expected within an Apptainer
+container with the <code class="docutils literal notranslate"><span class="pre">--allow-setuid</span></code> option like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell --allow-setuid some_container.sif
+</pre></div>
+</div>
+</div>
+<div class="section" id="keep-privs">
+<h3><code class="docutils literal notranslate"><span class="pre">--keep-privs</span></code><a class="headerlink" href="#keep-privs" title="Permalink to this heading"></a></h3>
+<p>It is possible for an admin to set a different set of default
+capabilities or to reduce the default capabilities to zero for the root
+user by setting the <code class="docutils literal notranslate"><span class="pre">root</span> <span class="pre">default</span> <span class="pre">capabilities</span></code> parameter in the
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> file to <code class="docutils literal notranslate"><span class="pre">file</span></code> or <code class="docutils literal notranslate"><span class="pre">no</span></code> respectively. If this
+change is in effect, the root user can override the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>
+file and enter the container with full capabilities using the
+<code class="docutils literal notranslate"><span class="pre">--keep-privs</span></code> option.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer exec --keep-privs docker://centos:7 ping -c 1 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=128 time=18.8 ms
+
+--- 8.8.8.8 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 18.838/18.838/18.838/0.000 ms
+</pre></div>
+</div>
+</div>
+<div class="section" id="drop-caps">
+<h3><code class="docutils literal notranslate"><span class="pre">--drop-caps</span></code><a class="headerlink" href="#drop-caps" title="Permalink to this heading"></a></h3>
+<p>By default, the root user has a full set of capabilities when they enter
+the container. You may choose to drop specific capabilities when you
+initiate a container as root to enhance security.</p>
+<p>For instance, to drop the ability for the root user to open a raw socket
+inside the container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer exec --drop-caps CAP_NET_RAW docker://centos:7 ping -c 1 8.8.8.8
+ping: socket: Operation not permitted
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">drop-caps</span></code> option will also accept the case insensitive keyword
+<code class="docutils literal notranslate"><span class="pre">all</span></code> as an option to drop all capabilities when entering the
+container.</p>
+</div>
+<div class="section" id="security">
+<h3><code class="docutils literal notranslate"><span class="pre">--security</span></code><a class="headerlink" href="#security" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">--security</span></code> flag allows the root user to leverage security
+modules such as SELinux, AppArmor, and seccomp within your Apptainer
+container. You can also change the UID and GID of the user within the
+container at runtime.</p>
+<p>For instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo whoami
+root
+
+$ sudo apptainer exec --security uid:1000 my_container.sif whoami
+david
+</pre></div>
+</div>
+<p>To use seccomp to blacklist a command follow this procedure. (It is
+actually preferable from a security standpoint to whitelist commands but
+this will suffice for a simple example.) Note that this example was run
+on Ubuntu and that Apptainer was installed with the
+<code class="docutils literal notranslate"><span class="pre">libseccomp-dev</span></code> and <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> packages as dependencies.</p>
+<p>First write a configuration file. An example configuration file is
+installed with Apptainer, normally at
+<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/apptainer/seccomp-profiles/default.json</span></code>. For this
+example, we will use a much simpler configuration file to blacklist the
+<code class="docutils literal notranslate"><span class="pre">mkdir</span></code> command.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;defaultAction&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_ALLOW&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;archMap&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;architecture&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ARCH_X86_64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;subArchitectures&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;SCMP_ARCH_X86&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;SCMP_ARCH_X32&quot;</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;syscalls&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;mkdir&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_KILL&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;includes&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;excludes&quot;</span><span class="p">:</span> <span class="p">{}</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We’ll save the file at <code class="docutils literal notranslate"><span class="pre">/home/david/no_mkdir.json</span></code>. Then we can invoke
+the container like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell --security seccomp:/home/david/no_mkdir.json my_container.sif
+
+Apptainer&gt; mkdir /tmp/foo
+Bad system call (core dumped)
+</pre></div>
+</div>
+<p>Note that attempting to use the blacklisted <code class="docutils literal notranslate"><span class="pre">mkdir</span></code> command resulted
+in a core dump.</p>
+<p>The full list of arguments accepted by the <code class="docutils literal notranslate"><span class="pre">--security</span></code> option are as
+follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;seccomp:/usr/local/etc/apptainer/seccomp-profiles/default.json&quot;</span>
+<span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;apparmor:/usr/bin/man&quot;</span>
+<span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;selinux:context&quot;</span>
+<span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;uid:1000&quot;</span>
+<span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;gid:1000&quot;</span>
+<span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;gid:1000:1:0&quot;</span> <span class="p">(</span><span class="n">multiple</span> <span class="n">gids</span><span class="p">,</span> <span class="n">first</span> <span class="ow">is</span> <span class="n">always</span> <span class="n">the</span> <span class="n">primary</span> <span class="n">group</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plugins.html" class="btn btn-neutral float-left" title="Plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="networking.html" class="btn btn-neutral float-right" title="Network virtualization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

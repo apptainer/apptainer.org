@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OCI Image Registries &mdash; Apptainer User Guide main documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/js/ga.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Library API Registries" href="library_api.html" />
+    <link rel="prev" title="Keyserver Management" href="keyserver.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                main
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OCI Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Instances - Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Limiting Container Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Application Checkpointing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apptainer User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">OCI Image Registries</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/registry.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="oci-image-registries">
+<span id="registry"></span><h1>OCI Image Registries<a class="headerlink" href="#oci-image-registries" title="Permalink to this heading"></a></h1>
+<p>It is common for users of Apptainer to use <a class="reference external" href="https://opencontainers.org/">OCI</a> registries as sources for their container
+images. Some registries require credentials to access certain images or even the
+registry itself. One method is to supply credentials for each command or set
+environment variables to contain the credentials for a single registry. See
+<span class="xref std std-ref">Authentication via Interactive Login</span> and <span class="xref std std-ref">Authentication via Environment
+Variables</span>.</p>
+<p>Alternatively, users can supply credentials on a per-registry basis with the <code class="docutils literal notranslate"><span class="pre">registry</span></code> command.</p>
+<p>Users can login to an OCI registry with the <code class="docutils literal notranslate"><span class="pre">registry</span> <span class="pre">login</span></code> command by
+specifying a <code class="docutils literal notranslate"><span class="pre">docker://</span></code> prefix to the registry hostname:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>registry<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>myuser<span class="w"> </span>docker://docker.com
+<span class="go">Password / Token:</span>
+<span class="go">INFO:    Token stored in /home/myuser/.apptainer/remote.yaml</span>
+
+<span class="gp">$ </span>apptainer<span class="w"> </span>registry<span class="w"> </span>list
+
+<span class="go">URI                  SECURE?</span>
+<span class="go">docker://docker.com  ✓</span>
+</pre></div>
+</div>
+<p>Apptainer will automatically supply the configured credentials when
+interacting with DockerHub. The checkmark in the <code class="docutils literal notranslate"><span class="pre">SECURE?</span></code> column indicates
+that Apptainer will use TLS when communicating with the registry.</p>
+<p>A user can be logged-in to multiple OCI registries at the same time:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>registry<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>myuser<span class="w"> </span>docker://registry.example.com
+<span class="go">Password / Token:</span>
+<span class="go">INFO:    Token stored in /home/myuser/.apptainer/remote.yaml</span>
+
+<span class="gp">$ </span>apptainer<span class="w"> </span>registry<span class="w"> </span>list
+
+<span class="go">URI                            SECURE?</span>
+<span class="go">docker://docker.com            ✓</span>
+<span class="go">docker://registry.example.com  ✓</span>
+</pre></div>
+</div>
+<p>Apptainer will supply the correct credentials for the registry based on the
+hostname used, whenever one of the following commands is used with a
+<code class="docutils literal notranslate"><span class="pre">docker://</span></code> or <code class="docutils literal notranslate"><span class="pre">oras://</span></code> URI:</p>
+<p><a class="reference external" href="cli/apptainer_pull.html">pull</a>,
+<a class="reference external" href="cli/apptainer_push.html">push</a>,
+<a class="reference external" href="cli/apptainer_build.html">build</a>,
+<a class="reference external" href="cli/apptainer_exec.html">exec</a>,
+<a class="reference external" href="cli/apptainer_shell.html">shell</a>,
+<a class="reference external" href="cli/apptainer_run.html">run</a>,
+<a class="reference external" href="cli/apptainer_instance.html">instance</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is important for users to be aware that the <code class="docutils literal notranslate"><span class="pre">registry</span> <span class="pre">login</span></code> command
+will store the supplied credentials or tokens unencrypted in their home
+directory.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="keyserver.html" class="btn btn-neutral float-left" title="Keyserver Management" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="library_api.html" class="btn btn-neutral float-right" title="Library API Registries" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

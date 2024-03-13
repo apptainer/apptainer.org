@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plugins &mdash; Apptainer User Guide main documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/js/ga.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Security Options" href="security_options.html" />
+    <link rel="prev" title="Environment and Metadata" href="environment_and_metadata.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                main
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Instances - Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#limitations-requirements">Limitations / Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-plugins">Using Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-a-plugin">Writing a Plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Limiting Container Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Application Checkpointing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apptainer User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Plugins</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/plugins.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="plugins">
+<span id="id1"></span><h1>Plugins<a class="headerlink" href="#plugins" title="Permalink to this heading"></a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>An Apptainer plugin is a package that can be dynamically loaded by the
+Apptainer runtime, augmenting Apptainer with experimental, non-standard
+and/or vendor-specific functionality.</p>
+<p>Plugins can influence the behaviour of Apptainer in specific ways:</p>
+<ul class="simple">
+<li><p>A cli plugin can use the <code class="docutils literal notranslate"><span class="pre">Command</span></code> callback to add or modify CLI
+subcommands and/or flags.</p></li>
+<li><p>A cli plugin can use the <code class="docutils literal notranslate"><span class="pre">ApptainerEngineConfig</span></code> callback to change the
+container configuration before it is passed to the runtime, e.g. adding bind
+mounts etc.</p></li>
+<li><p>A runtime plugin can use the <code class="docutils literal notranslate"><span class="pre">MonitorContainer</span></code> callback to watch the
+container process as it is executing.</p></li>
+<li><p>A runtime plugin can use the <code class="docutils literal notranslate"><span class="pre">PostStartProcess</span></code> callback to carry out a task
+after the container has been started.</p></li>
+<li><p>A runtime plugin can use the <code class="docutils literal notranslate"><span class="pre">RegisterImageDriver</span></code> callback to implement an
+alternative way of providing a container image to execute.</p></li>
+</ul>
+</div>
+<div class="section" id="limitations-requirements">
+<h2>Limitations / Requirements<a class="headerlink" href="#limitations-requirements" title="Permalink to this heading"></a></h2>
+<p>The way that plugin functionality is implemented in the Go language, which
+Apptainer is written with, is quite restrictive.</p>
+<p>Go plugins must be built with the same Go version, and set of dependencies, as
+the main program they will be loaded into. This means it is generally
+impractical to develop and build plugins except in lock-step with the main
+Apptainer source tree.</p>
+<p>Functionality that can be implemented with plugins is limited to the scope of
+the exposed plugin callbacks. Container runtimes such as Apptainer execute
+using multiple processes, with distinct boundaries that limit the influence a
+plugin can have.</p>
+<p>If you are considering writing a plugin for Apptainer you may wish to
+investigate whether the feature can be contributed to the main source tree
+directly via a PR. This simplifies future maintenance, and avoids the
+limitations of Go plugins.</p>
+</div>
+<div class="section" id="using-plugins">
+<h2>Using Plugins<a class="headerlink" href="#using-plugins" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> command prints the currently installed plugins.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer plugin list
+There are no plugins installed.
+</pre></div>
+</div>
+<p>Plugins are packaged and distributed as binaries encoded with the versatile
+Singularity Image Format (SIF). However, plugin authors may also distribute the
+source code of their plugins. A plugin can be compiled from its source code with
+the <code class="docutils literal notranslate"><span class="pre">compile</span></code> command. A number of example plugins are included in the
+<code class="docutils literal notranslate"><span class="pre">examples/plugins</span></code> directory of the Apptainer source.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer plugin compile examples/plugins/cli-plugin/
+INFO:    Plugin built to: /home/dtrudg/Git/apptainer/examples/plugins/cli-plugin/cli-plugin.sif
+</pre></div>
+</div>
+<p>Upon successful compilation, a SIF file will appear in the directory of the
+plugin’s source code.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls examples/plugins/cli-plugin/ | grep sif
+cli-plugin.sif
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Due to the structure of the Apptainer project, and the strict
+requirements of Go plugin compilation, <strong>all</strong> plugins must be compiled from
+within the Apptainer source code tree.</p>
+<p>The ability to compile plugins outside of the Apptainer tree, that
+previously existed, has been removed due to incompatible changes in Go 1.18.</p>
+</div>
+<p>Every plugin encapsulates various information such as the plugin’s
+author, the plugin’s version, etc. To view this information about a
+plugin, use the <code class="docutils literal notranslate"><span class="pre">inspect</span></code> command.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer plugin inspect examples/plugins/cli-plugin/cli-plugin.sif
+Name: example.com/cli-plugin
+Description: This is a short example CLI plugin for Apptainer
+Author: Apptainer Team
+Version: 0.1.0
+</pre></div>
+</div>
+<p>To install a plugin, use the <code class="docutils literal notranslate"><span class="pre">install</span></code> command. This operation
+requires root privilege.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer plugin install examples/plugins/cli-plugin/cli-plugin.sif
+$ apptainer plugin list
+ENABLED  NAME
+    yes  example.com/cli-plugin
+</pre></div>
+</div>
+<p>After successful installation, the plugin will automatically be enabled.
+Any plugin can be disabled with the <code class="docutils literal notranslate"><span class="pre">disable</span></code> command and re-enabled
+with the <code class="docutils literal notranslate"><span class="pre">enable</span></code> command. Both of these operations require root
+privilege.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer plugin disable example.com/cli-plugin
+$ apptainer plugin list
+ENABLED  NAME
+     no  example.com/cli-plugin
+
+$ sudo apptainer plugin enable example.com/cli-plugin
+$ apptainer plugin list
+ENABLED  NAME
+    yes  example.com/cli-plugin
+</pre></div>
+</div>
+<p>Finally, to uninstall a plugin, use the <code class="docutils literal notranslate"><span class="pre">uninstall</span></code> command. This
+operation requires root privilege.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer plugin uninstall example.com/cli-plugin
+Uninstalled plugin &quot;example.com/cli-plugin&quot;.
+
+$ apptainer plugin list
+There are no plugins installed.
+</pre></div>
+</div>
+</div>
+<div class="section" id="writing-a-plugin">
+<h2>Writing a Plugin<a class="headerlink" href="#writing-a-plugin" title="Permalink to this heading"></a></h2>
+<p>Developers interested in writing Apptainer plugins can get started
+by reading the <a class="reference external" href="https://godoc.org/github.com/apptainer/apptainer/pkg/plugin">Go documentation</a> for the
+plugin package.</p>
+<p>Example plugins can be found in the Apptainer <a class="reference external" href="https://github.com/apptainer/apptainer/tree/main/examples/plugins">source code</a>.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="environment_and_metadata.html" class="btn btn-neutral float-left" title="Environment and Metadata" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="security_options.html" class="btn btn-neutral float-right" title="Security Options" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
