@@ -638,7 +638,7 @@ LC_ALL=C
 but adopt the value of a host environment variable if it is set, use
 the following syntax:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%environment</span>
-<span class="w">   </span><span class="nv">FOO</span><span class="o">=</span><span class="si">${</span><span class="nv">FOO</span><span class="k">:-</span><span class="s1">&#39;default&#39;</span><span class="si">}</span>
+<span class="w">   </span><span class="nb">export</span><span class="w"> </span><span class="nv">FOO</span><span class="o">=</span><span class="si">${</span><span class="nv">FOO</span><span class="k">:-</span><span class="s1">&#39;default&#39;</span><span class="si">}</span>
 </pre></div>
 </div>
 <p>The value of <code class="docutils literal notranslate"><span class="pre">FOO</span></code> in the container will take the value of <code class="docutils literal notranslate"><span class="pre">FOO</span></code> on
