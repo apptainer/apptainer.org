@@ -159,6 +159,15 @@ easily by expanding the menus on the left.</p>
 at least 2GB of RAM is recommended when building from source.</p>
 <p>Full functionality of Apptainer requires that the kernel supports:</p>
 <ul class="simple">
+<li><p><strong>FUSE</strong> - Required to mount SIF files, for fuse-overlayfs
+on older kernels (see OverlayFS below), and for mounting ext3
+overlay filesystems.
+The kernels of all major Linux operating systems support FUSE by
+default, but system administrators must not disable it.  If system
+administrators do not want users to mount FUSE filesystems in the
+primary namespace, they can remove or not install the <code class="docutils literal notranslate"><span class="pre">fuse</span></code>
+package which contains the privileged <code class="docutils literal notranslate"><span class="pre">fusermount</span></code> program.
+Apptainer does not use <code class="docutils literal notranslate"><span class="pre">fusermount</span></code> in any mode.</p></li>
 <li><p><strong>Unprivileged user namespaces</strong> - (minimum kernel &gt;=3.8, &gt;=4.18
 or 3.10.0-1127 on RHEL7 recommended)
 Required to run containers without root or setuid privilege.

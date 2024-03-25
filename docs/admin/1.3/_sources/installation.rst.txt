@@ -33,6 +33,16 @@ at least 2GB of RAM is recommended when building from source.
 
 Full functionality of {Project} requires that the kernel supports:
 
+-  **FUSE** - Required to mount SIF files, for fuse-overlayfs
+   on older kernels (see OverlayFS below), and for mounting ext3
+   overlay filesystems.
+   The kernels of all major Linux operating systems support FUSE by
+   default, but system administrators must not disable it.  If system
+   administrators do not want users to mount FUSE filesystems in the
+   primary namespace, they can remove or not install the ``fuse``
+   package which contains the privileged ``fusermount`` program.
+   {Project} does not use ``fusermount`` in any mode.
+
 -  **Unprivileged user namespaces** - (minimum kernel >=3.8, >=4.18
    or 3.10.0-1127 on RHEL7 recommended)
    Required to run containers without root or setuid privilege.
