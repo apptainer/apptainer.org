@@ -369,7 +369,7 @@ retrieve it, so that you can verify even if you are offline with <code class="do
 <p>As well as the default behaviour, which signs all objects, fine-grained
 control of signing is possible.</p>
 <p>If you <code class="docutils literal notranslate"><span class="pre">sif</span> <span class="pre">list</span></code> a SIF file you will see it is comprised of a number
-of objects. Each object has an <code class="docutils literal notranslate"><span class="pre">ID</span></code>, and belongs to a <code class="docutils literal notranslate"><span class="pre">GROUP</span></code>.</p>
+of objects. Each object has an <code class="docutils literal notranslate"><span class="pre">ID</span></code>, and belongs to a <code class="docutils literal notranslate"><span class="pre">GROUP</span></code>. Since signatures are <em>applied</em> to objects, they have an <code class="docutils literal notranslate"><span class="pre">ID</span></code> but not a <code class="docutils literal notranslate"><span class="pre">GROUP</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sif list my_container.sif
 
 ------------------------------------------------------------------------------
