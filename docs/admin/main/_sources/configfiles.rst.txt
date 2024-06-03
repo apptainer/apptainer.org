@@ -219,7 +219,21 @@ means users can specify bind points, scratch and tmp locations.
 Limiting Container Execution
 ============================
 
-.. warning::
+By default {Project} allows all users on a system to execute any container,
+but there may be reasons that a system administrator desires to limit who
+can do that.
+The primary motivation of system administrators for this in the past was
+to prevent untrusted users from potentially attacking the kernel via
+setuid-mode mounting of containers using kernel drivers.
+However this is no longer the default behavior of {Project};
+user namespace mode never uses kernel drivers, and setuid-mode by
+default does not use them if no container limits have been defined
+(see ``allow setuid-mount squashfs`` below).
+But there may be other reasons to limit execution, so {Project} provides
+configuration options for this purpose, described here and in the
+:ref:`Execution Control List <execution_control_list>` section below.
+
+.. note::
 
    The 'limit container' and 'allow container' directives are not effective if
    unprivileged user namespaces are enabled. They are only effectively applied
@@ -717,7 +731,7 @@ SIF files by signing key is defined here. You can authorize the
 containers by validating both the location of the SIF file in the
 filesystem and by checking against a list of signing entities.
 
-.. warning::
+.. note::
 
    The ECL is not effective if unprivileged user namespaces are enabled. It is
    only effectively applied when {Project} is running
