@@ -334,8 +334,21 @@ means users can specify bind points, scratch and tmp locations.</p>
 </div>
 <div class="section" id="limiting-container-execution">
 <h3>Limiting Container Execution<a class="headerlink" href="#limiting-container-execution" title="Permalink to this heading"></a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p>By default Apptainer allows all users on a system to execute any container,
+but there may be reasons that a system administrator desires to limit who
+can do that.
+The primary motivation of system administrators for this in the past was
+to prevent untrusted users from potentially attacking the kernel via
+setuid-mode mounting of containers using kernel drivers.
+However this is no longer the default behavior of Apptainer;
+user namespace mode never uses kernel drivers, and setuid-mode by
+default does not use them if no container limits have been defined
+(see <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid-mount</span> <span class="pre">squashfs</span></code> below).
+But there may be other reasons to limit execution, so Apptainer provides
+configuration options for this purpose, described here and in the
+<a class="reference internal" href="#execution-control-list"><span class="std std-ref">Execution Control List</span></a> section below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The ‘limit container’ and ‘allow container’ directives are not effective if
 unprivileged user namespaces are enabled. They are only effectively applied
 when Apptainer is running in setuid mode and
@@ -751,8 +764,8 @@ TOML format for the configuration file, rather than JSON.</p>
 SIF files by signing key is defined here. You can authorize the
 containers by validating both the location of the SIF file in the
 filesystem and by checking against a list of signing entities.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The ECL is not effective if unprivileged user namespaces are enabled. It is
 only effectively applied when Apptainer is running
 in setuid mode, and unprivileged container execution is not possible on the
