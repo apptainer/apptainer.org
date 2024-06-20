@@ -74,6 +74,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#add-package-to-a-writable-overlay">Add package to a writable overlay</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ping-from-container">Ping from container:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#http-server">HTTP server:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-fakeroot-command-inside-definition-file">Using fakeroot command inside definition file:</a></li>
 </ul>
 </li>
 </ul>
@@ -187,10 +188,16 @@ allows most package installations to work, but the fakeroot command is
 bound in from the host so if the host libc library is a newer version
 than the corresponding library in the container the
 fakeroot command can fail with errors about missing GLIBC versions.
-If that situation happens the easiest solution is to use the
+If that situation happens the easiest solution may be to use the
 <a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html#install-from-pre-built-packages">install-unprivileged.sh script</a>
 to install Apptainer because it downloads a fakeroot command
-built with as old a libc as possible.</p></li>
+built with as old a libc as possible.
+Otherwise you can also try using the <code class="docutils literal notranslate"><span class="pre">--ignore-fakeroot-command`</span>
+<span class="pre">which</span> <span class="pre">may</span> <span class="pre">work</span> <span class="pre">if</span> <span class="pre">the</span> <span class="pre">commands</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">``%post</span></code> section of the build
+definition file are simple enough.
+As a last resort advanced option see the
+<a class="reference internal" href="#fakeroot-inside-def"><span class="std std-ref">Using fakeroot command inside definition file</span></a>
+example below.</p></li>
 <li><p>If user namespaces are not available but Apptainer has been installed
 with setuid-root and also the “fakeroot” command is available, then
 the fakeroot command will be run by itself.
@@ -353,6 +360,35 @@ created may not be writable by the creating user.</p>
 <h4>HTTP server:<a class="headerlink" href="#http-server" title="Permalink to this heading"></a></h4>
 <p>(when the Network conditions above are met)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">run</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="o">--</span><span class="n">network</span><span class="o">-</span><span class="n">args</span><span class="o">=</span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span> <span class="o">-</span><span class="n">w</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">nginx</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-fakeroot-command-inside-definition-file">
+<span id="fakeroot-inside-def"></span><h4>Using fakeroot command inside definition file:<a class="headerlink" href="#using-fakeroot-command-inside-definition-file" title="Permalink to this heading"></a></h4>
+<p>When using fakeroot mode 3 above, where user namespaces are
+available but /etc/subuid mapping is not set up, and you are trying
+to build a container for an operating sytem with an older glibc
+library than the host, this more advanced technique may help.</p>
+<p>First, use the apptainer build <code class="docutils literal notranslate"><span class="pre">--ignore-fakeroot-command</span></code> option.
+If your <code class="docutils literal notranslate"><span class="pre">%post</span></code> commands are simple enough, that alone may be enough.
+If any of the commands try to do <code class="docutils literal notranslate"><span class="pre">chown</span></code> or something similar, then
+try additionally installing the fakeroot command in the <code class="docutils literal notranslate"><span class="pre">%post</span></code>
+section and running the other commands under that.</p>
+<p>For example, with a definition file called <code class="docutils literal notranslate"><span class="pre">my.def</span></code>
+containing this:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: docker://centos:<span class="m">7</span>
+
+<span class="gh">%post</span>
+<span class="w">    </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>epel-release
+<span class="w">    </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fakeroot
+<span class="w">    </span>fakeroot<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">        yum install -y openssh</span>
+<span class="s1">    &#39;</span>
+</pre></div>
+</div>
+<p>then build with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">build</span> <span class="o">--</span><span class="n">ignore</span><span class="o">-</span><span class="n">fakeroot</span><span class="o">-</span><span class="n">command</span> <span class="n">my</span><span class="o">.</span><span class="n">sif</span> <span class="n">my</span><span class="o">.</span><span class="k">def</span>
 </pre></div>
 </div>
 </div>
