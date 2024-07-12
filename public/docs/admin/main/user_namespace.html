@@ -60,11 +60,7 @@
 <li class="toctree-l1"><a class="reference internal" href="singularity_migration.html">Migrating from Singularity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configfiles.html">Configuration files</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User Namespaces &amp; Fakeroot</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#user-namespace-requirements">User Namespace Requirements</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#debian">Debian</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rhel-centos-7">RHEL/CentOS 7</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#user-namespace-requirements">User Namespace Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#disabling-network-namespaces">Disabling network namespaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rootless-fakeroot-feature">“Rootless” Fakeroot feature</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
@@ -132,35 +128,18 @@ of the user guide.</p>
 <p>To allow unprivileged creation of user namespaces a kernel &gt;=3.8 is
 required, with &gt;=4.18 being recommended due to support for unprivileged
 mounting of FUSE filesystems (needed for example for mounting SIF files).
-The equivalent recommendation on RHEL7 is &gt;=3.10.0-1127 from release
-7.8, where unprivileged mounting of FUSE filesystems was backported.
 To use unprivileged overlayFS for creating missing bind mount paths and
 for writable overlays, kernel &gt;=5.11 is recommended.
-That feature has not been backported to RHEL7.
 Whenever the kernel overlayFS doesn’t work then Apptainer will use
 fuse-overlayfs instead.</p>
 <p>Additionally, some Linux distributions require that unprivileged user
 namespace creation is enabled using a <code class="docutils literal notranslate"><span class="pre">sysctl</span></code> or kernel command line
 parameter. Please consult your distribution documentation or vendor to
 confirm the steps necessary to ‘enable unprivileged user namespace
-creation’.</p>
-<div class="section" id="debian">
-<h3>Debian<a class="headerlink" href="#debian" title="Permalink to this heading"></a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;echo kernel.unprivileged_userns_clone=1 </span><span class="se">\</span>
-<span class="s1">    &gt;/etc/sysctl.d/90-unprivileged_userns.conf&#39;</span>
-<span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">90</span><span class="o">-</span><span class="n">unprivileged_userns</span><span class="o">.</span><span class="n">conf</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="rhel-centos-7">
-<h3>RHEL/CentOS 7<a class="headerlink" href="#rhel-centos-7" title="Permalink to this heading"></a></h3>
-<p>From 7.4, kernel support is included but must be enabled with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;echo user.max_user_namespaces=15000 </span><span class="se">\</span>
-<span class="s1">    &gt;/etc/sysctl.d/90-max_user_namespaces.conf&#39;</span>
-<span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">90</span><span class="o">-</span><span class="n">max_user_namespaces</span><span class="o">.</span><span class="n">conf</span>
-</pre></div>
-</div>
-</div>
+creation’.
+In general, the parameter <code class="docutils literal notranslate"><span class="pre">user.max_usernamespaces</span></code> has to be non-zero,
+and additionally on Debian the parameter <code class="docutils literal notranslate"><span class="pre">kernel.unprivileged_userns_clone</span></code>
+needs to be non-zero.</p>
 </div>
 <div class="section" id="disabling-network-namespaces">
 <h2>Disabling network namespaces<a class="headerlink" href="#disabling-network-namespaces" title="Permalink to this heading"></a></h2>

@@ -308,19 +308,19 @@ repositories like this:
 
 .. code::
 
-   $ sudo yum install -y epel-release
+   $ sudo dnf install -y epel-release
 
 Then to install a non-setuid installation of {Project} do:
 
 .. code::
 
-   $ sudo yum install -y {command}
+   $ sudo dnf install -y {command}
 
 or for a setuid installation do:
 
 .. code::
 
-   $ sudo yum install -y {command}-suid
+   $ sudo dnf install -y {command}-suid
 
 Install from GitHub release RPMs
 --------------------------------
@@ -331,13 +331,13 @@ non-setuid installation:
 
 .. code::
 
-   $ sudo yum install -y https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-{GitHubDownloadVersion}.x86_64.rpm
+   $ sudo dnf install -y https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-{GitHubDownloadVersion}.x86_64.rpm
 
 For the setuid installation do above command first and then this one:
 
 .. code::
 
-   $ sudo yum install -y https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid-{GitHubDownloadVersion}.x86_64.rpm
+   $ sudo dnf install -y https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid-{GitHubDownloadVersion}.x86_64.rpm
 
 Install Debian packages
 ------------------------------
@@ -425,7 +425,7 @@ continues to work in new shells. (Adjust the path if you installed
 Build an RPM
 ------------
 
-If you use RHEL, CentOS or SUSE, building and installing {aProject}
+If you use RHEL, a RHEL derivate, or SUSE, building and installing {aProject}
 RPM allows your {Project} installation be more easily managed,
 upgraded and removed.  
 
