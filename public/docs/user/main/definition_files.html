@@ -211,15 +211,15 @@ also be valid in the header. For example, when using the <code class="docutils l
 bootstrap agent, the <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword becomes valid. Here is an example
 that uses the <code class="docutils literal notranslate"><span class="pre">From</span></code> keyword to build a Debian container:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
-<span class="k">From</span>: debian:<span class="m">7</span>
+<span class="k">From</span>: debian:<span class="m">10</span>
 </pre></div>
 </div>
 <p>A def file that uses an official mirror to install CentOS 7 might look
 like this:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: yum
-<span class="k">OSVersion</span>: <span class="m">7</span>
-<span class="k">MirrorURL</span>: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
-<span class="k">Include</span>: yum
+<span class="k">OSVersion</span>: <span class="m">9</span>
+<span class="k">MirrorURL</span>: http://repo.almalinux.org/almalinux/%{OSVERSION}/BaseOS/x86_64/os
+<span class="k">Include</span>: dnf
 </pre></div>
 </div>
 <p>Each bootstrap agent enables its own options and keywords, which you can
@@ -239,8 +239,8 @@ container from scratch)</p></li>
 <ul class="simple">
 <li><p><a class="reference internal" href="appendix.html#build-library-module"><span class="std std-ref">library</span></a> (images hosted on Library API Registries)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-shub"><span class="std std-ref">shub</span></a> (images hosted on Singularity Hub)</p></li>
-<li><p><a class="reference internal" href="appendix.html#build-yum"><span class="std std-ref">yum</span></a> (yum-based systems such as CentOS and
-Scientific Linux)</p></li>
+<li><p><a class="reference internal" href="appendix.html#build-yum"><span class="std std-ref">yum</span></a> (yum- or dnf- based systems such as RHEL and
+its derivatives)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-debootstrap"><span class="std std-ref">debootstrap</span></a> (apt-based systems such as
 Debian and Ubuntu)</p></li>
 <li><p>oci (bundle compliant with OCI Image Specification)</p></li>

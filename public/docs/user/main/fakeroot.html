@@ -345,7 +345,7 @@ created may not be writable by the creating user.</p>
 <div class="section" id="add-package-to-a-writable-overlay">
 <h4>Add package to a writable overlay<a class="headerlink" href="#add-package-to-a-writable-overlay" title="Permalink to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">overlay</span>
-<span class="n">apptainer</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">overlay</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">overlay</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">openssh</span>
+<span class="n">apptainer</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">overlay</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">overlay</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="n">dnf</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">openssh</span>
 </pre></div>
 </div>
 </div>
@@ -377,13 +377,13 @@ section and running the other commands under that.</p>
 <p>For example, with a definition file called <code class="docutils literal notranslate"><span class="pre">my.def</span></code>
 containing this:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
-<span class="k">From</span>: docker://centos:<span class="m">7</span>
+<span class="k">From</span>: docker://rockylinux:<span class="m">8</span>
 
 <span class="gh">%post</span>
-<span class="w">    </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>epel-release
-<span class="w">    </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fakeroot
+<span class="w">    </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>epel-release
+<span class="w">    </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fakeroot
 <span class="w">    </span>fakeroot<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
-<span class="s1">        yum install -y openssh</span>
+<span class="s1">        dnf install -y openssh</span>
 <span class="s1">    &#39;</span>
 </pre></div>
 </div>
