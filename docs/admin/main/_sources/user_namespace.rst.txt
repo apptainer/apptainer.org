@@ -32,11 +32,8 @@ of the user guide.
 To allow unprivileged creation of user namespaces a kernel >=3.8 is
 required, with >=4.18 being recommended due to support for unprivileged
 mounting of FUSE filesystems (needed for example for mounting SIF files).
-The equivalent recommendation on RHEL7 is >=3.10.0-1127 from release
-7.8, where unprivileged mounting of FUSE filesystems was backported.
 To use unprivileged overlayFS for creating missing bind mount paths and
 for writable overlays, kernel >=5.11 is recommended.
-That feature has not been backported to RHEL7.
 Whenever the kernel overlayFS doesn't work then {Project} will use
 fuse-overlayfs instead.  
 
@@ -44,27 +41,10 @@ Additionally, some Linux distributions require that unprivileged user
 namespace creation is enabled using a ``sysctl`` or kernel command line
 parameter. Please consult your distribution documentation or vendor to
 confirm the steps necessary to 'enable unprivileged user namespace
-creation'.
-
-Debian
-======
-
-.. code::
-
-   sudo sh -c 'echo kernel.unprivileged_userns_clone=1 \
-       >/etc/sysctl.d/90-unprivileged_userns.conf'
-   sudo sysctl -p /etc/sysctl.d/90-unprivileged_userns.conf
-
-RHEL/CentOS 7
-=============
-
-From 7.4, kernel support is included but must be enabled with:
-
-.. code::
-
-   sudo sh -c 'echo user.max_user_namespaces=15000 \
-       >/etc/sysctl.d/90-max_user_namespaces.conf'
-   sudo sysctl -p /etc/sysctl.d/90-max_user_namespaces.conf
+creation'.  
+In general, the parameter ``user.max_usernamespaces`` has to be non-zero,
+and additionally on Debian the parameter ``kernel.unprivileged_userns_clone``
+needs to be non-zero.
 
 ******************************
  Disabling network namespaces
