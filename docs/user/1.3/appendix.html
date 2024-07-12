@@ -701,7 +701,7 @@ is signed by keys matching <em>all</em> of the specified fingerprints.</p>
 create an image. You can use Docker layers to create a base image, and
 then add your own custom software. For example, you might use Docker’s
 Ubuntu image layers to create an Ubuntu Apptainer container. You
-could do the same with CentOS, Debian, Arch, Suse, Alpine, BusyBox, etc.</p>
+could do the same with Fedora, Debian, Arch, Suse, Alpine, BusyBox, etc.</p>
 <p>Or maybe you want a container that already has software installed. For
 instance, maybe you want to build a container that uses CUDA and cuDNN
 to leverage the GPU, but you don’t want to install from scratch. You can
@@ -875,11 +875,11 @@ the new image during bootstrap.</p>
 </div>
 <div class="section" id="yum-bootstrap-agent">
 <span id="build-yum"></span><h3><code class="docutils literal notranslate"><span class="pre">yum</span></code> bootstrap agent<a class="headerlink" href="#yum-bootstrap-agent" title="Permalink to this heading"></a></h3>
-<p id="sec-build-yum">This module allows you to build a Red Hat/CentOS/Scientific Linux style
-container from a mirror URI.</p>
+<p id="sec-build-yum">This module allows you to build a Red Hat style
+container from a mirror URI based on yum or dnf.</p>
 <div class="section" id="id13">
 <h4>Overview<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h4>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">yum</span></code> module to specify a base for a CentOS-like container.
+<p>Use the <code class="docutils literal notranslate"><span class="pre">yum</span></code> module to specify a base for a RHEL-like container.
 You must also specify the URI for the mirror you would like to use.</p>
 </div>
 <div class="section" id="id14">
@@ -889,26 +889,26 @@ You must also specify the URI for the mirror you would like to use.</p>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
 module to use.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">OSVersion</span>: <span class="m">7</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">OSVersion</span>: <span class="m">9</span>
 </pre></div>
 </div>
 <p>The OSVersion keyword is optional. It specifies the OS version you would
 like to use. It is only required if you have specified a %{OSVERSION}
 variable in the <code class="docutils literal notranslate"><span class="pre">MirrorURL</span></code> keyword.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">MirrorURL</span>: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">MirrorURL</span>: http://repo.almalinux.org/almalinux/%{OSVERSION}/BaseOS/x86_64/os
 </pre></div>
 </div>
 <p>The MirrorURL keyword is mandatory. It specifies the URI to use as a
 mirror to download the OS. If you define the <code class="docutils literal notranslate"><span class="pre">OSVersion</span></code> keyword, then
 you can use it in the URI as in the example above.</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Include</span>: yum
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Include</span>: dnf
 </pre></div>
 </div>
 <p>The Include keyword is optional. It allows you to install additional
 packages into the core operating system. It is a best practice to supply
 only the bare essentials such that the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section has what it
 needs to properly complete the build. One common package you may want to
-install when using the <code class="docutils literal notranslate"><span class="pre">yum</span></code> build module is YUM itself.</p>
+install when using the <code class="docutils literal notranslate"><span class="pre">yum</span></code> build module is YUM or DNF itself.</p>
 </div>
 <div class="section" id="id15">
 <h4>Notes<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h4>
@@ -919,7 +919,7 @@ system. If the RPM implementation inside the container is not compatible
 with the RPM database that was used to create the container, RPM and YUM
 commands inside the container may fail. This issue can be easily
 demonstrated by bootstrapping an older RHEL compatible image by a newer
-one (e.g. bootstrap a Centos 6 container from a Centos 7 host).</p>
+one (e.g. bootstrap a RHEL 8 container from a RHEL 9 host).</p>
 <p>In order to use the <code class="docutils literal notranslate"><span class="pre">yum</span></code> build module, you must have <code class="docutils literal notranslate"><span class="pre">yum</span></code>
 installed on your system. It may seem counter-intuitive to install YUM
 on a system that uses a different package manager, but you can do so.
@@ -977,8 +977,8 @@ like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get update &amp;&amp; sudo apt-get install debootstrap
 </pre></div>
 </div>
-<p>On CentOS you can install it from the epel repos like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo yum update &amp;&amp; sudo yum install epel-release &amp;&amp; sudo yum install debootstrap.noarch
+<p>On RHEL you can install it from the epel repos like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo dnf update &amp;&amp; sudo dnf install epel-release &amp;&amp; sudo dnf install debootstrap.noarch
 </pre></div>
 </div>
 </div>
