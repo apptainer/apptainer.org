@@ -85,21 +85,28 @@ Filesystem support / limitations
 when installing {Project} on, or running containers from, common
 parallel / network filesystems. In general:
 
--  We recommend installing {Project} on local disk on each
-   compute node.
-
--  If {Project} is installed to a network location, a
-   ``--localstatedir`` should be provided on each node, and {Project}
-   configured to use it.
-
--  The ``--localstatedir`` filesystem should support overlay mounts.
-
 -  ``TMPDIR`` / ``{ENVPREFIX}_TMPDIR`` should be on a local filesystem
    wherever possible.
 
+-  If you install {Project} on a local disk on each compute node
+   you will have the greatest chance of avoiding any limitations.
+
+-  If {Project} is installed to a network location, it might work 
+   with the default directory layout but depending on the network
+   filesystem type (details below) you might run into problems.
+   The kernel overlayfs is especially selective on which filesystem
+   types it supports, but {Project} will fall back to fuse-overlayfs
+   if the kernel overlayfs doesn't work so you might not notice it.
+   The issue primarily affects the directory that can be changed by the
+   ``--localstatedir`` option to the ``mconfig`` command when compiling
+   from source.  If you have this issue, a solution may be to put most
+   of the installation in the network location but then define
+   ``--localstatedir`` to point to a directory that is on the local
+   filesystem of all the nodes.
+
 .. note::
 
-   Set the ``--localstatedir`` location by by providing
+   Set the ``--localstatedir`` location by providing
    ``--localstatedir my/dir`` as an option when you configure your
    {Project} build with ``./mconfig``.
 
@@ -107,13 +114,16 @@ parallel / network filesystems. In general:
    The directory is used as a location to mount the container root
    filesystem, overlays, bind mounts etc. that construct the runtime
    view of a container. You will not see these mounts from a host shell,
-   as they are made in a separate mount namespace.
+   as they are made in a separate mount namespace.  Write access to this
+   area is not needed but a ``lib/{project}/mnt/session`` directory
+   needs to pre-exist in it.
 
 Overlay support
 ^^^^^^^^^^^^^^^
 
 Some features of {Project}, such as the ``--writable-tmpfs`` and
-``--overlay`` options, use overlay mounts to construct a container root
+``--overlay`` options as well as creation of missing bind mountpoints,
+use overlay mounts to construct a container root
 filesystem that combines files from different locations. Overlay mounts may use
 the Linux kernel overlay filesystem driver or the fuse-overlayfs userspace
 implementation, depending on the workflow and support from the host kernel.
