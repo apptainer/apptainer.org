@@ -205,30 +205,41 @@ related path or the user’s PATH.</p>
 when installing Apptainer on, or running containers from, common
 parallel / network filesystems. In general:</p>
 <ul class="simple">
-<li><p>We recommend installing Apptainer on local disk on each
-compute node.</p></li>
-<li><p>If Apptainer is installed to a network location, a
-<code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> should be provided on each node, and Apptainer
-configured to use it.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> filesystem should support overlay mounts.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> / <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> should be on a local filesystem
 wherever possible.</p></li>
+<li><p>If you install Apptainer on a local disk on each compute node
+you will have the greatest chance of avoiding any limitations.</p></li>
+<li><p>If Apptainer is installed to a network location, it might work
+with the default directory layout but depending on the network
+filesystem type (details below) you might run into problems.
+The kernel overlayfs is especially selective on which filesystem
+types it supports, but Apptainer will fall back to fuse-overlayfs
+if the kernel overlayfs doesn’t work so you might not notice it.
+The issue primarily affects the directory that can be changed by the
+<code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> option to the <code class="docutils literal notranslate"><span class="pre">mconfig</span></code> command when compiling
+from source.  If you have this issue, a solution may be to put most
+of the installation in the network location but then define
+<code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> to point to a directory that is on the local
+filesystem of all the nodes.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Set the <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> location by by providing
+<p>Set the <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> location by providing
 <code class="docutils literal notranslate"><span class="pre">--localstatedir</span> <span class="pre">my/dir</span></code> as an option when you configure your
 Apptainer build with <code class="docutils literal notranslate"><span class="pre">./mconfig</span></code>.</p>
 <p>Disk usage at the <code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> location is negligible (&lt;1MiB).
 The directory is used as a location to mount the container root
 filesystem, overlays, bind mounts etc. that construct the runtime
 view of a container. You will not see these mounts from a host shell,
-as they are made in a separate mount namespace.</p>
+as they are made in a separate mount namespace.  Write access to this
+area is not needed but a <code class="docutils literal notranslate"><span class="pre">lib/{project}/mnt/session</span></code> directory
+needs to pre-exist in it.</p>
 </div>
 <div class="section" id="overlay-support">
 <h5>Overlay support<a class="headerlink" href="#overlay-support" title="Permalink to this heading"></a></h5>
 <p>Some features of Apptainer, such as the <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> and
-<code class="docutils literal notranslate"><span class="pre">--overlay</span></code> options, use overlay mounts to construct a container root
+<code class="docutils literal notranslate"><span class="pre">--overlay</span></code> options as well as creation of missing bind mountpoints,
+use overlay mounts to construct a container root
 filesystem that combines files from different locations. Overlay mounts may use
 the Linux kernel overlay filesystem driver or the fuse-overlayfs userspace
 implementation, depending on the workflow and support from the host kernel.</p>
