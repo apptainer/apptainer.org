@@ -115,7 +115,7 @@ parallel / network filesystems. In general:
    filesystem, overlays, bind mounts etc. that construct the runtime
    view of a container. You will not see these mounts from a host shell,
    as they are made in a separate mount namespace.  Write access to this
-   area is not needed but a ``lib/{project}/mnt/session`` directory
+   area is not needed but a ``lib/{command}/mnt/session`` directory
    needs to pre-exist in it.
 
 Overlay support
