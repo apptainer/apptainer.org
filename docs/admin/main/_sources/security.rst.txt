@@ -29,17 +29,19 @@ seccomp and apparmor.  Please see the `Security Options section
 Limits on resource usage by containers can be enforced using cgroups. On systems
 that use cgroups v1, only the root user can set resource limits. On systems that
 use cgroups v2 and systemd, all users can apply resource limits as long as the
-system is configured for delegation.
+system is configured for delegation to non-root users.
 
 By default, EL9, Ubuntu 22.04, Debian 11, Fedora 31 and newer use cgroups v2 and
-are configured for delegation so that unprivileged users will be able to use the
-``--apply-cgroups`` and other resource limit flags of {Project} without
-further configuration.
-
-On EL8 and Ubuntu 20.04 it is possible to setup a compatible configuration by
-following the 'Enabling cgroup v2' and 'Enabling CPU, CPUSET, and I/O
-delegation' steps at the `rootless containers website
+are configured so that non-root users will be able to use the
+``--memory-*`` and ``--pids-limit`` flags of {Project} or
+limit those aspects with the ``--apply-cgroups`` flag.
+To enable the other resource limits follow the
+'Enabling CPU, CPUSET, and I/O delegation' step at the
+`rootless containers website
 <https://rootlesscontaine.rs/getting-started/common/cgroup2/>`_.
+
+On EL8 and Ubuntu 20.04 it is possible to set up a compatible configuration by
+also following the 'Enabling cgroup v2' step at the above website.
 
 See the `Limiting Container Resources section
 <{userdocs}/cgroups.html>`_ of the user guide

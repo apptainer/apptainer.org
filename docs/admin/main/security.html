@@ -111,14 +111,16 @@ seccomp and apparmor.  Please see the <a class="reference external" href="https:
 <p>Limits on resource usage by containers can be enforced using cgroups. On systems
 that use cgroups v1, only the root user can set resource limits. On systems that
 use cgroups v2 and systemd, all users can apply resource limits as long as the
-system is configured for delegation.</p>
+system is configured for delegation to non-root users.</p>
 <p>By default, EL9, Ubuntu 22.04, Debian 11, Fedora 31 and newer use cgroups v2 and
-are configured for delegation so that unprivileged users will be able to use the
-<code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code> and other resource limit flags of Apptainer without
-further configuration.</p>
-<p>On EL8 and Ubuntu 20.04 it is possible to setup a compatible configuration by
-following the ‘Enabling cgroup v2’ and ‘Enabling CPU, CPUSET, and I/O
-delegation’ steps at the <a class="reference external" href="https://rootlesscontaine.rs/getting-started/common/cgroup2/">rootless containers website</a>.</p>
+are configured so that non-root users will be able to use the
+<code class="docutils literal notranslate"><span class="pre">--memory-*</span></code> and <code class="docutils literal notranslate"><span class="pre">--pids-limit</span></code> flags of Apptainer or
+limit those aspects with the <code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code> flag.
+To enable the other resource limits follow the
+‘Enabling CPU, CPUSET, and I/O delegation’ step at the
+<a class="reference external" href="https://rootlesscontaine.rs/getting-started/common/cgroup2/">rootless containers website</a>.</p>
+<p>On EL8 and Ubuntu 20.04 it is possible to set up a compatible configuration by
+also following the ‘Enabling cgroup v2’ step at the above website.</p>
 <p>See the <a class="reference external" href="https://apptainer.org/docs/user/main/cgroups.html">Limiting Container Resources section</a> of the user guide
 for more details of how to apply cgroups limits to containers at runtime.</p>
 </div>
