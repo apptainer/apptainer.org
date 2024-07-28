@@ -43,10 +43,9 @@ Full functionality of {Project} requires that the kernel supports:
    package which contains the privileged ``fusermount`` program.
    {Project} does not use ``fusermount`` in any mode.
 
--  **Unprivileged user namespaces** - (minimum kernel >=3.8, >=4.18
-   or 3.10.0-1127 on RHEL7 recommended)
+-  **Unprivileged user namespaces** - (minimum kernel >=3.8, >=4.18 recommended)
    Required to run containers without root or setuid privilege.
-   The recommended versions are required for unprivileged FUSE mounts.
+   The recommended minimum version is required for unprivileged FUSE mounts.
 
 -  **OverlayFS mounts** - (minimum kernel >=3.18, >=5.11 recommended)
    Used for creating missing bind mount paths and for writable overlays.
