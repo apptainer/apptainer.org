@@ -168,10 +168,9 @@ administrators do not want users to mount FUSE filesystems in the
 primary namespace, they can remove or not install the <code class="docutils literal notranslate"><span class="pre">fuse</span></code>
 package which contains the privileged <code class="docutils literal notranslate"><span class="pre">fusermount</span></code> program.
 Apptainer does not use <code class="docutils literal notranslate"><span class="pre">fusermount</span></code> in any mode.</p></li>
-<li><p><strong>Unprivileged user namespaces</strong> - (minimum kernel &gt;=3.8, &gt;=4.18
-or 3.10.0-1127 on RHEL7 recommended)
+<li><p><strong>Unprivileged user namespaces</strong> - (minimum kernel &gt;=3.8, &gt;=4.18 recommended)
 Required to run containers without root or setuid privilege.
-The recommended versions are required for unprivileged FUSE mounts.</p></li>
+The recommended minimum version is required for unprivileged FUSE mounts.</p></li>
 <li><p><strong>OverlayFS mounts</strong> - (minimum kernel &gt;=3.18, &gt;=5.11 recommended)
 Used for creating missing bind mount paths and for writable overlays.
 Kernel 5.11 enables support for overlays unprivileged, but whenever
