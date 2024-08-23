@@ -368,27 +368,78 @@ created may not be writable by the creating user.</p>
 <p>When using fakeroot mode 3 above, where user namespaces are
 available but /etc/subuid mapping is not set up, and you are trying
 to build a container for an operating sytem with an older glibc
-library than the host, this more advanced technique may help.</p>
-<p>First, use the apptainer build <code class="docutils literal notranslate"><span class="pre">--ignore-fakeroot-command</span></code> option.
+library than the host or for a target operating system like alpine
+that does not include glibc, this more advanced technique may help.</p>
+<p>First, use the apptainer build <code class="docutils literal notranslate"><span class="pre">--ignore-fakeroot-command</span></code> option
+to avoid binding in the fakeroot command from the host.
 If your <code class="docutils literal notranslate"><span class="pre">%post</span></code> commands are simple enough, that alone may be enough.
 If any of the commands try to do <code class="docutils literal notranslate"><span class="pre">chown</span></code> or something similar, then
 try additionally installing the fakeroot command in the <code class="docutils literal notranslate"><span class="pre">%post</span></code>
-section and running the other commands under that.</p>
+section and running the other commands under that.
+In order to work correctly with user namespaces there also needs to be
+an environment variable setting of <code class="docutils literal notranslate"><span class="pre">FAKEROOTDONTTRYCHOWN=1</span></code>.</p>
 <p>For example, with a definition file called <code class="docutils literal notranslate"><span class="pre">my.def</span></code>
-containing this:</p>
+containing this for a RHEL-derived system:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
-<span class="k">From</span>: docker://rockylinux:<span class="m">8</span>
+<span class="k">From</span>: rockylinux:<span class="m">8</span>
 
 <span class="gh">%post</span>
 <span class="w">    </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>epel-release
 <span class="w">    </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fakeroot
-<span class="w">    </span>fakeroot<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
+<span class="w">    </span><span class="nv">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>fakeroot<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
 <span class="s1">        dnf install -y openssh</span>
 <span class="s1">    &#39;</span>
 </pre></div>
 </div>
+<p>or this for an alpine system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Bootstrap</span><span class="p">:</span> <span class="n">docker</span>
+<span class="n">From</span><span class="p">:</span> <span class="n">alpine</span><span class="p">:</span><span class="n">latest</span>
+
+<span class="o">%</span><span class="n">post</span>
+    <span class="n">apk</span> <span class="n">update</span>
+    <span class="n">apk</span> <span class="n">add</span> <span class="n">fakeroot</span>
+    <span class="n">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="mi">1</span> <span class="n">fakeroot</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;</span>
+        <span class="n">apk</span> <span class="n">add</span> <span class="n">squid</span>
+    <span class="s1">&#39;</span>
+</pre></div>
+</div>
 <p>then build with</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">build</span> <span class="o">--</span><span class="n">ignore</span><span class="o">-</span><span class="n">fakeroot</span><span class="o">-</span><span class="n">command</span> <span class="n">my</span><span class="o">.</span><span class="n">sif</span> <span class="n">my</span><span class="o">.</span><span class="k">def</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>apptainer build --ignore-fakeroot-command my.sif my.def
+</pre></div>
+</div>
+<p>A Debian-derived system is more challenging because even the
+installation of the fakeroot package itself requires more than is
+available in fakeroot mode 2 (root-mapped user namespace).  So to
+demonstrate this you need to first build an image with another method
+that installs fakeroot (perhaps on another host where you have root
+access), and then make that image available where you need it and build
+on top of that.</p>
+<p>For example for the first phase:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: ubuntu:<span class="m">20.04</span>
+
+<span class="gh">%post</span>
+<span class="w">    </span>apt<span class="w"> </span>update
+<span class="w">    </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fakeroot
+</pre></div>
+</div>
+<p>and build with</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>sudo apptainer build ubuntu+fakeroot.sif my.def
+</pre></div>
+</div>
+<p>Then this for the second phase in a file called my2.def:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: localimage
+<span class="k">From</span>: ubuntu+fakeroot.sif
+
+<span class="gh">%post</span>
+<span class="w">    </span><span class="nv">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>fakeroot<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">        apt update</span>
+<span class="s1">        apt install -y openssh</span>
+<span class="s1">    &#39;</span>
+</pre></div>
+</div>
+<p>and build with</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>apptainer build --ignore-fakeroot-command my.sif my2.def
 </pre></div>
 </div>
 </div>
