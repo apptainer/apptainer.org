@@ -192,8 +192,8 @@ If that situation happens the easiest solution may be to use the
 <a class="reference external" href="https://apptainer.org/docs/admin/1.3/installation.html#install-from-pre-built-packages">install-unprivileged.sh script</a>
 to install Apptainer because it downloads a fakeroot command
 built with as old a libc as possible.
-Otherwise you can also try using the <code class="docutils literal notranslate"><span class="pre">--ignore-fakeroot-command`</span>
-<span class="pre">which</span> <span class="pre">may</span> <span class="pre">work</span> <span class="pre">if</span> <span class="pre">the</span> <span class="pre">commands</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">``%post</span></code> section of the build
+Otherwise you can also try using the <code class="docutils literal notranslate"><span class="pre">--ignore-fakeroot-command</span></code>
+which may work if the commands in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section of the build
 definition file are simple enough.
 As a last resort advanced option see the
 <a class="reference internal" href="#fakeroot-inside-def"><span class="std std-ref">Using fakeroot command inside definition file</span></a>
@@ -379,7 +379,7 @@ section and running the other commands under that.
 In order to work correctly with user namespaces there also needs to be
 an environment variable setting of <code class="docutils literal notranslate"><span class="pre">FAKEROOTDONTTRYCHOWN=1</span></code>.</p>
 <p>For example, with a definition file called <code class="docutils literal notranslate"><span class="pre">my.def</span></code>
-containing this for a RHEL-derived system:</p>
+containing this for a RHEL-derived container:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 <span class="k">From</span>: rockylinux:<span class="m">8</span>
 
@@ -391,7 +391,7 @@ containing this for a RHEL-derived system:</p>
 <span class="s1">    &#39;</span>
 </pre></div>
 </div>
-<p>or this for an alpine system:</p>
+<p>or this for an alpine container:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Bootstrap</span><span class="p">:</span> <span class="n">docker</span>
 <span class="n">From</span><span class="p">:</span> <span class="n">alpine</span><span class="p">:</span><span class="n">latest</span>
 
@@ -407,7 +407,7 @@ containing this for a RHEL-derived system:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>apptainer build --ignore-fakeroot-command my.sif my.def
 </pre></div>
 </div>
-<p>A Debian-derived system is more challenging because even the
+<p>A Debian-derived container is more challenging because even the
 installation of the fakeroot package itself requires more than is
 available in fakeroot mode 2 (root-mapped user namespace).  So to
 demonstrate this you need to first build an image with another method
