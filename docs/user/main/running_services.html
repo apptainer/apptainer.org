@@ -283,17 +283,12 @@ Apptainer&gt;
 <p>If you have multiple instances running and you want to stop all of them,
 you can do so with a wildcard or the –all flag. The following three
 commands are identical.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance stop \*
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance stop &#39;*&#39;
 
 $ apptainer instance stop --all
 
 $ apptainer instance stop -a
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You must escape the wildcard with a backslash <code class="docutils literal notranslate"><span class="pre">\*</span></code> to pass it properly
-through your shell.</p>
 </div>
 </div>
 </div>
