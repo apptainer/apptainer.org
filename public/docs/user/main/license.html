@@ -114,7 +114,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#dependency-licenses">Dependency Licenses</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-netflix-go-expect">github.com/Netflix/go-expect</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-containerd-containerd-pkg-userns">github.com/containerd/containerd/pkg/userns</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-containerd-log">github.com/containerd/log</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-containerd-stargz-snapshotter-estargz">github.com/containerd/stargz-snapshotter/estargz</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-containernetworking-cni">github.com/containernetworking/cni</a></li>
@@ -150,11 +149,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#github-com-google-go-containerregistry">github.com/google/go-containerregistry</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-gosimple-unidecode">github.com/gosimple/unidecode</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-klauspost-compress">github.com/klauspost/compress</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-matttproud-golang-protobuf-extensions-pbutil">github.com/matttproud/golang_protobuf_extensions/pbutil</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-moby-docker-image-spec-specs-go-v1">github.com/moby/docker-image-spec/specs-go/v1</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-moby-patternmatcher">github.com/moby/patternmatcher</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-moby-sys-mountinfo">github.com/moby/sys/mountinfo</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-moby-sys-sequential">github.com/moby/sys/sequential</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-moby-sys-user">github.com/moby/sys/user</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-moby-sys-userns">github.com/moby/sys/userns</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-modern-go-concurrent">github.com/modern-go/concurrent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-modern-go-reflect2">github.com/modern-go/reflect2</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-oklog-ulid">github.com/oklog/ulid</a></li>
@@ -216,7 +216,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#github-com-vbatts-go-mtree">github.com/vbatts/go-mtree</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-vbatts-tar-split">github.com/vbatts/tar-split</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#golang-org-x-crypto">golang.org/x/crypto</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#golang-org-x-exp">golang.org/x/exp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#golang-org-x-exp-maps">golang.org/x/exp/maps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#golang-org-x-net">golang.org/x/net</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#golang-org-x-sync">golang.org/x/sync</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#golang-org-x-sys">golang.org/x/sys</a></li>
@@ -264,12 +264,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#github-com-shopspring-decimal">github.com/shopspring/decimal</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-sirupsen-logrus">github.com/sirupsen/logrus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-titanous-rocacheck">github.com/titanous/rocacheck</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-urfave-cli">github.com/urfave/cli</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#go-mozilla-org-pkcs7">go.mozilla.org/pkcs7</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gopkg-in-yaml-v3">gopkg.in/yaml.v3</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-gosimple-slug">github.com/gosimple/slug</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-hashicorp-errwrap">github.com/hashicorp/errwrap</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-hashicorp-go-multierror">github.com/hashicorp/go-multierror</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-letsencrypt-boulder">github.com/letsencrypt/boulder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-garyburd-redigo-internal">github.com/garyburd/redigo/internal</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-garyburd-redigo-redis">github.com/garyburd/redigo/redis</a></li>
@@ -732,11 +729,6 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> Apache-2.0</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/Netflix/go-expect/blob/master/LICENSE">https://github.com/Netflix/go-expect/blob/master/LICENSE</a></p>
 </div>
-<div class="section" id="github-com-containerd-containerd-pkg-userns">
-<h4>github.com/containerd/containerd/pkg/userns<a class="headerlink" href="#github-com-containerd-containerd-pkg-userns" title="Permalink to this heading"></a></h4>
-<p><strong>License:</strong> Apache-2.0</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/containerd/containerd/blob/master/pkg/userns/LICENSE">https://github.com/containerd/containerd/blob/master/pkg/userns/LICENSE</a></p>
-</div>
 <div class="section" id="github-com-containerd-log">
 <h4>github.com/containerd/log<a class="headerlink" href="#github-com-containerd-log" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> Apache-2.0</p>
@@ -912,10 +904,10 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> Apache-2.0</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/klauspost/compress/blob/master/LICENSE">https://github.com/klauspost/compress/blob/master/LICENSE</a></p>
 </div>
-<div class="section" id="github-com-matttproud-golang-protobuf-extensions-pbutil">
-<h4>github.com/matttproud/golang_protobuf_extensions/pbutil<a class="headerlink" href="#github-com-matttproud-golang-protobuf-extensions-pbutil" title="Permalink to this heading"></a></h4>
+<div class="section" id="github-com-moby-docker-image-spec-specs-go-v1">
+<h4>github.com/moby/docker-image-spec/specs-go/v1<a class="headerlink" href="#github-com-moby-docker-image-spec-specs-go-v1" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> Apache-2.0</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/matttproud/golang_protobuf_extensions/blob/master/pbutil/LICENSE">https://github.com/matttproud/golang_protobuf_extensions/blob/master/pbutil/LICENSE</a></p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/moby/docker-image-spec/blob/master/specs-go/v1/LICENSE">https://github.com/moby/docker-image-spec/blob/master/specs-go/v1/LICENSE</a></p>
 </div>
 <div class="section" id="github-com-moby-patternmatcher">
 <h4>github.com/moby/patternmatcher<a class="headerlink" href="#github-com-moby-patternmatcher" title="Permalink to this heading"></a></h4>
@@ -936,6 +928,11 @@ you may use a subset of them.</p>
 <h4>github.com/moby/sys/user<a class="headerlink" href="#github-com-moby-sys-user" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> Apache-2.0</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/moby/sys/blob/master/user/LICENSE">https://github.com/moby/sys/blob/master/user/LICENSE</a></p>
+</div>
+<div class="section" id="github-com-moby-sys-userns">
+<h4>github.com/moby/sys/userns<a class="headerlink" href="#github-com-moby-sys-userns" title="Permalink to this heading"></a></h4>
+<p><strong>License:</strong> Apache-2.0</p>
+<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/moby/sys/blob/master/userns/LICENSE">https://github.com/moby/sys/blob/master/userns/LICENSE</a></p>
 </div>
 <div class="section" id="github-com-modern-go-concurrent">
 <h4>github.com/modern-go/concurrent<a class="headerlink" href="#github-com-modern-go-concurrent" title="Permalink to this heading"></a></h4>
@@ -1242,10 +1239,10 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> BSD-3-Clause</p>
 <p><strong>Project URL:</strong> <a class="reference external" href="https://golang.org/x/crypto">https://golang.org/x/crypto</a></p>
 </div>
-<div class="section" id="golang-org-x-exp">
-<h4>golang.org/x/exp<a class="headerlink" href="#golang-org-x-exp" title="Permalink to this heading"></a></h4>
+<div class="section" id="golang-org-x-exp-maps">
+<h4>golang.org/x/exp/maps<a class="headerlink" href="#golang-org-x-exp-maps" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> BSD-3-Clause</p>
-<p><strong>Project URL:</strong> <a class="reference external" href="https://golang.org/x/exp">https://golang.org/x/exp</a></p>
+<p><strong>Project URL:</strong> <a class="reference external" href="https://golang.org/x/exp/maps">https://golang.org/x/exp/maps</a></p>
 </div>
 <div class="section" id="golang-org-x-net">
 <h4>golang.org/x/net<a class="headerlink" href="#golang-org-x-net" title="Permalink to this heading"></a></h4>
@@ -1482,11 +1479,6 @@ you may use a subset of them.</p>
 <p><strong>License:</strong> MIT</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/titanous/rocacheck/blob/master/LICENSE">https://github.com/titanous/rocacheck/blob/master/LICENSE</a></p>
 </div>
-<div class="section" id="github-com-urfave-cli">
-<h4>github.com/urfave/cli<a class="headerlink" href="#github-com-urfave-cli" title="Permalink to this heading"></a></h4>
-<p><strong>License:</strong> MIT</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/urfave/cli/blob/master/LICENSE">https://github.com/urfave/cli/blob/master/LICENSE</a></p>
-</div>
 <div class="section" id="go-mozilla-org-pkcs7">
 <h4>go.mozilla.org/pkcs7<a class="headerlink" href="#go-mozilla-org-pkcs7" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> MIT</p>
@@ -1501,16 +1493,6 @@ you may use a subset of them.</p>
 <h4>github.com/gosimple/slug<a class="headerlink" href="#github-com-gosimple-slug" title="Permalink to this heading"></a></h4>
 <p><strong>License:</strong> MPL-2.0</p>
 <p><strong>License URL:</strong> <a class="reference external" href="https://github.com/gosimple/slug/blob/master/LICENSE">https://github.com/gosimple/slug/blob/master/LICENSE</a></p>
-</div>
-<div class="section" id="github-com-hashicorp-errwrap">
-<h4>github.com/hashicorp/errwrap<a class="headerlink" href="#github-com-hashicorp-errwrap" title="Permalink to this heading"></a></h4>
-<p><strong>License:</strong> MPL-2.0</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/hashicorp/errwrap/blob/master/LICENSE">https://github.com/hashicorp/errwrap/blob/master/LICENSE</a></p>
-</div>
-<div class="section" id="github-com-hashicorp-go-multierror">
-<h4>github.com/hashicorp/go-multierror<a class="headerlink" href="#github-com-hashicorp-go-multierror" title="Permalink to this heading"></a></h4>
-<p><strong>License:</strong> MPL-2.0</p>
-<p><strong>License URL:</strong> <a class="reference external" href="https://github.com/hashicorp/go-multierror/blob/master/LICENSE">https://github.com/hashicorp/go-multierror/blob/master/LICENSE</a></p>
 </div>
 <div class="section" id="github-com-letsencrypt-boulder">
 <h4>github.com/letsencrypt/boulder<a class="headerlink" href="#github-com-letsencrypt-boulder" title="Permalink to this heading"></a></h4>
