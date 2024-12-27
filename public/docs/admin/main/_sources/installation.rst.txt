@@ -653,8 +653,8 @@ Then do ``limactl start template://apptainer`` and ``limactl shell apptainer``.
 
 To customize cpus and memory on the VM, you can use ``--cpus 1`` and ``--memory 1``.
 
-See the `lima "apptainer" template <https://github.com/lima-vm/lima/blob/master/examples/apptainer.yaml>`_
-and the `lima "default" template <https://github.com/lima-vm/lima/blob/master/examples/default.yaml>`_
+See the `lima "apptainer" template <https://github.com/lima-vm/lima/blob/master/templates/apptainer.yaml>`_
+and the `lima "default" template <https://github.com/lima-vm/lima/blob/master/templates/default.yaml>`_
 for more details.
 
 By default, the host home directory is mounted as read-only in the guest,
