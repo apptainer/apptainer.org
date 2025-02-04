@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Library API Registries &mdash; Apptainer User Guide main documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/js/ga.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a8da1a53"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                main
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -140,10 +135,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="library-api-registries">
-<span id="id1"></span><h1>Library API Registries<a class="headerlink" href="#library-api-registries" title="Permalink to this heading"></a></h1>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+  <section id="library-api-registries">
+<span id="id1"></span><h1>Library API Registries<a class="headerlink" href="#library-api-registries" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>Apptainer enables users to use <a class="reference external" href="https://singularityhub.github.io/library-api/#/?id=library-api">Library API Container Registries</a> to
 <a class="reference internal" href="#push"><span class="std std-ref">push</span></a> containers to a registry that was designed specifically for
 SIF images and <a class="reference internal" href="#pull"><span class="std std-ref">pull</span></a> SIF images created by others.</p>
@@ -156,9 +151,9 @@ The <code class="docutils literal notranslate"><span class="pre">remote</span></
 registries. Check out the instructions for how to add and login with a
 <a class="reference internal" href="endpoint.html#remote-add-and-login"><span class="std std-ref">remote endpoint</span></a>.</p>
 <p>Once you have authenticated, you are ready to push your container!</p>
-</div>
-<div class="section" id="pushing-a-container">
-<span id="push"></span><h2>Pushing a Container<a class="headerlink" href="#pushing-a-container" title="Permalink to this heading"></a></h2>
+</section>
+<section id="pushing-a-container">
+<span id="push"></span><h2>Pushing a Container<a class="headerlink" href="#pushing-a-container" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">push</span></code> command will push a container to the container
 library with the given URL. Here’s an example of a typical push command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer push my-container.sif library://your-name/project-dir/my-container:latest
@@ -193,9 +188,9 @@ to setting the description via the web interface:</p>
 </div>
 <p>Note that when you push to a library that supports it, Apptainer will report
 your quota usage and the direct URL to view the container in your web browser.</p>
-</div>
-<div class="section" id="pulling-a-container">
-<span id="pull"></span><h2>Pulling a container<a class="headerlink" href="#pulling-a-container" title="Permalink to this heading"></a></h2>
+</section>
+<section id="pulling-a-container">
+<span id="pull"></span><h2>Pulling a container<a class="headerlink" href="#pulling-a-container" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> command will download a container from an
 <a class="reference external" href="https://hub.docker.com/">OCI Registry</a> (<code class="docutils literal notranslate"><span class="pre">docker://</span></code>),
 <a class="reference external" href="https://singularityhub.github.io/library-api/#/?id=library-api">Library API Registry</a>
@@ -225,8 +220,8 @@ URL:</p>
 </div>
 <p>Of course, you can pull your own containers. Here’s what that will look
 like:</p>
-<div class="section" id="pulling-your-own-container">
-<h3>Pulling your own container<a class="headerlink" href="#pulling-your-own-container" title="Permalink to this heading"></a></h3>
+<section id="pulling-your-own-container">
+<h3>Pulling your own container<a class="headerlink" href="#pulling-your-own-container" title="Link to this heading"></a></h3>
 <p>Pulling your own container is just like pulling from Github, Docker,
 etc…</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull out-file.sif library://your-name/project-dir/my-container:latest
@@ -242,24 +237,24 @@ $ apptainer pull out-file.sif library://your-name/project-dir/my-container:1.0.1
 automatically, but it’s good practice to always specify your output
 file.</p>
 </div>
-</div>
-</div>
-<div class="section" id="verify-sign-your-container">
-<h2>Verify/Sign your Container<a class="headerlink" href="#verify-sign-your-container" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="verify-sign-your-container">
+<h2>Verify/Sign your Container<a class="headerlink" href="#verify-sign-your-container" title="Link to this heading"></a></h2>
 <p>Verify containers that you pull from the library, ensuring they are
 bit-for-bit reproductions of the original image.</p>
 <p>Check out <a class="reference internal" href="signNverify.html#signnverify"><span class="std std-ref">this page</span></a> on how to: <a class="reference internal" href="signNverify.html#verify-container-from-remote-sources"><span class="std std-ref">verify a
 container</span></a>, <a class="reference internal" href="signNverify.html#sign-your-own-containers"><span class="std std-ref">making PGP key, and
 sign your own containers</span></a>.</p>
-</div>
-<div class="section" id="searching-the-library-for-containers">
-<span id="search-the-library"></span><h2>Searching the Library for Containers<a class="headerlink" href="#searching-the-library-for-containers" title="Permalink to this heading"></a></h2>
+</section>
+<section id="searching-the-library-for-containers">
+<span id="search-the-library"></span><h2>Searching the Library for Containers<a class="headerlink" href="#searching-the-library-for-containers" title="Link to this heading"></a></h2>
 <p>To find interesting or useful containers in a library, you can open that
 library in your browser if that project supports a web GUI.</p>
 <p>Alternatively, from the CLI you can use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">search</span> <span class="pre">&lt;query&gt;</span></code>.
 This will search a library for container images matching <code class="docutils literal notranslate"><span class="pre">&lt;query&gt;</span></code>.</p>
-<div class="section" id="using-the-cli-search">
-<h3>Using the CLI Search<a class="headerlink" href="#using-the-cli-search" title="Permalink to this heading"></a></h3>
+<section id="using-the-cli-search">
+<h3>Using the CLI Search<a class="headerlink" href="#using-the-cli-search" title="Link to this heading"></a></h3>
 <p>Here is an example of searching a library for <code class="docutils literal notranslate"><span class="pre">centos</span></code>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apptainer search centos</span>
 <span class="go">Found 72 container images for amd64 matching &quot;centos&quot;:</span>
@@ -334,9 +329,9 @@ current system. To e.g. search for <code class="docutils literal notranslate"><s
 <span class="go">    ...</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="building-from-a-definition-file">
-<h3>Building from a definition file:<a class="headerlink" href="#building-from-a-definition-file" title="Permalink to this heading"></a></h3>
+</section>
+<section id="building-from-a-definition-file">
+<h3>Building from a definition file:<a class="headerlink" href="#building-from-a-definition-file" title="Link to this heading"></a></h3>
 <p>This is our definition file. Let’s call it <code class="docutils literal notranslate"><span class="pre">ubuntu.def</span></code>:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">bootstrap</span>: library
 <span class="k">from</span>: ubuntu:<span class="m">22.04</span>
@@ -355,9 +350,9 @@ current system. To e.g. search for <code class="docutils literal notranslate"><s
 hello world from ubuntu container!
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

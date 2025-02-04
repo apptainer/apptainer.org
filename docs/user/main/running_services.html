@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Instances - Running Services &mdash; Apptainer User Guide main documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/js/ga.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a8da1a53"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                main
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -144,8 +139,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="instances-running-services">
-<span id="running-services"></span><h1>Instances - Running Services<a class="headerlink" href="#instances-running-services" title="Permalink to this heading"></a></h1>
+  <section id="instances-running-services">
+<span id="running-services"></span><h1>Instances - Running Services<a class="headerlink" href="#instances-running-services" title="Link to this heading"></a></h1>
 <p>Apptainer is most commonly used to run containers interactively, or in a
 batch job, where the container runs in the foreground, performs some work, and
 then exits. There are <a class="reference internal" href="quick_start.html#runcontainer"><span class="std std-ref">different ways</span></a> in which you can run
@@ -159,8 +154,8 @@ a web server or a database.</p>
 <p>A Apptainer container running a service in the background is called an
 <em>instance</em>, to distinguish it from the default mode which runs containers in the
 foreground.</p>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p id="sec-instances">This page will help you understand instances using an elementary example
 followed by a more useful example running an NGINX web server using instances.
 At the end, you will find a more detailed example of running an instance of a
@@ -178,9 +173,9 @@ expects various conditions that are satisfied on the host system, but not inside
 containers.</p>
 <p>Instead, you should run NGINX in the foreground <em>inside</em> the container, but then
 run the container in the background, as an <em>instance</em>.</p>
-</div>
-<div class="section" id="container-instances-in-apptainer">
-<h2>Container Instances in Apptainer<a class="headerlink" href="#container-instances-in-apptainer" title="Permalink to this heading"></a></h2>
+</section>
+<section id="container-instances-in-apptainer">
+<h2>Container Instances in Apptainer<a class="headerlink" href="#container-instances-in-apptainer" title="Link to this heading"></a></h2>
 <p>To demonstrate the basics of instances, let’s use an easy (though somewhat
 useless) example, using an Alpine Linux image from Apptainer’s github container
 registry:</p>
@@ -188,8 +183,8 @@ registry:</p>
 </pre></div>
 </div>
 <p>The above command will save the alpine image as <code class="docutils literal notranslate"><span class="pre">alpine_latest.sif</span></code>.</p>
-<div class="section" id="starting-instances">
-<h3>Starting Instances<a class="headerlink" href="#starting-instances" title="Permalink to this heading"></a></h3>
+<section id="starting-instances">
+<h3>Starting Instances<a class="headerlink" href="#starting-instances" title="Link to this heading"></a></h3>
 <p>To start an instance, you should follow this procedure:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[command]                      [image]              [name of instance]
 
@@ -249,9 +244,9 @@ there is no <code class="docutils literal notranslate"><span class="pre">%starts
 container’s <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">definition file</span></a> in the background. If
 there is no <code class="docutils literal notranslate"><span class="pre">%myappstart</span></code> the container will stay idle in the background.</p>
 <p>Besides how they are started, app instances behave just like regular instances.</p>
-</div>
-<div class="section" id="interacting-with-instances">
-<h3>Interacting With Instances<a class="headerlink" href="#interacting-with-instances" title="Permalink to this heading"></a></h3>
+</section>
+<section id="interacting-with-instances">
+<h3>Interacting With Instances<a class="headerlink" href="#interacting-with-instances" title="Link to this heading"></a></h3>
 <p>Although an instance runs its <code class="docutils literal notranslate"><span class="pre">%startscript</span></code> (if there is one) in the
 background, you can also interact with it in the foreground, by referring to it
 with an <code class="docutils literal notranslate"><span class="pre">instance://&lt;name&gt;</span></code> URI, where <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> is replaced with the
@@ -272,9 +267,9 @@ container, against a running instance:</p>
 Apptainer&gt;
 </pre></div>
 </div>
-</div>
-<div class="section" id="stopping-instances">
-<h3>Stopping Instances<a class="headerlink" href="#stopping-instances" title="Permalink to this heading"></a></h3>
+</section>
+<section id="stopping-instances">
+<h3>Stopping Instances<a class="headerlink" href="#stopping-instances" title="Link to this heading"></a></h3>
 <p>When you are finished with your instance you can clean it up with the
 <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">stop</span></code> command as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance stop instance1
@@ -290,10 +285,10 @@ $ apptainer instance stop --all
 $ apptainer instance stop -a
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="nginx-hello-world-in-apptainer">
-<h2>Nginx “Hello-world” in Apptainer<a class="headerlink" href="#nginx-hello-world-in-apptainer" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="nginx-hello-world-in-apptainer">
+<h2>Nginx “Hello-world” in Apptainer<a class="headerlink" href="#nginx-hello-world-in-apptainer" title="Link to this heading"></a></h2>
 <p>The above example, although not very useful, should serve as a fair
 introduction to the concept of Apptainer instances and running
 containers in the background. We will now look at a more useful
@@ -355,14 +350,14 @@ Commercial support is available at
 </div>
 <p>You could also visit <code class="docutils literal notranslate"><span class="pre">http://localhost</span></code> in a web browser, if you are running
 the instance from a desktop session.</p>
-</div>
-<div class="section" id="api-server-example">
-<h2>API Server Example<a class="headerlink" href="#api-server-example" title="Permalink to this heading"></a></h2>
+</section>
+<section id="api-server-example">
+<h2>API Server Example<a class="headerlink" href="#api-server-example" title="Link to this heading"></a></h2>
 <p>Let’s now package a useful service into a SIF container, and run it as an
 instance. The service we will be packaging is an API server that converts a web
 page into a PDF, and can be found <a class="reference external" href="https://github.com/alvarcarto/url-to-pdf-api">here</a>.</p>
-<div class="section" id="building-the-image">
-<h3>Building the image<a class="headerlink" href="#building-the-image" title="Permalink to this heading"></a></h3>
+<section id="building-the-image">
+<h3>Building the image<a class="headerlink" href="#building-the-image" title="Link to this heading"></a></h3>
 <p>To package the Web to PDF service into a SIF container, we must create a
 definition file. Let’s first choose a base from which to build our container. In
 this case the docker image <code class="docutils literal notranslate"><span class="pre">node:8</span></code> which comes pre-installed with Node 8 has
@@ -449,9 +444,9 @@ be set, which we can do in the environment section:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build url-to-pdf.sif url-to-pdf.def
 </pre></div>
 </div>
-</div>
-<div class="section" id="running-the-service">
-<h3>Running the Service<a class="headerlink" href="#running-the-service" title="Permalink to this heading"></a></h3>
+</section>
+<section id="running-the-service">
+<h3>Running the Service<a class="headerlink" href="#running-the-service" title="Link to this heading"></a></h3>
 <p>We can now start an instance to run the service:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start url-to-pdf.sif pdf
 </pre></div>
@@ -484,10 +479,10 @@ user     124  0.0  0.0  18372  3592 pts/1    S    11:41   0:00 /bin/bash --norc
 user     130  0.0  0.0  36640  2836 pts/1    R+   11:41   0:00 ps aux
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="instance-logs">
-<h2>Instance Logs<a class="headerlink" href="#instance-logs" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="instance-logs">
+<h2>Instance Logs<a class="headerlink" href="#instance-logs" title="Link to this heading"></a></h2>
 <p>Generally, when running services using instances, we write the <code class="docutils literal notranslate"><span class="pre">%startscript</span></code>
 so that the service will run in the foreground, and would write any log messages
 to the terminal. When an instance container is started there is no terminal.
@@ -524,9 +519,9 @@ running:</p>
 ...
 </pre></div>
 </div>
-</div>
-<div class="section" id="resource-usage-limits">
-<h2>Resource Usage / Limits<a class="headerlink" href="#resource-usage-limits" title="Permalink to this heading"></a></h2>
+</section>
+<section id="resource-usage-limits">
+<h2>Resource Usage / Limits<a class="headerlink" href="#resource-usage-limits" title="Link to this heading"></a></h2>
 <p>If you are running a container as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user, or your system supports
 cgroups v2, then all instances will be started inside a cgroup. A cgroup allows
 the resources used by the instance to be monitored, and limited.</p>
@@ -549,9 +544,9 @@ that are available for interactive containers. E.g. to limit memory usage to
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">instance</span> <span class="n">start</span> <span class="o">--</span><span class="n">memory</span> <span class="mi">1</span><span class="n">G</span> <span class="n">url</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">pdf</span><span class="o">.</span><span class="n">sif</span> <span class="n">pdf</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="system-integration-pid-files">
-<h2>System integration / PID files<a class="headerlink" href="#system-integration-pid-files" title="Permalink to this heading"></a></h2>
+</section>
+<section id="system-integration-pid-files">
+<h2>System integration / PID files<a class="headerlink" href="#system-integration-pid-files" title="Link to this heading"></a></h2>
 <p>If you are running services in containers you may want them to be
 started on boot, and shutdown gracefully automatically. This is usually
 performed by an init process, or another supervisor daemon installed on
@@ -587,8 +582,8 @@ systemd.</p>
 </div>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">Type=forking</span></code> is required here, since <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code>
 starts an instance and then exits.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

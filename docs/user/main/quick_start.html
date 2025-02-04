@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quick Start &mdash; Apptainer User Guide main documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/js/ga.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a8da1a53"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                main
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -148,8 +143,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="quick-start">
-<span id="id1"></span><h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h1>
+  <section id="quick-start">
+<span id="id1"></span><h1>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h1>
 <p id="sec-quickstart">This guide is intended for running Apptainer on a computer where you
 will install Apptainer yourself.</p>
 <p>If you need to request an installation on your shared resource, see
@@ -157,8 +152,8 @@ will install Apptainer yourself.</p>
 information to send to your system administrator.</p>
 <p>For any additional help or support contact the Apptainer Community:
 <a class="reference external" href="https://apptainer.org/support">https://apptainer.org/support</a></p>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
 <p>You will need a Linux system to run Apptainer.
 Root access is not required if user namespaces are available.</p>
 <p>To install from source, follow the instructions in the <a class="reference external" href="https://github.com/apptainer/apptainer/blob/main/INSTALL.md">INSTALL.md</a>
@@ -171,9 +166,9 @@ and using Apptainer on Mac and Windows machines
 are discussed in the <a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html">installation section of the admin guide</a>.</p>
 <p>If you have an existing version of Apptainer installed from source, which
 you wish to upgrade or remove / uninstall, also see the <a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html">installation section of the admin guide</a>.</p>
-</div>
-<div class="section" id="overview-of-the-apptainer-interface">
-<h2>Overview of the Apptainer Interface<a class="headerlink" href="#overview-of-the-apptainer-interface" title="Permalink to this heading"></a></h2>
+</section>
+<section id="overview-of-the-apptainer-interface">
+<h2>Overview of the Apptainer Interface<a class="headerlink" href="#overview-of-the-apptainer-interface" title="Link to this heading"></a></h2>
 <p>Apptainer’s <a class="reference internal" href="cli.html#cli"><span class="std std-ref">command line interface</span></a> allows you to build
 and interact with containers transparently. You can run programs inside
 a container as if they were running on your host system. You can easily
@@ -323,9 +318,9 @@ particular container, you can view them as follows:</p>
 $ apptainer inspect --helpfile --app=foo foo.sif  # See the help for the app foo, if provided
 </pre></div>
 </div>
-</div>
-<div class="section" id="downloading-images">
-<h2>Downloading images<a class="headerlink" href="#downloading-images" title="Permalink to this heading"></a></h2>
+</section>
+<section id="downloading-images">
+<h2>Downloading images<a class="headerlink" href="#downloading-images" title="Link to this heading"></a></h2>
 <p>You can use the <a class="reference internal" href="cli/apptainer_pull.html#apptainer-pull"><span class="std std-ref">pull</span></a> and <a class="reference internal" href="cli/apptainer_build.html#apptainer-build"><span class="std std-ref">build</span></a>
 commands to download images from an external resource like an OCI registry.</p>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">pull</span></code> with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code> uri to reference OCI
@@ -349,9 +344,9 @@ scratch using a <a class="reference internal" href="definition_files.html#defini
 use <code class="docutils literal notranslate"><span class="pre">build</span></code> to convert an image between the container formats
 supported by Apptainer. To see a comparison of the Apptainer
 definition file with Dockerfile, please see <a class="reference internal" href="docker_and_oci.html#sec-deffile-vs-dockerfile"><span class="std std-ref">this section</span></a>.</p>
-</div>
-<div class="section" id="interacting-with-images">
-<span id="cowimage"></span><h2>Interacting with images<a class="headerlink" href="#interacting-with-images" title="Permalink to this heading"></a></h2>
+</section>
+<section id="interacting-with-images">
+<span id="cowimage"></span><h2>Interacting with images<a class="headerlink" href="#interacting-with-images" title="Link to this heading"></a></h2>
 <p>You can interact with images in several ways, each of which can accept
 image URIs in addition to local image paths.</p>
 <p>As an example, the following command will pull a <code class="docutils literal notranslate"><span class="pre">lolcow_latest.sif</span></code> image
@@ -359,8 +354,8 @@ from ghcr.io:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://ghcr.io/apptainer/lolcow
 </pre></div>
 </div>
-<div class="section" id="shell">
-<h3>Shell<a class="headerlink" href="#shell" title="Permalink to this heading"></a></h3>
+<section id="shell">
+<h3>Shell<a class="headerlink" href="#shell" title="Link to this heading"></a></h3>
 <p>The <a class="reference internal" href="cli/apptainer_shell.html#apptainer-shell"><span class="std std-ref">shell</span></a>
 command allows you to spawn a new shell within your container and
 interact with it as though it were a virtual machine.</p>
@@ -387,9 +382,9 @@ when the shell is exited.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell docker://ghcr.io/apptainer/lolcow
 </pre></div>
 </div>
-</div>
-<div class="section" id="executing-commands">
-<h3>Executing Commands<a class="headerlink" href="#executing-commands" title="Permalink to this heading"></a></h3>
+</section>
+<section id="executing-commands">
+<h3>Executing Commands<a class="headerlink" href="#executing-commands" title="Link to this heading"></a></h3>
 <p>The <a class="reference internal" href="cli/apptainer_exec.html#apptainer-exec"><span class="std std-ref">exec</span></a>
 command allows you to execute a custom command within a container by
 specifying the image file. For instance, to execute the <code class="docutils literal notranslate"><span class="pre">cowsay</span></code>
@@ -419,9 +414,9 @@ command and disappears.</p>
                 ||     ||
 </pre></div>
 </div>
-</div>
-<div class="section" id="running-a-container">
-<span id="runcontainer"></span><h3>Running a container<a class="headerlink" href="#running-a-container" title="Permalink to this heading"></a></h3>
+</section>
+<section id="running-a-container">
+<span id="runcontainer"></span><h3>Running a container<a class="headerlink" href="#running-a-container" title="Link to this heading"></a></h3>
 <p>Apptainer containers may contain <a class="reference internal" href="definition_files.html#runscript"><span class="std std-ref">runscripts</span></a>. These
 are user-defined scripts that define the actions a container should
 perform when someone runs it. The runscript can be triggered with the
@@ -463,8 +458,8 @@ ______________________________
                 ||     ||
 </pre></div>
 </div>
-<div class="section" id="arguments-to-run">
-<h4>Arguments to <code class="docutils literal notranslate"><span class="pre">run</span></code><a class="headerlink" href="#arguments-to-run" title="Permalink to this heading"></a></h4>
+<section id="arguments-to-run">
+<h4>Arguments to <code class="docutils literal notranslate"><span class="pre">run</span></code><a class="headerlink" href="#arguments-to-run" title="Link to this heading"></a></h4>
 <p>You can pass arguments to the runscript of a container, if it accepts
 them. For example, the default runscript of the <code class="docutils literal notranslate"><span class="pre">docker://alpine</span></code>
 container passes any arguments to a shell. We can ask the container
@@ -499,11 +494,11 @@ $ apptainer exec docker://alpine echo &quot;\\\$HOSTNAME&quot;
 \$HOSTNAME
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="working-with-files">
-<h2>Working with Files<a class="headerlink" href="#working-with-files" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+</section>
+<section id="working-with-files">
+<h2>Working with Files<a class="headerlink" href="#working-with-files" title="Link to this heading"></a></h2>
 <p>Files on the host are reachable from within the container:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &quot;Hello from inside the container&quot; &gt; $HOME/hostfile.txt
 
@@ -539,9 +534,9 @@ do with normal Linux commands:</p>
                 ||     ||
 </pre></div>
 </div>
-</div>
-<div class="section" id="building-images-from-scratch">
-<span id="build-images-from-scratch"></span><h2>Building images from scratch<a class="headerlink" href="#building-images-from-scratch" title="Permalink to this heading"></a></h2>
+</section>
+<section id="building-images-from-scratch">
+<span id="build-images-from-scratch"></span><h2>Building images from scratch<a class="headerlink" href="#building-images-from-scratch" title="Link to this heading"></a></h2>
 <p id="sec-buildimagesfromscratch">Apptainer produces immutable images in the
 Singularity Image File (SIF) format. This ensures reproducible and
 verifiable images and allows for many extra benefits such as the ability
@@ -551,8 +546,8 @@ is writable. This way you can <code class="docutils literal notranslate"><span c
 software and dependencies until you are satisfied that your container
 will fulfill your needs. For these scenarios, Apptainer also
 supports the <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> format (which is really just a directory).</p>
-<div class="section" id="sandbox-directories">
-<h3>Sandbox Directories<a class="headerlink" href="#sandbox-directories" title="Permalink to this heading"></a></h3>
+<section id="sandbox-directories">
+<h3>Sandbox Directories<a class="headerlink" href="#sandbox-directories" title="Link to this heading"></a></h3>
 <p>To build into a <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> (container in a directory) use the <code class="docutils literal notranslate"><span class="pre">build</span>
 <span class="pre">--sandbox</span></code> command and option:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --sandbox ubuntu/ docker://ubuntu
@@ -572,9 +567,9 @@ $ apptainer exec ubuntu/ ls /foo
 /foo
 </pre></div>
 </div>
-</div>
-<div class="section" id="converting-images-from-one-format-to-another">
-<h3>Converting images from one format to another<a class="headerlink" href="#converting-images-from-one-format-to-another" title="Permalink to this heading"></a></h3>
+</section>
+<section id="converting-images-from-one-format-to-another">
+<h3>Converting images from one format to another<a class="headerlink" href="#converting-images-from-one-format-to-another" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">build</span></code> command allows you to build a new container from an existing
 container. This means that you can use it to convert a container from one format
 to another. For instance, if you have already created a sandbox (directory) and
@@ -584,9 +579,9 @@ want to convert it to the Singularity Image Format, you can do so as follows:</p
 </div>
 <p>Note, however, that this approach may break reproducibility, in the event that
 you have altered your sandbox outside of the context of a <a class="reference internal" href="#qs-def-files"><span class="std std-ref">definition file</span></a>, so you are advised to exercise care.</p>
-</div>
-<div class="section" id="apptainer-definition-files">
-<span id="qs-def-files"></span><h3>Apptainer Definition Files<a class="headerlink" href="#apptainer-definition-files" title="Permalink to this heading"></a></h3>
+</section>
+<section id="apptainer-definition-files">
+<span id="qs-def-files"></span><h3>Apptainer Definition Files<a class="headerlink" href="#apptainer-definition-files" title="Link to this heading"></a></h3>
 <p>For a reproducible, verifiable and production-quality container, it is
 recommended that you build a SIF file using an Apptainer definition file.
 This also makes it easy to add files, environment variables, and install custom
@@ -644,10 +639,10 @@ that will replace placeholders in the definition file at build time.</p>
 <p>This quickstart document just scratches the surface of all of the things
 you can do with Apptainer!</p>
 <p>If you need additional help or support, see <a class="reference external" href="https://apptainer.org/help">https://apptainer.org/help</a>.</p>
-</div>
-</div>
-<div class="section" id="apptainer-on-a-shared-resource">
-<span id="installation-request"></span><h2>Apptainer on a shared resource<a class="headerlink" href="#apptainer-on-a-shared-resource" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="apptainer-on-a-shared-resource">
+<span id="installation-request"></span><h2>Apptainer on a shared resource<a class="headerlink" href="#apptainer-on-a-shared-resource" title="Link to this heading"></a></h2>
 <p>Perhaps you are a user who wants a few talking points and background to
 share with your administrator. Or maybe you are an administrator who
 needs to decide whether to install Apptainer.</p>
@@ -700,8 +695,8 @@ Best,
 User
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

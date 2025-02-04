@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Security in Apptainer &mdash; Apptainer User Guide main documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/js/ga.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a8da1a53"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                main
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -134,10 +129,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="security-in-apptainer">
-<span id="security"></span><h1>Security in Apptainer<a class="headerlink" href="#security-in-apptainer" title="Permalink to this heading"></a></h1>
-<div class="section" id="security-policy">
-<h2>Security Policy<a class="headerlink" href="#security-policy" title="Permalink to this heading"></a></h2>
+  <section id="security-in-apptainer">
+<span id="security"></span><h1>Security in Apptainer<a class="headerlink" href="#security-in-apptainer" title="Link to this heading"></a></h1>
+<section id="security-policy">
+<h2>Security Policy<a class="headerlink" href="#security-policy" title="Link to this heading"></a></h2>
 <p>If you suspect you have found a vulnerability in Apptainer, we want
 to work with you so that it can be investigated, fixed, and disclosed in
 a responsible manner. Please follow the steps in our published <a class="reference external" href="https://apptainer.org/security-policy/">Security
@@ -148,9 +143,9 @@ CVE reports, as well as notifications on our community channels. We
 encourage all users to monitor new releases of Apptainer for
 security information. Security patches are applied to the latest
 release.</p>
-</div>
-<div class="section" id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h2>
+</section>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Link to this heading"></a></h2>
 <p>Apptainer grew out of the need to implement a container platform
 that was suitable for use on shared systems, such as HPC clusters. In
 these environments, multiple people typically need to access the same
@@ -170,9 +165,9 @@ wouldn’t normally have permission to carry out themselves.</p>
 normal process running under the user’s account. Standard file
 permissions and other security controls based on user accounts, groups,
 and processes apply.</p>
-</div>
-<div class="section" id="setuid-user-namespaces">
-<h2>Setuid &amp; User Namespaces<a class="headerlink" href="#setuid-user-namespaces" title="Permalink to this heading"></a></h2>
+</section>
+<section id="setuid-user-namespaces">
+<h2>Setuid &amp; User Namespaces<a class="headerlink" href="#setuid-user-namespaces" title="Link to this heading"></a></h2>
 <p>Using a setuid binary to run container setup operations used to be
 essential to support containers on the older Linux distributions that were
 previously common in HPC and enterprise.</p>
@@ -247,9 +242,9 @@ See the <a class="reference external" href="https://apptainer.org/docs/admin/mai
 of the admin guide for details about mitigating the impact of user
 namespace vulnerabilities through disabling network namespaces.</p></li>
 </ul>
-</div>
-<div class="section" id="runtime-user-privilege-model">
-<h2>Runtime &amp; User Privilege Model<a class="headerlink" href="#runtime-user-privilege-model" title="Permalink to this heading"></a></h2>
+</section>
+<section id="runtime-user-privilege-model">
+<h2>Runtime &amp; User Privilege Model<a class="headerlink" href="#runtime-user-privilege-model" title="Link to this heading"></a></h2>
 <p>While other runtimes have aimed to tackle security concerns by
 sandboxing containers executing as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user so that they cannot
 affect the host system, Apptainer has adopted a different security
@@ -274,9 +269,9 @@ other means.</p>
 <p>If you do require the additional isolation of the network, devices,
 PIDs, etc., which other runtimes provide, Apptainer can make use of
 additional namespaces and functionality such as seccomp and cgroups.</p>
-</div>
-<div class="section" id="singularity-image-format-sif">
-<h2>Singularity Image Format (SIF)<a class="headerlink" href="#singularity-image-format-sif" title="Permalink to this heading"></a></h2>
+</section>
+<section id="singularity-image-format-sif">
+<h2>Singularity Image Format (SIF)<a class="headerlink" href="#singularity-image-format-sif" title="Link to this heading"></a></h2>
 <p>Apptainer uses SIF as its default container format. A SIF container
 is a single file, which makes it easy to manage and distribute. Inside
 the SIF file, the container filesystem is held in a SquashFS object. When
@@ -314,16 +309,16 @@ kernel. Unlike other container formats, the encrypted container is run
 without ever decrypting its contents to disk.
 Non-suid encryption and decryption uses the FUSE gocryptfs program,
 which also avoids decrypting contents to disk.</p>
-</div>
-<div class="section" id="configuration-runtime-options">
-<h2>Configuration &amp; Runtime Options<a class="headerlink" href="#configuration-runtime-options" title="Permalink to this heading"></a></h2>
+</section>
+<section id="configuration-runtime-options">
+<h2>Configuration &amp; Runtime Options<a class="headerlink" href="#configuration-runtime-options" title="Link to this heading"></a></h2>
 <p>System administrators who manage Apptainer can use configuration
 files to set security restrictions, grant or revoke a user’s
 capabilities, manage resources, authorize containers, etc.</p>
 <p>For details see the <a class="reference external" href="https://apptainer.org/docs/admin/main/security.html">Security section</a>
 of the admin guide.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
