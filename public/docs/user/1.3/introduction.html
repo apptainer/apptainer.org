@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Introduction to Apptainer &mdash; Apptainer User Guide 1.3 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/js/ga.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=c55cb9cb"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.3
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -140,8 +135,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="introduction-to-apptainer">
-<span id="introduction"></span><h1>Introduction to Apptainer<a class="headerlink" href="#introduction-to-apptainer" title="Permalink to this heading"></a></h1>
+  <section id="introduction-to-apptainer">
+<span id="introduction"></span><h1>Introduction to Apptainer<a class="headerlink" href="#introduction-to-apptainer" title="Link to this heading"></a></h1>
 <p>Apptainer is a <em>container</em> platform. It allows you to create and run
 containers that package up pieces of software in a way that is portable
 and reproducible. You can build a container using Apptainer on your
@@ -150,8 +145,8 @@ world, local university or company clusters, a single server, in the
 cloud, or on a workstation down the hall. Your container is a single
 file, and you don’t have to worry about how to install all the software
 you need on each different operating system.</p>
-<div class="section" id="why-use-apptainer">
-<h2>Why use Apptainer?<a class="headerlink" href="#why-use-apptainer" title="Permalink to this heading"></a></h2>
+<section id="why-use-apptainer">
+<h2>Why use Apptainer?<a class="headerlink" href="#why-use-apptainer" title="Link to this heading"></a></h2>
 <p>Apptainer was created to run complex applications on HPC clusters in
 a simple, portable, and reproducible way. First developed at Lawrence
 Berkeley National Laboratory, it quickly became popular at other HPC
@@ -175,9 +170,9 @@ container as outside, and cannot gain additional privilege on the
 host system by default. Read more about <a class="reference internal" href="security.html#security"><span class="std std-ref">Security in Apptainer</span></a>.</p></li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="why-use-containers">
-<h2>Why use containers?<a class="headerlink" href="#why-use-containers" title="Permalink to this heading"></a></h2>
+</section>
+<section id="why-use-containers">
+<h2>Why use containers?<a class="headerlink" href="#why-use-containers" title="Link to this heading"></a></h2>
 <p>A Unix operating system is broken into two primary components, the
 kernel space, and the user space. The Kernel talks to the hardware, and
 provides core system features. The user space is the environment that
@@ -200,11 +195,11 @@ a single, verifiable file.</p>
 system base fits their needs best, and create distributable runtime
 environments so that users never have to worry about dependencies and
 requirements, that they might not be able to satisfy on their systems.</p>
-</div>
-<div class="section" id="use-cases">
-<h2>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this heading"></a></h2>
-<div class="section" id="byoe-bring-your-own-environment">
-<h3>BYOE: Bring Your Own Environment!<a class="headerlink" href="#byoe-bring-your-own-environment" title="Permalink to this heading"></a></h3>
+</section>
+<section id="use-cases">
+<h2>Use Cases<a class="headerlink" href="#use-cases" title="Link to this heading"></a></h2>
+<section id="byoe-bring-your-own-environment">
+<h3>BYOE: Bring Your Own Environment!<a class="headerlink" href="#byoe-bring-your-own-environment" title="Link to this heading"></a></h3>
 <p>Engineering work-flows for research computing can be a complicated and
 iterative process, and even more so on a shared and somewhat inflexible
 production environment. Apptainer solves this problem by making the
@@ -213,16 +208,16 @@ environment flexible.</p>
 provide a standardized pre-configured Linux distribution to the students
 which includes all of the necessary tools, programs, and configurations
 so they can immediately follow along.</p>
-</div>
-<div class="section" id="reproducible-science">
-<h3>Reproducible science<a class="headerlink" href="#reproducible-science" title="Permalink to this heading"></a></h3>
+</section>
+<section id="reproducible-science">
+<h3>Reproducible science<a class="headerlink" href="#reproducible-science" title="Link to this heading"></a></h3>
 <p>Apptainer containers can be built to include all of the programs,
 libraries, data and scripts such that an entire demonstration can be
 contained and either archived or distributed for others to replicate no
 matter what version of Linux they are presently running.</p>
-</div>
-<div class="section" id="commercially-supported-code-requiring-a-particular-environment">
-<h3>Commercially supported code requiring a particular environment<a class="headerlink" href="#commercially-supported-code-requiring-a-particular-environment" title="Permalink to this heading"></a></h3>
+</section>
+<section id="commercially-supported-code-requiring-a-particular-environment">
+<h3>Commercially supported code requiring a particular environment<a class="headerlink" href="#commercially-supported-code-requiring-a-particular-environment" title="Link to this heading"></a></h3>
 <p>Some commercial applications are only certified to run on particular
 versions of Linux. If that application was installed into a
 Apptainer container running the version of Linux that it is
@@ -234,9 +229,9 @@ such that your home directory (and other directories) exist within the
 container. Applications within the container have full and direct access
 to all files you own thus you can easily incorporate the contained
 commercial application into your work and process flow on the host.</p>
-</div>
-<div class="section" id="static-environments-software-appliances">
-<h3>Static environments (software appliances)<a class="headerlink" href="#static-environments-software-appliances" title="Permalink to this heading"></a></h3>
+</section>
+<section id="static-environments-software-appliances">
+<h3>Static environments (software appliances)<a class="headerlink" href="#static-environments-software-appliances" title="Link to this heading"></a></h3>
 <p>Fund once, update never software development model. While this is not
 ideal, it is a common scenario for research funding. A certain amount of
 money is granted for initial development, and once that has been done
@@ -244,33 +239,33 @@ the interns, grad students, post-docs, or developers are reassigned to
 other projects. This leaves the software stack un-maintained, and even
 rebuilds for updated compilers or Linux distributions can not be done
 without unfunded effort.</p>
-</div>
-<div class="section" id="legacy-code-on-old-operating-systems">
-<h3>Legacy code on old operating systems<a class="headerlink" href="#legacy-code-on-old-operating-systems" title="Permalink to this heading"></a></h3>
+</section>
+<section id="legacy-code-on-old-operating-systems">
+<h3>Legacy code on old operating systems<a class="headerlink" href="#legacy-code-on-old-operating-systems" title="Link to this heading"></a></h3>
 <p>Similar to the above example, while this is less than ideal it is a fact
 of the research ecosystem. As an example, I know of one Linux
 distribution which has been end of life for 15 years which is still in
 production due to the software stack which is custom built for this
 environment. Apptainer has no problem running that operating system
 and application stack on a current operating system and hardware.</p>
-</div>
-<div class="section" id="complicated-software-stacks-that-are-very-host-specific">
-<h3>Complicated software stacks that are very host specific<a class="headerlink" href="#complicated-software-stacks-that-are-very-host-specific" title="Permalink to this heading"></a></h3>
+</section>
+<section id="complicated-software-stacks-that-are-very-host-specific">
+<h3>Complicated software stacks that are very host specific<a class="headerlink" href="#complicated-software-stacks-that-are-very-host-specific" title="Link to this heading"></a></h3>
 <p>There are various software packages which are so complicated that it
 takes much effort in order to port, update and qualify to new operating
 systems or compilers. The atmospheric and weather applications are a
 good example of this. Porting them to a contained operating system will
 prolong the usefullness of the development effort considerably.</p>
-</div>
-<div class="section" id="complicated-work-flows-that-require-custom-installation-and-or-data">
-<h3>Complicated work-flows that require custom installation and/or data<a class="headerlink" href="#complicated-work-flows-that-require-custom-installation-and-or-data" title="Permalink to this heading"></a></h3>
+</section>
+<section id="complicated-work-flows-that-require-custom-installation-and-or-data">
+<h3>Complicated work-flows that require custom installation and/or data<a class="headerlink" href="#complicated-work-flows-that-require-custom-installation-and-or-data" title="Link to this heading"></a></h3>
 <p>Consolidating a work-flow into an Apptainer container simplifies
 distribution and replication of scientific results. Making containers
 available along with published work enables other scientists to build
 upon (and verify) previous scientific work.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

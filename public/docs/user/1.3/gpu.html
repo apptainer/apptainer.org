@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GPU Support (NVIDIA CUDA &amp; AMD ROCm) &mdash; Apptainer User Guide 1.3 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/js/ga.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=c55cb9cb"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.3
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -154,8 +149,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="gpu-support-nvidia-cuda-amd-rocm">
-<span id="gpu"></span><h1>GPU Support (NVIDIA CUDA &amp; AMD ROCm)<a class="headerlink" href="#gpu-support-nvidia-cuda-amd-rocm" title="Permalink to this heading"></a></h1>
+  <section id="gpu-support-nvidia-cuda-amd-rocm">
+<span id="gpu"></span><h1>GPU Support (NVIDIA CUDA &amp; AMD ROCm)<a class="headerlink" href="#gpu-support-nvidia-cuda-amd-rocm" title="Link to this heading"></a></h1>
 <p>Apptainer natively supports running application containers that use
 NVIDIA’s CUDA GPU compute framework, or AMD’s ROCm solution. This allows
 easy access to users of GPU-enabled machine learning frameworks such as
@@ -175,8 +170,8 @@ Nvidia’s <code class="docutils literal notranslate"><span class="pre">nvidia-c
 functionality, accessible via the new <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> flag, improves
 compatibility with OCI runtimes and exposes additional container
 configuration options.</p>
-<div class="section" id="nvidia-gpus-cuda-standard">
-<h2>NVIDIA GPUs &amp; CUDA (Standard)<a class="headerlink" href="#nvidia-gpus-cuda-standard" title="Permalink to this heading"></a></h2>
+<section id="nvidia-gpus-cuda-standard">
+<h2>NVIDIA GPUs &amp; CUDA (Standard)<a class="headerlink" href="#nvidia-gpus-cuda-standard" title="Link to this heading"></a></h2>
 <p>Commands that <code class="docutils literal notranslate"><span class="pre">run</span></code>, or otherwise execute containers (<code class="docutils literal notranslate"><span class="pre">shell</span></code>,
 <code class="docutils literal notranslate"><span class="pre">exec</span></code>) can take an <code class="docutils literal notranslate"><span class="pre">--nv</span></code> option, which will setup the container’s
 environment to use an NVIDIA GPU and the basic CUDA libraries to run a
@@ -191,8 +186,8 @@ kernel GPU driver on the host.</p></li>
 version of the CUDA libraries are used by applications run inside the
 container.</p></li>
 </ul>
-<div class="section" id="requirements">
-<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h3>
+<section id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h3>
 <p>To use the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> flag to run a CUDA application inside a container
 you must ensure that:</p>
 <ul class="simple">
@@ -217,9 +212,9 @@ list of libraries in the configuration file
 latest stable CUDA version. It can be modified by the administrator to
 add additional libraries if necessary. See the admin guide for more
 details.</p>
-</div>
-<div class="section" id="example-tensorflow-gpu">
-<h3>Example - tensorflow-gpu<a class="headerlink" href="#example-tensorflow-gpu" title="Permalink to this heading"></a></h3>
+</section>
+<section id="example-tensorflow-gpu">
+<h3>Example - tensorflow-gpu<a class="headerlink" href="#example-tensorflow-gpu" title="Link to this heading"></a></h3>
 <p>Tensorflow is commonly used for machine learning projects but can be
 difficult to install on older systems, and is updated frequently.
 Running tensorflow from a container removes installation problems and
@@ -257,25 +252,25 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 <span class="n">Python</span> <span class="mf">2.7.15</span><span class="o">+</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Jul</span>  <span class="mi">9</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">16</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">35</span><span class="p">)</span>
 <span class="p">[</span><span class="n">GCC</span> <span class="mf">7.4.0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux2</span>
 <span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tensorflow.python.client</span> <span class="kn">import</span> <span class="n">device_lib</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.python.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">device_lib</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">device_lib</span><span class="o">.</span><span class="n">list_local_devices</span><span class="p">())</span>
 <span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.743600</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">cpu_feature_guard</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">Your</span> <span class="n">CPU</span> <span class="n">supports</span> <span class="n">instructions</span> <span class="n">that</span> <span class="n">this</span> <span class="n">TensorFlow</span> <span class="n">binary</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">compiled</span> <span class="n">to</span> <span class="n">use</span><span class="p">:</span> <span class="n">AVX2</span> <span class="n">FMA</span>
 <span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.784482</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">profile_utils</span><span class="o">/</span><span class="n">cpu_utils</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">94</span><span class="p">]</span> <span class="n">CPU</span> <span class="n">Frequency</span><span class="p">:</span> <span class="mi">3292620000</span> <span class="n">Hz</span>
 <span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.787911</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">xla</span><span class="o">/</span><span class="n">service</span><span class="o">/</span><span class="n">service</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">168</span><span class="p">]</span> <span class="n">XLA</span> <span class="n">service</span> <span class="mh">0x565246634360</span> <span class="n">executing</span> <span class="n">computations</span> <span class="n">on</span> <span class="n">platform</span> <span class="n">Host</span><span class="o">.</span> <span class="n">Devices</span><span class="p">:</span>
 <span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.787939</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">xla</span><span class="o">/</span><span class="n">service</span><span class="o">/</span><span class="n">service</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">175</span><span class="p">]</span>   <span class="n">StreamExecutor</span> <span class="n">device</span> <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Host</span><span class="p">,</span> <span class="n">Default</span> <span class="n">Version</span>
 <span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.798428</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">dso_loader</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">44</span><span class="p">]</span> <span class="n">Successfully</span> <span class="n">opened</span> <span class="n">dynamic</span> <span class="n">library</span> <span class="n">libcuda</span><span class="o">.</span><span class="n">so</span><span class="mf">.1</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.842683</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_gpu_executor</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1006</span><span class="p">]</span> <span class="n">successful</span> <span class="n">NUMA</span> <span class="n">node</span> <span class="n">read</span> <span class="kn">from</span> <span class="nn">SysFS</span> <span class="n">had</span> <span class="n">negative</span> <span class="n">value</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">but</span> <span class="n">there</span> <span class="n">must</span> <span class="n">be</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">NUMA</span> <span class="n">node</span><span class="p">,</span> <span class="n">so</span> <span class="n">returning</span> <span class="n">NUMA</span> <span class="n">node</span> <span class="n">zero</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.842683</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_gpu_executor</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1006</span><span class="p">]</span> <span class="n">successful</span> <span class="n">NUMA</span> <span class="n">node</span> <span class="n">read</span> <span class="kn">from</span><span class="w"> </span><span class="nn">SysFS</span> <span class="n">had</span> <span class="n">negative</span> <span class="n">value</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">but</span> <span class="n">there</span> <span class="n">must</span> <span class="n">be</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">NUMA</span> <span class="n">node</span><span class="p">,</span> <span class="n">so</span> <span class="n">returning</span> <span class="n">NUMA</span> <span class="n">node</span> <span class="n">zero</span>
 <span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.843252</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">xla</span><span class="o">/</span><span class="n">service</span><span class="o">/</span><span class="n">service</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">168</span><span class="p">]</span> <span class="n">XLA</span> <span class="n">service</span> <span class="mh">0x5652469263d0</span> <span class="n">executing</span> <span class="n">computations</span> <span class="n">on</span> <span class="n">platform</span> <span class="n">CUDA</span><span class="o">.</span> <span class="n">Devices</span><span class="p">:</span>
 <span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.843265</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">xla</span><span class="o">/</span><span class="n">service</span><span class="o">/</span><span class="n">service</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">175</span><span class="p">]</span>   <span class="n">StreamExecutor</span> <span class="n">device</span> <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">GeForce</span> <span class="n">GT</span> <span class="mi">730</span><span class="p">,</span> <span class="n">Compute</span> <span class="n">Capability</span> <span class="mf">3.5</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.843380</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_gpu_executor</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1006</span><span class="p">]</span> <span class="n">successful</span> <span class="n">NUMA</span> <span class="n">node</span> <span class="n">read</span> <span class="kn">from</span> <span class="nn">SysFS</span> <span class="n">had</span> <span class="n">negative</span> <span class="n">value</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">but</span> <span class="n">there</span> <span class="n">must</span> <span class="n">be</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">NUMA</span> <span class="n">node</span><span class="p">,</span> <span class="n">so</span> <span class="n">returning</span> <span class="n">NUMA</span> <span class="n">node</span> <span class="n">zero</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.843380</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_gpu_executor</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1006</span><span class="p">]</span> <span class="n">successful</span> <span class="n">NUMA</span> <span class="n">node</span> <span class="n">read</span> <span class="kn">from</span><span class="w"> </span><span class="nn">SysFS</span> <span class="n">had</span> <span class="n">negative</span> <span class="n">value</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">but</span> <span class="n">there</span> <span class="n">must</span> <span class="n">be</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">NUMA</span> <span class="n">node</span><span class="p">,</span> <span class="n">so</span> <span class="n">returning</span> <span class="n">NUMA</span> <span class="n">node</span> <span class="n">zero</span>
 <span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.843984</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">common_runtime</span><span class="o">/</span><span class="n">gpu</span><span class="o">/</span><span class="n">gpu_device</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1618</span><span class="p">]</span> <span class="n">Found</span> <span class="n">device</span> <span class="mi">0</span> <span class="k">with</span> <span class="n">properties</span><span class="p">:</span>
 <span class="n">name</span><span class="p">:</span> <span class="n">GeForce</span> <span class="n">GT</span> <span class="mi">730</span> <span class="n">major</span><span class="p">:</span> <span class="mi">3</span> <span class="n">minor</span><span class="p">:</span> <span class="mi">5</span> <span class="n">memoryClockRate</span><span class="p">(</span><span class="n">GHz</span><span class="p">):</span> <span class="mf">0.9015</span>
 <span class="o">...</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="multiple-gpus">
-<h3>Multiple GPUs<a class="headerlink" href="#multiple-gpus" title="Permalink to this heading"></a></h3>
+</section>
+<section id="multiple-gpus">
+<h3>Multiple GPUs<a class="headerlink" href="#multiple-gpus" title="Link to this heading"></a></h3>
 <p>By default, Apptainer makes all host devices available in the
 container. When the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> option is used a minimal <code class="docutils literal notranslate"><span class="pre">/dev</span></code> tree
 is created in the container, but the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> option will ensure that
@@ -299,14 +294,14 @@ $ export APPTAINERENV_CUDA_VISIBLE_DEVICES=0
 $ apptainer run tensorflow_latest-gpu.sif
 </pre></div>
 </div>
-</div>
-<div class="section" id="troubleshooting">
-<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h3>
+</section>
+<section id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h3>
 <p>If the host installation of the NVIDIA / CUDA driver and libraries is
 working and up-to-date there are rarely issues running CUDA programs
 inside of Apptainer containers. The most common issue seen is:</p>
-<div class="section" id="cuda-error-unknown-when-everything-seems-to-be-correctly-configured">
-<h4>CUDA_ERROR_UNKNOWN when everything seems to be correctly configured<a class="headerlink" href="#cuda-error-unknown-when-everything-seems-to-be-correctly-configured" title="Permalink to this heading"></a></h4>
+<section id="cuda-error-unknown-when-everything-seems-to-be-correctly-configured">
+<h4>CUDA_ERROR_UNKNOWN when everything seems to be correctly configured<a class="headerlink" href="#cuda-error-unknown-when-everything-seems-to-be-correctly-configured" title="Link to this heading"></a></h4>
 <p>CUDA depends on multiple kernel modules being loaded. Not all of the
 modules are loaded at system startup. Some portions of the NVIDA driver
 stack are initialized when first needed. This is done using a setuid
@@ -317,11 +312,11 @@ setuid root binary cannot initialize the driver stack fully.</p>
 driver stack on the host first, by running a CUDA program there or
 <code class="docutils literal notranslate"><span class="pre">modprobe</span> <span class="pre">nvidia_uvm</span></code> as root, and using <code class="docutils literal notranslate"><span class="pre">nvidia-persistenced</span></code> to
 avoid driver unload.</p>
-</div>
-</div>
-</div>
-<div class="section" id="nvidia-gpus-cuda-nvidia-container-cli">
-<h2>NVIDIA GPUs &amp; CUDA (nvidia-container-cli)<a class="headerlink" href="#nvidia-gpus-cuda-nvidia-container-cli" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+</section>
+<section id="nvidia-gpus-cuda-nvidia-container-cli">
+<h2>NVIDIA GPUs &amp; CUDA (nvidia-container-cli)<a class="headerlink" href="#nvidia-gpus-cuda-nvidia-container-cli" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> option instructs
 Apptainer to perform GPU container setup using the
 <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> utility. This utility must be installed
@@ -346,8 +341,8 @@ container, e.g. compute, graphics, and display functionality.</p></li>
 <li><p>Configuration via the same environment variables that are in use with
 OCI containers.</p></li>
 </ul>
-<div class="section" id="requirements-limitations">
-<h3>Requirements &amp; Limitations<a class="headerlink" href="#requirements-limitations" title="Permalink to this heading"></a></h3>
+<section id="requirements-limitations">
+<h3>Requirements &amp; Limitations<a class="headerlink" href="#requirements-limitations" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> must be installed on your host.
 It must be able to be found by the <code class="docutils literal notranslate"><span class="pre">binary</span> <span class="pre">path</span></code> set in
@@ -366,9 +361,9 @@ the <code class="docutils literal notranslate"><span class="pre">--fix-perms</sp
 <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> in recent Debian distributions. See <a class="reference external" href="https://github.com/NVIDIA/nvidia-docker/issues/1399">this
 GitHub issue</a></p></li>
 </ul>
-</div>
-<div class="section" id="id1">
-<h3>Example - tensorflow-gpu<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id1">
+<h3>Example - tensorflow-gpu<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <p>Tensorflow can be run using <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> in a similar manner as the
 standard <code class="docutils literal notranslate"><span class="pre">--nv</span></code> binding approach when run unprivleged. Build the
 large container into a sandbox:</p>
@@ -401,7 +396,7 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 <span class="n">Python</span> <span class="mf">2.7.15</span><span class="o">+</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Jul</span>  <span class="mi">9</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">16</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">35</span><span class="p">)</span>
 <span class="p">[</span><span class="n">GCC</span> <span class="mf">7.4.0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux2</span>
 <span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tensorflow.python.client</span> <span class="kn">import</span> <span class="n">device_lib</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.python.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">device_lib</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">device_lib</span><span class="o">.</span><span class="n">list_local_devices</span><span class="p">())</span>
 <span class="o">...</span>
 <span class="n">device_type</span><span class="p">:</span> <span class="s2">&quot;GPU&quot;</span>
@@ -416,9 +411,9 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 <span class="o">...</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="gpu-selection">
-<h3>GPU Selection<a class="headerlink" href="#gpu-selection" title="Permalink to this heading"></a></h3>
+</section>
+<section id="gpu-selection">
+<h3>GPU Selection<a class="headerlink" href="#gpu-selection" title="Link to this heading"></a></h3>
 <p>When running with <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code>, by default Apptainer will expose all
 GPUs on the host inside the container. This mirrors the functionality of
 the standard GPU support for the most common use-case.</p>
@@ -464,9 +459,9 @@ devices, you can specify MIG identifiers / UUIDs.</p>
 these would be statically configured by the system administrator, or
 setup dynamically by a job scheduler / workflow system according to the
 requirements of the job.</p>
-</div>
-<div class="section" id="other-gpu-options">
-<h3>Other GPU Options<a class="headerlink" href="#other-gpu-options" title="Permalink to this heading"></a></h3>
+</section>
+<section id="other-gpu-options">
+<h3>Other GPU Options<a class="headerlink" href="#other-gpu-options" title="Link to this heading"></a></h3>
 <p>In <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> mode, Apptainer understands the following additional
 environment variables. Note that these environment variables are read
 from the environment where <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> is run. Apptainer does
@@ -491,10 +486,10 @@ these container variables are not yet interpreted by Apptainer.</p></li>
 <p>Full details of the supported values for these environment variables can
 be found in the container-toolkit guide:</p>
 <p><a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#environment-variables-oci-spec">https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#environment-variables-oci-spec</a></p>
-</div>
-</div>
-<div class="section" id="amd-gpus-rocm">
-<h2>AMD GPUs &amp; ROCm<a class="headerlink" href="#amd-gpus-rocm" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="amd-gpus-rocm">
+<h2>AMD GPUs &amp; ROCm<a class="headerlink" href="#amd-gpus-rocm" title="Link to this heading"></a></h2>
 <p>Apptainer has a <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> flag to support GPU compute with the
 ROCm framework using AMD Radeon GPU cards.</p>
 <p>Commands that <code class="docutils literal notranslate"><span class="pre">run</span></code>, or otherwise execute containers (<code class="docutils literal notranslate"><span class="pre">shell</span></code>,
@@ -511,8 +506,8 @@ kernel GPU driver on the host.</p></li>
 version of the ROCm libraries are used by application run inside the
 container.</p></li>
 </ul>
-<div class="section" id="id2">
-<h3>Requirements<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<section id="id2">
+<h3>Requirements<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <p>To use the <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> flag to run a CUDA application inside a container
 you must ensure that:</p>
 <ul class="simple">
@@ -526,9 +521,9 @@ that is compatible with the ROCm version on your host.</p></li>
 </ul>
 <p>These requirements can be satisfied by following the requirements on the
 <a class="reference external" href="https://rocm.github.io/ROCmInstall.html">ROCm web site</a></p>
-</div>
-<div class="section" id="example-tensorflow-rocm">
-<h3>Example - tensorflow-rocm<a class="headerlink" href="#example-tensorflow-rocm" title="Permalink to this heading"></a></h3>
+</section>
+<section id="example-tensorflow-rocm">
+<h3>Example - tensorflow-rocm<a class="headerlink" href="#example-tensorflow-rocm" title="Link to this heading"></a></h3>
 <p>Tensorflow is commonly used for machine learning projects, but can be
 difficult to install on older systems, and is updated frequently.
 Running tensorflow from a container removes installation problems and
@@ -554,7 +549,7 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 <span class="n">Python</span> <span class="mf">3.5.2</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Jul</span> <span class="mi">10</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">11</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">48</span><span class="p">)</span>
 <span class="n">Type</span> <span class="s1">&#39;copyright&#39;</span><span class="p">,</span> <span class="s1">&#39;credits&#39;</span> <span class="ow">or</span> <span class="s1">&#39;license&#39;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span>
 <span class="n">IPython</span> <span class="mf">7.8.0</span> <span class="o">--</span> <span class="n">An</span> <span class="n">enhanced</span> <span class="n">Interactive</span> <span class="n">Python</span><span class="o">.</span> <span class="n">Type</span> <span class="s1">&#39;?&#39;</span> <span class="k">for</span> <span class="n">help</span><span class="o">.</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tensorflow.python.client</span> <span class="kn">import</span> <span class="n">device_lib</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.python.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">device_lib</span>
 <span class="o">...</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">device_lib</span><span class="o">.</span><span class="n">list_local_devices</span><span class="p">())</span>
 <span class="o">...</span>
@@ -566,10 +561,10 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 <span class="o">...</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="opencl-applications">
-<h2>OpenCL Applications<a class="headerlink" href="#opencl-applications" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="opencl-applications">
+<h2>OpenCL Applications<a class="headerlink" href="#opencl-applications" title="Link to this heading"></a></h2>
 <p>Both the <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> and <code class="docutils literal notranslate"><span class="pre">--nv</span></code> flags will bind the vendor OpenCL
 implementation libraries into a container that is being run. However,
 these libraries will not be used by OpenCL applications unless a vendor
@@ -578,8 +573,8 @@ to use the vendor library.</p>
 <p>The simplest way to use OpenCL in a container is to <code class="docutils literal notranslate"><span class="pre">--bind</span>
 <span class="pre">/etc/OpenCL</span></code> so that the icd files from the host (which match the
 bound-in libraries) are present in the container.</p>
-<div class="section" id="example-blender-opencl">
-<h3>Example - Blender OpenCL<a class="headerlink" href="#example-blender-opencl" title="Permalink to this heading"></a></h3>
+<section id="example-blender-opencl">
+<h3>Example - Blender OpenCL<a class="headerlink" href="#example-blender-opencl" title="Link to this heading"></a></h3>
 <p>The <a class="reference external" href="https://github.com/sylabs/examples">Sylabs examples repository</a>
 contains an example container definition for the 3D modelling
 application ‘Blender’.</p>
@@ -592,9 +587,9 @@ the Sylabs library:</p>
 </div>
 <p>Note the <em>exec</em> used as the <em>runscript</em> for this container is setup for
 batch rendering (which can also use OpenCL).</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

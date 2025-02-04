@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Environment and Metadata &mdash; Apptainer User Guide 1.3 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/js/ga.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=c55cb9cb"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.3
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -169,8 +164,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="environment-and-metadata">
-<span id="id1"></span><h1>Environment and Metadata<a class="headerlink" href="#environment-and-metadata" title="Permalink to this heading"></a></h1>
+  <section id="environment-and-metadata">
+<span id="id1"></span><h1>Environment and Metadata<a class="headerlink" href="#environment-and-metadata" title="Link to this heading"></a></h1>
 <p id="sec-envandmetadata">Environment variables are values you can set in a session, which can be
 used to influence the behavior of programs. It’s often considered best
 practice to use environment variables to pass settings to a program in a
@@ -185,8 +180,8 @@ information such as the definition file used to build a container. Other
 details such as the version of Apptainer used are present as
 <a class="reference internal" href="#sec-labels"><span class="std std-ref">labels</span></a> on a container. You can also specify your own
 to be recorded against your container.</p>
-<div class="section" id="environment-overview">
-<h2>Environment Overview<a class="headerlink" href="#environment-overview" title="Permalink to this heading"></a></h2>
+<section id="environment-overview">
+<h2>Environment Overview<a class="headerlink" href="#environment-overview" title="Link to this heading"></a></h2>
 <p>When you run a program in a container with Apptainer, the
 environment variables that the program sees are a combination of:</p>
 <blockquote>
@@ -215,9 +210,9 @@ created, and can be manipulated.</p>
 <p>If you are interested in variables available when you are <em>building</em> a
 container, rather than when running a container, see <a class="reference internal" href="build_env.html#build-environment"><span class="std std-ref">build
 environment section</span></a>.</p>
-</div>
-<div class="section" id="environment-from-a-base-image">
-<h2>Environment From a Base Image<a class="headerlink" href="#environment-from-a-base-image" title="Permalink to this heading"></a></h2>
+</section>
+<section id="environment-from-a-base-image">
+<h2>Environment From a Base Image<a class="headerlink" href="#environment-from-a-base-image" title="Link to this heading"></a></h2>
 <p>When you build a container with Apptainer you might <em>bootstrap</em> from
 a library or Docker image, or using Linux distribution bootstrap tools
 such as <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code>, <code class="docutils literal notranslate"><span class="pre">yum</span></code> etc.</p>
@@ -238,9 +233,9 @@ PYTHON_VERSION=3.7.7
 <p>You can override the inherited environment with <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> vars, or the
 <code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">/</span> <span class="pre">--env-file</span></code> flags (see below), but <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> <code class="docutils literal notranslate"><span class="pre">ENV</span></code> vars will
 not be overridden by host environment variables of the same name.</p>
-</div>
-<div class="section" id="environment-from-a-definition-file">
-<h2>Environment From a Definition File<a class="headerlink" href="#environment-from-a-definition-file" title="Permalink to this heading"></a></h2>
+</section>
+<section id="environment-from-a-definition-file">
+<h2>Environment From a Definition File<a class="headerlink" href="#environment-from-a-definition-file" title="Link to this heading"></a></h2>
 <p>Environment variables can be included in your container by adding them
 to your definition file. Use <code class="docutils literal notranslate"><span class="pre">export</span></code> in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section
 of a definition file to set a container environment variable:</p>
@@ -270,8 +265,8 @@ is not recommended to use this section to run potentially long
 initialization tasks because this would impact users running the
 image and the execution could abort due to timeout.</p>
 </div>
-<div class="section" id="build-time-variables-in-post">
-<h3>Build Time Variables in <code class="docutils literal notranslate"><span class="pre">%post</span></code><a class="headerlink" href="#build-time-variables-in-post" title="Permalink to this heading"></a></h3>
+<section id="build-time-variables-in-post">
+<h3>Build Time Variables in <code class="docutils literal notranslate"><span class="pre">%post</span></code><a class="headerlink" href="#build-time-variables-in-post" title="Link to this heading"></a></h3>
 <p>In some circumstances the value that needs to be assigned to an
 environment variable may only be known after e.g. software
 installation, in <code class="docutils literal notranslate"><span class="pre">%post</span></code>. For situations like this, the
@@ -282,10 +277,10 @@ runtime.</p>
 <p>Variables set in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section through
 <code class="docutils literal notranslate"><span class="pre">$APPTAINER_ENVIRONMENT</span></code> take precedence over those added via
 <code class="docutils literal notranslate"><span class="pre">%environment</span></code>.</p>
-</div>
-</div>
-<div class="section" id="environment-from-the-host">
-<h2>Environment From the Host<a class="headerlink" href="#environment-from-the-host" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="environment-from-the-host">
+<h2>Environment From the Host<a class="headerlink" href="#environment-from-the-host" title="Link to this heading"></a></h2>
 <p>If you have environment variables set outside of your container, on the
 host, then by default they will be available inside the container.
 Except that:</p>
@@ -347,9 +342,9 @@ container. Check your host environment with <code class="docutils literal notran
 such as <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> that can change the way code runs, and
 consider using <code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code>.</p>
 </div>
-</div>
-<div class="section" id="environment-from-the-apptainer-runtime">
-<h2>Environment From the Apptainer Runtime<a class="headerlink" href="#environment-from-the-apptainer-runtime" title="Permalink to this heading"></a></h2>
+</section>
+<section id="environment-from-the-apptainer-runtime">
+<h2>Environment From the Apptainer Runtime<a class="headerlink" href="#environment-from-the-apptainer-runtime" title="Link to this heading"></a></h2>
 <p>It can be useful for a program to know when it is running in a
 Apptainer container, and some basic information about the container
 environment. Apptainer will automatically set a number of
@@ -374,14 +369,14 @@ container.</p></li>
 <p>See compatibility documentation for <code class="docutils literal notranslate"><span class="pre">SINGULARITY_</span></code> prefixed environment
 variable support <a class="reference internal" href="singularity_compatibility.html#singularity-environment-variable-compatibility"><span class="std std-ref">here</span></a>.</p>
 </div>
-</div>
-<div class="section" id="overriding-environment-variables">
-<h2>Overriding Environment Variables<a class="headerlink" href="#overriding-environment-variables" title="Permalink to this heading"></a></h2>
+</section>
+<section id="overriding-environment-variables">
+<h2>Overriding Environment Variables<a class="headerlink" href="#overriding-environment-variables" title="Link to this heading"></a></h2>
 <p>You can override variables that have been set in the container image, or
 define additional variables, in various ways as appropriate for your
 workflow.</p>
-<div class="section" id="env-option">
-<h3><code class="docutils literal notranslate"><span class="pre">--env</span></code> option<a class="headerlink" href="#env-option" title="Permalink to this heading"></a></h3>
+<section id="env-option">
+<h3><code class="docutils literal notranslate"><span class="pre">--env</span></code> option<a class="headerlink" href="#env-option" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--env</span></code> option on the <code class="docutils literal notranslate"><span class="pre">run/exec/shell</span></code> commands allows you to
 specify environment variables as <code class="docutils literal notranslate"><span class="pre">NAME=VALUE</span></code> pairs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run env.sif
@@ -394,9 +389,9 @@ Goodbye
 <p>Separate multiple variables with commas, e.g. <code class="docutils literal notranslate"><span class="pre">--env</span>
 <span class="pre">MYVAR=A,MYVAR2=B</span></code>, and use shell quoting / shell escape if your
 variables include special characters.</p>
-</div>
-<div class="section" id="env-file-option">
-<h3><code class="docutils literal notranslate"><span class="pre">--env-file</span></code> option<a class="headerlink" href="#env-file-option" title="Permalink to this heading"></a></h3>
+</section>
+<section id="env-file-option">
+<h3><code class="docutils literal notranslate"><span class="pre">--env-file</span></code> option<a class="headerlink" href="#env-file-option" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> option lets you provide a file that contains
 environment variables as <code class="docutils literal notranslate"><span class="pre">NAME=VALUE</span></code> pairs, e.g.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat myenvs
@@ -406,9 +401,9 @@ $ apptainer run --env-file myenvs env.sif
 Hello from a file
 </pre></div>
 </div>
-</div>
-<div class="section" id="apptainerenv-prefix">
-<h3><code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> prefix<a class="headerlink" href="#apptainerenv-prefix" title="Permalink to this heading"></a></h3>
+</section>
+<section id="apptainerenv-prefix">
+<h3><code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> prefix<a class="headerlink" href="#apptainerenv-prefix" title="Link to this heading"></a></h3>
 <p>If you export an environment variable on your host called
 <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_xxx</span></code> <em>before</em> you run a container, then it will set
 the environment variable <code class="docutils literal notranslate"><span class="pre">xxx</span></code> inside the container:</p>
@@ -420,9 +415,9 @@ $ apptainer run env.sif
 Overridden
 </pre></div>
 </div>
-</div>
-<div class="section" id="manipulating-path">
-<h3>Manipulating <code class="docutils literal notranslate"><span class="pre">PATH</span></code><a class="headerlink" href="#manipulating-path" title="Permalink to this heading"></a></h3>
+</section>
+<section id="manipulating-path">
+<h3>Manipulating <code class="docutils literal notranslate"><span class="pre">PATH</span></code><a class="headerlink" href="#manipulating-path" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">PATH</span></code> is a special environment variable that tells a system where to
 look for programs that can be run. <code class="docutils literal notranslate"><span class="pre">PATH</span></code> contains multiple filesystem</p>
 <p>locations (paths) separated by colons. When you ask to run a program
@@ -468,17 +463,17 @@ $ apptainer exec env.sif sh -c &#39;echo $PATH&#39;
 </div>
 <p>Alternatively you could use the <code class="docutils literal notranslate"><span class="pre">--env</span></code> option to set a
 <code class="docutils literal notranslate"><span class="pre">PREPEND_PATH</span></code> variable, e.g. <code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">PREPEND_PATH=/startpath</span></code>.</p>
-</div>
-</div>
-<div class="section" id="escaping-and-evaluation-of-environment-variables">
-<span id="escaping-environment"></span><h2>Escaping and Evaluation of Environment Variables<a class="headerlink" href="#escaping-and-evaluation-of-environment-variables" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="escaping-and-evaluation-of-environment-variables">
+<span id="escaping-environment"></span><h2>Escaping and Evaluation of Environment Variables<a class="headerlink" href="#escaping-and-evaluation-of-environment-variables" title="Link to this heading"></a></h2>
 <p>Apptainer uses an embedded shell interpreter to process the container
 startup scripts and environment. When this processing is performed, by default a
 single step of shell evaluation happens in the container context. The shell from
 which you are running Apptainer may also evaluate variables on your command
 line before passing them to Apptainer.</p>
-<div class="section" id="docker-oci-compatibility">
-<h3>Docker / OCI Compatibility<a class="headerlink" href="#docker-oci-compatibility" title="Permalink to this heading"></a></h3>
+<section id="docker-oci-compatibility">
+<h3>Docker / OCI Compatibility<a class="headerlink" href="#docker-oci-compatibility" title="Link to this heading"></a></h3>
 <p>This default behavior of Apptainer differs from Docker/OCI handling of
 environment variables / <code class="docutils literal notranslate"><span class="pre">ENV</span></code> directives. To avoid the extra evaluation of
 variables that Apptainer performs you can:</p>
@@ -506,9 +501,9 @@ MYVAR=$(date)
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">--compat</span></code> flag is a short-hand flag to activate <code class="docutils literal notranslate"><span class="pre">--no-eval</span></code> along with
 other Docker/OCI compatibility flags. See <a class="reference internal" href="docker_and_oci.html#compat-flag"><span class="std std-ref">Docker-like --compat Flag</span></a> for more details.</p>
-</div>
-<div class="section" id="using-host-variables">
-<h3>Using Host Variables<a class="headerlink" href="#using-host-variables" title="Permalink to this heading"></a></h3>
+</section>
+<section id="using-host-variables">
+<h3>Using Host Variables<a class="headerlink" href="#using-host-variables" title="Link to this heading"></a></h3>
 <p>To set a container environment variable to the value of a variable on
 the host, use double quotes around the variable, so that it is
 processed by the host shell before the value is passed to
@@ -525,9 +520,9 @@ substituted before the host shell runs <code class="docutils literal notranslate
 consistently so that variables containing e.g. spaces are handled
 correctly.</p>
 </div>
-</div>
-<div class="section" id="using-container-variables">
-<h3>Using Container Variables<a class="headerlink" href="#using-container-variables" title="Permalink to this heading"></a></h3>
+</section>
+<section id="using-container-variables">
+<h3>Using Container Variables<a class="headerlink" href="#using-container-variables" title="Link to this heading"></a></h3>
 <p>To set an environment variable to a value that references another
 variable inside the container, you should escape the <code class="docutils literal notranslate"><span class="pre">$</span></code> sign to
 <code class="docutils literal notranslate"><span class="pre">\$</span></code>. This prevents the host shell from substituting the
@@ -542,9 +537,9 @@ are already set in the container. For example, <code class="docutils literal not
 <span class="pre">PATH=&quot;\$PATH:/endpath&quot;</span></code> would have the same effect as <code class="docutils literal notranslate"><span class="pre">--env</span>
 <span class="pre">APPEND_PATH=&quot;/endpath&quot;</span></code>, which uses the special <code class="docutils literal notranslate"><span class="pre">APPEND/PREPEND</span></code>
 handling for <code class="docutils literal notranslate"><span class="pre">PATH</span></code> discussed above.</p>
-</div>
-<div class="section" id="quoting-avoiding-evaluation">
-<h3>Quoting / Avoiding Evaluation<a class="headerlink" href="#quoting-avoiding-evaluation" title="Permalink to this heading"></a></h3>
+</section>
+<section id="quoting-avoiding-evaluation">
+<h3>Quoting / Avoiding Evaluation<a class="headerlink" href="#quoting-avoiding-evaluation" title="Link to this heading"></a></h3>
 <p>If you need to pass an environment variable into the container
 verbatim, it must be quoted and escaped appropriately. For example, if
 you need to set a path containing a literal <code class="docutils literal notranslate"><span class="pre">$LIB</span></code> for the
@@ -562,10 +557,10 @@ level of escaping:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">run</span> <span class="o">--</span><span class="n">env</span><span class="o">=</span><span class="s1">&#39;LD_PRELOAD=/foo/bar/\$LIB/baz.so&#39;</span> <span class="n">mycontainer</span><span class="o">.</span><span class="n">sif</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="environment-variable-precedence">
-<h2>Environment Variable Precedence<a class="headerlink" href="#environment-variable-precedence" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="environment-variable-precedence">
+<h2>Environment Variable Precedence<a class="headerlink" href="#environment-variable-precedence" title="Link to this heading"></a></h2>
 <p>When a container is run with Apptainer, the container
 environment is constructed in the following order:</p>
 <blockquote>
@@ -609,9 +604,9 @@ filesystem. This will permit further reproducibility and
 compatibility improvements, but will preclude environment
 manipulation via arbitrary scripts.</p>
 </div>
-</div>
-<div class="section" id="umask-default-file-permissions">
-<span id="sec-umask"></span><h2>Umask / Default File Permissions<a class="headerlink" href="#umask-default-file-permissions" title="Permalink to this heading"></a></h2>
+</section>
+<section id="umask-default-file-permissions">
+<span id="sec-umask"></span><h2>Umask / Default File Permissions<a class="headerlink" href="#umask-default-file-permissions" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">umask</span></code> value on a Linux system controls the default permissions
 for newly created files. It is not an environment variable, but
 influences the behavior of programs in the container when they create
@@ -633,17 +628,17 @@ non-root users who may use the same container later.</p></li>
 is set.</p></li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="container-metadata">
-<span id="sec-metadata"></span><h2>Container Metadata<a class="headerlink" href="#container-metadata" title="Permalink to this heading"></a></h2>
+</section>
+<section id="container-metadata">
+<span id="sec-metadata"></span><h2>Container Metadata<a class="headerlink" href="#container-metadata" title="Link to this heading"></a></h2>
 <p>Each Apptainer container has metadata describing the container, how
 it was built, etc. This metadata includes the definition file used to
 build the container and labels, which are specific pieces of information
 set automatically or explicitly when the container is built.</p>
 <p>Apptainer container default labels are represented using the
 <a class="reference external" href="http://label-schema.org/rc1/">rc1 Label Schema</a>.</p>
-<div class="section" id="inherited-labels">
-<span id="sec-labels"></span><h3>Inherited Labels<a class="headerlink" href="#inherited-labels" title="Permalink to this heading"></a></h3>
+<section id="inherited-labels">
+<span id="sec-labels"></span><h3>Inherited Labels<a class="headerlink" href="#inherited-labels" title="Link to this heading"></a></h3>
 <p>When building a container from an existing image, either directly from a
 URI or with a definition file, your container will inherit the labels
 that are set in that base image. For example the <code class="docutils literal notranslate"><span class="pre">LABEL</span></code> a Docker
@@ -658,9 +653,9 @@ INFO:    Adding labels
 WARNING: Label: OWNER already exists and force option is false, not overwriting
 </pre></div>
 </div>
-</div>
-<div class="section" id="custom-labels">
-<h3>Custom Labels<a class="headerlink" href="#custom-labels" title="Permalink to this heading"></a></h3>
+</section>
+<section id="custom-labels">
+<h3>Custom Labels<a class="headerlink" href="#custom-labels" title="Link to this heading"></a></h3>
 <p>You can add custom labels to your container using the <code class="docutils literal notranslate"><span class="pre">%labels</span></code>
 section in a definition file:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
@@ -670,9 +665,9 @@ section in a definition file:</p>
 <span class="w">  </span>OWNER<span class="w"> </span>Joana
 </pre></div>
 </div>
-</div>
-<div class="section" id="dynamic-build-time-labels">
-<h3>Dynamic Build Time Labels<a class="headerlink" href="#dynamic-build-time-labels" title="Permalink to this heading"></a></h3>
+</section>
+<section id="dynamic-build-time-labels">
+<h3>Dynamic Build Time Labels<a class="headerlink" href="#dynamic-build-time-labels" title="Link to this heading"></a></h3>
 <p>You may wish to set a label to a value that is not known in advance,
 when you are writing the definition file, but can be obtained in the
 <code class="docutils literal notranslate"><span class="pre">%post</span></code> section of your definition file while the container is
@@ -695,13 +690,13 @@ file defined by the <code class="docutils literal notranslate"><span class="pre"
 </div>
 <p>Labels must be added to the file one per line, in a <code class="docutils literal notranslate"><span class="pre">NAME</span> <span class="pre">VALUE</span></code>
 format, where the name and value are separated by a space.</p>
-</div>
-<div class="section" id="inspecting-metadata">
-<h3>Inspecting Metadata<a class="headerlink" href="#inspecting-metadata" title="Permalink to this heading"></a></h3>
+</section>
+<section id="inspecting-metadata">
+<h3>Inspecting Metadata<a class="headerlink" href="#inspecting-metadata" title="Link to this heading"></a></h3>
 <p id="inspect-command">The <code class="docutils literal notranslate"><span class="pre">inspect</span></code> command gives you the ability to view the labels and/or
 other metadata that were added to your container when it was built.</p>
-<div class="section" id="l-labels">
-<h4><code class="docutils literal notranslate"><span class="pre">-l</span></code>/ <code class="docutils literal notranslate"><span class="pre">--labels</span></code><a class="headerlink" href="#l-labels" title="Permalink to this heading"></a></h4>
+<section id="l-labels">
+<h4><code class="docutils literal notranslate"><span class="pre">-l</span></code>/ <code class="docutils literal notranslate"><span class="pre">--labels</span></code><a class="headerlink" href="#l-labels" title="Link to this heading"></a></h4>
 <p>Running inspect without any options, or with the <code class="docutils literal notranslate"><span class="pre">-l</span></code> or <code class="docutils literal notranslate"><span class="pre">--labels</span></code>
 options will display any labels set on the container</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>inspect<span class="w"> </span>ubuntu.sif
@@ -719,9 +714,9 @@ options will display any labels set on the container</p>
 image, and the exact version of Apptainer that was used to build it.</p>
 <p>The custom label <code class="docutils literal notranslate"><span class="pre">OWNER</span></code> that we set in our definition file is also
 visible.</p>
-</div>
-<div class="section" id="d-deffile">
-<h4><code class="docutils literal notranslate"><span class="pre">-d</span></code> / <code class="docutils literal notranslate"><span class="pre">--deffile</span></code><a class="headerlink" href="#d-deffile" title="Permalink to this heading"></a></h4>
+</section>
+<section id="d-deffile">
+<h4><code class="docutils literal notranslate"><span class="pre">-d</span></code> / <code class="docutils literal notranslate"><span class="pre">--deffile</span></code><a class="headerlink" href="#d-deffile" title="Link to this heading"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">-d</span></code> or <code class="docutils literal notranslate"><span class="pre">-deffile</span></code> flag shows the definition file(s) that were
 used to build the container.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer inspect --deffile jupyter.sif
@@ -786,9 +781,9 @@ used to build the container.</p>
 </pre></div>
 </div>
 <p>Which is the definition file for the <code class="docutils literal notranslate"><span class="pre">jupyter.sif</span></code> container.</p>
-</div>
-<div class="section" id="r-runscript">
-<h4><code class="docutils literal notranslate"><span class="pre">-r</span></code> / <code class="docutils literal notranslate"><span class="pre">--runscript</span></code><a class="headerlink" href="#r-runscript" title="Permalink to this heading"></a></h4>
+</section>
+<section id="r-runscript">
+<h4><code class="docutils literal notranslate"><span class="pre">-r</span></code> / <code class="docutils literal notranslate"><span class="pre">--runscript</span></code><a class="headerlink" href="#r-runscript" title="Link to this heading"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">-r</span></code> or <code class="docutils literal notranslate"><span class="pre">--runscript</span></code> option shows the runscript for the image.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer inspect --runscript jupyter.sif
 </pre></div>
@@ -822,18 +817,18 @@ used to build the container.</p>
 <span class="nb">exec</span><span class="w"> </span><span class="nv">$SINGULARITY_OCI_RUN</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="t-test">
-<h4><code class="docutils literal notranslate"><span class="pre">-t</span></code> / <code class="docutils literal notranslate"><span class="pre">--test</span></code><a class="headerlink" href="#t-test" title="Permalink to this heading"></a></h4>
+</section>
+<section id="t-test">
+<h4><code class="docutils literal notranslate"><span class="pre">-t</span></code> / <code class="docutils literal notranslate"><span class="pre">--test</span></code><a class="headerlink" href="#t-test" title="Link to this heading"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">-t</span></code> or <code class="docutils literal notranslate"><span class="pre">--test</span></code> flag shows the test script for the image.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer inspect --test jupyter.sif
 </pre></div>
 </div>
 <p>This will output the corresponding <code class="docutils literal notranslate"><span class="pre">%test</span></code> section from the definition
 file.</p>
-</div>
-<div class="section" id="e-environment">
-<h4><code class="docutils literal notranslate"><span class="pre">-e</span></code> / <code class="docutils literal notranslate"><span class="pre">--environment</span></code><a class="headerlink" href="#e-environment" title="Permalink to this heading"></a></h4>
+</section>
+<section id="e-environment">
+<h4><code class="docutils literal notranslate"><span class="pre">-e</span></code> / <code class="docutils literal notranslate"><span class="pre">--environment</span></code><a class="headerlink" href="#e-environment" title="Link to this heading"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">-e</span></code> or <code class="docutils literal notranslate"><span class="pre">--environment</span></code> flag shows the environment variables
 that are defined in the container image. These may be set from one or
 more environment files, depending on how the container was built.</p>
@@ -849,9 +844,9 @@ more environment files, depending on how the container was built.</p>
 <span class="nb">export</span><span class="w"> </span>JUP_PORT<span class="w"> </span>JUP_IPNAME
 </pre></div>
 </div>
-</div>
-<div class="section" id="h-helpfile">
-<h4><code class="docutils literal notranslate"><span class="pre">-H</span></code> / <code class="docutils literal notranslate"><span class="pre">--helpfile</span></code><a class="headerlink" href="#h-helpfile" title="Permalink to this heading"></a></h4>
+</section>
+<section id="h-helpfile">
+<h4><code class="docutils literal notranslate"><span class="pre">-H</span></code> / <code class="docutils literal notranslate"><span class="pre">--helpfile</span></code><a class="headerlink" href="#h-helpfile" title="Link to this heading"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">-H</span></code> or <code class="docutils literal notranslate"><span class="pre">-helpfile</span></code> flag will show the container’s description
 in the <code class="docutils literal notranslate"><span class="pre">%help</span></code> section of its definition file.</p>
 <p>You can call it this way:</p>
@@ -863,9 +858,9 @@ in the <code class="docutils literal notranslate"><span class="pre">%help</span>
 <span class="n">This</span> <span class="n">installation</span> <span class="ow">is</span> <span class="n">based</span> <span class="n">on</span> <span class="n">Python</span> <span class="mf">2.7.15</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="j-json">
-<h4><code class="docutils literal notranslate"><span class="pre">-j</span></code> / <code class="docutils literal notranslate"><span class="pre">--json</span></code><a class="headerlink" href="#j-json" title="Permalink to this heading"></a></h4>
+</section>
+<section id="j-json">
+<h4><code class="docutils literal notranslate"><span class="pre">-j</span></code> / <code class="docutils literal notranslate"><span class="pre">--json</span></code><a class="headerlink" href="#j-json" title="Link to this heading"></a></h4>
 <p>This flag gives you the possibility to output your labels in a JSON
 format.</p>
 <p>You can call it this way:</p>
@@ -892,11 +887,11 @@ format.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="singularity-d-directory">
-<h2>/.singularity.d directory<a class="headerlink" href="#singularity-d-directory" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+</section>
+<section id="singularity-d-directory">
+<h2>/.singularity.d directory<a class="headerlink" href="#singularity-d-directory" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">/.singularity.d</span></code> directory in a container contains scripts and
 environment files that are used when a container is executed.</p>
 <p><em>You should not manually modify</em> files under <code class="docutils literal notranslate"><span class="pre">/.singularity.d</span></code>, from
@@ -961,8 +956,8 @@ numeric order in a sub-directory called <code class="docutils literal notranslat
 <li><p><strong>startscript</strong>: The commands in this file will be executed when the
 container is invoked with the <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code> command.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
