@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fakeroot feature &mdash; Apptainer User Guide 1.3 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/js/ga.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=c55cb9cb"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.3
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -146,10 +141,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="fakeroot-feature">
-<span id="fakeroot"></span><h1>Fakeroot feature<a class="headerlink" href="#fakeroot-feature" title="Permalink to this heading"></a></h1>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+  <section id="fakeroot-feature">
+<span id="fakeroot"></span><h1>Fakeroot feature<a class="headerlink" href="#fakeroot-feature" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>The fakeroot feature allows an unprivileged user to run a container with
 the appearance of running as root.
 Apptainer does this in different ways, depending on what is available on
@@ -222,11 +217,11 @@ as the fake root user</p></li>
 </div></blockquote>
 <p>In addition, the first three modes above may have full privileges inside
 the requested network namespace (see below).</p>
-</div>
-<div class="section" id="restrictions-security">
-<h2>Restrictions/security<a class="headerlink" href="#restrictions-security" title="Permalink to this heading"></a></h2>
-<div class="section" id="filesystem">
-<h3>Filesystem<a class="headerlink" href="#filesystem" title="Permalink to this heading"></a></h3>
+</section>
+<section id="restrictions-security">
+<h2>Restrictions/security<a class="headerlink" href="#restrictions-security" title="Link to this heading"></a></h2>
+<section id="filesystem">
+<h3>Filesystem<a class="headerlink" href="#filesystem" title="Link to this heading"></a></h3>
 <p>A “fake root” user can never access or modify files and directories for
 which they don’t already have access or rights on the host filesystem,
 so a “fake root” user won’t be able to access root-only host files
@@ -240,10 +235,6 @@ outside of the container.</p>
 to use the rootless mode fakeroot feature and can use 65536
 UIDs starting at 131072 (same thing for GIDs).</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 49%" />
-<col style="width: 51%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>UID inside container</p></th>
 <th class="head"><p>UID outside container</p></th>
@@ -272,9 +263,9 @@ user in the container, this file will be owned by <code class="docutils literal 
 outside of the container. The responsibility relies on the administrator to
 ensure that there is no overlap with any user’s UID/GID on the
 system.</p>
-</div>
-<div class="section" id="network">
-<h3>Network<a class="headerlink" href="#network" title="Permalink to this heading"></a></h3>
+</section>
+<section id="network">
+<h3>Network<a class="headerlink" href="#network" title="Link to this heading"></a></h3>
 <p>Normally the kernel prevents unprivileged users from connecting to
 ports below 1024, and the <code class="docutils literal notranslate"><span class="pre">ping</span></code> command requires a setcap capability in
 order to work on the network.
@@ -299,10 +290,10 @@ on the host with the <code class="docutils literal notranslate"><span class="pre
 <p>Of course an unprivileged user can not map host ports below
 1024 by using for example: <code class="docutils literal notranslate"><span class="pre">--network-args=&quot;portmap=80:80/tcp&quot;</span></code></p>
 </div>
-</div>
-</div>
-<div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>You can work as a fake root user inside a container by using the
 <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> or <code class="docutils literal notranslate"><span class="pre">-f</span></code> option.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option is available with the following apptainer
@@ -318,8 +309,8 @@ commands:</p>
 </div></blockquote>
 <p>The option is automatically implied when doing a build as an
 unprivileged user.</p>
-<div class="section" id="build">
-<span id="id1"></span><h3>Build<a class="headerlink" href="#build" title="Permalink to this heading"></a></h3>
+<section id="build">
+<span id="id1"></span><h3>Build<a class="headerlink" href="#build" title="Link to this heading"></a></h3>
 <p>Depending on the method of “fake root” used, an unprivileged user can build
 an image from a definition file with few restrictions.
 Some bootstrap methods that require creation of block devices (like
@@ -332,39 +323,39 @@ bootstrap methods, although <code class="docutils literal notranslate"><span cla
 user namespaces are available, in suid mode), then building a container
 also implies the <code class="docutils literal notranslate"><span class="pre">--fix-perms</span></code> option, because otherwise directories
 created may not be writable by the creating user.</p>
-</div>
-<div class="section" id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h3>
-<div class="section" id="build-from-a-definition-file">
-<h4>Build from a definition file:<a class="headerlink" href="#build-from-a-definition-file" title="Permalink to this heading"></a></h4>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h3>
+<section id="build-from-a-definition-file">
+<h4>Build from a definition file:<a class="headerlink" href="#build-from-a-definition-file" title="Link to this heading"></a></h4>
 <p>(fakeroot is implied)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">build</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="k">def</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="add-package-to-a-writable-overlay">
-<h4>Add package to a writable overlay<a class="headerlink" href="#add-package-to-a-writable-overlay" title="Permalink to this heading"></a></h4>
+</section>
+<section id="add-package-to-a-writable-overlay">
+<h4>Add package to a writable overlay<a class="headerlink" href="#add-package-to-a-writable-overlay" title="Link to this heading"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">overlay</span>
 <span class="n">apptainer</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">overlay</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">overlay</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="n">dnf</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">openssh</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="ping-from-container">
-<h4>Ping from container:<a class="headerlink" href="#ping-from-container" title="Permalink to this heading"></a></h4>
+</section>
+<section id="ping-from-container">
+<h4>Ping from container:<a class="headerlink" href="#ping-from-container" title="Link to this heading"></a></h4>
 <p>(when the Network conditions above are met)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">alpine</span> <span class="n">ping</span> <span class="o">-</span><span class="n">c1</span> <span class="mf">8.8.8.8</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="http-server">
-<h4>HTTP server:<a class="headerlink" href="#http-server" title="Permalink to this heading"></a></h4>
+</section>
+<section id="http-server">
+<h4>HTTP server:<a class="headerlink" href="#http-server" title="Link to this heading"></a></h4>
 <p>(when the Network conditions above are met)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">run</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="o">--</span><span class="n">network</span><span class="o">-</span><span class="n">args</span><span class="o">=</span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span> <span class="o">-</span><span class="n">w</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">nginx</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="using-fakeroot-command-inside-definition-file">
-<span id="fakeroot-inside-def"></span><h4>Using fakeroot command inside definition file:<a class="headerlink" href="#using-fakeroot-command-inside-definition-file" title="Permalink to this heading"></a></h4>
+</section>
+<section id="using-fakeroot-command-inside-definition-file">
+<span id="fakeroot-inside-def"></span><h4>Using fakeroot command inside definition file:<a class="headerlink" href="#using-fakeroot-command-inside-definition-file" title="Link to this heading"></a></h4>
 <p>When using fakeroot mode 3 above, where user namespaces are
 available but /etc/subuid mapping is not set up, and you are trying
 to build a container for an operating sytem with an older glibc
@@ -442,10 +433,10 @@ on top of that.</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>apptainer build --ignore-fakeroot-command my.sif my2.def
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
 
            </div>

@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Build Environment &mdash; Apptainer User Guide 1.3 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/js/ga.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=c55cb9cb"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.3
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -149,17 +144,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="build-environment">
-<span id="id1"></span><h1>Build Environment<a class="headerlink" href="#build-environment" title="Permalink to this heading"></a></h1>
-<div class="section" id="overview">
-<span id="sec-buildenv"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+  <section id="build-environment">
+<span id="id1"></span><h1>Build Environment<a class="headerlink" href="#build-environment" title="Link to this heading"></a></h1>
+<section id="overview">
+<span id="sec-buildenv"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>You may wish to customize your build environment by doing things such as
 specifying a custom cache directory for images, or sending your Docker
 Credentials to the registry endpoint. In this section, we will discuss these and
 other topics related to the build environment.</p>
-</div>
-<div class="section" id="cache-folders">
-<span id="sec-cache"></span><h2>Cache Folders<a class="headerlink" href="#cache-folders" title="Permalink to this heading"></a></h2>
+</section>
+<section id="cache-folders">
+<span id="sec-cache"></span><h2>Cache Folders<a class="headerlink" href="#cache-folders" title="Link to this heading"></a></h2>
 <p>Apptainer will cache SIF container images generated from remote
 sources, and any OCI/docker layers used to create them. The cache is
 created at <code class="docutils literal notranslate"><span class="pre">$HOME/.apptainer/cache</span></code> by default. The location of the
@@ -218,8 +213,8 @@ future runs.</p>
 may cause checksum / integrity errors when you run or build containers. If you
 experience problems use, <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">clean</span></code> to reset the cache to a
 clean, empty state.</p>
-<div class="section" id="boltdb-corruption-errors">
-<h3>BoltDB Corruption Errors<a class="headerlink" href="#boltdb-corruption-errors" title="Permalink to this heading"></a></h3>
+<section id="boltdb-corruption-errors">
+<h3>BoltDB Corruption Errors<a class="headerlink" href="#boltdb-corruption-errors" title="Link to this heading"></a></h3>
 <p>The library that Apptainer uses to retrieve and cache Docker/OCI
 layers keeps track of them using a single-file database. If your home
 directory is on a network filesystem which experiences interruptions, or
@@ -230,10 +225,10 @@ trying to run Apptainer, then you should remove the database file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">~/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">containers</span><span class="o">/</span><span class="n">cache</span><span class="o">/</span><span class="n">blob</span><span class="o">-</span><span class="n">info</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">boltdb</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="cache-commands">
-<h2>Cache commands<a class="headerlink" href="#cache-commands" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="cache-commands">
+<h2>Cache commands<a class="headerlink" href="#cache-commands" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">cache</span></code> command for Apptainer allows you to view and clean up your
 cache, without needing to manually inspect the cache directories.</p>
 <div class="admonition note">
@@ -243,8 +238,8 @@ location for those builds is <code class="docutils literal notranslate"><span cl
 <code class="docutils literal notranslate"><span class="pre">sudo</span></code> when running <code class="docutils literal notranslate"><span class="pre">cache</span> <span class="pre">clean</span></code> or <code class="docutils literal notranslate"><span class="pre">cache</span> <span class="pre">list</span></code> to manage these cache
 entries.</p>
 </div>
-<div class="section" id="listing-the-cache">
-<h3>Listing the Cache<a class="headerlink" href="#listing-the-cache" title="Permalink to this heading"></a></h3>
+<section id="listing-the-cache">
+<h3>Listing the Cache<a class="headerlink" href="#listing-the-cache" title="Link to this heading"></a></h3>
 <p>To view a summary of cache usage, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">list</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache list
 There are 4 container file(s) using 59.45 MB and 23 oci blob file(s) using 379.10 MB of space
@@ -294,9 +289,9 @@ create SIF format images in the <code class="docutils literal notranslate"><span
 the source of the image, e.g. <code class="docutils literal notranslate"><span class="pre">library</span></code> or <code class="docutils literal notranslate"><span class="pre">oras</span></code>.</p>
 <p>You can limit the cache list to a specific cache type with the <code class="docutils literal notranslate"><span class="pre">--type</span></code> /
 <code class="docutils literal notranslate"><span class="pre">-t</span></code> option.</p>
-</div>
-<div class="section" id="cleaning-the-cache">
-<h3>Cleaning the Cache<a class="headerlink" href="#cleaning-the-cache" title="Permalink to this heading"></a></h3>
+</section>
+<section id="cleaning-the-cache">
+<h3>Cleaning the Cache<a class="headerlink" href="#cleaning-the-cache" title="Link to this heading"></a></h3>
 <p>To reclaim space used by the Apptainer cache, use <code class="docutils literal notranslate"><span class="pre">apptainer</span>
 <span class="pre">cache</span> <span class="pre">clean</span></code>.</p>
 <p>By default, <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">clean</span></code> will remove all cache entries,
@@ -321,10 +316,10 @@ use the <code class="docutils literal notranslate"><span class="pre">--type</spa
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache clean --type library
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="temporary-folders">
-<span id="sec-temporaryfolders"></span><h2>Temporary Folders<a class="headerlink" href="#temporary-folders" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="temporary-folders">
+<span id="sec-temporaryfolders"></span><h2>Temporary Folders<a class="headerlink" href="#temporary-folders" title="Link to this heading"></a></h2>
 <p>When building a container, or pulling/running an Apptainer container from a
 Docker/OCI source, a temporary working space is required. The container is
 constructed in this temporary space before being packaged into an Apptainer
@@ -352,16 +347,16 @@ some container builds.</p>
 <p>If you experience problems, set <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code> to a disk location, or
 disable the <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> mount on your system.</p>
 </div>
-</div>
-<div class="section" id="encrypted-containers">
-<h2>Encrypted Containers<a class="headerlink" href="#encrypted-containers" title="Permalink to this heading"></a></h2>
+</section>
+<section id="encrypted-containers">
+<h2>Encrypted Containers<a class="headerlink" href="#encrypted-containers" title="Link to this heading"></a></h2>
 <p>With Apptainer it is possible to build and run encrypted
 containers. The containers are decrypted at runtime entirely in memory,
 meaning that no intermediate decrypted data is ever present on disk. See
 <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
-</div>
-<div class="section" id="environment-variables">
-<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this heading"></a></h2>
+</section>
+<section id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading"></a></h2>
 <p>You can set environment variables on the host to influence the behaviour of a
 build. Note that environment variables are not passed into the build itself, and
 cannot be accessed in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section of a definition file. To pass values
@@ -380,12 +375,12 @@ not been explicitly set in the command line.</p></li>
 command line, or by corresponding environment variables, will then take
 effect.</p></li>
 </ol>
-<div class="section" id="defaults">
-<h3>Defaults<a class="headerlink" href="#defaults" title="Permalink to this heading"></a></h3>
+<section id="defaults">
+<h3>Defaults<a class="headerlink" href="#defaults" title="Link to this heading"></a></h3>
 <p>The following variables have defaults that can be overridden by assigning your
 own values to the corresponding environment variables at runtime:</p>
-<div class="section" id="docker">
-<h4>Docker<a class="headerlink" href="#docker" title="Permalink to this heading"></a></h4>
+<section id="docker">
+<h4>Docker<a class="headerlink" href="#docker" title="Link to this heading"></a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_LOGIN</span></code> -
 Set this to login to a Docker Repository interactively.</p>
 <p><code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_USERNAME</span></code> -
@@ -402,25 +397,25 @@ Is the default tag, <code class="docutils literal notranslate"><span class="pre"
 This is relevant if you want to use a registry that doesn’t support https. A
 typical use-case for this variable is when using local registry, running on
 the same machine as Apptainer itself.</p>
-</div>
-<div class="section" id="library">
-<h4>Library<a class="headerlink" href="#library" title="Permalink to this heading"></a></h4>
+</section>
+<section id="library">
+<h4>Library<a class="headerlink" href="#library" title="Link to this heading"></a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">APPTAINER_LIBRARY</span></code> -
 Used to specify the library to pull from.
 Default is the currently selected <a class="reference internal" href="endpoint.html#endpoint"><span class="std std-ref">remote endpoint</span></a>.</p>
-</div>
-<div class="section" id="encryption">
-<h4>Encryption<a class="headerlink" href="#encryption" title="Permalink to this heading"></a></h4>
+</section>
+<section id="encryption">
+<h4>Encryption<a class="headerlink" href="#encryption" title="Link to this heading"></a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PASSPHRASE</span></code> -
 Used to pass a plaintext passphrase to be used to encrypt a container file
 system (in conjunction with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag). The default is empty.</p>
 <p><code class="docutils literal notranslate"><span class="pre">APPTAINER_ENCRYPTION_PEM_PATH</span></code> -
 Used to specify the location of a public key to use for container encryption
 (in conjunction with the <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> flag). The default is empty.</p>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
 
            </div>

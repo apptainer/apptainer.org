@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>apptainer keyserver &mdash; Apptainer User Guide 1.3 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/js/ga.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=c55cb9cb"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/ga.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.3
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -234,34 +229,34 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="apptainer-keyserver">
-<span id="id1"></span><h1>apptainer keyserver<a class="headerlink" href="#apptainer-keyserver" title="Permalink to this heading"></a></h1>
+  <section id="apptainer-keyserver">
+<span id="id1"></span><h1>apptainer keyserver<a class="headerlink" href="#apptainer-keyserver" title="Link to this heading"></a></h1>
 <p>Manage apptainer keyservers</p>
-<div class="section" id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
+<section id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Link to this heading"></a></h2>
 <blockquote>
 <div><p>The ‘keyserver’ command allows you to manage standalone keyservers that will
 be used for retrieving cryptographic keys.</p>
 </div></blockquote>
-</div>
-<div class="section" id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>All group commands have their own help output:
 
   $ apptainer help keyserver add
   $ apptainer keyserver add
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="o">--</span><span class="n">config</span> <span class="n">string</span>   <span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">file</span> <span class="n">holding</span> <span class="n">keyserver</span> <span class="n">configurations</span> <span class="p">(</span><span class="n">default</span> <span class="s2">&quot;/home/runner/.apptainer/remote.yaml&quot;</span><span class="p">)</span>
 <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">help</span> <span class="k">for</span> <span class="n">keyserver</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="see-also">
-<h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
+</section>
+<section id="see-also">
+<h2>SEE ALSO<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="apptainer.html#apptainer"><span class="std std-ref">apptainer</span></a>   -</p></li>
 </ul>
@@ -272,9 +267,9 @@ Enterprise Performance Computing (EPC)
 * <a class="reference internal" href="apptainer_keyserver_login.html#apptainer-keyserver-login"><span class="std std-ref">apptainer keyserver login</span></a>   - Login to a keyserver
 * <a class="reference internal" href="apptainer_keyserver_logout.html#apptainer-keyserver-logout"><span class="std std-ref">apptainer keyserver logout</span></a>         - Logout from a keyserver
 * <a class="reference internal" href="apptainer_keyserver_remove.html#apptainer-keyserver-remove"><span class="std std-ref">apptainer keyserver remove</span></a>         - Remove a keyserver (root user only)</p>
-<p><em>Auto generated by spf13/cobra on 4-Dec-2024</em></p>
-</div>
-</div>
+<p><em>Auto generated by spf13/cobra on 4-Feb-2025</em></p>
+</section>
+</section>
 
 
            </div>

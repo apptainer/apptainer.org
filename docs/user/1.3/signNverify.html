@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Signing and Verifying Containers &mdash; Apptainer User Guide 1.3 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/js/ga.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=c55cb9cb"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.3
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -143,8 +138,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="signing-and-verifying-containers">
-<span id="signnverify"></span><h1>Signing and Verifying Containers<a class="headerlink" href="#signing-and-verifying-containers" title="Permalink to this heading"></a></h1>
+  <section id="signing-and-verifying-containers">
+<span id="signnverify"></span><h1>Signing and Verifying Containers<a class="headerlink" href="#signing-and-verifying-containers" title="Link to this heading"></a></h1>
 <p id="sec-signnverify">Apptainer’s SIF images can be signed, and subsequently verified, so that a
 user can be confident that an image they have obtained is a bit-for-bit
 reproduction of the original container as the author intended it. The signature,
@@ -171,8 +166,8 @@ for more information).</p>
 3.6.0 the <code class="docutils literal notranslate"><span class="pre">--legacy-insecure</span></code> flag must be provided to the
 <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">verify</span></code> command.</p>
 </div>
-<div class="section" id="verifying-containers-from-remote-sources">
-<span id="verify-container-from-remote-sources"></span><h2>Verifying containers from remote sources<a class="headerlink" href="#verifying-containers-from-remote-sources" title="Permalink to this heading"></a></h2>
+<section id="verifying-containers-from-remote-sources">
+<span id="verify-container-from-remote-sources"></span><h2>Verifying containers from remote sources<a class="headerlink" href="#verifying-containers-from-remote-sources" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">verify</span></code> command will check that a SIF container image has
 been signed using a PGP key or certificate. This ensures that the container
 image on your disk is a bit-for-bit reproduction of the original image.</p>
@@ -199,11 +194,11 @@ libraries or OCI registries via <code class="docutils literal notranslate"><span
 <p><code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">verify</span></code> will only run against a local SIF file. You must
 <code class="docutils literal notranslate"><span class="pre">pull</span></code> an image to a local disk before you can verify it.</p>
 </div>
-</div>
-<div class="section" id="signing-your-own-containers">
-<span id="sign-your-own-containers"></span><h2>Signing your own containers<a class="headerlink" href="#signing-your-own-containers" title="Permalink to this heading"></a></h2>
-<div class="section" id="generating-and-managing-pgp-keys">
-<h3>Generating and managing PGP keys<a class="headerlink" href="#generating-and-managing-pgp-keys" title="Permalink to this heading"></a></h3>
+</section>
+<section id="signing-your-own-containers">
+<span id="sign-your-own-containers"></span><h2>Signing your own containers<a class="headerlink" href="#signing-your-own-containers" title="Link to this heading"></a></h2>
+<section id="generating-and-managing-pgp-keys">
+<h3>Generating and managing PGP keys<a class="headerlink" href="#generating-and-managing-pgp-keys" title="Link to this heading"></a></h3>
 <p>To sign your own containers with a PGP key you first need to generate one or
 more keys.</p>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">newpair</span></code> subcommand in the <code class="docutils literal notranslate"><span class="pre">key</span></code> command group like so:</p>
@@ -285,9 +280,9 @@ $ apptainer key pull 8232570480B868E1473AEEB03DBCBA1EE9D661E5
 <p>But note that this only restores the <em>public</em> key (used for verifying) to your
 local machine and does not restore the <em>private</em> key (used for signing).  <strong>If
 you permanently delete your private key, there is no way to recover it.</strong></p>
-</div>
-<div class="section" id="searching-for-keys">
-<span id="id1"></span><h3>Searching for keys<a class="headerlink" href="#searching-for-keys" title="Permalink to this heading"></a></h3>
+</section>
+<section id="searching-for-keys">
+<span id="id1"></span><h3>Searching for keys<a class="headerlink" href="#searching-for-keys" title="Link to this heading"></a></h3>
 <p>Apptainer allows you to search the keystore for public keys. You can search for
 names, emails, and fingerprints (key IDs) provided that the backend keystore
 supports these actions. When searching for a fingerprint, you need to use <code class="docutils literal notranslate"><span class="pre">0x</span></code>
@@ -305,9 +300,9 @@ $ apptainer key search Godlove
 $ apptainer key search @gmail.com
 </pre></div>
 </div>
-</div>
-<div class="section" id="signing-and-validating-your-own-containers">
-<h3>Signing and validating your own containers<a class="headerlink" href="#signing-and-validating-your-own-containers" title="Permalink to this heading"></a></h3>
+</section>
+<section id="signing-and-validating-your-own-containers">
+<h3>Signing and validating your own containers<a class="headerlink" href="#signing-and-validating-your-own-containers" title="Link to this heading"></a></h3>
 <p>Now that you have a key generated, you can use it to sign images like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sign my_container.sif
 
@@ -363,9 +358,9 @@ retrieve it, so that you can verify even if you are offline with <code class="do
 1 key(s) added to keyring of trust /home/ian/.apptainer/keys/pgp-public
 </pre></div>
 </div>
-</div>
-<div class="section" id="advanced-signing-sif-ids-and-groups">
-<h3>Advanced Signing - SIF IDs and Groups<a class="headerlink" href="#advanced-signing-sif-ids-and-groups" title="Permalink to this heading"></a></h3>
+</section>
+<section id="advanced-signing-sif-ids-and-groups">
+<h3>Advanced Signing - SIF IDs and Groups<a class="headerlink" href="#advanced-signing-sif-ids-and-groups" title="Link to this heading"></a></h3>
 <p>As well as the default behaviour, which signs all objects, fine-grained
 control of signing is possible.</p>
 <p>If you <code class="docutils literal notranslate"><span class="pre">sif</span> <span class="pre">list</span></code> a SIF file you will see it is comprised of a number
@@ -465,10 +460,10 @@ ID  |GROUP   |LINK    |TYPE
 Container verified: my_container.sif
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="pem-key-x-509-certificate-support">
-<h2>PEM Key / X.509 Certificate Support<a class="headerlink" href="#pem-key-x-509-certificate-support" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="pem-key-x-509-certificate-support">
+<h2>PEM Key / X.509 Certificate Support<a class="headerlink" href="#pem-key-x-509-certificate-support" title="Link to this heading"></a></h2>
 <p>Apptainer also supports signing SIF container images using a PEM format private
 key, and verifying with a PEM format public key, or X.509 certificate. Non-PGP
 signatures are implemented using the <a class="reference external" href="https://github.com/secure-systems-lab/dsse">Dead Simple Signing Envelope</a> (DSSE) standard.</p>
@@ -485,8 +480,8 @@ $ export CERTD=&quot;${PWD}/apptainer/test/certs&quot;
 <p>Information on creating PEM files can be found in the <span class="xref std std-ref">encrypted container
 docs</span>, and the method for creating certificates is
 documented <a class="reference external" href="https://github.com/apptainer/apptainer/blob/release-1.3/test/certs/gen_certs.go">here</a>.</p>
-<div class="section" id="signing-with-a-pem-key">
-<h3>Signing with a PEM key<a class="headerlink" href="#signing-with-a-pem-key" title="Permalink to this heading"></a></h3>
+<section id="signing-with-a-pem-key">
+<h3>Signing with a PEM key<a class="headerlink" href="#signing-with-a-pem-key" title="Link to this heading"></a></h3>
 <p>To sign a container using a private key in PEM format, provide the private key
 material to the <code class="docutils literal notranslate"><span class="pre">sign</span></code> command using the <code class="docutils literal notranslate"><span class="pre">--key</span></code> flag.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sign --key $KEYD/rsa-private.pem lolcow.sif
@@ -520,9 +515,9 @@ FATAL:   Failed to verify container: integrity: key material not provided for DS
 </div>
 <p>Note that the error message shows that the container image has a DSSE signature
 present.</p>
-</div>
-<div class="section" id="verifying-with-a-pem-key">
-<h3>Verifying with a PEM key<a class="headerlink" href="#verifying-with-a-pem-key" title="Permalink to this heading"></a></h3>
+</section>
+<section id="verifying-with-a-pem-key">
+<h3>Verifying with a PEM key<a class="headerlink" href="#verifying-with-a-pem-key" title="Link to this heading"></a></h3>
 <p>To verify a container using a PEM public key directly, provide the key material
 to the <code class="docutils literal notranslate"><span class="pre">verify</span></code> command using the <code class="docutils literal notranslate"><span class="pre">key</span></code> flag:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify --key $KEYD/rsa-public.pem lolcow.sif
@@ -537,9 +532,9 @@ ID  |GROUP   |LINK    |TYPE
 INFO:    Verified signature(s) from image &#39;lolcow.sif&#39;
 </pre></div>
 </div>
-</div>
-<div class="section" id="verifying-with-an-x-509-certificate">
-<h3>Verifying with an X.509 certificate<a class="headerlink" href="#verifying-with-an-x-509-certificate" title="Permalink to this heading"></a></h3>
+</section>
+<section id="verifying-with-an-x-509-certificate">
+<h3>Verifying with an X.509 certificate<a class="headerlink" href="#verifying-with-an-x-509-certificate" title="Link to this heading"></a></h3>
 <p>To verify a container that was signed with a PEM private key, using an X.509
 certificate, pass the certificate to the <code class="docutils literal notranslate"><span class="pre">verify</span></code> command using the
 <code class="docutils literal notranslate"><span class="pre">--certificate</span></code> flag. If the certificate is part of a chain, provide
@@ -557,9 +552,9 @@ intermediate and valid root certificates with the
 <p>The certificate must have a usage field that allows code signing in order to
 verify container images.</p>
 </div>
-</div>
-<div class="section" id="oscp-certificate-revocation-checks">
-<h3>OSCP Certificate Revocation Checks<a class="headerlink" href="#oscp-certificate-revocation-checks" title="Permalink to this heading"></a></h3>
+</section>
+<section id="oscp-certificate-revocation-checks">
+<h3>OSCP Certificate Revocation Checks<a class="headerlink" href="#oscp-certificate-revocation-checks" title="Link to this heading"></a></h3>
 <p>When verifying a container using X.509 certificates, Apptainer can perform
 online revocation checks using the Online Certificate Status Protocol (OCSP). To
 enable OCSP checks, add the <code class="docutils literal notranslate"><span class="pre">--ocsp-verify</span></code> flag to your <code class="docutils literal notranslate"><span class="pre">verify</span></code> command:</p>
@@ -580,9 +575,9 @@ error:</p>
 <span class="n">FATAL</span><span class="p">:</span>   <span class="n">Failed</span> <span class="n">to</span> <span class="n">verify</span> <span class="n">container</span><span class="p">:</span> <span class="n">OCSP</span> <span class="n">verification</span> <span class="n">has</span> <span class="n">failed</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

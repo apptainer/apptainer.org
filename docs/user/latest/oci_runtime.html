@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OCI Runtime Support &mdash; Apptainer User Guide 1.3 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/js/ga.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=c55cb9cb"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.3
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -136,10 +131,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="oci-runtime"></span><div class="section" id="oci-runtime-support">
-<h1>OCI Runtime Support<a class="headerlink" href="#oci-runtime-support" title="Permalink to this heading"></a></h1>
-<div class="section" id="overview">
-<span id="sec-oci-runtime-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+  <span class="target" id="oci-runtime"></span><section id="oci-runtime-support">
+<h1>OCI Runtime Support<a class="headerlink" href="#oci-runtime-support" title="Link to this heading"></a></h1>
+<section id="overview">
+<span id="sec-oci-runtime-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>OCI is an acronym for the <a class="reference external" href="https://www.opencontainers.org/">Open Containers Initiative</a> - an independent organization whose
 mandate is to develop open standards relating to containerization. To
 date, standardization efforts have focused on container formats and
@@ -154,11 +149,11 @@ command group.</p>
 <p>All commands in the <code class="docutils literal notranslate"><span class="pre">oci</span></code> command group require <code class="docutils literal notranslate"><span class="pre">root</span></code>
 privileges.</p>
 </div>
-</div>
-<div class="section" id="mounted-oci-filesystem-bundles">
-<h2>Mounted OCI Filesystem Bundles<a class="headerlink" href="#mounted-oci-filesystem-bundles" title="Permalink to this heading"></a></h2>
-<div class="section" id="mounting-an-oci-filesystem-bundle">
-<h3>Mounting an OCI Filesystem Bundle<a class="headerlink" href="#mounting-an-oci-filesystem-bundle" title="Permalink to this heading"></a></h3>
+</section>
+<section id="mounted-oci-filesystem-bundles">
+<h2>Mounted OCI Filesystem Bundles<a class="headerlink" href="#mounted-oci-filesystem-bundles" title="Link to this heading"></a></h2>
+<section id="mounting-an-oci-filesystem-bundle">
+<h3>Mounting an OCI Filesystem Bundle<a class="headerlink" href="#mounting-an-oci-filesystem-bundle" title="Link to this heading"></a></h3>
 <p><a class="reference external" href="https://busybox.net/about.html">BusyBox</a> is used here for the purpose
 of illustration.</p>
 <p>Suppose the Singularity Image Format (SIF) file <code class="docutils literal notranslate"><span class="pre">busybox_latest.sif</span></code>
@@ -205,9 +200,9 @@ overlay                       19519312 2620740  15883996  15% /var/tmp/busybox/r
 drwx------ 4 root root 4096 Apr  4 14:30 /var/tmp/busybox
 </pre></div>
 </div>
-</div>
-<div class="section" id="content-of-an-oci-compliant-filesystem-bundle">
-<h3>Content of an OCI Compliant Filesystem Bundle<a class="headerlink" href="#content-of-an-oci-compliant-filesystem-bundle" title="Permalink to this heading"></a></h3>
+</section>
+<section id="content-of-an-oci-compliant-filesystem-bundle">
+<h3>Content of an OCI Compliant Filesystem Bundle<a class="headerlink" href="#content-of-an-oci-compliant-filesystem-bundle" title="Link to this heading"></a></h3>
 <p>The <em>expected</em> contents of the mounted filesystem are as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo ls -la /var/tmp/busybox
 total 28
@@ -870,10 +865,10 @@ properties, refer to the <a class="reference external" href="https://github.com/
 filesystem bundle that conforms with the OCI runtime specification,
 this extensibility is evident.</p>
 </div>
-</div>
-</div>
-<div class="section" id="creating-oci-compliant-container-instances">
-<h2>Creating OCI Compliant Container Instances<a class="headerlink" href="#creating-oci-compliant-container-instances" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="creating-oci-compliant-container-instances">
+<h2>Creating OCI Compliant Container Instances<a class="headerlink" href="#creating-oci-compliant-container-instances" title="Link to this heading"></a></h2>
 <p>SIF files encapsulate the OCI runtime. By ‘OCI mounting’ a SIF file (see
 above), this encapsulated runtime is revealed; please refer to the note
 below for additional details. Once revealed, the filesystem bundle can
@@ -924,9 +919,9 @@ the OCI runtime specification as detailed <a class="reference external" href="ht
 <p>The <code class="docutils literal notranslate"><span class="pre">create</span></code> command has a number of options available. Of these,
 real-time logging to a file is likely to be of particular value - e.g.,
 in deployments where auditing requirements exist.</p>
-</div>
-<div class="section" id="unmounting-oci-filesystem-bundles">
-<h2>Unmounting OCI Filesystem Bundles<a class="headerlink" href="#unmounting-oci-filesystem-bundles" title="Permalink to this heading"></a></h2>
+</section>
+<section id="unmounting-oci-filesystem-bundles">
+<h2>Unmounting OCI Filesystem Bundles<a class="headerlink" href="#unmounting-oci-filesystem-bundles" title="Link to this heading"></a></h2>
 <p>To unmount a mounted OCI filesystem bundle, the following command should
 be issued:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer oci umount /var/tmp/busybox
@@ -938,8 +933,8 @@ be issued:</p>
 bundle path, <code class="docutils literal notranslate"><span class="pre">/var/tmp/busybox</span></code>, as opposed to the mount point for
 the overlay filesystem, <code class="docutils literal notranslate"><span class="pre">/var/tmp/busybox/rootfs</span></code>.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
