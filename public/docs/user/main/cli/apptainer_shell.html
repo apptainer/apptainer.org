@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>apptainer shell &mdash; Apptainer User Guide main documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/js/ga.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=a8da1a53"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/ga.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                main
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -234,11 +229,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="apptainer-shell">
-<span id="id1"></span><h1>apptainer shell<a class="headerlink" href="#apptainer-shell" title="Permalink to this heading"></a></h1>
+  <section id="apptainer-shell">
+<span id="id1"></span><h1>apptainer shell<a class="headerlink" href="#apptainer-shell" title="Link to this heading"></a></h1>
 <p>Run a shell within a container</p>
-<div class="section" id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
+<section id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Link to this heading"></a></h2>
 <blockquote>
 <div><p>apptainer shell supports the following formats:</p>
 <dl class="simple">
@@ -267,9 +262,9 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">shell</span> <span class="p">[</span><span class="n">shell</span> <span class="n">options</span><span class="o">...</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">container</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell /tmp/Debian.sif
 Apptainer/Debian.sif&gt; pwd
 /home/gmk/test
@@ -296,13 +291,14 @@ ubuntu       2     0  0 20:01 pts/8    00:00:00 /bin/bash --norc
 ubuntu       3     2  0 20:02 pts/8    00:00:00 ps -ef
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    --add-caps string               a comma separated capability list to add
     --allow-setuid                  allow setuid binaries in container (root only)
     --app string                    set an application to run inside a container
     --apply-cgroups string          apply cgroups from file for container processes (root only)
+    --authfile string               Docker-style authentication file to use for writing/reading OCI registry credentials
 -B, --bind stringArray              a user-bind path specification.  spec has the format src[:dest[:opts]], where src and dest are outside and inside paths.  If dest is not given, it is set equal to src.  Mount options (&#39;opts&#39;) may be specified as &#39;ro&#39; (read-only) or &#39;rw&#39; (read/write, which is the default). Multiple bind paths can be given by a comma separated list.
     --blkio-weight int              Block IO relative weight in range 10-1000, 0 to disable
     --blkio-weight-device strings   Device specific block IO relative weight
@@ -321,7 +317,7 @@ ubuntu       3     2  0 20:02 pts/8    00:00:00 ps -ef
     --docker-login                  login to a Docker Repository interactively
     --drop-caps string              a comma separated capability list to drop
     --env stringToString            pass environment variable to contained process (default [])
-    --env-file string               pass environment variables from file to contained process
+    --env-file strings              pass environment variables from file to contained process
 -f, --fakeroot                      run container with the appearance of running as root
     --fusemount strings             A FUSE filesystem mount specification of the form &#39;&lt;type&gt;:&lt;fuse command&gt; &lt;mountpoint&gt;&#39; - where &lt;type&gt; is &#39;container&#39; or &#39;host&#39;, specifying where the mount will be performed (&#39;container-daemon&#39; or &#39;host-daemon&#39; will run the FUSE process detached). &lt;fuse command&gt; is the path to the FUSE executable, plus options for the mount. &lt;mountpoint&gt; is the location in the container to which the FUSE mount will be attached. E.g. &#39;container:sshfs 10.0.0.1:/ /sshfs&#39;. Implies --pid.
 -h, --help                          help for shell
@@ -334,6 +330,7 @@ ubuntu       3     2  0 20:02 pts/8    00:00:00 ps -ef
     --memory-swap string            Swap limit, use -1 for unlimited swap
     --mount stringArray             a mount specification e.g. &#39;type=bind,source=/opt,destination=/hostopt&#39;.
 -n, --net                           run container in a new network namespace (sets up a bridge network interface by default)
+    --netns-path string             join the network namespace at the specified path (as root, or if permitted in apptainer.conf)
     --network string                specify desired network type separated by commas, each network will bring up a dedicated interface inside container
     --network-args strings          specify network arguments to pass to CNI plugins
     --no-eval                       do not shell evaluate env vars or OCI container CMD/ENTRYPOINT/ARGS
@@ -365,17 +362,17 @@ ubuntu       3     2  0 20:02 pts/8    00:00:00 ps -ef
     --writable-tmpfs                makes the file system accessible as read-write with non persistent data (with overlay support only)
 </pre></div>
 </div>
-</div>
-<div class="section" id="see-also">
-<h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
+</section>
+<section id="see-also">
+<h2>SEE ALSO<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="apptainer.html#apptainer"><span class="std std-ref">apptainer</span></a>   -</p></li>
 </ul>
 <p>Linux container platform optimized for High Performance Computing (HPC) and
 Enterprise Performance Computing (EPC)</p>
-<p><em>Auto generated by spf13/cobra on 4-Dec-2024</em></p>
-</div>
-</div>
+<p><em>Auto generated by spf13/cobra on 4-Feb-2025</em></p>
+</section>
+</section>
 
 
            </div>

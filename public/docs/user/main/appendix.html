@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Appendix &mdash; Apptainer User Guide main documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/js/ga.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a8da1a53"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                main
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -229,15 +224,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="appendix">
-<span id="id1"></span><h1>Appendix<a class="headerlink" href="#appendix" title="Permalink to this heading"></a></h1>
-<div class="section" id="apptainer-s-environment-variables">
-<span id="apptainer-environment-variables"></span><h2>Apptainer’s environment variables<a class="headerlink" href="#apptainer-s-environment-variables" title="Permalink to this heading"></a></h2>
+  <section id="appendix">
+<span id="id1"></span><h1>Appendix<a class="headerlink" href="#appendix" title="Link to this heading"></a></h1>
+<section id="apptainer-s-environment-variables">
+<span id="apptainer-environment-variables"></span><h2>Apptainer’s environment variables<a class="headerlink" href="#apptainer-s-environment-variables" title="Link to this heading"></a></h2>
 <p>Apptainer comes with some environment variables you can set or
 modify depending on your needs. You can see them listed alphabetically
 below with their respective functionality.</p>
-<div class="section" id="a">
-<h3><code class="docutils literal notranslate"><span class="pre">A</span></code><a class="headerlink" href="#a" title="Permalink to this heading"></a></h3>
+<section id="a">
+<h3><code class="docutils literal notranslate"><span class="pre">A</span></code><a class="headerlink" href="#a" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_ADD_CAPS</strong>: To specify a list (comma separated string)
 of capabilities to be added. Default is an empty string.</p></li>
@@ -255,9 +250,9 @@ file for container processes. (it requires root privileges)</p></li>
 (e.g. <code class="docutils literal notranslate"><span class="pre">arm64</span></code>) of an image to pull from a <code class="docutils literal notranslate"><span class="pre">library://</span></code> or OCI source.
 Defaults to the host architecture.</p></li>
 </ol>
-</div>
-<div class="section" id="b">
-<h3><code class="docutils literal notranslate"><span class="pre">B</span></code><a class="headerlink" href="#b" title="Permalink to this heading"></a></h3>
+</section>
+<section id="b">
+<h3><code class="docutils literal notranslate"><span class="pre">B</span></code><a class="headerlink" href="#b" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_BIND</strong> and <strong>APPTAINER_BINDPATH</strong>: Comma separated
 string <code class="docutils literal notranslate"><span class="pre">source:&lt;dest&gt;</span></code> list of paths to bind between the host and
@@ -273,9 +268,9 @@ Must be supplied in <code class="docutils literal notranslate"><span class="pre"
 <li><p><strong>APPTAINER_BOOT</strong>: Set to false by default, considers if executing
 <code class="docutils literal notranslate"><span class="pre">/sbin/init</span></code> when container boots (root only).</p></li>
 </ol>
-</div>
-<div class="section" id="c">
-<h3><code class="docutils literal notranslate"><span class="pre">C</span></code><a class="headerlink" href="#c" title="Permalink to this heading"></a></h3>
+</section>
+<section id="c">
+<h3><code class="docutils literal notranslate"><span class="pre">C</span></code><a class="headerlink" href="#c" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_CACHEDIR</strong>: Specifies the directory for image downloads
 to be cached in. See <a class="reference internal" href="build_env.html#sec-cache"><span class="std std-ref">Cache Folders</span></a>.</p></li>
@@ -311,9 +306,9 @@ available to the container. Default is unset.</p></li>
 <li><p><strong>APPTAINER_CWD</strong> (deprecated <strong>APPTAINER_PWD</strong> and <strong>APPTAINER_TARGET_PWD</strong>): The initial
 working directory for payload process inside the container.</p></li>
 </ol>
-</div>
-<div class="section" id="d">
-<h3><code class="docutils literal notranslate"><span class="pre">D</span></code><a class="headerlink" href="#d" title="Permalink to this heading"></a></h3>
+</section>
+<section id="d">
+<h3><code class="docutils literal notranslate"><span class="pre">D</span></code><a class="headerlink" href="#d" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_DEBUG</strong>: Enable debug output when set. Equivalent to <code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">/</span>
 <span class="pre">--debug</span></code>.</p></li>
@@ -345,9 +340,9 @@ when concurrent downloads are enabled.</p></li>
 <li><p><strong>APPTAINER_DROP_CAPS</strong>: To specify a list (comma separated string)
 of capabilities to be dropped. Default is an empty string.</p></li>
 </ol>
-</div>
-<div class="section" id="e">
-<h3><code class="docutils literal notranslate"><span class="pre">E</span></code><a class="headerlink" href="#e" title="Permalink to this heading"></a></h3>
+</section>
+<section id="e">
+<h3><code class="docutils literal notranslate"><span class="pre">E</span></code><a class="headerlink" href="#e" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_ENCRYPTION_PASSPHRASE</strong>: Used to specify the plaintext
 passphrase to encrypt the container.</p></li>
@@ -379,9 +374,9 @@ beginning of <code class="docutils literal notranslate"><span class="pre">$PATH<
 detail on how to use this variable in our <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">environment and
 metadata section</span></a>.</p></li>
 </ol>
-</div>
-<div class="section" id="f">
-<h3><code class="docutils literal notranslate"><span class="pre">F</span></code><a class="headerlink" href="#f" title="Permalink to this heading"></a></h3>
+</section>
+<section id="f">
+<h3><code class="docutils literal notranslate"><span class="pre">F</span></code><a class="headerlink" href="#f" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_FAKEROOT</strong>: Run or build a container using a user namespace
 with a root uid/gid mapping.</p></li>
@@ -392,9 +387,9 @@ overwriting a container image or killing an instance.</p></li>
 <li><p><strong>APPTAINER_FUSESPEC</strong>: A FUSE filesystem mount specification of the form
 ‘&lt;type&gt;:&lt;fuse command&gt; &lt;mountpoint&gt;’, that will be mounted in the container.</p></li>
 </ol>
-</div>
-<div class="section" id="h">
-<h3><code class="docutils literal notranslate"><span class="pre">H</span></code><a class="headerlink" href="#h" title="Permalink to this heading"></a></h3>
+</section>
+<section id="h">
+<h3><code class="docutils literal notranslate"><span class="pre">H</span></code><a class="headerlink" href="#h" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_HELPFILE</strong>: Specifies the runscript helpfile, if it
 exists.</p></li>
@@ -404,29 +399,29 @@ outside the container and the destination overrides the home
 directory within the container.</p></li>
 <li><p><strong>APPTAINER_HOSTNAME</strong>: The container’s hostname.</p></li>
 </ol>
-</div>
-<div class="section" id="i">
-<h3><code class="docutils literal notranslate"><span class="pre">I</span></code><a class="headerlink" href="#i" title="Permalink to this heading"></a></h3>
+</section>
+<section id="i">
+<h3><code class="docutils literal notranslate"><span class="pre">I</span></code><a class="headerlink" href="#i" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_IMAGE</strong>: Filename of the container.</p></li>
 </ol>
-</div>
-<div class="section" id="j">
-<h3><code class="docutils literal notranslate"><span class="pre">J</span></code><a class="headerlink" href="#j" title="Permalink to this heading"></a></h3>
+</section>
+<section id="j">
+<h3><code class="docutils literal notranslate"><span class="pre">J</span></code><a class="headerlink" href="#j" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_JSON</strong>: Use JSON as an input or output format. Applies to the
 <code class="docutils literal notranslate"><span class="pre">build</span></code> and <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">list</span></code> commands. Default is false.</p></li>
 </ol>
-</div>
-<div class="section" id="k">
-<h3><code class="docutils literal notranslate"><span class="pre">K</span></code><a class="headerlink" href="#k" title="Permalink to this heading"></a></h3>
+</section>
+<section id="k">
+<h3><code class="docutils literal notranslate"><span class="pre">K</span></code><a class="headerlink" href="#k" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_KEEP_PRIVS</strong>: To let root user keep privileges in the
 container. Default is set to false.</p></li>
 </ol>
-</div>
-<div class="section" id="l">
-<h3><code class="docutils literal notranslate"><span class="pre">L</span></code><a class="headerlink" href="#l" title="Permalink to this heading"></a></h3>
+</section>
+<section id="l">
+<h3><code class="docutils literal notranslate"><span class="pre">L</span></code><a class="headerlink" href="#l" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_LABELS</strong>: Specifies the labels associated with the
 image.</p></li>
@@ -444,9 +439,9 @@ logging in to a remote endpoint. Default is false.</p></li>
 <li><p><strong>APPTAINER_LOGS</strong>: Set to true to show the path to instance log files in
 <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">list</span></code> output. Default is false.</p></li>
 </ol>
-</div>
-<div class="section" id="m">
-<h3><code class="docutils literal notranslate"><span class="pre">M</span></code><a class="headerlink" href="#m" title="Permalink to this heading"></a></h3>
+</section>
+<section id="m">
+<h3><code class="docutils literal notranslate"><span class="pre">M</span></code><a class="headerlink" href="#m" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_MEMORY</strong>: Specify a memory limit in bytes for the
 container. Default is unset (no limit).</p></li>
@@ -461,9 +456,9 @@ Verbose=2, Verbose2=3, Verbose3=4, Debug=5</cite>.</p></li>
 syntax understood by the <code class="docutils literal notranslate"><span class="pre">--mount</span></code> flag. Multiple mounts should be
 separated by newline characters.</p></li>
 </ol>
-</div>
-<div class="section" id="n">
-<h3><code class="docutils literal notranslate"><span class="pre">N</span></code><a class="headerlink" href="#n" title="Permalink to this heading"></a></h3>
+</section>
+<section id="n">
+<h3><code class="docutils literal notranslate"><span class="pre">N</span></code><a class="headerlink" href="#n" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_NAME</strong>: Specifies a custom image name.</p></li>
 <li><p><strong>APPTAINER_NETWORK</strong>: Used to specify a desired network. If more
@@ -504,9 +499,9 @@ set to false.</p></li>
 <li><p><strong>APPTAINER_NVCCLI</strong>: To use nvidia-container-cli for container GPU setup
 (experimental, only unprivileged).</p></li>
 </ol>
-</div>
-<div class="section" id="o">
-<h3><code class="docutils literal notranslate"><span class="pre">O</span></code><a class="headerlink" href="#o" title="Permalink to this heading"></a></h3>
+</section>
+<section id="o">
+<h3><code class="docutils literal notranslate"><span class="pre">O</span></code><a class="headerlink" href="#o" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_OOM_KILL_DISABLE</strong>: Set to true to disable OOM killer for
 container processes, if possible. Default is false.</p></li>
@@ -514,9 +509,9 @@ container processes, if possible. Default is false.</p></li>
 the use of an overlay file system image for persistent data storage
 or as read-only layer of container.</p></li>
 </ol>
-</div>
-<div class="section" id="p">
-<h3><code class="docutils literal notranslate"><span class="pre">P</span></code><a class="headerlink" href="#p" title="Permalink to this heading"></a></h3>
+</section>
+<section id="p">
+<h3><code class="docutils literal notranslate"><span class="pre">P</span></code><a class="headerlink" href="#p" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_PULLDIR</strong> and <strong>APPTAINER_PULLFOLDER</strong>: Specify destination
 directory when pulling a container image.</p></li>
@@ -525,16 +520,16 @@ to the specified file.</p></li>
 <li><p><strong>APPTAINER_PIDS_LIMIT</strong>: Specify maximum number of processes that
 the container may spawn. Default is 0 (no limit).</p></li>
 </ol>
-</div>
-<div class="section" id="q">
-<h3><code class="docutils literal notranslate"><span class="pre">Q</span></code><a class="headerlink" href="#q" title="Permalink to this heading"></a></h3>
+</section>
+<section id="q">
+<h3><code class="docutils literal notranslate"><span class="pre">Q</span></code><a class="headerlink" href="#q" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_QUIET</strong>: Suppresses all Info messages.
 Default is set to false.</p></li>
 </ol>
-</div>
-<div class="section" id="r">
-<h3><code class="docutils literal notranslate"><span class="pre">R</span></code><a class="headerlink" href="#r" title="Permalink to this heading"></a></h3>
+</section>
+<section id="r">
+<h3><code class="docutils literal notranslate"><span class="pre">R</span></code><a class="headerlink" href="#r" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_ROOTFS</strong>: During a build <code class="docutils literal notranslate"><span class="pre">APPTAINER_ROOTFS</span></code> is set to the
 path of the rootfs for the container. It can be used within a definition file
@@ -543,9 +538,9 @@ to manipulate the rootfs (e.g. from the <code class="docutils literal notranslat
 the container. Default is false.</p></li>
 <li><p><strong>APPTAINER_RUNSCRIPT</strong>: Specifies the runscript of the image.</p></li>
 </ol>
-</div>
-<div class="section" id="s">
-<h3><code class="docutils literal notranslate"><span class="pre">S</span></code><a class="headerlink" href="#s" title="Permalink to this heading"></a></h3>
+</section>
+<section id="s">
+<h3><code class="docutils literal notranslate"><span class="pre">S</span></code><a class="headerlink" href="#s" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_SANDBOX</strong>: Set to true to specify that the format of the image
 should be a sandbox. Default is set to false.</p></li>
@@ -573,17 +568,17 @@ the <code class="docutils literal notranslate"><span class="pre">apptainer</span
 <li><p><strong>APPTAINER_SHARENS</strong>: Share the namespace and image
 with other containers launched from the same parent process.</p></li>
 </ol>
-</div>
-<div class="section" id="t">
-<h3><code class="docutils literal notranslate"><span class="pre">T</span></code><a class="headerlink" href="#t" title="Permalink to this heading"></a></h3>
+</section>
+<section id="t">
+<h3><code class="docutils literal notranslate"><span class="pre">T</span></code><a class="headerlink" href="#t" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_TEST</strong>: Specifies the test script for the image.</p></li>
 <li><p><strong>APPTAINER_TMPDIR</strong>: Specify a location for temporary files to be used
 when pulling and building container images. See <a class="reference internal" href="build_env.html#sec-temporaryfolders"><span class="std std-ref">Temporary Folders</span></a>.</p></li>
 </ol>
-</div>
-<div class="section" id="u">
-<h3><code class="docutils literal notranslate"><span class="pre">U</span></code><a class="headerlink" href="#u" title="Permalink to this heading"></a></h3>
+</section>
+<section id="u">
+<h3><code class="docutils literal notranslate"><span class="pre">U</span></code><a class="headerlink" href="#u" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_UNSHARE_PID</strong>: To specify that the container will run
 in a new PID namespace. Default is set to false.</p></li>
@@ -607,16 +602,16 @@ Apptainer to run completely unprivileged even with a setuid
 installation.
 Default is set to false.</p></li>
 </ol>
-</div>
-<div class="section" id="v">
-<h3><code class="docutils literal notranslate"><span class="pre">V</span></code><a class="headerlink" href="#v" title="Permalink to this heading"></a></h3>
+</section>
+<section id="v">
+<h3><code class="docutils literal notranslate"><span class="pre">V</span></code><a class="headerlink" href="#v" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_VERBOSE</strong>: Print additional information.
 Default is set to false.</p></li>
 </ol>
-</div>
-<div class="section" id="id2">
-<h3><code class="docutils literal notranslate"><span class="pre">V</span></code><a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id2">
+<h3><code class="docutils literal notranslate"><span class="pre">V</span></code><a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_VERIFY_CERTIFICATE</strong>: Set the path to a PEM file containing the
 certificate to be used when verifying an x509 signed SIF image.</p></li>
@@ -630,9 +625,9 @@ certificates. Default is false.</p></li>
 <li><p><strong>APPTAINER_VERIFY_ROOTS</strong>: Set the path to a PEM file containing root
 certificate(s) to be used when verifying an x509 signed SIF image.</p></li>
 </ol>
-</div>
-<div class="section" id="w">
-<h3><code class="docutils literal notranslate"><span class="pre">W</span></code><a class="headerlink" href="#w" title="Permalink to this heading"></a></h3>
+</section>
+<section id="w">
+<h3><code class="docutils literal notranslate"><span class="pre">W</span></code><a class="headerlink" href="#w" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_WORKDIR</strong>: The working directory to be used for
 <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, <code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code> and <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> (if <code class="docutils literal notranslate"><span class="pre">-c</span></code> or <code class="docutils literal notranslate"><span class="pre">--contain</span></code> was
@@ -644,14 +639,14 @@ accessible as read/write. Default set to false.</p></li>
 read-write with non-persistent data (with overlay support only).
 Default is set to false.</p></li>
 </ol>
-</div>
-</div>
-<div class="section" id="build-modules">
-<span id="buildmodules"></span><h2>Build Modules<a class="headerlink" href="#build-modules" title="Permalink to this heading"></a></h2>
-<div class="section" id="library-bootstrap-agent">
-<span id="build-library-module"></span><h3><code class="docutils literal notranslate"><span class="pre">library</span></code> bootstrap agent<a class="headerlink" href="#library-bootstrap-agent" title="Permalink to this heading"></a></h3>
-<div class="section" id="overview">
-<span id="sec-build-library-module"></span><h4>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h4>
+</section>
+</section>
+<section id="build-modules">
+<span id="buildmodules"></span><h2>Build Modules<a class="headerlink" href="#build-modules" title="Link to this heading"></a></h2>
+<section id="library-bootstrap-agent">
+<span id="build-library-module"></span><h3><code class="docutils literal notranslate"><span class="pre">library</span></code> bootstrap agent<a class="headerlink" href="#library-bootstrap-agent" title="Link to this heading"></a></h3>
+<section id="overview">
+<span id="sec-build-library-module"></span><h4>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h4>
 <p>You can use an existing container in a Container Library as your
 “base” and then add customization. This allows you to build multiple
 images from the same starting point. For example, you may want to build
@@ -664,9 +659,9 @@ existing base container adding customizations in <code class="docutils literal n
 <p>This requires setting up a Container Library as shown in the
 <a class="reference internal" href="endpoint.html#sec-managing-remote-endpoints"><span class="std std-ref">Managing Remote Endpoints</span></a>
 section.</p>
-</div>
-<div class="section" id="keywords">
-<h4>Keywords<a class="headerlink" href="#keywords" title="Permalink to this heading"></a></h4>
+</section>
+<section id="keywords">
+<h4>Keywords<a class="headerlink" href="#keywords" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: library
 </pre></div>
 </div>
@@ -691,12 +686,12 @@ example). <code class="docutils literal notranslate"><span class="pre">tag</span
 separated fingerprints corresponding to PGP public keys. If present, the
 bootstrap image will be verified and the build will only proceed if it
 is signed by keys matching <em>all</em> of the specified fingerprints.</p>
-</div>
-</div>
-<div class="section" id="docker-bootstrap-agent">
-<span id="build-docker-module"></span><h3><code class="docutils literal notranslate"><span class="pre">docker</span></code> bootstrap agent<a class="headerlink" href="#docker-bootstrap-agent" title="Permalink to this heading"></a></h3>
-<div class="section" id="sec-build-docker-module">
-<span id="id3"></span><h4>Overview<a class="headerlink" href="#sec-build-docker-module" title="Permalink to this heading"></a></h4>
+</section>
+</section>
+<section id="docker-bootstrap-agent">
+<span id="build-docker-module"></span><h3><code class="docutils literal notranslate"><span class="pre">docker</span></code> bootstrap agent<a class="headerlink" href="#docker-bootstrap-agent" title="Link to this heading"></a></h3>
+<section id="sec-build-docker-module">
+<span id="id3"></span><h4>Overview<a class="headerlink" href="#sec-build-docker-module" title="Link to this heading"></a></h4>
 <p>Docker images are comprised of layers that are assembled at runtime to
 create an image. You can use Docker layers to create a base image, and
 then add your own custom software. For example, you might use Docker’s
@@ -710,9 +705,9 @@ software on top of that.</p>
 <p>Or perhaps you have already invested in Docker and created your own
 Docker containers. If so, you can seamlessly convert them to
 Apptainer with the <code class="docutils literal notranslate"><span class="pre">docker</span></code> bootstrap module.</p>
-</div>
-<div class="section" id="id4">
-<h4>Keywords<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id4">
+<h4>Keywords<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
 </pre></div>
 </div>
@@ -737,9 +732,9 @@ detailed info on using Docker registries.</p>
 </pre></div>
 </div>
 <p>The Namespace keyword is optional. It will default to <code class="docutils literal notranslate"><span class="pre">library</span></code>.</p>
-</div>
-<div class="section" id="notes">
-<h4>Notes<a class="headerlink" href="#notes" title="Permalink to this heading"></a></h4>
+</section>
+<section id="notes">
+<h4>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h4>
 <p>Docker containers are stored as a collection of tarballs called layers.
 When building from a Docker container the layers must be downloaded and
 then assembled in the proper order to produce a viable file system. Then
@@ -747,12 +742,12 @@ the file system must be converted to Singularity Image File (sif)
 format.</p>
 <p>For detailed information about setting your build environment see
 <a class="reference internal" href="build_env.html#build-environment"><span class="std std-ref">Build Customization</span></a>.</p>
-</div>
-</div>
-<div class="section" id="shub-bootstrap-agent">
-<span id="build-shub"></span><h3><code class="docutils literal notranslate"><span class="pre">shub</span></code> bootstrap agent<a class="headerlink" href="#shub-bootstrap-agent" title="Permalink to this heading"></a></h3>
-<div class="section" id="id5">
-<h4>Overview<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+</section>
+</section>
+<section id="shub-bootstrap-agent">
+<span id="build-shub"></span><h3><code class="docutils literal notranslate"><span class="pre">shub</span></code> bootstrap agent<a class="headerlink" href="#shub-bootstrap-agent" title="Link to this heading"></a></h3>
+<section id="id5">
+<h4>Overview<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
 <p>You can use an existing container on Singularity Hub as your “base” and
 then add customization. This allows you to build multiple images from
 the same starting point. For example, you may want to build several
@@ -762,9 +757,9 @@ building these from scratch each time, you could create a base container
 on Singularity Hub and then build new containers from that existing base
 container adding customizations in <code class="docutils literal notranslate"><span class="pre">%post</span></code> , <code class="docutils literal notranslate"><span class="pre">%environment</span></code>,
 <code class="docutils literal notranslate"><span class="pre">%runscript</span></code>, etc.</p>
-</div>
-<div class="section" id="id6">
-<h4>Keywords<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id6">
+<h4>Keywords<a class="headerlink" href="#id6" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: shub
 </pre></div>
 </div>
@@ -777,21 +772,21 @@ module to use.</p>
 a base. <code class="docutils literal notranslate"><span class="pre">registry</span> <span class="pre">is</span> <span class="pre">optional</span> <span class="pre">and</span> <span class="pre">defaults</span> <span class="pre">to</span> <span class="pre">``singularity-hub.org</span></code>.
 <code class="docutils literal notranslate"><span class="pre">tag</span></code> and <code class="docutils literal notranslate"><span class="pre">digest</span></code> are also optional. <code class="docutils literal notranslate"><span class="pre">tag</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">latest</span></code>
 and <code class="docutils literal notranslate"><span class="pre">digest</span></code> can be left blank if you want the latest build.</p>
-</div>
-<div class="section" id="id7">
-<h4>Notes<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id7">
+<h4>Notes<a class="headerlink" href="#id7" title="Link to this heading"></a></h4>
 <p>When bootstrapping from a Singularity Hub image, all previous definition
 files that led to the creation of the current image will be stored in a
 directory within the container called
 <code class="docutils literal notranslate"><span class="pre">/.singularity.d/bootstrap_history</span></code>. Apptainer will also alert you
 if environment variables have been changed between the base image and
 the new image during bootstrap.</p>
-</div>
-</div>
-<div class="section" id="oras-bootstrap-agent">
-<span id="build-oras"></span><h3><code class="docutils literal notranslate"><span class="pre">oras</span></code> bootstrap agent<a class="headerlink" href="#oras-bootstrap-agent" title="Permalink to this heading"></a></h3>
-<div class="section" id="id8">
-<h4>Overview<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h4>
+</section>
+</section>
+<section id="oras-bootstrap-agent">
+<span id="build-oras"></span><h3><code class="docutils literal notranslate"><span class="pre">oras</span></code> bootstrap agent<a class="headerlink" href="#oras-bootstrap-agent" title="Link to this heading"></a></h3>
+<section id="id8">
+<h4>Overview<a class="headerlink" href="#id8" title="Link to this heading"></a></h4>
 <p>Using, this module, a container from supporting OCI Registries - Eg: ACR
 (Azure Container Registry), local container registries, etc can be used
 as your “base” image and later customized. This allows you to build
@@ -802,9 +797,9 @@ Instead of building these from scratch each time, you could make use of
 <code class="docutils literal notranslate"><span class="pre">oras</span></code> to pull an appropriate base container and then build new
 containers by adding customizations in <code class="docutils literal notranslate"><span class="pre">%post</span></code> , <code class="docutils literal notranslate"><span class="pre">%environment</span></code>,
 <code class="docutils literal notranslate"><span class="pre">%runscript</span></code>, etc.</p>
-</div>
-<div class="section" id="id9">
-<h4>Keywords<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id9">
+<h4>Keywords<a class="headerlink" href="#id9" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: oras
 </pre></div>
 </div>
@@ -823,16 +818,16 @@ you want to use.</p>
 fingerprints corresponding to PGP public keys. If present, the SIF file will be
 verified and the build will only proceed if it is signed by keys matching <em>all</em>
 of the specified fingerprints.</p>
-</div>
-</div>
-<div class="section" id="localimage-bootstrap-agent">
-<span id="build-localimage"></span><h3><code class="docutils literal notranslate"><span class="pre">localimage</span></code> bootstrap agent<a class="headerlink" href="#localimage-bootstrap-agent" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="localimage-bootstrap-agent">
+<span id="build-localimage"></span><h3><code class="docutils literal notranslate"><span class="pre">localimage</span></code> bootstrap agent<a class="headerlink" href="#localimage-bootstrap-agent" title="Link to this heading"></a></h3>
 <p id="sec-build-localimage">This module allows you to build a container from an existing
 Apptainer container on your host system. The name is somewhat
 misleading because your container can be in either image or directory
 format.</p>
-<div class="section" id="id10">
-<h4>Overview<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h4>
+<section id="id10">
+<h4>Overview<a class="headerlink" href="#id10" title="Link to this heading"></a></h4>
 <p>You can use an existing container image as your “base”, and then add
 customization. This allows you to build multiple images from the same
 starting point. For example, you may want to build several containers
@@ -841,9 +836,9 @@ toolchain, or the same base MPI installation. Instead of building these
 from scratch each time, you could start with the appropriate local base
 container and then customize the new container in <code class="docutils literal notranslate"><span class="pre">%post</span></code>,
 <code class="docutils literal notranslate"><span class="pre">%environment</span></code>, <code class="docutils literal notranslate"><span class="pre">%runscript</span></code>, etc.</p>
-</div>
-<div class="section" id="id11">
-<h4>Keywords<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id11">
+<h4>Keywords<a class="headerlink" href="#id11" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: localimage
 </pre></div>
 </div>
@@ -862,28 +857,28 @@ separated fingerprints corresponding to PGP public keys. If present, and
 the <code class="docutils literal notranslate"><span class="pre">From:</span></code> keyword points to a SIF format image, it will be verified
 and the build will only proceed if it is signed by keys matching <em>all</em>
 of the specified fingerprints.</p>
-</div>
-<div class="section" id="id12">
-<h4>Notes<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id12">
+<h4>Notes<a class="headerlink" href="#id12" title="Link to this heading"></a></h4>
 <p>When building from a local container, all previous definition files that
 led to the creation of the current container will be stored in a
 directory within the container called
 <code class="docutils literal notranslate"><span class="pre">/.singularity.d/bootstrap_history</span></code>. Apptainer will also alert you
 if environment variables have been changed between the base image and
 the new image during bootstrap.</p>
-</div>
-</div>
-<div class="section" id="yum-bootstrap-agent">
-<span id="build-yum"></span><h3><code class="docutils literal notranslate"><span class="pre">yum</span></code> bootstrap agent<a class="headerlink" href="#yum-bootstrap-agent" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="yum-bootstrap-agent">
+<span id="build-yum"></span><h3><code class="docutils literal notranslate"><span class="pre">yum</span></code> bootstrap agent<a class="headerlink" href="#yum-bootstrap-agent" title="Link to this heading"></a></h3>
 <p id="sec-build-yum">This module allows you to build a Red Hat style
 container from a mirror URI based on yum or dnf.</p>
-<div class="section" id="id13">
-<h4>Overview<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h4>
+<section id="id13">
+<h4>Overview<a class="headerlink" href="#id13" title="Link to this heading"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">yum</span></code> module to specify a base for a RHEL-like container.
 You must also specify the URI for the mirror you would like to use.</p>
-</div>
-<div class="section" id="id14">
-<h4>Keywords<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id14">
+<h4>Keywords<a class="headerlink" href="#id14" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: yum
 </pre></div>
 </div>
@@ -909,9 +904,9 @@ packages into the core operating system. It is a best practice to supply
 only the bare essentials such that the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section has what it
 needs to properly complete the build. One common package you may want to
 install when using the <code class="docutils literal notranslate"><span class="pre">yum</span></code> build module is YUM or DNF itself.</p>
-</div>
-<div class="section" id="id15">
-<h4>Notes<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id15">
+<h4>Notes<a class="headerlink" href="#id15" title="Link to this heading"></a></h4>
 <p>There is a major limitation with using YUM to bootstrap a container. The
 RPM database that exists within the container will be created using the
 RPM library and Berkeley DB implementation that exists on the host
@@ -927,20 +922,20 @@ For instance, on Ubuntu you can install it like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get update &amp;&amp; sudo apt-get install yum
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="debootstrap-build-agent">
-<span id="build-debootstrap"></span><h3><code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> build agent<a class="headerlink" href="#debootstrap-build-agent" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="debootstrap-build-agent">
+<span id="build-debootstrap"></span><h3><code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> build agent<a class="headerlink" href="#debootstrap-build-agent" title="Link to this heading"></a></h3>
 <p id="sec-build-debootstrap">This module allows you to build a Debian/Ubuntu style container from a
 mirror URI.</p>
-<div class="section" id="id16">
-<h4>Overview<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h4>
+<section id="id16">
+<h4>Overview<a class="headerlink" href="#id16" title="Link to this heading"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> module to specify a base for a Debian-like
 container. You must also specify the OS version and a URI for the mirror
 you would like to use.</p>
-</div>
-<div class="section" id="id17">
-<h4>Keywords<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id17">
+<h4>Keywords<a class="headerlink" href="#id17" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: debootstrap
 </pre></div>
 </div>
@@ -968,9 +963,9 @@ mirror when downloading the OS.</p>
 packages into the core operating system. It is a best practice to supply
 only the bare essentials such that the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section has what it
 needs to properly complete the build.</p>
-</div>
-<div class="section" id="id18">
-<h4>Notes<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id18">
+<h4>Notes<a class="headerlink" href="#id18" title="Link to this heading"></a></h4>
 <p>In order to use the <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> build module, you must have
 <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> installed on your system. On Ubuntu you can install it
 like so:</p>
@@ -981,19 +976,19 @@ like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo dnf update &amp;&amp; sudo dnf install epel-release &amp;&amp; sudo dnf install debootstrap.noarch
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="arch-bootstrap-agent">
-<span id="build-arch"></span><h3><code class="docutils literal notranslate"><span class="pre">arch</span></code> bootstrap agent<a class="headerlink" href="#arch-bootstrap-agent" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="arch-bootstrap-agent">
+<span id="build-arch"></span><h3><code class="docutils literal notranslate"><span class="pre">arch</span></code> bootstrap agent<a class="headerlink" href="#arch-bootstrap-agent" title="Link to this heading"></a></h3>
 <p id="sec-build-arch">This module allows you to build a Arch Linux based container.</p>
-<div class="section" id="id19">
-<h4>Overview<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h4>
+<section id="id19">
+<h4>Overview<a class="headerlink" href="#id19" title="Link to this heading"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">arch</span></code> module to specify a base for an Arch Linux based
 container. Arch Linux uses the aptly named <code class="docutils literal notranslate"><span class="pre">pacman</span></code> package manager
 (all puns intended).</p>
-</div>
-<div class="section" id="id20">
-<h4>Keywords<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id20">
+<h4>Keywords<a class="headerlink" href="#id20" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: arch
 </pre></div>
 </div>
@@ -1003,26 +998,26 @@ module to use.</p>
 this time. By defining the <code class="docutils literal notranslate"><span class="pre">arch</span></code> module, you have essentially given
 all of the information necessary for that particular bootstrap module to
 build a core operating system.</p>
-</div>
-<div class="section" id="id21">
-<h4>Notes<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id21">
+<h4>Notes<a class="headerlink" href="#id21" title="Link to this heading"></a></h4>
 <p>Arch Linux is, by design, a very stripped down, light-weight OS. You may
 need to perform a significant amount of configuration to get a usable
 OS. Please refer to this <a class="reference external" href="https://github.com/apptainer/apptainer/blob/main/examples/arch/README.md">README.md</a>
 and the <a class="reference external" href="https://github.com/apptainer/apptainer/blob/main/examples/arch/">Arch Linux example</a>
 for more info.</p>
-</div>
-</div>
-<div class="section" id="busybox-bootstrap-agent">
-<span id="build-busybox"></span><h3><code class="docutils literal notranslate"><span class="pre">busybox</span></code> bootstrap agent<a class="headerlink" href="#busybox-bootstrap-agent" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="busybox-bootstrap-agent">
+<span id="build-busybox"></span><h3><code class="docutils literal notranslate"><span class="pre">busybox</span></code> bootstrap agent<a class="headerlink" href="#busybox-bootstrap-agent" title="Link to this heading"></a></h3>
 <p id="sec-build-busybox">This module allows you to build a container based on BusyBox.</p>
-<div class="section" id="id22">
-<h4>Overview<a class="headerlink" href="#id22" title="Permalink to this heading"></a></h4>
+<section id="id22">
+<h4>Overview<a class="headerlink" href="#id22" title="Link to this heading"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">busybox</span></code> module to specify a BusyBox base for container. You
 must also specify a URI for the mirror you would like to use.</p>
-</div>
-<div class="section" id="id23">
-<h4>Keywords<a class="headerlink" href="#id23" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id23">
+<h4>Keywords<a class="headerlink" href="#id23" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: busybox
 </pre></div>
 </div>
@@ -1033,15 +1028,15 @@ module to use.</p>
 </div>
 <p>The MirrorURL keyword is mandatory. It specifies a URI to use as a
 mirror when downloading the OS.</p>
-</div>
-<div class="section" id="id24">
-<h4>Notes<a class="headerlink" href="#id24" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id24">
+<h4>Notes<a class="headerlink" href="#id24" title="Link to this heading"></a></h4>
 <p>You can build a fully functional BusyBox container that only takes up
 ~700kB of disk space!</p>
-</div>
-</div>
-<div class="section" id="zypper-bootstrap-agent">
-<span id="build-zypper"></span><h3><code class="docutils literal notranslate"><span class="pre">zypper</span></code> bootstrap agent<a class="headerlink" href="#zypper-bootstrap-agent" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="zypper-bootstrap-agent">
+<span id="build-zypper"></span><h3><code class="docutils literal notranslate"><span class="pre">zypper</span></code> bootstrap agent<a class="headerlink" href="#zypper-bootstrap-agent" title="Link to this heading"></a></h3>
 <p id="sec-build-zypper">This module allows you to build a Suse style container from a mirror
 URI.</p>
 <div class="admonition note">
@@ -1049,13 +1044,13 @@ URI.</p>
 <p><code class="docutils literal notranslate"><span class="pre">zypper</span></code> version 1.11.20 or greater is required on the host system,
 as Apptainer requires the <code class="docutils literal notranslate"><span class="pre">--releasever</span></code> flag.</p>
 </div>
-<div class="section" id="id25">
-<h4>Overview<a class="headerlink" href="#id25" title="Permalink to this heading"></a></h4>
+<section id="id25">
+<h4>Overview<a class="headerlink" href="#id25" title="Link to this heading"></a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">zypper</span></code> module to specify a base for a Suse-like container.
 You must also specify a URI for the mirror you would like to use.</p>
-</div>
-<div class="section" id="id26">
-<h4>Keywords<a class="headerlink" href="#id26" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id26">
+<h4>Keywords<a class="headerlink" href="#id26" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: zypper
 </pre></div>
 </div>
@@ -1075,12 +1070,12 @@ packages into the core operating system. It is a best practice to supply
 only the bare essentials such that the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section has what it
 needs to properly complete the build. One common package you may want to
 install when using the zypper build module is <code class="docutils literal notranslate"><span class="pre">zypper</span></code> itself.</p>
-</div>
-</div>
-<div class="section" id="docker-daemon-bootstrap-agent">
-<span id="docker-daemon"></span><h3><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> bootstrap agent<a class="headerlink" href="#docker-daemon-bootstrap-agent" title="Permalink to this heading"></a></h3>
-<div class="section" id="id27">
-<h4>Overview<a class="headerlink" href="#id27" title="Permalink to this heading"></a></h4>
+</section>
+</section>
+<section id="docker-daemon-bootstrap-agent">
+<span id="docker-daemon"></span><h3><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> bootstrap agent<a class="headerlink" href="#docker-daemon-bootstrap-agent" title="Link to this heading"></a></h3>
+<section id="id27">
+<h4>Overview<a class="headerlink" href="#id27" title="Link to this heading"></a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> allows you to build a SIF from any Docker image
 currently residing in the Docker daemon’s internal storage:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>images<span class="w"> </span>alpine
@@ -1107,9 +1102,9 @@ running at the default location. For example, when using a virtualized Docker yo
 <span class="n">export</span> <span class="n">DOCKER_HOST</span><span class="o">=</span><span class="n">tcp</span><span class="p">:</span><span class="o">//</span><span class="mf">192.168.59.103</span><span class="p">:</span><span class="mi">2375</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id28">
-<h4>Keywords<a class="headerlink" href="#id28" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id28">
+<h4>Keywords<a class="headerlink" href="#id28" title="Link to this heading"></a></h4>
 <p>In a definition file, the <code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code> bootstrap agent requires the source container reference to
 be provided with the <code class="docutils literal notranslate"><span class="pre">From:</span></code> keyword:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker-daemon
@@ -1118,12 +1113,12 @@ be provided with the <code class="docutils literal notranslate"><span class="pre
 </div>
 <p>where both <code class="docutils literal notranslate"><span class="pre">&lt;image&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;tag&gt;</span></code> are mandatory fields that must be
 written explicitly.</p>
-</div>
-</div>
-<div class="section" id="docker-archive-bootstrap-agent">
-<span id="id29"></span><h3><code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent<a class="headerlink" href="#docker-archive-bootstrap-agent" title="Permalink to this heading"></a></h3>
-<div class="section" id="id30">
-<h4>Overview<a class="headerlink" href="#id30" title="Permalink to this heading"></a></h4>
+</section>
+</section>
+<section id="docker-archive-bootstrap-agent">
+<span id="id29"></span><h3><code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent<a class="headerlink" href="#docker-archive-bootstrap-agent" title="Link to this heading"></a></h3>
+<section id="id30">
+<h4>Overview<a class="headerlink" href="#id30" title="Link to this heading"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> boostrap agent allows you to create a Apptainer image
 from a docker image stored in a <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">save</span></code> formatted tar file:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>save<span class="w"> </span>-o<span class="w"> </span>alpine.tar<span class="w"> </span>alpine:latest
@@ -1141,26 +1136,26 @@ from a docker image stored in a <code class="docutils literal notranslate"><span
 <span class="go">Apptainer&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id31">
-<h4>Keywords<a class="headerlink" href="#id31" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id31">
+<h4>Keywords<a class="headerlink" href="#id31" title="Link to this heading"></a></h4>
 <p>In a definition file, the <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent requires the path
 to the tar file containing the image to be specified with the <code class="docutils literal notranslate"><span class="pre">From:</span></code> keyword.</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker-archive
 <span class="k">From</span>: &lt;path-to-tar-file&gt;
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="scratch-bootstrap-agent">
-<span id="scratch-agent"></span><h3><code class="docutils literal notranslate"><span class="pre">scratch</span></code> bootstrap agent<a class="headerlink" href="#scratch-bootstrap-agent" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="scratch-bootstrap-agent">
+<span id="scratch-agent"></span><h3><code class="docutils literal notranslate"><span class="pre">scratch</span></code> bootstrap agent<a class="headerlink" href="#scratch-bootstrap-agent" title="Link to this heading"></a></h3>
 <p>The scratch bootstrap agent allows you to start from a completely empty
 container. You are then responsible for adding any and all executables,
 libraries etc. that are required. Starting with a scratch container can
 be useful when you are aiming to minimize container size, and have a
 simple application / static binaries.</p>
-<div class="section" id="id32">
-<h4>Overview<a class="headerlink" href="#id32" title="Permalink to this heading"></a></h4>
+<section id="id32">
+<h4>Overview<a class="headerlink" href="#id32" title="Link to this heading"></a></h4>
 <p>A minimal container providing a shell can be created by copying the
 <code class="docutils literal notranslate"><span class="pre">busybox</span></code> static binary into an empty scratch container:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
@@ -1190,17 +1185,17 @@ Apptainer&gt; echo &quot;Hello from a 696KiB container&quot;
 Hello from a 696KiB container
 </pre></div>
 </div>
-</div>
-<div class="section" id="id33">
-<h4>Keywords<a class="headerlink" href="#id33" title="Permalink to this heading"></a></h4>
+</section>
+<section id="id33">
+<h4>Keywords<a class="headerlink" href="#id33" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
 </pre></div>
 </div>
 <p>There are no additional keywords for the scratch bootstrap agent.</p>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
 
            </div>

@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>apptainer remote login &mdash; Apptainer User Guide main documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/js/ga.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=a8da1a53"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/ga.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                main
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -234,11 +229,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="apptainer-remote-login">
-<span id="id1"></span><h1>apptainer remote login<a class="headerlink" href="#apptainer-remote-login" title="Permalink to this heading"></a></h1>
+  <section id="apptainer-remote-login">
+<span id="id1"></span><h1>apptainer remote login<a class="headerlink" href="#apptainer-remote-login" title="Link to this heading"></a></h1>
 <p>Login to an apptainer remote endpoint</p>
-<div class="section" id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
+<section id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Link to this heading"></a></h2>
 <blockquote>
 <div><p>The ‘remote login’ command allows you to set credentials for a specific
 endpoint.</p>
@@ -248,33 +243,33 @@ active remote endpoint.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">remote</span> <span class="n">login</span> <span class="p">[</span><span class="n">login</span> <span class="n">options</span><span class="o">...</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">remote_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>To log in to an endpoint:
 $ apptainer remote login SylabsCloud
 </pre></div>
 </div>
-</div>
-<div class="section" id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>               <span class="n">help</span> <span class="k">for</span> <span class="n">login</span>
 <span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">--</span><span class="n">insecure</span>           <span class="n">allow</span> <span class="n">insecure</span> <span class="n">login</span>
 <span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="o">--</span><span class="n">password</span> <span class="n">string</span>    <span class="n">password</span> <span class="o">/</span> <span class="n">token</span> <span class="n">to</span> <span class="n">authenticate</span> <span class="k">with</span>
-    <span class="o">--</span><span class="n">password</span><span class="o">-</span><span class="n">stdin</span>     <span class="n">take</span> <span class="n">password</span> <span class="kn">from</span> <span class="nn">standard</span> <span class="nb">input</span>
+    <span class="o">--</span><span class="n">password</span><span class="o">-</span><span class="n">stdin</span>     <span class="n">take</span> <span class="n">password</span> <span class="kn">from</span><span class="w"> </span><span class="nn">standard</span> <span class="nb">input</span>
     <span class="o">--</span><span class="n">tokenfile</span> <span class="n">string</span>   <span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">file</span> <span class="n">holding</span> <span class="n">auth</span> <span class="n">token</span> <span class="k">for</span> <span class="n">login</span> <span class="p">(</span><span class="n">remote</span> <span class="n">endpoints</span> <span class="n">only</span><span class="p">)</span>
 <span class="o">-</span><span class="n">u</span><span class="p">,</span> <span class="o">--</span><span class="n">username</span> <span class="n">string</span>    <span class="n">username</span> <span class="n">to</span> <span class="n">authenticate</span> <span class="k">with</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="see-also">
-<h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
+</section>
+<section id="see-also">
+<h2>SEE ALSO<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="apptainer_remote.html#apptainer-remote"><span class="std std-ref">apptainer remote</span></a>     - Manage apptainer remote endpoints</p></li>
 </ul>
-<p><em>Auto generated by spf13/cobra on 4-Dec-2024</em></p>
-</div>
-</div>
+<p><em>Auto generated by spf13/cobra on 4-Feb-2025</em></p>
+</section>
+</section>
 
 
            </div>

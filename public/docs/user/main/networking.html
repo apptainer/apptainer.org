@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Network virtualization &mdash; Apptainer User Guide main documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/js/ga.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a8da1a53"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,9 +38,6 @@
             Apptainer User Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                main
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -133,8 +128,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="network-virtualization">
-<span id="networking"></span><h1>Network virtualization<a class="headerlink" href="#network-virtualization" title="Permalink to this heading"></a></h1>
+  <section id="network-virtualization">
+<span id="networking"></span><h1>Network virtualization<a class="headerlink" href="#network-virtualization" title="Link to this heading"></a></h1>
 <p id="sec-networking">Apptainer provides full integration with <a class="reference external" href="https://github.com/containernetworking/cni">cni</a> , to make network
 virtualization easy. The following options can be used with the the
 action commands (<code class="docutils literal notranslate"><span class="pre">exec</span></code>, <code class="docutils literal notranslate"><span class="pre">run</span></code>, and <code class="docutils literal notranslate"><span class="pre">shell</span></code>) to create and
@@ -151,8 +146,8 @@ configurations. This is accomplished through settings in
 <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> and only work in setuid mode.
 See the <a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#networking-options">administrator guide</a> for details.</p>
 </div>
-<div class="section" id="dns">
-<h2><code class="docutils literal notranslate"><span class="pre">--dns</span></code><a class="headerlink" href="#dns" title="Permalink to this heading"></a></h2>
+<section id="dns">
+<h2><code class="docutils literal notranslate"><span class="pre">--dns</span></code><a class="headerlink" href="#dns" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--dns</span></code> option allows you to specify a comma separated list of DNS
 servers to add to the <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> file.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nslookup google.com | grep Server
@@ -165,9 +160,9 @@ $ sudo apptainer exec --dns 8.8.8.8 ubuntu.sif cat /etc/resolv.conf
 nameserver 8.8.8.8
 </pre></div>
 </div>
-</div>
-<div class="section" id="hostname">
-<h2><code class="docutils literal notranslate"><span class="pre">--hostname</span></code><a class="headerlink" href="#hostname" title="Permalink to this heading"></a></h2>
+</section>
+<section id="hostname">
+<h2><code class="docutils literal notranslate"><span class="pre">--hostname</span></code><a class="headerlink" href="#hostname" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--hostname</span></code> option accepts a string argument to change the
 hostname within the container.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ hostname
@@ -177,9 +172,9 @@ $ sudo apptainer exec --hostname hal-9000 my_container.sif hostname
 hal-9000
 </pre></div>
 </div>
-</div>
-<div class="section" id="net">
-<h2><code class="docutils literal notranslate"><span class="pre">--net</span></code><a class="headerlink" href="#net" title="Permalink to this heading"></a></h2>
+</section>
+<section id="net">
+<h2><code class="docutils literal notranslate"><span class="pre">--net</span></code><a class="headerlink" href="#net" title="Link to this heading"></a></h2>
 <p>Passing the <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag will cause the container to join a new
 network namespace when it initiates. A bridge interface is also set up by
 default.</p>
@@ -190,9 +185,9 @@ $ sudo apptainer exec --net my_container.sif hostname -I
 10.22.0.4
 </pre></div>
 </div>
-</div>
-<div class="section" id="network">
-<h2><code class="docutils literal notranslate"><span class="pre">--network</span></code><a class="headerlink" href="#network" title="Permalink to this heading"></a></h2>
+</section>
+<section id="network">
+<h2><code class="docutils literal notranslate"><span class="pre">--network</span></code><a class="headerlink" href="#network" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--network</span></code> option can only be invoked in combination with the
 <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag. It accepts a comma delimited string of network types.
 Each entry will bring up a dedicated interface inside container.</p>
@@ -229,9 +224,9 @@ network configurations through options in <code class="docutils literal notransl
 Additional cni configuration files can be added to the <code class="docutils literal notranslate"><span class="pre">network</span></code>
 configuration directory as required, and Apptainer’s provided
 configurations may also be modified.</p>
-</div>
-<div class="section" id="network-args">
-<h2><code class="docutils literal notranslate"><span class="pre">--network-args</span></code><a class="headerlink" href="#network-args" title="Permalink to this heading"></a></h2>
+</section>
+<section id="network-args">
+<h2><code class="docutils literal notranslate"><span class="pre">--network-args</span></code><a class="headerlink" href="#network-args" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--network-args</span></code> option provides a convenient way to specify
 arguments to pass directly to the cni plugins. It must be used in
 conjunction with the <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag.</p>
@@ -284,8 +279,8 @@ Commercial support is available at
 </pre></div>
 </div>
 <p>For more information about cni, check the <a class="reference external" href="https://github.com/containernetworking/cni/blob/master/SPEC.md">cni specification</a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
