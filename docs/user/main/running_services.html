@@ -360,10 +360,10 @@ page into a PDF, and can be found <a class="reference external" href="https://gi
 <h3>Building the image<a class="headerlink" href="#building-the-image" title="Link to this heading"></a></h3>
 <p>To package the Web to PDF service into a SIF container, we must create a
 definition file. Let’s first choose a base from which to build our container. In
-this case the docker image <code class="docutils literal notranslate"><span class="pre">node:8</span></code> which comes pre-installed with Node 8 has
+this case the docker image <code class="docutils literal notranslate"><span class="pre">node:23</span></code> which comes pre-installed with Node 23 has
 been used:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
-<span class="k">From</span>: node:<span class="m">8</span>
+<span class="k">From</span>: node:<span class="m">23</span>
 </pre></div>
 </div>
 <p>The service also requires a slew of dependencies to be manually installed
