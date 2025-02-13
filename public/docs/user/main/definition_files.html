@@ -209,9 +209,9 @@ that uses the <code class="docutils literal notranslate"><span class="pre">From<
 <span class="k">From</span>: debian:<span class="m">10</span>
 </pre></div>
 </div>
-<p>A def file that uses an official mirror to install CentOS 7 might look
+<p>A def file that uses an official mirror to install AlmaLinux 9 might look
 like this:</p>
-<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: yum
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: dnf
 <span class="k">OSVersion</span>: <span class="m">9</span>
 <span class="k">MirrorURL</span>: http://repo.almalinux.org/almalinux/%{OSVERSION}/BaseOS/x86_64/os
 <span class="k">Include</span>: dnf
