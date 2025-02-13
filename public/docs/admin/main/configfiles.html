@@ -451,6 +451,10 @@ execution where only 40_fakeroot.conflist is used.</p>
 <p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">net</span> <span class="pre">networks</span></code>: Specify the names of CNI network configurations
 that may be used by users and groups listed in the allow net users /
 allow net groups directives.</p>
+<p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">netns</span> <span class="pre">paths</span></code>: Specify the paths to network namespaces that may
+be joined by users and groups listed in the allow net users / allow net
+groups directives. This restriction only applies when Apptainer is
+running in SUID mode and the user is non-root.</p>
 </section>
 <section id="gpu-options">
 <h3>GPU Options<a class="headerlink" href="#gpu-options" title="Link to this heading"></a></h3>
