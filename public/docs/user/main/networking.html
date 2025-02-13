@@ -78,6 +78,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Network Options</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#dns"><code class="docutils literal notranslate"><span class="pre">--dns</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#hostname"><code class="docutils literal notranslate"><span class="pre">--hostname</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#netns-path"><code class="docutils literal notranslate"><span class="pre">--netns-path</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#net"><code class="docutils literal notranslate"><span class="pre">--net</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#network"><code class="docutils literal notranslate"><span class="pre">--network</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#network-args"><code class="docutils literal notranslate"><span class="pre">--network-args</span></code></a></li>
@@ -130,8 +131,9 @@
              
   <section id="network-virtualization">
 <span id="networking"></span><h1>Network virtualization<a class="headerlink" href="#network-virtualization" title="Link to this heading"></a></h1>
-<p id="sec-networking">Apptainer provides full integration with <a class="reference external" href="https://github.com/containernetworking/cni">cni</a> , to make network
-virtualization easy. The following options can be used with the the
+<p id="sec-networking">Apptainer provides full integration with <a class="reference external" href="https://github.com/containernetworking/cni">CNI</a> , and the ability to join an
+existing network namespace, to make network virtualization easy.
+The following options can be used with the the
 action commands (<code class="docutils literal notranslate"><span class="pre">exec</span></code>, <code class="docutils literal notranslate"><span class="pre">run</span></code>, and <code class="docutils literal notranslate"><span class="pre">shell</span></code>) to create and
 configure a virtualized network for a container.</p>
 <div class="admonition note">
@@ -172,6 +174,47 @@ $ sudo apptainer exec --hostname hal-9000 my_container.sif hostname
 hal-9000
 </pre></div>
 </div>
+</section>
+<section id="netns-path">
+<h2><code class="docutils literal notranslate"><span class="pre">--netns-path</span></code><a class="headerlink" href="#netns-path" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">--netns-path</span></code> flag takes a path to a network namespace to join when
+starting a container. The root user may join any network namespace. An
+unprivileged user can only join a network namespace specified in the new
+allowed <code class="docutils literal notranslate"><span class="pre">netns</span> <span class="pre">paths</span> <span class="pre">directive</span></code> in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>, if they are also
+listed in <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">net</span> <span class="pre">users</span></code> / <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">net</span> <span class="pre">groups</span></code>. Not currently supported
+with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> mode.</p>
+<p>For example, a network namespace can be created with the <code class="docutils literal notranslate"><span class="pre">ip</span></code> command on the
+host, and then a container started that will run within this namespace:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create an example named network namespace
+$ sudo ip netns add my-net
+
+# Add a dummy network interface to the network namespace
+$ sudo ip netns exec my-net ip link add dummy0 type dummy
+
+# Run a container in the network namespace
+$ sudo apptainer run --netns-path /run/netns/my-net library://alpine
+INFO:    Using cached image
+Apptainer&gt; ip a
+1: lo: &lt;LOOPBACK&gt; mtu 65536 qdisc noop state DOWN qlen 1000
+   link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: dummy0: &lt;BROADCAST,NOARP&gt; mtu 1500 qdisc noop state DOWN qlen 1000
+   link/ether 92:5c:ab:ab:d3:d0 brd ff:ff:ff:ff:ff:ff
+Apptainer&gt;
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">a</span></code> command run inside the container shows the <code class="docutils literal notranslate"><span class="pre">dummy0</span></code>
+interface we added to the <code class="docutils literal notranslate"><span class="pre">my-net</span></code> network namespace.</p>
+<p>The root user can join any network namespace with <code class="docutils literal notranslate"><span class="pre">--netns-path</span></code>.</p>
+<p>A non-root user can only join a network namespace if the following are true:</p>
+<ul class="simple">
+<li><p>Apptainer is installed with setuid privileges.</p></li>
+<li><p>The path of the network namespace is listed in the <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">netns</span> <span class="pre">paths</span></code>
+directive in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>, which is typically managed by the system
+administrator.</p></li>
+<li><p>The user is listed in the <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">net</span> <span class="pre">users</span></code> directive in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>,
+or the user is a member of a group listed in the <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">net</span> <span class="pre">groups</span></code> directive
+in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>.</p></li>
+</ul>
 </section>
 <section id="net">
 <h2><code class="docutils literal notranslate"><span class="pre">--net</span></code><a class="headerlink" href="#net" title="Link to this heading"></a></h2>
