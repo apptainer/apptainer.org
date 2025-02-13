@@ -392,14 +392,25 @@ variables include special characters.</p>
 </section>
 <section id="env-file-option">
 <h3><code class="docutils literal notranslate"><span class="pre">--env-file</span></code> option<a class="headerlink" href="#env-file-option" title="Link to this heading"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> option lets you provide a file that contains
+<p>The <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> option lets you provide one or more files that contain
 environment variables as <code class="docutils literal notranslate"><span class="pre">NAME=VALUE</span></code> pairs, e.g.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat myenvs
 MYVAR=&quot;Hello from a file&quot;
 
-$ apptainer run --env-file myenvs env.sif
+$ cat myenvs2
+MYVAR=&quot;Hello from a file 2&quot;
+
+$ apptainer run --env-file myenvs --env-file myenvs2 env.sif
+Hello from a file 2
+
+$ apptainer run --env-file myenvs2,myenvs env.sif
 Hello from a file
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that if more than one file is used, the variables of the same name are
+overridden with later files taking priority.</p>
 </div>
 </section>
 <section id="apptainerenv-prefix">
