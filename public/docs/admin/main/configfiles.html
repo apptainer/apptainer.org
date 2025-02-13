@@ -221,6 +221,14 @@ namespace when running their containers through the <code class="docutils litera
 <p>Using the PID namespace can confuse the process tracking of some
 resource managers, as well as some MPI implementations.</p>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">user</span> <span class="pre">ns</span></code>: This option controls the creation of user namespaces. If
+set to <code class="docutils literal notranslate"><span class="pre">no</span></code>, this will prevent execution of containers with the <code class="docutils literal notranslate"><span class="pre">--userns</span></code>
+or <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> flags, and unprivileged installations of Apptainer.</p>
+<p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">uts</span> <span class="pre">ns</span></code>: Likewise, this option determines whether users can make use
+of the UTS namespace when running their containers. If sets to <code class="docutils literal notranslate"><span class="pre">no</span></code>, it
+disables the <code class="docutils literal notranslate"><span class="pre">--uts</span></code> and <code class="docutils literal notranslate"><span class="pre">--hostname</span></code> flags.</p>
+<p><code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">ipc</span> <span class="pre">ns</span></code>: Likewise, this option determines whether users can request
+the IPC namespace. If sets to <code class="docutils literal notranslate"><span class="pre">no</span></code>, it disable the use of the <code class="docutils literal notranslate"><span class="pre">--ipc</span></code> flag.</p>
 </section>
 <section id="configuration-files">
 <h3>Configuration Files<a class="headerlink" href="#configuration-files" title="Link to this heading"></a></h3>
