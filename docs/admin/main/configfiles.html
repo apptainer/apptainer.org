@@ -834,15 +834,15 @@ section of the user guide.</p>
 <section id="nvidia-gpus-cuda">
 <h3>NVIDIA GPUs / CUDA<a class="headerlink" href="#nvidia-gpus-cuda" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> configuration file is used to specify libraries
-and executables that need to be injected into the container when running
-Apptainer with the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> Nvidia GPU support option. The provided
-<code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> is suitable for CUDA 11, but may need to be modified
-if you need to include additional libraries, or further libraries are
+, executables and non-library files that need to be injected into the
+container when running Apptainer with the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> Nvidia GPU support option.
+The provided <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> is suitable for CUDA 11, but may need to be
+modified if you need to include additional libraries, or further libraries are
 added to newer versions of the Nvidia driver/CUDA distribution.</p>
 <p>When adding new entries to <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> use the bare filename of
 executables, and the <code class="docutils literal notranslate"><span class="pre">xxxx.so</span></code> form of libraries. Libraries are
-resolved via <code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">-p</span></code>, and exectuables are found by searching
-<code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p>
+resolved via <code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">-p</span></code>, executables are found by searching
+<code class="docutils literal notranslate"><span class="pre">$PATH</span></code>, and non-library file paths should be full absolute paths.</p>
 <section id="experimental-nvidia-container-cli-support">
 <h4>Experimental nvidia-container-cli Support<a class="headerlink" href="#experimental-nvidia-container-cli-support" title="Link to this heading"></a></h4>
 <p>The <a class="reference external" href="https://github.com/NVIDIA/libnvidia-container">nvidia-container-cli</a> tool is Nvidia’s
@@ -868,7 +868,7 @@ modified if you need to include additional libraries, or further
 libraries are added to newer versions of the ROCm distribution.</p>
 <p>When adding new entries to <code class="docutils literal notranslate"><span class="pre">rocmlist.conf</span></code> use the bare filename of
 executables, and the <code class="docutils literal notranslate"><span class="pre">xxxx.so</span></code> form of libraries. Libraries are
-resolved via <code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">-p</span></code>, and exectuables are found by searching
+resolved via <code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">-p</span></code>, and executables are found by searching
 <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p>
 </section>
 <section id="gpu-liblist-format">

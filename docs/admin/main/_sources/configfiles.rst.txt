@@ -820,16 +820,16 @@ NVIDIA GPUs / CUDA
 ==================
 
 The ``nvliblist.conf`` configuration file is used to specify libraries
-and executables that need to be injected into the container when running
-{Project} with the ``--nv`` Nvidia GPU support option. The provided
-``nvliblist.conf`` is suitable for CUDA 11, but may need to be modified
-if you need to include additional libraries, or further libraries are
+, executables and non-library files that need to be injected into the
+container when running {Project} with the ``--nv`` Nvidia GPU support option.
+The provided ``nvliblist.conf`` is suitable for CUDA 11, but may need to be
+modified if you need to include additional libraries, or further libraries are
 added to newer versions of the Nvidia driver/CUDA distribution.
 
 When adding new entries to ``nvliblist.conf`` use the bare filename of
 executables, and the ``xxxx.so`` form of libraries. Libraries are
-resolved via ``ldconfig -p``, and exectuables are found by searching
-``$PATH``.
+resolved via ``ldconfig -p``, executables are found by searching
+``$PATH``, and non-library file paths should be full absolute paths.
 
 Experimental nvidia-container-cli Support
 -----------------------------------------
@@ -861,7 +861,7 @@ libraries are added to newer versions of the ROCm distribution.
 
 When adding new entries to ``rocmlist.conf`` use the bare filename of
 executables, and the ``xxxx.so`` form of libraries. Libraries are
-resolved via ``ldconfig -p``, and exectuables are found by searching
+resolved via ``ldconfig -p``, and executables are found by searching
 ``$PATH``.
 
 GPU liblist format
