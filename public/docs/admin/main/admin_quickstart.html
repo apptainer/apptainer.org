@@ -1,29 +1,27 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Quick Start &mdash; Apptainer Admin Guide main documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/clipboard.min.js"></script>
-        <script src="_static/copybutton.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a8da1a53"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=7cec7674"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -43,9 +41,6 @@
             Apptainer Admin Guide
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                main
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -96,15 +91,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="admin-quick-start">
-<h1>Admin Quick Start<a class="headerlink" href="#admin-quick-start" title="Permalink to this heading"></a></h1>
+  <section id="admin-quick-start">
+<h1>Admin Quick Start<a class="headerlink" href="#admin-quick-start" title="Link to this heading"></a></h1>
 <p>This quick start gives an overview of installation of Apptainer,
 a description of the architecture of Apptainer, and pointers
 to configuration files. More information, including alternate
 installation options and detailed configuration options can be found
 later in this guide.</p>
-<div class="section" id="architecture-of-apptainer">
-<span id="apptainer-architecture"></span><h2>Architecture of Apptainer<a class="headerlink" href="#architecture-of-apptainer" title="Permalink to this heading"></a></h2>
+<section id="architecture-of-apptainer">
+<span id="apptainer-architecture"></span><h2>Architecture of Apptainer<a class="headerlink" href="#architecture-of-apptainer" title="Link to this heading"></a></h2>
 <p>Apptainer is designed to allow containers to be executed as if they
 were native programs or scripts on a host system. No daemon is required
 to build or run containers, and the security model is compatible with
@@ -125,13 +120,13 @@ of containerized applications without major changes to their existing
 workflows. Where more complete isolation is important, Apptainer
 can use additional Linux namespaces and other security and resource
 limits to accomplish this.</p>
-</div>
-<div class="section" id="apptainer-security">
-<span id="id1"></span><h2>Apptainer Security<a class="headerlink" href="#apptainer-security" title="Permalink to this heading"></a></h2>
+</section>
+<section id="apptainer-security">
+<span id="id1"></span><h2>Apptainer Security<a class="headerlink" href="#apptainer-security" title="Link to this heading"></a></h2>
 <p>See the <a class="reference external" href="https://apptainer.org/docs/user/main/security.html">Security section</a> of the user guide.</p>
-</div>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
 <p>Apptainer can be installed from source directly, by building an
 RPM or Debian package from the source, or by downloading pre-built packages.
 Linux distributions may also package
@@ -140,9 +135,9 @@ upstream version on GitHub.</p>
 <p>To install from source, follow the instructions in <a class="reference external" href="https://github.com/apptainer/apptainer/blob/main/INSTALL.md">INSTALL.md</a>
 on GitHub.
 Other methods are discussed in the <a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installation</span></a> section of this guide.</p>
-</div>
-<div class="section" id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
 <p>Apptainer is configured using files under <code class="docutils literal notranslate"><span class="pre">etc/apptainer</span></code> in
 your <code class="docutils literal notranslate"><span class="pre">--prefix</span></code>, or <code class="docutils literal notranslate"><span class="pre">--syconfdir</span></code> if you used that option with
 <code class="docutils literal notranslate"><span class="pre">mconfig</span></code>. In a default installation from source without a
@@ -155,9 +150,9 @@ runtime behavior of Apptainer. Additional files control security,
 network, and resource configuration. Head over to the
 <a class="reference internal" href="configfiles.html#apptainer-configfiles"><span class="std std-ref">Configuration files</span></a> section where the
 files and configuration options are discussed.</p>
-</div>
-<div class="section" id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>You can run a quick test of Apptainer using a small alpine container:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine cat /etc/alpine-release
 3.9.2
@@ -165,8 +160,8 @@ files and configuration options are discussed.</p>
 </div>
 <p>See the <a class="reference external" href="https://apptainer.org/docs/user/main">user guide</a> for more
 information about how to use Apptainer.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
