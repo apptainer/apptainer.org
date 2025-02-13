@@ -356,6 +356,11 @@ execution where only 40_fakeroot.conflist is used.
 that may be used by users and groups listed in the allow net users /
 allow net groups directives.
 
+``allow netns paths``: Specify the paths to network namespaces that may 
+be joined by users and groups listed in the allow net users / allow net 
+groups directives. This restriction only applies when {Project} is 
+running in SUID mode and the user is non-root.
+
 GPU Options
 ===========
 
