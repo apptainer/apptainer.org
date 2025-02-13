@@ -146,7 +146,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#id12">Notes</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#yum-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">yum</span></code> bootstrap agent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#yum-or-dnf-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">yum</span></code> or <code class="docutils literal notranslate"><span class="pre">dnf</span></code> bootstrap agent</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id13">Overview</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id14">Keywords</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id15">Notes</a></li>
@@ -868,18 +868,22 @@ if environment variables have been changed between the base image and
 the new image during bootstrap.</p>
 </section>
 </section>
-<section id="yum-bootstrap-agent">
-<span id="build-yum"></span><h3><code class="docutils literal notranslate"><span class="pre">yum</span></code> bootstrap agent<a class="headerlink" href="#yum-bootstrap-agent" title="Link to this heading"></a></h3>
+<section id="yum-or-dnf-bootstrap-agent">
+<span id="build-yum"></span><h3><code class="docutils literal notranslate"><span class="pre">yum</span></code> or <code class="docutils literal notranslate"><span class="pre">dnf</span></code> bootstrap agent<a class="headerlink" href="#yum-or-dnf-bootstrap-agent" title="Link to this heading"></a></h3>
 <p id="sec-build-yum">This module allows you to build a Red Hat style
 container from a mirror URI based on yum or dnf.</p>
 <section id="id13">
 <h4>Overview<a class="headerlink" href="#id13" title="Link to this heading"></a></h4>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">yum</span></code> module to specify a base for a RHEL-like container.
+<p>Use the <code class="docutils literal notranslate"><span class="pre">yum</span></code> or <code class="docutils literal notranslate"><span class="pre">dnf</span></code> module to specify a base for a RHEL-like container.
 You must also specify the URI for the mirror you would like to use.</p>
 </section>
 <section id="id14">
 <h4>Keywords<a class="headerlink" href="#id14" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: yum
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: dnf
 </pre></div>
 </div>
 <p>The Bootstrap keyword is always mandatory. It describes the bootstrap
@@ -903,23 +907,23 @@ you can use it in the URI as in the example above.</p>
 packages into the core operating system. It is a best practice to supply
 only the bare essentials such that the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section has what it
 needs to properly complete the build. One common package you may want to
-install when using the <code class="docutils literal notranslate"><span class="pre">yum</span></code> build module is YUM or DNF itself.</p>
+install when using the <code class="docutils literal notranslate"><span class="pre">yum</span></code> or <code class="docutils literal notranslate"><span class="pre">dnf</span></code> build module is YUM or DNF itself.</p>
 </section>
 <section id="id15">
 <h4>Notes<a class="headerlink" href="#id15" title="Link to this heading"></a></h4>
-<p>There is a major limitation with using YUM to bootstrap a container. The
+<p>There is a major limitation with using YUM/DNF to bootstrap a container. The
 RPM database that exists within the container will be created using the
 RPM library and Berkeley DB implementation that exists on the host
 system. If the RPM implementation inside the container is not compatible
-with the RPM database that was used to create the container, RPM and YUM
+with the RPM database that was used to create the container, RPM and YUM/DNF
 commands inside the container may fail. This issue can be easily
 demonstrated by bootstrapping an older RHEL compatible image by a newer
 one (e.g. bootstrap a RHEL 8 container from a RHEL 9 host).</p>
-<p>In order to use the <code class="docutils literal notranslate"><span class="pre">yum</span></code> build module, you must have <code class="docutils literal notranslate"><span class="pre">yum</span></code>
-installed on your system. It may seem counter-intuitive to install YUM
-on a system that uses a different package manager, but you can do so.
+<p>In order to use the <code class="docutils literal notranslate"><span class="pre">yum</span></code> or <code class="docutils literal notranslate"><span class="pre">dnf</span></code> build module, you must have <code class="docutils literal notranslate"><span class="pre">yum</span></code>
+or <code class="docutils literal notranslate"><span class="pre">dnf</span></code> installed on your system. It may seem counter-intuitive to install YUM
+or DNF on a system that uses a different package manager, but you can do so.
 For instance, on Ubuntu you can install it like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get update &amp;&amp; sudo apt-get install yum
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get update &amp;&amp; sudo apt-get install dnf
 </pre></div>
 </div>
 </section>
