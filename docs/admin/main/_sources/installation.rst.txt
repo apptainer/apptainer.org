@@ -389,13 +389,7 @@ For the non-setuid installation use these commands:
     $ sudo apt update
     $ sudo apt install -y apptainer
 
-For the setuid installation do above commands first and then these:
-
-.. code::
-
-    $ sudo add-apt-repository -y ppa:apptainer/ppa
-    $ sudo apt update
-    $ sudo apt install -y apptainer-suid
+For the setuid installation use ``apptainer-suid`` instead of ``apptainer``.
 
 Install from Source
 ===================
