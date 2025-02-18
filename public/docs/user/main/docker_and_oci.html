@@ -295,6 +295,7 @@ Hub and other OCI registries. For Docker Hub, the registry hostname is
 username:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer registry login --username myuser docker://docker.io
 Password / Token:
+INFO:    Token stored in /home/myuser/.docker/config.json
 INFO:    Token stored in /home/myuser/.apptainer/remote.yaml
 </pre></div>
 </div>
@@ -309,6 +310,9 @@ use <code class="docutils literal notranslate"><span class="pre">apptainer</span
 INFO:    Logout succeeded
 </pre></div>
 </div>
+<p>For more information on <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">registry</span></code> and its subcommands, including
+the <code class="docutils literal notranslate"><span class="pre">--authfile</span></code> flag for storing and using credentials in user-specified
+files, see <a class="reference internal" href="registry.html#registry"><span class="std std-ref">the documentation of the registry command</span></a> itself.</p>
 </section>
 <section id="docker-cli-authentication">
 <h4>Docker CLI Authentication<a class="headerlink" href="#docker-cli-authentication" title="Link to this heading"></a></h4>
@@ -335,7 +339,7 @@ Enter Docker Password:
 </div>
 </section>
 <section id="environment-variables">
-<h4>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading"></a></h4>
+<span id="sec-docker-envvars"></span><h4>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading"></a></h4>
 <p>When calling Apptainer in a CI/CD workflow, or other non-interactive
 scenario, it may be useful to specify Docker Hub login credentials using
 environment variables. These are often the default way of passing
@@ -624,9 +628,10 @@ ensure that the credentials needed to access the image are available to
 Apptainer.</p>
 <p>A build might be run as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user, e.g. via <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, or under
 your own account.</p>
-<p>If you are running the build as <code class="docutils literal notranslate"><span class="pre">root</span></code>, using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, then any
-stored credentials or environment variables must be available to the
-<code class="docutils literal notranslate"><span class="pre">root</span></code> user:</p>
+<p>If you are running the build as <code class="docutils literal notranslate"><span class="pre">root</span></code>, then any stored
+credentials or environment variables must be available to the <code class="docutils literal notranslate"><span class="pre">root</span></code> user. You
+can make the credentials available to the <code class="docutils literal notranslate"><span class="pre">root</span></code> user in one of the following
+ways:</p>
 <ul class="simple">
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag for a one-time interactive login.
 I.E. run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apptainer</span> <span class="pre">build</span> <span class="pre">--docker-login</span> <span class="pre">myimage.sif</span>
@@ -640,6 +645,12 @@ for the <code class="docutils literal notranslate"><span class="pre">root</span>
 the credentials under your own account.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">login</span></code> if <code class="docutils literal notranslate"><span class="pre">docker</span></code> is on your machine. This is
 separate from storing the credentials under your own account.</p></li>
+<li><p>Store the credentials in a custom file on your filesystem using the
+<code class="docutils literal notranslate"><span class="pre">registry</span> <span class="pre">login</span> <span class="pre">--authfile</span> <span class="pre">&lt;path&gt;</span></code> subcommand, and then pass the same
+<code class="docutils literal notranslate"><span class="pre">--authfile</span> <span class="pre">&lt;path&gt;</span></code> flag to the <code class="docutils literal notranslate"><span class="pre">build</span></code> command. Note, however, that this
+will store the relevant credentials unencrypted in the specified file, so
+appropriate care must be taken concerning the location, ownership, and
+permissions of this file. See the <a class="reference internal" href="registry.html#sec-authfile"><span class="std std-ref">documentation of the –authfile flag</span></a> for more information.</p></li>
 </ul>
 <p>If you are running the build under your account
 you do not need to specially set credentials for the root user.</p>
