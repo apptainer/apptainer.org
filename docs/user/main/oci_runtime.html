@@ -83,7 +83,10 @@
 <li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">OCI Runtime Support</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#authentication-with-oci-registries">Authentication with OCI registries</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#mounted-oci-filesystem-bundles">Mounted OCI Filesystem Bundles</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#mounting-an-oci-filesystem-bundle">Mounting an OCI Filesystem Bundle</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#content-of-an-oci-compliant-filesystem-bundle">Content of an OCI Compliant Filesystem Bundle</a></li>
@@ -149,6 +152,19 @@ command group.</p>
 <p>All commands in the <code class="docutils literal notranslate"><span class="pre">oci</span></code> command group require <code class="docutils literal notranslate"><span class="pre">root</span></code>
 privileges.</p>
 </div>
+<section id="authentication-with-oci-registries">
+<h3>Authentication with OCI registries<a class="headerlink" href="#authentication-with-oci-registries" title="Link to this heading"></a></h3>
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">/</span> <span class="pre">shell</span> <span class="pre">/</span> <span class="pre">exec</span></code> and <code class="docutils literal notranslate"><span class="pre">pull</span></code> commands will attempt to use
+the login credentials found in the user’s
+<code class="docutils literal notranslate"><span class="pre">$HOME/.docker/docker-config.json</span></code> file to authenticate with the OCI
+registry in use (e.g. DockerHub). This file is created and populated by the
+<a class="reference internal" href="registry.html#registry"><span class="std std-ref">registry login</span></a> command.</p>
+<p>If this file does not exist, or exists but does not contain credentials for the
+registry in question, anonymous authentication will be used instead.</p>
+<p>However, the <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">/</span> <span class="pre">shell</span> <span class="pre">/</span> <span class="pre">exec</span></code> and <code class="docutils literal notranslate"><span class="pre">pull</span></code> commands can also use
+credentials stored in a different file of the user’s choosing, by specifying the
+<code class="docutils literal notranslate"><span class="pre">--authfile</span> <span class="pre">&lt;path&gt;</span></code> flag. See the <a class="reference internal" href="registry.html#sec-authfile"><span class="std std-ref">documentation of the –authfile flag</span></a> for details on how to create and use custom credential files.</p>
+</section>
 </section>
 <section id="mounted-oci-filesystem-bundles">
 <h2>Mounted OCI Filesystem Bundles<a class="headerlink" href="#mounted-oci-filesystem-bundles" title="Link to this heading"></a></h2>
