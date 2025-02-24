@@ -55,6 +55,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Build a container</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#downloading-an-existing-container-from-docker-hub">Downloading an existing container from Docker Hub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-an-architecture">Specifying an architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#downloading-an-existing-container-from-a-library-api-registry">Downloading an existing container from a Library API Registry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-writable-sandbox-directories">Creating writable <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#converting-containers-from-one-format-to-another">Converting containers from one format to another</a></li>
@@ -207,6 +208,21 @@ them into Apptainer containers.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build alpine.sif docker://alpine
 </pre></div>
 </div>
+</section>
+<section id="specifying-an-architecture">
+<h2>Specifying an architecture<a class="headerlink" href="#specifying-an-architecture" title="Link to this heading"></a></h2>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">build</span></code> from a <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI will attempt to fetch
+a container that matches the architecture of your host system. If you need to
+retrieve a container that does not have the same architecture as your host (e.g.
+an <code class="docutils literal notranslate"><span class="pre">arm64</span></code> container on an <code class="docutils literal notranslate"><span class="pre">amd64</span></code> host), you can use the <code class="docutils literal notranslate"><span class="pre">--arch</span></code> options.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --arch arm64 alpine.sif docker://alpine
+</pre></div>
+</div>
+<p>Or to build an <code class="docutils literal notranslate"><span class="pre">arm32</span></code> container by using the <code class="docutils literal notranslate"><span class="pre">--arch-variant</span></code> option:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --arch arm --arch-variant 7 alpine.sif docker://alpine
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="docker_and_oci.html#specifying-an-architecture"><span class="std std-ref">Specifying an architecture</span></a> and <a class="reference internal" href="docker_and_oci.html#cpu-emulation"><span class="std std-ref">CPU emulation</span></a> for more details.</p>
 </section>
 <section id="downloading-an-existing-container-from-a-library-api-registry">
 <h2>Downloading an existing container from a Library API Registry<a class="headerlink" href="#downloading-an-existing-container-from-a-library-api-registry" title="Link to this heading"></a></h2>
