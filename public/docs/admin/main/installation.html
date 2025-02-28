@@ -657,14 +657,18 @@ approach (<code class="docutils literal notranslate"><span class="pre">--nv</spa
 </section>
 <section id="mac">
 <h3>Mac<a class="headerlink" href="#mac" title="Link to this heading"></a></h3>
-<p>Apptainer is available via Lima (installable with <a class="reference external" href="https://brew.sh">Homebrew</a> or manually)</p>
+<p>Apptainer is available via <a class="reference external" href="https://lima-vm.io">Lima</a> (installable with <a class="reference external" href="https://brew.sh">Homebrew</a> or manually)</p>
+<p>Lima launches Linux machines with automatic file sharing and port forwarding.
+It uses native virtualization support provided by macOS Virtualization.Framework,
+on platforms (such as Intel Macs) where that (“VZ”) is not supported it uses QEMU.
+The default Linux distribution used by Lima for Apptainer template is Ubuntu.</p>
 <p>To use Lima via Homebrew:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ /bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;
-$ brew install qemu lima
+$ brew install lima
 </pre></div>
 </div>
 <p>Then do <code class="docutils literal notranslate"><span class="pre">limactl</span> <span class="pre">start</span> <span class="pre">template://apptainer</span></code> and <code class="docutils literal notranslate"><span class="pre">limactl</span> <span class="pre">shell</span> <span class="pre">apptainer</span></code>.</p>
-<p>To customize cpus and memory on the VM, you can use <code class="docutils literal notranslate"><span class="pre">--cpus</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">--memory</span> <span class="pre">1</span></code>.</p>
+<p>To customize cpus and memory on the VM, you can use <code class="docutils literal notranslate"><span class="pre">--cpus</span> <span class="pre">4</span></code> and <code class="docutils literal notranslate"><span class="pre">--memory</span> <span class="pre">4</span></code>.</p>
 <p>See the <a class="reference external" href="https://github.com/lima-vm/lima/blob/master/templates/apptainer.yaml">lima “apptainer” template</a>
 and the <a class="reference external" href="https://github.com/lima-vm/lima/blob/master/templates/default.yaml">lima “default” template</a>
 for more details.</p>
