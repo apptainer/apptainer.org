@@ -633,19 +633,24 @@ approach (``--nv`` only) is not sufficient for GPU support under WSL2.
 Mac
 ===
 
-{Project} is available via Lima (installable with `Homebrew
+{Project} is available via `Lima <https://lima-vm.io>`_ (installable with `Homebrew
 <https://brew.sh>`_ or manually)
+
+Lima launches Linux machines with automatic file sharing and port forwarding.
+It uses native virtualization support provided by macOS Virtualization.Framework,
+on platforms (such as Intel Macs) where that ("VZ") is not supported it uses QEMU.
+The default Linux distribution used by Lima for {Project} template is Ubuntu.
 
 To use Lima via Homebrew:
 
 .. code::
 
    $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-   $ brew install qemu lima
+   $ brew install lima
 
 Then do ``limactl start template://apptainer`` and ``limactl shell apptainer``.
 
-To customize cpus and memory on the VM, you can use ``--cpus 1`` and ``--memory 1``.
+To customize cpus and memory on the VM, you can use ``--cpus 4`` and ``--memory 4``.
 
 See the `lima "apptainer" template <https://github.com/lima-vm/lima/blob/master/templates/apptainer.yaml>`_
 and the `lima "default" template <https://github.com/lima-vm/lima/blob/master/templates/default.yaml>`_
