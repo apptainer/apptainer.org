@@ -69,6 +69,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#centrally-managed-subuid-subgid-mappings">Centrally managed subuid/subgid mappings</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
@@ -256,10 +257,8 @@ that can be used by <code class="docutils literal notranslate"><span class="pre"
 <p>Some distributions add users to these files on installation, or when
 <code class="docutils literal notranslate"><span class="pre">useradd</span></code>, <code class="docutils literal notranslate"><span class="pre">adduser</span></code>, etc. utilities are used to manage local
 users.</p>
-<p>The glibc nss name service switch mechanism does not currently
-support managing <code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code> mappings with external
-directory services such as LDAP. You must manage or provision mapping
-files direct to systems where rootless fakeroot will be used.</p>
+<p>Newer operating systems that support libsubid can
+<a class="reference internal" href="#managed-subuid"><span class="std std-ref">manage these mappings centrally for a cluster</span></a>.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -374,12 +373,14 @@ You may <code class="docutils literal notranslate"><span class="pre">--add</span
 also <code class="docutils literal notranslate"><span class="pre">--enable</span></code> or <code class="docutils literal notranslate"><span class="pre">--disable</span></code> existing mappings.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you deploy Apptainer to a cluster you will need to make
+<p>Newer operating systems that support libsubid can
+<a class="reference internal" href="#managed-subuid"><span class="std std-ref">manage these mappings centrally for a cluster</span></a>.
+If you do not use that and you deploy Apptainer to a cluster
+you will need to make
 arrangements to synchronize <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>
-mapping files to all nodes.</p>
-<p>At this time, the glibc name service switch functionality does not
-support subuid or subgid mappings, so they cannot be defined in a
-central directory such as LDAP.</p>
+mapping files to all nodes.
+The <cite>apptainer config fakeroot</cite> command only modifies the settings
+on the local machine.</p>
 </div>
 <section id="adding-a-fakeroot-mapping">
 <h4>Adding a fakeroot mapping<a class="headerlink" href="#adding-a-fakeroot-mapping" title="Link to this heading"></a></h4>
@@ -448,6 +449,23 @@ $ cat /etc/subuid
 </div>
 </section>
 </section>
+</section>
+<section id="centrally-managed-subuid-subgid-mappings">
+<span id="managed-subuid"></span><h2>Centrally managed subuid/subgid mappings<a class="headerlink" href="#centrally-managed-subuid-subgid-mappings" title="Link to this heading"></a></h2>
+<p>When available on newer operating systems, Apptainer supports the
+<code class="docutils literal notranslate"><span class="pre">libsubid</span></code> library (which comes from the
+<a class="reference external" href="https://github.com/shadow-maint/shadow">shadow-utils package</a>)
+to use subuid and subgid mappings from an LDAP database shared within a
+cluster of computers.</p>
+<p>To use this the cluster needs to be set up with a
+<a class="reference external" href="https://freeipa.org">FreeIPA</a> server that is
+<a class="reference external" href="https://freeipa.readthedocs.io/en/latest/designs/subordinate-ids.html">configured</a>
+with the subordinate user and group ids.
+In addition, the client machines need to have a line like the following in
+<code class="docutils literal notranslate"><span class="pre">/etc/nsswitch.conf</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">subid</span><span class="p">:</span> <span class="n">sss</span>
+</pre></div>
+</div>
 </section>
 </section>
 
