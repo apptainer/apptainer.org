@@ -194,10 +194,8 @@ Same for ``/etc/subgid``:
    ``useradd``, ``adduser``, etc. utilities are used to manage local
    users.
 
-   The glibc nss name service switch mechanism does not currently
-   support managing ``subuid`` and ``subgid`` mappings with external
-   directory services such as LDAP. You must manage or provision mapping
-   files direct to systems where rootless fakeroot will be used.
+   Newer operating systems that support libsubid can
+   :ref:`manage these mappings centrally for a cluster <managed-subuid>`.
 
 .. warning::
 
@@ -307,13 +305,15 @@ also ``--enable`` or ``--disable`` existing mappings.
 
 .. note::
 
-   If you deploy {Project} to a cluster you will need to make
+   Newer operating systems that support libsubid can
+   :ref:`manage these mappings centrally for a cluster <managed-subuid>`.
+   If you do not use that and you deploy {Project} to a cluster
+   you will need to make
    arrangements to synchronize ``/etc/subuid`` and ``/etc/subgid``
    mapping files to all nodes.
+   The `{command} config fakeroot` command only modifies the settings
+   on the local machine.
 
-   At this time, the glibc name service switch functionality does not
-   support subuid or subgid mappings, so they cannot be defined in a
-   central directory such as LDAP.
 
 Adding a fakeroot mapping
 -------------------------
@@ -387,3 +387,27 @@ user.
    # Entry is active
    $ cat /etc/subuid
    1000:4294836224:65536
+
+
+.. _managed-subuid:
+
+******************************
+ Centrally managed subuid/subgid mappings
+******************************
+
+When available on newer operating systems, {Project} supports the
+``libsubid`` library (which comes from the
+`shadow-utils package <https://github.com/shadow-maint/shadow>`_)
+to use subuid and subgid mappings from an LDAP database shared within a
+cluster of computers.  
+
+To use this the cluster needs to be set up with a 
+`FreeIPA <https://freeipa.org>`_ server that is
+`configured <https://freeipa.readthedocs.io/en/latest/designs/subordinate-ids.html>`_
+with the subordinate user and group ids.
+In addition, the client machines need to have a line like the following in
+``/etc/nsswitch.conf``:
+
+.. code::
+
+    subid: sss
