@@ -151,7 +151,8 @@ Apptainer does this in different ways, depending on what is available on
 the host:</p>
 <ol class="arabic simple">
 <li><p>If the host is set up to map the current user via <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and
-<code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> mapping files, Apptainer will use that method first.
+<code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> mapping files (or equivalent through libsubid),
+Apptainer will use that method first.
 This is also commonly referred to as “rootless mode” and is the
 method used for example by Podman.
 This mode requires user namespaces to be enabled.

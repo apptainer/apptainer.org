@@ -171,6 +171,8 @@ Options
 
 ::
 
+      --arch string              architecture to build for (default "amd64")
+      --arch-variant string      architecture variant to build for
       --authfile string          Docker-style authentication file to use for writing/reading OCI registry credentials
   -B, --bind stringArray         a user-bind path specification. spec has the format src[:dest[:opts]],where src and dest are outside and inside paths. If dest is not given,it is set equal to src. Mount options ('opts') may be specified as 'ro'(read-only) or 'rw' (read/write, which is the default).Multiple bind paths can be given by a comma separated list.
       --build-arg strings        defines variable=value to replace {{ variable }} entries in build definition file
