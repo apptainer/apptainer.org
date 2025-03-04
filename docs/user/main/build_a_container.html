@@ -446,7 +446,19 @@ definition file as JSON.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mksquashfs squashfs-root out.squashfs -comp zstd -Xhelp
 </pre></div>
 </div>
-<p>Non-gzip squashfs compression might not work with some installations.</p>
+<p>Non-gzip squashfs compression might not work with some installations.
+However, note that by default the apptainer command now uses its own
+bundled recent version of mksquashfs that should have the maximum
+compressors enabled.  So you might want to explore the help on that
+version, for example by setting its directory early in your PATH like
+this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ PATH=$(apptainer buildcfg | sed -n &#39;s,^LIBEXECDIR=\(.*\),\1/apptainer/bin,p&#39;):$PATH
+</pre></div>
+</div>
+<p>Also note that by using non-default compression methods that the
+resulting SIF file might not be usable by installations that do not have
+the decompression method available.  This can be especially true for
+older versions of apptainer.</p>
 </section>
 <section id="notest">
 <h3><code class="docutils literal notranslate"><span class="pre">--notest</span></code><a class="headerlink" href="#notest" title="Link to this heading"></a></h3>
