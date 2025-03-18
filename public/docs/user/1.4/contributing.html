@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributing &mdash; Apptainer User Guide main documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a8da1a53"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Appendix" href="appendix.html" />
+    <link rel="prev" title="GPU Support (NVIDIA CUDA &amp; AMD ROCm)" href="gpu.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Instances - Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Limiting Container Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Application Checkpointing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#join-the-community">Join the community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#raise-an-issue">Raise an Issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#write-documentation">Write Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contribute-to-the-code">Contribute to the code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-fork-the-repo">Step 1. Fork the repo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-checkout-a-new-branch">Step 2. Checkout a new branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-make-your-changes">Step 3. Make your changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-push-your-branch-to-your-fork">Step 4. Push your branch to your fork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-5-submit-a-pull-request">Step 5. Submit a Pull Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-6-keep-your-branch-in-sync">Step 6. Keep your branch in sync</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apptainer User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Contributing</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/contributing.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contributing">
+<span id="id1"></span><h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading"></a></h1>
+<p>Apptainer is an open source project, meaning we have the challenge
+of limited resources. We are grateful for any support that you can
+offer. Helping other users, raising issues, helping write documentation,
+or contributing code are all ways to help!</p>
+<section id="join-the-community">
+<h2>Join the community<a class="headerlink" href="#join-the-community" title="Link to this heading"></a></h2>
+<p>This is a huge endeavor, and your help would be greatly appreciated!
+Post to online communities about Apptainer, and request that your
+distribution vendor, service provider, and system administrators include
+Apptainer for you!</p>
+<p>You can reach the community through the mailing list or Slack.  Links to
+join those are on the <a class="reference external" href="https://apptainer.org/help/">apptainer help page</a>.</p>
+</section>
+<section id="raise-an-issue">
+<span id="report-a-issue"></span><span id="contributing-to-documentation"></span><h2>Raise an Issue<a class="headerlink" href="#raise-an-issue" title="Link to this heading"></a></h2>
+<p>For general bugs/issues, you can open an issue <a class="reference external" href="https://github.com/apptainer/apptainer/issues/new">at the GitHub repo</a>. However, if you
+find a security related issue/problem, please email the Apptainer Security Team directly at
+<a class="reference external" href="mailto:security&#37;&#52;&#48;apptainer&#46;org">security<span>&#64;</span>apptainer<span>&#46;</span>org</a>. More information about the Apptainer security policies
+and procedures can be found <a class="reference external" href="https://apptainer.org/security-policy/">here</a></p>
+</section>
+<section id="write-documentation">
+<h2>Write Documentation<a class="headerlink" href="#write-documentation" title="Link to this heading"></a></h2>
+<p>We (like almost all open source software providers) have a documentation
+dilemma… We tend to focus on the code features and functionality before
+working on documentation. And there is very good reason for this: we
+want to share the love so nobody feels left out!</p>
+<p>You can contribute to the documentation by <a class="reference external" href="https://github.com/apptainer/apptainer-userdocs/issues/new">raising an issue to suggest
+an improvement</a> or by
+sending a <a class="reference external" href="https://github.com/apptainer/apptainer-userdocs/compare">pull request</a> on <a class="reference external" href="https://github.com/apptainer/apptainer-userdocs">our
+repository for documentation</a>.</p>
+<p>The current documentation is generated with:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructured Text (RST)</a>
+and <a class="reference external" href="https://readthedocs.org/">ReadTheDocs</a>.</p></li>
+</ul>
+<p>Other dependencies include:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.python.org/downloads/">Python 3.5 or newer</a>.</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/Sphinx/">Sphinx</a>.</p></li>
+</ul>
+<p>More information about contributing to the documentation, instructions
+on how to install the dependencies, and how to generate the files can be
+obtained <a class="reference external" href="https://github.com/apptainer/apptainer-userdocs/blob/main/README.md">here</a>.</p>
+<p>For more information on using Git and GitHub to create a pull request
+suggesting additions and edits to the docs, see the <a class="reference internal" href="#contribute-to-the-code"><span class="std std-ref">section on
+contributing to the code</span></a>. The procedure is
+identical for contributions to the documentation and the code base.</p>
+</section>
+<section id="contribute-to-the-code">
+<span id="id2"></span><h2>Contribute to the code<a class="headerlink" href="#contribute-to-the-code" title="Link to this heading"></a></h2>
+<p>We use the traditional <a class="reference external" href="https://guides.github.com/introduction/flow/">GitHub Flow</a> to develop. This means
+that you fork the main repo, create a new branch to make changes, and
+submit a pull request (PR) to the main branch.</p>
+<p>Check out our official <a class="reference external" href="https://github.com/apptainer/apptainer/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
+document, which also includes a <a class="reference external" href="https://github.com/apptainer/apptainer/blob/main/CONTRIBUTING.md#code-of-conduct">code of conduct</a>.</p>
+<section id="step-1-fork-the-repo">
+<h3>Step 1. Fork the repo<a class="headerlink" href="#step-1-fork-the-repo" title="Link to this heading"></a></h3>
+<p>To contribute to Apptainer, you should obtain a GitHub account and
+fork the <a class="reference external" href="https://github.com/apptainer/apptainer">Apptainer</a>
+repository. Once forked, clone your fork of the repo to your computer.
+(Obviously, you should replace <code class="docutils literal notranslate"><span class="pre">your-username</span></code> with your GitHub
+username.)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/your-username/apptainer.git &amp;&amp; \
+    cd apptainer/
+</pre></div>
+</div>
+</section>
+<section id="step-2-checkout-a-new-branch">
+<h3>Step 2. Checkout a new branch<a class="headerlink" href="#step-2-checkout-a-new-branch" title="Link to this heading"></a></h3>
+<p><a class="reference external" href="https://guides.github.com/introduction/flow//">Branches</a> are a way of
+isolating your features from the main branch. Given that we’ve just
+cloned the repo, we will probably want to make a new branch from main
+in which to work on our new feature. Lets call that branch
+<code class="docutils literal notranslate"><span class="pre">new-feature</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout main &amp;&amp; \
+    git checkout -b new-feature
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can always check which branch you are in by running <code class="docutils literal notranslate"><span class="pre">git</span>
+<span class="pre">branch</span></code>.</p>
+</div>
+</section>
+<section id="step-3-make-your-changes">
+<h3>Step 3. Make your changes<a class="headerlink" href="#step-3-make-your-changes" title="Link to this heading"></a></h3>
+<p>On your new branch, go nuts! Make changes, test them, and when you are
+happy commit the changes to the branch.
+The Apptainer requires that all contributed git commits use the <code class="docutils literal notranslate"><span class="pre">-s</span></code> option
+which adds a <code class="docutils literal notranslate"><span class="pre">Signed-off-by</span></code> line to indicate agreement with the
+<a class="reference external" href="https://developercertificate.org">Developer Certificate of Origin</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git add file-changed1 file-changed2...
+
+$ git commit -s -m &quot;what changed?&quot;
+</pre></div>
+</div>
+<p>This commit message is important - it should describe exactly the
+changes that you have made. Good commit messages read like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git commit -s -m &quot;changed function getConfig in functions.go to output csv to fix #2&quot;
+
+$ git commit -s -m &quot;updated docs about shell to close #10&quot;
+</pre></div>
+</div>
+<p>The tags <code class="docutils literal notranslate"><span class="pre">close</span> <span class="pre">#10</span></code> and <code class="docutils literal notranslate"><span class="pre">fix</span> <span class="pre">#2</span></code> are referencing issues that are
+posted on the upstream repo where you will direct your pull request.
+When your PR is merged into the main branch, these messages will
+automatically close the issues, and further, they will link your commits
+directly to the issues they intend to fix. This will help future
+maintainers understand your contribution, or (hopefully not) revert the
+code back to a previous version if necessary.</p>
+</section>
+<section id="step-4-push-your-branch-to-your-fork">
+<h3>Step 4. Push your branch to your fork<a class="headerlink" href="#step-4-push-your-branch-to-your-fork" title="Link to this heading"></a></h3>
+<p>When you are done with your commits, you should push your branch to your
+fork (and you can also continuously push commits here as you work):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git push origin new-feature
+</pre></div>
+</div>
+<p>Note that you should always check the status of your branches to see
+what has been pushed (or not):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git status
+</pre></div>
+</div>
+</section>
+<section id="step-5-submit-a-pull-request">
+<h3>Step 5. Submit a Pull Request<a class="headerlink" href="#step-5-submit-a-pull-request" title="Link to this heading"></a></h3>
+<p>Once you have pushed your branch, then you can go to your fork (in the
+web GUI on GitHub) and <a class="reference external" href="https://help.github.com/articles/creating-a-pull-request/">submit a Pull Request</a>.
+Regardless of the name of your branch, your PR should be submitted to
+the Apptainer <code class="docutils literal notranslate"><span class="pre">main</span></code> branch. Submitting your PR will open a
+conversation thread for the maintainers of Apptainer to discuss your
+contribution. At this time, the continuous integration that is linked
+with the code base will also be executed. If there is an issue, or if
+the maintainers suggest changes, you can continue to push commits to
+your branch and they will update the Pull Request.</p>
+</section>
+<section id="step-6-keep-your-branch-in-sync">
+<h3>Step 6. Keep your branch in sync<a class="headerlink" href="#step-6-keep-your-branch-in-sync" title="Link to this heading"></a></h3>
+<p>Cloning the repo will create an exact copy of the Apptainer
+repository at that moment. As you work, your branch may become out of
+date as others merge changes into the upstream main. In the event that
+you need to update a branch, you will need to follow the next steps:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git remote add upstream https://github.com/apptainer/apptainer.git &amp;&amp; # to add a new remote named &quot;upstream&quot; \
+    git checkout main &amp;&amp; # or another branch to be updated \
+    git pull upstream main &amp;&amp; \
+    git push origin main &amp;&amp; # to update your fork \
+    git checkout new-feature &amp;&amp; \
+    git merge main
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gpu.html" class="btn btn-neutral float-left" title="GPU Support (NVIDIA CUDA &amp; AMD ROCm)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="appendix.html" class="btn btn-neutral float-right" title="Appendix" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
