@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Apptainer Configuration Files &mdash; Apptainer Admin Guide main documentation</title>
+  <title>Apptainer Configuration Files &mdash; Apptainer Admin Guide 1.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -17,7 +17,7 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=a8da1a53"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -136,7 +136,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Apptainer Configuration Files</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/apptainer-admindocs/blob/main/configfiles.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-admindocs/blob/1.4/configfiles.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -197,7 +197,7 @@ the <code class="docutils literal notranslate"><span class="pre">--no-privs</spa
 <p class="admonition-title">Note</p>
 <p>The root user can manage the capabilities granted to individual
 containers when they are launched through the <code class="docutils literal notranslate"><span class="pre">--add-caps</span></code> and
-<code class="docutils literal notranslate"><span class="pre">drop-caps</span></code> flags. Please see <a class="reference external" href="https://apptainer.org/docs/user/main/security_options.html#linux-capabilities">Linux Capabilities</a>
+<code class="docutils literal notranslate"><span class="pre">drop-caps</span></code> flags. Please see <a class="reference external" href="https://apptainer.org/docs/user/1.4/security_options.html#linux-capabilities">Linux Capabilities</a>
 in the user guide for more information.</p>
 </div>
 </section>
@@ -431,7 +431,7 @@ For security reasons this defaults to <code class="docutils literal notranslate"
 <section id="networking-options">
 <h3>Networking Options<a class="headerlink" href="#networking-options" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--network</span></code> option can be used to specify a CNI networking
-configuration that will be used when running a container with <a class="reference external" href="https://apptainer.org/docs/user/main/networking.html">network
+configuration that will be used when running a container with <a class="reference external" href="https://apptainer.org/docs/user/1.4/networking.html">network
 virtualization</a>.
 Unrestricted use of CNI network configurations requires root privilege,
 as certain configurations may disrupt the host networking environment.</p>
@@ -502,10 +502,10 @@ similar to the kernel overlay driver and to fuse-overlayfs.</p>
 <h3>CNI Configuration and Plugins<a class="headerlink" href="#cni-configuration-and-plugins" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">cni</span> <span class="pre">configuration</span> <span class="pre">path</span></code>: This option allows admins to specify a
 custom path for the CNI configuration that Apptainer will use for
-<a class="reference external" href="https://apptainer.org/docs/user/main/networking.html">Network Virtualization</a>.</p>
+<a class="reference external" href="https://apptainer.org/docs/user/1.4/networking.html">Network Virtualization</a>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">cni</span> <span class="pre">plugin</span> <span class="pre">path</span></code>: This option allows admins to specify a custom path
 for Apptainer to access CNI plugin executables. Check out the
-<a class="reference external" href="https://apptainer.org/docs/user/main/networking.html">Network Virtualization</a>
+<a class="reference external" href="https://apptainer.org/docs/user/1.4/networking.html">Network Virtualization</a>
 section of the user guide for more information.</p>
 </section>
 <section id="external-binaries">
@@ -841,7 +841,7 @@ restrict the in-container device tree.</p>
 <p>Compatibility between containerized CUDA/ROCm/OpenCL applications and
 host drivers/libraries is dependent on the versions of the GPU compute
 frameworks that were used to build the applications. Compatibility and
-usage information is discussed in the <a class="reference external" href="https://apptainer.org/docs/user/main/gpu.html">GPU Support</a>
+usage information is discussed in the <a class="reference external" href="https://apptainer.org/docs/user/1.4/gpu.html">GPU Support</a>
 section of the user guide.</p>
 <section id="nvidia-gpus-cuda">
 <h3>NVIDIA GPUs / CUDA<a class="headerlink" href="#nvidia-gpus-cuda" title="Link to this heading"></a></h3>
@@ -1005,8 +1005,8 @@ listed system calls if the user has the associated capability.</p>
 </pre></div>
 </div>
 <p>For more insight into security options, network options, cgroups,
-capabilities, etc, please check the <a class="reference external" href="https://apptainer.org/docs/user/main">Userdocs</a> and it’s
-<a class="reference external" href="https://apptainer.org/docs/user/main/appendix.html">Appendix</a>.</p>
+capabilities, etc, please check the <a class="reference external" href="https://apptainer.org/docs/user/1.4">Userdocs</a> and it’s
+<a class="reference external" href="https://apptainer.org/docs/user/1.4/appendix.html">Appendix</a>.</p>
 </section>
 <section id="remote-yaml">
 <h2>remote.yaml<a class="headerlink" href="#remote-yaml" title="Link to this heading"></a></h2>
@@ -1094,12 +1094,12 @@ set by the service discovery file.</p>
 server, it does not support the <code class="docutils literal notranslate"><span class="pre">library://</span></code> protocol.
 Formerly the default was set to point to Sylabs servers, but the
 read/write support of the <code class="docutils literal notranslate"><span class="pre">oras://</span></code> protocol by for example the
-<a class="reference external" href="https://apptainer.org/docs/user/main/docker_and_oci.html#github-container-registry">GitHub Container Registry</a>
+<a class="reference external" href="https://apptainer.org/docs/user/1.4/docker_and_oci.html#github-container-registry">GitHub Container Registry</a>
 makes it unnecessary.
 The remote endpoint was also formerly used for builds using the
 build <code class="docutils literal notranslate"><span class="pre">--remote</span></code> option, but Apptainer does not support that.
 Instead, it supports
-<a class="reference external" href="https://apptainer.org/docs/user/main/fakeroot.html#build">unprivileged local builds</a>.</p>
+<a class="reference external" href="https://apptainer.org/docs/user/1.4/fakeroot.html#build">unprivileged local builds</a>.</p>
 <p>If you would still like to have the previous default for all users,
 these are the commands to restore the library behavior from before
 Apptainer, where using the <code class="docutils literal notranslate"><span class="pre">library://</span></code> URI would download from the
@@ -1130,7 +1130,7 @@ https://keys.production.sycloud.io  YES     NO        1*
 <section id="additional-information">
 <h4>Additional Information<a class="headerlink" href="#additional-information" title="Link to this heading"></a></h4>
 <p>For more details on the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group and managing remote
-endpoints, please check the <a class="reference external" href="https://apptainer.org/docs/user/main/endpoint.html">Remote Userdocs</a>.</p>
+endpoints, please check the <a class="reference external" href="https://apptainer.org/docs/user/1.4/endpoint.html">Remote Userdocs</a>.</p>
 </section>
 </section>
 <section id="keyserver-configuration">
@@ -1141,7 +1141,7 @@ supplemented via the <code class="docutils literal notranslate"><span class="pre
 commands. These commands allow an administrator to create a global list
 of key servers used to verify container signatures by default.</p>
 <p>For more details on the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group and managing
-keyservers, please check the <a class="reference external" href="https://apptainer.org/docs/user/main/endpoint.html">Remote Userdocs</a>.</p>
+keyservers, please check the <a class="reference external" href="https://apptainer.org/docs/user/1.4/endpoint.html">Remote Userdocs</a>.</p>
 </section>
 </section>
 <section id="dmtcp-conf-yaml">
@@ -1183,7 +1183,7 @@ specified without version information, i.e.
 that they are in a system path (binaries), or available in paths
 configured in <code class="docutils literal notranslate"><span class="pre">/etc/ld.so.conf</span></code> (libraries).</p>
 <p>For more details on the checkpointing features in Apptainer, please check the
-<a class="reference external" href="https://apptainer.org/docs/user/main/checkpoint.html">Checkpoint Userdocs</a>.</p>
+<a class="reference external" href="https://apptainer.org/docs/user/1.4/checkpoint.html">Checkpoint Userdocs</a>.</p>
 </section>
 </section>
 
