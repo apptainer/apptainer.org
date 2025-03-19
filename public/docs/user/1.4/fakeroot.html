@@ -157,7 +157,7 @@ This is also commonly referred to as “rootless mode” and is the
 method used for example by Podman.
 This mode requires user namespaces to be enabled.
 It is the most complete emulation but it requires administrator setup
-as described in the <a class="reference external" href="https://apptainer.org/docs/admin/main/user_namespace.html#rootless-fakeroot-feature">admin guide</a>.
+as described in the <a class="reference external" href="https://apptainer.org/docs/admin/1.4/user_namespace.html#rootless-fakeroot-feature">admin guide</a>.
 It also requires some elevated privilege assistance on the host as described
 there, which means that it will not be able to run nested inside another
 container that disallows elevating privileges, as Apptainer does.
@@ -185,7 +185,7 @@ bound in from the host so if the host libc library is a newer version
 than the corresponding library in the container the
 fakeroot command can fail with errors about missing GLIBC versions.
 If that situation happens the easiest solution may be to use the
-<a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html#install-from-pre-built-packages">install-unprivileged.sh script</a>
+<a class="reference external" href="https://apptainer.org/docs/admin/1.4/installation.html#install-from-pre-built-packages">install-unprivileged.sh script</a>
 to install Apptainer because it downloads a fakeroot command
 built with as old a libc as possible.
 Otherwise you can also try using the <code class="docutils literal notranslate"><span class="pre">--ignore-fakeroot-command</span></code>

@@ -160,7 +160,7 @@ capabilities on a user or group basis. For example, let us suppose that
 an admin has decided to grant a user (named <code class="docutils literal notranslate"><span class="pre">pinger</span></code>) capabilities to
 open raw sockets so that they can use <code class="docutils literal notranslate"><span class="pre">ping</span></code> in a container where the
 binary is controlled via capabilities. For information about how to
-manage capabilities as an admin please refer to the <a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#capability-json">capability admin
+manage capabilities as an admin please refer to the <a class="reference external" href="https://apptainer.org/docs/admin/1.4/configfiles.html#capability-json">capability admin
 docs</a>.
 This feature requires a setuid-root installation of Apptainer.</p>
 <p>To take advantage of this granted capability as a user, <code class="docutils literal notranslate"><span class="pre">pinger</span></code> must
@@ -189,8 +189,8 @@ useful in cloud-native architectures is dropping capabilities when
 spawning containers as the root user to help minimize attack surfaces.
 With a default installation of Apptainer, containers created by the
 root user will maintain all capabilities. This behavior is configurable
-if desired. Check out the <a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#capability.json">capability configuration</a>
-and <a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#setuid-and-capabilities">root default capabilities</a>
+if desired. Check out the <a class="reference external" href="https://apptainer.org/docs/admin/1.4/configfiles.html#capability.json">capability configuration</a>
+and <a class="reference external" href="https://apptainer.org/docs/admin/1.4/configfiles.html#setuid-and-capabilities">root default capabilities</a>
 sections of the admin docs for more information.</p>
 <p>Assuming the root user will execute containers with the <code class="docutils literal notranslate"><span class="pre">CAP_NET_RAW</span></code>
 capability by default, executing the same container <code class="docutils literal notranslate"><span class="pre">pinger</span></code> executed
