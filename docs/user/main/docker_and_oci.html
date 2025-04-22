@@ -769,8 +769,17 @@ registry, the <code class="docutils literal notranslate"><span class="pre">docke
 <p>In the example above, the build was performed without <code class="docutils literal notranslate"><span class="pre">sudo</span></code>. This
 is possible only when the user is part of the <code class="docutils literal notranslate"><span class="pre">docker</span></code> group on the
 host, since Apptainer must contact the Docker daemon through its
-socket. If you are not part of the <code class="docutils literal notranslate"><span class="pre">docker</span></code> group you will need to
-use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> for the build to complete successfully.</p>
+socket. If you are not part of the <code class="docutils literal notranslate"><span class="pre">docker</span></code> group, or if you are using
+Podman for the <code class="docutils literal notranslate"><span class="pre">docker</span></code> command, you will need to use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> for
+the build to complete successfully.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can also use rootless docker or rootless podman with <code class="docutils literal notranslate"><span class="pre">docker-daemon</span></code>,
+then you don’t need to use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> or be a part of any root groups.
+Set the environment variable <code class="docutils literal notranslate"><span class="pre">DOCKER_HOST</span></code> to the URL of your daemon
+socket, following the upstream documentation from <a class="reference external" href="https://docs.docker.com/engine/security/rootless">Docker</a> or from <a class="reference external" href="https://docs.podman.io/en/latest/Tutorials.html">Podman</a>.
+Example command: <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">DOCKER_HOST=unix:///run/user/1000/docker.sock</span></code></p>
 </div>
 <p>To build from an image cached by the Docker daemon in a definition file
 use <code class="docutils literal notranslate"><span class="pre">Bootstrap:</span> <span class="pre">docker-daemon</span></code>, and a <code class="docutils literal notranslate"><span class="pre">From:</span> <span class="pre">&lt;REPOSITORY&gt;:TAG</span></code> line:</p>
