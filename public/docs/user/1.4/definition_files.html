@@ -647,6 +647,22 @@ the host, or <code class="docutils literal notranslate"><span class="pre">defaul
 </div>
 <p>See <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">Environment and Metadata</span></a> for more
 information about the Apptainer container environment.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Things set up in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section are done in a parent
+shell of the one that executes the container, so things such as
+function definitions and aliases do not get carried through.
+As a result, for example initializing conda cannot be done there.
+For that type of initialization you can instead in the <code class="docutils literal notranslate"><span class="pre">%post</span></code>
+section add to <code class="docutils literal notranslate"><span class="pre">/etc/bash.bashrc</span></code> on Debian-based distributions or
+<code class="docutils literal notranslate"><span class="pre">/etc/bashrc</span></code> on Redhat-based distributions.
+In addition, by default the <code class="docutils literal notranslate"><span class="pre">shell</span></code> command starts the shell
+with a <code class="docutils literal notranslate"><span class="pre">--norc</span></code> option so it does not run any bashrc.
+That can be worked around by adding
+<code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">SINGULARITY_SHELL=/bin/bash</span></code> in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code>
+section, but be aware that then the user’s <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> will
+also be run which may have new side effects.</p>
+</div>
 </section>
 <section id="startscript">
 <span id="id3"></span><h3>%startscript<a class="headerlink" href="#startscript" title="Link to this heading"></a></h3>
