@@ -652,10 +652,14 @@ information about the Apptainer container environment.</p>
 <p>Things set up in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section are done in a parent
 shell of the one that executes the container, so things such as
 function definitions and aliases do not get carried through.
-As a result, for example initializing conda cannot be done there.
-For that type of initialization you can instead in the <code class="docutils literal notranslate"><span class="pre">%post</span></code>
-section add to <code class="docutils literal notranslate"><span class="pre">/etc/bash.bashrc</span></code> on Debian-based distributions or
-<code class="docutils literal notranslate"><span class="pre">/etc/bashrc</span></code> on Redhat-based distributions.
+As a result, for example initializing conda cannot be done there.</p>
+<p>For that type of initialization in non-interactive shells you can in
+the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section export <code class="docutils literal notranslate"><span class="pre">BASH_ENV</span></code> to point to a script to
+source when the shell starts.</p>
+<p>For the equivalent in interactive shells you can instead in the <code class="docutils literal notranslate"><span class="pre">%post</span></code>
+section add to <code class="docutils literal notranslate"><span class="pre">/etc/bash.bashrc</span></code> on Debian-based distributions.
+(RedHat-based distributions have a /etc/bashrc that apparently once
+was equivalent but it does not appear to work in current versions.)
 In addition, by default the <code class="docutils literal notranslate"><span class="pre">shell</span></code> command starts the shell
 with a <code class="docutils literal notranslate"><span class="pre">--norc</span></code> option so it does not run any bashrc.
 That can be worked around by adding
