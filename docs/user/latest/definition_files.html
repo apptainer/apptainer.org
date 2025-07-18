@@ -87,6 +87,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#scif-app-sections">SCIF %app* sections</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#comments">Comments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#best-practices-for-writing-definition-files">Best Practices for Writing Definition Files</a></li>
 </ul>
 </li>
@@ -1301,6 +1302,25 @@ SOFTWARE=bar
 </pre></div>
 </div>
 </section>
+</section>
+<section id="comments">
+<h2>Comments<a class="headerlink" href="#comments" title="Link to this heading"></a></h2>
+<p>You can add a comment by prefixing the line with a ‘#’.</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="c"># This is a comment</span>
+<span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: debian:<span class="m">10</span>
+
+<span class="c"># This is a comment</span>
+<span class="gh">%setup</span>
+<span class="w">   </span><span class="c1"># This is a comment</span>
+<span class="w">   </span>touch<span class="w"> </span>/file1
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some sections like <code class="docutils literal notranslate"><span class="pre">%test</span></code> and <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> recognise
+hashbang lines (<code class="docutils literal notranslate"><span class="pre">#!</span></code>) for specifying a custom shell.</p>
+</div>
 </section>
 <section id="best-practices-for-writing-definition-files">
 <h2>Best Practices for Writing Definition Files<a class="headerlink" href="#best-practices-for-writing-definition-files" title="Link to this heading"></a></h2>
