@@ -1247,3 +1247,28 @@ configured in ``/etc/ld.so.conf`` (libraries).
 
 For more details on the checkpointing features in {Project}, please check the
 `Checkpoint Userdocs <{userdocs}/checkpoint.html>`_.
+
+.. _registry_mirror_configuration:
+
+*****************
+ registries.conf - Registry mirrors
+*****************
+
+``registries.conf`` is a configuration file in ``/etc/containers``
+that may be shared with other container systems.
+{Project} looks in that configuration file and any ``*.conf`` under
+``/etc/containers/registry.conf.d`` for definitions of registry 
+pull-through mirrors (caches).  For example the following entries in
+one of those files will cause {Project} to read from 
+``docker-registry.example.edu`` whenever it would otherwise read
+from ``docker.io``:
+
+.. code::
+
+   [[registry]]
+   location="docker.io"
+   [[registry.mirror]]
+   location="docker-registry.example.edu"
+
+Users may also put the configuration in their own
+``$HOME/.config/containers/registry.conf`` instead.

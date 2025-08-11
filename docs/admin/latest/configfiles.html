@@ -112,6 +112,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#dmtcp-conf-yaml">dmtcp-conf.yaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#registries-conf-registry-mirrors">registries.conf - Registry mirrors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="user_namespace.html">User Namespaces &amp; Fakeroot</a></li>
@@ -1184,6 +1185,25 @@ that they are in a system path (binaries), or available in paths
 configured in <code class="docutils literal notranslate"><span class="pre">/etc/ld.so.conf</span></code> (libraries).</p>
 <p>For more details on the checkpointing features in Apptainer, please check the
 <a class="reference external" href="https://apptainer.org/docs/user/1.4/checkpoint.html">Checkpoint Userdocs</a>.</p>
+</section>
+<section id="registries-conf-registry-mirrors">
+<span id="registry-mirror-configuration"></span><h2>registries.conf - Registry mirrors<a class="headerlink" href="#registries-conf-registry-mirrors" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">registries.conf</span></code> is a configuration file in <code class="docutils literal notranslate"><span class="pre">/etc/containers</span></code>
+that may be shared with other container systems.
+Apptainer looks in that configuration file and any <code class="docutils literal notranslate"><span class="pre">*.conf</span></code> under
+<code class="docutils literal notranslate"><span class="pre">/etc/containers/registry.conf.d</span></code> for definitions of registry
+pull-through mirrors (caches).  For example the following entries in
+one of those files will cause Apptainer to read from
+<code class="docutils literal notranslate"><span class="pre">docker-registry.example.edu</span></code> whenever it would otherwise read
+from <code class="docutils literal notranslate"><span class="pre">docker.io</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">registry</span><span class="p">]]</span>
+<span class="n">location</span><span class="o">=</span><span class="s2">&quot;docker.io&quot;</span>
+<span class="p">[[</span><span class="n">registry</span><span class="o">.</span><span class="n">mirror</span><span class="p">]]</span>
+<span class="n">location</span><span class="o">=</span><span class="s2">&quot;docker-registry.example.edu&quot;</span>
+</pre></div>
+</div>
+<p>Users may also put the configuration in their own
+<code class="docutils literal notranslate"><span class="pre">$HOME/.config/containers/registry.conf</span></code> instead.</p>
 </section>
 </section>
 
