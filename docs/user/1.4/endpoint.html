@@ -530,91 +530,10 @@ store the supplied credentials or tokens unencrypted in your home directory.</p>
 </section>
 <section id="managing-oci-registries">
 <h2>Managing OCI Registries<a class="headerlink" href="#managing-oci-registries" title="Link to this heading"></a></h2>
-<p>It is common for users of Apptainer to use
-<a class="reference external" href="https://opencontainers.org/">OCI</a> registries as sources for their container
-images. Some registries require credentials to access certain images or even the
-registry itself. Previously, the only method in Apptainer to supply
-credentials to registries was to supply credentials for each command or set
-environment variables to contain the credentials for a single registry. See
-<span class="xref std std-ref">Authentication via Interactive Login</span> and <span class="xref std std-ref">Authentication via Environment
-Variables</span>.</p>
-<p>Apptainer supports the ability for users to supply credentials
-on a per-registry basis with the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group.</p>
-<p>Users can login to an OCI registry with the <code class="docutils literal notranslate"><span class="pre">remote</span> <span class="pre">login</span></code> command by
-specifying a <code class="docutils literal notranslate"><span class="pre">docker://</span></code> prefix to the registry hostname:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>myname<span class="w"> </span>docker://docker.io
-<span class="go">Password (or token when username is empty):</span>
-<span class="go">INFO:    Token stored in /home/myname/.apptainer/remote.yaml</span>
-
-<span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>list
-<span class="go">Cloud Services Endpoints</span>
-<span class="go">========================</span>
-
-<span class="go">NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE</span>
-<span class="go">DefaultRemote  cloud.apptainer.org  YES     YES     NO</span>
-
-<span class="go">Keyservers</span>
-<span class="go">==========</span>
-
-<span class="go">URI                       GLOBAL  INSECURE  ORDER</span>
-<span class="go">https://keys.openpgp.org  YES     NO        1*</span>
-
-<span class="go">* Active cloud services keyserver</span>
-
-<span class="go">Authenticated Logins</span>
-<span class="go">=================================</span>
-
-<span class="go">URI                 INSECURE</span>
-<span class="go">docker://docker.io  NO</span>
-</pre></div>
-</div>
-<p>An entry for <code class="docutils literal notranslate"><span class="pre">docker://docker.io</span></code> now shows up under <code class="docutils literal notranslate"><span class="pre">Authenticated</span> <span class="pre">Logins</span></code>,
-and Apptainer will automatically supply the configured credentials when
-interacting with DockerHub. We can also see the <code class="docutils literal notranslate"><span class="pre">INSECURE</span></code> column indicating
-that Apptainer will use TLS when communicating with the registry.</p>
-<p>We can be logged-in to multiple OCI registries at the same time:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>myname<span class="w"> </span>docker://registry.example.com
-<span class="go">Password (or token when username is empty):</span>
-<span class="go">INFO:    Token stored in /home/myname/.apptainer/remote.yaml</span>
-
-<span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>list
-<span class="go">Cloud Services Endpoints</span>
-<span class="go">========================</span>
-
-<span class="go">NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE</span>
-<span class="go">DefaultRemote  cloud.apptainer.org  YES     YES     NO</span>
-
-<span class="go">Keyservers</span>
-<span class="go">==========</span>
-
-<span class="go">URI                       GLOBAL  INSECURE  ORDER</span>
-<span class="go">https://keys.openpgp.org  YES     NO        1*</span>
-
-<span class="go">* Active cloud services keyserver</span>
-
-<span class="go">Authenticated Logins</span>
-<span class="go">=================================</span>
-
-<span class="go">URI                            INSECURE</span>
-<span class="go">docker://docker.io             NO</span>
-<span class="go">docker://registry.example.com  NO</span>
-</pre></div>
-</div>
-<p>Apptainer will supply the correct credentials for the registry based
-on the hostname used, whenever using the following commands with a
-<code class="docutils literal notranslate"><span class="pre">docker://</span></code> or <code class="docutils literal notranslate"><span class="pre">oras://</span></code> URI:
-<a class="reference external" href="cli/apptainer_pull.html">pull</a>,
-<a class="reference external" href="cli/apptainer_push.html">push</a>,
-<a class="reference external" href="cli/apptainer_build.html">build</a>,
-<a class="reference external" href="cli/apptainer_exec.html">exec</a>,
-<a class="reference external" href="cli/apptainer_shell.html">shell</a>,
-<a class="reference external" href="cli/apptainer_run.html">run</a>,
-or <a class="reference external" href="cli/apptainer_instance.html">instance</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It is important for users to be aware that the <code class="docutils literal notranslate"><span class="pre">remote</span> <span class="pre">login</span></code> command will
-store the supplied credentials or tokens unencrypted in your home directory.</p>
-</div>
+<p>OCI Registries used to also be managed using the apptainer <code class="docutils literal notranslate"><span class="pre">remote</span></code>
+command group, but those are deprecated in favor of apptainer <code class="docutils literal notranslate"><span class="pre">registry</span></code>
+commands.
+See the <a class="reference internal" href="registry.html#registry"><span class="std std-ref">OCI Image Registries</span></a> section in this guide.</p>
 </section>
 </section>
 
