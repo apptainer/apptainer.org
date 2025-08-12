@@ -1257,7 +1257,7 @@ For more details on the checkpointing features in {Project}, please check the
 ``registries.conf`` is a configuration file in ``/etc/containers``
 that may be shared with other container systems.
 {Project} looks in that configuration file and any ``*.conf`` under
-``/etc/containers/registry.conf.d`` for definitions of registry 
+``/etc/containers/registries.conf.d`` for definitions of registry 
 pull-through mirrors (caches).  For example the following entries in
 one of those files will cause {Project} to read from 
 ``docker-registry.example.edu`` whenever it would otherwise read
@@ -1271,4 +1271,4 @@ from ``docker.io``:
    location="docker-registry.example.edu"
 
 Users may also put the configuration in their own
-``$HOME/.config/containers/registry.conf`` instead.
+``$HOME/.config/containers/registries.conf`` instead.

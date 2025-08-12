@@ -1191,7 +1191,7 @@ configured in <code class="docutils literal notranslate"><span class="pre">/etc/
 <p><code class="docutils literal notranslate"><span class="pre">registries.conf</span></code> is a configuration file in <code class="docutils literal notranslate"><span class="pre">/etc/containers</span></code>
 that may be shared with other container systems.
 Apptainer looks in that configuration file and any <code class="docutils literal notranslate"><span class="pre">*.conf</span></code> under
-<code class="docutils literal notranslate"><span class="pre">/etc/containers/registry.conf.d</span></code> for definitions of registry
+<code class="docutils literal notranslate"><span class="pre">/etc/containers/registries.conf.d</span></code> for definitions of registry
 pull-through mirrors (caches).  For example the following entries in
 one of those files will cause Apptainer to read from
 <code class="docutils literal notranslate"><span class="pre">docker-registry.example.edu</span></code> whenever it would otherwise read
@@ -1203,7 +1203,7 @@ from <code class="docutils literal notranslate"><span class="pre">docker.io</spa
 </pre></div>
 </div>
 <p>Users may also put the configuration in their own
-<code class="docutils literal notranslate"><span class="pre">$HOME/.config/containers/registry.conf</span></code> instead.</p>
+<code class="docutils literal notranslate"><span class="pre">$HOME/.config/containers/registries.conf</span></code> instead.</p>
 </section>
 </section>
 
