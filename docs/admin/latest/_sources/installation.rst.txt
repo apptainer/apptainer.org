@@ -659,3 +659,28 @@ for more details.
 By default, the host home directory is mounted as read-only in the guest,
 but there is also a shared writable directory mounted in ``/tmp/lima``
 that can be accessed both from the host and in the guest.
+
+**********************
+ Running inside Docker
+**********************
+
+{Project} can run nested inside a Docker container, but it requires 
+some non-default options.
+
+The simplest way to do it is with the docker ``--privileged`` option.
+That enables {command} to run in both unprivileged mode and in suid
+mode.
+
+{Project} unprivileged mode can also be used inside docker without
+enabling docker privileged mode, using these additional docker options:
+
+.. code::
+
+    --security-opt seccomp=unconfined --security-opt systempaths=unconfined --device /dev/fuse
+
+The first option enables the ``unshare`` system call to work, which
+{command} always needs.
+The second options enables the {command} ``-p/--pid`` option (which is
+implied by ``-C/--containall``).
+The third option is needed for unprivileged FUSE mounts.
+

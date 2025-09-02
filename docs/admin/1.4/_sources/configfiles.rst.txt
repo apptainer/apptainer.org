@@ -1250,9 +1250,9 @@ For more details on the checkpointing features in {Project}, please check the
 
 .. _registry_mirror_configuration:
 
-*****************
+***********************************
  registries.conf - Registry mirrors
-*****************
+***********************************
 
 ``registries.conf`` is a configuration file in ``/etc/containers``
 that may be shared with other container systems.

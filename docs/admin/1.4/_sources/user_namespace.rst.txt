@@ -391,9 +391,9 @@ user.
 
 .. _managed-subuid:
 
-******************************
+*****************************************
  Centrally managed subuid/subgid mappings
-******************************
+*****************************************
 
 When available on newer operating systems, {Project} supports the
 ``libsubid`` library (which comes from the
