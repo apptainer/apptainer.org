@@ -96,6 +96,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#running-inside-docker">Running inside Docker</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="singularity_migration.html">Migrating from Singularity</a></li>
@@ -676,6 +677,24 @@ for more details.</p>
 but there is also a shared writable directory mounted in <code class="docutils literal notranslate"><span class="pre">/tmp/lima</span></code>
 that can be accessed both from the host and in the guest.</p>
 </section>
+</section>
+<section id="running-inside-docker">
+<h2>Running inside Docker<a class="headerlink" href="#running-inside-docker" title="Link to this heading"></a></h2>
+<p>Apptainer can run nested inside a Docker container, but it requires
+some non-default options.</p>
+<p>The simplest way to do it is with the docker <code class="docutils literal notranslate"><span class="pre">--privileged</span></code> option.
+That enables apptainer to run in both unprivileged mode and in suid
+mode.</p>
+<p>Apptainer unprivileged mode can also be used inside docker without
+enabling docker privileged mode, using these additional docker options:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">security</span><span class="o">-</span><span class="n">opt</span> <span class="n">seccomp</span><span class="o">=</span><span class="n">unconfined</span> <span class="o">--</span><span class="n">security</span><span class="o">-</span><span class="n">opt</span> <span class="n">systempaths</span><span class="o">=</span><span class="n">unconfined</span> <span class="o">--</span><span class="n">device</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">fuse</span>
+</pre></div>
+</div>
+<p>The first option enables the <code class="docutils literal notranslate"><span class="pre">unshare</span></code> system call to work, which
+apptainer always needs.
+The second options enables the apptainer <code class="docutils literal notranslate"><span class="pre">-p/--pid</span></code> option (which is
+implied by <code class="docutils literal notranslate"><span class="pre">-C/--containall</span></code>).
+The third option is needed for unprivileged FUSE mounts.</p>
 </section>
 </section>
 
