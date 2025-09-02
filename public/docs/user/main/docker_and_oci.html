@@ -210,6 +210,9 @@ local Docker daemon.</p></li>
 <p>This section will highlight these workflows, and discuss the limitations
 and best practices to keep in mind when creating containers targeting
 both Docker and Apptainer.</p>
+<p>{Apptainer} can also run nested inside a Docker container, although it
+requires adding some runtime options to the docker command.  For details
+see the <a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html#running-inside-docker">admin guide</a>.</p>
 <section id="containers-from-docker-hub">
 <h2>Containers From Docker Hub<a class="headerlink" href="#containers-from-docker-hub" title="Link to this heading"></a></h2>
 <p>Docker Hub is the most common place that projects publish public
@@ -333,7 +336,7 @@ Docker credential helpers.</p>
 </div>
 </section>
 <section id="interactive-login">
-<h4>Interactive Login<a class="headerlink" href="#interactive-login" title="Link to this heading"></a></h4>
+<span id="sec-docker-login"></span><h4>Interactive Login<a class="headerlink" href="#interactive-login" title="Link to this heading"></a></h4>
 <p>To perform a one-off interactive login, which will not store your
 credentials, use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull --docker-login docker://myuser/private
