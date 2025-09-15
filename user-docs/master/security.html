@@ -1,23 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Security in Singularity &mdash; Singularity User Guide 3.8 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/favicon.png"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Security in Apptainer &mdash; Apptainer User Guide 1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/js/ga.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -30,24 +31,25 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Singularity User Guide
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                3.8
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Security in Singularity</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Security in Apptainer</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#security-policy">Security Policy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#setuid-user-namespaces">Setuid &amp; User Namespaces</a></li>
@@ -70,22 +72,26 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cloud_library.html">Sylabs Cloud Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Instances - Running Services</a></li>
 <li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Limiting Container Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Application Checkpointing</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -96,7 +102,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
 </ul>
 
         </div>
@@ -105,17 +111,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Singularity User Guide</a>
+          <a href="index.html">Apptainer User Guide</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Security in Singularity</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Security in Apptainer</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/hpcng/singularity-userdocs/blob/master/security.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/1.4/security.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -123,159 +129,194 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="security-in-singularity">
-<span id="security"></span><h1>Security in Singularity<a class="headerlink" href="#security-in-singularity" title="Permalink to this headline"></a></h1>
+  <section id="security-in-apptainer">
+<span id="security"></span><h1>Security in Apptainer<a class="headerlink" href="#security-in-apptainer" title="Link to this heading"></a></h1>
 <section id="security-policy">
-<h2>Security Policy<a class="headerlink" href="#security-policy" title="Permalink to this headline"></a></h2>
-<p>If you suspect you have found a vulnerability in Singularity we want
-to work with you so that it can be investigated, fixed, and disclosed
-in a responsible manner. Please follow the steps in our published
-<a class="reference external" href="https://singularity.hpcng.org/security-policy/">Security Policy</a>, which begins
-with contacting us privately via singularity‑<a class="reference external" href="mailto:security&#37;&#52;&#48;hpcng&#46;org">security<span>&#64;</span>hpcng<span>&#46;</span>org</a></p>
-<p>We disclose vulnerabilities found in Singularity through public
-CVE reports, and notifications on our community channels. We encourage
-all users to monitor new releases of Singularity for security
-information. Security patches are applied to the latest open-source
+<h2>Security Policy<a class="headerlink" href="#security-policy" title="Link to this heading"></a></h2>
+<p>If you suspect you have found a vulnerability in Apptainer, we want
+to work with you so that it can be investigated, fixed, and disclosed in
+a responsible manner. Please follow the steps in our published <a class="reference external" href="https://apptainer.org/security-policy/">Security
+Policy</a>, which begins with
+contacting us privately via <a class="reference external" href="mailto:security&#37;&#52;&#48;apptainer&#46;org">security<span>&#64;</span>apptainer<span>&#46;</span>org</a>.</p>
+<p>We disclose vulnerabilities found in Apptainer through public
+CVE reports, as well as notifications on our community channels. We
+encourage all users to monitor new releases of Apptainer for
+security information. Security patches are applied to the latest
 release.</p>
 </section>
 <section id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline"></a></h2>
-<p>Singularity grew out of the need to implement a container platform
+<h2>Background<a class="headerlink" href="#background" title="Link to this heading"></a></h2>
+<p>Apptainer grew out of the need to implement a container platform
 that was suitable for use on shared systems, such as HPC clusters. In
-these environments multiple people access a shared resource. User
-accounts, groups, and standard file permissions limit their access to
-data, devices, and prevent them from disrupting or accessing others’
-work.</p>
+these environments, multiple people typically need to access the same
+shared resource. User accounts, groups, and standard file permissions
+limit their access to data and devices, and prevent them from disrupting
+or accessing others’ work.</p>
 <p>To provide security in these environments a container needs to run as
-the user who starts it on the system. Before the widepread adoption of
-the Linux user namespace, only a privileged user could perform the
+the user who starts it on the system. Before the widespread adoption of
+Linux user namespaces, only a privileged user could perform the
 operations which are needed to run a container. A default Docker
-installation uses a root-owned daemon to start containers. Users can
-request that the daemon starts a container on their behalf. However,
-co-ordinating a daemon with other schedulers is difficult and, since
-the daemon is privileged, users can ask it to carry out actions that
-they wouldn’t normally have permission to do.</p>
-<p>When a user runs a container with Singularity, it is started as a
+installation uses a root-owned daemon to start containers, and users can
+request that the daemon start a container on their behalf. However,
+coordinating a daemon with other schedulers is difficult and, since the
+daemon is privileged, users can ask it to carry out actions that they
+wouldn’t normally have permission to carry out themselves.</p>
+<p>When a user runs a container with Apptainer, it is started as a
 normal process running under the user’s account. Standard file
-permissions and other security controls based on user accounts,
-groups, and processes apply. In a default installation Singularity
-uses a setuid starter binary to perform only the specific tasks needed
-to setup the container.</p>
+permissions and other security controls based on user accounts, groups,
+and processes apply.</p>
 </section>
 <section id="setuid-user-namespaces">
-<h2>Setuid &amp; User Namespaces<a class="headerlink" href="#setuid-user-namespaces" title="Permalink to this headline"></a></h2>
-<p>Using a setuid binary to run container setup operations is essential
-to support containers on older Linux distributions, such as CentOS 6,
-that were previously common in HPC and enterprise. Newer distributions
-have support for ‘unprivileged user namespace creation’. This means a
-normal user can create a user namespace, in which most setup operations
-needed to run a container can be run, unprivileged.</p>
-<p>Singularity supports running containers without setuid, using user
-namespaces. It can be compiled with the <code class="docutils literal notranslate"><span class="pre">--without-setuid</span></code> option,
-or <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> can be set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> to enable
-this. In this mode <em>all</em> operations run as the user who starts the
-<code class="docutils literal notranslate"><span class="pre">singularity</span></code> program. However, there are some disadvantages:</p>
+<h2>Setuid &amp; User Namespaces<a class="headerlink" href="#setuid-user-namespaces" title="Link to this heading"></a></h2>
+<p>Using a setuid binary to run container setup operations used to be
+essential to support containers on the older Linux distributions that were
+previously common in HPC and enterprise.</p>
+<p>Most distributions now have
+support for unprivileged user namespaces. This means a normal, unprivileged
+user can create a user namespace, in which most operations needed
+to run a container can be run.</p>
+<p>Apptainer still supports running containers with a setuid starter, but
+by default it runs containers without setuid, using user namespaces.
+If user namespaces are available when compiling, the <code class="docutils literal notranslate"><span class="pre">--without-suid</span></code>
+option is implied.
+If user namespaces are not available when compiling, the installer
+must choose between <code class="docutils literal notranslate"><span class="pre">--with-suid</span></code> and <code class="docutils literal notranslate"><span class="pre">--without-suid</span></code>.
+Packages are compiled with <code class="docutils literal notranslate"><span class="pre">--with-suid</span></code> but then the setuid
+component is not installed by default and the installer must separately
+install the <code class="docutils literal notranslate"><span class="pre">apptainer-suid</span></code> package if setuid mode is desired.</p>
+<p>In non-suid mode <em>all</em> operations run as the user who starts the
+<code class="docutils literal notranslate"><span class="pre">apptainer</span></code> program.
+This has some advantages over suid mode:</p>
 <ul class="simple">
-<li><p>SIF and other single file container images cannot be mounted
-directly. The container image must be extracted to a directory on
-disk to run. This impact the speed of execution. Workloads accessing
-large numbers of small files (such as python application startup) do
-not benefit from the reduced metadata load on the filesystem an
-image file provides.</p></li>
-<li><p>Replacing direct kernel mounts with a FUSE approach is likely to
-cause a significant reduction in perfomance.</p></li>
-<li><p>The effectiveness of signing and verifying container images is
-reduced as, when extracted to a directory, modification is possible
-and verification of the image’s original signature cannot be
-performed.</p></li>
-<li><p>Encryption is not supported. Singularity leverages kernel LUKS2
-mounts to run encrypted containers without decrypting their content
-to disk.</p></li>
-<li><p>Some sites hold the opinion that vulnerabilities in kernel user
-namespace code could have greater impact than vulnerabilities
-confined to a single piece of setuid software. Therefore they are
-reluctant to enable unprivileged user namespace creation.</p></li>
+<li><p>Setuid-root programs are notoriously difficult to make fully secure.
+Apptainer keeps the setuid portions to a minimum and has passed a
+careful review, but still it is a risk.</p></li>
+<li><p>Non-suid apptainer can run nested inside another apptainer command
+or in other container runtimes that restrict setuid-root.</p></li>
+<li><p>Although suid apptainer no longer uses kernel filesystem drivers by
+by default except when the system administrator has strictly
+controlled which containers may be run, suid mode has optional
+features that are dangerous if improperly configured.  In particular,
+Linux kernel developers believe that it is inherently unsafe to
+allow unprivileged users to modify an underlying filesystem at will
+while kernel code is actively accessing the filesystem
+(see this <a class="reference external" href="https://lwn.net/Articles/652468/">article</a>).
+Kernel filesystem drivers do not and cannot protect against all kinds
+of modifications to that data which it has not itself written, and
+that fact could potentially be used to attack the kernel.
+In fact there is a known public vulnerability
+for the ext4 filesystem that is unpatched on many older operating
+systems which is part of a class of vulnerabilities that are
+continuously being discovered (see this <a class="reference external" href="https://github.com/apptainer/apptainer/security/advisories/GHSA-j4rf-7357-f4cg">advisory</a>).
+This is why suid mode apptainer now uses FUSE drivers for filesystem
+mounts by default.</p></li>
 </ul>
-<p>Because of the points above, the default mode of operation of
-Singularity uses a setuid binary. We aim to reduce the
-circumstances that require this as new functionality is developed and
-reaches commonly deployed Linux distributions.</p>
+<p>However, there are also some disadvantages of the non-suid mode:</p>
+<ul class="simple">
+<li><p>Non-suid mode SIF file encryption is incompatible with the older suid
+mode encryption.  It uses a kernel feature that does not have an exact
+uprivileged replacement, but encryption is available unprivileged by
+making use of a FUSE program.</p></li>
+<li><p>Some little used <a class="reference internal" href="security_options.html#security-options"><span class="std std-ref">security options</span></a> and
+<a class="reference internal" href="networking.html#networking"><span class="std std-ref">network options</span></a> of Apptainer that give users elevated
+privileges through configuration are only available in suid mode.</p></li>
+<li><p>Apptainer configuration options that restrict the use of containers
+are not enforceable, because if unprivileged user namespaces are
+available then people could always compile their own copy from source
+and set their own configuration options.</p></li>
+<li><p>Supplementary groups are not visible inside of the container.  That is
+because unprivileged user namespaces only allow mapping one group.
+Processes running inside non-suid apptainer containers retain the
+access rights of the supplementary groups assigned outside,
+but they cannot change the default group.</p></li>
+<li><p>Since the Linux kernel is subject to a much greater amount of
+scrutiny than the Apptainer setuid software, there have been a greater
+number of announced vulnerabilities that are exploitable through
+kernel namespace code than have been announced for Apptainer and
+its predecessor.
+Security experts generally argue that it is better to have the
+scrutiny than to have “security by obscurity”,
+but urgently responding to those vulnerabilities causes additional
+administrator effort and can cause disruption to operations.
+See the <a class="reference external" href="https://apptainer.org/docs/admin/1.4/user_namespace.html#disabling-network-namespaces">User Namespaces section</a>
+of the admin guide for details about mitigating the impact of user
+namespace vulnerabilities through disabling network namespaces.</p></li>
+</ul>
 </section>
 <section id="runtime-user-privilege-model">
-<h2>Runtime &amp; User Privilege Model<a class="headerlink" href="#runtime-user-privilege-model" title="Permalink to this headline"></a></h2>
-<p>While other runtimes have aimed to safely sandbox containers executing
-as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user, so that they cannot affect the host system,
-Singularity has adopted an alternative security model:</p>
+<h2>Runtime &amp; User Privilege Model<a class="headerlink" href="#runtime-user-privilege-model" title="Link to this heading"></a></h2>
+<p>While other runtimes have aimed to tackle security concerns by
+sandboxing containers executing as the <code class="docutils literal notranslate"><span class="pre">root</span></code> user so that they cannot
+affect the host system, Apptainer has adopted a different security
+model that protects against attacks even with the setuid-root mode:</p>
 <ul class="simple">
 <li><p>Containers should be run as an unprivileged user.</p></li>
 <li><p>The user should never be able to elevate their privileges inside the
 container to gain control over the host.</p></li>
-<li><p>All permission restrictions on the user outside of a container
-should apply inside the container.</p></li>
-<li><p>Favor integration over isolation. Allow a user to use host resources
-such as GPUs, network filesystems, high speed interconnects
-easily. The process ID space, network etc. are not isolated in
-separate namespaces by default.</p></li>
+<li><p>All permission restrictions on the user outside of a container should
+apply inside the container, as well.</p></li>
+<li><p>Favor integration over isolation: a user is allowed to easily use
+host resources such as GPUs, network filesystems, and high speed
+interconnects. The process ID space, network, etc., are not isolated
+in separate namespaces by default.</p></li>
 </ul>
-<p>To accomplish this, Singularity uses a number of Linux kernel
+<p>To accomplish this, Apptainer uses a number of Linux kernel
 features. The container file system is mounted using the <code class="docutils literal notranslate"><span class="pre">nosuid</span></code>
-option, and processes are started with the <code class="docutils literal notranslate"><span class="pre">PR_NO_NEW_PRIVS</span></code> flag
-set. This means that even if you run <code class="docutils literal notranslate"><span class="pre">sudo</span></code> inside your container,
-you won’t be able to change to another user, or gain root privileges
-by other means.</p>
+option, and processes are started with the <code class="docutils literal notranslate"><span class="pre">PR_NO_NEW_PRIVS</span></code> flag set.
+This means that even if you run <code class="docutils literal notranslate"><span class="pre">sudo</span></code> inside your container, you
+won’t be able to change to another user, or gain root privileges by
+other means.</p>
 <p>If you do require the additional isolation of the network, devices,
-PIDs etc. provided by other runtimes, Singularity can make use of
+PIDs, etc., which other runtimes provide, Apptainer can make use of
 additional namespaces and functionality such as seccomp and cgroups.</p>
 </section>
 <section id="singularity-image-format-sif">
-<h2>Singularity Image Format (SIF)<a class="headerlink" href="#singularity-image-format-sif" title="Permalink to this headline"></a></h2>
-<p>Singularity uses SIF as its default container format. A SIF
-container is a single file, which makes it easy to manage and
-distribute. Inside the SIF file, the container filesystem is held in a
-SquashFS object. By default, we mount the container filesystem
-directly using SquashFS. On a network filesytem this means that reads
-from the container are data-only. Metadata operations happen locally,
-speeding up workloads with many small files.</p>
-<p>Holding the container image in a single file also enable unique
+<h2>Singularity Image Format (SIF)<a class="headerlink" href="#singularity-image-format-sif" title="Link to this heading"></a></h2>
+<p>Apptainer uses SIF as its default container format. A SIF container
+is a single file, which makes it easy to manage and distribute. Inside
+the SIF file, the container filesystem is held in a SquashFS object. When
+in suid mode, Apptainer mounts the container filesystem directly using SquashFS,
+otherwise it mounts the filesystem with squashfuse. In either case, on a
+network filesystem, this means that reads from the container are
+data-only. Metadata operations happen locally, speeding up workloads
+that involve many small files.</p>
+<p>Holding the container image in a single file also enables unique
 security features. The container filesystem is immutable, and can be
-signed. The signature travels in the SIF image itself so that it is
-always possible to verify that the image has not been tampered with or
-corrupted.</p>
-<p>We use private PGP keys to create a container signature, and the
-public key in order to verify the container. Verification of signed
-containers happens automatically in <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span></code> commands
-against the Sylabs Cloud Container Library. A Keystore in the Sylabs
-Cloud makes it easier to share and obtain public keys for container
-verification.</p>
-<p>A container may be signed once, by a trusted individual who approves
-its use. It could also be signed with multiple keys to signify it has
-passed each step in a CI/CD QA &amp; Security process. Singularity can
-be configured with an execution control list (ECL), which requires the
-presence of one or more valid signatures, to limit execution to
-approved containers.</p>
-<p>In Singularity 3.4 and above, the root filesystem of a container
-(stored in the squashFS partition of SIF) can be encrypted. As a
-result, everything inside the container becomes inaccessible without
-the correct key or passphrase. The content of the container is
-private, even if the SIF file is shared in public.</p>
-<p>Encryption and decryption are performed using the Linux kernel’s LUKS2
+signed. The signature travels as part of the SIF image itself so that it
+is always possible to verify that the image has not been tampered with
+or corrupted.</p>
+<p>Apptainer uses private PGP keys to create a container signature, and the
+corresponding public keys to verify the container. Verification of
+signed containers can be done at any time by a user and happens automatically in
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> commands against the Library API registries. The prevalence
+of PGP key servers, (like <a class="reference external" href="https://keys.openpgp.org/">https://keys.openpgp.org/</a>), make sharing and obtaining
+public keys for container verification relatively simple.</p>
+<p>A container could be signed once, by a trusted individual who approves
+its use. It could also be signed with multiple keys, to signify it has
+passed each step in a CI/CD QA &amp; Security process. Apptainer can be
+configured with an execution control list (ECL), which requires the
+presence of one or more valid signatures, to limit execution to approved
+containers.</p>
+<p>In addition, the root filesystem of a container (stored in the SquashFS
+partition of SIF) can be encrypted. As a result, everything inside the container
+becomes inaccessible without the correct key or passphrase. The content of the
+container then remains private, even if the SIF file is shared in public.</p>
+<p>When in suid mode,
+encryption and decryption are performed using the Linux kernel’s LUKS2
 feature. This is the same technology routinely used for full disk
 encryption. The encrypted container is mounted directly through the
-kernel. Unlike other container formats, an encrypted container is not
-decrypted to disk in order to run it.</p>
+kernel. Unlike other container formats, the encrypted container is run
+without ever decrypting its contents to disk.
+Non-suid encryption and decryption uses the FUSE gocryptfs program,
+which also avoids decrypting contents to disk.</p>
 </section>
 <section id="configuration-runtime-options">
-<h2>Configuration &amp; Runtime Options<a class="headerlink" href="#configuration-runtime-options" title="Permalink to this headline"></a></h2>
-<p>System administrators who manage Singularity can use configuration
+<h2>Configuration &amp; Runtime Options<a class="headerlink" href="#configuration-runtime-options" title="Link to this heading"></a></h2>
+<p>System administrators who manage Apptainer can use configuration
 files to set security restrictions, grant or revoke a user’s
-capabilities, manage resources and authorize containers etc.</p>
-<p>For example, the <a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/configfiles.html#ecl-toml">ecl.toml</a>
-file allows blacklisting and whitelisting of containers.</p>
-<p>Configuration files and their parameters are documented for
-administrators documented <a class="reference external" href="https://singularity.hpcng.org/admin-docs/3.8/configfiles.html">here</a>.</p>
-<p>When running a container as root, Singularity can apply hardening
-rules using cgroups, seccomp, apparmor. See <a class="reference internal" href="security_options.html#security-options"><span class="std std-ref">details of these
-options here</span></a>.</p>
+capabilities, manage resources, authorize containers, etc.</p>
+<p>For details see the <a class="reference external" href="https://apptainer.org/docs/admin/1.4/security.html">Security section</a>
+of the admin guide.</p>
 </section>
 </section>
 
@@ -290,13 +331,18 @@ options here</span></a>.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2017-2021, HPCng.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
 
 </footer>
         </div>

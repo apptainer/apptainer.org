@@ -1,23 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Signing and Verifying Containers &mdash; Singularity User Guide 3.8 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/favicon.png"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Signing and Verifying Containers &mdash; Apptainer User Guide 1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/js/ga.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -30,24 +31,25 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Singularity User Guide
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                3.8
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -57,12 +59,19 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Sign and Verify</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#verifying-containers-from-the-container-library">Verifying containers from the Container Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verifying-containers-from-remote-sources">Verifying containers from remote sources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#signing-your-own-containers">Signing your own containers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#generating-and-managing-pgp-keys">Generating and managing PGP keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#searching-for-keys">Searching for keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#signing-and-validating-your-own-containers">Signing and validating your own containers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#advanced-signing-sif-ids-and-groups">Advanced Signing - SIF IDs and Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pem-key-x-509-certificate-support">PEM Key / X.509 Certificate Support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#signing-with-a-pem-key">Signing with a PEM key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verifying-with-a-pem-key">Verifying with a PEM key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verifying-with-an-x-509-certificate">Verifying with an X.509 certificate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#oscp-certificate-revocation-checks">OSCP Certificate Revocation Checks</a></li>
 </ul>
 </li>
 </ul>
@@ -72,22 +81,26 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cloud_library.html">Sylabs Cloud Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Instances - Running Services</a></li>
 <li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Limiting Container Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Application Checkpointing</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -98,7 +111,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
 </ul>
 
         </div>
@@ -107,17 +120,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Singularity User Guide</a>
+          <a href="index.html">Apptainer User Guide</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Signing and Verifying Containers</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Signing and Verifying Containers</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/hpcng/singularity-userdocs/blob/master/signNverify.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/1.4/signNverify.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -126,229 +139,261 @@
            <div itemprop="articleBody">
              
   <section id="signing-and-verifying-containers">
-<span id="signnverify"></span><h1>Signing and Verifying Containers<a class="headerlink" href="#signing-and-verifying-containers" title="Permalink to this headline"></a></h1>
-<p id="sec-signnverify">Singularity 3.0 introduced the ability to create and manage PGP keys and use
-them to sign and verify containers. This provides a trusted method for
-Singularity users to share containers. It ensures a bit-for-bit reproduction
-of the original container as the author intended it.</p>
+<span id="signnverify"></span><h1>Signing and Verifying Containers<a class="headerlink" href="#signing-and-verifying-containers" title="Link to this heading"></a></h1>
+<p id="sec-signnverify">Apptainer’s SIF images can be signed, and subsequently verified, so that a
+user can be confident that an image they have obtained is a bit-for-bit
+reproduction of the original container as the author intended it. The signature,
+over the metadata and content of the container, is created using a private key,
+and directly added to the SIF file. This means that a signed container carries
+it’s signature with it, avoiding the need for extra infrastructure to distribute
+signatures to end users of the container.</p>
+<p>A user verifies the container has not been modified since it was signed using a
+public key or certificate. By default, Apptainer uses PGP keys to sign and
+verify containers. Signing and verifying containers with X.509 key material
+/ certificates is also supported.</p>
+<p>PGP Public keys for verification can be distributed manually, or
+can be uploaded to and automatically retrieved from a remote keyserver.</p>
+<p>As well as indicating a container has not been modified, a valid signature may
+be used to indicate a container has undergone testing or review, and is approved
+for execution. Multiple signatures can be added to a container, to document its
+progress through an approval process. Apptainer’s Execution Control List
+(ECL) feature can be enable by administrators of privileged installations to
+restrict execution of containers based on their signatures (see the admin guide
+for more information).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Singularity 3.6.0 uses a new signature format. Containers signed
-by 3.6.0 cannot be verifed by older versions of Singularity.</p>
-<p>To verify containers signed with older versions of Singularity using 3.6.0
-the <code class="docutils literal notranslate"><span class="pre">--legacy-insecure</span></code> flag must be provided to the <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">verify</span></code> command.</p>
+<p>To verify containers signed with Singularity versions older than
+3.6.0 the <code class="docutils literal notranslate"><span class="pre">--legacy-insecure</span></code> flag must be provided to the
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">verify</span></code> command.</p>
 </div>
-<section id="verifying-containers-from-the-container-library">
-<span id="verify-container-from-library"></span><h2>Verifying containers from the Container Library<a class="headerlink" href="#verifying-containers-from-the-container-library" title="Permalink to this headline"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">verify</span></code> command will allow you to verify that a container has been
-signed using a PGP key. To use this feature with images that you pull from the
-container library, you must first generate an access token to the Sylabs Cloud.
-If you don’t already have a valid access token, follow these steps:</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li><p>Go to: <a class="reference external" href="https://cloud.sylabs.io/">https://cloud.sylabs.io/</a></p></li>
-<li><p>Click “Sign In” and follow the sign in steps.</p></li>
-<li><p>Click on your login id (same and updated button as the Sign in one).</p></li>
-<li><p>Select “Access Tokens” from the drop down menu.</p></li>
-<li><p>Enter a name for your new access token, such as “test token”</p></li>
-<li><p>Click the “Create a New Access Token” button.</p></li>
-<li><p>Click “Copy token to Clipboard” from the “New API Token” page.</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span> <span class="pre">login</span></code> and paste the access token at the prompt.</p></li>
-</ol>
-</div></blockquote>
-<p>Now you can verify containers that you pull from the library, ensuring they are
-bit-for-bit reproductions of the original image.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity verify alpine_latest.sif
+<section id="verifying-containers-from-remote-sources">
+<span id="verify-container-from-remote-sources"></span><h2>Verifying containers from remote sources<a class="headerlink" href="#verifying-containers-from-remote-sources" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">verify</span></code> command will check that a SIF container image has
+been signed using a PGP key or certificate. This ensures that the container
+image on your disk is a bit-for-bit reproduction of the original image.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify alpine_latest.sif
 
-Container is signed by 1 key(s):
-
-Verifying partition: FS:
-8883491F4268F173C6E5DC49EDECE4F3F38D871E
-[REMOTE]  Sylabs Admin &lt;support@sylabs.io&gt;
-[OK]      Data integrity verified
-
-INFO:    Container verified: alpine_latest.sif
+[REMOTE]  Signing entity: Ian Kaneshiro (example key) &lt;ikaneshiro@apptainer.org&gt;
+[REMOTE]  Fingerprint: 8232570480B868E1473AEEB03DBCBA1EE9D661E5
+Objects verified:
+ID  |GROUP   |LINK    |TYPE
+------------------------------------------------
+1   |1       |NONE    |Def.FILE
+2   |1       |NONE    |JSON.Generic
+3   |1       |NONE    |JSON.Generic
+4   |1       |NONE    |FS
+Container verified: my_container.sif
 </pre></div>
 </div>
-<p>In this example you can see that <strong>Sylabs Admin</strong> has signed the container.</p>
+<p>In this example you can see that <strong>Ian Kaneshiro</strong> has signed the
+container.</p>
+<p>This feature is available with SIF images like those you can pull from container
+libraries or OCI registries via <code class="docutils literal notranslate"><span class="pre">oras://</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">verify</span></code> will only run against a local SIF file. You must
+<code class="docutils literal notranslate"><span class="pre">pull</span></code> an image to a local disk before you can verify it.</p>
+</div>
 </section>
 <section id="signing-your-own-containers">
-<span id="sign-your-own-containers"></span><h2>Signing your own containers<a class="headerlink" href="#signing-your-own-containers" title="Permalink to this headline"></a></h2>
+<span id="sign-your-own-containers"></span><h2>Signing your own containers<a class="headerlink" href="#signing-your-own-containers" title="Link to this heading"></a></h2>
 <section id="generating-and-managing-pgp-keys">
-<h3>Generating and managing PGP keys<a class="headerlink" href="#generating-and-managing-pgp-keys" title="Permalink to this headline"></a></h3>
-<p>To sign your own containers you first need to generate one or more keys.</p>
-<p>If you attempt to sign a container before you have generated any keys,
-Singularity will guide you through the interactive process of creating a new
-key. Or you can use the <code class="docutils literal notranslate"><span class="pre">newpair</span></code> subcommand in the <code class="docutils literal notranslate"><span class="pre">key</span></code> command group
-like so:.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity key newpair
+<h3>Generating and managing PGP keys<a class="headerlink" href="#generating-and-managing-pgp-keys" title="Link to this heading"></a></h3>
+<p>To sign your own containers with a PGP key you first need to generate one or
+more keys.</p>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">newpair</span></code> subcommand in the <code class="docutils literal notranslate"><span class="pre">key</span></code> command group like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer key newpair
 
-Enter your name (e.g., John Doe) : David Trudgian
-Enter your email address (e.g., john.doe@example.com) : david.trudgian@sylabs.io
+Enter your name (e.g., John Doe) : Joe User
+Enter your email address (e.g., john.doe@example.com) : myuser@example.com
 Enter optional comment (e.g., development keys) : demo
 Enter a passphrase :
 Retype your passphrase :
-Would you like to push it to the keystore? [Y,n] Y
 Generating Entity and OpenPGP Key Pair... done
-Key successfully pushed to: https://keys.sylabs.io
 </pre></div>
 </div>
-<p>Note that I chose <code class="docutils literal notranslate"><span class="pre">Y</span></code> when asked if I wanted to push my key to the
-keystore. This will push my public key to whichever keystore has been
-configured by the <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span></code> command, so that it can be
-retrieved by other users running <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">verify</span></code>. If you do not
-wish to push your public key, say <code class="docutils literal notranslate"><span class="pre">n</span></code> during the <code class="docutils literal notranslate"><span class="pre">newpair</span></code>
-process.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> subcommand will show you all of the keys you have created or saved
-locally.`</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity key list
+<p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> subcommand will show you all of the keys you have created
+or saved locally.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer key list
 
-Public key listing (/home/dave/.singularity/sypgp/pgp-public):
+Public key listing (/home/ian/.apptainer/keys/pgp-public):
 
-0) U: David Trudgian (demo) &lt;david.trudgian@sylabs.io&gt;
-   C: 2019-11-15 09:54:54 -0600 CST
-   F: E5F780B2C22F59DF748524B435C3844412EE233B
-   L: 4096
-   --------
+0)  User:              Joe User (demo) &lt;myuser@example.com&gt;
+    Creation time:     2019-11-15 09:54:54 -0600 CST
+    Fingerprint:       E5F780B2C22F59DF748524B435C3844412EE233B
+    Length (in bits):  4096
 </pre></div>
 </div>
-<p>In the output above the index of my key is <code class="docutils literal notranslate"><span class="pre">0</span></code> and the letters stand
-for the following:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>U: User</p></li>
-<li><p>C: Creation date and time</p></li>
-<li><p>F: Fingerprint</p></li>
-<li><p>L: Key length</p></li>
-</ul>
-</div></blockquote>
-<p>If you chose not to push your key to the keystore during the <code class="docutils literal notranslate"><span class="pre">newpair</span></code> process, but later wish to, you can push it to a keystore configured using <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">remote</span></code> like so:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity key push E5F780B2C22F59DF748524B435C3844412EE233B
+<p>If you would like others in the community to easily be able to fetch your
+public key for image verification, you can push your key to a public keyserver.</p>
+<p>First we can check which key server we have configured using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer remote list
 
-public key `E5F780B2C22F59DF748524B435C3844412EE233B` pushed to server successfully
+Cloud Services Endpoints
+========================
+
+NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE
+DefaultRemote  cloud.apptainer.org  YES     YES     NO
+
+Keyservers
+==========
+
+URI                       GLOBAL  INSECURE  ORDER
+https://keys.openpgp.org  YES     NO        1*
+
+* Active cloud services keyserver
+
+Authenticated Logins
+=================================
+
+URI             INSECURE
+oras://ghcr.io  NO
 </pre></div>
 </div>
-<p>If you delete your local public PGP key, you can always locate and download it
-again like so.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity key search Trudgian
+<p>Here we can see that we will be pushing to <a class="reference external" href="https://keys.openpgp.org">https://keys.openpgp.org</a>. Now we can use the following command to push our
+key:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer key push 8232570480B868E1473AEEB03DBCBA1EE9D661E5
+
+WARNING: No default remote in use, falling back to default keyserver: https://keys.openpgp.org
+INFO:    Key server response: Upload successful. This is a new key, a welcome email has been sent.
+public key &#39;8232570480B868E1473AEEB03DBCBA1EE9D661E5&#39; pushed to server successfully
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The default key server keys.openpgp.org requires you to verify your key via
+email before the public key material will be accessible.</p>
+</div>
+<p>If you delete your local public PGP key, you can always locate and
+download it again like so.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer key search --long-list ikaneshiro@apptainer.org
 
 Showing 1 results
 
 KEY ID    BITS  NAME/EMAIL
-12EE233B  4096  David Trudgian (demo) &lt;david.trudgian@sylabs.io&gt;
+12EE233B  4096  Joe User (demo) &lt;myuser@example.com&gt;
 
-$ singularity key pull 12EE233B
-
-1 key(s) added to keyring of trust /home/dave/.singularity/sypgp/pgp-public
+$ apptainer key pull 8232570480B868E1473AEEB03DBCBA1EE9D661E5
+1 key(s) added to keyring of trust /home/ian/.apptainer/keys/pgp-public
 </pre></div>
 </div>
 <p>But note that this only restores the <em>public</em> key (used for verifying) to your
-local machine and does not restore the <em>private</em> key (used for signing).</p>
+local machine and does not restore the <em>private</em> key (used for signing).  <strong>If
+you permanently delete your private key, there is no way to recover it.</strong></p>
 </section>
 <section id="searching-for-keys">
-<span id="id1"></span><h3>Searching for keys<a class="headerlink" href="#searching-for-keys" title="Permalink to this headline"></a></h3>
-<p>Singularity allows you to search the keystore for public keys. You can search for names,
-emails, and fingerprints (key IDs). When searching for a fingerprint, you need to use <code class="docutils literal notranslate"><span class="pre">0x</span></code>
+<span id="id1"></span><h3>Searching for keys<a class="headerlink" href="#searching-for-keys" title="Link to this heading"></a></h3>
+<p>Apptainer allows you to search the keystore for public keys. You can search for
+names, emails, and fingerprints (key IDs) provided that the backend keystore
+supports these actions. When searching for a fingerprint, you need to use <code class="docutils literal notranslate"><span class="pre">0x</span></code>
 before the fingerprint, check the example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># search for key ID:
-$ singularity key search 0x8883491F4268F173C6E5DC49EDECE4F3F38D871E
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># search for key ID:
+$ apptainer key search 0x8883491F4268F173C6E5DC49EDECE4F3F38D871E
 
 # search for the sort ID:
-$ singularity key search 0xF38D871E
+$ apptainer key search 0xF38D871E
 
 # search for user:
-$ singularity key search Godlove
+$ apptainer key search Godlove
 
 # search for email:
-$ singularity key search @gmail.com
+$ apptainer key search @gmail.com
 </pre></div>
 </div>
 </section>
 <section id="signing-and-validating-your-own-containers">
-<h3>Signing and validating your own containers<a class="headerlink" href="#signing-and-validating-your-own-containers" title="Permalink to this headline"></a></h3>
+<h3>Signing and validating your own containers<a class="headerlink" href="#signing-and-validating-your-own-containers" title="Link to this heading"></a></h3>
 <p>Now that you have a key generated, you can use it to sign images like so:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity sign my_container.sif
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sign my_container.sif
 
 Signing image: my_container.sif
 Enter key passphrase :
 Signature created and applied to my_container.sif
 </pre></div>
 </div>
-<p>Because your public PGP key is saved locally you can verify the image without
-needing to contact the Keystore.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity verify my_container.sif
+<p>Because your public PGP key is saved locally you can verify the image
+without needing to contact the key server.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify my_container.sif
+
 Verifying image: my_container.sif
-[LOCAL]   Signing entity: David Trudgian (Demo keys) &lt;david.trudgian@sylabs.io&gt;
+[LOCAL]   Signing entity: Joe User (Demo keys) &lt;myuser@example.com&gt;
 [LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
 Objects verified:
 ID  |GROUP   |LINK    |TYPE
 ------------------------------------------------
 1   |1       |NONE    |Def.FILE
 2   |1       |NONE    |JSON.Generic
-3   |1       |NONE    |FS
+3   |1       |NONE    |JSON.Generic
+4   |1       |NONE    |FS
 Container verified: my_container.sif
 </pre></div>
 </div>
-<p>If you’ve pushed your key to the Keystore you can also verify this
-image in the absence of a local public key.  To demonstrate this,
-first <code class="docutils literal notranslate"><span class="pre">remove</span></code> your local public key, and then try to use the
-<code class="docutils literal notranslate"><span class="pre">verify</span></code> command again.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity key remove E5F780B2C22F59DF748524B435C3844412EE233B
+<p>If you’ve pushed your key to a key server you can also verify this image
+in the absence of a local public key. To demonstrate this, first
+<code class="docutils literal notranslate"><span class="pre">remove</span></code> your local public key, and then try to use the <code class="docutils literal notranslate"><span class="pre">verify</span></code>
+command again.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer key remove 8232570480B868E1473AEEB03DBCBA1EE9D661E5
 
-$ singularity verify my_container.sif
+$ apptainer verify my_container.sif
+
 Verifying image: my_container.sif
-[REMOTE]   Signing entity: David Trudgian (Demo keys) &lt;david.trudgian@sylabs.io&gt;
+[REMOTE]   Signing entity: Joe User (Demo keys) &lt;myuser@example.com&gt;
 [REMOTE]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
 Objects verified:
 ID  |GROUP   |LINK    |TYPE
 ------------------------------------------------
 1   |1       |NONE    |Def.FILE
 2   |1       |NONE    |JSON.Generic
-3   |1       |NONE    |FS
+3   |1       |NONE    |JSON.Generic
+4   |1       |NONE    |FS
 Container verified: my_container.sif
 </pre></div>
 </div>
-<p>Note that the <code class="docutils literal notranslate"><span class="pre">[REMOTE]</span></code> message shows the key used for verification
-was obtained from the keystore, and is not present on your local
-computer. You can retrieve it, so that you can verify even if you are
-offline with <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">key</span> <span class="pre">pull</span></code></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity key pull E5F780B2C22F59DF748524B435C3844412EE233B
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">[REMOTE]</span></code> message shows the key used for verification was
+obtained from a key server, and is not present on your local computer. You can
+retrieve it, so that you can verify even if you are offline with <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">key</span>
+<span class="pre">pull</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer key pull 8232570480B868E1473AEEB03DBCBA1EE9D661E5
 
-1 key(s) added to keyring of trust /home/dave/.singularity/sypgp/pgp-public
+1 key(s) added to keyring of trust /home/ian/.apptainer/keys/pgp-public
 </pre></div>
 </div>
 </section>
 <section id="advanced-signing-sif-ids-and-groups">
-<h3>Advanced Signing - SIF IDs and Groups<a class="headerlink" href="#advanced-signing-sif-ids-and-groups" title="Permalink to this headline"></a></h3>
-<p>As well as the default behaviour, which signs all objects,
-fine-grained control of signing is possible.</p>
-<p>If you <code class="docutils literal notranslate"><span class="pre">sif</span> <span class="pre">list</span></code> a SIF file you will see it is comprised of a
-number of objects. Each object has an <code class="docutils literal notranslate"><span class="pre">ID</span></code>, and belongs to a
-<code class="docutils literal notranslate"><span class="pre">GROUP</span></code>.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity sif list my_container.sif
+<h3>Advanced Signing - SIF IDs and Groups<a class="headerlink" href="#advanced-signing-sif-ids-and-groups" title="Link to this heading"></a></h3>
+<p>As well as the default behaviour, which signs all objects, fine-grained
+control of signing is possible.</p>
+<p>If you <code class="docutils literal notranslate"><span class="pre">sif</span> <span class="pre">list</span></code> a SIF file you will see it is comprised of a number
+of objects. Each object has an <code class="docutils literal notranslate"><span class="pre">ID</span></code>, and belongs to a <code class="docutils literal notranslate"><span class="pre">GROUP</span></code>. Since signatures are <em>applied</em> to objects, they have an <code class="docutils literal notranslate"><span class="pre">ID</span></code> but not a <code class="docutils literal notranslate"><span class="pre">GROUP</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sif list my_container.sif
 
-Container id: e455d2ae-7f0b-4c79-b3ef-315a4913d76a
-Created on:   2019-11-15 10:11:58 -0600 CST
-Modified on:  2019-11-15 10:11:58 -0600 CST
-----------------------------------------------------
-Descriptor list:
+------------------------------------------------------------------------------
 ID   |GROUP   |LINK    |SIF POSITION (start-end)  |TYPE
 ------------------------------------------------------------------------------
 1    |1       |NONE    |32768-32800               |Def.FILE
-2    |1       |NONE    |36864-36961               |JSON.Generic
-3    |1       |NONE    |40960-25890816            |FS (Squashfs/*System/amd64)
+2    |1       |NONE    |36864-39751               |JSON.Generic
+3    |1       |NONE    |40960-41055               |JSON.Generic
+4    |1       |NONE    |45056-2781184             |FS (Squashfs/*System/amd64)
+5    |NONE    |1   (G) |2781184-2782981           |Signature (SHA-256)
 </pre></div>
 </div>
-<p>I can choose to sign and verify a specific object with the <code class="docutils literal notranslate"><span class="pre">--sif-id</span></code> option
-to <code class="docutils literal notranslate"><span class="pre">sign</span></code> and <code class="docutils literal notranslate"><span class="pre">verify</span></code>.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity sign --sif-id 1 my_container.sif
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">sif</span></code> commands will only run against a local SIF file. You
+must <code class="docutils literal notranslate"><span class="pre">pull</span></code> an image to a local disk before you can examine it.</p>
+</div>
+<p>I can choose to sign and verify a specific object with the <code class="docutils literal notranslate"><span class="pre">--sif-id</span></code>
+option to <code class="docutils literal notranslate"><span class="pre">sign</span></code> and <code class="docutils literal notranslate"><span class="pre">verify</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sign --sif-id 1 my_container.sif
+
 Signing image: my_container.sif
 Enter key passphrase :
 Signature created and applied to my_container.sif
 
-$ singularity verify --sif-id 1 my_container.sif
+$ apptainer verify --sif-id 1 my_container.sif
+
 Verifying image: my_container.sif
-[LOCAL]   Signing entity: David Trudgian (Demo keys) &lt;david.trudgian@sylabs.io&gt;
+[LOCAL]   Signing entity: Joe User (Demo keys) &lt;myuser@example.com&gt;
 [LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
 Objects verified:
 ID  |GROUP   |LINK    |TYPE
@@ -357,55 +402,177 @@ ID  |GROUP   |LINK    |TYPE
 Container verified: my_container.sif
 </pre></div>
 </div>
-<p>Note that running the <code class="docutils literal notranslate"><span class="pre">verify</span></code> command without specifying the specific sif-id
-gives a fatal error. The container is not considered verified as whole because
-other objects could have been changed without my knowledge.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity verify my_container.sif
+<p>Note that running the <code class="docutils literal notranslate"><span class="pre">verify</span></code> command without specifying the specific
+sif-id gives a fatal error. The container is not considered verified as
+whole because other objects could have been changed without my
+knowledge.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify my_container.sif
+
 Verifying image: my_container.sif
-[LOCAL]   Signing entity: David Trudgian (Demo keys) &lt;david.trudgian@sylabs.io&gt;
+[LOCAL]   Signing entity: Joe User (Demo keys) &lt;myuser@example.com&gt;
 [LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
 
 Error encountered during signature verification: object 2: object not signed
 FATAL:   Failed to verify container: integrity: object 2: object not signed
 </pre></div>
 </div>
-<p>I can sign a group of objects with the <code class="docutils literal notranslate"><span class="pre">--group-id</span></code> option to <code class="docutils literal notranslate"><span class="pre">sign</span></code>.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity sign --groupid 1 my_container.sif
+<p>I can sign a group of objects with the <code class="docutils literal notranslate"><span class="pre">--group-id</span></code> option to
+<code class="docutils literal notranslate"><span class="pre">sign</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sign --group-id 1 my_container.sif
 Signing image: my_container.sif
 Enter key passphrase :
 Signature created and applied to my_container.sif
 </pre></div>
 </div>
-<p>This creates one signature over all objects in the
-group. I can verify that nothing in the group has been modified by
-running <code class="docutils literal notranslate"><span class="pre">verify</span></code> with the same <code class="docutils literal notranslate"><span class="pre">--group-id</span></code> option.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity verify --group-id 1 my_container.sif
+<p>This creates one signature over all objects in the group. I can verify
+that nothing in the group has been modified by running <code class="docutils literal notranslate"><span class="pre">verify</span></code> with
+the same <code class="docutils literal notranslate"><span class="pre">--group-id</span></code> option.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify --group-id 1 my_container.sif
+
 Verifying image: my_container.sif
-[LOCAL]   Signing entity: David Trudgian (Demo keys) &lt;david.trudgian@sylabs.io&gt;
+[LOCAL]   Signing entity: Joe User (Demo keys) &lt;myuser@example.com&gt;
 [LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
 Objects verified:
 ID  |GROUP   |LINK    |TYPE
 ------------------------------------------------
 1   |1       |NONE    |Def.FILE
 2   |1       |NONE    |JSON.Generic
-3   |1       |NONE    |FS
+3   |1       |NONE    |JSON.Generic
+4   |1       |NONE    |FS
 Container verified: my_container.sif
 </pre></div>
 </div>
-<p>Because every object in the SIF file is within the signed group 1 the entire
-container is signed, and the default <code class="docutils literal notranslate"><span class="pre">verify</span></code> behavior without specifying
-<code class="docutils literal notranslate"><span class="pre">--group-id</span></code> can also verify the container:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ singularity verify my_container.sif
+<p>Because every object in the SIF file is within the signed group 1 the
+entire container is signed, and the default <code class="docutils literal notranslate"><span class="pre">verify</span></code> behavior without
+specifying <code class="docutils literal notranslate"><span class="pre">--group-id</span></code> can also verify the container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify my_container.sif
+
 Verifying image: my_container.sif
-[LOCAL]   Signing entity: David Trudgian (Demo keys) &lt;david.trudgian@sylabs.io&gt;
+[LOCAL]   Signing entity: Joe User (Demo keys) &lt;myuser@example.com&gt;
 [LOCAL]   Fingerprint: 65833F473098C6215E750B3BDFD69E5CEE85D448
 Objects verified:
 ID  |GROUP   |LINK    |TYPE
 ------------------------------------------------
 1   |1       |NONE    |Def.FILE
 2   |1       |NONE    |JSON.Generic
-3   |1       |NONE    |FS
+3   |1       |NONE    |JSON.Generic
+4   |1       |NONE    |FS
 Container verified: my_container.sif
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pem-key-x-509-certificate-support">
+<h2>PEM Key / X.509 Certificate Support<a class="headerlink" href="#pem-key-x-509-certificate-support" title="Link to this heading"></a></h2>
+<p>Apptainer also supports signing SIF container images using a PEM format private
+key, and verifying with a PEM format public key, or X.509 certificate. Non-PGP
+signatures are implemented using the <a class="reference external" href="https://github.com/secure-systems-lab/dsse">Dead Simple Signing Envelope</a> (DSSE) standard.</p>
+<p>The Apptainer GitHub repo contains keys and certificates useful for testing. If
+you want to use them to carry out the commands below, first, carry out the
+following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/apptainer/apptainer.git
+
+$ export KEYD=&quot;${PWD}/apptainer/test/keys&quot;
+
+$ export CERTD=&quot;${PWD}/apptainer/test/certs&quot;
+</pre></div>
+</div>
+<p>Information on creating PEM files can be found in the <span class="xref std std-ref">encrypted container
+docs</span>, and the method for creating certificates is
+documented <a class="reference external" href="https://github.com/apptainer/apptainer/blob/release-1.4/test/certs/gen_certs.go">here</a>.</p>
+<section id="signing-with-a-pem-key">
+<h3>Signing with a PEM key<a class="headerlink" href="#signing-with-a-pem-key" title="Link to this heading"></a></h3>
+<p>To sign a container using a private key in PEM format, provide the private key
+material to the <code class="docutils literal notranslate"><span class="pre">sign</span></code> command using the <code class="docutils literal notranslate"><span class="pre">--key</span></code> flag.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sign --key $KEYD/rsa-private.pem lolcow.sif
+INFO:    Signing image with key material from &#39;rsa_pri.pem&#39;
+INFO:    Signature created and applied to image &#39;lolcow.sif&#39;
+</pre></div>
+</div>
+<p>The DSSE signature descriptor can now be seen by inspecting the SIF file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer sif list lolcow.sif
+------------------------------------------------------------------------------
+ID   |GROUP   |LINK    |SIF POSITION (start-end)  |TYPE
+------------------------------------------------------------------------------
+1    |1       |NONE    |32176-32393               |Def.FILE
+2    |1       |NONE    |32393-33522               |JSON.Generic
+3    |1       |NONE    |33522-33718               |JSON.Generic
+4    |1       |NONE    |36864-84656128            |FS (Squashfs/*System/amd64)
+5    |NONE    |1   (G) |84656128-84658191         |Signature (SHA-256)
+
+$ apptainer sif dump 5 lolcow.sif | jq
+{
+&quot;payloadType&quot;: &quot;application/vnd.apptainer.sif-metadata+json&quot;,
+...
+</pre></div>
+</div>
+<p>Attempting to <code class="docutils literal notranslate"><span class="pre">verify</span></code> the image without options will fail, as it is not
+signed with a PGP key:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify lolcow.sif
+INFO:    Verifying image with PGP key material
+FATAL:   Failed to verify container: integrity: key material not provided for DSSE envelope signature
+</pre></div>
+</div>
+<p>Note that the error message shows that the container image has a DSSE signature
+present.</p>
+</section>
+<section id="verifying-with-a-pem-key">
+<h3>Verifying with a PEM key<a class="headerlink" href="#verifying-with-a-pem-key" title="Link to this heading"></a></h3>
+<p>To verify a container using a PEM public key directly, provide the key material
+to the <code class="docutils literal notranslate"><span class="pre">verify</span></code> command using the <code class="docutils literal notranslate"><span class="pre">key</span></code> flag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify --key $KEYD/rsa-public.pem lolcow.sif
+INFO:    Verifying image with key material from &#39;rsa_pub.pem&#39;
+Objects verified:
+ID  |GROUP   |LINK    |TYPE
+------------------------------------------------
+1   |1       |NONE    |Def.FILE
+2   |1       |NONE    |JSON.Generic
+3   |1       |NONE    |JSON.Generic
+4   |1       |NONE    |FS
+INFO:    Verified signature(s) from image &#39;lolcow.sif&#39;
+</pre></div>
+</div>
+</section>
+<section id="verifying-with-an-x-509-certificate">
+<h3>Verifying with an X.509 certificate<a class="headerlink" href="#verifying-with-an-x-509-certificate" title="Link to this heading"></a></h3>
+<p>To verify a container that was signed with a PEM private key, using an X.509
+certificate, pass the certificate to the <code class="docutils literal notranslate"><span class="pre">verify</span></code> command using the
+<code class="docutils literal notranslate"><span class="pre">--certificate</span></code> flag. If the certificate is part of a chain, provide
+intermediate and valid root certificates with the
+<code class="docutils literal notranslate"><span class="pre">--certificate-intermediates</span></code> and <code class="docutils literal notranslate"><span class="pre">--certificate-roots</span></code> flags:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify \
+   --certificate $CERTD/leaf.pem \
+   --certificate-intermediates $CERTD/intermediate.pem \
+   --certificate-roots $CERTD/root.pem \
+   lolcow.sif
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The certificate must have a usage field that allows code signing in order to
+verify container images.</p>
+</div>
+</section>
+<section id="oscp-certificate-revocation-checks">
+<h3>OSCP Certificate Revocation Checks<a class="headerlink" href="#oscp-certificate-revocation-checks" title="Link to this heading"></a></h3>
+<p>When verifying a container using X.509 certificates, Apptainer can perform
+online revocation checks using the Online Certificate Status Protocol (OCSP). To
+enable OCSP checks, add the <code class="docutils literal notranslate"><span class="pre">--ocsp-verify</span></code> flag to your <code class="docutils literal notranslate"><span class="pre">verify</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer verify \
+   --certificate $CERTD/leaf.pem \
+   --certificate-intermediates $CERTD/intermediate.pem \
+   --certificate-roots $CERTD/root.pem \
+   --ocsp-verify
+   lolcow.sif
+</pre></div>
+</div>
+<p>Apptainer will then attempt to contact the prescribed OCSP responder for
+each certificate in the chain, in order to check that the relevant certificate
+has not been revoked. In the event that an OCSP responder cannot be contacted,
+or a certificate has been revoked, verification will fail with a validation
+error:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span>    <span class="n">Validate</span><span class="p">:</span> <span class="n">cert</span><span class="p">:</span><span class="n">leaf</span>  <span class="n">issuer</span><span class="p">:</span><span class="n">intermediate</span>
+<span class="n">FATAL</span><span class="p">:</span>   <span class="n">Failed</span> <span class="n">to</span> <span class="n">verify</span> <span class="n">container</span><span class="p">:</span> <span class="n">OCSP</span> <span class="n">verification</span> <span class="n">has</span> <span class="n">failed</span>
 </pre></div>
 </div>
 </section>
@@ -423,13 +590,18 @@ Container verified: my_container.sif
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2017-2021, HPCng.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
 
 </footer>
         </div>

@@ -1,23 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fakeroot feature &mdash; Singularity User Guide 3.8 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/favicon.png"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Fakeroot feature &mdash; Apptainer User Guide 1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/js/ga.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -30,24 +31,25 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Singularity User Guide
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                3.8
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
@@ -60,13 +62,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#network">Network</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#requirements-configuration">Requirements / Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#build">Build</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#build-from-a-definition-file">Build from a definition file:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-package-to-a-writable-overlay">Add package to a writable overlay</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ping-from-container">Ping from container:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#http-server">HTTP server:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-fakeroot-command-inside-definition-file">Using fakeroot command inside definition file:</a></li>
 </ul>
 </li>
 </ul>
@@ -81,22 +84,26 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cloud_library.html">Sylabs Cloud Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running_services.html">Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Instances - Running Services</a></li>
 <li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Cgroups Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Limiting Container Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Application Checkpointing</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singularity_and_docker.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">Singularity and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 </ul>
 <ul>
@@ -107,7 +114,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
 </ul>
 
         </div>
@@ -116,17 +123,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Singularity User Guide</a>
+          <a href="index.html">Apptainer User Guide</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Fakeroot feature</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Fakeroot feature</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/hpcng/singularity-userdocs/blob/master/fakeroot.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/1.4/fakeroot.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -135,42 +142,100 @@
            <div itemprop="articleBody">
              
   <section id="fakeroot-feature">
-<span id="fakeroot"></span><h1>Fakeroot feature<a class="headerlink" href="#fakeroot-feature" title="Permalink to this headline"></a></h1>
+<span id="fakeroot"></span><h1>Fakeroot feature<a class="headerlink" href="#fakeroot-feature" title="Link to this heading"></a></h1>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
-<p>The fakeroot feature (commonly referred as rootless mode) allows an unprivileged user
-to run a container as a <strong>“fake root”</strong> user by leveraging
-<a class="reference external" href="http://man7.org/linux/man-pages/man7/user_namespaces.7.html">user namespace UID/GID mapping</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This feature requires a Linux kernel &gt;= 3.8, but the recommended version is &gt;= 3.18</p>
-</div>
-<p>A <strong>“fake root”</strong> user has almost the same administrative rights as root but only <strong>inside the container</strong>
-and the <strong>requested namespaces</strong>, which means that this user:</p>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The fakeroot feature allows an unprivileged user to run a container with
+the appearance of running as root.
+Apptainer does this in different ways, depending on what is available on
+the host:</p>
+<ol class="arabic simple">
+<li><p>If the host is set up to map the current user via <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and
+<code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> mapping files (or equivalent through libsubid),
+Apptainer will use that method first.
+This is also commonly referred to as “rootless mode” and is the
+method used for example by Podman.
+This mode requires user namespaces to be enabled.
+It is the most complete emulation but it requires administrator setup
+as described in the <a class="reference external" href="https://apptainer.org/docs/admin/1.4/user_namespace.html#rootless-fakeroot-feature">admin guide</a>.
+It also requires some elevated privilege assistance on the host as described
+there, which means that it will not be able to run nested inside another
+container that disallows elevating privileges, as Apptainer does.
+Those elevated privileges on the host come from either a setuid-root
+install of Apptainer or via the host <code class="docutils literal notranslate"><span class="pre">newuidmap</span></code> and <code class="docutils literal notranslate"><span class="pre">newgidmap</span></code>
+commands.</p></li>
+<li><p>Otherwise if user namespaces are available without <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code>
+and <code class="docutils literal notranslate"><span class="pre">/etc/subguid</span></code> mapping files, Apptainer will map only
+the root user id to the original unprivileged user.
+This method is sometimes called a “root-mapped user namespace”.
+Since this method is not as complete an emulation as rootless mode,
+an INFO message showing it is happening is displayed.</p></li>
+<li><p>If the “fakeroot” command is available on the host, Apptainer will
+use it in addition to a root-mapped user namespace.
+This command fakes root privileges on file manipulation, telling
+programs that operations that would succeed as root have succeeded
+even though they really haven’t.
+This is useful for avoiding errors when building containers or when
+adding packages to a writable container, because many package
+installations attempt to do additional setup that only works as root.
+When the fakeroot command is used, an INFO message is displayed.
+The combination of a root-mapped user namespace with the fakeroot command
+allows most package installations to work, but the fakeroot command is
+bound in from the host so if the host libc library is a newer version
+than the corresponding library in the container the
+fakeroot command can fail with errors about missing GLIBC versions.
+If that situation happens the easiest solution may be to use the
+<a class="reference external" href="https://apptainer.org/docs/admin/1.4/installation.html#install-from-pre-built-packages">install-unprivileged.sh script</a>
+to install Apptainer because it downloads a fakeroot command
+built with as old a libc as possible.
+Otherwise you can also try using the <code class="docutils literal notranslate"><span class="pre">--ignore-fakeroot-command</span></code>
+which may work if the commands in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section of the build
+definition file are simple enough.
+As a last resort advanced option see the
+<a class="reference internal" href="#fakeroot-inside-def"><span class="std std-ref">Using fakeroot command inside definition file</span></a>
+example below.</p></li>
+<li><p>If user namespaces are not available but Apptainer has been installed
+with setuid-root and also the “fakeroot” command is available, then
+the fakeroot command will be run by itself.
+This allows some package installations to succeed but others will
+still fail; it is not as complete an emulation because the
+root-mapped user namespace causes the kernel to allow bypassing
+restrictions on files that are actually owned by the original user
+on the host, things that the fakeroot command cannot do by itself.
+Also, this mode requires the container image to be a sandbox.</p></li>
+</ol>
+<p>As mentioned above, the “rootless” fakeroot mode is the most complete
+emulation.  That mode has almost the same administrative rights as root
+but only <strong>inside the container</strong> and the <strong>requested namespaces</strong>,
+which means that this user:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>can set different user/group ownership for files or directories they own</p></li>
-<li><p>can change user/group identity with su/sudo commands</p></li>
-<li><p>has full privileges inside the requested namespaces (network, ipc, uts)</p></li>
+<li><p>can set different user/group ownership for files or directories
+they own</p></li>
+<li><p>can change user/group identity with su/sudo commands when starting
+as the fake root user</p></li>
 </ul>
 </div></blockquote>
+<p>In addition, the first three modes above may have full privileges inside
+the requested network namespace (see below).</p>
 </section>
 <section id="restrictions-security">
-<h2>Restrictions/security<a class="headerlink" href="#restrictions-security" title="Permalink to this headline"></a></h2>
+<h2>Restrictions/security<a class="headerlink" href="#restrictions-security" title="Link to this heading"></a></h2>
 <section id="filesystem">
-<h3>Filesystem<a class="headerlink" href="#filesystem" title="Permalink to this headline"></a></h3>
-<p>A <strong>“fake root”</strong> user can’t access or modify files and directories for which they don’t
-already have access or rights on the host filesystem, so a <strong>“fake root”</strong> user won’t be able
-to access root-only host files like <code class="docutils literal notranslate"><span class="pre">/etc/shadow</span></code> or the host <code class="docutils literal notranslate"><span class="pre">/root</span></code> directory.</p>
-<p>Additionally, all files or directories created by the <strong>“fake root”</strong> user are owned by
-<code class="docutils literal notranslate"><span class="pre">root:root</span></code> inside container but as <code class="docutils literal notranslate"><span class="pre">user:group</span></code> outside of the container.
-Let’s consider the following example, in this case “user” is authorized to use the fakeroot feature
-and can use 65536 UIDs starting at 131072 (same thing for GIDs).</p>
+<h3>Filesystem<a class="headerlink" href="#filesystem" title="Link to this heading"></a></h3>
+<p>A “fake root” user can never access or modify files and directories for
+which they don’t already have access or rights on the host filesystem,
+so a “fake root” user won’t be able to access root-only host files
+such as <code class="docutils literal notranslate"><span class="pre">/etc/shadow</span></code> or the host <code class="docutils literal notranslate"><span class="pre">/root</span></code> directory.
+As a convenience, by default the original user’s home directory is bound
+to <code class="docutils literal notranslate"><span class="pre">/root</span></code> inside the container.</p>
+<p>Additionally, all files or directories created by the “fake root”
+user are owned by <code class="docutils literal notranslate"><span class="pre">root:root</span></code> inside the container but as <code class="docutils literal notranslate"><span class="pre">user:group</span></code>
+outside of the container.</p>
+<p>Let’s consider the following example.  In this case “user” is authorized
+to use the rootless mode fakeroot feature and can use 65536
+UIDs starting at 131072 (same thing for GIDs).</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 49%" />
-<col style="width: 51%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>UID inside container</p></th>
 <th class="head"><p>UID outside container</p></th>
@@ -194,45 +259,46 @@ and can use 65536 UIDs starting at 131072 (same thing for GIDs).</p>
 </tr>
 </tbody>
 </table>
-<p>Which means if the <strong>“fake root”</strong> user creates a file under a <code class="docutils literal notranslate"><span class="pre">bin</span></code> user in the container, this file will
-be owned by <code class="docutils literal notranslate"><span class="pre">131073:131073</span></code> outside of container. The responsibility relies on the administrator
-to ensure that there is no overlap with the current user’s UID/GID on the system.</p>
+<p>This means that if the “fake root” user creates a file under a <code class="docutils literal notranslate"><span class="pre">bin</span></code>
+user in the container, this file will be owned by <code class="docutils literal notranslate"><span class="pre">131073:131073</span></code>
+outside of the container. The responsibility relies on the administrator to
+ensure that there is no overlap with any user’s UID/GID on the
+system.</p>
 </section>
 <section id="network">
-<h3>Network<a class="headerlink" href="#network" title="Permalink to this headline"></a></h3>
-<p>Restrictions are also applied to networking, if <code class="docutils literal notranslate"><span class="pre">singularity</span></code> is executed without the <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag,
-the <strong>“fake root”</strong> user won’t be able to use <code class="docutils literal notranslate"><span class="pre">ping</span></code> or bind a container service to a port below
-1024.</p>
-<p>With <code class="docutils literal notranslate"><span class="pre">--net</span></code> the <strong>“fake root”</strong> user has full privileges in a dedicated container network. Inside
-the container network they can bind on privileged ports below 1024, use ping, manage firewall rules,
-listen to traffic, etc. Anything done in this dedicated network won’t affect the host network.</p>
+<h3>Network<a class="headerlink" href="#network" title="Link to this heading"></a></h3>
+<p>Normally the kernel prevents unprivileged users from connecting to
+ports below 1024, and the <code class="docutils literal notranslate"><span class="pre">ping</span></code> command requires a setcap capability in
+order to work on the network.
+Apptainer allows overriding these restrictions when all of the following
+conditions are true:</p>
+<ol class="arabic simple">
+<li><p>Apptainer is installed with suid mode enabled</p></li>
+<li><p>Network namespaces are enabled</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">-net</span></code> option is used</p></li>
+<li><p>The user is listed in <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and so can use rootless mode</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option is used</p></li>
+</ol>
+<p>If those conditions are true, the user has full network privileges in a
+dedicated container network. Inside the container network they can bind
+on privileged ports below 1024, use ping, manage firewall rules, listen
+to traffic, etc. Anything done in this dedicated network won’t affect
+the host network.
+The ports inside the dedicated network can be mapped to other ports
+on the host with the <code class="docutils literal notranslate"><span class="pre">--network-args=&quot;portmap&quot;</span></code> option.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Of course an unprivileged user could not map host ports below than 1024 by using:
-<code class="docutils literal notranslate"><span class="pre">--network-args=&quot;portmap=80:80/tcp&quot;</span></code></p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>For unprivileged installation of Singularity or if <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">setuid</span> <span class="pre">=</span> <span class="pre">no</span></code> is set in <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code>
-users won’t be able to use a <code class="docutils literal notranslate"><span class="pre">fakeroot</span></code> network.</p>
+<p>Of course an unprivileged user can not map host ports below
+1024 by using for example: <code class="docutils literal notranslate"><span class="pre">--network-args=&quot;portmap=80:80/tcp&quot;</span></code></p>
 </div>
 </section>
-</section>
-<section id="requirements-configuration">
-<h2>Requirements / Configuration<a class="headerlink" href="#requirements-configuration" title="Permalink to this headline"></a></h2>
-<p>Fakeroot depends on user mappings set in <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and group mappings in <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>, so your username
-needs to be listed in those files with a valid mapping (see the admin-guide for details), if you can’t edit
-the files ask an administrator.</p>
-<p>In Singularity <code class="docutils literal notranslate"><span class="pre">3.5</span></code> a <code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">config</span> <span class="pre">fakeroot</span></code> command has been added to allow configuration
-of the <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> mappings from the Singularity command line. You must be a root
-user or run with <code class="docutils literal notranslate"><span class="pre">sudo</span></code> to use <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code>, as the mapping files are security sensitive. See the
-admin-guide for more details.</p>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
-<p>If your user account is configured with valid <code class="docutils literal notranslate"><span class="pre">subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">subgid</span></code> mappings you work as a fake root user
-inside a container by using the <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> or <code class="docutils literal notranslate"><span class="pre">-f</span></code> option.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option is available with the following singularity commands:</p>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>You can work as a fake root user inside a container by using the
+<code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> or <code class="docutils literal notranslate"><span class="pre">-f</span></code> option.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option is available with the following apptainer
+commands:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">shell</span></code></p></li>
@@ -242,30 +308,130 @@ inside a container by using the <code class="docutils literal notranslate"><span
 <li><p><code class="docutils literal notranslate"><span class="pre">build</span></code></p></li>
 </ul>
 </div></blockquote>
+<p>The option is automatically implied when doing a build as an
+unprivileged user.</p>
 <section id="build">
-<h3>Build<a class="headerlink" href="#build" title="Permalink to this headline"></a></h3>
-<p>With fakeroot an unprivileged user can now build an image from a definition file with few restrictions. Some bootstrap
-methods that require creation of block devices (like <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>) may not always work correctly with <strong>“fake root”</strong>,
-Singularity uses seccomp filters to give programs the illusion that block device creation succeeded. This appears to
-work with <code class="docutils literal notranslate"><span class="pre">yum</span></code> bootstraps and <em>may</em> work with other bootstrap methods, although <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> is known to not work.</p>
+<span id="id1"></span><h3>Build<a class="headerlink" href="#build" title="Link to this heading"></a></h3>
+<p>Depending on the method of “fake root” used, an unprivileged user can build
+an image from a definition file with few restrictions.
+Some bootstrap methods that require creation of block devices (like
+<code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>) may not always work correctly with “fake root”.
+With the rootles mode “fake root”, Apptainer uses seccomp filters
+to give programs the illusion that block device creation succeeded.
+This appears to work with <code class="docutils literal notranslate"><span class="pre">yum</span></code> or <code class="docutils literal notranslate"><span class="pre">dnf</span></code> bootstraps and <em>may</em> work with other
+bootstrap methods, although <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> is known to not work.</p>
+<p>If only the fakeroot command is used for “fake root” mode (because no
+user namespaces are available, in suid mode), then building a container
+also implies the <code class="docutils literal notranslate"><span class="pre">--fix-perms</span></code> option, because otherwise directories
+created may not be writable by the creating user.</p>
 </section>
 <section id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h3>
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h3>
 <section id="build-from-a-definition-file">
-<h4>Build from a definition file:<a class="headerlink" href="#build-from-a-definition-file" title="Permalink to this headline"></a></h4>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>singularity build --fakeroot /tmp/test.sif /tmp/test.def
+<h4>Build from a definition file:<a class="headerlink" href="#build-from-a-definition-file" title="Link to this heading"></a></h4>
+<p>(fakeroot is implied)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">build</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="k">def</span>
+</pre></div>
+</div>
+</section>
+<section id="add-package-to-a-writable-overlay">
+<h4>Add package to a writable overlay<a class="headerlink" href="#add-package-to-a-writable-overlay" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">overlay</span>
+<span class="n">apptainer</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">overlay</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">overlay</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="n">dnf</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">openssh</span>
 </pre></div>
 </div>
 </section>
 <section id="ping-from-container">
-<h4>Ping from container:<a class="headerlink" href="#ping-from-container" title="Permalink to this headline"></a></h4>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>singularity exec --fakeroot --net docker://alpine ping -c1 8.8.8.8
+<h4>Ping from container:<a class="headerlink" href="#ping-from-container" title="Link to this heading"></a></h4>
+<p>(when the Network conditions above are met)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">alpine</span> <span class="n">ping</span> <span class="o">-</span><span class="n">c1</span> <span class="mf">8.8.8.8</span>
 </pre></div>
 </div>
 </section>
 <section id="http-server">
-<h4>HTTP server:<a class="headerlink" href="#http-server" title="Permalink to this headline"></a></h4>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>singularity run --fakeroot --net --network-args=&quot;portmap=8080:80/tcp&quot; -w docker://nginx
+<h4>HTTP server:<a class="headerlink" href="#http-server" title="Link to this heading"></a></h4>
+<p>(when the Network conditions above are met)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">run</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="o">--</span><span class="n">network</span><span class="o">-</span><span class="n">args</span><span class="o">=</span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span> <span class="o">-</span><span class="n">w</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">nginx</span>
+</pre></div>
+</div>
+</section>
+<section id="using-fakeroot-command-inside-definition-file">
+<span id="fakeroot-inside-def"></span><h4>Using fakeroot command inside definition file:<a class="headerlink" href="#using-fakeroot-command-inside-definition-file" title="Link to this heading"></a></h4>
+<p>When using fakeroot mode 3 above, where user namespaces are
+available but /etc/subuid mapping is not set up, and you are trying
+to build a container for an operating sytem with an older glibc
+library than the host or for a target operating system like alpine
+that does not include glibc, this more advanced technique may help.</p>
+<p>First, use the apptainer build <code class="docutils literal notranslate"><span class="pre">--ignore-fakeroot-command</span></code> option
+to avoid binding in the fakeroot command from the host.
+If your <code class="docutils literal notranslate"><span class="pre">%post</span></code> commands are simple enough, that alone may be enough.
+If any of the commands try to do <code class="docutils literal notranslate"><span class="pre">chown</span></code> or something similar, then
+try additionally installing the fakeroot command in the <code class="docutils literal notranslate"><span class="pre">%post</span></code>
+section and running the other commands under that.
+In order to work correctly with user namespaces there also needs to be
+an environment variable setting of <code class="docutils literal notranslate"><span class="pre">FAKEROOTDONTTRYCHOWN=1</span></code>.</p>
+<p>For example, with a definition file called <code class="docutils literal notranslate"><span class="pre">my.def</span></code>
+containing this for a RHEL-derived container:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: rockylinux:<span class="m">8</span>
+
+<span class="gh">%post</span>
+<span class="w">    </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>epel-release
+<span class="w">    </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fakeroot
+<span class="w">    </span><span class="nv">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>fakeroot<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">        dnf install -y openssh</span>
+<span class="s1">    &#39;</span>
+</pre></div>
+</div>
+<p>or this for an alpine container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Bootstrap</span><span class="p">:</span> <span class="n">docker</span>
+<span class="n">From</span><span class="p">:</span> <span class="n">alpine</span><span class="p">:</span><span class="n">latest</span>
+
+<span class="o">%</span><span class="n">post</span>
+    <span class="n">apk</span> <span class="n">update</span>
+    <span class="n">apk</span> <span class="n">add</span> <span class="n">fakeroot</span>
+    <span class="n">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="mi">1</span> <span class="n">fakeroot</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;</span>
+        <span class="n">apk</span> <span class="n">add</span> <span class="n">squid</span>
+    <span class="s1">&#39;</span>
+</pre></div>
+</div>
+<p>then build with</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>apptainer build --ignore-fakeroot-command my.sif my.def
+</pre></div>
+</div>
+<p>A Debian-derived container is more challenging because even the
+installation of the fakeroot package itself requires more than is
+available in fakeroot mode 2 (root-mapped user namespace).  So to
+demonstrate this you need to first build an image with another method
+that installs fakeroot (perhaps on another host where you have root
+access), and then make that image available where you need it and build
+on top of that.</p>
+<p>For example for the first phase:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: ubuntu:<span class="m">20.04</span>
+
+<span class="gh">%post</span>
+<span class="w">    </span>apt<span class="w"> </span>update
+<span class="w">    </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fakeroot
+</pre></div>
+</div>
+<p>and build with</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>sudo apptainer build ubuntu+fakeroot.sif my.def
+</pre></div>
+</div>
+<p>Then this for the second phase in a file called my2.def:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: localimage
+<span class="k">From</span>: ubuntu+fakeroot.sif
+
+<span class="gh">%post</span>
+<span class="w">    </span><span class="nv">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>fakeroot<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">        apt update</span>
+<span class="s1">        apt install -y openssh</span>
+<span class="s1">    &#39;</span>
+</pre></div>
+</div>
+<p>and build with</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>apptainer build --ignore-fakeroot-command my.sif my2.def
 </pre></div>
 </div>
 </section>
@@ -284,13 +450,18 @@ work with <code class="docutils literal notranslate"><span class="pre">yum</span
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2017-2021, HPCng.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
 
 </footer>
         </div>

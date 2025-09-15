@@ -1,27 +1,31 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Quick Start &mdash; Singularity Admin Guide 3.8 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/favicon.png"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Admin Quick Start &mdash; Apptainer Admin Guide 1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=7cec7674"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installing Singularity" href="installation.html" />
+    <link rel="next" title="Installing Apptainer" href="installation.html" />
     <link rel="prev" title="Admin Guide" href="index.html" /> 
 </head>
 
@@ -30,15 +34,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Singularity Admin Guide
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer Admin Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                3.8
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -46,24 +51,19 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Admin Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#architecture-of-singularity">Architecture of Singularity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#singularity-security">Singularity Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation-from-source">Installation from Source</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#install-dependencies">Install Dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#install-go">Install Go</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#download-singularity-from-a-github-release">Download Singularity from a GitHub release</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compile-install-singularity">Compile &amp; Install Singularity</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture-of-apptainer">Architecture of Apptainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#apptainer-security">Apptainer Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#test-singularity">Test Singularity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Singularity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singularity_migration.html">Migrating from Singularity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configfiles.html">Configuration files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_namespace.html">User Namespaces &amp; Fakeroot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Singularity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring.html">Monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -73,17 +73,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Singularity Admin Guide</a>
+          <a href="index.html">Apptainer Admin Guide</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Admin Quick Start</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Admin Quick Start</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/hpcng/singularity-admindocs/blob/master/admin_quickstart.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-admindocs/blob/1.4/admin_quickstart.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -92,15 +92,15 @@
            <div itemprop="articleBody">
              
   <section id="admin-quick-start">
-<h1>Admin Quick Start<a class="headerlink" href="#admin-quick-start" title="Permalink to this headline"></a></h1>
-<p>This quick start gives an overview of installation of Singularity from
-source, a description of the architecture of Singularity, and pointers
+<h1>Admin Quick Start<a class="headerlink" href="#admin-quick-start" title="Link to this heading"></a></h1>
+<p>This quick start gives an overview of installation of Apptainer,
+a description of the architecture of Apptainer, and pointers
 to configuration files. More information, including alternate
 installation options and detailed configuration options can be found
 later in this guide.</p>
-<section id="architecture-of-singularity">
-<span id="singularity-architecture"></span><h2>Architecture of Singularity<a class="headerlink" href="#architecture-of-singularity" title="Permalink to this headline"></a></h2>
-<p>Singularity is designed to allow containers to be executed as if they
+<section id="architecture-of-apptainer">
+<span id="apptainer-architecture"></span><h2>Architecture of Apptainer<a class="headerlink" href="#architecture-of-apptainer" title="Link to this heading"></a></h2>
+<p>Apptainer is designed to allow containers to be executed as if they
 were native programs or scripts on a host system. No daemon is required
 to build or run containers, and the security model is compatible with
 shared systems.</p>
@@ -109,221 +109,57 @@ Engine, Torque, SLURM, SGE, and many others is as simple as running any
 other command. All standard input, output, errors, pipes, IPC, and other
 communication pathways used by locally running programs are synchronized
 with the applications running locally within the container.</p>
-<p>Singularity favors an ‘integration over isolation’ approach to
-containers. By default only the mount namespace is isolated for
+<p>Apptainer favors an ‘integration over isolation’ approach to
+containers. By default only the mount and user namespaces are isolated for
 containers, so that they have their own filesystem view. Access to
 hardware such as GPUs, high speed networks, and shared filesystems is
 easy and does not require special configuration. Default access to
 user home directories, <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> space, and installation specific
 mounts makes it simple for users to benefit from the reproducibility
 of containerized applications without major changes to their existing
-workflows. Where more complete isolation is important, Singularity
+workflows. Where more complete isolation is important, Apptainer
 can use additional Linux namespaces and other security and resource
 limits to accomplish this.</p>
 </section>
-<section id="singularity-security">
-<span id="id1"></span><h2>Singularity Security<a class="headerlink" href="#singularity-security" title="Permalink to this headline"></a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>See also the <a class="reference internal" href="security.html#security"><span class="std std-ref">security section</span></a> of this guide, for more
-detail.</p>
-</div>
-<p>Singularity uses a number of strategies to provide safety and
-ease-of-use on both single-user and shared systems. Notable security
-features include:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>The user inside a container is the same as the user who ran the
-container. This means access to files and devices from the
-container is easily controlled with standard POSIX permissions.</p></li>
-<li><p>Container filesystems are mounted <code class="docutils literal notranslate"><span class="pre">nosuid</span></code> and container
-applications run with the <code class="docutils literal notranslate"><span class="pre">PR_SET_NO_NEW_PRIVS</span></code> flag. This means
-that applications in a container cannot gain additional
-privileges. A regular user cannot <code class="docutils literal notranslate"><span class="pre">sudo</span></code> or otherwise gain root
-privilege on the host via a container.</p></li>
-<li><p>The Singularity Image Format (SIF) supports encryption of
-containers, as well as cryptographic signing and verification of
-their content.</p></li>
-<li><p>SIF containers are immutable and their payload is run directly,
-without extraction to disk. This means that the container can
-always be verified, even at runtime, and encrypted content is not
-exposed on disk.</p></li>
-<li><p>Restrictions can be configured to limit the ownership, location,
-and cryptographic signatures of containers that are permitted to
-be run.</p></li>
-</ul>
-</div></blockquote>
-<p>To support the SIF image format, automated networking setup etc., and
-older Linux distributions without user namespace support, Singularity
-runs small amounts of privileged container setup code via a
-<code class="docutils literal notranslate"><span class="pre">starter-setuid</span></code> binary. This is a ‘setuid root’ binary, so that
-Singularity can perform filesystem loop mounts and other operations
-that need privilege. The setuid flow is the default mode of operation,
-but <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">can be disabled</span></a> on build, or in the
-<code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> configuration file if required.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Running Singularity in non-setuid mode requires unprivileged user
-namespace support in the operating system kernel and does not support
-all features, most notably direct mounts of SIF images. This impacts
-integrity/security guarantees of containers at runtime.</p>
-<p>See the <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">non-setuid installation section</span></a>
-for further detail on how to install Singularity to run in
-non-setuid mode.</p>
-</div>
+<section id="apptainer-security">
+<span id="id1"></span><h2>Apptainer Security<a class="headerlink" href="#apptainer-security" title="Link to this heading"></a></h2>
+<p>See the <a class="reference external" href="https://apptainer.org/docs/user/1.4/security.html">Security section</a> of the user guide.</p>
 </section>
-<section id="installation-from-source">
-<h2>Installation from Source<a class="headerlink" href="#installation-from-source" title="Permalink to this headline"></a></h2>
-<p>Singularity can be installed from source directly, or by building an
-RPM package from the source. Linux distributions may also package
-Singularity, but their packages may not be up-to-date with the
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<p>Apptainer can be installed from source directly, by building an
+RPM or Debian package from the source, or by downloading pre-built packages.
+Linux distributions may also package
+Apptainer, but their packages may or may not be up-to-date with the
 upstream version on GitHub.</p>
-<p>To install Singularity directly from source, follow the procedure
-below. Other methods are discussed in the <a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installation</span></a> section.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This quick-start that you will install as <code class="docutils literal notranslate"><span class="pre">root</span></code> using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, so
-that Singularity uses the default <code class="docutils literal notranslate"><span class="pre">setuid</span></code> workflow, and all
-features are available. See the <a class="reference internal" href="installation.html#install-nonsetuid"><span class="std std-ref">non-setuid installation</span></a> section of this guide for detail of how to
-install as a non-root user, and how this affects the functionality of
-Singularity.</p>
-</div>
-<section id="install-dependencies">
-<h3>Install Dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this headline"></a></h3>
-<p>On Red Hat Enterprise Linux or CentOS install the following
-dependencies:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo yum update -y <span class="o">&amp;&amp;</span> <span class="se">\</span>
-     sudo yum groupinstall -y <span class="s1">&#39;Development Tools&#39;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
-     sudo yum install -y <span class="se">\</span>
-     openssl-devel <span class="se">\</span>
-     libuuid-devel <span class="se">\</span>
-     libseccomp-devel <span class="se">\</span>
-     wget <span class="se">\</span>
-     squashfs-tools <span class="se">\</span>
-     cryptsetup
-</pre></div>
-</div>
-<p>On Ubuntu or Debian install the following dependencies:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install -y <span class="se">\</span>
-    build-essential <span class="se">\</span>
-    uuid-dev <span class="se">\</span>
-    libgpgme-dev <span class="se">\</span>
-    squashfs-tools <span class="se">\</span>
-    libseccomp-dev <span class="se">\</span>
-    wget <span class="se">\</span>
-    pkg-config <span class="se">\</span>
-    git <span class="se">\</span>
-    cryptsetup-bin
-</pre></div>
-</div>
-</section>
-<section id="install-go">
-<h3>Install Go<a class="headerlink" href="#install-go" title="Permalink to this headline"></a></h3>
-<p>Singularity v3 is written primarily in Go, and you will need Go 1.16
-or above installed to compile it from source. Versions of Go packaged by
-your distribution may not be new enough to build Singularity.</p>
-<p>The method below is one of several ways to <a class="reference external" href="https://golang.org/doc/install">install and configure Go</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you have previously installed Go from a download, rather than an
-operating system package, you should remove your <code class="docutils literal notranslate"><span class="pre">go</span></code> directory,
-e.g. <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">/usr/local/go</span></code> before installing a newer version.
-Extracting a new version of Go over an existing installation can lead
-to errors when building Go programs, as it may leave old files, which
-have been removed or replaced in newer versions.</p>
-</div>
-<p>Visit the <a class="reference external" href="https://golang.org/dl/">Go download page</a> and pick a
-package archive to download. Copy the link address and download with
-wget. Then extract the archive to <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> (or use other
-instructions on go installation page).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=1.17.6 OS=linux ARCH=amd64 &amp;&amp; \
-    wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \
-    sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz &amp;&amp; \
-    rm go$VERSION.$OS-$ARCH.tar.gz
-</pre></div>
-</div>
-<p>Then, set up your environment for Go.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &#39;export GOPATH=${HOME}/go&#39; &gt;&gt; ~/.bashrc &amp;&amp; \
-    echo &#39;export PATH=/usr/local/go/bin:${PATH}:${GOPATH}/bin&#39; &gt;&gt; ~/.bashrc &amp;&amp; \
-    source ~/.bashrc
-</pre></div>
-</div>
-</section>
-<section id="download-singularity-from-a-github-release">
-<h3>Download Singularity from a GitHub release<a class="headerlink" href="#download-singularity-from-a-github-release" title="Permalink to this headline"></a></h3>
-<p>You can download Singularity from one of the releases. To see a full
-list, visit <a class="reference external" href="https://github.com/hpcng/singularity/releases">the GitHub release page</a>.  After deciding on a
-release to install, you can run the following commands to proceed with
-the installation.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VERSION=3.8.5 &amp;&amp; # adjust this as necessary \
-    wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &amp;&amp; \
-    tar -xzf singularity-${VERSION}.tar.gz &amp;&amp; \
-    cd singularity
-</pre></div>
-</div>
-</section>
-<section id="compile-install-singularity">
-<h3>Compile &amp; Install Singularity<a class="headerlink" href="#compile-install-singularity" title="Permalink to this headline"></a></h3>
-<p>Singularity uses a custom build system called <code class="docutils literal notranslate"><span class="pre">makeit</span></code>. <code class="docutils literal notranslate"><span class="pre">mconfig</span></code>
-is called to generate a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> and then <code class="docutils literal notranslate"><span class="pre">make</span></code> is used to
-compile and install.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mconfig &amp;&amp; \
-    make -C ./builddir &amp;&amp; \
-    sudo make -C ./builddir install
-</pre></div>
-</div>
-<p>By default Singularity will be installed in the <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>
-directory hierarchy. You can specify a custom directory with the
-<code class="docutils literal notranslate"><span class="pre">--prefix</span></code> option, to <code class="docutils literal notranslate"><span class="pre">mconfig</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mconfig --prefix=/opt/singularity
-</pre></div>
-</div>
-<p>This option can be useful if you want to install multiple versions of
-Singularity, install a personal version of Singularity on a shared
-system, or if you want to remove Singularity easily after installing
-it.</p>
-<p>For a full list of <code class="docutils literal notranslate"><span class="pre">mconfig</span></code> options, run <code class="docutils literal notranslate"><span class="pre">mconfig</span> <span class="pre">--help</span></code>. Here are
-some of the most common options that you may need to use when building
-Singularity from source.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--sysconfdir</span></code>: Install read-only config files in sysconfdir. This
-option is important if you need the <code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> file or
-other configuration files in a custom location.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code>: Set the state directory where containers are
-mounted. This is a particularly important option for administrators
-installing Singularity on a shared file system. The
-<code class="docutils literal notranslate"><span class="pre">--localstatedir</span></code> should be set to a directory that is present on
-each individual node.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-b</span></code>: Build Singularity in a given directory. By default this is
-<code class="docutils literal notranslate"><span class="pre">./builddir</span></code>.</p></li>
-</ul>
-</section>
+<p>To install from source, follow the instructions in <a class="reference external" href="https://github.com/apptainer/apptainer/blob/release-1.4/INSTALL.md">INSTALL.md</a>
+on GitHub.
+Other methods are discussed in the <a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installation</span></a> section of this guide.</p>
 </section>
 <section id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline"></a></h2>
-<p>Singularity is configured using files under <code class="docutils literal notranslate"><span class="pre">etc/singularity</span></code> in
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<p>Apptainer is configured using files under <code class="docutils literal notranslate"><span class="pre">etc/apptainer</span></code> in
 your <code class="docutils literal notranslate"><span class="pre">--prefix</span></code>, or <code class="docutils literal notranslate"><span class="pre">--syconfdir</span></code> if you used that option with
 <code class="docutils literal notranslate"><span class="pre">mconfig</span></code>. In a default installation from source without a
 <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> set you will find them under
-<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/singularity</span></code>. In a default installation from RPM or Deb packages you will find them under <code class="docutils literal notranslate"><span class="pre">/etc/singularity</span></code>.</p>
-<p>You can edit these files directly, or using the <code class="docutils literal notranslate"><span class="pre">Singularity</span> <span class="pre">config</span>
+<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/apptainer</span></code>. In a default installation from RPM or Deb packages you will find them under <code class="docutils literal notranslate"><span class="pre">/etc/apptainer</span></code>.</p>
+<p>You can edit these files directly, or using the <code class="docutils literal notranslate"><span class="pre">Apptainer</span> <span class="pre">config</span>
 <span class="pre">global</span></code> command as the root user to manage them.</p>
-<p><code class="docutils literal notranslate"><span class="pre">singularity.conf</span></code> contains the majority of options controlling the
-runtime behavior of Singularity. Additional files control security,
+<p><code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> contains the majority of options controlling the
+runtime behavior of Apptainer. Additional files control security,
 network, and resource configuration. Head over to the
-<a class="reference internal" href="configfiles.html#singularity-configfiles"><span class="std std-ref">Configuration files</span></a> section where the
+<a class="reference internal" href="configfiles.html#apptainer-configfiles"><span class="std std-ref">Configuration files</span></a> section where the
 files and configuration options are discussed.</p>
 </section>
-<section id="test-singularity">
-<h2>Test Singularity<a class="headerlink" href="#test-singularity" title="Permalink to this headline"></a></h2>
-<p>You can run a quick test of Singularity using a container in the
-Sylabs Container Library:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ singularity exec library://alpine cat /etc/alpine-release
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>You can run a quick test of Apptainer using a small alpine container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine cat /etc/alpine-release
 3.9.2
 </pre></div>
 </div>
-<p>See the <a class="reference external" href="https://singularity.hpcng.org/user-docs/3.8">user guide</a> for more
-information about how to use Singularity.</p>
+<p>See the <a class="reference external" href="https://apptainer.org/docs/user/1.4">user guide</a> for more
+information about how to use Apptainer.</p>
 </section>
 </section>
 
@@ -332,19 +168,24 @@ information about how to use Singularity.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Admin Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="installation.html" class="btn btn-neutral float-right" title="Installing Singularity" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installing Apptainer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021-2022, Apptainer a Series of LF Projects LLC © 2017-2022, Sylabs Inc.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
 
 </footer>
         </div>

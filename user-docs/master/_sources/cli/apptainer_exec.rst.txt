@@ -1,0 +1,133 @@
+.. _apptainer_exec:
+
+apptainer exec
+--------------
+
+Run a command within a container
+
+Synopsis
+~~~~~~~~
+
+
+
+  apptainer exec supports the following formats:
+
+  *.sif               Singularity Image Format (SIF). Native to Singularity
+                      (3.0+) and Apptainer (v1.0.0+)
+  
+  *.sqsh              SquashFS format.  Native to Singularity 2.4+
+
+  *.img               ext3 format. Native to Singularity versions < 2.4.
+
+  directory/          sandbox format. Directory containing a valid root file 
+                      system and optionally Apptainer meta-data.
+
+  instance://*        A local running instance of a container. (See the instance
+                      command group.)
+
+  library://*         A SIF container hosted on a Library (no default)
+
+  docker://*          A Docker/OCI container hosted on Docker Hub or another
+                      OCI registry.
+
+  shub://*            A container hosted on Singularity Hub.
+
+  oras://*            A SIF container hosted on an OCI registry that supports
+                      the OCI Registry As Storage (ORAS) specification.
+
+::
+
+  apptainer exec [exec options...] <container> <command>
+
+Examples
+~~~~~~~~
+
+::
+
+
+    $ apptainer exec /tmp/debian.sif cat /etc/debian_version
+    $ apptainer exec /tmp/debian.sif python ./hello_world.py
+    $ cat hello_world.py | apptainer exec /tmp/debian.sif python
+    $ sudo apptainer exec --writable /tmp/debian.sif apt-get update
+    $ apptainer exec instance://my_instance ps -ef
+    $ apptainer exec library://centos cat /etc/os-release
+
+Options
+~~~~~~~
+
+::
+
+      --add-caps string               a comma separated capability list to add
+      --allow-setuid                  allow setuid binaries in container (root only)
+      --app string                    set an application to run inside a container
+      --apply-cgroups string          apply cgroups from file for container processes (root only)
+      --authfile string               Docker-style authentication file to use for writing/reading OCI registry credentials
+  -B, --bind stringArray              a user-bind path specification.  spec has the format src[:dest[:opts]], where src and dest are outside and inside paths.  If dest is not given, it is set equal to src.  Mount options ('opts') may be specified as 'ro' (read-only) or 'rw' (read/write, which is the default). Multiple bind paths can be given by a comma separated list.
+      --blkio-weight int              Block IO relative weight in range 10-1000, 0 to disable
+      --blkio-weight-device strings   Device specific block IO relative weight
+  -e, --cleanenv                      clean environment before running container
+      --compat                        apply settings for increased OCI/Docker compatibility. Infers --containall, --no-init, --no-umask, --no-eval, --writable-tmpfs.
+  -c, --contain                       use minimal /dev and empty other directories (e.g. /tmp and $HOME) instead of sharing filesystems from your host
+  -C, --containall                    contain not only file systems, but also PID, IPC, and environment
+      --cpu-shares int                CPU shares for container (default -1)
+      --cpus string                   Number of CPUs available to container
+      --cpuset-cpus string            List of host CPUs available to container
+      --cpuset-mems string            List of host memory nodes available to container
+      --cwd string                    initial working directory for payload process inside the container (synonym for --pwd)
+      --disable-cache                 do not use or create cache
+      --dns string                    list of DNS server separated by commas to add in resolv.conf
+      --docker-host string            specify a custom Docker daemon host
+      --docker-login                  login to a Docker Repository interactively
+      --drop-caps string              a comma separated capability list to drop
+      --env stringToString            pass environment variable to contained process (default [])
+      --env-file strings              pass environment variables from file to contained process
+  -f, --fakeroot                      run container with the appearance of running as root
+      --fusemount strings             A FUSE filesystem mount specification of the form '<type>:<fuse command> <mountpoint>' - where <type> is 'container' or 'host', specifying where the mount will be performed ('container-daemon' or 'host-daemon' will run the FUSE process detached). <fuse command> is the path to the FUSE executable, plus options for the mount. <mountpoint> is the location in the container to which the FUSE mount will be attached. E.g. 'container:sshfs 10.0.0.1:/ /sshfs'. Implies --pid.
+  -h, --help                          help for exec
+  -H, --home string                   a home directory specification.  spec can either be a src path or src:dest pair.  src is the source path of the home directory outside the container and dest overrides the home directory within the container. (default "/home/runner")
+      --hostname string               set container hostname
+  -i, --ipc                           run container in a new IPC namespace
+      --keep-privs                    let root user keep privileges in container (root only)
+      --memory string                 Memory limit in bytes
+      --memory-reservation string     Memory soft limit in bytes
+      --memory-swap string            Swap limit, use -1 for unlimited swap
+      --mount stringArray             a mount specification e.g. 'type=bind,source=/opt,destination=/hostopt'.
+  -n, --net                           run container in a new network namespace (sets up a bridge network interface by default)
+      --netns-path string             join the network namespace at the specified path (as root, or if permitted in apptainer.conf)
+      --network string                specify desired network type separated by commas, each network will bring up a dedicated interface inside container
+      --network-args strings          specify network arguments to pass to CNI plugins
+      --no-eval                       do not shell evaluate env vars or OCI container CMD/ENTRYPOINT/ARGS
+      --no-home                       do NOT mount users home directory if /home is not the current working directory
+      --no-https                      use http instead of https for docker:// oras:// and library://<hostname>/... URIs
+      --no-init                       do NOT start shim process with --pid
+      --no-mount strings              disable one or more 'mount xxx' options set in apptainer.conf and/or specify absolute destination path to disable a bind path entry, or 'bind-paths' to disable all bind path entries.
+      --no-pid                        do not run container in a new PID namespace
+      --no-privs                      drop all privileges from root user in container)
+      --no-umask                      do not propagate umask to the container, set default 0022 umask
+      --nv                            enable Nvidia support
+      --nvccli                        use nvidia-container-cli for GPU setup (experimental)
+      --oom-kill-disable              Disable OOM killer
+  -o, --overlay strings               use an overlayFS image for persistent data storage or as read-only layer of container
+      --passphrase                    prompt for an encryption passphrase
+      --pem-path string               enter an path to a PEM formatted RSA key for an encrypted container
+  -p, --pid                           run container in a new PID namespace
+      --pids-limit int                Limit number of container PIDs, use -1 for unlimited
+      --rocm                          enable experimental Rocm support
+  -S, --scratch strings               include a scratch directory within the container that is linked to a temporary dir (use -W to force location)
+      --security strings              enable security features (SELinux, Apparmor, Seccomp)
+      --sharens                       share the namespace and image with other containers launched from the same parent process
+      --unsquash                      Convert SIF file to temporary sandbox before running
+  -u, --userns                        run container in a new user namespace
+      --uts                           run container in a new UTS namespace
+  -W, --workdir string                working directory to be used for /tmp, /var/tmp and $HOME (if -c/--contain was also used)
+  -w, --writable                      by default all Apptainer containers are available as read only. This option makes the file system accessible as read/write.
+      --writable-tmpfs                makes the file system accessible as read-write with non persistent data (with overlay support only)
+
+SEE ALSO
+~~~~~~~~
+
+* :ref:`apptainer <apptainer>` 	 - 
+Linux container platform optimized for High Performance Computing (HPC) and
+Enterprise Performance Computing (EPC)
+
+*Auto generated by spf13/cobra on 2-Sep-2025*
