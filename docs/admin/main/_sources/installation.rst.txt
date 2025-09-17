@@ -351,7 +351,7 @@ For the setuid installation do above command first and then this one:
 Install Debian packages
 ------------------------------
 
-Pre-built Debian packages are only available on GitHub and only for the amd64 architecture. For the non-setuid installation on on Debian 11 or 12 use these commands:
+Pre-built Debian packages are only available on GitHub and only for the amd64 architecture. For the non-setuid installation on Debian 11 or 12 use these commands:
 
 .. code::
 
