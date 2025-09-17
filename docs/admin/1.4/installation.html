@@ -426,7 +426,7 @@ non-setuid installation:</p>
 </section>
 <section id="install-debian-packages">
 <h4>Install Debian packages<a class="headerlink" href="#install-debian-packages" title="Link to this heading"></a></h4>
-<p>Pre-built Debian packages are only available on GitHub and only for the amd64 architecture. For the non-setuid installation use these commands:</p>
+<p>Pre-built Debian packages are only available on GitHub and only for the amd64 architecture. For the non-setuid installation on Debian 11 or 12 use these commands:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt update
 $ sudo apt install -y wget
 $ cd /tmp
@@ -437,6 +437,19 @@ $ sudo apt install -y ./apptainer_1.4.2_amd64.deb
 <p>For the setuid installation do above commands first and then these:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://github.com/apptainer/apptainer/releases/download/v1.4.2/apptainer-suid_1.4.2_amd64.deb
 $ sudo dpkg -i ./apptainer-suid_1.4.2_amd64.deb
+</pre></div>
+</div>
+<p>For Debian 13 do these commands instead</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt update
+$ sudo apt install -y wget
+$ cd /tmp
+$ wget https://github.com/apptainer/apptainer/releases/download/v1.4.2/apptainer_1.4.2-trixie+_amd64.deb
+$ sudo apt install -y ./apptainer_1.4.2-trixie+_amd64.deb
+</pre></div>
+</div>
+<p>For the setuid installation do above commands first and then these:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://github.com/apptainer/apptainer/releases/download/v1.4.2/apptainer-suid_1.4.2-trixie+_amd64.deb
+$ sudo dpkg -i ./apptainer-suid_1.4.2-trixie+_amd64.deb
 </pre></div>
 </div>
 </section>
