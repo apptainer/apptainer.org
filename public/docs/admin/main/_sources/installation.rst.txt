@@ -351,7 +351,7 @@ For the setuid installation do above command first and then this one:
 Install Debian packages
 ------------------------------
 
-Pre-built Debian packages are only available on GitHub and only for the amd64 architecture. For the non-setuid installation use these commands:
+Pre-built Debian packages are only available on GitHub and only for the amd64 architecture. For the non-setuid installation on on Debian 11 or 12 use these commands:
 
 .. code::
 
@@ -367,6 +367,24 @@ For the setuid installation do above commands first and then these:
 
     $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid_{InstallationVersion}_amd64.deb
     $ sudo dpkg -i ./{command}-suid_{InstallationVersion}_amd64.deb
+
+For Debian 13 do these commands instead 
+
+.. code::
+
+    $ sudo apt update
+    $ sudo apt install -y wget
+    $ cd /tmp
+    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}_{InstallationVersion}-trixie+_amd64.deb
+    $ sudo apt install -y ./{command}_{InstallationVersion}-trixie+_amd64.deb
+
+For the setuid installation do above commands first and then these:
+
+.. code::
+
+    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid_{InstallationVersion}-trixie+_amd64.deb
+    $ sudo dpkg -i ./{command}-suid_{InstallationVersion}-trixie+_amd64.deb
+
 
 Install Ubuntu packages
 ------------------------------
