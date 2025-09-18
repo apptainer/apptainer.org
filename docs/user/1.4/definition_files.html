@@ -654,14 +654,19 @@ information about the Apptainer container environment.</p>
 shell of the one that executes the container, so things such as
 function definitions and aliases do not get carried through.
 As a result, for example initializing conda cannot be done there.</p>
-<p>For that type of initialization in non-interactive shells you can in
+<p>For that type of initialization you can take advantage of some bash
+features, if the container includes bash (for example alpine does not
+include bash).  Apptainer by default will use bash if it is available.
+For non-interactive shells you can in
 the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section export <code class="docutils literal notranslate"><span class="pre">BASH_ENV</span></code> to point to a script to
-source when the shell starts.</p>
+source when the child shell starts.
+Note that bash by default does not process aliases in non-interactive
+shells, unless <code class="docutils literal notranslate"><span class="pre">shopt</span> <span class="pre">-s</span> <span class="pre">expand_aliases</span></code> is used before they are defined.</p>
 <p>For the equivalent in interactive shells you can instead in the <code class="docutils literal notranslate"><span class="pre">%post</span></code>
 section add to <code class="docutils literal notranslate"><span class="pre">/etc/bash.bashrc</span></code> on Debian-based distributions.
 (RedHat-based distributions have a /etc/bashrc that apparently once
 was equivalent but it does not appear to work in current versions.)
-In addition, by default the <code class="docutils literal notranslate"><span class="pre">shell</span></code> command starts the shell
+In addition, by default the <code class="docutils literal notranslate"><span class="pre">shell</span></code> command starts bash
 with a <code class="docutils literal notranslate"><span class="pre">--norc</span></code> option so it does not run any bashrc.
 That can be worked around by adding
 <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">SINGULARITY_SHELL=/bin/bash</span></code> in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code>
