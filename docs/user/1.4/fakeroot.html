@@ -63,15 +63,15 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#build">Build</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#building-container-images">Building container images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fakeroot-examples">Fakeroot examples</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#build-from-a-definition-file">Build from a definition file:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#add-package-to-a-writable-overlay">Add package to a writable overlay</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ping-from-container">Ping from container:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#http-server">HTTP server:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#using-fakeroot-command-inside-definition-file">Using fakeroot command inside definition file:</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#using-fakeroot-command-inside-definition-file">Using fakeroot command inside definition file:</a></li>
 </ul>
 </li>
 </ul>
@@ -310,23 +310,36 @@ commands:</p>
 </div></blockquote>
 <p>The option is automatically implied when doing a build as an
 unprivileged user.</p>
-<section id="build">
-<span id="id1"></span><h3>Build<a class="headerlink" href="#build" title="Link to this heading"></a></h3>
-<p>Depending on the method of “fake root” used, an unprivileged user can build
+<section id="building-container-images">
+<span id="build"></span><h3>Building container images<a class="headerlink" href="#building-container-images" title="Link to this heading"></a></h3>
+<p>Depending on the mode of “fake root” used, an unprivileged user can build
 an image from a definition file with few restrictions.
-Some bootstrap methods that require creation of block devices (like
+The <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> option is automatically implied when an unprivileged
+user uses the <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">build</span></code> command.</p>
+<p>The rootless mode (fakeroot mode 1) works for almost all cases and has
+the fewest restrictions.  For adding to existing containers, such as
+with the bootstrap methods <code class="docutils literal notranslate"><span class="pre">docker</span></code>, <code class="docutils literal notranslate"><span class="pre">oras</span></code>, and <code class="docutils literal notranslate"><span class="pre">localimage</span></code>,
+fakeroot mode 3 using the fakeroot command and a root-mapped user
+namespace also works well for most cases, as long as the host and
+container libraries are compatible as detailed in the description of
+mode 3 above.</p>
+<p>Some bootstrap methods that require creation of block devices (like
 <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>) may not always work correctly with “fake root”.
-With the rootles mode “fake root”, Apptainer uses seccomp filters
+With fakeroot mode 1, Apptainer uses seccomp filters
 to give programs the illusion that block device creation succeeded.
-This appears to work with <code class="docutils literal notranslate"><span class="pre">yum</span></code> or <code class="docutils literal notranslate"><span class="pre">dnf</span></code> bootstraps and <em>may</em> work with other
-bootstrap methods, although <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> is known to not work.</p>
-<p>If only the fakeroot command is used for “fake root” mode (because no
-user namespaces are available, in suid mode), then building a container
+This appears to work with <code class="docutils literal notranslate"><span class="pre">yum</span></code>, <code class="docutils literal notranslate"><span class="pre">dnf</span></code>, and <code class="docutils literal notranslate"><span class="pre">scratch</span></code> bootstraps
+and <em>may</em> work with other
+bootstrap methods, although <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> is known to not work.
+The other fakeroot modes do not work well with these bootstraps that
+build containers from scratch.</p>
+<p>If the fakeroot command is used by itself for “fake root” mode (because no
+user namespaces are available in suid mode, that is, fakeroot mode 4),
+then building a container
 also implies the <code class="docutils literal notranslate"><span class="pre">--fix-perms</span></code> option, because otherwise directories
 created may not be writable by the creating user.</p>
 </section>
-<section id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h3>
+<section id="fakeroot-examples">
+<h3>Fakeroot examples<a class="headerlink" href="#fakeroot-examples" title="Link to this heading"></a></h3>
 <section id="build-from-a-definition-file">
 <h4>Build from a definition file:<a class="headerlink" href="#build-from-a-definition-file" title="Link to this heading"></a></h4>
 <p>(fakeroot is implied)</p>
@@ -355,8 +368,9 @@ created may not be writable by the creating user.</p>
 </pre></div>
 </div>
 </section>
+</section>
 <section id="using-fakeroot-command-inside-definition-file">
-<span id="fakeroot-inside-def"></span><h4>Using fakeroot command inside definition file:<a class="headerlink" href="#using-fakeroot-command-inside-definition-file" title="Link to this heading"></a></h4>
+<span id="fakeroot-inside-def"></span><h3>Using fakeroot command inside definition file:<a class="headerlink" href="#using-fakeroot-command-inside-definition-file" title="Link to this heading"></a></h3>
 <p>When using fakeroot mode 3 above, where user namespaces are
 available but /etc/subuid mapping is not set up, and you are trying
 to build a container for an operating sytem with an older glibc
@@ -434,7 +448,6 @@ on top of that.</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span>apptainer build --ignore-fakeroot-command my.sif my2.def
 </pre></div>
 </div>
-</section>
 </section>
 </section>
 </section>

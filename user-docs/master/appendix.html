@@ -188,6 +188,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#scratch-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">scratch</span></code> bootstrap agent</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id32">Overview</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id33">Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id34">Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -929,6 +930,9 @@ For instance, on Ubuntu you can install it like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get update &amp;&amp; sudo apt-get install dnf
 </pre></div>
 </div>
+<p>When building a container as an unprivileged user using this bootstrap,
+not all of the fakeroot modes work well.  See
+<a class="reference internal" href="fakeroot.html#build"><span class="std std-ref">Building container images</span></a> for details.</p>
 </section>
 </section>
 <section id="debootstrap-build-agent">
@@ -983,6 +987,9 @@ like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo dnf update &amp;&amp; sudo dnf install epel-release &amp;&amp; sudo dnf install debootstrap.noarch
 </pre></div>
 </div>
+<p>When building a container as an unprivileged user using this bootstrap,
+not all of the fakeroot modes work well.  See
+<a class="reference internal" href="fakeroot.html#build"><span class="std std-ref">Building container images</span></a> for details.</p>
 </section>
 </section>
 <section id="arch-bootstrap-agent">
@@ -1201,6 +1208,12 @@ Hello from a 696KiB container
 </pre></div>
 </div>
 <p>There are no additional keywords for the scratch bootstrap agent.</p>
+</section>
+<section id="id34">
+<h4>Notes<a class="headerlink" href="#id34" title="Link to this heading"></a></h4>
+<p>When building a container as an unprivileged user using this bootstrap,
+not all of the fakeroot modes work well.  See
+<a class="reference internal" href="fakeroot.html#build"><span class="std std-ref">Building container images</span></a> for details.</p>
 </section>
 </section>
 </section>
