@@ -142,6 +142,20 @@
 <li class="toctree-l4"><a class="reference internal" href="#github-com-creack-pty">github.com/creack/pty</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-cyberphone-json-canonicalization-go-src-webpki-org-jsoncanonicalizer">github.com/cyberphone/json-canonicalization/go/src/webpki.org/jsoncanonicalizer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-cyphar-filepath-securejoin">github.com/cyphar/filepath-securejoin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mozilla-public-license-version-2-0">Mozilla Public License Version 2.0</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#definitions">1. Definitions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#license-grants-and-conditions">2. License Grants and Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#responsibilities">3. Responsibilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inability-to-comply-due-to-statute-or-regulation">4. Inability to Comply Due to Statute or Regulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#termination">5. Termination</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#litigation">8. Litigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#miscellaneous">9. Miscellaneous</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#versions-of-the-license">10. Versions of the License</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exhibit-a-source-code-form-license-notice">Exhibit A - Source Code Form License Notice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exhibit-b-incompatible-with-secondary-licenses-notice">Exhibit B - “Incompatible With Secondary Licenses” Notice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-cyphar-filepath-securejoin-pathrs-lite">github.com/cyphar/filepath-securejoin/pathrs-lite</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-distribution-reference">github.com/distribution/reference</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-docker-cli-cli-config">github.com/docker/cli/cli/config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-docker-distribution">github.com/docker/distribution</a></li>
@@ -209,7 +223,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#github-com-oklog-ulid">github.com/oklog/ulid</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-opencontainers-go-digest">github.com/opencontainers/go-digest</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-opencontainers-image-spec-specs-go">github.com/opencontainers/image-spec/specs-go</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-com-opencontainers-runc-libcontainer">github.com/opencontainers/runc/libcontainer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-com-opencontainers-runc">github.com/opencontainers/runc</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-opencontainers-runtime-spec-specs-go">github.com/opencontainers/runtime-spec/specs-go</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-opencontainers-umoci">github.com/opencontainers/umoci</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-com-opencontainers-umoci-third-party-shared">github.com/opencontainers/umoci/third_party/shared</a></li>
@@ -3551,35 +3565,469 @@ limitations under the License.
 </section>
 <section id="github-com-cyphar-filepath-securejoin">
 <h4>github.com/cyphar/filepath-securejoin<a class="headerlink" href="#github-com-cyphar-filepath-securejoin" title="Link to this heading"></a></h4>
-<p><strong>License:</strong> BSD-3-Clause</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">2015</span> <span class="n">Docker</span> <span class="n">Inc</span> <span class="o">&amp;</span> <span class="n">Go</span> <span class="n">Authors</span><span class="o">.</span> <span class="n">All</span> <span class="n">rights</span> <span class="n">reserved</span><span class="o">.</span>
-<span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="mi">2017</span><span class="o">-</span><span class="mi">2024</span> <span class="n">SUSE</span> <span class="n">LLC</span><span class="o">.</span> <span class="n">All</span> <span class="n">rights</span> <span class="n">reserved</span><span class="o">.</span>
+<p><strong>License:</strong> MPL-2.0</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>## COPYING ##
 
-<span class="n">Redistribution</span> <span class="ow">and</span> <span class="n">use</span> <span class="ow">in</span> <span class="n">source</span> <span class="ow">and</span> <span class="n">binary</span> <span class="n">forms</span><span class="p">,</span> <span class="k">with</span> <span class="ow">or</span> <span class="n">without</span>
-<span class="n">modification</span><span class="p">,</span> <span class="n">are</span> <span class="n">permitted</span> <span class="n">provided</span> <span class="n">that</span> <span class="n">the</span> <span class="n">following</span> <span class="n">conditions</span> <span class="n">are</span>
-<span class="n">met</span><span class="p">:</span>
+`SPDX-License-Identifier: BSD-3-Clause AND MPL-2.0`
 
-   <span class="o">*</span> <span class="n">Redistributions</span> <span class="n">of</span> <span class="n">source</span> <span class="n">code</span> <span class="n">must</span> <span class="n">retain</span> <span class="n">the</span> <span class="n">above</span> <span class="n">copyright</span>
-<span class="n">notice</span><span class="p">,</span> <span class="n">this</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">conditions</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">following</span> <span class="n">disclaimer</span><span class="o">.</span>
-   <span class="o">*</span> <span class="n">Redistributions</span> <span class="ow">in</span> <span class="n">binary</span> <span class="n">form</span> <span class="n">must</span> <span class="n">reproduce</span> <span class="n">the</span> <span class="n">above</span>
-<span class="n">copyright</span> <span class="n">notice</span><span class="p">,</span> <span class="n">this</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">conditions</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">following</span> <span class="n">disclaimer</span>
-<span class="ow">in</span> <span class="n">the</span> <span class="n">documentation</span> <span class="ow">and</span><span class="o">/</span><span class="ow">or</span> <span class="n">other</span> <span class="n">materials</span> <span class="n">provided</span> <span class="k">with</span> <span class="n">the</span>
-<span class="n">distribution</span><span class="o">.</span>
-   <span class="o">*</span> <span class="n">Neither</span> <span class="n">the</span> <span class="n">name</span> <span class="n">of</span> <span class="n">Google</span> <span class="n">Inc</span><span class="o">.</span> <span class="n">nor</span> <span class="n">the</span> <span class="n">names</span> <span class="n">of</span> <span class="n">its</span>
-<span class="n">contributors</span> <span class="n">may</span> <span class="n">be</span> <span class="n">used</span> <span class="n">to</span> <span class="n">endorse</span> <span class="ow">or</span> <span class="n">promote</span> <span class="n">products</span> <span class="n">derived</span> <span class="kn">from</span>
-<span class="nn">this</span> <span class="n">software</span> <span class="n">without</span> <span class="n">specific</span> <span class="n">prior</span> <span class="n">written</span> <span class="n">permission</span><span class="o">.</span>
+This project is made up of code licensed under different licenses. Which code
+you use will have an impact on whether only one or both licenses apply to your
+usage of this library.
 
-<span class="n">THIS</span> <span class="n">SOFTWARE</span> <span class="n">IS</span> <span class="n">PROVIDED</span> <span class="n">BY</span> <span class="n">THE</span> <span class="n">COPYRIGHT</span> <span class="n">HOLDERS</span> <span class="n">AND</span> <span class="n">CONTRIBUTORS</span>
-<span class="s2">&quot;AS IS&quot;</span> <span class="n">AND</span> <span class="n">ANY</span> <span class="n">EXPRESS</span> <span class="n">OR</span> <span class="n">IMPLIED</span> <span class="n">WARRANTIES</span><span class="p">,</span> <span class="n">INCLUDING</span><span class="p">,</span> <span class="n">BUT</span> <span class="n">NOT</span>
-<span class="n">LIMITED</span> <span class="n">TO</span><span class="p">,</span> <span class="n">THE</span> <span class="n">IMPLIED</span> <span class="n">WARRANTIES</span> <span class="n">OF</span> <span class="n">MERCHANTABILITY</span> <span class="n">AND</span> <span class="n">FITNESS</span> <span class="n">FOR</span>
-<span class="n">A</span> <span class="n">PARTICULAR</span> <span class="n">PURPOSE</span> <span class="n">ARE</span> <span class="n">DISCLAIMED</span><span class="o">.</span> <span class="n">IN</span> <span class="n">NO</span> <span class="n">EVENT</span> <span class="n">SHALL</span> <span class="n">THE</span> <span class="n">COPYRIGHT</span>
-<span class="n">OWNER</span> <span class="n">OR</span> <span class="n">CONTRIBUTORS</span> <span class="n">BE</span> <span class="n">LIABLE</span> <span class="n">FOR</span> <span class="n">ANY</span> <span class="n">DIRECT</span><span class="p">,</span> <span class="n">INDIRECT</span><span class="p">,</span> <span class="n">INCIDENTAL</span><span class="p">,</span>
-<span class="n">SPECIAL</span><span class="p">,</span> <span class="n">EXEMPLARY</span><span class="p">,</span> <span class="n">OR</span> <span class="n">CONSEQUENTIAL</span> <span class="n">DAMAGES</span> <span class="p">(</span><span class="n">INCLUDING</span><span class="p">,</span> <span class="n">BUT</span> <span class="n">NOT</span>
-<span class="n">LIMITED</span> <span class="n">TO</span><span class="p">,</span> <span class="n">PROCUREMENT</span> <span class="n">OF</span> <span class="n">SUBSTITUTE</span> <span class="n">GOODS</span> <span class="n">OR</span> <span class="n">SERVICES</span><span class="p">;</span> <span class="n">LOSS</span> <span class="n">OF</span> <span class="n">USE</span><span class="p">,</span>
-<span class="n">DATA</span><span class="p">,</span> <span class="n">OR</span> <span class="n">PROFITS</span><span class="p">;</span> <span class="n">OR</span> <span class="n">BUSINESS</span> <span class="n">INTERRUPTION</span><span class="p">)</span> <span class="n">HOWEVER</span> <span class="n">CAUSED</span> <span class="n">AND</span> <span class="n">ON</span> <span class="n">ANY</span>
-<span class="n">THEORY</span> <span class="n">OF</span> <span class="n">LIABILITY</span><span class="p">,</span> <span class="n">WHETHER</span> <span class="n">IN</span> <span class="n">CONTRACT</span><span class="p">,</span> <span class="n">STRICT</span> <span class="n">LIABILITY</span><span class="p">,</span> <span class="n">OR</span> <span class="n">TORT</span>
-<span class="p">(</span><span class="n">INCLUDING</span> <span class="n">NEGLIGENCE</span> <span class="n">OR</span> <span class="n">OTHERWISE</span><span class="p">)</span> <span class="n">ARISING</span> <span class="n">IN</span> <span class="n">ANY</span> <span class="n">WAY</span> <span class="n">OUT</span> <span class="n">OF</span> <span class="n">THE</span> <span class="n">USE</span>
-<span class="n">OF</span> <span class="n">THIS</span> <span class="n">SOFTWARE</span><span class="p">,</span> <span class="n">EVEN</span> <span class="n">IF</span> <span class="n">ADVISED</span> <span class="n">OF</span> <span class="n">THE</span> <span class="n">POSSIBILITY</span> <span class="n">OF</span> <span class="n">SUCH</span> <span class="n">DAMAGE</span><span class="o">.</span>
+Note that **each file** in this project individually has a code comment at the
+start describing the license of that particular file -- this is the most
+accurate license information of this project; in case there is any conflict
+between this document and the comment at the start of a file, the comment shall
+take precedence. The only purpose of this document is to work around [a known
+technical limitation of pkg.go.dev&#39;s license checking tool when dealing with
+non-trivial project licenses][go75067].
+
+[go75067]: https://go.dev/issue/75067
+
+### `BSD-3-Clause` ###
+
+At time of writing, the following files and directories are licensed under the
+BSD-3-Clause license:
+
+ * `doc.go`
+ * `join*.go`
+ * `vfs.go`
+ * `internal/consts/*.go`
+ * `pathrs-lite/internal/gocompat/*.go`
+ * `pathrs-lite/internal/kernelversion/*.go`
+
+The text of the BSD-3-Clause license used by this project is the following (the
+text is also available from the [`LICENSE.BSD`](./LICENSE.BSD) file):
+</pre></div>
+</div>
+<p>Copyright (C) 2014-2015 Docker Inc &amp; Go Authors. All rights reserved.
+Copyright (C) 2017-2024 SUSE LLC. All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:</p>
+<ul class="simple">
+<li><p>Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.</p></li>
+<li><p>Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.</p></li>
+<li><p>Neither the name of Google Inc. nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.</p></li>
+</ul>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+“AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>### `MPL-2.0` ###
+
+All other files (unless otherwise marked) are licensed under the Mozilla Public
+License (version 2.0).
+
+The text of the Mozilla Public License (version 2.0) is the following (the text
+is also available from the [`LICENSE.MPL-2.0`](./LICENSE.MPL-2.0) file):
+</pre></div>
+</div>
+</section>
+</section>
+<section id="mozilla-public-license-version-2-0">
+<h3>Mozilla Public License Version 2.0<a class="headerlink" href="#mozilla-public-license-version-2-0" title="Link to this heading"></a></h3>
+<section id="definitions">
+<h4>1. Definitions<a class="headerlink" href="#definitions" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>1.1. “Contributor”</dt><dd><p>means each individual or legal entity that creates, contributes to
+the creation of, or owns Covered Software.</p>
+</dd>
+<dt>1.2. “Contributor Version”</dt><dd><p>means the combination of the Contributions of others (if any) used
+by a Contributor and that particular Contributor’s Contribution.</p>
+</dd>
+<dt>1.3. “Contribution”</dt><dd><p>means Covered Software of a particular Contributor.</p>
+</dd>
+<dt>1.4. “Covered Software”</dt><dd><p>means Source Code Form to which the initial Contributor has attached
+the notice in Exhibit A, the Executable Form of such Source Code
+Form, and Modifications of such Source Code Form, in each case
+including portions thereof.</p>
+</dd>
+<dt>1.5. “Incompatible With Secondary Licenses”</dt><dd><p>means</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="n">that</span> <span class="n">the</span> <span class="n">initial</span> <span class="n">Contributor</span> <span class="n">has</span> <span class="n">attached</span> <span class="n">the</span> <span class="n">notice</span> <span class="n">described</span>
+    <span class="ow">in</span> <span class="n">Exhibit</span> <span class="n">B</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Covered</span> <span class="n">Software</span><span class="p">;</span> <span class="ow">or</span>
+
+<span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="n">that</span> <span class="n">the</span> <span class="n">Covered</span> <span class="n">Software</span> <span class="n">was</span> <span class="n">made</span> <span class="n">available</span> <span class="n">under</span> <span class="n">the</span> <span class="n">terms</span> <span class="n">of</span>
+    <span class="n">version</span> <span class="mf">1.1</span> <span class="ow">or</span> <span class="n">earlier</span> <span class="n">of</span> <span class="n">the</span> <span class="n">License</span><span class="p">,</span> <span class="n">but</span> <span class="ow">not</span> <span class="n">also</span> <span class="n">under</span> <span class="n">the</span>
+    <span class="n">terms</span> <span class="n">of</span> <span class="n">a</span> <span class="n">Secondary</span> <span class="n">License</span><span class="o">.</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>1.6. “Executable Form”</dt><dd><p>means any form of the work other than Source Code Form.</p>
+</dd>
+<dt>1.7. “Larger Work”</dt><dd><p>means a work that combines Covered Software with other material, in
+a separate file or files, that is not Covered Software.</p>
+</dd>
+<dt>1.8. “License”</dt><dd><p>means this document.</p>
+</dd>
+<dt>1.9. “Licensable”</dt><dd><p>means having the right to grant, to the maximum extent possible,
+whether at the time of the initial grant or subsequently, any and
+all of the rights conveyed by this License.</p>
+</dd>
+<dt>1.10. “Modifications”</dt><dd><p>means any of the following:</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="nb">any</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">Source</span> <span class="n">Code</span> <span class="n">Form</span> <span class="n">that</span> <span class="n">results</span> <span class="kn">from</span><span class="w"> </span><span class="nn">an</span> <span class="n">addition</span> <span class="n">to</span><span class="p">,</span>
+    <span class="n">deletion</span> <span class="n">from</span><span class="p">,</span> <span class="ow">or</span> <span class="n">modification</span> <span class="n">of</span> <span class="n">the</span> <span class="n">contents</span> <span class="n">of</span> <span class="n">Covered</span>
+    <span class="n">Software</span><span class="p">;</span> <span class="ow">or</span>
+
+<span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="nb">any</span> <span class="n">new</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">Source</span> <span class="n">Code</span> <span class="n">Form</span> <span class="n">that</span> <span class="n">contains</span> <span class="nb">any</span> <span class="n">Covered</span>
+    <span class="n">Software</span><span class="o">.</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>1.11. “Patent Claims” of a Contributor</dt><dd><p>means any patent claim(s), including without limitation, method,
+process, and apparatus claims, in any patent Licensable by such
+Contributor that would be infringed, but for the grant of the
+License, by the making, using, selling, offering for sale, having
+made, import, or transfer of either its Contributions or its
+Contributor Version.</p>
+</dd>
+<dt>1.12. “Secondary License”</dt><dd><p>means either the GNU General Public License, Version 2.0, the GNU
+Lesser General Public License, Version 2.1, the GNU Affero General
+Public License, Version 3.0, or any later versions of those
+licenses.</p>
+</dd>
+<dt>1.13. “Source Code Form”</dt><dd><p>means the form of the work preferred for making modifications.</p>
+</dd>
+<dt>1.14. “You” (or “Your”)</dt><dd><p>means an individual or a legal entity exercising rights under this
+License. For legal entities, “You” includes any entity that
+controls, is controlled by, or is under common control with You. For
+purposes of this definition, “control” means (a) the power, direct
+or indirect, to cause the direction or management of such entity,
+whether by contract or otherwise, or (b) ownership of more than
+fifty percent (50%) of the outstanding shares or beneficial
+ownership of such entity.</p>
+</dd>
+</dl>
+</section>
+<section id="license-grants-and-conditions">
+<h4>2. License Grants and Conditions<a class="headerlink" href="#license-grants-and-conditions" title="Link to this heading"></a></h4>
+<p>2.1. Grants</p>
+<p>Each Contributor hereby grants You a world-wide, royalty-free,
+non-exclusive license:</p>
+<ol class="loweralpha simple">
+<li><p>under intellectual property rights (other than patent or trademark)
+Licensable by such Contributor to use, reproduce, make available,
+modify, display, perform, distribute, and otherwise exploit its
+Contributions, either on an unmodified basis, with Modifications, or
+as part of a Larger Work; and</p></li>
+<li><p>under Patent Claims of such Contributor to make, use, sell, offer
+for sale, have made, import, and otherwise transfer either its
+Contributions or its Contributor Version.</p></li>
+</ol>
+<p>2.2. Effective Date</p>
+<p>The licenses granted in Section 2.1 with respect to any Contribution
+become effective for each Contribution on the date the Contributor first
+distributes such Contribution.</p>
+<p>2.3. Limitations on Grant Scope</p>
+<p>The licenses granted in this Section 2 are the only rights granted under
+this License. No additional rights or licenses will be implied from the
+distribution or licensing of Covered Software under this License.
+Notwithstanding Section 2.1(b) above, no patent license is granted by a
+Contributor:</p>
+<ol class="loweralpha simple">
+<li><p>for any code that a Contributor has removed from Covered Software;
+or</p></li>
+<li><p>for infringements caused by: (i) Your and any other third party’s
+modifications of Covered Software, or (ii) the combination of its
+Contributions with other software (except as part of its Contributor
+Version); or</p></li>
+<li><p>under Patent Claims infringed by Covered Software in the absence of
+its Contributions.</p></li>
+</ol>
+<p>This License does not grant any rights in the trademarks, service marks,
+or logos of any Contributor (except as may be necessary to comply with
+the notice requirements in Section 3.4).</p>
+<p>2.4. Subsequent Licenses</p>
+<p>No Contributor makes additional grants as a result of Your choice to
+distribute the Covered Software under a subsequent version of this
+License (see Section 10.2) or under the terms of a Secondary License (if
+permitted under the terms of Section 3.3).</p>
+<p>2.5. Representation</p>
+<p>Each Contributor represents that the Contributor believes its
+Contributions are its original creation(s) or it has sufficient rights
+to grant the rights to its Contributions conveyed by this License.</p>
+<p>2.6. Fair Use</p>
+<p>This License is not intended to limit any rights You have under
+applicable copyright doctrines of fair use, fair dealing, or other
+equivalents.</p>
+<p>2.7. Conditions</p>
+<p>Sections 3.1, 3.2, 3.3, and 3.4 are conditions of the licenses granted
+in Section 2.1.</p>
+</section>
+<section id="responsibilities">
+<h4>3. Responsibilities<a class="headerlink" href="#responsibilities" title="Link to this heading"></a></h4>
+<p>3.1. Distribution of Source Form</p>
+<p>All distribution of Covered Software in Source Code Form, including any
+Modifications that You create or to which You contribute, must be under
+the terms of this License. You must inform recipients that the Source
+Code Form of the Covered Software is governed by the terms of this
+License, and how they can obtain a copy of this License. You may not
+attempt to alter or restrict the recipients’ rights in the Source Code
+Form.</p>
+<p>3.2. Distribution of Executable Form</p>
+<p>If You distribute Covered Software in Executable Form then:</p>
+<ol class="loweralpha simple">
+<li><p>such Covered Software must also be made available in Source Code
+Form, as described in Section 3.1, and You must inform recipients of
+the Executable Form how they can obtain a copy of such Source Code
+Form by reasonable means in a timely manner, at a charge no more
+than the cost of distribution to the recipient; and</p></li>
+<li><p>You may distribute such Executable Form under the terms of this
+License, or sublicense it under different terms, provided that the
+license for the Executable Form does not attempt to limit or alter
+the recipients’ rights in the Source Code Form under this License.</p></li>
+</ol>
+<p>3.3. Distribution of a Larger Work</p>
+<p>You may create and distribute a Larger Work under terms of Your choice,
+provided that You also comply with the requirements of this License for
+the Covered Software. If the Larger Work is a combination of Covered
+Software with a work governed by one or more Secondary Licenses, and the
+Covered Software is not Incompatible With Secondary Licenses, this
+License permits You to additionally distribute such Covered Software
+under the terms of such Secondary License(s), so that the recipient of
+the Larger Work may, at their option, further distribute the Covered
+Software under the terms of either this License or such Secondary
+License(s).</p>
+<p>3.4. Notices</p>
+<p>You may not remove or alter the substance of any license notices
+(including copyright notices, patent notices, disclaimers of warranty,
+or limitations of liability) contained within the Source Code Form of
+the Covered Software, except that You may alter any license notices to
+the extent required to remedy known factual inaccuracies.</p>
+<p>3.5. Application of Additional Terms</p>
+<p>You may choose to offer, and to charge a fee for, warranty, support,
+indemnity or liability obligations to one or more recipients of Covered
+Software. However, You may do so only on Your own behalf, and not on
+behalf of any Contributor. You must make it absolutely clear that any
+such warranty, support, indemnity, or liability obligation is offered by
+You alone, and You hereby agree to indemnify every Contributor for any
+liability incurred by such Contributor as a result of warranty, support,
+indemnity or liability terms You offer. You may include additional
+disclaimers of warranty and limitations of liability specific to any
+jurisdiction.</p>
+</section>
+<section id="inability-to-comply-due-to-statute-or-regulation">
+<h4>4. Inability to Comply Due to Statute or Regulation<a class="headerlink" href="#inability-to-comply-due-to-statute-or-regulation" title="Link to this heading"></a></h4>
+<p>If it is impossible for You to comply with any of the terms of this
+License with respect to some or all of the Covered Software due to
+statute, judicial order, or regulation then You must: (a) comply with
+the terms of this License to the maximum extent possible; and (b)
+describe the limitations and the code they affect. Such description must
+be placed in a text file included with all distributions of the Covered
+Software under this License. Except to the extent prohibited by statute
+or regulation, such description must be sufficiently detailed for a
+recipient of ordinary skill to be able to understand it.</p>
+</section>
+<section id="termination">
+<h4>5. Termination<a class="headerlink" href="#termination" title="Link to this heading"></a></h4>
+<p>5.1. The rights granted under this License will terminate automatically
+if You fail to comply with any of its terms. However, if You become
+compliant, then the rights granted under this License from a particular
+Contributor are reinstated (a) provisionally, unless and until such
+Contributor explicitly and finally terminates Your grants, and (b) on an
+ongoing basis, if such Contributor fails to notify You of the
+non-compliance by some reasonable means prior to 60 days after You have
+come back into compliance. Moreover, Your grants from a particular
+Contributor are reinstated on an ongoing basis if such Contributor
+notifies You of the non-compliance by some reasonable means, this is the
+first time You have received notice of non-compliance with this License
+from such Contributor, and You become compliant prior to 30 days after
+Your receipt of the notice.</p>
+<p>5.2. If You initiate litigation against any entity by asserting a patent
+infringement claim (excluding declaratory judgment actions,
+counter-claims, and cross-claims) alleging that a Contributor Version
+directly or indirectly infringes any patent, then the rights granted to
+You by any and all Contributors for the Covered Software under Section
+2.1 of this License shall terminate.</p>
+<p>5.3. In the event of termination under Sections 5.1 or 5.2 above, all
+end user license agreements (excluding distributors and resellers) which
+have been validly granted by You or Your distributors under this License
+prior to termination shall survive termination.</p>
+<hr class="docutils" />
+<ul class="simple">
+<li><ul>
+<li></li>
+</ul>
+</li>
+<li><ol class="arabic simple">
+<li><p>Disclaimer of Warranty                                           *</p></li>
+</ol>
+</li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><ul>
+<li></li>
+</ul>
+</li>
+<li><p>Covered Software is provided under this License on an “as is”       *</p></li>
+<li><p>basis, without warranty of any kind, either expressed, implied, or  *</p></li>
+<li><p>statutory, including, without limitation, warranties that the       *</p></li>
+<li><p>Covered Software is free of defects, merchantable, fit for a        *</p></li>
+<li><p>particular purpose or non-infringing. The entire risk as to the     *</p></li>
+<li><p>quality and performance of the Covered Software is with You.        *</p></li>
+<li><p>Should any Covered Software prove defective in any respect, You     *</p></li>
+<li><p>(not any Contributor) assume the cost of any necessary servicing,   *</p></li>
+<li><p>repair, or correction. This disclaimer of warranty constitutes an   *</p></li>
+<li><p>essential part of this License. No use of any Covered Software is   *</p></li>
+<li><p>authorized under this License except under this disclaimer.         *</p></li>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils" />
+<hr class="docutils" />
+<ul class="simple">
+<li><ul>
+<li></li>
+</ul>
+</li>
+<li><ol class="arabic simple">
+<li><p>Limitation of Liability                                          *</p></li>
+</ol>
+</li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><ul>
+<li></li>
+</ul>
+</li>
+<li><p>Under no circumstances and under no legal theory, whether tort      *</p></li>
+<li><p>(including negligence), contract, or otherwise, shall any           *</p></li>
+<li><p>Contributor, or anyone who distributes Covered Software as          *</p></li>
+<li><p>permitted above, be liable to You for any direct, indirect,         *</p></li>
+<li><p>special, incidental, or consequential damages of any character      *</p></li>
+<li><p>including, without limitation, damages for lost profits, loss of    *</p></li>
+<li><p>goodwill, work stoppage, computer failure or malfunction, or any    *</p></li>
+<li><p>and all other commercial damages or losses, even if such party      *</p></li>
+<li><p>shall have been informed of the possibility of such damages. This   *</p></li>
+<li><p>limitation of liability shall not apply to liability for death or   *</p></li>
+<li><p>personal injury resulting from such party’s negligence to the       *</p></li>
+<li><p>extent applicable law prohibits such limitation. Some               *</p></li>
+<li><p>jurisdictions do not allow the exclusion or limitation of           *</p></li>
+<li><p>incidental or consequential damages, so this exclusion and          *</p></li>
+<li><p>limitation may not apply to You.                                    *</p></li>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="litigation">
+<h4>8. Litigation<a class="headerlink" href="#litigation" title="Link to this heading"></a></h4>
+<p>Any litigation relating to this License may be brought only in the
+courts of a jurisdiction where the defendant maintains its principal
+place of business and such litigation shall be governed by laws of that
+jurisdiction, without reference to its conflict-of-law provisions.
+Nothing in this Section shall prevent a party’s ability to bring
+cross-claims or counter-claims.</p>
+</section>
+<section id="miscellaneous">
+<h4>9. Miscellaneous<a class="headerlink" href="#miscellaneous" title="Link to this heading"></a></h4>
+<p>This License represents the complete agreement concerning the subject
+matter hereof. If any provision of this License is held to be
+unenforceable, such provision shall be reformed only to the extent
+necessary to make it enforceable. Any law or regulation which provides
+that the language of a contract shall be construed against the drafter
+shall not be used to construe this License against a Contributor.</p>
+</section>
+<section id="versions-of-the-license">
+<h4>10. Versions of the License<a class="headerlink" href="#versions-of-the-license" title="Link to this heading"></a></h4>
+<p>10.1. New Versions</p>
+<p>Mozilla Foundation is the license steward. Except as provided in Section
+10.3, no one other than the license steward has the right to modify or
+publish new versions of this License. Each version will be given a
+distinguishing version number.</p>
+<p>10.2. Effect of New Versions</p>
+<p>You may distribute the Covered Software under the terms of the version
+of the License under which You originally received the Covered Software,
+or under the terms of any subsequent version published by the license
+steward.</p>
+<p>10.3. Modified Versions</p>
+<p>If you create software not governed by this License, and you want to
+create a new license for such software, you may create and use a
+modified version of this License if you rename the license and remove
+any references to the name of the license steward (except to note that
+such modified license differs from this License).</p>
+<p>10.4. Distributing Source Code Form that is Incompatible With Secondary
+Licenses</p>
+<p>If You choose to distribute Source Code Form that is Incompatible With
+Secondary Licenses under the terms of this version of the License, the
+notice described in Exhibit B of this License must be attached.</p>
+</section>
+<section id="exhibit-a-source-code-form-license-notice">
+<h4>Exhibit A - Source Code Form License Notice<a class="headerlink" href="#exhibit-a-source-code-form-license-notice" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at <a class="reference external" href="https://mozilla.org/MPL/2.0/">https://mozilla.org/MPL/2.0/</a>.</p>
+</div></blockquote>
+<p>If it is not possible or desirable to put the notice in a particular
+file, then You may include the notice in a location (such as a LICENSE
+file in a relevant directory) where a recipient would be likely to look
+for such a notice.</p>
+<p>You may add additional accurate notices of copyright ownership.</p>
+</section>
+<section id="exhibit-b-incompatible-with-secondary-licenses-notice">
+<h4>Exhibit B - “Incompatible With Secondary Licenses” Notice<a class="headerlink" href="#exhibit-b-incompatible-with-secondary-licenses-notice" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This Source Code Form is “Incompatible With Secondary Licenses”, as
+defined by the Mozilla Public License, v. 2.0.</p>
+</div></blockquote>
+</section>
+<section id="github-com-cyphar-filepath-securejoin-pathrs-lite">
+<h4>github.com/cyphar/filepath-securejoin/pathrs-lite<a class="headerlink" href="#github-com-cyphar-filepath-securejoin-pathrs-lite" title="Link to this heading"></a></h4>
+<p><strong>License:</strong> MPL-2.0</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>## `pathrs-lite` ##
+
+`github.com/cyphar/filepath-securejoin/pathrs-lite` provides a minimal **pure
+Go** implementation of the core bits of [libpathrs][]. This is not intended to
+be a complete replacement for libpathrs, instead it is mainly intended to be
+useful as a transition tool for existing Go projects.
+
+The long-term plan for `pathrs-lite` is to provide a build tag that will cause
+all `pathrs-lite` operations to call into libpathrs directly, thus removing
+code duplication for projects that wish to make use of libpathrs (and providing
+the ability for software packagers to opt-in to libpathrs support without
+needing to patch upstream).
+
+[libpathrs]: https://github.com/cyphar/libpathrs
+
+### License ###
+
+Most of this subpackage is licensed under the Mozilla Public License (version
+2.0). For more information, see the top-level [COPYING.md][] and
+[LICENSE.MPL-2.0][] files, as well as the individual license headers for each
+file.
+</pre></div>
+</div>
+<p>Copyright (C) 2024-2025 Aleksa Sarai <a class="reference external" href="mailto:cyphar&#37;&#52;&#48;cyphar&#46;com">cyphar<span>&#64;</span>cyphar<span>&#46;</span>com</a>
+Copyright (C) 2024-2025 SUSE LLC</p>
+<p>This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at <a class="reference external" href="https://mozilla.org/MPL/2.0/">https://mozilla.org/MPL/2.0/</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">COPYING</span><span class="o">.</span><span class="n">md</span><span class="p">]:</span> <span class="o">../</span><span class="n">COPYING</span><span class="o">.</span><span class="n">md</span>
+<span class="p">[</span><span class="n">LICENSE</span><span class="o">.</span><span class="n">MPL</span><span class="o">-</span><span class="mf">2.0</span><span class="p">]:</span> <span class="o">../</span><span class="n">LICENSE</span><span class="o">.</span><span class="n">MPL</span><span class="o">-</span><span class="mf">2.0</span>
 </pre></div>
 </div>
 </section>
@@ -12402,8 +12850,8 @@ limitations under the License.
 </pre></div>
 </div>
 </section>
-<section id="github-com-opencontainers-runc-libcontainer">
-<h4>github.com/opencontainers/runc/libcontainer<a class="headerlink" href="#github-com-opencontainers-runc-libcontainer" title="Link to this heading"></a></h4>
+<section id="github-com-opencontainers-runc">
+<h4>github.com/opencontainers/runc<a class="headerlink" href="#github-com-opencontainers-runc" title="Link to this heading"></a></h4>
 <p><strong>License:</strong> Apache-2.0</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                              <span class="n">Apache</span> <span class="n">License</span>
                         <span class="n">Version</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">January</span> <span class="mi">2004</span>
