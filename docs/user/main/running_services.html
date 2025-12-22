@@ -86,7 +86,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#instance-logs">Instance Logs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#resource-usage-limits">Resource Usage / Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resource-usage-limits">Resource Usage / Limits</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#profiling-with-performance-counters-using-perf">Profiling with performance counters using perf</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#system-integration-pid-files">System integration / PID files</a></li>
 </ul>
 </li>
@@ -544,6 +547,33 @@ that are available for interactive containers. E.g. to limit memory usage to
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">instance</span> <span class="n">start</span> <span class="o">--</span><span class="n">memory</span> <span class="mi">1</span><span class="n">G</span> <span class="n">url</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">pdf</span><span class="o">.</span><span class="n">sif</span> <span class="n">pdf</span>
 </pre></div>
 </div>
+<section id="profiling-with-performance-counters-using-perf">
+<h3>Profiling with performance counters using perf<a class="headerlink" href="#profiling-with-performance-counters-using-perf" title="Link to this heading"></a></h3>
+<p>For in-depth container perfomance analysis it would be useful to collect data
+from Linux’s performance counters. Normally this is done by supplying the target
+PID to <code class="docutils literal notranslate"><span class="pre">perf</span></code>. However, this does not work for containers out of the box.
+Apart from PID, perf can also keep track of cgroups. When possible, apptainer
+instances are run within a cgroup, so we can use that fact to track our
+container’s performance counters. You can do this by using the <code class="docutils literal notranslate"><span class="pre">-G</span> <span class="pre">or</span> <span class="pre">--cgroup</span></code>
+perf option that collects all system events and filters by cgroup name. For
+cgroups v2, the cgroup name is everything after <code class="docutils literal notranslate"><span class="pre">/sys/fs/cgroup/</span></code>. Usually for
+apptainer instance, cgroups are found in
+<code class="docutils literal notranslate"><span class="pre">$CGROUPPATH/apptainer-$INSTANCEID</span></code>, where <code class="docutils literal notranslate"><span class="pre">$CGROUPPATH</span></code> is the path between
+/sys/fs/cgroup and your cgroup directory. For example, for the cgroup in
+<code class="docutils literal notranslate"><span class="pre">/sys/fs/cgroup/user.slice/user-1000.slice/user&#64;1000.service/user.slice/</span>
+<span class="pre">apptainer-30443</span></code>
+the $CGROUPPATH is <code class="docutils literal notranslate"><span class="pre">user.slice/user-1000.slice/user&#64;1000.service/user.slice/</span></code>.
+The final perf command would look something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">perf</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">e</span> <span class="n">cache</span><span class="o">-</span><span class="n">misses</span> <span class="o">--</span><span class="n">cgroup</span> <span class="s2">&quot;$CGROUPPATH/apptainer-$INSTANCEID&quot;</span> <span class="o">--</span> <span class="n">sleep</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because you are gathering system metrics you will need to reduce your
+<code class="docutils literal notranslate"><span class="pre">kernel.perf_event_paranoid</span></code> to less than or equal to 0 or enable
+CAP_PERFMON, CAP_SYS_PTRACE or CAP_SYS_ADMIN</p>
+</div>
+</section>
 </section>
 <section id="system-integration-pid-files">
 <h2>System integration / PID files<a class="headerlink" href="#system-integration-pid-files" title="Link to this heading"></a></h2>
