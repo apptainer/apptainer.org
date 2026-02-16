@@ -212,14 +212,14 @@ configured with either overlay or underlay support enabled.
 You can define the a bind point where the source and destination are
 identical:
 
-.. code::
+.. code:: linuxconfig
 
    bind path = /etc/localtime
 
 Or you can specify different source and destination locations using a
 colon:
 
-.. code::
+.. code:: linuxconfig
 
    bind path = /etc/{command}/default-nsswitch.conf:/etc/nsswitch.conf
 
@@ -479,14 +479,14 @@ In this example we will changing the ``bind path`` option described
 above. First we can see the current list of bind paths set within our
 system configuration:
 
-.. code::
+.. code:: console
 
    $ sudo {command} config global --get "bind path"
    /etc/localtime,/etc/hosts
 
 Now we can add a new path and verify it was successfully added:
 
-.. code::
+.. code:: console
 
    $ sudo {command} config global --set "bind path" /etc/resolv.conf
    $ sudo {command} config global --get "bind path"
@@ -494,7 +494,7 @@ Now we can add a new path and verify it was successfully added:
 
 From here we can remove a path with:
 
-.. code::
+.. code:: console
 
    $ sudo {command} config global --unset "bind path" /etc/localtime
    $ sudo {command} config global --get "bind path"
@@ -503,7 +503,7 @@ From here we can remove a path with:
 If we want to reset the option to the default at installation, then we
 can reset it with:
 
-.. code::
+.. code:: console
 
    $ sudo {command} config global --reset "bind path"
    $ sudo {command} config global --get "bind path"
@@ -516,7 +516,7 @@ configuration file, it will output what would have been written to the
 configuration file if the command had been run without the ``--dry-run``
 option:
 
-.. code::
+.. code:: console
 
    $ sudo {command} config global --dry-run --set "bind path" /etc/resolv.conf
    # {ENVPREFIX}.CONF
@@ -585,7 +585,7 @@ To apply resource limits to a container, use the ``--apply-cgroups``
 flag, which takes a path to a TOML file specifying the cgroups
 configuration to be applied:
 
-.. code::
+.. code:: console
 
    $ {command} shell --apply-cgroups /path/to/cgroups.toml my_container.sif
 
@@ -601,14 +601,14 @@ To limit the amount of memory that your container uses to 500MB
 (524288000 bytes), set a ``limit`` value inside the ``[memory]`` section
 of your cgroups TOML file:
 
-.. code::
+.. code:: toml
 
    [memory]
        limit = 524288000
 
 Start your container, applying the toml file, e.g.:
 
-.. code::
+.. code:: console
 
    $ {command} run --apply-cgroups path/to/cgroups.toml library://alpine
 
@@ -624,7 +624,7 @@ This corresponds to a ratio versus other cgroups with cpu shares.
 Usually the default value is ``1024``. That means if you want to allow
 to use 50% of a single CPU, you will set ``512`` as value.
 
-.. code::
+.. code:: toml
 
    [cpu]
        shares = 512
@@ -643,7 +643,7 @@ the cgroup. ``quota`` allows you to configure the amount of CPU time
 that a cgroup can use per period. The default is 100ms (100000us). So if
 you want to limit amount of CPU time to 20ms during period of 100ms:
 
-.. code::
+.. code:: toml
 
    [cpu]
        period = 100000
@@ -654,7 +654,7 @@ you want to limit amount of CPU time to 20ms during period of 100ms:
 You can also restrict access to specific CPUs (cores) and associated
 memory nodes by using ``cpus/mems`` fields:
 
-.. code::
+.. code:: toml
 
    [cpu]
        cpus = "0-1"
@@ -673,7 +673,7 @@ Limiting IO
 To control block device I/O, applying limits to competing container, use
 the ``[blockIO]`` section of the TOML file:
 
-.. code::
+.. code:: toml
 
    [blockIO]
        weight = 1000
@@ -693,7 +693,7 @@ for specific device major/minor numbers. For example, to override
 ``weight/leafWeight`` for ``/dev/loop0`` and ``/dev/loop1`` block
 devices, set limits for device major 7, minor 0 and 1:
 
-.. code::
+.. code:: toml
 
    [blockIO]
        [[blockIO.weightDevice]]
@@ -711,7 +711,7 @@ You can also limit the IO read/write rate to a specific absolute value,
 e.g. 16MB per second for the ``/dev/loop0`` block device. The ``rate``
 is specified in bytes per second.
 
-.. code::
+.. code:: toml
 
    [blockIO]
        [[blockIO.throttleReadBpsDevice]]
@@ -765,7 +765,7 @@ filesystem and by checking against a list of signing entities.
    types (squashfs/extfs/dir) via the ``{command}.conf`` file ``allow
    container`` settings.
 
-.. code::
+.. code:: linuxconfig
 
    [[execgroup]]
      tagname = "group2"
@@ -889,7 +889,7 @@ information.
 
 Binaries are found by searching ``$PATH``:
 
-.. code::
+.. code:: linuxconfig
 
    # put binaries here
    # In shared environments you should ensure that permissions on these files
@@ -900,7 +900,7 @@ Binaries are found by searching ``$PATH``:
 Libraries should be specified without version information, i.e.
 ``libname.so``, and are resolved using ``ldconfig``.
 
-.. code::
+.. code:: linuxconfig
 
    # put libs here (must end in .so)
    libamd_comgr.so
@@ -941,7 +941,7 @@ For example, let us suppose that we have decided to grant a user (named
 
 To do so, we would issue a command such as this:
 
-.. code::
+.. code:: console
 
    $ sudo {command} capability add --user pinger CAP_NET_RAW
 
@@ -952,7 +952,7 @@ containers.
 We can check that this change is in effect with the ``capability list``
 command.
 
-.. code::
+.. code:: console
 
    $ sudo {command} capability list --user pinger
    CAP_NET_RAW
@@ -961,7 +961,7 @@ To take advantage of this new capability, the user ``pinger`` must also
 request the capability when executing a container with the
 ``--add-caps`` flag. ``pinger`` would need to run a command like this:
 
-.. code::
+.. code:: console
 
    $ {command} exec --add-caps CAP_NET_RAW \
      library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
@@ -976,7 +976,7 @@ If we decide that it is no longer necessary to allow the user ``pinger``
 to open raw sockets within {Project} containers, we can revoke the
 appropriate Linux capability like so:
 
-.. code::
+.. code:: console
 
    $ sudo {command} capability drop --user pinger CAP_NET_RAW
 
@@ -984,7 +984,7 @@ Now if ``pinger`` tries to use ``CAP_NET_RAW``, {Project} will not
 give the capability to the container and ``ping`` will fail to create a
 socket:
 
-.. code::
+.. code:: console
 
    $ {command} exec --add-caps CAP_NET_RAW \
      library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
@@ -1024,7 +1024,7 @@ listed system calls if the user has the associated capability.
 
 Use the ``--security`` option to invoke the container like:
 
-.. code::
+.. code:: console
 
    $ sudo {command} shell --security seccomp:/home/david/my.json my_container.sif
 
@@ -1065,7 +1065,7 @@ that registry exists on premise or in the cloud.
 Use the ``remote`` command group with the ``--global`` flag to create a
 system-wide remote endpoint:
 
-.. code::
+.. code:: console
 
    $ sudo {command} remote add --global company-remote https://enterprise.example.com
    INFO:    Remote "company-remote" added.
@@ -1073,7 +1073,7 @@ system-wide remote endpoint:
 
 Conversely, to remove a system-wide endpoint:
 
-.. code::
+.. code:: console
 
    $ sudo {command} remote remove --global company-remote
    INFO:    Remote "company-remote" removed.
@@ -1093,7 +1093,7 @@ Exclusive Endpoint
 remote the only usable remote for the system by using the
 ``--exclusive`` flag:
 
-.. code::
+.. code:: console
 
    $ sudo {command} remote use --exclusive company-remote
    INFO:    Remote "company-remote" now in use.
@@ -1121,7 +1121,7 @@ If you are using a endpoint that exposes its
 service discovery file over an insecure HTTP connection only, it can be
 added by specifying the ``--insecure`` flag:
 
-.. code::
+.. code:: console
 
    $ sudo {command} remote add --global --insecure test http://test.example.com
    INFO:    Remote "test" added.
@@ -1153,7 +1153,7 @@ these are the commands to restore the library behavior from before
 {Project}, where using the ``library://`` URI would download from the
 Sylabs Cloud anonymously:
 
-.. code::
+.. code:: console
 
    $ sudo {command} remote add --global SylabsCloud cloud.sycloud.io
    INFO:    Remote "SylabsCloud" added.
@@ -1217,7 +1217,7 @@ with application checkpointing ( e.g. ``--dmctp-launch``, ``dmtcp-restart``).
 Binaries are specified as an array under the ``bins`` key and are found by
 searching ``$PATH``:
 
-.. code::
+.. code:: yaml
 
    # List binaries to bind into the container here
    # In shared environments you should ensure that permissions on these files
@@ -1226,20 +1226,20 @@ searching ``$PATH``:
      - "dmtcp_command"
      - "dmtcp_discover_rm"
      - "dmtcp_launch"
-   [...]
+   ...
 
 Libraries are specified as an array under the ``libs`` key and should be
 specified without version information, i.e.
 ``libname.so``, and are resolved using ``ldconfig``.
 
-.. code::
+.. code:: yaml
 
    # List libraries to bind into the container here. Library names must end in ".so"
    libs:
      - "libdmtcp_alloc.so"
      - "libdmtcp_dl.so"
      - "libdmtcp_modify-env.so"
-   [...]
+   ...
 
 If you receive warnings that binaries or libraries are not found, ensure
 that they are in a system path (binaries), or available in paths
@@ -1263,7 +1263,7 @@ one of those files will cause {Project} to read from
 ``docker-registry.example.edu`` whenever it would otherwise read
 from ``docker.io``:
 
-.. code::
+.. code:: linuxconfig
 
    [[registry]]
    location="docker.io"

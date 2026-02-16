@@ -87,7 +87,7 @@ files and configuration options are discussed.
 
 You can run a quick test of {Project} using a small alpine container:
 
-.. code::
+.. code:: console
 
    $ {command} exec docker://alpine cat /etc/alpine-release
    3.9.2
