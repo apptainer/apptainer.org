@@ -242,14 +242,14 @@ configuration files to use the fakeroot feature. Apptainer provides
 a <a class="reference internal" href="#config-fakeroot"><span class="std std-ref">config fakeroot</span></a> command to assist in managing
 these files, but it is important to understand how they work.</p>
 <p>For user <code class="docutils literal notranslate"><span class="pre">foo</span></code> an entry in <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> might be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">foo</span><span class="p">:</span><span class="mi">100000</span><span class="p">:</span><span class="mi">65536</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>foo:100000:65536
 </pre></div>
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">foo</span></code> is the username, <code class="docutils literal notranslate"><span class="pre">100000</span></code> is the start of the UID range
 that can be used by <code class="docutils literal notranslate"><span class="pre">foo</span></code> in a user namespace uid mapping, and
 <code class="docutils literal notranslate"><span class="pre">65536</span></code> number of UIDs available for mapping.</p>
 <p>Same for <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">foo</span><span class="p">:</span><span class="mi">100000</span><span class="p">:</span><span class="mi">65536</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>foo:100000:65536
 </pre></div>
 </div>
 <div class="admonition note">
@@ -270,8 +270,8 @@ and GIDs on the host system.</p>
 </div>
 <p>So if you want to add another user <code class="docutils literal notranslate"><span class="pre">bar</span></code>, <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and
 <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> will look like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">foo</span><span class="p">:</span><span class="mi">100000</span><span class="p">:</span><span class="mi">65536</span>
-<span class="n">bar</span><span class="p">:</span><span class="mi">165536</span><span class="p">:</span><span class="mi">65536</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>foo:100000:65536
+bar:165536:65536
 </pre></div>
 </div>
 <p>Resulting in the following allocation:</p>
@@ -387,15 +387,15 @@ on the local machine.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">-a/--add</span> <span class="pre">&lt;user&gt;</span></code> option to <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> to create new
 mapping entries so that <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> can use the fakeroot feature of
 Apptainer:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config fakeroot --add dave
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>fakeroot<span class="w"> </span>--add<span class="w"> </span>dave
 
-# Show generated `/etc/subuid`
-$ cat /etc/subuid
-1000:4294836224:65536
+<span class="gp"># </span>Show<span class="w"> </span>generated<span class="w"> </span><span class="sb">`</span>/etc/subuid<span class="sb">`</span>
+<span class="gp">$ </span>cat<span class="w"> </span>/etc/subuid
+<span class="go">1000:4294836224:65536</span>
 
-# Show generated `/etc/subgid`
-$ cat /etc/subgid
-1000:4294836224:65536
+<span class="gp"># </span>Show<span class="w"> </span>generated<span class="w"> </span><span class="sb">`</span>/etc/subgid<span class="sb">`</span>
+<span class="gp">$ </span>cat<span class="w"> </span>/etc/subgid
+<span class="go">1000:4294836224:65536</span>
 </pre></div>
 </div>
 <p>The first subuid range will be set to the top of the 32-bit UID
@@ -416,7 +416,7 @@ username.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">-r/--remove</span> <span class="pre">&lt;user&gt;</span></code> option to <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">fakeroot</span></code> to
 completely remove mapping entries. The <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> will no longer be able
 to use the fakeroot feature of Apptainer:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config fakeroot --remove dave
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>fakeroot<span class="w"> </span>--remove<span class="w"> </span>dave
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -432,19 +432,19 @@ subsequently re-enable fakeroot functionality for a user. This can be
 useful to disable fakeroot for a user, but ensure the subuid/subgid
 range assigned to them is reserved, and not re-assigned to a different
 user.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Disable dave
-$ sudo apptainer config fakeroot --disable dave
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Disable<span class="w"> </span>dave
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>fakeroot<span class="w"> </span>--disable<span class="w"> </span>dave
 
-# Entry is commented
-$ cat /etc/subuid
-!1000:4294836224:65536
+<span class="gp"># </span>Entry<span class="w"> </span>is<span class="w"> </span>commented
+<span class="gp">$ </span>cat<span class="w"> </span>/etc/subuid
+<span class="go">!1000:4294836224:65536</span>
 
-# Enable dave
-$ sudo apptainer config fakeroot --enable dave
+<span class="gp"># </span>Enable<span class="w"> </span>dave
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>fakeroot<span class="w"> </span>--enable<span class="w"> </span>dave
 
-# Entry is active
-$ cat /etc/subuid
-1000:4294836224:65536
+<span class="gp"># </span>Entry<span class="w"> </span>is<span class="w"> </span>active
+<span class="gp">$ </span>cat<span class="w"> </span>/etc/subuid
+<span class="go">1000:4294836224:65536</span>
 </pre></div>
 </div>
 </section>
@@ -463,7 +463,7 @@ cluster of computers.</p>
 with the subordinate user and group ids.
 In addition, the client machines need to have a line like the following in
 <code class="docutils literal notranslate"><span class="pre">/etc/nsswitch.conf</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">subid</span><span class="p">:</span> <span class="n">sss</span>
+<div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span>subid<span class="p">:</span> sss
 </pre></div>
 </div>
 </section>

@@ -276,7 +276,7 @@ systems, Fedora, SUSE/OpenSUSE, Debian, and Ubuntu.
 
 This is the easiest way to use it:
 
-.. code::
+.. code:: console
 
     $ curl -s https://raw.githubusercontent.com/{orgrepo}/main/tools/install-unprivileged.sh | \
         bash -s - install-dir
@@ -315,19 +315,19 @@ Linux and Fedora.
 First, on Red Hat Enterprise Linux derived systems enable the EPEL
 repositories like this:
 
-.. code::
+.. code:: console
 
    $ sudo dnf install -y epel-release
 
 Then to install a non-setuid installation of {Project} do:
 
-.. code::
+.. code:: console
 
    $ sudo dnf install -y {command}
 
 or for a setuid installation do:
 
-.. code::
+.. code:: console
 
    $ sudo dnf install -y {command}-suid
 
@@ -338,13 +338,13 @@ Alternatively, x86_64 RPMs are available on GitHub immediately after each
 {Project} release and they can be installed directly from there.  For the
 non-setuid installation:
 
-.. code::
+.. code:: console
 
    $ sudo dnf install -y https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-{GitHubDownloadVersion}.x86_64.rpm
 
 For the setuid installation do above command first and then this one:
 
-.. code::
+.. code:: console
 
    $ sudo dnf install -y https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid-{GitHubDownloadVersion}.x86_64.rpm
 
@@ -353,7 +353,7 @@ Install Debian packages
 
 Pre-built Debian packages are only available on GitHub and only for the amd64 architecture. For the non-setuid installation on Debian 11 or 12 use these commands:
 
-.. code::
+.. code:: console
 
     $ sudo apt update
     $ sudo apt install -y wget
@@ -363,14 +363,14 @@ Pre-built Debian packages are only available on GitHub and only for the amd64 ar
 
 For the setuid installation do above commands first and then these:
 
-.. code::
+.. code:: console
 
     $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid_{InstallationVersion}_amd64.deb
     $ sudo dpkg -i ./{command}-suid_{InstallationVersion}_amd64.deb
 
 For Debian 13 do these commands instead 
 
-.. code::
+.. code:: console
 
     $ sudo apt update
     $ sudo apt install -y wget
@@ -380,7 +380,7 @@ For Debian 13 do these commands instead
 
 For the setuid installation do above commands first and then these:
 
-.. code::
+.. code:: console
 
     $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid_{InstallationVersion}-trixie+_amd64.deb
     $ sudo dpkg -i ./{command}-suid_{InstallationVersion}-trixie+_amd64.deb
@@ -393,7 +393,7 @@ Pre-built Ubuntu packages are available on PPA (Personal Package Archive) for th
 
 First, on Ubuntu based containers install `software-properties-common` package to obtain `add-apt-repository` command. On Ubuntu Desktop/Server derived systems skip this step.
 
-.. code::
+.. code:: console
 
     $ sudo apt update
     $ sudo apt install -y software-properties-common
@@ -401,7 +401,7 @@ First, on Ubuntu based containers install `software-properties-common` package t
 
 For the non-setuid installation use these commands:
 
-.. code::
+.. code:: console
 
     $ sudo add-apt-repository -y ppa:apptainer/ppa
     $ sudo apt update
@@ -435,7 +435,7 @@ If you installed from source, then
 to enjoy bash shell completion with {Project} commands and options,
 source the bash completion file (assuming the default installation prefix):
 
-.. code::
+.. code:: console
 
    $ . /usr/local/share/bash-completion/completions/{command}
 
@@ -470,7 +470,7 @@ Testing & Checking the Build Configuration
 After installation you can perform a basic test of {Project}
 functionality by executing a simple alpine container:
 
-.. code::
+.. code:: console
 
    $ {command} exec docker://alpine cat /etc/alpine-release
    3.9.2
@@ -488,7 +488,7 @@ installed version of {Project}, and lists the paths used by
 correctly for your installation, and troubleshoot any 'not-found' errors
 at runtime.
 
-.. code::
+.. code:: console
 
    $ {command} buildcfg
    PACKAGE_NAME={command}
@@ -583,7 +583,7 @@ the default Ubuntu 22.04 environment. On Windows 11 and the most recent builds
 of Windows 10 this is as easy as opening an administrator command prompt or
 Powershell window and entering:
 
-.. code::
+.. code:: powershell
 
   wsl --install
 
@@ -604,7 +604,7 @@ WSL2 supports using an NVIDIA GPU from the Linux environment. To use a GPU from
 following the instructions in the `libnvidia-container documentation
 <https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html>`__:
 
-.. code::
+.. code:: shell
 
   curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
   curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
@@ -616,7 +616,7 @@ following the instructions in the `libnvidia-container documentation
 Once this process has been completed, GPU containers can be run under WSL2 using
 the ``--nv`` and ``--nvccli`` flags together:
 
-.. code::
+.. code:: console
 
   $ {command} pull docker://tensorflow/tensorflow:latest-gpu
 
@@ -661,7 +661,7 @@ The default Linux distribution used by Lima for {Project} template is Ubuntu.
 
 To use Lima via Homebrew:
 
-.. code::
+.. code:: console
 
    $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    $ brew install lima
@@ -694,7 +694,7 @@ mode.
 {Project} unprivileged mode can also be used inside docker without
 enabling docker privileged mode, using these additional docker options:
 
-.. code::
+.. code:: shell
 
     --security-opt seccomp=unconfined --security-opt systempaths=unconfined --device /dev/fuse
 

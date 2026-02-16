@@ -324,12 +324,12 @@ configured with either overlay or underlay support enabled.</p>
 </div>
 <p>You can define the a bind point where the source and destination are
 identical:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bind</span> <span class="n">path</span> <span class="o">=</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">localtime</span>
+<div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span>bind path <span class="s">= /etc/localtime</span>
 </pre></div>
 </div>
 <p>Or you can specify different source and destination locations using a
 colon:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bind</span> <span class="n">path</span> <span class="o">=</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apptainer</span><span class="o">/</span><span class="n">default</span><span class="o">-</span><span class="n">nsswitch</span><span class="o">.</span><span class="n">conf</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nsswitch</span><span class="o">.</span><span class="n">conf</span>
+<div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span>bind path <span class="s">= /etc/apptainer/default-nsswitch.conf</span><span class="p">:</span><span class="s">/etc/nsswitch.conf</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">user</span> <span class="pre">bind</span> <span class="pre">control</span></code>: This allows admins to decide if users can define
@@ -553,27 +553,27 @@ only be modified by an administrator.</p>
 <p>In this example we will changing the <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">path</span></code> option described
 above. First we can see the current list of bind paths set within our
 system configuration:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config global --get &quot;bind path&quot;
-/etc/localtime,/etc/hosts
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">&quot;bind path&quot;</span>
+<span class="go">/etc/localtime,/etc/hosts</span>
 </pre></div>
 </div>
 <p>Now we can add a new path and verify it was successfully added:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config global --set &quot;bind path&quot; /etc/resolv.conf
-$ sudo apptainer config global --get &quot;bind path&quot;
-/etc/resolv.conf,/etc/localtime,/etc/hosts
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--set<span class="w"> </span><span class="s2">&quot;bind path&quot;</span><span class="w"> </span>/etc/resolv.conf
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">&quot;bind path&quot;</span>
+<span class="go">/etc/resolv.conf,/etc/localtime,/etc/hosts</span>
 </pre></div>
 </div>
 <p>From here we can remove a path with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config global --unset &quot;bind path&quot; /etc/localtime
-$ sudo apptainer config global --get &quot;bind path&quot;
-/etc/resolv.conf,/etc/hosts
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--unset<span class="w"> </span><span class="s2">&quot;bind path&quot;</span><span class="w"> </span>/etc/localtime
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">&quot;bind path&quot;</span>
+<span class="go">/etc/resolv.conf,/etc/hosts</span>
 </pre></div>
 </div>
 <p>If we want to reset the option to the default at installation, then we
 can reset it with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config global --reset &quot;bind path&quot;
-$ sudo apptainer config global --get &quot;bind path&quot;
-/etc/localtime,/etc/hosts
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--reset<span class="w"> </span><span class="s2">&quot;bind path&quot;</span>
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">&quot;bind path&quot;</span>
+<span class="go">/etc/localtime,/etc/hosts</span>
 </pre></div>
 </div>
 <p>And now we are back to our original option settings. You can also test
@@ -582,23 +582,23 @@ conjunction with the above commands. Instead of writing to the
 configuration file, it will output what would have been written to the
 configuration file if the command had been run without the <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code>
 option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer config global --dry-run --set &quot;bind path&quot; /etc/resolv.conf
-# APPTAINER.CONF
-# This is the global configuration file for Apptainer. This file controls
-[...]
-# BIND PATH: [STRING]
-# DEFAULT: Undefined
-# Define a list of files/directories that should be made available from within
-# the container. The file or directory must exist within the container on
-# which to attach to. you can specify a different source and destination
-# path (respectively) with a colon; otherwise source and dest are the same.
-# NOTE: these are ignored if apptainer is invoked with --contain.
-bind path = /etc/resolv.conf
-bind path = /etc/localtime
-bind path = /etc/hosts
-[...]
-$ sudo apptainer config global --get &quot;bind path&quot;
-/etc/localtime,/etc/hosts
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--dry-run<span class="w"> </span>--set<span class="w"> </span><span class="s2">&quot;bind path&quot;</span><span class="w"> </span>/etc/resolv.conf
+<span class="gp"># </span>APPTAINER.CONF
+<span class="gp"># </span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>global<span class="w"> </span>configuration<span class="w"> </span>file<span class="w"> </span><span class="k">for</span><span class="w"> </span>Apptainer.<span class="w"> </span>This<span class="w"> </span>file<span class="w"> </span>controls
+<span class="go">[...]</span>
+<span class="gp"># </span>BIND<span class="w"> </span>PATH:<span class="w"> </span><span class="o">[</span>STRING<span class="o">]</span>
+<span class="gp"># </span>DEFAULT:<span class="w"> </span>Undefined
+<span class="gp"># </span>Define<span class="w"> </span>a<span class="w"> </span>list<span class="w"> </span>of<span class="w"> </span>files/directories<span class="w"> </span>that<span class="w"> </span>should<span class="w"> </span>be<span class="w"> </span>made<span class="w"> </span>available<span class="w"> </span>from<span class="w"> </span>within
+<span class="gp"># </span>the<span class="w"> </span>container.<span class="w"> </span>The<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory<span class="w"> </span>must<span class="w"> </span>exist<span class="w"> </span>within<span class="w"> </span>the<span class="w"> </span>container<span class="w"> </span>on
+<span class="gp"># </span>which<span class="w"> </span>to<span class="w"> </span>attach<span class="w"> </span>to.<span class="w"> </span>you<span class="w"> </span>can<span class="w"> </span>specify<span class="w"> </span>a<span class="w"> </span>different<span class="w"> </span><span class="nb">source</span><span class="w"> </span>and<span class="w"> </span>destination
+<span class="gp"># </span>path<span class="w"> </span><span class="o">(</span>respectively<span class="o">)</span><span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>colon<span class="p">;</span><span class="w"> </span>otherwise<span class="w"> </span><span class="nb">source</span><span class="w"> </span>and<span class="w"> </span>dest<span class="w"> </span>are<span class="w"> </span>the<span class="w"> </span>same.
+<span class="gp"># </span>NOTE:<span class="w"> </span>these<span class="w"> </span>are<span class="w"> </span>ignored<span class="w"> </span><span class="k">if</span><span class="w"> </span>apptainer<span class="w"> </span>is<span class="w"> </span>invoked<span class="w"> </span>with<span class="w"> </span>--contain.
+<span class="go">bind path = /etc/resolv.conf</span>
+<span class="go">bind path = /etc/localtime</span>
+<span class="go">bind path = /etc/hosts</span>
+<span class="go">[...]</span>
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">&quot;bind path&quot;</span>
+<span class="go">/etc/localtime,/etc/hosts</span>
 </pre></div>
 </div>
 <p>Above we can see that <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> is listed as a bind path in
@@ -641,7 +641,7 @@ eBPF programs that implement the requested access controls.</p>
 <p>To apply resource limits to a container, use the <code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code>
 flag, which takes a path to a TOML file specifying the cgroups
 configuration to be applied:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --apply-cgroups /path/to/cgroups.toml my_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--apply-cgroups<span class="w"> </span>/path/to/cgroups.toml<span class="w"> </span>my_container.sif
 </pre></div>
 </div>
 <div class="admonition note">
@@ -654,12 +654,12 @@ privileges.</p>
 <p>To limit the amount of memory that your container uses to 500MB
 (524288000 bytes), set a <code class="docutils literal notranslate"><span class="pre">limit</span></code> value inside the <code class="docutils literal notranslate"><span class="pre">[memory]</span></code> section
 of your cgroups TOML file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">memory</span><span class="p">]</span>
-    <span class="n">limit</span> <span class="o">=</span> <span class="mi">524288000</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[memory]</span>
+<span class="w">    </span><span class="n">limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">524288000</span>
 </pre></div>
 </div>
 <p>Start your container, applying the toml file, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --apply-cgroups path/to/cgroups.toml library://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--apply-cgroups<span class="w"> </span>path/to/cgroups.toml<span class="w"> </span>library://alpine
 </pre></div>
 </div>
 </section>
@@ -671,8 +671,8 @@ specified in the <code class="docutils literal notranslate"><span class="pre">[c
 <p>This corresponds to a ratio versus other cgroups with cpu shares.
 Usually the default value is <code class="docutils literal notranslate"><span class="pre">1024</span></code>. That means if you want to allow
 to use 50% of a single CPU, you will set <code class="docutils literal notranslate"><span class="pre">512</span></code> as value.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">cpu</span><span class="p">]</span>
-    <span class="n">shares</span> <span class="o">=</span> <span class="mi">512</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[cpu]</span>
+<span class="w">    </span><span class="n">shares</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">512</span>
 </pre></div>
 </div>
 <p>A cgroup can get more than its share of CPU if there are enough idle CPU
@@ -686,17 +686,17 @@ contained processes can’t use more than the amount of CPU time set for
 the cgroup. <code class="docutils literal notranslate"><span class="pre">quota</span></code> allows you to configure the amount of CPU time
 that a cgroup can use per period. The default is 100ms (100000us). So if
 you want to limit amount of CPU time to 20ms during period of 100ms:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">cpu</span><span class="p">]</span>
-    <span class="n">period</span> <span class="o">=</span> <span class="mi">100000</span>
-    <span class="n">quota</span> <span class="o">=</span> <span class="mi">20000</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[cpu]</span>
+<span class="w">    </span><span class="n">period</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span>
+<span class="w">    </span><span class="n">quota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20000</span>
 </pre></div>
 </div>
 <p><strong>cpus/mems</strong></p>
 <p>You can also restrict access to specific CPUs (cores) and associated
 memory nodes by using <code class="docutils literal notranslate"><span class="pre">cpus/mems</span></code> fields:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">cpu</span><span class="p">]</span>
-    <span class="n">cpus</span> <span class="o">=</span> <span class="s2">&quot;0-1&quot;</span>
-    <span class="n">mems</span> <span class="o">=</span> <span class="s2">&quot;0-1&quot;</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[cpu]</span>
+<span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0-1&quot;</span>
+<span class="w">    </span><span class="n">mems</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0-1&quot;</span>
 </pre></div>
 </div>
 <p>Where container has limited access to CPU 0 and CPU 1.</p>
@@ -710,9 +710,9 @@ memory nodes by using <code class="docutils literal notranslate"><span class="pr
 <h4>Limiting IO<a class="headerlink" href="#limiting-io" title="Link to this heading"></a></h4>
 <p>To control block device I/O, applying limits to competing container, use
 the <code class="docutils literal notranslate"><span class="pre">[blockIO]</span></code> section of the TOML file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">blockIO</span><span class="p">]</span>
-    <span class="n">weight</span> <span class="o">=</span> <span class="mi">1000</span>
-    <span class="n">leafWeight</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[blockIO]</span>
+<span class="w">    </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
+<span class="w">    </span><span class="n">leafWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">weight</span></code> and <code class="docutils literal notranslate"><span class="pre">leafWeight</span></code> accept values between <code class="docutils literal notranslate"><span class="pre">10</span></code> and <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p>
@@ -725,31 +725,31 @@ child cgroups.</p>
 for specific device major/minor numbers. For example, to override
 <code class="docutils literal notranslate"><span class="pre">weight/leafWeight</span></code> for <code class="docutils literal notranslate"><span class="pre">/dev/loop0</span></code> and <code class="docutils literal notranslate"><span class="pre">/dev/loop1</span></code> block
 devices, set limits for device major 7, minor 0 and 1:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">blockIO</span><span class="p">]</span>
-    <span class="p">[[</span><span class="n">blockIO</span><span class="o">.</span><span class="n">weightDevice</span><span class="p">]]</span>
-        <span class="n">major</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">minor</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">weight</span> <span class="o">=</span> <span class="mi">100</span>
-        <span class="n">leafWeight</span> <span class="o">=</span> <span class="mi">50</span>
-    <span class="p">[[</span><span class="n">blockIO</span><span class="o">.</span><span class="n">weightDevice</span><span class="p">]]</span>
-        <span class="n">major</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">minor</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">weight</span> <span class="o">=</span> <span class="mi">100</span>
-        <span class="n">leafWeight</span> <span class="o">=</span> <span class="mi">50</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[blockIO]</span>
+<span class="w">    </span><span class="k">[[blockIO.weightDevice]]</span>
+<span class="w">        </span><span class="n">major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span>
+<span class="w">        </span><span class="n">minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">        </span><span class="n">leafWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span>
+<span class="w">    </span><span class="k">[[blockIO.weightDevice]]</span>
+<span class="w">        </span><span class="n">major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span>
+<span class="w">        </span><span class="n">minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">        </span><span class="n">leafWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span>
 </pre></div>
 </div>
 <p>You can also limit the IO read/write rate to a specific absolute value,
 e.g. 16MB per second for the <code class="docutils literal notranslate"><span class="pre">/dev/loop0</span></code> block device. The <code class="docutils literal notranslate"><span class="pre">rate</span></code>
 is specified in bytes per second.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">blockIO</span><span class="p">]</span>
-    <span class="p">[[</span><span class="n">blockIO</span><span class="o">.</span><span class="n">throttleReadBpsDevice</span><span class="p">]]</span>
-        <span class="n">major</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">minor</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">rate</span> <span class="o">=</span> <span class="mi">16777216</span>
-    <span class="p">[[</span><span class="n">blockIO</span><span class="o">.</span><span class="n">throttleWriteBpsDevice</span><span class="p">]]</span>
-        <span class="n">major</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">minor</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">rate</span> <span class="o">=</span> <span class="mi">16777216</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[blockIO]</span>
+<span class="w">    </span><span class="k">[[blockIO.throttleReadBpsDevice]]</span>
+<span class="w">        </span><span class="n">major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span>
+<span class="w">        </span><span class="n">minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16777216</span>
+<span class="w">    </span><span class="k">[[blockIO.throttleWriteBpsDevice]]</span>
+<span class="w">        </span><span class="n">major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span>
+<span class="w">        </span><span class="n">minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16777216</span>
 </pre></div>
 </div>
 </section>
@@ -789,11 +789,11 @@ down execution fully you should disable execution of other container
 types (squashfs/extfs/dir) via the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code> file <code class="docutils literal notranslate"><span class="pre">allow</span>
 <span class="pre">container</span></code> settings.</p>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">execgroup</span><span class="p">]]</span>
-  <span class="n">tagname</span> <span class="o">=</span> <span class="s2">&quot;group2&quot;</span>
-  <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;whitelist&quot;</span>
-  <span class="n">dirpath</span> <span class="o">=</span> <span class="s2">&quot;/tmp/containers&quot;</span>
-  <span class="n">keyfp</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;7064B1D6EFF01B1262FED3F03581D99FE87EAFD1&quot;</span><span class="p">]</span>
+<div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span><span class="s">[[execgroup]]</span>
+  tagname <span class="s">= &quot;group2&quot;</span>
+  mode <span class="s">= &quot;whitelist&quot;</span>
+  dirpath <span class="s">= &quot;/tmp/containers&quot;</span>
+  keyfp <span class="s">= [&quot;7064B1D6EFF01B1262FED3F03581D99FE87EAFD1&quot;]</span>
 </pre></div>
 </div>
 <p>Only the containers running from and signed with above-mentioned path
@@ -890,19 +890,19 @@ resolved via <code class="docutils literal notranslate"><span class="pre">ldconf
 executables and libraries to be bound into the container, without path
 information.</p>
 <p>Binaries are found by searching <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># put binaries here</span>
-<span class="c1"># In shared environments you should ensure that permissions on these files</span>
-<span class="c1"># exclude writing by non-privileged users.</span>
-<span class="n">rocm</span><span class="o">-</span><span class="n">smi</span>
-<span class="n">rocminfo</span>
+<div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span><span class="c"># put binaries here</span>
+<span class="c"># In shared environments you should ensure that permissions on these files</span>
+<span class="c"># exclude writing by non-privileged users.</span>
+rocm-smi
+rocminfo
 </pre></div>
 </div>
 <p>Libraries should be specified without version information, i.e.
 <code class="docutils literal notranslate"><span class="pre">libname.so</span></code>, and are resolved using <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># put libs here (must end in .so)</span>
-<span class="n">libamd_comgr</span><span class="o">.</span><span class="n">so</span>
-<span class="n">libcomgr</span><span class="o">.</span><span class="n">so</span>
-<span class="n">libCXLActivityLogger</span><span class="o">.</span><span class="n">so</span>
+<div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span><span class="c"># put libs here (must end in .so)</span>
+libamd_comgr<span class="s">.so</span>
+libcomgr<span class="s">.so</span>
+libCXLActivityLogger<span class="s">.so</span>
 </pre></div>
 </div>
 <p>If you receive warnings that binaries or libraries are not found, ensure
@@ -935,7 +935,7 @@ maintained by Apptainer in order to manage these capabilities. The
 <code class="docutils literal notranslate"><span class="pre">pinger</span></code>) capabilities to open raw sockets so that they can use
 <code class="docutils literal notranslate"><span class="pre">ping</span></code> in a container where the binary is controlled via capabilities.</p>
 <p>To do so, we would issue a command such as this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer capability add --user pinger CAP_NET_RAW
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>capability<span class="w"> </span>add<span class="w"> </span>--user<span class="w"> </span>pinger<span class="w"> </span>CAP_NET_RAW
 </pre></div>
 </div>
 <p>This means the user <code class="docutils literal notranslate"><span class="pre">pinger</span></code> has just been granted permissions
@@ -943,36 +943,36 @@ maintained by Apptainer in order to manage these capabilities. The
 containers.</p>
 <p>We can check that this change is in effect with the <code class="docutils literal notranslate"><span class="pre">capability</span> <span class="pre">list</span></code>
 command.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer capability list --user pinger
-CAP_NET_RAW
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>capability<span class="w"> </span>list<span class="w"> </span>--user<span class="w"> </span>pinger
+<span class="go">CAP_NET_RAW</span>
 </pre></div>
 </div>
 <p>To take advantage of this new capability, the user <code class="docutils literal notranslate"><span class="pre">pinger</span></code> must also
 request the capability when executing a container with the
 <code class="docutils literal notranslate"><span class="pre">--add-caps</span></code> flag. <code class="docutils literal notranslate"><span class="pre">pinger</span></code> would need to run a command like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW \
-  library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
-PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
-64 bytes from 8.8.8.8: icmp_seq=1 ttl=52 time=73.1 ms
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--add-caps<span class="w"> </span>CAP_NET_RAW<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>library://sylabs/tests/ubuntu_ping:v1.0<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span>.8.8.8
+<span class="go">PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.</span>
+<span class="go">64 bytes from 8.8.8.8: icmp_seq=1 ttl=52 time=73.1 ms</span>
 
---- 8.8.8.8 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 73.178/73.178/73.178/0.000 ms
+<span class="go">--- 8.8.8.8 ping statistics ---</span>
+<span class="go">1 packets transmitted, 1 received, 0% packet loss, time 0ms</span>
+<span class="go">rtt min/avg/max/mdev = 73.178/73.178/73.178/0.000 ms</span>
 </pre></div>
 </div>
 <p>If we decide that it is no longer necessary to allow the user <code class="docutils literal notranslate"><span class="pre">pinger</span></code>
 to open raw sockets within Apptainer containers, we can revoke the
 appropriate Linux capability like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer capability drop --user pinger CAP_NET_RAW
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>capability<span class="w"> </span>drop<span class="w"> </span>--user<span class="w"> </span>pinger<span class="w"> </span>CAP_NET_RAW
 </pre></div>
 </div>
 <p>Now if <code class="docutils literal notranslate"><span class="pre">pinger</span></code> tries to use <code class="docutils literal notranslate"><span class="pre">CAP_NET_RAW</span></code>, Apptainer will not
 give the capability to the container and <code class="docutils literal notranslate"><span class="pre">ping</span></code> will fail to create a
 socket:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW \
-  library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
-WARNING: not authorized to add capability: CAP_NET_RAW
-ping: socket: Operation not permitted
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--add-caps<span class="w"> </span>CAP_NET_RAW<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>library://sylabs/tests/ubuntu_ping:v1.0<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span>.8.8.8
+<span class="go">WARNING: not authorized to add capability: CAP_NET_RAW</span>
+<span class="go">ping: socket: Operation not permitted</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">capability</span> <span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">drop</span></code> subcommands will also accept the
@@ -1002,7 +1002,7 @@ syscalls related to the current architecture where it’s been executed.
 The <code class="docutils literal notranslate"><span class="pre">include</span></code>/<code class="docutils literal notranslate"><span class="pre">exclude</span></code>-&gt; <code class="docutils literal notranslate"><span class="pre">caps</span></code> section will include/exclude the
 listed system calls if the user has the associated capability.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">--security</span></code> option to invoke the container like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell --security seccomp:/home/david/my.json my_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--security<span class="w"> </span>seccomp:/home/david/my.json<span class="w"> </span>my_container.sif
 </pre></div>
 </div>
 <p>For more insight into security options, network options, cgroups,
@@ -1031,14 +1031,14 @@ like to use a Library API registry.</p>
 <p><strong>Examples</strong></p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group with the <code class="docutils literal notranslate"><span class="pre">--global</span></code> flag to create a
 system-wide remote endpoint:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer remote add --global company-remote https://enterprise.example.com
-INFO:    Remote &quot;company-remote&quot; added.
-INFO:    Global option detected. Will not automatically log into remote.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--global<span class="w"> </span>company-remote<span class="w"> </span>https://enterprise.example.com
+<span class="go">INFO:    Remote &quot;company-remote&quot; added.</span>
+<span class="go">INFO:    Global option detected. Will not automatically log into remote.</span>
 </pre></div>
 </div>
 <p>Conversely, to remove a system-wide endpoint:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer remote remove --global company-remote
-INFO:    Remote &quot;company-remote&quot; removed.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>remove<span class="w"> </span>--global<span class="w"> </span>company-remote
+<span class="go">INFO:    Remote &quot;company-remote&quot; removed.</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1054,24 +1054,24 @@ endpoint themselves.</p>
 <p>Apptainer has the ability for an administrator to make a
 remote the only usable remote for the system by using the
 <code class="docutils literal notranslate"><span class="pre">--exclusive</span></code> flag:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer remote use --exclusive company-remote
-INFO:    Remote &quot;company-remote&quot; now in use.
-$ apptainer remote list
-Cloud Services Endpoints
-========================
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>use<span class="w"> </span>--exclusive<span class="w"> </span>company-remote
+<span class="go">INFO:    Remote &quot;company-remote&quot; now in use.</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>list
+<span class="go">Cloud Services Endpoints</span>
+<span class="go">========================</span>
 
-NAME            URI                     ACTIVE  GLOBAL  EXCLUSIVE  INSECURE
-DefaultRemote   cloud.apptainer.org     NO      YES     NO         NO
-company-remote  enterprise.example.com  YES     YES     YES        NO
-myremote        enterprise.example.com  NO      NO      NO         NO
+<span class="go">NAME            URI                     ACTIVE  GLOBAL  EXCLUSIVE  INSECURE</span>
+<span class="go">DefaultRemote   cloud.apptainer.org     NO      YES     NO         NO</span>
+<span class="go">company-remote  enterprise.example.com  YES     YES     YES        NO</span>
+<span class="go">myremote        enterprise.example.com  NO      NO      NO         NO</span>
 
-Keyservers
-==========
+<span class="go">Keyservers</span>
+<span class="go">==========</span>
 
-URI                       GLOBAL  INSECURE  ORDER
-https://keys.example.com  YES     NO        1*
+<span class="go">URI                       GLOBAL  INSECURE  ORDER</span>
+<span class="go">https://keys.example.com  YES     NO        1*</span>
 
-* Active cloud services keyserver
+<span class="go">* Active cloud services keyserver</span>
 </pre></div>
 </div>
 </section>
@@ -1080,9 +1080,9 @@ https://keys.example.com  YES     NO        1*
 <p>If you are using a endpoint that exposes its
 service discovery file over an insecure HTTP connection only, it can be
 added by specifying the <code class="docutils literal notranslate"><span class="pre">--insecure</span></code> flag:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer remote add --global --insecure test http://test.example.com
-INFO:    Remote &quot;test&quot; added.
-INFO:    Global option detected. Will not automatically log into remote.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--global<span class="w"> </span>--insecure<span class="w"> </span><span class="nb">test</span><span class="w"> </span>http://test.example.com
+<span class="go">INFO:    Remote &quot;test&quot; added.</span>
+<span class="go">INFO:    Global option detected. Will not automatically log into remote.</span>
 </pre></div>
 </div>
 <p>This flag controls HTTP vs HTTPS for service discovery only. The
@@ -1105,26 +1105,26 @@ Instead, it supports
 these are the commands to restore the library behavior from before
 Apptainer, where using the <code class="docutils literal notranslate"><span class="pre">library://</span></code> URI would download from the
 Sylabs Cloud anonymously:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer remote add --global SylabsCloud cloud.sycloud.io
-INFO:    Remote &quot;SylabsCloud&quot; added.
-INFO:    Global option detected. Will not automatically log into remote.
-$ sudo apptainer remote use --global SylabsCloud
-INFO:    Remote &quot;SylabsCloud&quot; now in use.
-$ apptainer remote list
-Cloud Services Endpoints
-========================
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--global<span class="w"> </span>SylabsCloud<span class="w"> </span>cloud.sycloud.io
+<span class="go">INFO:    Remote &quot;SylabsCloud&quot; added.</span>
+<span class="go">INFO:    Global option detected. Will not automatically log into remote.</span>
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>use<span class="w"> </span>--global<span class="w"> </span>SylabsCloud
+<span class="go">INFO:    Remote &quot;SylabsCloud&quot; now in use.</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>list
+<span class="go">Cloud Services Endpoints</span>
+<span class="go">========================</span>
 
-NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE
-DefaultRemote  cloud.apptainer.org  NO      YES     NO
-SylabsCloud    cloud.sycloud.io     YES     YES     NO
+<span class="go">NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE</span>
+<span class="go">DefaultRemote  cloud.apptainer.org  NO      YES     NO</span>
+<span class="go">SylabsCloud    cloud.sycloud.io     YES     YES     NO</span>
 
-Keyservers
-==========
+<span class="go">Keyservers</span>
+<span class="go">==========</span>
 
-URI                                 GLOBAL  INSECURE  ORDER
-https://keys.production.sycloud.io  YES     NO        1*
+<span class="go">URI                                 GLOBAL  INSECURE  ORDER</span>
+<span class="go">https://keys.production.sycloud.io  YES     NO        1*</span>
 
-* Active cloud services keyserver
+<span class="go">* Active cloud services keyserver</span>
 </pre></div>
 </div>
 </section>
@@ -1159,25 +1159,25 @@ this feature set as it matures.</p>
 </div>
 <p>Binaries are specified as an array under the <code class="docutils literal notranslate"><span class="pre">bins</span></code> key and are found by
 searching <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># List binaries to bind into the container here</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># List binaries to bind into the container here</span>
 <span class="c1"># In shared environments you should ensure that permissions on these files</span>
 <span class="c1"># exclude writing by non-privileged users.</span>
-<span class="n">bins</span><span class="p">:</span>
-  <span class="o">-</span> <span class="s2">&quot;dmtcp_command&quot;</span>
-  <span class="o">-</span> <span class="s2">&quot;dmtcp_discover_rm&quot;</span>
-  <span class="o">-</span> <span class="s2">&quot;dmtcp_launch&quot;</span>
-<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="nt">bins</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;dmtcp_command&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;dmtcp_discover_rm&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;dmtcp_launch&quot;</span>
+<span class="nn">...</span>
 </pre></div>
 </div>
 <p>Libraries are specified as an array under the <code class="docutils literal notranslate"><span class="pre">libs</span></code> key and should be
 specified without version information, i.e.
 <code class="docutils literal notranslate"><span class="pre">libname.so</span></code>, and are resolved using <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># List libraries to bind into the container here. Library names must end in &quot;.so&quot;</span>
-<span class="n">libs</span><span class="p">:</span>
-  <span class="o">-</span> <span class="s2">&quot;libdmtcp_alloc.so&quot;</span>
-  <span class="o">-</span> <span class="s2">&quot;libdmtcp_dl.so&quot;</span>
-  <span class="o">-</span> <span class="s2">&quot;libdmtcp_modify-env.so&quot;</span>
-<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># List libraries to bind into the container here. Library names must end in &quot;.so&quot;</span>
+<span class="nt">libs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;libdmtcp_alloc.so&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;libdmtcp_dl.so&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;libdmtcp_modify-env.so&quot;</span>
+<span class="nn">...</span>
 </pre></div>
 </div>
 <p>If you receive warnings that binaries or libraries are not found, ensure
@@ -1196,10 +1196,10 @@ pull-through mirrors (caches).  For example the following entries in
 one of those files will cause Apptainer to read from
 <code class="docutils literal notranslate"><span class="pre">docker-registry.example.edu</span></code> whenever it would otherwise read
 from <code class="docutils literal notranslate"><span class="pre">docker.io</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">registry</span><span class="p">]]</span>
-<span class="n">location</span><span class="o">=</span><span class="s2">&quot;docker.io&quot;</span>
-<span class="p">[[</span><span class="n">registry</span><span class="o">.</span><span class="n">mirror</span><span class="p">]]</span>
-<span class="n">location</span><span class="o">=</span><span class="s2">&quot;docker-registry.example.edu&quot;</span>
+<div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span><span class="s">[[registry]]</span>
+location<span class="s">=&quot;docker.io&quot;</span>
+<span class="s">[[registry.mirror]]</span>
+location<span class="s">=&quot;docker-registry.example.edu&quot;</span>
 </pre></div>
 </div>
 <p>Users may also put the configuration in their own

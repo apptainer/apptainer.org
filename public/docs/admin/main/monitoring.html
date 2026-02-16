@@ -111,15 +111,15 @@ agent tool that helps connect Apptainer to Prometheus.</p>
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>First, the administrator needs to enable the monitoring feature inside Apptainer by editing <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>.
 Simply changing the value of <code class="docutils literal notranslate"><span class="pre">allow</span> <span class="pre">monitoring</span></code> to <code class="docutils literal notranslate"><span class="pre">yes</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ALLOW MONITORING: [BOOL]</span>
-<span class="c1"># DEFAULT: no</span>
-<span class="c1"># Allow to monitor the system resource usage of apptainer. To enable this option</span>
-<span class="c1"># additional tool, i.e. apptheus, is required.</span>
-<span class="n">allow</span> <span class="n">monitoring</span> <span class="o">=</span> <span class="n">yes</span>
+<div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span><span class="c"># ALLOW MONITORING: [BOOL]</span>
+<span class="c"># DEFAULT: no</span>
+<span class="c"># Allow to monitor the system resource usage of apptainer. To enable this option</span>
+<span class="c"># additional tool, i.e. apptheus, is required.</span>
+allow monitoring <span class="s">= yes</span>
 </pre></div>
 </div>
 <p>Then the administrator starts the Apptheus</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apptheus</span> <span class="o">--</span><span class="n">trust</span><span class="o">.</span><span class="n">path</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span><span class="n">apptainer</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">starter</span><span class="p">;</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span><span class="n">apptainer</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">starter</span><span class="o">-</span><span class="n">suid</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apptheus<span class="w"> </span>--trust.path<span class="o">=</span>/usr/local/libexec/apptainer/bin/starter<span class="p">;</span>/usr/local/libexec/apptainer/bin/starter-suid
 </pre></div>
 </div>
 <div class="admonition note">
@@ -127,119 +127,118 @@ Simply changing the value of <code class="docutils literal notranslate"><span cl
 <p><code class="docutils literal notranslate"><span class="pre">--trust.path</span></code> lists trusted callers to Apptheus. In this case, they are <code class="docutils literal notranslate"><span class="pre">starter</span></code> or <code class="docutils literal notranslate"><span class="pre">starter-suid</span></code> for Apptainer.</p>
 </div>
 <p>Prometheus can read the container’s metrics via the local http address, by default <code class="docutils literal notranslate"><span class="pre">localhost:9091/metrics</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="n">locahost</span><span class="p">:</span><span class="mi">9091</span><span class="o">/</span><span class="n">metrics</span>
-
-<span class="c1"># HELP apptheus_build_info A metric with a constant &#39;1&#39; value labeled by version, revision, branch, goversion from which apptheus was built, and the goos and goarch for the build.</span>
-<span class="c1"># TYPE apptheus_build_info gauge</span>
-<span class="n">apptheus_build_info</span><span class="p">{</span><span class="n">branch</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">goarch</span><span class="o">=</span><span class="s2">&quot;arm64&quot;</span><span class="p">,</span><span class="n">goos</span><span class="o">=</span><span class="s2">&quot;linux&quot;</span><span class="p">,</span><span class="n">goversion</span><span class="o">=</span><span class="s2">&quot;go1.21.1&quot;</span><span class="p">,</span><span class="n">revision</span><span class="o">=</span><span class="s2">&quot;284ead0316031c8c08e2081f0468ad83bfb82e20&quot;</span><span class="p">,</span><span class="n">tags</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">}</span> <span class="mi">1</span>
-<span class="c1"># HELP go_gc_duration_seconds A summary of the pause duration of garbage collection cycles.</span>
-<span class="c1"># TYPE go_gc_duration_seconds summary</span>
-<span class="n">go_gc_duration_seconds</span><span class="p">{</span><span class="n">quantile</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">}</span> <span class="mi">0</span>
-<span class="n">go_gc_duration_seconds</span><span class="p">{</span><span class="n">quantile</span><span class="o">=</span><span class="s2">&quot;0.25&quot;</span><span class="p">}</span> <span class="mi">0</span>
-<span class="n">go_gc_duration_seconds</span><span class="p">{</span><span class="n">quantile</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span><span class="p">}</span> <span class="mi">0</span>
-<span class="n">go_gc_duration_seconds</span><span class="p">{</span><span class="n">quantile</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">}</span> <span class="mi">0</span>
-<span class="n">go_gc_duration_seconds</span><span class="p">{</span><span class="n">quantile</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">}</span> <span class="mi">0</span>
-<span class="n">go_gc_duration_seconds_sum</span> <span class="mi">0</span>
-<span class="n">go_gc_duration_seconds_count</span> <span class="mi">0</span>
-<span class="c1"># HELP go_goroutines Number of goroutines that currently exist.</span>
-<span class="c1"># TYPE go_goroutines gauge</span>
-<span class="n">go_goroutines</span> <span class="mi">13</span>
-<span class="c1"># HELP go_info Information about the Go environment.</span>
-<span class="c1"># TYPE go_info gauge</span>
-<span class="n">go_info</span><span class="p">{</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;go1.21.1&quot;</span><span class="p">}</span> <span class="mi">1</span>
-<span class="c1"># HELP go_memstats_alloc_bytes Number of bytes allocated and still in use.</span>
-<span class="c1"># TYPE go_memstats_alloc_bytes gauge</span>
-<span class="n">go_memstats_alloc_bytes</span> <span class="mi">577680</span>
-<span class="c1"># HELP go_memstats_alloc_bytes_total Total number of bytes allocated, even if freed.</span>
-<span class="c1"># TYPE go_memstats_alloc_bytes_total counter</span>
-<span class="n">go_memstats_alloc_bytes_total</span> <span class="mi">577680</span>
-<span class="c1"># HELP go_memstats_buck_hash_sys_bytes Number of bytes used by the profiling bucket hash table.</span>
-<span class="c1"># TYPE go_memstats_buck_hash_sys_bytes gauge</span>
-<span class="n">go_memstats_buck_hash_sys_bytes</span> <span class="mi">5134</span>
-<span class="c1"># HELP go_memstats_frees_total Total number of frees.</span>
-<span class="c1"># TYPE go_memstats_frees_total counter</span>
-<span class="n">go_memstats_frees_total</span> <span class="mi">0</span>
-<span class="c1"># HELP go_memstats_gc_sys_bytes Number of bytes used for garbage collection system metadata.</span>
-<span class="c1"># TYPE go_memstats_gc_sys_bytes gauge</span>
-<span class="n">go_memstats_gc_sys_bytes</span> <span class="mf">2.563968e+06</span>
-<span class="c1"># HELP go_memstats_heap_alloc_bytes Number of heap bytes allocated and still in use.</span>
-<span class="c1"># TYPE go_memstats_heap_alloc_bytes gauge</span>
-<span class="n">go_memstats_heap_alloc_bytes</span> <span class="mi">577680</span>
-<span class="c1"># HELP go_memstats_heap_idle_bytes Number of heap bytes waiting to be used.</span>
-<span class="c1"># TYPE go_memstats_heap_idle_bytes gauge</span>
-<span class="n">go_memstats_heap_idle_bytes</span> <span class="mf">1.55648e+06</span>
-<span class="c1"># HELP go_memstats_heap_inuse_bytes Number of heap bytes that are in use.</span>
-<span class="c1"># TYPE go_memstats_heap_inuse_bytes gauge</span>
-<span class="n">go_memstats_heap_inuse_bytes</span> <span class="mf">2.146304e+06</span>
-<span class="c1"># HELP go_memstats_heap_objects Number of allocated objects.</span>
-<span class="c1"># TYPE go_memstats_heap_objects gauge</span>
-<span class="n">go_memstats_heap_objects</span> <span class="mi">2406</span>
-<span class="c1"># HELP go_memstats_heap_released_bytes Number of heap bytes released to OS.</span>
-<span class="c1"># TYPE go_memstats_heap_released_bytes gauge</span>
-<span class="n">go_memstats_heap_released_bytes</span> <span class="mf">1.55648e+06</span>
-<span class="c1"># HELP go_memstats_heap_sys_bytes Number of heap bytes obtained from system.</span>
-<span class="c1"># TYPE go_memstats_heap_sys_bytes gauge</span>
-<span class="n">go_memstats_heap_sys_bytes</span> <span class="mf">3.702784e+06</span>
-<span class="c1"># HELP go_memstats_last_gc_time_seconds Number of seconds since 1970 of last garbage collection.</span>
-<span class="c1"># TYPE go_memstats_last_gc_time_seconds gauge</span>
-<span class="n">go_memstats_last_gc_time_seconds</span> <span class="mi">0</span>
-<span class="c1"># HELP go_memstats_lookups_total Total number of pointer lookups.</span>
-<span class="c1"># TYPE go_memstats_lookups_total counter</span>
-<span class="n">go_memstats_lookups_total</span> <span class="mi">0</span>
-<span class="c1"># HELP go_memstats_mallocs_total Total number of mallocs.</span>
-<span class="c1"># TYPE go_memstats_mallocs_total counter</span>
-<span class="n">go_memstats_mallocs_total</span> <span class="mi">2406</span>
-<span class="c1"># HELP go_memstats_mcache_inuse_bytes Number of bytes in use by mcache structures.</span>
-<span class="c1"># TYPE go_memstats_mcache_inuse_bytes gauge</span>
-<span class="n">go_memstats_mcache_inuse_bytes</span> <span class="mi">2400</span>
-<span class="c1"># HELP go_memstats_mcache_sys_bytes Number of bytes used for mcache structures obtained from system.</span>
-<span class="c1"># TYPE go_memstats_mcache_sys_bytes gauge</span>
-<span class="n">go_memstats_mcache_sys_bytes</span> <span class="mi">15600</span>
-<span class="c1"># HELP go_memstats_mspan_inuse_bytes Number of bytes in use by mspan structures.</span>
-<span class="c1"># TYPE go_memstats_mspan_inuse_bytes gauge</span>
-<span class="n">go_memstats_mspan_inuse_bytes</span> <span class="mi">45528</span>
-<span class="c1"># HELP go_memstats_mspan_sys_bytes Number of bytes used for mspan structures obtained from system.</span>
-<span class="c1"># TYPE go_memstats_mspan_sys_bytes gauge</span>
-<span class="n">go_memstats_mspan_sys_bytes</span> <span class="mi">48888</span>
-<span class="c1"># HELP go_memstats_next_gc_bytes Number of heap bytes when next garbage collection will take place.</span>
-<span class="c1"># TYPE go_memstats_next_gc_bytes gauge</span>
-<span class="n">go_memstats_next_gc_bytes</span> <span class="mf">4.194304e+06</span>
-<span class="c1"># HELP go_memstats_other_sys_bytes Number of bytes used for other system allocations.</span>
-<span class="c1"># TYPE go_memstats_other_sys_bytes gauge</span>
-<span class="n">go_memstats_other_sys_bytes</span> <span class="mi">617626</span>
-<span class="c1"># HELP go_memstats_stack_inuse_bytes Number of bytes in use by the stack allocator.</span>
-<span class="c1"># TYPE go_memstats_stack_inuse_bytes gauge</span>
-<span class="n">go_memstats_stack_inuse_bytes</span> <span class="mi">491520</span>
-<span class="c1"># HELP go_memstats_stack_sys_bytes Number of bytes obtained from system for stack allocator.</span>
-<span class="c1"># TYPE go_memstats_stack_sys_bytes gauge</span>
-<span class="n">go_memstats_stack_sys_bytes</span> <span class="mi">491520</span>
-<span class="c1"># HELP go_memstats_sys_bytes Number of bytes obtained from system.</span>
-<span class="c1"># TYPE go_memstats_sys_bytes gauge</span>
-<span class="n">go_memstats_sys_bytes</span> <span class="mf">7.44552e+06</span>
-<span class="c1"># HELP go_threads Number of OS threads created.</span>
-<span class="c1"># TYPE go_threads gauge</span>
-<span class="n">go_threads</span> <span class="mi">9</span>
-<span class="c1"># HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.</span>
-<span class="c1"># TYPE process_cpu_seconds_total counter</span>
-<span class="n">process_cpu_seconds_total</span> <span class="mf">0.02</span>
-<span class="c1"># HELP process_max_fds Maximum number of open file descriptors.</span>
-<span class="c1"># TYPE process_max_fds gauge</span>
-<span class="n">process_max_fds</span> <span class="mf">1.048576e+06</span>
-<span class="c1"># HELP process_open_fds Number of open file descriptors.</span>
-<span class="c1"># TYPE process_open_fds gauge</span>
-<span class="n">process_open_fds</span> <span class="mi">13</span>
-<span class="c1"># HELP process_resident_memory_bytes Resident memory size in bytes.</span>
-<span class="c1"># TYPE process_resident_memory_bytes gauge</span>
-<span class="n">process_resident_memory_bytes</span> <span class="mf">1.1862016e+07</span>
-<span class="c1"># HELP process_start_time_seconds Start time of the process since unix epoch in seconds.</span>
-<span class="c1"># TYPE process_start_time_seconds gauge</span>
-<span class="n">process_start_time_seconds</span> <span class="mf">1.70902187483e+09</span>
-<span class="c1"># HELP process_virtual_memory_bytes Virtual memory size in bytes.</span>
-<span class="c1"># TYPE process_virtual_memory_bytes gauge</span>
-<span class="n">process_virtual_memory_bytes</span> <span class="mf">1.797275648e+09</span>
-<span class="c1"># HELP process_virtual_memory_max_bytes Maximum amount of virtual memory available in bytes.</span>
-<span class="c1"># TYPE process_virtual_memory_max_bytes gauge</span>
-<span class="n">process_virtual_memory_max_bytes</span> <span class="mf">1.8446744073709552e+19</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>curl<span class="w"> </span>locahost:9091/metrics
+<span class="gp"># </span>HELP<span class="w"> </span>apptheus_build_info<span class="w"> </span>A<span class="w"> </span>metric<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>constant<span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="w"> </span>value<span class="w"> </span>labeled<span class="w"> </span>by<span class="w"> </span>version,<span class="w"> </span>revision,<span class="w"> </span>branch,<span class="w"> </span>goversion<span class="w"> </span>from<span class="w"> </span>which<span class="w"> </span>apptheus<span class="w"> </span>was<span class="w"> </span>built,<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>goos<span class="w"> </span>and<span class="w"> </span>goarch<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>build.
+<span class="gp"># </span>TYPE<span class="w"> </span>apptheus_build_info<span class="w"> </span>gauge
+<span class="go">apptheus_build_info{branch=&quot;&quot;,goarch=&quot;arm64&quot;,goos=&quot;linux&quot;,goversion=&quot;go1.21.1&quot;,revision=&quot;284ead0316031c8c08e2081f0468ad83bfb82e20&quot;,tags=&quot;unknown&quot;,version=&quot;&quot;} 1</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_gc_duration_seconds<span class="w"> </span>A<span class="w"> </span>summary<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>pause<span class="w"> </span>duration<span class="w"> </span>of<span class="w"> </span>garbage<span class="w"> </span>collection<span class="w"> </span>cycles.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_gc_duration_seconds<span class="w"> </span>summary
+<span class="go">go_gc_duration_seconds{quantile=&quot;0&quot;} 0</span>
+<span class="go">go_gc_duration_seconds{quantile=&quot;0.25&quot;} 0</span>
+<span class="go">go_gc_duration_seconds{quantile=&quot;0.5&quot;} 0</span>
+<span class="go">go_gc_duration_seconds{quantile=&quot;0.75&quot;} 0</span>
+<span class="go">go_gc_duration_seconds{quantile=&quot;1&quot;} 0</span>
+<span class="go">go_gc_duration_seconds_sum 0</span>
+<span class="go">go_gc_duration_seconds_count 0</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_goroutines<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>goroutines<span class="w"> </span>that<span class="w"> </span>currently<span class="w"> </span>exist.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_goroutines<span class="w"> </span>gauge
+<span class="go">go_goroutines 13</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_info<span class="w"> </span>Information<span class="w"> </span>about<span class="w"> </span>the<span class="w"> </span>Go<span class="w"> </span>environment.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_info<span class="w"> </span>gauge
+<span class="go">go_info{version=&quot;go1.21.1&quot;} 1</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_alloc_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>bytes<span class="w"> </span>allocated<span class="w"> </span>and<span class="w"> </span>still<span class="w"> </span><span class="k">in</span><span class="w"> </span>use.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_alloc_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_alloc_bytes 577680</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_alloc_bytes_total<span class="w"> </span>Total<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>bytes<span class="w"> </span>allocated,<span class="w"> </span>even<span class="w"> </span><span class="k">if</span><span class="w"> </span>freed.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_alloc_bytes_total<span class="w"> </span>counter
+<span class="go">go_memstats_alloc_bytes_total 577680</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_buck_hash_sys_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>bytes<span class="w"> </span>used<span class="w"> </span>by<span class="w"> </span>the<span class="w"> </span>profiling<span class="w"> </span>bucket<span class="w"> </span><span class="nb">hash</span><span class="w"> </span>table.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_buck_hash_sys_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_buck_hash_sys_bytes 5134</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_frees_total<span class="w"> </span>Total<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frees.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_frees_total<span class="w"> </span>counter
+<span class="go">go_memstats_frees_total 0</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_gc_sys_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>bytes<span class="w"> </span>used<span class="w"> </span><span class="k">for</span><span class="w"> </span>garbage<span class="w"> </span>collection<span class="w"> </span>system<span class="w"> </span>metadata.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_gc_sys_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_gc_sys_bytes 2.563968e+06</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_heap_alloc_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>heap<span class="w"> </span>bytes<span class="w"> </span>allocated<span class="w"> </span>and<span class="w"> </span>still<span class="w"> </span><span class="k">in</span><span class="w"> </span>use.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_heap_alloc_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_heap_alloc_bytes 577680</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_heap_idle_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>heap<span class="w"> </span>bytes<span class="w"> </span>waiting<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>used.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_heap_idle_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_heap_idle_bytes 1.55648e+06</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_heap_inuse_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>heap<span class="w"> </span>bytes<span class="w"> </span>that<span class="w"> </span>are<span class="w"> </span><span class="k">in</span><span class="w"> </span>use.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_heap_inuse_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_heap_inuse_bytes 2.146304e+06</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_heap_objects<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>allocated<span class="w"> </span>objects.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_heap_objects<span class="w"> </span>gauge
+<span class="go">go_memstats_heap_objects 2406</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_heap_released_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>heap<span class="w"> </span>bytes<span class="w"> </span>released<span class="w"> </span>to<span class="w"> </span>OS.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_heap_released_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_heap_released_bytes 1.55648e+06</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_heap_sys_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>heap<span class="w"> </span>bytes<span class="w"> </span>obtained<span class="w"> </span>from<span class="w"> </span>system.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_heap_sys_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_heap_sys_bytes 3.702784e+06</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_last_gc_time_seconds<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>seconds<span class="w"> </span>since<span class="w"> </span><span class="m">1970</span><span class="w"> </span>of<span class="w"> </span>last<span class="w"> </span>garbage<span class="w"> </span>collection.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_last_gc_time_seconds<span class="w"> </span>gauge
+<span class="go">go_memstats_last_gc_time_seconds 0</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_lookups_total<span class="w"> </span>Total<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>pointer<span class="w"> </span>lookups.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_lookups_total<span class="w"> </span>counter
+<span class="go">go_memstats_lookups_total 0</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_mallocs_total<span class="w"> </span>Total<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>mallocs.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_mallocs_total<span class="w"> </span>counter
+<span class="go">go_memstats_mallocs_total 2406</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_mcache_inuse_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>bytes<span class="w"> </span><span class="k">in</span><span class="w"> </span>use<span class="w"> </span>by<span class="w"> </span>mcache<span class="w"> </span>structures.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_mcache_inuse_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_mcache_inuse_bytes 2400</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_mcache_sys_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>bytes<span class="w"> </span>used<span class="w"> </span><span class="k">for</span><span class="w"> </span>mcache<span class="w"> </span>structures<span class="w"> </span>obtained<span class="w"> </span>from<span class="w"> </span>system.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_mcache_sys_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_mcache_sys_bytes 15600</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_mspan_inuse_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>bytes<span class="w"> </span><span class="k">in</span><span class="w"> </span>use<span class="w"> </span>by<span class="w"> </span>mspan<span class="w"> </span>structures.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_mspan_inuse_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_mspan_inuse_bytes 45528</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_mspan_sys_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>bytes<span class="w"> </span>used<span class="w"> </span><span class="k">for</span><span class="w"> </span>mspan<span class="w"> </span>structures<span class="w"> </span>obtained<span class="w"> </span>from<span class="w"> </span>system.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_mspan_sys_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_mspan_sys_bytes 48888</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_next_gc_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>heap<span class="w"> </span>bytes<span class="w"> </span>when<span class="w"> </span>next<span class="w"> </span>garbage<span class="w"> </span>collection<span class="w"> </span>will<span class="w"> </span>take<span class="w"> </span>place.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_next_gc_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_next_gc_bytes 4.194304e+06</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_other_sys_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>bytes<span class="w"> </span>used<span class="w"> </span><span class="k">for</span><span class="w"> </span>other<span class="w"> </span>system<span class="w"> </span>allocations.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_other_sys_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_other_sys_bytes 617626</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_stack_inuse_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>bytes<span class="w"> </span><span class="k">in</span><span class="w"> </span>use<span class="w"> </span>by<span class="w"> </span>the<span class="w"> </span>stack<span class="w"> </span>allocator.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_stack_inuse_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_stack_inuse_bytes 491520</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_stack_sys_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>bytes<span class="w"> </span>obtained<span class="w"> </span>from<span class="w"> </span>system<span class="w"> </span><span class="k">for</span><span class="w"> </span>stack<span class="w"> </span>allocator.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_stack_sys_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_stack_sys_bytes 491520</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_memstats_sys_bytes<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>bytes<span class="w"> </span>obtained<span class="w"> </span>from<span class="w"> </span>system.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_memstats_sys_bytes<span class="w"> </span>gauge
+<span class="go">go_memstats_sys_bytes 7.44552e+06</span>
+<span class="gp"># </span>HELP<span class="w"> </span>go_threads<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>OS<span class="w"> </span>threads<span class="w"> </span>created.
+<span class="gp"># </span>TYPE<span class="w"> </span>go_threads<span class="w"> </span>gauge
+<span class="go">go_threads 9</span>
+<span class="gp"># </span>HELP<span class="w"> </span>process_cpu_seconds_total<span class="w"> </span>Total<span class="w"> </span>user<span class="w"> </span>and<span class="w"> </span>system<span class="w"> </span>CPU<span class="w"> </span><span class="nb">time</span><span class="w"> </span>spent<span class="w"> </span><span class="k">in</span><span class="w"> </span>seconds.
+<span class="gp"># </span>TYPE<span class="w"> </span>process_cpu_seconds_total<span class="w"> </span>counter
+<span class="go">process_cpu_seconds_total 0.02</span>
+<span class="gp"># </span>HELP<span class="w"> </span>process_max_fds<span class="w"> </span>Maximum<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>open<span class="w"> </span>file<span class="w"> </span>descriptors.
+<span class="gp"># </span>TYPE<span class="w"> </span>process_max_fds<span class="w"> </span>gauge
+<span class="go">process_max_fds 1.048576e+06</span>
+<span class="gp"># </span>HELP<span class="w"> </span>process_open_fds<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>open<span class="w"> </span>file<span class="w"> </span>descriptors.
+<span class="gp"># </span>TYPE<span class="w"> </span>process_open_fds<span class="w"> </span>gauge
+<span class="go">process_open_fds 13</span>
+<span class="gp"># </span>HELP<span class="w"> </span>process_resident_memory_bytes<span class="w"> </span>Resident<span class="w"> </span>memory<span class="w"> </span>size<span class="w"> </span><span class="k">in</span><span class="w"> </span>bytes.
+<span class="gp"># </span>TYPE<span class="w"> </span>process_resident_memory_bytes<span class="w"> </span>gauge
+<span class="go">process_resident_memory_bytes 1.1862016e+07</span>
+<span class="gp"># </span>HELP<span class="w"> </span>process_start_time_seconds<span class="w"> </span>Start<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>process<span class="w"> </span>since<span class="w"> </span>unix<span class="w"> </span>epoch<span class="w"> </span><span class="k">in</span><span class="w"> </span>seconds.
+<span class="gp"># </span>TYPE<span class="w"> </span>process_start_time_seconds<span class="w"> </span>gauge
+<span class="go">process_start_time_seconds 1.70902187483e+09</span>
+<span class="gp"># </span>HELP<span class="w"> </span>process_virtual_memory_bytes<span class="w"> </span>Virtual<span class="w"> </span>memory<span class="w"> </span>size<span class="w"> </span><span class="k">in</span><span class="w"> </span>bytes.
+<span class="gp"># </span>TYPE<span class="w"> </span>process_virtual_memory_bytes<span class="w"> </span>gauge
+<span class="go">process_virtual_memory_bytes 1.797275648e+09</span>
+<span class="gp"># </span>HELP<span class="w"> </span>process_virtual_memory_max_bytes<span class="w"> </span>Maximum<span class="w"> </span>amount<span class="w"> </span>of<span class="w"> </span>virtual<span class="w"> </span>memory<span class="w"> </span>available<span class="w"> </span><span class="k">in</span><span class="w"> </span>bytes.
+<span class="gp"># </span>TYPE<span class="w"> </span>process_virtual_memory_max_bytes<span class="w"> </span>gauge
+<span class="go">process_virtual_memory_max_bytes 1.8446744073709552e+19</span>
 </pre></div>
 </div>
 </section>

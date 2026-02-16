@@ -369,8 +369,8 @@ of Apptainer, including all dependencies that are not normally installed
 on Linux systems.  The script works on current Red Hat Enterprise Linux-derived
 systems, Fedora, SUSE/OpenSUSE, Debian, and Ubuntu.</p>
 <p>This is the easiest way to use it:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -s https://raw.githubusercontent.com/apptainer/apptainer/main/tools/install-unprivileged.sh | \
-    bash -s - install-dir
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>curl<span class="w"> </span>-s<span class="w"> </span>https://raw.githubusercontent.com/apptainer/apptainer/main/tools/install-unprivileged.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>bash<span class="w"> </span>-s<span class="w"> </span>-<span class="w"> </span>install-dir
 </pre></div>
 </div>
 <p>where install-dir is the directory you want to install it into.
@@ -399,15 +399,15 @@ a variety of host operating systems.</p>
 Linux and Fedora.</p>
 <p>First, on Red Hat Enterprise Linux derived systems enable the EPEL
 repositories like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo dnf install -y epel-release
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>epel-release
 </pre></div>
 </div>
 <p>Then to install a non-setuid installation of Apptainer do:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo dnf install -y apptainer
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>apptainer
 </pre></div>
 </div>
 <p>or for a setuid installation do:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo dnf install -y apptainer-suid
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>apptainer-suid
 </pre></div>
 </div>
 </section>
@@ -416,40 +416,40 @@ repositories like this:</p>
 <p>Alternatively, x86_64 RPMs are available on GitHub immediately after each
 Apptainer release and they can be installed directly from there.  For the
 non-setuid installation:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo dnf install -y https://github.com/apptainer/apptainer/releases/download/v1.4.5/apptainer-1.4.5-1.x86_64.rpm
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>https://github.com/apptainer/apptainer/releases/download/v1.4.5/apptainer-1.4.5-1.x86_64.rpm
 </pre></div>
 </div>
 <p>For the setuid installation do above command first and then this one:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo dnf install -y https://github.com/apptainer/apptainer/releases/download/v1.4.5/apptainer-suid-1.4.5-1.x86_64.rpm
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>https://github.com/apptainer/apptainer/releases/download/v1.4.5/apptainer-suid-1.4.5-1.x86_64.rpm
 </pre></div>
 </div>
 </section>
 <section id="install-debian-packages">
 <h4>Install Debian packages<a class="headerlink" href="#install-debian-packages" title="Link to this heading"></a></h4>
 <p>Pre-built Debian packages are only available on GitHub and only for the amd64 architecture. For the non-setuid installation on Debian 11 or 12 use these commands:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt update
-$ sudo apt install -y wget
-$ cd /tmp
-$ wget https://github.com/apptainer/apptainer/releases/download/v1.4.5/apptainer_1.4.5_amd64.deb
-$ sudo apt install -y ./apptainer_1.4.5_amd64.deb
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wget
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>/tmp
+<span class="gp">$ </span>wget<span class="w"> </span>https://github.com/apptainer/apptainer/releases/download/v1.4.5/apptainer_1.4.5_amd64.deb
+<span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>./apptainer_1.4.5_amd64.deb
 </pre></div>
 </div>
 <p>For the setuid installation do above commands first and then these:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://github.com/apptainer/apptainer/releases/download/v1.4.5/apptainer-suid_1.4.5_amd64.deb
-$ sudo dpkg -i ./apptainer-suid_1.4.5_amd64.deb
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>wget<span class="w"> </span>https://github.com/apptainer/apptainer/releases/download/v1.4.5/apptainer-suid_1.4.5_amd64.deb
+<span class="gp">$ </span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>./apptainer-suid_1.4.5_amd64.deb
 </pre></div>
 </div>
 <p>For Debian 13 do these commands instead</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt update
-$ sudo apt install -y wget
-$ cd /tmp
-$ wget https://github.com/apptainer/apptainer/releases/download/v1.4.5/apptainer_1.4.5-trixie+_amd64.deb
-$ sudo apt install -y ./apptainer_1.4.5-trixie+_amd64.deb
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wget
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>/tmp
+<span class="gp">$ </span>wget<span class="w"> </span>https://github.com/apptainer/apptainer/releases/download/v1.4.5/apptainer_1.4.5-trixie+_amd64.deb
+<span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>./apptainer_1.4.5-trixie+_amd64.deb
 </pre></div>
 </div>
 <p>For the setuid installation do above commands first and then these:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://github.com/apptainer/apptainer/releases/download/v1.4.5/apptainer-suid_1.4.5-trixie+_amd64.deb
-$ sudo dpkg -i ./apptainer-suid_1.4.5-trixie+_amd64.deb
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>wget<span class="w"> </span>https://github.com/apptainer/apptainer/releases/download/v1.4.5/apptainer-suid_1.4.5-trixie+_amd64.deb
+<span class="gp">$ </span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>./apptainer-suid_1.4.5-trixie+_amd64.deb
 </pre></div>
 </div>
 </section>
@@ -457,14 +457,14 @@ $ sudo dpkg -i ./apptainer-suid_1.4.5-trixie+_amd64.deb
 <h4>Install Ubuntu packages<a class="headerlink" href="#install-ubuntu-packages" title="Link to this heading"></a></h4>
 <p>Pre-built Ubuntu packages are available on PPA (Personal Package Archive) for the amd64 and arm64 architectures on all current Ubuntu releases.</p>
 <p>First, on Ubuntu based containers install <cite>software-properties-common</cite> package to obtain <cite>add-apt-repository</cite> command. On Ubuntu Desktop/Server derived systems skip this step.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt update
-$ sudo apt install -y software-properties-common
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>software-properties-common
 </pre></div>
 </div>
 <p>For the non-setuid installation use these commands:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo add-apt-repository -y ppa:apptainer/ppa
-$ sudo apt update
-$ sudo apt install -y apptainer
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span>-y<span class="w"> </span>ppa:apptainer/ppa
+<span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>apptainer
 </pre></div>
 </div>
 <p>For the setuid installation use <code class="docutils literal notranslate"><span class="pre">apptainer-suid</span></code> instead of <code class="docutils literal notranslate"><span class="pre">apptainer</span></code>.</p>
@@ -489,7 +489,7 @@ security.</p>
 <p>If you installed from source, then
 to enjoy bash shell completion with Apptainer commands and options,
 source the bash completion file (assuming the default installation prefix):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ . /usr/local/share/bash-completion/completions/apptainer
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>.<span class="w"> </span>/usr/local/share/bash-completion/completions/apptainer
 </pre></div>
 </div>
 <p>Add this command to your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file so that bash completion
@@ -516,8 +516,8 @@ on GitHub.</p>
 <h3>Testing &amp; Checking the Build Configuration<a class="headerlink" href="#testing-checking-the-build-configuration" title="Link to this heading"></a></h3>
 <p>After installation you can perform a basic test of Apptainer
 functionality by executing a simple alpine container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine cat /etc/alpine-release
-3.9.2
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://alpine<span class="w"> </span>cat<span class="w"> </span>/etc/alpine-release
+<span class="go">3.9.2</span>
 </pre></div>
 </div>
 <p>See the <a class="reference external" href="https://apptainer.org/docs/user/main">user guide</a> for more
@@ -529,32 +529,32 @@ installed version of Apptainer, and lists the paths used by
 Apptainer. Use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">buildcfg</span></code> to confirm paths are set
 correctly for your installation, and troubleshoot any ‘not-found’ errors
 at runtime.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer buildcfg
-PACKAGE_NAME=apptainer
-PACKAGE_VERSION=1.4.5
-BUILDDIR=/home/dtrudg/Sylabs/Git/apptainer/builddir
-PREFIX=/usr/local
-EXECPREFIX=/usr/local
-BINDIR=/usr/local/bin
-SBINDIR=/usr/local/sbin
-LIBEXECDIR=/usr/local/libexec
-DATAROOTDIR=/usr/local/share
-DATADIR=/usr/local/share
-SYSCONFDIR=/usr/local/etc
-SHAREDSTATEDIR=/usr/local/com
-LOCALSTATEDIR=/usr/local/var
-RUNSTATEDIR=/usr/local/var/run
-INCLUDEDIR=/usr/local/include
-DOCDIR=/usr/local/share/doc/apptainer
-INFODIR=/usr/local/share/info
-LIBDIR=/usr/local/lib
-LOCALEDIR=/usr/local/share/locale
-MANDIR=/usr/local/share/man
-APPTAINER_CONFDIR=/usr/local/etc/apptainer
-SESSIONDIR=/usr/local/var/apptainer/mnt/session
-PLUGIN_ROOTDIR=/usr/local/libexec/apptainer/plugin
-APPTAINER_CONF_FILE=/usr/local/etc/apptainer/apptainer.conf
-APPTAINER_SUID_INSTALL=0
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>buildcfg
+<span class="go">PACKAGE_NAME=apptainer</span>
+<span class="go">PACKAGE_VERSION=1.4.5</span>
+<span class="go">BUILDDIR=/home/dtrudg/Sylabs/Git/apptainer/builddir</span>
+<span class="go">PREFIX=/usr/local</span>
+<span class="go">EXECPREFIX=/usr/local</span>
+<span class="go">BINDIR=/usr/local/bin</span>
+<span class="go">SBINDIR=/usr/local/sbin</span>
+<span class="go">LIBEXECDIR=/usr/local/libexec</span>
+<span class="go">DATAROOTDIR=/usr/local/share</span>
+<span class="go">DATADIR=/usr/local/share</span>
+<span class="go">SYSCONFDIR=/usr/local/etc</span>
+<span class="go">SHAREDSTATEDIR=/usr/local/com</span>
+<span class="go">LOCALSTATEDIR=/usr/local/var</span>
+<span class="go">RUNSTATEDIR=/usr/local/var/run</span>
+<span class="go">INCLUDEDIR=/usr/local/include</span>
+<span class="go">DOCDIR=/usr/local/share/doc/apptainer</span>
+<span class="go">INFODIR=/usr/local/share/info</span>
+<span class="go">LIBDIR=/usr/local/lib</span>
+<span class="go">LOCALEDIR=/usr/local/share/locale</span>
+<span class="go">MANDIR=/usr/local/share/man</span>
+<span class="go">APPTAINER_CONFDIR=/usr/local/etc/apptainer</span>
+<span class="go">SESSIONDIR=/usr/local/var/apptainer/mnt/session</span>
+<span class="go">PLUGIN_ROOTDIR=/usr/local/libexec/apptainer/plugin</span>
+<span class="go">APPTAINER_CONF_FILE=/usr/local/etc/apptainer/apptainer.conf</span>
+<span class="go">APPTAINER_SUID_INSTALL=0</span>
 </pre></div>
 </div>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">LOCALSTATEDIR</span></code> and <code class="docutils literal notranslate"><span class="pre">SESSIONDIR</span></code> should be on local,
@@ -612,7 +612,7 @@ WSL2 Ubuntu, and use all of its features.</p>
 the default Ubuntu 22.04 environment. On Windows 11 and the most recent builds
 of Windows 10 this is as easy as opening an administrator command prompt or
 Powershell window and entering:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span> <span class="o">--</span><span class="n">install</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span> <span class="p">-</span><span class="n">-install</span>
 </pre></div>
 </div>
 <p>Follow the prompts. A restart is required, and when you open the ‘Ubuntu’ app
@@ -627,41 +627,41 @@ or from the <a class="reference external" href="#install-ubuntu-packages">Ubuntu
 <p>WSL2 supports using an NVIDIA GPU from the Linux environment. To use a GPU from
 Apptainer in WSL2, you must first install <code class="docutils literal notranslate"><span class="pre">libnvidia-container-tools</span></code>,
 following the instructions in the <a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">libnvidia-container documentation</a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">fsSL</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nvidia</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">libnvidia</span><span class="o">-</span><span class="n">container</span><span class="o">/</span><span class="n">gpgkey</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">gpg</span> <span class="o">--</span><span class="n">dearmor</span> <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">keyrings</span><span class="o">/</span><span class="n">nvidia</span><span class="o">-</span><span class="n">container</span><span class="o">-</span><span class="n">toolkit</span><span class="o">-</span><span class="n">keyring</span><span class="o">.</span><span class="n">gpg</span> \
-<span class="n">curl</span> <span class="o">-</span><span class="n">s</span> <span class="o">-</span><span class="n">L</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nvidia</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">libnvidia</span><span class="o">-</span><span class="n">container</span><span class="o">/</span><span class="n">stable</span><span class="o">/</span><span class="n">deb</span><span class="o">/</span><span class="n">nvidia</span><span class="o">-</span><span class="n">container</span><span class="o">-</span><span class="n">toolkit</span><span class="o">.</span><span class="n">list</span> <span class="o">|</span> \
-  <span class="n">sed</span> <span class="s1">&#39;s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g&#39;</span> <span class="o">|</span> \
-  <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">sources</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">nvidia</span><span class="o">-</span><span class="n">container</span><span class="o">-</span><span class="n">toolkit</span><span class="o">.</span><span class="n">list</span> \
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">nvidia</span><span class="o">-</span><span class="n">container</span><span class="o">-</span><span class="n">toolkit</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://nvidia.github.io/libnvidia-container/gpgkey<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg<span class="w"> </span><span class="se">\</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-L<span class="w"> </span>https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>sed<span class="w"> </span><span class="s1">&#39;s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/nvidia-container-toolkit.list<span class="w"> </span><span class="se">\</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nvidia-container-toolkit
 </pre></div>
 </div>
 <p>Once this process has been completed, GPU containers can be run under WSL2 using
 the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> and <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> flags together:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://tensorflow/tensorflow:latest-gpu
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://tensorflow/tensorflow:latest-gpu
 
-$  apptainer run --nv --nvccli tensorflow_latest-gpu.sif
-INFO:    Setting &#39;NVIDIA_VISIBLE_DEVICES=all&#39; to emulate legacy GPU binding.
-INFO:    Setting --writable-tmpfs (required by nvidia-container-cli)
-________                               _______________
-___  __/__________________________________  ____/__  /________      __
-__  /  _  _ \_  __ \_  ___/  __ \_  ___/_  /_   __  /_  __ \_ | /| / /
-_  /   /  __/  / / /(__  )/ /_/ /  /   _  __/   _  / / /_/ /_ |/ |/ /
-/_/    \___//_/ /_//____/ \____//_/    /_/      /_/  \____/____/|__/
-You are running this container as user with ID 1000 and group 1000,
-which should map to the ID and group for your user on the Docker host. Great!
-Apptainer&gt; python
-Python 3.8.10 (default, Nov 26 2021, 20:14:08)
-[GCC 9.3.0] on linux
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
-&gt;&gt;&gt; import tensorflow as tf
-&gt;&gt;&gt; tf.config.list_physical_devices(&#39;GPU&#39;)
-2022-03-25 11:42:25.672088: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:922] could not open file to read NUMA node: /sys/bus/pci/devices/0000:01:00.0/numa_node
-Your kernel may have been built without NUMA support.
-2022-03-25 11:42:25.713295: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:922] could not open file to read NUMA node: /sys/bus/pci/devices/0000:01:00.0/numa_node
-Your kernel may have been built without NUMA support.
-2022-03-25 11:42:25.713892: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:922] could not open file to read NUMA node: /sys/bus/pci/devices/0000:01:00.0/numa_node
-Your kernel may have been built without NUMA support.
-[PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=&#39;GPU&#39;)]
+<span class="gp">$  </span>apptainer<span class="w"> </span>run<span class="w"> </span>--nv<span class="w"> </span>--nvccli<span class="w"> </span>tensorflow_latest-gpu.sif
+<span class="go">INFO:    Setting &#39;NVIDIA_VISIBLE_DEVICES=all&#39; to emulate legacy GPU binding.</span>
+<span class="go">INFO:    Setting --writable-tmpfs (required by nvidia-container-cli)</span>
+<span class="go">________                               _______________</span>
+<span class="go">___  __/__________________________________  ____/__  /________      __</span>
+<span class="go">__  /  _  _ \_  __ \_  ___/  __ \_  ___/_  /_   __  /_  __ \_ | /| / /</span>
+<span class="go">_  /   /  __/  / / /(__  )/ /_/ /  /   _  __/   _  / / /_/ /_ |/ |/ /</span>
+<span class="go">/_/    \___//_/ /_//____/ \____//_/    /_/      /_/  \____/____/|__/</span>
+<span class="go">You are running this container as user with ID 1000 and group 1000,</span>
+<span class="go">which should map to the ID and group for your user on the Docker host. Great!</span>
+<span class="go">Apptainer&gt; python</span>
+<span class="go">Python 3.8.10 (default, Nov 26 2021, 20:14:08)</span>
+<span class="go">[GCC 9.3.0] on linux</span>
+<span class="go">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
+<span class="go">&gt;&gt;&gt; import tensorflow as tf</span>
+<span class="go">&gt;&gt;&gt; tf.config.list_physical_devices(&#39;GPU&#39;)</span>
+<span class="go">2022-03-25 11:42:25.672088: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:922] could not open file to read NUMA node: /sys/bus/pci/devices/0000:01:00.0/numa_node</span>
+<span class="go">Your kernel may have been built without NUMA support.</span>
+<span class="go">2022-03-25 11:42:25.713295: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:922] could not open file to read NUMA node: /sys/bus/pci/devices/0000:01:00.0/numa_node</span>
+<span class="go">Your kernel may have been built without NUMA support.</span>
+<span class="go">2022-03-25 11:42:25.713892: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:922] could not open file to read NUMA node: /sys/bus/pci/devices/0000:01:00.0/numa_node</span>
+<span class="go">Your kernel may have been built without NUMA support.</span>
+<span class="go">[PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=&#39;GPU&#39;)]</span>
 </pre></div>
 </div>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> flag is required to enable container setup using the
@@ -677,8 +677,8 @@ It uses native virtualization support provided by macOS Virtualization.Framework
 on platforms (such as Intel Macs) where that (“VZ”) is not supported it uses QEMU.
 The default Linux distribution used by Lima for Apptainer template is Ubuntu.</p>
 <p>To use Lima via Homebrew:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ /bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;
-$ brew install lima
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+<span class="gp">$ </span>brew<span class="w"> </span>install<span class="w"> </span>lima
 </pre></div>
 </div>
 <p>Then do <code class="docutils literal notranslate"><span class="pre">limactl</span> <span class="pre">start</span> <span class="pre">template://apptainer</span></code> and <code class="docutils literal notranslate"><span class="pre">limactl</span> <span class="pre">shell</span> <span class="pre">apptainer</span></code>.</p>
@@ -701,7 +701,7 @@ That enables apptainer to run in both unprivileged mode and in suid
 mode.</p>
 <p>Apptainer unprivileged mode can also be used inside docker without
 enabling docker privileged mode, using these additional docker options:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">security</span><span class="o">-</span><span class="n">opt</span> <span class="n">seccomp</span><span class="o">=</span><span class="n">unconfined</span> <span class="o">--</span><span class="n">security</span><span class="o">-</span><span class="n">opt</span> <span class="n">systempaths</span><span class="o">=</span><span class="n">unconfined</span> <span class="o">--</span><span class="n">device</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">fuse</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>--security-opt<span class="w"> </span><span class="nv">seccomp</span><span class="o">=</span>unconfined<span class="w"> </span>--security-opt<span class="w"> </span><span class="nv">systempaths</span><span class="o">=</span>unconfined<span class="w"> </span>--device<span class="w"> </span>/dev/fuse
 </pre></div>
 </div>
 <p>The first option enables the <code class="docutils literal notranslate"><span class="pre">unshare</span></code> system call to work, which
