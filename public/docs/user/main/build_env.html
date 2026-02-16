@@ -166,13 +166,13 @@ the <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHE
 option to pass the value of <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> through to the root user’s
 environment. This allows you to control where images will be cached even when
 running builds under <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_CACHEDIR=/tmp/user/temporary-cache
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINER_CACHEDIR</span><span class="o">=</span>/tmp/user/temporary-cache
 
-# Running a build under your user account
-$ apptainer build --fakeroot myimage.sif mydef.def
+<span class="gp"># </span>Running<span class="w"> </span>a<span class="w"> </span>build<span class="w"> </span>under<span class="w"> </span>your<span class="w"> </span>user<span class="w"> </span>account
+<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--fakeroot<span class="w"> </span>myimage.sif<span class="w"> </span>mydef.def
 
-# Running a build with sudo, must use -E to pass env var
-$ sudo -E apptainer build myimage.sif mydef.def
+<span class="gp"># </span>Running<span class="w"> </span>a<span class="w"> </span>build<span class="w"> </span>with<span class="w"> </span>sudo,<span class="w"> </span>must<span class="w"> </span>use<span class="w"> </span>-E<span class="w"> </span>to<span class="w"> </span>pass<span class="w"> </span>env<span class="w"> </span>var
+<span class="gp">$ </span>sudo<span class="w"> </span>-E<span class="w"> </span>apptainer<span class="w"> </span>build<span class="w"> </span>myimage.sif<span class="w"> </span>mydef.def
 </pre></div>
 </div>
 <p>If you change the value of <code class="docutils literal notranslate"><span class="pre">APPTAINER_CACHEDIR</span></code> be sure to choose a
@@ -199,11 +199,11 @@ source, into a temporary location.</p>
 </div>
 <p>Inside the cache location you will find separate directories for the
 different kinds of data that are cached:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$HOME/.apptainer/cache/blob
-$HOME/.apptainer/cache/library
-$HOME/.apptainer/cache/net
-$HOME/.apptainer/cache/oci-tmp
-$HOME/.apptainer/cache/shub
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">$HOME</span>/.apptainer/cache/blob
+<span class="nv">$HOME</span>/.apptainer/cache/library
+<span class="nv">$HOME</span>/.apptainer/cache/net
+<span class="nv">$HOME</span>/.apptainer/cache/oci-tmp
+<span class="nv">$HOME</span>/.apptainer/cache/shub
 </pre></div>
 </div>
 <p>You can safely delete these directories, or content within them.
@@ -222,7 +222,7 @@ you run out of storage, it is possible for this database to become
 inconsistent.</p>
 <p>If you observe error messages that mention <cite>github.com/etcd-io/bbolt</cite> when
 trying to run Apptainer, then you should remove the database file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">~/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">containers</span><span class="o">/</span><span class="n">cache</span><span class="o">/</span><span class="n">blob</span><span class="o">-</span><span class="n">info</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">boltdb</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>~/.local/share/containers/cache/blob-info-cache-v1.boltdb
 </pre></div>
 </div>
 </section>
@@ -241,44 +241,44 @@ entries.</p>
 <section id="listing-the-cache">
 <h3>Listing the Cache<a class="headerlink" href="#listing-the-cache" title="Link to this heading"></a></h3>
 <p>To view a summary of cache usage, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">list</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache list
-There are 4 container file(s) using 59.45 MB and 23 oci blob file(s) using 379.10 MB of space
-Total space used: 438.55 MB
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>cache<span class="w"> </span>list
+<span class="go">There are 4 container file(s) using 59.45 MB and 23 oci blob file(s) using 379.10 MB of space</span>
+<span class="go">Total space used: 438.55 MB</span>
 </pre></div>
 </div>
 <p>To view more detailed information, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">list</span> <span class="pre">-v</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache list -v
-NAME                     DATE CREATED           SIZE             TYPE
-0ed5a98249068fe0592edb   2020-05-27 12:57:22    192.21 MB        blob
-1d9cd1b99a7eca56d8f2be   2020-05-28 15:19:07    0.35 kB          blob
-219c332183ec3800bdfda4   2020-05-28 12:22:13    0.35 kB          blob
-2adae3950d4d0f11875568   2020-05-27 12:57:16    51.83 MB         blob
-376057ac6fa17f65688c56   2020-05-27 12:57:12    50.39 MB         blob
-496548a8c952b37bdf149a   2020-05-27 12:57:14    10.00 MB         blob
-5a63a0a859d859478f3046   2020-05-27 12:57:13    7.81 MB          blob
-5efaeecfa72afde779c946   2020-05-27 12:57:25    0.23 kB          blob
-6154df8ff9882934dc5bf2   2020-05-27 08:37:22    0.85 kB          blob
-70d0b3967cd8abe96c9719   2020-05-27 12:57:24    26.61 MB         blob
-8f5af4048c33630473b396   2020-05-28 15:19:07    0.57 kB          blob
-95c3f3755f37380edb2f8f   2020-05-28 14:07:20    2.48 kB          blob
-96878229af8adf91bcbf11   2020-05-28 14:07:20    0.81 kB          blob
-af88fdb253aac46693de78   2020-05-28 12:22:13    0.58 kB          blob
-bb94ffe723890b4d62d742   2020-05-27 12:57:23    6.15 MB          blob
-c080bf936f6a1fdd2045e3   2020-05-27 12:57:25    1.61 kB          blob
-cbdbe7a5bc2a134ca8ec91   2020-05-28 12:22:13    2.81 MB          blob
-d51af753c3d3a984351448   2020-05-27 08:37:21    28.56 MB         blob
-d9cbbca60e5f0fc028b13c   2020-05-28 15:19:06    760.85 kB        blob
-db8816f445487e48e1d614   2020-05-27 12:57:25    1.93 MB          blob
-fc878cd0a91c7bece56f66   2020-05-27 08:37:22    32.30 kB         blob
-fee5db0ff82f7aa5ace634   2020-05-27 08:37:22    0.16 kB          blob
-ff110406d51ca9ea722112   2020-05-27 12:57:25    7.78 kB          blob
-sha256.02ee8bf9dc335c2   2020-05-29 13:45:14    28.11 MB         library
-sha256.5111f59250ac94f   2020-05-28 13:14:39    782.34 kB        library
-747d2dbbaaee995098c979   2020-05-28 14:07:22    27.77 MB         oci-tmp
-9a839e63dad54c3a6d1834   2020-05-28 12:22:13    2.78 MB          oci-tmp
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>cache<span class="w"> </span>list<span class="w"> </span>-v
+<span class="go">NAME                     DATE CREATED           SIZE             TYPE</span>
+<span class="go">0ed5a98249068fe0592edb   2020-05-27 12:57:22    192.21 MB        blob</span>
+<span class="go">1d9cd1b99a7eca56d8f2be   2020-05-28 15:19:07    0.35 kB          blob</span>
+<span class="go">219c332183ec3800bdfda4   2020-05-28 12:22:13    0.35 kB          blob</span>
+<span class="go">2adae3950d4d0f11875568   2020-05-27 12:57:16    51.83 MB         blob</span>
+<span class="go">376057ac6fa17f65688c56   2020-05-27 12:57:12    50.39 MB         blob</span>
+<span class="go">496548a8c952b37bdf149a   2020-05-27 12:57:14    10.00 MB         blob</span>
+<span class="go">5a63a0a859d859478f3046   2020-05-27 12:57:13    7.81 MB          blob</span>
+<span class="go">5efaeecfa72afde779c946   2020-05-27 12:57:25    0.23 kB          blob</span>
+<span class="go">6154df8ff9882934dc5bf2   2020-05-27 08:37:22    0.85 kB          blob</span>
+<span class="go">70d0b3967cd8abe96c9719   2020-05-27 12:57:24    26.61 MB         blob</span>
+<span class="go">8f5af4048c33630473b396   2020-05-28 15:19:07    0.57 kB          blob</span>
+<span class="go">95c3f3755f37380edb2f8f   2020-05-28 14:07:20    2.48 kB          blob</span>
+<span class="go">96878229af8adf91bcbf11   2020-05-28 14:07:20    0.81 kB          blob</span>
+<span class="go">af88fdb253aac46693de78   2020-05-28 12:22:13    0.58 kB          blob</span>
+<span class="go">bb94ffe723890b4d62d742   2020-05-27 12:57:23    6.15 MB          blob</span>
+<span class="go">c080bf936f6a1fdd2045e3   2020-05-27 12:57:25    1.61 kB          blob</span>
+<span class="go">cbdbe7a5bc2a134ca8ec91   2020-05-28 12:22:13    2.81 MB          blob</span>
+<span class="go">d51af753c3d3a984351448   2020-05-27 08:37:21    28.56 MB         blob</span>
+<span class="go">d9cbbca60e5f0fc028b13c   2020-05-28 15:19:06    760.85 kB        blob</span>
+<span class="go">db8816f445487e48e1d614   2020-05-27 12:57:25    1.93 MB          blob</span>
+<span class="go">fc878cd0a91c7bece56f66   2020-05-27 08:37:22    32.30 kB         blob</span>
+<span class="go">fee5db0ff82f7aa5ace634   2020-05-27 08:37:22    0.16 kB          blob</span>
+<span class="go">ff110406d51ca9ea722112   2020-05-27 12:57:25    7.78 kB          blob</span>
+<span class="go">sha256.02ee8bf9dc335c2   2020-05-29 13:45:14    28.11 MB         library</span>
+<span class="go">sha256.5111f59250ac94f   2020-05-28 13:14:39    782.34 kB        library</span>
+<span class="go">747d2dbbaaee995098c979   2020-05-28 14:07:22    27.77 MB         oci-tmp</span>
+<span class="go">9a839e63dad54c3a6d1834   2020-05-28 12:22:13    2.78 MB          oci-tmp</span>
 
-There are 4 container file(s) using 59.45 MB and 23 oci blob file(s) using 379.10 MB of space
-Total space used: 438.55 MB
+<span class="go">There are 4 container file(s) using 59.45 MB and 23 oci blob file(s) using 379.10 MB of space</span>
+<span class="go">Total space used: 438.55 MB</span>
 </pre></div>
 </div>
 <p>All cache entries are named using a content hash, so that identical
@@ -296,10 +296,10 @@ the source of the image, e.g. <code class="docutils literal notranslate"><span c
 <span class="pre">cache</span> <span class="pre">clean</span></code>.</p>
 <p>By default, <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">cache</span> <span class="pre">clean</span></code> will remove all cache entries,
 after asking you to confirm:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache clean
-This will delete everything in your cache (containers from all sources and OCI blobs).
-Hint: You can see exactly what would be deleted by canceling and using the --dry-run option.
-Do you want to continue? [N/y] n
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>cache<span class="w"> </span>clean
+<span class="go">This will delete everything in your cache (containers from all sources and OCI blobs).</span>
+<span class="go">Hint: You can see exactly what would be deleted by canceling and using the --dry-run option.</span>
+<span class="go">Do you want to continue? [N/y] n</span>
 </pre></div>
 </div>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> / <code class="docutils literal notranslate"><span class="pre">-n</span></code> option to see the files that would be
@@ -308,12 +308,12 @@ confirmation.</p>
 <p>If you want to leave your most recent cached images in place, but remove
 images that were cached longer ago, you can use the <code class="docutils literal notranslate"><span class="pre">--days</span></code> / <code class="docutils literal notranslate"><span class="pre">-d</span></code>
 option. E.g. to clean cache entries older than 30 days:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache clean --days 30
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>cache<span class="w"> </span>clean<span class="w"> </span>--days<span class="w"> </span><span class="m">30</span>
 </pre></div>
 </div>
 <p>To remove only a specific kind of cache entry, e.g. only library images,
 use the <code class="docutils literal notranslate"><span class="pre">--type</span></code> / <code class="docutils literal notranslate"><span class="pre">-T</span></code> option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer cache clean --type library
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>cache<span class="w"> </span>clean<span class="w"> </span>--type<span class="w"> </span>library
 </pre></div>
 </div>
 </section>

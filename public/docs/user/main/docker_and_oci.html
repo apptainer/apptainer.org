@@ -223,28 +223,28 @@ or build from containers that are hosted there.</p>
 <p>It’s easy to run a public Docker Hub container with Apptainer. Just
 put <code class="docutils literal notranslate"><span class="pre">docker://</span></code> in front of the container repository and tag. To run
 the container that’s called <code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow:latest</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run docker://sylabsio/lolcow:latest
-INFO:    Converting OCI blobs to SIF format
-INFO:    Starting build...
-Getting image source signatures
-Copying blob 16ec32c2132b done
-Copying blob 5ca731fc36c2 done
-Copying config fd0daa4d89 done
-Writing manifest to image destination
-Storing signatures
-2021/10/04 14:50:21  info unpack layer: sha256:16ec32c2132b43494832a05f2b02f7a822479f8250c173d0ab27b3de78b2f058
-2021/10/04 14:50:23  info unpack layer: sha256:5ca731fc36c28789c5ddc3216563e8bfca2ab3ea10347e07554ebba1c953242e
-INFO:    Creating SIF file...
-[=====================================================================]
-100 % 0s
- _____________________________
-&lt; Mon Oct 4 14:50:30 CDT 2021 &gt;
- -----------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://sylabsio/lolcow:latest
+<span class="go">INFO:    Converting OCI blobs to SIF format</span>
+<span class="go">INFO:    Starting build...</span>
+<span class="go">Getting image source signatures</span>
+<span class="go">Copying blob 16ec32c2132b done</span>
+<span class="go">Copying blob 5ca731fc36c2 done</span>
+<span class="go">Copying config fd0daa4d89 done</span>
+<span class="go">Writing manifest to image destination</span>
+<span class="go">Storing signatures</span>
+<span class="go">2021/10/04 14:50:21  info unpack layer: sha256:16ec32c2132b43494832a05f2b02f7a822479f8250c173d0ab27b3de78b2f058</span>
+<span class="go">2021/10/04 14:50:23  info unpack layer: sha256:5ca731fc36c28789c5ddc3216563e8bfca2ab3ea10347e07554ebba1c953242e</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================]</span>
+<span class="go">100 % 0s</span>
+<span class="go"> _____________________________</span>
+<span class="go">&lt; Mon Oct 4 14:50:30 CDT 2021 &gt;</span>
+<span class="go"> -----------------------------</span>
+<span class="go">        \   ^__^</span>
+<span class="go">         \  (oo)\_______</span>
+<span class="go">            (__)\       )\/\</span>
+<span class="go">                ||----w |</span>
+<span class="go">                ||     ||</span>
 </pre></div>
 </div>
 <p>Note that Apptainer retrieves blobs and configuration data from
@@ -254,11 +254,11 @@ Apptainer <a class="reference internal" href="build_env.html#sec-cache"><span cl
 Docker container again the downloads and conversion aren’t required.</p>
 <p>To obtain the Docker container as a SIF file in a specific location,
 which you can move, share, and keep for later, <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">pull</span></code> it:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://sylabsio/lolcow
-INFO:    Using cached SIF image
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://sylabsio/lolcow
+<span class="go">INFO:    Using cached SIF image</span>
 
-$ ls -l lolcow_latest.sif
--rwxr-xr-x 1 myuser myuser 74993664 Oct  4 14:55 lolcow_latest.sif
+<span class="gp">$ </span>ls<span class="w"> </span>-l<span class="w"> </span>lolcow_latest.sif
+<span class="go">-rwxr-xr-x 1 myuser myuser 74993664 Oct  4 14:55 lolcow_latest.sif</span>
 </pre></div>
 </div>
 <p>If it’s the first time you pull the container it’ll be downloaded and
@@ -300,10 +300,10 @@ a number of ways to do this with Apptainer.</p>
 Hub and other OCI registries. For Docker Hub, the registry hostname is
 <code class="docutils literal notranslate"><span class="pre">docker.io</span></code>, so you will need to login as below, specifying your
 username:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer registry login --username myuser docker://docker.io
-Password / Token:
-INFO:    Token stored in /home/myuser/.docker/config.json
-INFO:    Token stored in /home/myuser/.apptainer/remote.yaml
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>registry<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>myuser<span class="w"> </span>docker://docker.io
+<span class="go">Password / Token:</span>
+<span class="go">INFO:    Token stored in /home/myuser/.docker/config.json</span>
+<span class="go">INFO:    Token stored in /home/myuser/.apptainer/remote.yaml</span>
 </pre></div>
 </div>
 <p>The Password / Token you enter must be a Docker Hub CLI access token,
@@ -313,8 +313,8 @@ profile page on Docker Hub.</p>
 use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">registry</span> <span class="pre">list</span></code>.</p>
 <p>To logout of a registry, so that your credentials are forgotten, use
 <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">registry</span> <span class="pre">logout</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer registry logout docker://docker.io
-INFO:    Logout succeeded
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>registry<span class="w"> </span><span class="nb">logout</span><span class="w"> </span>docker://docker.io
+<span class="go">INFO:    Logout succeeded</span>
 </pre></div>
 </div>
 <p>For more information on <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">registry</span></code> and its subcommands, including
@@ -339,9 +339,9 @@ Docker credential helpers.</p>
 <span id="sec-docker-login"></span><h4>Interactive Login<a class="headerlink" href="#interactive-login" title="Link to this heading"></a></h4>
 <p>To perform a one-off interactive login, which will not store your
 credentials, use the <code class="docutils literal notranslate"><span class="pre">--docker-login</span></code> flag:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull --docker-login docker://myuser/private
-Enter Docker Username: myuser
-Enter Docker Password:
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>--docker-login<span class="w"> </span>docker://myuser/private
+<span class="go">Enter Docker Username: myuser</span>
+<span class="go">Enter Docker Password:</span>
 </pre></div>
 </div>
 </section>
@@ -359,9 +359,9 @@ credentials.</p>
 prefix, are set they will also be used provided the <code class="docutils literal notranslate"><span class="pre">APPTAINER_</span></code> equivalent
 is not overriding them. This allows a single set of environment variables to be
 set for both <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> and <code class="docutils literal notranslate"><span class="pre">docker</span></code> operations.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_DOCKER_USERNAME=myuser
-$ export APPTAINER_DOCKER_PASSWORD=mytoken
-$ apptainer pull docker://myuser/private
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINER_DOCKER_USERNAME</span><span class="o">=</span>myuser
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINER_DOCKER_PASSWORD</span><span class="o">=</span>mytoken
+<span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://myuser/private
 </pre></div>
 </div>
 </section>
@@ -384,16 +384,16 @@ authenticating to access private images.</p>
 <p>Quay is an OCI container registry used by a large number of projects,
 and hosted at <code class="docutils literal notranslate"><span class="pre">https://quay.io</span></code>. To pull public containers from Quay,
 just include the <code class="docutils literal notranslate"><span class="pre">quay.io</span></code> hostname in your <code class="docutils literal notranslate"><span class="pre">docker://</span></code> URI:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://quay.io/bitnami/python:3.7
-INFO:    Converting OCI blobs to SIF format
-INFO:    Starting build...
-...
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://quay.io/bitnami/python:3.7
+<span class="go">INFO:    Converting OCI blobs to SIF format</span>
+<span class="go">INFO:    Starting build...</span>
+<span class="go">...</span>
 
-$ apptainer run python_3.7.sif
-Python 3.7.12 (default, Sep 24 2021, 11:48:27)
-[GCC 8.3.0] on linux
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
-&gt;&gt;&gt;
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>python_3.7.sif
+<span class="go">Python 3.7.12 (default, Sep 24 2021, 11:48:27)</span>
+<span class="go">[GCC 8.3.0] on linux</span>
+<span class="go">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
+<span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
 <p>To pull containers from private repositories you will need to generate a
@@ -417,9 +417,9 @@ instructions available.</p>
 <p>Previously, an account and API token was required to pull NGC
 containers. However, they are now available to pull as a guest without
 login:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://nvcr.io/nvidia/pytorch:21.09-py3
-INFO:    Converting OCI blobs to SIF format
-INFO:    Starting build...
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://nvcr.io/nvidia/pytorch:21.09-py3
+<span class="go">INFO:    Converting OCI blobs to SIF format</span>
+<span class="go">INFO:    Starting build...</span>
 </pre></div>
 </div>
 <p>If you do need to pull containers using an NVIDIA account, e.g. if you
@@ -444,9 +444,9 @@ your NGC API key.</p>
 <p>GitHub Container Registry is increasingly used to provide Docker
 containers alongside the source code of hosted projects. You can pull a
 public container from GitHub Container Registry using a <code class="docutils literal notranslate"><span class="pre">ghcr.io</span></code> URI:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://ghcr.io/containerd/alpine:latest
-INFO:    Converting OCI blobs to SIF format
-INFO:    Starting build...
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://ghcr.io/containerd/alpine:latest
+<span class="go">INFO:    Converting OCI blobs to SIF format</span>
+<span class="go">INFO:    Starting build...</span>
 </pre></div>
 </div>
 <p>To pull private containers from GHCR you will need to generate a
@@ -488,7 +488,7 @@ Docker, only reading credentials stored directly in the
 the AWS CLI to request a password, which can then be used to
 authenticate to an ECR private registry in the specified region. The
 username used in conjunction with this password is always <code class="docutils literal notranslate"><span class="pre">AWS</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ aws ecr get-login-password --region region
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>aws<span class="w"> </span>ecr<span class="w"> </span>get-login-password<span class="w"> </span>--region<span class="w"> </span>region
 </pre></div>
 </div>
 <p>Then login using one of the following methods:</p>
@@ -545,7 +545,7 @@ an <code class="docutils literal notranslate"><span class="pre">arm64</span></co
 <h3><code class="docutils literal notranslate"><span class="pre">--arch</span></code> option<a class="headerlink" href="#arch-option" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--arch</span></code> option accepts a CPU architecture only. For example, to pull an
 Ubuntu image for a 64-bit ARM system:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull --arch arm64 docker://ubuntu
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>--arch<span class="w"> </span>arm64<span class="w"> </span>docker://ubuntu
 </pre></div>
 </div>
 </section>
@@ -553,7 +553,7 @@ Ubuntu image for a 64-bit ARM system:</p>
 <h3><code class="docutils literal notranslate"><span class="pre">--arch-variant</span></code> option<a class="headerlink" href="#arch-variant-option" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--arch-variant</span></code> option can be used for CPU variants. Currently only the
 ARM CPU variants are supported.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull --arch arm --arch-variant 7 docker://ubuntu
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>--arch<span class="w"> </span>arm<span class="w"> </span>--arch-variant<span class="w"> </span><span class="m">7</span><span class="w"> </span>docker://ubuntu
 </pre></div>
 </div>
 <table class="docutils align-default" id="id4">
@@ -593,15 +593,15 @@ ARM CPU variants are supported.</p>
 <span id="id3"></span><h3>CPU emulation<a class="headerlink" href="#cpu-emulation" title="Link to this heading"></a></h3>
 <p>If you try to run a container that does not match the host CPU architecture, it
 will likely fail:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run ppc64le.sif
-FATAL:   While checking image: could not open image ppc64le.sif: the image&#39;s architecture (ppc64le) could not run on the host&#39;s (amd64)
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>ppc64le.sif
+<span class="go">FATAL:   While checking image: could not open image ppc64le.sif: the image&#39;s architecture (ppc64le) could not run on the host&#39;s (amd64)</span>
 </pre></div>
 </div>
 <p>However, Apptainer is able to make use of CPU emulation with QEMU, and the Linux
 kernel’s binfmt_misc mechanism, to run containers that do not match the host CPU.</p>
 <p>An adminstrator can configure emulation support by installing distribution
 packages, or using the <a class="reference external" href="https://github.com/multiarch/qemu-user-static">multiarch/qemu-user-static</a> container from Docker Hub:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer run docker://multiarch/qemu-user-static --reset -p yes
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://multiarch/qemu-user-static<span class="w"> </span>--reset<span class="w"> </span>-p<span class="w"> </span>yes
 </pre></div>
 </div>
 <div class="admonition note">
@@ -610,13 +610,13 @@ packages, or using the <a class="reference external" href="https://github.com/mu
 register binaries on the host.</p>
 </div>
 <p>It is now possible to run containers for other architectures:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># The host system is an AMD64 / x86_64 machine
-$ uname -m
-x86_64
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>The<span class="w"> </span>host<span class="w"> </span>system<span class="w"> </span>is<span class="w"> </span>an<span class="w"> </span>AMD64<span class="w"> </span>/<span class="w"> </span>x86_64<span class="w"> </span>machine
+<span class="gp">$ </span>uname<span class="w"> </span>-m
+<span class="go">x86_64</span>
 
-# A ppc64le container can be run using emulation
-$ apptainer run ppc64le.sif uname -m
-ppc64le
+<span class="gp"># </span>A<span class="w"> </span>ppc64le<span class="w"> </span>container<span class="w"> </span>can<span class="w"> </span>be<span class="w"> </span>run<span class="w"> </span>using<span class="w"> </span>emulation
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>ppc64le.sif<span class="w"> </span>uname<span class="w"> </span>-m
+<span class="go">ppc64le</span>
 </pre></div>
 </div>
 <p>Running a container in this manner, using emulation, will be many times slower
@@ -674,12 +674,12 @@ header. The following two examples are equivalent:</p>
 the architecture of your host system.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--arch</span></code> option can be used to build for another CPU architecture.
 For example, to build an image for a 64-bit ARM system on an Intel host:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --arch arm64 ubuntu.sif docker://ubuntu
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--arch<span class="w"> </span>arm64<span class="w"> </span>ubuntu.sif<span class="w"> </span>docker://ubuntu
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">--arch-variant</span></code> option can be used for fetching CPU variants,
 although the variant is not recorded in the SIF file metadata (only the arch).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --arch arm --arch-variant 7 ubuntu.sif docker://ubuntu
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--arch<span class="w"> </span>arm<span class="w"> </span>--arch-variant<span class="w"> </span><span class="m">7</span><span class="w"> </span>ubuntu.sif<span class="w"> </span>docker://ubuntu
 </pre></div>
 </div>
 <p>See <a class="reference internal" href="#specifying-an-architecture"><span class="std std-ref">Specifying an architecture</span></a> and <a class="reference internal" href="#cpu-emulation"><span class="std std-ref">CPU emulation</span></a> for more details.</p>
@@ -730,38 +730,38 @@ bootstrap agents.</p>
 <p>If you have pulled or run a container on your machine under <code class="docutils literal notranslate"><span class="pre">docker</span></code>,
 it will be cached locally by the Docker daemon. The <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code>
 command will list containers that are available:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-sylabsio/lolcow     latest              5a15b484bc65        2 hours ago         188MB
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>images
+<span class="go">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span>
+<span class="go">sylabsio/lolcow     latest              5a15b484bc65        2 hours ago         188MB</span>
 </pre></div>
 </div>
 <p>This indicates that <code class="docutils literal notranslate"><span class="pre">sylabsio/lolcow:latest</span></code> has been cached locally
 by Docker. You can directly build it into a SIF file using a
 <code class="docutils literal notranslate"><span class="pre">docker-daemon:</span></code> URI specifying the <code class="docutils literal notranslate"><span class="pre">REPOSITORY:TAG</span></code> container
 name:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build lolcow_from_docker_cache.sif docker-daemon:sylabsio/lolcow:latest
-INFO:    Starting build...
-Getting image source signatures
-Copying blob sha256:a2022691bf950a72f9d2d84d557183cb9eee07c065a76485f1695784855c5193
- 119.83 MiB / 119.83 MiB [==================================================] 6s
-Copying blob sha256:ae620432889d2553535199dbdd8ba5a264ce85fcdcd5a430974d81fc27c02b45
- 15.50 KiB / 15.50 KiB [====================================================] 0s
-Copying blob sha256:c561538251751e3685c7c6e7479d488745455ad7f84e842019dcb452c7b6fecc
- 14.50 KiB / 14.50 KiB [====================================================] 0s
-Copying blob sha256:f96e6b25195f1b36ad02598b5d4381e41997c93ce6170cab1b81d9c68c514db0
- 5.50 KiB / 5.50 KiB [======================================================] 0s
-Copying blob sha256:7f7a065d245a6501a782bf674f4d7e9d0a62fa6bd212edbf1f17bad0d5cd0bfc
- 3.00 KiB / 3.00 KiB [======================================================] 0s
-Copying blob sha256:70ca7d49f8e9c44705431e3dade0636a2156300ae646ff4f09c904c138728839
- 116.56 MiB / 116.56 MiB [==================================================] 6s
-Copying config sha256:73d5b1025fbfa138f2cacf45bbf3f61f7de891559fa25b28ab365c7d9c3cbd82
- 3.33 KiB / 3.33 KiB [======================================================] 0s
-Writing manifest to image destination
-Storing signatures
-INFO:    Creating SIF file...
-[=====================================================================]
-100 % 0s
-INFO:    Build complete: lolcow_from_docker_cache.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>lolcow_from_docker_cache.sif<span class="w"> </span>docker-daemon:sylabsio/lolcow:latest
+<span class="go">INFO:    Starting build...</span>
+<span class="go">Getting image source signatures</span>
+<span class="go">Copying blob sha256:a2022691bf950a72f9d2d84d557183cb9eee07c065a76485f1695784855c5193</span>
+<span class="go"> 119.83 MiB / 119.83 MiB [==================================================] 6s</span>
+<span class="go">Copying blob sha256:ae620432889d2553535199dbdd8ba5a264ce85fcdcd5a430974d81fc27c02b45</span>
+<span class="go"> 15.50 KiB / 15.50 KiB [====================================================] 0s</span>
+<span class="go">Copying blob sha256:c561538251751e3685c7c6e7479d488745455ad7f84e842019dcb452c7b6fecc</span>
+<span class="go"> 14.50 KiB / 14.50 KiB [====================================================] 0s</span>
+<span class="go">Copying blob sha256:f96e6b25195f1b36ad02598b5d4381e41997c93ce6170cab1b81d9c68c514db0</span>
+<span class="go"> 5.50 KiB / 5.50 KiB [======================================================] 0s</span>
+<span class="go">Copying blob sha256:7f7a065d245a6501a782bf674f4d7e9d0a62fa6bd212edbf1f17bad0d5cd0bfc</span>
+<span class="go"> 3.00 KiB / 3.00 KiB [======================================================] 0s</span>
+<span class="go">Copying blob sha256:70ca7d49f8e9c44705431e3dade0636a2156300ae646ff4f09c904c138728839</span>
+<span class="go"> 116.56 MiB / 116.56 MiB [==================================================] 6s</span>
+<span class="go">Copying config sha256:73d5b1025fbfa138f2cacf45bbf3f61f7de891559fa25b28ab365c7d9c3cbd82</span>
+<span class="go"> 3.33 KiB / 3.33 KiB [======================================================] 0s</span>
+<span class="go">Writing manifest to image destination</span>
+<span class="go">Storing signatures</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================]</span>
+<span class="go">100 % 0s</span>
+<span class="go">INFO:    Build complete: lolcow_from_docker_cache.sif</span>
 </pre></div>
 </div>
 <p>The tag name must be included in the URI. Unlike when pulling from a
@@ -800,47 +800,47 @@ build from (or run) these archive files, by extracting them as part of
 the build process.</p>
 <p>If an image is listed by the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code> command, then we can
 create a tar archive file using <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">save</span></code> and the image ID:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo docker images
-REPOSITORY                        TAG               IMAGE ID       CREATED          SIZE
-sylabsio/lolcow                   latest            5a15b484bc65   2 hours ago      188MB
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>docker<span class="w"> </span>images
+<span class="go">REPOSITORY                        TAG               IMAGE ID       CREATED          SIZE</span>
+<span class="go">sylabsio/lolcow                   latest            5a15b484bc65   2 hours ago      188MB</span>
 
-$ docker save 5a15b484bc65 -o lolcow.tar
+<span class="gp">$ </span>docker<span class="w"> </span>save<span class="w"> </span>5a15b484bc65<span class="w"> </span>-o<span class="w"> </span>lolcow.tar
 </pre></div>
 </div>
 <p>If we examine the contents of the tar file we can see that it contains
 the layers and metadata that make up a Docker container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tar tvf lolcow.tar
-drwxr-xr-x  0 0      0           0 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/
--rw-r--r--  0 0      0           3 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/VERSION
--rw-r--r--  0 0      0         401 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/json
--rw-r--r--  0 0      0    75156480 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/layer.tar
--rw-r--r--  0 0      0        1499 Aug 16 11:22 5a15b484bc657d2b418f2c20628c29945ec19f1a0c019d004eaf0ca1db9f952b.json
-drwxr-xr-x  0 0      0           0 Aug 16 11:22 af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab/
--rw-r--r--  0 0      0           3 Aug 16 11:22 af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab/VERSION
--rw-r--r--  0 0      0         946 Aug 16 11:22 af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab/json
--rw-r--r--  0 0      0   118356480 Aug 16 11:22 af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab/layer.tar
--rw-r--r--  0 0      0         266 Dec 31  1969 manifest.json
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>tar<span class="w"> </span>tvf<span class="w"> </span>lolcow.tar
+<span class="go">drwxr-xr-x  0 0      0           0 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/</span>
+<span class="go">-rw-r--r--  0 0      0           3 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/VERSION</span>
+<span class="go">-rw-r--r--  0 0      0         401 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/json</span>
+<span class="go">-rw-r--r--  0 0      0    75156480 Aug 16 11:22 2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171/layer.tar</span>
+<span class="go">-rw-r--r--  0 0      0        1499 Aug 16 11:22 5a15b484bc657d2b418f2c20628c29945ec19f1a0c019d004eaf0ca1db9f952b.json</span>
+<span class="go">drwxr-xr-x  0 0      0           0 Aug 16 11:22 af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab/</span>
+<span class="go">-rw-r--r--  0 0      0           3 Aug 16 11:22 af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab/VERSION</span>
+<span class="go">-rw-r--r--  0 0      0         946 Aug 16 11:22 af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab/json</span>
+<span class="go">-rw-r--r--  0 0      0   118356480 Aug 16 11:22 af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab/layer.tar</span>
+<span class="go">-rw-r--r--  0 0      0         266 Dec 31  1969 manifest.json</span>
 </pre></div>
 </div>
 <p>We can convert this tar file into an Apptainer container using the
 <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent. Because the agent accesses a file,
 rather than an object hosted by a service, it uses <code class="docutils literal notranslate"><span class="pre">:&lt;filename&gt;</span></code>, not
 <code class="docutils literal notranslate"><span class="pre">://&lt;location&gt;</span></code>. To build a tar archive directly to a SIF container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build lolcow_tar.sif docker-archive:lolcow.tar
-INFO:    Starting build...
-Getting image source signatures
-Copying blob sha256:2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171
- 119.83 MiB / 119.83 MiB [==================================================] 6s
-Copying blob sha256:af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab
- 15.50 KiB / 15.50 KiB [====================================================] 0s
-Copying config sha256:5a15b484bc657d2b418f2c20628c29945ec19f1a0c019d004eaf0ca1db9f952b
- 3.33 KiB / 3.33 KiB [======================================================] 0s
-Writing manifest to image destination
-Storing signatures
-INFO:    Creating SIF file...
-[=====================================================================]
-100 % 0s
-INFO:    Build complete: lolcow_tar.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>lolcow_tar.sif<span class="w"> </span>docker-archive:lolcow.tar
+<span class="go">INFO:    Starting build...</span>
+<span class="go">Getting image source signatures</span>
+<span class="go">Copying blob sha256:2f0514a4c044af1ff4f47a46e14b6d46143044522fcd7a9901124209d16d6171</span>
+<span class="go"> 119.83 MiB / 119.83 MiB [==================================================] 6s</span>
+<span class="go">Copying blob sha256:af7e389ea6636873dbc5adc17826e8401d96d3d384135b2f9fe990865af202ab</span>
+<span class="go"> 15.50 KiB / 15.50 KiB [====================================================] 0s</span>
+<span class="go">Copying config sha256:5a15b484bc657d2b418f2c20628c29945ec19f1a0c019d004eaf0ca1db9f952b</span>
+<span class="go"> 3.33 KiB / 3.33 KiB [======================================================] 0s</span>
+<span class="go">Writing manifest to image destination</span>
+<span class="go">Storing signatures</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================]</span>
+<span class="go">100 % 0s</span>
+<span class="go">INFO:    Build complete: lolcow_tar.sif</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -947,24 +947,24 @@ can cause conflicts and unexpected behavior.</p>
 Apptainer automatically binding directories into the container. You
 may need to use <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> to then add back e.g. an HPC
 project directory that you need access to.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Without --contain, python in the container finds packages
-# in your $HOME directory.
-$ apptainer exec docker://python:3.9 pip list
-Package    Version
----------- -------
-pip        21.2.4
-rstcheck   3.3.1
-setuptools 57.5.0
-wheel      0.37.0
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Without<span class="w"> </span>--contain,<span class="w"> </span>python<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>container<span class="w"> </span>finds<span class="w"> </span>packages
+<span class="gp"># </span><span class="k">in</span><span class="w"> </span>your<span class="w"> </span><span class="nv">$HOME</span><span class="w"> </span>directory.
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://python:3.9<span class="w"> </span>pip<span class="w"> </span>list
+<span class="go">Package    Version</span>
+<span class="go">---------- -------</span>
+<span class="go">pip        21.2.4</span>
+<span class="go">rstcheck   3.3.1</span>
+<span class="go">setuptools 57.5.0</span>
+<span class="go">wheel      0.37.0</span>
 
-# With --contain, python in the container only finds packages
-# installed in the container.
-$ apptainer exec --contain docker://python:3.9 pip list
-Package    Version
----------- -------
-pip        21.2.4
-setuptools 57.5.0
-wheel      0.37.0
+<span class="gp"># </span>With<span class="w"> </span>--contain,<span class="w"> </span>python<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>container<span class="w"> </span>only<span class="w"> </span>finds<span class="w"> </span>packages
+<span class="gp"># </span>installed<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>container.
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--contain<span class="w"> </span>docker://python:3.9<span class="w"> </span>pip<span class="w"> </span>list
+<span class="go">Package    Version</span>
+<span class="go">---------- -------</span>
+<span class="go">pip        21.2.4</span>
+<span class="go">setuptools 57.5.0</span>
+<span class="go">wheel      0.37.0</span>
 </pre></div>
 </div>
 </section>
@@ -978,17 +978,17 @@ change the behaviour of software.</p>
 <code class="docutils literal notranslate"><span class="pre">--cleanenv</span> <span class="pre">/</span> <span class="pre">-e</span></code> flag can be specified. When <code class="docutils literal notranslate"><span class="pre">--cleanenv</span></code> is used,
 only variables on the host that are prefixed with <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code>
 are set in the container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Set a host variable
-$ export HOST_VAR=123
-# Set a container environment variable
-$ export &quot;APPTAINERENV_FORCE_VAR=&quot;123&quot;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Set<span class="w"> </span>a<span class="w"> </span>host<span class="w"> </span>variable
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">HOST_VAR</span><span class="o">=</span><span class="m">123</span>
+<span class="gp"># </span>Set<span class="w"> </span>a<span class="w"> </span>container<span class="w"> </span>environment<span class="w"> </span>variable
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="s2">&quot;APPTAINERENV_FORCE_VAR=&quot;</span><span class="m">123</span><span class="s2">&quot;</span>
 
-$ apptainer run docker://alpine env | grep VAR
-FORCE_VAR=123
-HOST_VAR=ABC
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>VAR
+<span class="go">FORCE_VAR=123</span>
+<span class="go">HOST_VAR=ABC</span>
 
-$ apptainer run --cleanenv docker://alpine env | grep VAR
-FORCE_VAR=123
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--cleanenv<span class="w"> </span>docker://alpine<span class="w"> </span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>VAR
+<span class="go">FORCE_VAR=123</span>
 </pre></div>
 </div>
 <p>Any environment variables set via an <code class="docutils literal notranslate"><span class="pre">ENV</span></code> line in a <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> will be
@@ -996,18 +996,18 @@ available when the container is run with Apptainer. You can override them
 with <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> vars, or the <code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">/</span> <span class="pre">--env-file</span></code> flags, but they
 will not be overridden by host environment variables.</p>
 <p>For example, the <code class="docutils literal notranslate"><span class="pre">docker://openjdk:latest</span></code> container sets <code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Set a host JAVA_HOME
-export JAVA_HOME=/test
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Set<span class="w"> </span>a<span class="w"> </span>host<span class="w"> </span>JAVA_HOME
+<span class="go">export JAVA_HOME=/test</span>
 
-# Check JAVA_HOME in the docker container.
-# This value comes from ENV in the Dockerfile.
-$ apptainer run docker://openjdk:latest echo \$JAVA_HOME
-/usr/java/openjdk-17
+<span class="gp"># </span>Check<span class="w"> </span>JAVA_HOME<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>docker<span class="w"> </span>container.
+<span class="gp"># </span>This<span class="w"> </span>value<span class="w"> </span>comes<span class="w"> </span>from<span class="w"> </span>ENV<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>Dockerfile.
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://openjdk:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="se">\$</span>JAVA_HOME
+<span class="go">/usr/java/openjdk-17</span>
 
-# Override JAVA_HOME in the container
-export APPTAINERENV_JAVA_HOME=/test
-$ apptainer run docker://openjdk:latest echo \$JAVA_HOME
-/test
+<span class="gp"># </span>Override<span class="w"> </span>JAVA_HOME<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>container
+<span class="go">export APPTAINERENV_JAVA_HOME=/test</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://openjdk:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="se">\$</span>JAVA_HOME
+<span class="go">/test</span>
 </pre></div>
 </div>
 </section>
@@ -1026,18 +1026,18 @@ explictly escape environment variables.</p></li>
 <p><code class="docutils literal notranslate"><span class="pre">--no-eval</span></code> prevents Apptainer from evaluating environment variables on
 container startup, so that they will take the same value as with a Docker/OCI
 runtime:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Set an environment variable that would run `date` if evaluated
-$ export APPTAINER_MYVAR=&#39;$(date)&#39;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Set<span class="w"> </span>an<span class="w"> </span>environment<span class="w"> </span>variable<span class="w"> </span>that<span class="w"> </span>would<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>date<span class="sb">`</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>evaluated
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINER_MYVAR</span><span class="o">=</span><span class="s1">&#39;$(date)&#39;</span>
 
-# Default behavior
-# MYVAR was evaluated in the container, and is set to the output of `date`
-$ apptainer run ~/ubuntu_latest.sif env | grep MYVAR
-MYVAR=Tue Apr 26 14:37:07 CDT 2022
+<span class="gp"># </span>Default<span class="w"> </span>behavior
+<span class="gp"># </span>MYVAR<span class="w"> </span>was<span class="w"> </span>evaluated<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>container,<span class="w"> </span>and<span class="w"> </span>is<span class="w"> </span><span class="nb">set</span><span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>output<span class="w"> </span>of<span class="w"> </span><span class="sb">`</span>date<span class="sb">`</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>~/ubuntu_latest.sif<span class="w"> </span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>MYVAR
+<span class="go">MYVAR=Tue Apr 26 14:37:07 CDT 2022</span>
 
-# --no-eval / --compat behavior
-# MYVAR was not evaluated and is a literal `$(date)`
-$ apptainer run --no-eval ~/ubuntu_latest.sif env | grep MYVAR
-MYVAR=$(date)
+<span class="gp"># </span>--no-eval<span class="w"> </span>/<span class="w"> </span>--compat<span class="w"> </span>behavior
+<span class="gp"># </span>MYVAR<span class="w"> </span>was<span class="w"> </span>not<span class="w"> </span>evaluated<span class="w"> </span>and<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>literal<span class="w"> </span><span class="sb">`</span><span class="k">$(</span>date<span class="k">)</span><span class="sb">`</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-eval<span class="w"> </span>~/ubuntu_latest.sif<span class="w"> </span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>MYVAR
+<span class="go">MYVAR=$(date)</span>
 </pre></div>
 </div>
 </section>
@@ -1086,14 +1086,14 @@ process, which cannot operate under the control of Apptainer’s shim.</p>
 <p>For example, a container using the <code class="docutils literal notranslate"><span class="pre">tini</span></code> init process will produce
 warnings when started as an instance, or if run with <code class="docutils literal notranslate"><span class="pre">--pid</span></code>. To work
 around this, use the <code class="docutils literal notranslate"><span class="pre">--no-init</span></code> flag to disable the shim:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --pid tini_example.sif
-[WARN  tini (2690)] Tini is not running as PID 1 .
-Zombie processes will not be re-parented to Tini, so zombie reaping won&#39;t work.
-To fix the problem, run Tini as PID 1.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--pid<span class="w"> </span>tini_example.sif
+<span class="go">[WARN  tini (2690)] Tini is not running as PID 1 .</span>
+<span class="go">Zombie processes will not be re-parented to Tini, so zombie reaping won&#39;t work.</span>
+<span class="go">To fix the problem, run Tini as PID 1.</span>
 
-$ apptainer run --pid --no-init tini_example.sif
-...
-# NO WARNINGS
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--pid<span class="w"> </span>--no-init<span class="w"> </span>tini_example.sif
+<span class="go">...</span>
+<span class="gp"># </span>NO<span class="w"> </span>WARNINGS
 </pre></div>
 </div>
 </section>
@@ -1146,43 +1146,43 @@ and <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</spa
 this script mirrors Docker as closely as possible.</p>
 <p>If the Docker container only has an <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> - that <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>
 is run, with any arguments appended:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># ENTRYPOINT=&quot;date&quot;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span><span class="nv">ENTRYPOINT</span><span class="o">=</span><span class="s2">&quot;date&quot;</span>
 
-# Runs &#39;date&#39;
-$ apptainer run mycontainer.sif
-Wed 06 Oct 2021 02:42:54 PM CDT
+<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">&#39;date&#39;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif
+<span class="go">Wed 06 Oct 2021 02:42:54 PM CDT</span>
 
-# Runs &#39;date --utc`
-$ apptainer run mycontainer.sif --utc
-Wed 06 Oct 2021 07:44:27 PM UTC
+<span class="gp"># </span>Runs<span class="w"> </span><span class="err">&#39;</span>date<span class="w"> </span>--utc<span class="sb">`</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif<span class="w"> </span>--utc
+<span class="go">Wed 06 Oct 2021 07:44:27 PM UTC</span>
 </pre></div>
 </div>
 <p>If the Docker container only has a <code class="docutils literal notranslate"><span class="pre">CMD</span></code> - the <code class="docutils literal notranslate"><span class="pre">CMD</span></code> is run, or is
 <em>replaced</em> with any arguments:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># CMD=&quot;date&quot;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span><span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;date&quot;</span>
 
-# Runs &#39;date&#39;
-$ apptainer run mycontainer.sif
-Wed 06 Oct 2021 02:45:39 PM CDT
+<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">&#39;date&#39;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif
+<span class="go">Wed 06 Oct 2021 02:45:39 PM CDT</span>
 
-# Runs &#39;echo hello&#39;
-$ apptainer run mycontainer.sif echo hello
-hello
+<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">&#39;echo hello&#39;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>hello
+<span class="go">hello</span>
 </pre></div>
 </div>
 <p>If the Docker container has a <code class="docutils literal notranslate"><span class="pre">CMD</span></code> <em>and</em> <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>, then we run
 <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> with either <code class="docutils literal notranslate"><span class="pre">CMD</span></code> as default arguments, or replaced
 with any user supplied arguments:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># ENTRYPOINT=&quot;date&quot;
-# CMD=&quot;--utc&quot;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span><span class="nv">ENTRYPOINT</span><span class="o">=</span><span class="s2">&quot;date&quot;</span>
+<span class="gp"># </span><span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;--utc&quot;</span>
 
-# Runs &#39;date --utc&#39;
-$ apptainer run mycontainer.sif
-Wed 06 Oct 2021 07:48:43 PM UTC
+<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">&#39;date --utc&#39;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif
+<span class="go">Wed 06 Oct 2021 07:48:43 PM UTC</span>
 
-# Runs &#39;date -R&#39;
-$ apptainer run mycontainer.sif -R
-Wed, 06 Oct 2021 14:49:07 -0500
+<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">&#39;date -R&#39;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif<span class="w"> </span>-R
+<span class="go">Wed, 06 Oct 2021 14:49:07 -0500</span>
 </pre></div>
 </div>
 <p>There is no flag to override an <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> set for a Docker
@@ -1196,17 +1196,17 @@ code that may be evaluated.</p>
 <p>If you are using a container that was directly built or run from a Docker/OCI
 source, with Apptainer 1.1.0 or later, the <code class="docutils literal notranslate"><span class="pre">--no-eval</span></code> flag will prevent
 this extra evaluation so that arguments are handled in a compatible manner:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># docker/OCI behavior
-$ docker run -it --rm alpine echo &quot;\$HOSTNAME&quot;
-$HOSTNAME
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>docker/OCI<span class="w"> </span>behavior
+<span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<span class="gp">$</span>HOSTNAME
 
-# Apptainer default
-$ apptainer run docker://alpine echo &quot;\$HOSTNAME&quot;
-p700
+<span class="gp"># </span>Apptainer<span class="w"> </span>default
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<span class="go">p700</span>
 
-# Apptainer with --no-eval
-$ apptainer run --no-eval docker://alpine echo &quot;\$HOSTNAME&quot;
-$HOSTNAME
+<span class="gp"># </span>Apptainer<span class="w"> </span>with<span class="w"> </span>--no-eval
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-eval<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<span class="gp">$</span>HOSTNAME
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1220,14 +1220,14 @@ that is built into the container.</p>
 <p>To avoid evaluation without <code class="docutils literal notranslate"><span class="pre">--no-eval</span></code>, and when using containers built
 earlier than Apptainer 1.1.0, you will need to add an extra level of shell
 escaping to arguments on the command line:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker run -it --rm alpine echo &quot;\$HOSTNAME&quot;
-$HOSTNAME
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<span class="gp">$</span>HOSTNAME
 
-$ apptainer run docker://alpine echo &quot;\$HOSTNAME&quot;
-p700
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<span class="go">p700</span>
 
-$ apptainer run docker://alpine echo &quot;\\\$HOSTNAME&quot;
-$HOSTNAME
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\\\$HOSTNAME&quot;</span>
+<span class="gp">$</span>HOSTNAME
 </pre></div>
 </div>
 <p>If you are running a binary inside a <code class="docutils literal notranslate"><span class="pre">docker://</span></code> container directly,

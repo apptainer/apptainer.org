@@ -207,7 +207,7 @@ more details.</p>
 <h2>Downloading an existing container from Docker Hub<a class="headerlink" href="#downloading-an-existing-container-from-docker-hub" title="Link to this heading"></a></h2>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">build</span></code> to download layers from Docker Hub and assemble
 them into Apptainer containers.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build alpine.sif docker://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>alpine.sif<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
 </section>
@@ -217,11 +217,11 @@ them into Apptainer containers.</p>
 a container that matches the architecture of your host system. If you need to
 retrieve a container that does not have the same architecture as your host (e.g.
 an <code class="docutils literal notranslate"><span class="pre">arm64</span></code> container on an <code class="docutils literal notranslate"><span class="pre">amd64</span></code> host), you can use the <code class="docutils literal notranslate"><span class="pre">--arch</span></code> options.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --arch arm64 alpine.sif docker://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--arch<span class="w"> </span>arm64<span class="w"> </span>alpine.sif<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
 <p>Or to build an <code class="docutils literal notranslate"><span class="pre">arm32</span></code> container by using the <code class="docutils literal notranslate"><span class="pre">--arch-variant</span></code> option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --arch arm --arch-variant 7 alpine.sif docker://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--arch<span class="w"> </span>arm<span class="w"> </span>--arch-variant<span class="w"> </span><span class="m">7</span><span class="w"> </span>alpine.sif<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
 <p>See <a class="reference internal" href="docker_and_oci.html#specifying-an-architecture"><span class="std std-ref">Specifying an architecture</span></a> and <a class="reference internal" href="docker_and_oci.html#cpu-emulation"><span class="std std-ref">CPU emulation</span></a> for more details.</p>
@@ -232,7 +232,7 @@ an <code class="docutils literal notranslate"><span class="pre">arm64</span></co
 <a class="reference internal" href="endpoint.html#sec-managing-remote-endpoints"><span class="std std-ref">Managing Remote Endpoints</span></a>,
 you can use the build command to download a container from the Container
 Library.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build lolcow.sif library://lolcow
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>lolcow.sif<span class="w"> </span>library://lolcow
 </pre></div>
 </div>
 <p>The first argument (<code class="docutils literal notranslate"><span class="pre">lolcow.sif</span></code>) specifies the path and name for your
@@ -245,13 +245,13 @@ container in a writable format, use the <code class="docutils literal notranslat
 <span id="create-a-writable-container"></span><h2>Creating writable <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> directories<a class="headerlink" href="#creating-writable-sandbox-directories" title="Link to this heading"></a></h2>
 <p>If you want to create a container within a writable directory (called a
 <em>sandbox</em>) you can do so with the <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> option.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --sandbox alpine/ docker://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--sandbox<span class="w"> </span>alpine/<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
 <p>The resulting directory operates just like a container in a SIF file. To
 make persistent changes within the sandbox container, use the
 <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag when you invoke your container.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --writable alpine/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--writable<span class="w"> </span>alpine/
 </pre></div>
 </div>
 </section>
@@ -262,7 +262,7 @@ target to build a new container. This allows you convert containers from
 one format to another. For example, if you had a sandbox container
 called <code class="docutils literal notranslate"><span class="pre">development/</span></code> and you wanted to convert it to a SIF container
 called <code class="docutils literal notranslate"><span class="pre">production.sif</span></code>, you could do so as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build production.sif development/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>production.sif<span class="w"> </span>development/
 </pre></div>
 </div>
 <p>Use care when converting a sandbox directory to the default SIF format.
@@ -296,7 +296,7 @@ to use it to build a SIF container:</p>
 </pre></div>
 </div>
 <p>You can do so with the following command.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build lolcow.sif lolcow.def
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>lolcow.sif<span class="w"> </span>lolcow.def
 </pre></div>
 </div>
 </section>
@@ -421,7 +421,7 @@ definition file as JSON.</p>
 <span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">--mksquashfs-args</span></code><a class="headerlink" href="#mksquashfs-args" title="Link to this heading"></a></h3>
 <p>Extra arguments to pass to <code class="docutils literal notranslate"><span class="pre">mksquashfs`</span></code> when creating SIF files.</p>
 <p>To show the available arguments, see the manual page or help:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mksquashfs -help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mksquashfs<span class="w"> </span>-help
 </pre></div>
 </div>
 <p>For instance, to limit the number of processors use <code class="docutils literal notranslate"><span class="pre">-processors</span></code>:</p>
@@ -443,7 +443,7 @@ definition file as JSON.</p>
 </pre></div>
 </div>
 <p>To show help about the options available for selected compressor:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mksquashfs squashfs-root out.squashfs -comp zstd -Xhelp
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mksquashfs<span class="w"> </span>squashfs-root<span class="w"> </span>out.squashfs<span class="w"> </span>-comp<span class="w"> </span>zstd<span class="w"> </span>-Xhelp
 </pre></div>
 </div>
 <p>Non-gzip squashfs compression might not work with some installations.
@@ -452,7 +452,7 @@ bundled recent version of mksquashfs that should have the maximum
 compressors enabled.  So you might want to explore the help on that
 version, for example by setting its directory early in your PATH like
 this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ PATH=$(apptainer buildcfg | sed -n &#39;s,^LIBEXECDIR=\(.*\),\1/apptainer/bin,p&#39;):$PATH
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">PATH</span><span class="o">=</span><span class="k">$(</span>apptainer<span class="w"> </span>buildcfg<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;s,^LIBEXECDIR=\(.*\),\1/apptainer/bin,p&#39;</span><span class="k">)</span>:<span class="nv">$PATH</span>
 </pre></div>
 </div>
 <p>Also note that by using non-default compression methods that the

@@ -343,28 +343,28 @@ created may not be writable by the creating user.</p>
 <section id="build-from-a-definition-file">
 <h4>Build from a definition file:<a class="headerlink" href="#build-from-a-definition-file" title="Link to this heading"></a></h4>
 <p>(fakeroot is implied)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">build</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="k">def</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>build<span class="w"> </span>/tmp/test.sif<span class="w"> </span>/tmp/test.def
 </pre></div>
 </div>
 </section>
 <section id="add-package-to-a-writable-overlay">
 <h4>Add package to a writable overlay<a class="headerlink" href="#add-package-to-a-writable-overlay" title="Link to this heading"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">overlay</span>
-<span class="n">apptainer</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">overlay</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">overlay</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="n">dnf</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">openssh</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>/tmp/test.overlay
+apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--fakeroot<span class="w"> </span>--overlay<span class="w"> </span>/tmp/test.overlay<span class="w"> </span>/tmp/test.sif<span class="w"> </span>dnf<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>openssh
 </pre></div>
 </div>
 </section>
 <section id="ping-from-container">
 <h4>Ping from container:<a class="headerlink" href="#ping-from-container" title="Link to this heading"></a></h4>
 <p>(when the Network conditions above are met)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">alpine</span> <span class="n">ping</span> <span class="o">-</span><span class="n">c1</span> <span class="mf">8.8.8.8</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--fakeroot<span class="w"> </span>--net<span class="w"> </span>docker://alpine<span class="w"> </span>ping<span class="w"> </span>-c1<span class="w"> </span><span class="m">8</span>.8.8.8
 </pre></div>
 </div>
 </section>
 <section id="http-server">
 <h4>HTTP server:<a class="headerlink" href="#http-server" title="Link to this heading"></a></h4>
 <p>(when the Network conditions above are met)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">run</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="o">--</span><span class="n">network</span><span class="o">-</span><span class="n">args</span><span class="o">=</span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span> <span class="o">-</span><span class="n">w</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">nginx</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span>--fakeroot<span class="w"> </span>--net<span class="w"> </span>--network-args<span class="o">=</span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span><span class="w"> </span>-w<span class="w"> </span>docker://nginx
 </pre></div>
 </div>
 </section>
@@ -398,15 +398,15 @@ containing this for a RHEL-derived container:</p>
 </pre></div>
 </div>
 <p>or this for an alpine container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Bootstrap</span><span class="p">:</span> <span class="n">docker</span>
-<span class="n">From</span><span class="p">:</span> <span class="n">alpine</span><span class="p">:</span><span class="n">latest</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: alpine:latest
 
-<span class="o">%</span><span class="n">post</span>
-    <span class="n">apk</span> <span class="n">update</span>
-    <span class="n">apk</span> <span class="n">add</span> <span class="n">fakeroot</span>
-    <span class="n">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="mi">1</span> <span class="n">fakeroot</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;</span>
-        <span class="n">apk</span> <span class="n">add</span> <span class="n">squid</span>
-    <span class="s1">&#39;</span>
+<span class="gh">%post</span>
+<span class="w">    </span>apk<span class="w"> </span>update
+<span class="w">    </span>apk<span class="w"> </span>add<span class="w"> </span>fakeroot
+<span class="w">    </span><span class="nv">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>fakeroot<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">        apk add squid</span>
+<span class="s1">    &#39;</span>
 </pre></div>
 </div>
 <p>then build with</p>

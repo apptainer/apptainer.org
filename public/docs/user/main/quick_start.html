@@ -176,117 +176,117 @@ redirect I/O, use pipes, pass arguments, and access files, sockets, and
 ports on the host system from within a container.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">help</span></code> command gives an overview of Apptainer options and
 subcommands as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">help</span>
 
-Linux container platform optimized for High Performance Computing (HPC) and
-Enterprise Performance Computing (EPC)
+<span class="go">Linux container platform optimized for High Performance Computing (HPC) and</span>
+<span class="go">Enterprise Performance Computing (EPC)</span>
 
-Usage:
-  apptainer [global options...]
+<span class="go">Usage:</span>
+<span class="go">  apptainer [global options...]</span>
 
-Description:
-  Apptainer containers provide an application virtualization layer enabling
-  mobility of compute via both application and environment portability. With
-  Apptainer one is capable of building a root file system that runs on any
-  other Linux system where Apptainer is installed.
+<span class="go">Description:</span>
+<span class="go">  Apptainer containers provide an application virtualization layer enabling</span>
+<span class="go">  mobility of compute via both application and environment portability. With</span>
+<span class="go">  Apptainer one is capable of building a root file system that runs on any</span>
+<span class="go">  other Linux system where Apptainer is installed.</span>
 
-Options:
-      --build-config    use configuration needed for building containers
-  -c, --config string   specify a configuration file (for root or
-                        unprivileged installation only) (default
-                        &quot;/etc/apptainer/apptainer.conf&quot;)
-  -d, --debug           print debugging information (highest verbosity)
-  -h, --help            help for apptainer
-      --nocolor         print without color output (default False)
-  -q, --quiet           suppress normal output
-  -s, --silent          only print errors
-  -v, --verbose         print additional information
-      --version         version for apptainer
+<span class="go">Options:</span>
+<span class="go">      --build-config    use configuration needed for building containers</span>
+<span class="go">  -c, --config string   specify a configuration file (for root or</span>
+<span class="go">                        unprivileged installation only) (default</span>
+<span class="go">                        &quot;/etc/apptainer/apptainer.conf&quot;)</span>
+<span class="go">  -d, --debug           print debugging information (highest verbosity)</span>
+<span class="go">  -h, --help            help for apptainer</span>
+<span class="go">      --nocolor         print without color output (default False)</span>
+<span class="go">  -q, --quiet           suppress normal output</span>
+<span class="go">  -s, --silent          only print errors</span>
+<span class="go">  -v, --verbose         print additional information</span>
+<span class="go">      --version         version for apptainer</span>
 
-Available Commands:
-  build       Build an Apptainer image
-  cache       Manage the local cache
-  capability  Manage Linux capabilities for users and groups
-  checkpoint  Manage container checkpoint state (experimental)
-  completion  Generate the autocompletion script for the specified shell
-  config      Manage various apptainer configuration (root user only)
-  delete      Deletes requested image from the library
-  exec        Run a command within a container
-  help        Help about any command
-  inspect     Show metadata for an image
-  instance    Manage containers running as services
-  key         Manage OpenPGP keys
-  keyserver   Manage apptainer keyservers
-  oci         Manage OCI containers
-  overlay     Manage an EXT3 writable overlay image
-  plugin      Manage Apptainer plugins
-  pull        Pull an image from a URI
-  push        Upload image to the provided URI
-  registry    Manage authentication to OCI/Docker registries
-  remote      Manage apptainer remote endpoints
-  run         Run the user-defined default command within a container
-  run-help    Show the user-defined help for an image
-  search      Search a Container Library for images
-  shell       Run a shell within a container
-  sif         Manipulate Singularity Image Format (SIF) images
-  sign        Add digital signature(s) to an image
-  test        Run the user-defined tests within a container
-  verify      Verify digital signature(s) within an image
-  version     Show the version for Apptainer
+<span class="go">Available Commands:</span>
+<span class="go">  build       Build an Apptainer image</span>
+<span class="go">  cache       Manage the local cache</span>
+<span class="go">  capability  Manage Linux capabilities for users and groups</span>
+<span class="go">  checkpoint  Manage container checkpoint state (experimental)</span>
+<span class="go">  completion  Generate the autocompletion script for the specified shell</span>
+<span class="go">  config      Manage various apptainer configuration (root user only)</span>
+<span class="go">  delete      Deletes requested image from the library</span>
+<span class="go">  exec        Run a command within a container</span>
+<span class="go">  help        Help about any command</span>
+<span class="go">  inspect     Show metadata for an image</span>
+<span class="go">  instance    Manage containers running as services</span>
+<span class="go">  key         Manage OpenPGP keys</span>
+<span class="go">  keyserver   Manage apptainer keyservers</span>
+<span class="go">  oci         Manage OCI containers</span>
+<span class="go">  overlay     Manage an EXT3 writable overlay image</span>
+<span class="go">  plugin      Manage Apptainer plugins</span>
+<span class="go">  pull        Pull an image from a URI</span>
+<span class="go">  push        Upload image to the provided URI</span>
+<span class="go">  registry    Manage authentication to OCI/Docker registries</span>
+<span class="go">  remote      Manage apptainer remote endpoints</span>
+<span class="go">  run         Run the user-defined default command within a container</span>
+<span class="go">  run-help    Show the user-defined help for an image</span>
+<span class="go">  search      Search a Container Library for images</span>
+<span class="go">  shell       Run a shell within a container</span>
+<span class="go">  sif         Manipulate Singularity Image Format (SIF) images</span>
+<span class="go">  sign        Add digital signature(s) to an image</span>
+<span class="go">  test        Run the user-defined tests within a container</span>
+<span class="go">  verify      Verify digital signature(s) within an image</span>
+<span class="go">  version     Show the version for Apptainer</span>
 
-Examples:
-  $ apptainer help &lt;command&gt; [&lt;subcommand&gt;]
-  $ apptainer help build
-  $ apptainer help instance start
+<span class="go">Examples:</span>
+<span class="gp">  $ </span>apptainer<span class="w"> </span><span class="nb">help</span><span class="w"> </span>&lt;command&gt;<span class="w"> </span><span class="o">[</span>&lt;subcommand&gt;<span class="o">]</span>
+<span class="gp">  $ </span>apptainer<span class="w"> </span><span class="nb">help</span><span class="w"> </span>build
+<span class="gp">  $ </span>apptainer<span class="w"> </span><span class="nb">help</span><span class="w"> </span>instance<span class="w"> </span>start
 
 
-For additional help or support, please visit https://apptainer.org/help/
+<span class="go">For additional help or support, please visit https://apptainer.org/help/</span>
 </pre></div>
 </div>
 <p>Information about individual subcommands can also be viewed by using the
 <code class="docutils literal notranslate"><span class="pre">help</span></code> command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer help verify
-Verify digital signature(s) within an image
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">help</span><span class="w"> </span>verify
+<span class="go">Verify digital signature(s) within an image</span>
 
-Usage:
-  apptainer verify [verify options...] &lt;image path&gt;
+<span class="go">Usage:</span>
+<span class="go">  apptainer verify [verify options...] &lt;image path&gt;</span>
 
-Description:
-  The verify command allows a user to verify one or more digital signatures
-  within a SIF image.
+<span class="go">Description:</span>
+<span class="go">  The verify command allows a user to verify one or more digital signatures</span>
+<span class="go">  within a SIF image.</span>
 
-  Key material can be provided via PEM-encoded file, or via the PGP keyring. To
-  manage the PGP keyring, see &#39;apptainer help key&#39;.
+<span class="go">  Key material can be provided via PEM-encoded file, or via the PGP keyring. To</span>
+<span class="go">  manage the PGP keyring, see &#39;apptainer help key&#39;.</span>
 
-Options:
-  -a, --all                                verify all objects
-      --certificate string                 path to the certificate
-      --certificate-intermediates string   path to pool of intermediate
-                                           certificates
-      --certificate-roots string           path to pool of root certificates
-  -g, --group-id uint32                    verify objects with the
-                                           specified group ID
-  -h, --help                               help for verify
-  -j, --json                               output json
-      --key string                         path to the public key file
-      --legacy-insecure                    enable verification of
-                                           (insecure) legacy signatures
-  -l, --local                              only verify with local key(s)
-                                           in keyring
-      --ocsp-verify                        enable online revocation check
-                                           for certificates
-  -i, --sif-id uint32                      verify object with the specified ID
-  -u, --url string                         specify a URL for a key server
+<span class="go">Options:</span>
+<span class="go">  -a, --all                                verify all objects</span>
+<span class="go">      --certificate string                 path to the certificate</span>
+<span class="go">      --certificate-intermediates string   path to pool of intermediate</span>
+<span class="go">                                           certificates</span>
+<span class="go">      --certificate-roots string           path to pool of root certificates</span>
+<span class="go">  -g, --group-id uint32                    verify objects with the</span>
+<span class="go">                                           specified group ID</span>
+<span class="go">  -h, --help                               help for verify</span>
+<span class="go">  -j, --json                               output json</span>
+<span class="go">      --key string                         path to the public key file</span>
+<span class="go">      --legacy-insecure                    enable verification of</span>
+<span class="go">                                           (insecure) legacy signatures</span>
+<span class="go">  -l, --local                              only verify with local key(s)</span>
+<span class="go">                                           in keyring</span>
+<span class="go">      --ocsp-verify                        enable online revocation check</span>
+<span class="go">                                           for certificates</span>
+<span class="go">  -i, --sif-id uint32                      verify object with the specified ID</span>
+<span class="go">  -u, --url string                         specify a URL for a key server</span>
 
 
-Examples:
-  Verify with a public key:
-  $ apptainer verify --key public.pem container.sif
+<span class="go">Examples:</span>
+<span class="go">  Verify with a public key:</span>
+<span class="gp">  $ </span>apptainer<span class="w"> </span>verify<span class="w"> </span>--key<span class="w"> </span>public.pem<span class="w"> </span>container.sif
 
-  Verify with PGP:
-  $ apptainer verify container.sif
+<span class="go">  Verify with PGP:</span>
+<span class="gp">  $ </span>apptainer<span class="w"> </span>verify<span class="w"> </span>container.sif
 
-For additional help or support, please visit https://apptainer.org/help/
+<span class="go">For additional help or support, please visit https://apptainer.org/help/</span>
 </pre></div>
 </div>
 <p>Apptainer uses positional syntax (i.e., the order of commands and options
@@ -295,27 +295,27 @@ immediately after the main <code class="docutils literal notranslate"><span clas
 followed by their options and arguments.</p>
 <p>For example, to pass the <code class="docutils literal notranslate"><span class="pre">--debug</span></code> option to the main <code class="docutils literal notranslate"><span class="pre">apptainer</span></code>
 command and run Apptainer with debugging messages on:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer --debug run docker://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>--debug<span class="w"> </span>run<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
 <p>To pass the <code class="docutils literal notranslate"><span class="pre">--containall</span></code> option to the <code class="docutils literal notranslate"><span class="pre">run</span></code> command and run a
 Apptainer image in an isolated manner:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --containall docker://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--containall<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
 <p>Apptainer has the concept of command groups. For
 instance, to list Linux capabilities for a particular user, you would
 use the <code class="docutils literal notranslate"><span class="pre">list</span></code> command in the <code class="docutils literal notranslate"><span class="pre">capability</span></code> command group, as
 follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer capability list myuser
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>capability<span class="w"> </span>list<span class="w"> </span>myuser
 </pre></div>
 </div>
 <p>Container authors might also write help docs specific to a container, or
 for an internal module called an “app”. If those help docs exist for a
 particular container, you can view them as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer inspect --helpfile container.sif  # See the container&#39;s help, if provided
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>inspect<span class="w"> </span>--helpfile<span class="w"> </span>container.sif<span class="w">  </span><span class="c1"># See the container&#39;s help, if provided</span>
 
-$ apptainer inspect --helpfile --app=foo foo.sif  # See the help for the app foo, if provided
+<span class="gp">$ </span>apptainer<span class="w"> </span>inspect<span class="w"> </span>--helpfile<span class="w"> </span>--app<span class="o">=</span>foo<span class="w"> </span>foo.sif<span class="w">  </span><span class="c1"># See the help for the app foo, if provided</span>
 </pre></div>
 </div>
 </section>
@@ -327,13 +327,13 @@ commands to download images from an external resource like an OCI registry.</p>
 images served from an OCI registry. In this case <code class="docutils literal notranslate"><span class="pre">pull</span></code> does not just
 download an image file; OCI images are stored in layers, so <code class="docutils literal notranslate"><span class="pre">pull</span></code>
 must also combine those layers into a usable Apptainer image.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
 <p>You can also use the <code class="docutils literal notranslate"><span class="pre">build</span></code> command to download pre-built images from
 an external resource. When using <code class="docutils literal notranslate"><span class="pre">build</span></code> you must specify a name for
 your container like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build alpine.sif docker://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>alpine.sif<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
 <p>Unlike <code class="docutils literal notranslate"><span class="pre">pull</span></code>, <code class="docutils literal notranslate"><span class="pre">build</span></code> will convert your image to the latest
@@ -351,7 +351,7 @@ definition file with Dockerfile, please see <a class="reference internal" href="
 image URIs in addition to local image paths.</p>
 <p>As an example, the following command will pull a <code class="docutils literal notranslate"><span class="pre">lolcow_latest.sif</span></code> image
 from ghcr.io:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://ghcr.io/apptainer/lolcow
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://ghcr.io/apptainer/lolcow
 </pre></div>
 </div>
 <section id="shell">
@@ -359,9 +359,9 @@ from ghcr.io:</p>
 <p>The <a class="reference internal" href="cli/apptainer_shell.html#apptainer-shell"><span class="std std-ref">shell</span></a>
 command allows you to spawn a new shell within your container and
 interact with it as though it were a virtual machine.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell lolcow_latest.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>lolcow_latest.sif
 
-Apptainer&gt;
+<span class="go">Apptainer&gt;</span>
 </pre></div>
 </div>
 <p>The change in prompt indicates that you have entered the container
@@ -369,17 +369,17 @@ Apptainer&gt;
 a container or not).</p>
 <p>Once inside of an Apptainer container, you are the same user as you
 are on the host system.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Apptainer</span><span class="o">&gt;</span> <span class="n">whoami</span>
-<span class="n">david</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Apptainer&gt; whoami</span>
+<span class="go">david</span>
 
-<span class="n">Apptainer</span><span class="o">&gt;</span> <span class="nb">id</span>
-<span class="n">uid</span><span class="o">=</span><span class="mi">1000</span><span class="p">(</span><span class="n">david</span><span class="p">)</span> <span class="n">gid</span><span class="o">=</span><span class="mi">1000</span><span class="p">(</span><span class="n">david</span><span class="p">)</span> <span class="n">groups</span><span class="o">=</span><span class="mi">1000</span><span class="p">(</span><span class="n">david</span><span class="p">),</span><span class="mi">65534</span><span class="p">(</span><span class="n">nfsnobody</span><span class="p">)</span>
+<span class="go">Apptainer&gt; id</span>
+<span class="go">uid=1000(david) gid=1000(david) groups=1000(david),65534(nfsnobody)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">shell</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, <code class="docutils literal notranslate"><span class="pre">oras://</span></code>, and <code class="docutils literal notranslate"><span class="pre">library://</span></code>
 URIs. This creates an ephemeral container that disappears
 when the shell is exited.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell docker://ghcr.io/apptainer/lolcow
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>docker://ghcr.io/apptainer/lolcow
 </pre></div>
 </div>
 </section>
@@ -389,29 +389,29 @@ when the shell is exited.</p>
 command allows you to execute a custom command within a container by
 specifying the image file. For instance, to execute the <code class="docutils literal notranslate"><span class="pre">cowsay</span></code>
 program within the <code class="docutils literal notranslate"><span class="pre">lolcow_latest.sif</span></code> container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec lolcow_latest.sif cowsay moo
- _____
-&lt; moo &gt;
- -----
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>lolcow_latest.sif<span class="w"> </span>cowsay<span class="w"> </span>moo
+<span class="go"> _____</span>
+<span class="go">&lt; moo &gt;</span>
+<span class="go"> -----</span>
+<span class="go">        \   ^__^</span>
+<span class="go">         \  (oo)\_______</span>
+<span class="go">            (__)\       )\/\</span>
+<span class="go">                ||----w |</span>
+<span class="go">                ||     ||</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">exec</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, <code class="docutils literal notranslate"><span class="pre">oras://</span></code>, and <code class="docutils literal notranslate"><span class="pre">library://</span></code>
 URIs. This creates an ephemeral container that executes a
 command and disappears.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://ghcr.io/apptainer/lolcow cowsay &#39;Fresh from the internet&#39;
- _________________________
-&lt; Fresh from the internet &gt;
- -------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://ghcr.io/apptainer/lolcow<span class="w"> </span>cowsay<span class="w"> </span><span class="s1">&#39;Fresh from the internet&#39;</span>
+<span class="go"> _________________________</span>
+<span class="go">&lt; Fresh from the internet &gt;</span>
+<span class="go"> -------------------------</span>
+<span class="go">        \   ^__^</span>
+<span class="go">         \  (oo)\_______</span>
+<span class="go">            (__)\       )\/\</span>
+<span class="go">                ||----w |</span>
+<span class="go">                ||     ||</span>
 </pre></div>
 </div>
 </section>
@@ -423,39 +423,39 @@ perform when someone runs it. The runscript can be triggered with the
 <a class="reference internal" href="cli/apptainer_run.html#apptainer-run"><span class="std std-ref">run</span></a>
 command, or simply by calling the container as though it were an
 executable.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run lolcow_latest.sif
-______________________________
-&lt; Mon Aug 16 13:01:55 CDT 2021 &gt;
- ------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>lolcow_latest.sif
+<span class="go">______________________________</span>
+<span class="go">&lt; Mon Aug 16 13:01:55 CDT 2021 &gt;</span>
+<span class="go"> ------------------------------</span>
+<span class="go">        \   ^__^</span>
+<span class="go">         \  (oo)\_______</span>
+<span class="go">            (__)\       )\/\</span>
+<span class="go">                ||----w |</span>
+<span class="go">                ||     ||</span>
 
-$ ./lolcow_latest.sif
-______________________________
-&lt; Mon Aug 16 13:12:50 CDT 2021 &gt;
- ------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+<span class="gp">$ </span>./lolcow_latest.sif
+<span class="go">______________________________</span>
+<span class="go">&lt; Mon Aug 16 13:12:50 CDT 2021 &gt;</span>
+<span class="go"> ------------------------------</span>
+<span class="go">        \   ^__^</span>
+<span class="go">         \  (oo)\_______</span>
+<span class="go">            (__)\       )\/\</span>
+<span class="go">                ||----w |</span>
+<span class="go">                ||     ||</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">run</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, <code class="docutils literal notranslate"><span class="pre">oras://</span></code>, and <code class="docutils literal notranslate"><span class="pre">library://</span></code>
 URIs. This creates an ephemeral container that runs and then
 disappears.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run docker://ghcr.io/apptainer/lolcow
-______________________________
-&lt; Mon Aug 16 13:12:33 CDT 2021 &gt;
- ------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://ghcr.io/apptainer/lolcow
+<span class="go">______________________________</span>
+<span class="go">&lt; Mon Aug 16 13:12:33 CDT 2021 &gt;</span>
+<span class="go"> ------------------------------</span>
+<span class="go">        \   ^__^</span>
+<span class="go">         \  (oo)\_______</span>
+<span class="go">            (__)\       )\/\</span>
+<span class="go">                ||----w |</span>
+<span class="go">                ||     ||</span>
 </pre></div>
 </div>
 <section id="arguments-to-run">
@@ -464,34 +464,34 @@ ______________________________
 them. For example, the default runscript of the <code class="docutils literal notranslate"><span class="pre">docker://alpine</span></code>
 container passes any arguments to a shell. We can ask the container
 to run <code class="docutils literal notranslate"><span class="pre">echo</span></code> command in this shell as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run docker://alpine echo &quot;hello&quot;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span>
 
-hello
+<span class="go">hello</span>
 </pre></div>
 </div>
 <p>Because Apptainer runscripts are evaluated shell scripts, arguments
 can behave slightly differently than in Docker/OCI runtimes, if they
 contain expressions that have special meaning to the shell. Here is an
 illustrative example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker run -it --rm alpine echo &quot;\$HOSTNAME&quot;
-$HOSTNAME
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<span class="gp">$</span>HOSTNAME
 
-$ apptainer run docker://alpine echo &quot;\$HOSTNAME&quot;
-p700
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<span class="go">p700</span>
 
-$ apptainer run docker://alpine echo &quot;\\\$HOSTNAME&quot;
-$HOSTNAME
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\\\$HOSTNAME&quot;</span>
+<span class="gp">$</span>HOSTNAME
 </pre></div>
 </div>
 <p>To replicate Docker/OCI behavior, you may need additional escaping or
 quoting of arguments.</p>
 <p>Unlike the <code class="docutils literal notranslate"><span class="pre">run</span></code> command, the <code class="docutils literal notranslate"><span class="pre">exec</span></code> command does behave in the same
 manner as Docker/OCI, because it calls the specified executable directly:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine echo &quot;\$HOSTNAME&quot;
-$HOSTNAME
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<span class="gp">$</span>HOSTNAME
 
-$ apptainer exec docker://alpine echo &quot;\\\$HOSTNAME&quot;
-\$HOSTNAME
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\\\$HOSTNAME&quot;</span>
+<span class="go">\$HOSTNAME</span>
 </pre></div>
 </div>
 </section>
@@ -500,11 +500,11 @@ $ apptainer exec docker://alpine echo &quot;\\\$HOSTNAME&quot;
 <section id="working-with-files">
 <h2>Working with Files<a class="headerlink" href="#working-with-files" title="Link to this heading"></a></h2>
 <p>Files on the host are reachable from within the container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &quot;Hello from inside the container&quot; &gt; $HOME/hostfile.txt
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello from inside the container&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$HOME</span>/hostfile.txt
 
-$ apptainer exec lolcow_latest.sif cat $HOME/hostfile.txt
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>lolcow_latest.sif<span class="w"> </span>cat<span class="w"> </span><span class="nv">$HOME</span>/hostfile.txt
 
-Hello from inside the container
+<span class="go">Hello from inside the container</span>
 </pre></div>
 </div>
 <p>This example works because <code class="docutils literal notranslate"><span class="pre">hostfile.txt</span></code> exists in the user’s home directory
@@ -515,23 +515,23 @@ container.</p>
 with the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option. In the following example, the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory
 on the host system is bind mounted to the <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> directory inside the
 container.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &quot;Drink milk (and never eat hamburgers).&quot; &gt; /data/cow_advice.txt
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Drink milk (and never eat hamburgers).&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/data/cow_advice.txt
 
-$ apptainer exec --bind /data:/mnt lolcow_latest.sif cat /mnt/cow_advice.txt
-Drink milk (and never eat hamburgers).
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--bind<span class="w"> </span>/data:/mnt<span class="w"> </span>lolcow_latest.sif<span class="w"> </span>cat<span class="w"> </span>/mnt/cow_advice.txt
+<span class="go">Drink milk (and never eat hamburgers).</span>
 </pre></div>
 </div>
 <p>Pipes and redirects also work with Apptainer commands, just like they
 do with normal Linux commands:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat /data/cow_advice.txt | apptainer exec lolcow_latest.sif cowsay
- ________________________________________
-&lt; Drink milk (and never eat hamburgers). &gt;
- ----------------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>/data/cow_advice.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>lolcow_latest.sif<span class="w"> </span>cowsay
+<span class="go"> ________________________________________</span>
+<span class="go">&lt; Drink milk (and never eat hamburgers). &gt;</span>
+<span class="go"> ----------------------------------------</span>
+<span class="go">        \   ^__^</span>
+<span class="go">         \  (oo)\_______</span>
+<span class="go">            (__)\       )\/\</span>
+<span class="go">                ||----w |</span>
+<span class="go">                ||     ||</span>
 </pre></div>
 </div>
 </section>
@@ -550,7 +550,7 @@ supports the <code class="docutils literal notranslate"><span class="pre">sandbo
 <h3>Sandbox Directories<a class="headerlink" href="#sandbox-directories" title="Link to this heading"></a></h3>
 <p>To build into a <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> (container in a directory) use the <code class="docutils literal notranslate"><span class="pre">build</span>
 <span class="pre">--sandbox</span></code> command and option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --sandbox ubuntu/ docker://ubuntu
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--sandbox<span class="w"> </span>ubuntu/<span class="w"> </span>docker://ubuntu
 </pre></div>
 </div>
 <p>This command creates a directory called <code class="docutils literal notranslate"><span class="pre">ubuntu/</span></code> with an entire
@@ -561,10 +561,10 @@ directory just as you would with an Apptainer image. If you pass the
 <code class="docutils literal notranslate"><span class="pre">--writable</span></code> option when you use your container, you can also write
 files within the sandbox directory (provided you have the permissions to
 do so).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --writable ubuntu touch /foo
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--writable<span class="w"> </span>ubuntu<span class="w"> </span>touch<span class="w"> </span>/foo
 
-$ apptainer exec ubuntu/ ls /foo
-/foo
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ubuntu/<span class="w"> </span>ls<span class="w"> </span>/foo
+<span class="go">/foo</span>
 </pre></div>
 </div>
 </section>
@@ -574,7 +574,7 @@ $ apptainer exec ubuntu/ ls /foo
 container. This means that you can use it to convert a container from one format
 to another. For instance, if you have already created a sandbox (directory) and
 want to convert it to the Singularity Image Format, you can do so as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build new.sif sandbox
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>new.sif<span class="w"> </span>sandbox
 </pre></div>
 </div>
 <p>Note, however, that this approach may break reproducibility, in the event that
@@ -613,7 +613,7 @@ setup, and copying files into the container from host system.</p>
 </div>
 <p>To build a container from this definition file (assuming it is a file
 named <code class="docutils literal notranslate"><span class="pre">lolcow.def</span></code>), you would call <code class="docutils literal notranslate"><span class="pre">build</span></code> as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build lolcow.sif lolcow.def
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>lolcow.sif<span class="w"> </span>lolcow.def
 </pre></div>
 </div>
 <p>In this example, the header tells Apptainer to use a base Ubuntu 22.04 image
@@ -650,7 +650,7 @@ needs to decide whether to install Apptainer.</p>
 answers to many common questions.</p>
 <p>If you need to request an installation from your administrator, you may decide
 to draft a message similar to this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Dear shared resource administrator,
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Dear shared resource administrator,
 
 We are interested in having Apptainer (https://apptainer.org)
 installed on our shared resource. Apptainer containers will allow us to

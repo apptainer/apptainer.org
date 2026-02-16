@@ -156,7 +156,7 @@ registries. Check out the instructions for how to add and login with a
 <span id="push"></span><h2>Pushing a Container<a class="headerlink" href="#pushing-a-container" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">push</span></code> command will push a container to the container
 library with the given URL. Here’s an example of a typical push command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer push my-container.sif library://your-name/project-dir/my-container:latest
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>push<span class="w"> </span>my-container.sif<span class="w"> </span>library://your-name/project-dir/my-container:latest
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">:latest</span></code> is the container tag. Tags are used to have different
@@ -171,7 +171,7 @@ containers.</p>
 <p>Let’s assume you have your container (v1.0.1), and you want to push that
 container without deleting your <code class="docutils literal notranslate"><span class="pre">:latest</span></code> container, then you can add
 a version tag to that container, like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer push my-container.sif library://your-name/project-dir/my-container:1.0.1
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>push<span class="w"> </span>my-container.sif<span class="w"> </span>library://your-name/project-dir/my-container:1.0.1
 </pre></div>
 </div>
 <p>You can download the container with that tag by replacing the
@@ -201,11 +201,11 @@ your quota usage and the direct URL to view the container in your web browser.</
 converted to a SIF (Singularity Image Format) container.</p>
 </div>
 <p>Here’s a typical pull command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull file-out.sif library://alpine:latest
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>file-out.sif<span class="w"> </span>library://alpine:latest
 
-# or pull from docker:
+<span class="gp"># </span>or<span class="w"> </span>pull<span class="w"> </span>from<span class="w"> </span>docker:
 
-$ apptainer pull file-out.sif docker://alpine:latest
+<span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>file-out.sif<span class="w"> </span>docker://alpine:latest
 </pre></div>
 </div>
 <div class="admonition note">
@@ -215,7 +215,7 @@ automatically will pull the container with the <code class="docutils literal not
 </div>
 <p>To pull a container with a specific tag, just add the tag to the library
 URL:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull file-out.sif library://alpine:3.8
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>file-out.sif<span class="w"> </span>library://alpine:3.8
 </pre></div>
 </div>
 <p>Of course, you can pull your own containers. Here’s what that will look
@@ -224,11 +224,11 @@ like:</p>
 <h3>Pulling your own container<a class="headerlink" href="#pulling-your-own-container" title="Link to this heading"></a></h3>
 <p>Pulling your own container is just like pulling from Github, Docker,
 etc…</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull out-file.sif library://your-name/project-dir/my-container:latest
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>out-file.sif<span class="w"> </span>library://your-name/project-dir/my-container:latest
 
-# or use a different tag:
+<span class="gp"># </span>or<span class="w"> </span>use<span class="w"> </span>a<span class="w"> </span>different<span class="w"> </span>tag:
 
-$ apptainer pull out-file.sif library://your-name/project-dir/my-container:1.0.1
+<span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>out-file.sif<span class="w"> </span>library://your-name/project-dir/my-container:1.0.1
 </pre></div>
 </div>
 <div class="admonition note">
@@ -342,12 +342,12 @@ current system. To e.g. search for <code class="docutils literal notranslate"><s
 </div>
 <p>Now, to build the container, use the <code class="docutils literal notranslate"><span class="pre">--remote</span></code> flag, and without
 <code class="docutils literal notranslate"><span class="pre">sudo</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --remote ubuntu.sif ubuntu.def
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--remote<span class="w"> </span>ubuntu.sif<span class="w"> </span>ubuntu.def
 </pre></div>
 </div>
 <p>After building, you can test your container like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./ubuntu.sif
-hello world from ubuntu container!
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./ubuntu.sif
+<span class="go">hello world from ubuntu container!</span>
 </pre></div>
 </div>
 </section>

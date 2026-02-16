@@ -266,43 +266,43 @@ host.</p>
 <h3>MPICH Hybrid Container<a class="headerlink" href="#mpich-hybrid-container" title="Link to this heading"></a></h3>
 <p>If the host MPI is MPICH, a definition file such as the following
 example can be used:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
-From: ubuntu:22.04
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: ubuntu:<span class="m">22.04</span>
 
-%files
-    mpitest.c /opt
+<span class="gh">%files</span>
+<span class="w">    </span>mpitest.c<span class="w"> </span>/opt
 
-%environment
-    # Point to MPICH binaries, libraries man pages
-    export MPICH_DIR=/opt/mpich
-    export PATH=&quot;$MPICH_DIR/bin:$PATH&quot;
-    export LD_LIBRARY_PATH=&quot;$MPICH_DIR/lib:$LD_LIBRARY_PATH&quot;
-    export MANPATH=$MPICH_DIR/share/man:$MANPATH
+<span class="gh">%environment</span>
+<span class="w">    </span><span class="c1"># Point to MPICH binaries, libraries man pages</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPICH_DIR</span><span class="o">=</span>/opt/mpich
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MPICH_DIR</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MPICH_DIR</span><span class="s2">/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MANPATH</span><span class="o">=</span><span class="nv">$MPICH_DIR</span>/share/man:<span class="nv">$MANPATH</span>
 
-%post
-    echo &quot;Installing required packages...&quot;
-    export DEBIAN_FRONTEND=noninteractive
-    apt-get update &amp;&amp; apt-get install -y wget git bash gcc gfortran g++ make python3-dev
+<span class="gh">%post</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Installing required packages...&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive
+<span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wget<span class="w"> </span>git<span class="w"> </span>bash<span class="w"> </span>gcc<span class="w"> </span>gfortran<span class="w"> </span>g++<span class="w"> </span>make<span class="w"> </span>python3-dev
 
-    # Information about the version of MPICH to use
-    export MPICH_VERSION=4.1.1
-    export MPICH_URL=&quot;http://www.mpich.org/static/downloads/$MPICH_VERSION/mpich-$MPICH_VERSION.tar.gz&quot;
-    export MPICH_DIR=/opt/mpich
+<span class="w">    </span><span class="c1"># Information about the version of MPICH to use</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPICH_VERSION</span><span class="o">=</span><span class="m">4</span>.1.1
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPICH_URL</span><span class="o">=</span><span class="s2">&quot;http://www.mpich.org/static/downloads/</span><span class="nv">$MPICH_VERSION</span><span class="s2">/mpich-</span><span class="nv">$MPICH_VERSION</span><span class="s2">.tar.gz&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPICH_DIR</span><span class="o">=</span>/opt/mpich
 
-    echo &quot;Installing MPICH...&quot;
-    mkdir -p /tmp/mpich
-    mkdir -p /opt
-    # Download
-    cd /tmp/mpich &amp;&amp; wget -O mpich-$MPICH_VERSION.tar.gz $MPICH_URL &amp;&amp; tar xzf mpich-$MPICH_VERSION.tar.gz
-    # Compile and install
-    cd /tmp/mpich/mpich-$MPICH_VERSION &amp;&amp; ./configure --prefix=$MPICH_DIR &amp;&amp; make -j$(nproc) install
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Installing MPICH...&quot;</span>
+<span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/tmp/mpich
+<span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt
+<span class="w">    </span><span class="c1"># Download</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/tmp/mpich<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>wget<span class="w"> </span>-O<span class="w"> </span>mpich-<span class="nv">$MPICH_VERSION</span>.tar.gz<span class="w"> </span><span class="nv">$MPICH_URL</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>tar<span class="w"> </span>xzf<span class="w"> </span>mpich-<span class="nv">$MPICH_VERSION</span>.tar.gz
+<span class="w">    </span><span class="c1"># Compile and install</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/tmp/mpich/mpich-<span class="nv">$MPICH_VERSION</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>./configure<span class="w"> </span>--prefix<span class="o">=</span><span class="nv">$MPICH_DIR</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span><span class="w"> </span>install
 
-    # Set env variables so we can compile our application
-    export PATH=$MPICH_DIR/bin:$PATH
-    export LD_LIBRARY_PATH=$MPICH_DIR/lib:$LD_LIBRARY_PATH
+<span class="w">    </span><span class="c1"># Set env variables so we can compile our application</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$MPICH_DIR</span>/bin:<span class="nv">$PATH</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$MPICH_DIR</span>/lib:<span class="nv">$LD_LIBRARY_PATH</span>
 
-    echo &quot;Compiling the MPI application...&quot;
-    cd /opt &amp;&amp; mpicc -o mpitest mpitest.c
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Compiling the MPI application...&quot;</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/opt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>mpicc<span class="w"> </span>-o<span class="w"> </span>mpitest<span class="w"> </span>mpitest.c
 </pre></div>
 </div>
 <div class="admonition note">
@@ -319,40 +319,40 @@ details.</p>
 <section id="open-mpi-hybrid-container">
 <h3>Open MPI Hybrid Container<a class="headerlink" href="#open-mpi-hybrid-container" title="Link to this heading"></a></h3>
 <p>If the host MPI is Open MPI, the definition file looks like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Bootstrap: docker
-From: ubuntu:22.04
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: ubuntu:<span class="m">22.04</span>
 
-%files
-    mpitest.c /opt
+<span class="gh">%files</span>
+<span class="w">    </span>mpitest.c<span class="w"> </span>/opt
 
-%environment
-    # Point to OMPI binaries, libraries, man pages
-    export OMPI_DIR=/opt/ompi
-    export PATH=&quot;$OMPI_DIR/bin:$PATH&quot;
-    export LD_LIBRARY_PATH=&quot;$OMPI_DIR/lib:$LD_LIBRARY_PATH&quot;
-    export MANPATH=&quot;$OMPI_DIR/share/man:$MANPATH&quot;
+<span class="gh">%environment</span>
+<span class="w">    </span><span class="c1"># Point to OMPI binaries, libraries, man pages</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">OMPI_DIR</span><span class="o">=</span>/opt/ompi
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OMPI_DIR</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OMPI_DIR</span><span class="s2">/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MANPATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OMPI_DIR</span><span class="s2">/share/man:</span><span class="nv">$MANPATH</span><span class="s2">&quot;</span>
 
-%post
-    echo &quot;Installing required packages...&quot;
-    apt-get update &amp;&amp; apt-get install -y wget git bash gcc gfortran g++ make file bzip2
+<span class="gh">%post</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Installing required packages...&quot;</span>
+<span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wget<span class="w"> </span>git<span class="w"> </span>bash<span class="w"> </span>gcc<span class="w"> </span>gfortran<span class="w"> </span>g++<span class="w"> </span>make<span class="w"> </span>file<span class="w"> </span>bzip2
 
-    echo &quot;Installing Open MPI&quot;
-    export OMPI_DIR=/opt/ompi
-    export OMPI_VERSION=4.1.5
-    export OMPI_URL=&quot;https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-$OMPI_VERSION.tar.bz2&quot;
-    mkdir -p /tmp/ompi
-    mkdir -p /opt
-    # Download
-    cd /tmp/ompi &amp;&amp; wget -O openmpi-$OMPI_VERSION.tar.bz2 $OMPI_URL &amp;&amp; tar -xjf openmpi-$OMPI_VERSION.tar.bz2
-    # Compile and install
-    cd /tmp/ompi/openmpi-$OMPI_VERSION &amp;&amp; ./configure --prefix=$OMPI_DIR &amp;&amp; make -j$(nproc) install
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Installing Open MPI&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">OMPI_DIR</span><span class="o">=</span>/opt/ompi
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">OMPI_VERSION</span><span class="o">=</span><span class="m">4</span>.1.5
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">OMPI_URL</span><span class="o">=</span><span class="s2">&quot;https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-</span><span class="nv">$OMPI_VERSION</span><span class="s2">.tar.bz2&quot;</span>
+<span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/tmp/ompi
+<span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt
+<span class="w">    </span><span class="c1"># Download</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/tmp/ompi<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>wget<span class="w"> </span>-O<span class="w"> </span>openmpi-<span class="nv">$OMPI_VERSION</span>.tar.bz2<span class="w"> </span><span class="nv">$OMPI_URL</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>tar<span class="w"> </span>-xjf<span class="w"> </span>openmpi-<span class="nv">$OMPI_VERSION</span>.tar.bz2
+<span class="w">    </span><span class="c1"># Compile and install</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/tmp/ompi/openmpi-<span class="nv">$OMPI_VERSION</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>./configure<span class="w"> </span>--prefix<span class="o">=</span><span class="nv">$OMPI_DIR</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span><span class="w"> </span>install
 
-    # Set env variables so we can compile our application
-    export PATH=$OMPI_DIR/bin:$PATH
-    export LD_LIBRARY_PATH=$OMPI_DIR/lib:$LD_LIBRARY_PATH
+<span class="w">    </span><span class="c1"># Set env variables so we can compile our application</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$OMPI_DIR</span>/bin:<span class="nv">$PATH</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$OMPI_DIR</span>/lib:<span class="nv">$LD_LIBRARY_PATH</span>
 
-    echo &quot;Compiling the MPI application...&quot;
-    cd /opt &amp;&amp; mpicc -o mpitest mpitest.c
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Compiling the MPI application...&quot;</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/opt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>mpicc<span class="w"> </span>-o<span class="w"> </span>mpitest<span class="w"> </span>mpitest.c
 </pre></div>
 </div>
 <div class="admonition note">
@@ -371,7 +371,7 @@ details.</p>
 See <a class="reference external" href="https://github.com/apptainer/apptainer/issues/769">apptainer issue 769</a>
 for details and for now use the <code class="docutils literal notranslate"><span class="pre">UCX_TLS=sysv,ib</span></code> transport as
 a workaround, for example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mpirun -np 2 -mca pml ucx -x UCX_TLS=sysv,ib apptainer exec $MY_CONTAINER ./a.out
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">2</span><span class="w"> </span>-mca<span class="w"> </span>pml<span class="w"> </span>ucx<span class="w"> </span>-x<span class="w"> </span><span class="nv">UCX_TLS</span><span class="o">=</span>sysv,ib<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="nv">$MY_CONTAINER</span><span class="w"> </span>./a.out
 </pre></div>
 </div>
 </div>
@@ -381,7 +381,7 @@ a workaround, for example:</p>
 <p>By default in unprivileged user namespace mode each apptainer command runs in its own user namespace.
 This causes problems for MPI runs, as observed <a class="reference internal" href="#mpi-issue"><span class="std std-ref">in this issue</span></a>. The new <code class="docutils literal notranslate"><span class="pre">--sharens</span></code> flag will
 move all spawned processes into the same user namespace, similar to what is done with Apptainer SUID mode.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mpirun -np 2 apptainer exec --sharens $MY_CONTAINER ./a.out
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">2</span><span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--sharens<span class="w"> </span><span class="nv">$MY_CONTAINER</span><span class="w"> </span>./a.out
 </pre></div>
 </div>
 <div class="admonition note">
@@ -400,21 +400,21 @@ containers.</p>
 <p>Assuming your container with MPI and your application is already built,
 the <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> command to start your application looks like when your
 container has been built based on the hybrid model:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mpirun -n &lt;NUMBER_OF_RANKS&gt; apptainer exec &lt;PATH/TO/MY/IMAGE&gt; &lt;/PATH/TO/BINARY/WITHIN/CONTAINER&gt;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mpirun<span class="w"> </span>-n<span class="w"> </span>&lt;NUMBER_OF_RANKS&gt;<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>&lt;PATH/TO/MY/IMAGE&gt;<span class="w"> </span>&lt;/PATH/TO/BINARY/WITHIN/CONTAINER&gt;
 </pre></div>
 </div>
 <p>Practically, this command will first start a process instantiating
 <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> and then Apptainer containers on compute nodes. Finally,
 when the containers start, the MPI binary is executed:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mpirun -n 8 apptainer run hybrid-mpich.sif /opt/mpitest
-Hello, I am rank 3/8
-Hello, I am rank 4/8
-Hello, I am rank 6/8
-Hello, I am rank 2/8
-Hello, I am rank 0/8
-Hello, I am rank 5/8
-Hello, I am rank 1/8
-Hello, I am rank 7/8
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mpirun<span class="w"> </span>-n<span class="w"> </span><span class="m">8</span><span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>hybrid-mpich.sif<span class="w"> </span>/opt/mpitest
+<span class="go">Hello, I am rank 3/8</span>
+<span class="go">Hello, I am rank 4/8</span>
+<span class="go">Hello, I am rank 6/8</span>
+<span class="go">Hello, I am rank 2/8</span>
+<span class="go">Hello, I am rank 0/8</span>
+<span class="go">Hello, I am rank 5/8</span>
+<span class="go">Hello, I am rank 1/8</span>
+<span class="go">Hello, I am rank 7/8</span>
 </pre></div>
 </div>
 </section>
@@ -477,15 +477,15 @@ where Open MPI is installed.</p>
 forward. The following example shows the definition file for the test
 program, which in this case has been compiled on the host to
 <code class="docutils literal notranslate"><span class="pre">/tmp/mpitest</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Bootstrap</span><span class="p">:</span> <span class="n">docker</span>
-<span class="n">From</span><span class="p">:</span> <span class="n">ubuntu</span><span class="p">:</span><span class="mf">22.04</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: ubuntu:<span class="m">22.04</span>
 
-<span class="o">%</span><span class="n">files</span>
-      <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mpitest</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">mpitest</span>
+<span class="gh">%files</span>
+<span class="w">      </span>/tmp/mpitest<span class="w"> </span>/opt/mpitest
 
-<span class="o">%</span><span class="n">environment</span>
-      <span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="s2">&quot;$MPI_DIR/bin:$PATH&quot;</span>
-      <span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;$MPI_DIR/lib:$LD_LIBRARY_PATH&quot;</span>
+<span class="gh">%environment</span>
+<span class="w">      </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MPI_DIR</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MPI_DIR</span><span class="s2">/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
 <p>In this example, the application <code class="docutils literal notranslate"><span class="pre">mpitest</span></code> is copied from the host
@@ -504,23 +504,23 @@ the MPI installation is bound in.</p>
 systems that have a version-compatible MPI installation, but under
 different installation paths. You can also hard code the MPI path in the
 definition file if you wish.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export MPI_DIR=&quot;&lt;PATH/TO/HOST/MPI/DIRECTORY&gt;&quot;
-$ mpirun -n &lt;NUMBER_OF_RANKS&gt; apptainer exec --bind &quot;$MPI_DIR&quot; &lt;PATH/TO/MY/IMAGE&gt; &lt;/PATH/TO/BINARY/WITHIN/CONTAINER&gt;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPI_DIR</span><span class="o">=</span><span class="s2">&quot;&lt;PATH/TO/HOST/MPI/DIRECTORY&gt;&quot;</span>
+<span class="gp">$ </span>mpirun<span class="w"> </span>-n<span class="w"> </span>&lt;NUMBER_OF_RANKS&gt;<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--bind<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MPI_DIR</span><span class="s2">&quot;</span><span class="w"> </span>&lt;PATH/TO/MY/IMAGE&gt;<span class="w"> </span>&lt;/PATH/TO/BINARY/WITHIN/CONTAINER&gt;
 </pre></div>
 </div>
 <p>On an example system we may be using an Open MPI installation at
 <code class="docutils literal notranslate"><span class="pre">/cm/shared/apps/openmpi/gcc/64/4.0.5/</span></code>. This means that the commands
 to run the container in bind mode are:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export MPI_DIR=&quot;/cm/shared/apps/openmpi/gcc/64/4.0.5&quot;
-$ mpirun -n 8 apptainer exec --bind &quot;$MPI_DIR&quot; bind.sif /opt/mpitest
-Hello, I am rank 1/8
-Hello, I am rank 2/8
-Hello, I am rank 0/8
-Hello, I am rank 7/8
-Hello, I am rank 5/8
-Hello, I am rank 3/8
-Hello, I am rank 4/8
-Hello, I am rank 6/8
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPI_DIR</span><span class="o">=</span><span class="s2">&quot;/cm/shared/apps/openmpi/gcc/64/4.0.5&quot;</span>
+<span class="gp">$ </span>mpirun<span class="w"> </span>-n<span class="w"> </span><span class="m">8</span><span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--bind<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MPI_DIR</span><span class="s2">&quot;</span><span class="w"> </span>bind.sif<span class="w"> </span>/opt/mpitest
+<span class="go">Hello, I am rank 1/8</span>
+<span class="go">Hello, I am rank 2/8</span>
+<span class="go">Hello, I am rank 0/8</span>
+<span class="go">Hello, I am rank 7/8</span>
+<span class="go">Hello, I am rank 5/8</span>
+<span class="go">Hello, I am rank 3/8</span>
+<span class="go">Hello, I am rank 4/8</span>
+<span class="go">Hello, I am rank 6/8</span>
 </pre></div>
 </div>
 </section>
@@ -533,13 +533,13 @@ following example illustrates the context of a batch script for Slurm
 that aims at starting an Apptainer container on each node allocated
 to the execution of the job. It can easily be adapted for all major
 batch systems available.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat my_job.sh
-#!/bin/bash
-#SBATCH --job-name apptainer-mpi
-#SBATCH -N $NNODES # total number of nodes
-#SBATCH --time=00:05:00 # Max execution time
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>my_job.sh
+<span class="gp">#</span>!/bin/bash
+<span class="gp">#</span>SBATCH<span class="w"> </span>--job-name<span class="w"> </span>apptainer-mpi
+<span class="gp">#</span>SBATCH<span class="w"> </span>-N<span class="w"> </span><span class="nv">$NNODES</span><span class="w"> </span><span class="c1"># total number of nodes</span>
+<span class="gp">#</span>SBATCH<span class="w"> </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span><span class="c1"># Max execution time</span>
 
-mpirun -n $NP apptainer exec /var/nfsshare/gvallee/mpich.sif /opt/mpitest
+<span class="go">mpirun -n $NP apptainer exec /var/nfsshare/gvallee/mpich.sif /opt/mpitest</span>
 </pre></div>
 </div>
 <p>In fact, the example describes a job that requests the number of nodes
@@ -548,7 +548,7 @@ MPI processes specified by the <code class="docutils literal notranslate"><span 
 is also assuming that the container is based on the hybrid model; if it
 is based on the bind model, please add the appropriate bind options.</p>
 <p>A user can then submit a job by executing the following SLURM command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sbatch my_job.sh
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sbatch<span class="w"> </span>my_job.sh
 </pre></div>
 </div>
 </section>
@@ -583,16 +583,16 @@ launch the containerized application is not compatible with, or cannot
 communicate with, the MPI stack in the container.</p>
 <p>E.g. if we attempt to run the hybrid Open MPI container, but with
 <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> from MPICH loaded on the host:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ module add mpich
-$ mpirun -n 8 apptainer run hybrid-openmpi.sif /opt/mpitest
-Hello, I am rank 0/1
-Hello, I am rank 0/1
-Hello, I am rank 0/1
-Hello, I am rank 0/1
-Hello, I am rank 0/1
-Hello, I am rank 0/1
-Hello, I am rank 0/1
-Hello, I am rank 0/1
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>module<span class="w"> </span>add<span class="w"> </span>mpich
+<span class="gp">$ </span>mpirun<span class="w"> </span>-n<span class="w"> </span><span class="m">8</span><span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>hybrid-openmpi.sif<span class="w"> </span>/opt/mpitest
+<span class="go">Hello, I am rank 0/1</span>
+<span class="go">Hello, I am rank 0/1</span>
+<span class="go">Hello, I am rank 0/1</span>
+<span class="go">Hello, I am rank 0/1</span>
+<span class="go">Hello, I am rank 0/1</span>
+<span class="go">Hello, I am rank 0/1</span>
+<span class="go">Hello, I am rank 0/1</span>
+<span class="go">Hello, I am rank 0/1</span>
 </pre></div>
 </div>
 <p>If your container starts processes of different ranks, but fails with

@@ -241,9 +241,9 @@ its derivatives)</p></li>
 Debian and Ubuntu)</p></li>
 <li><p>oci (bundle compliant with OCI Image Specification)</p></li>
 <li><p>oci-archive (tar files obeying the OCI Image Layout Specification)</p></li>
-<li><p><span class="xref std std-ref">docker-daemon</span> (images managed by the
+<li><p><a class="reference internal" href="appendix.html#docker-daemon"><span class="std std-ref">docker-daemon</span></a> (images managed by the
 locally running docker daemon)</p></li>
-<li><p><span class="xref std std-ref">docker-archive</span> (saved docker
+<li><p><a class="reference internal" href="appendix.html#docker-archive"><span class="std std-ref">docker-archive</span></a> (saved docker
 images)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-arch"><span class="std std-ref">arch</span></a> (Arch Linux)</p></li>
 <li><p><a class="reference internal" href="appendix.html#build-busybox"><span class="std std-ref">busybox</span></a> (BusyBox)</p></li>
@@ -526,13 +526,13 @@ running the <code class="docutils literal notranslate"><span class="pre">%test</
 not have the same hardware that will be used in your production
 environment), you can do so by passing the <code class="docutils literal notranslate"><span class="pre">--notest</span></code> flag to the
 build command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --notest my_container.sif my_container.def
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--notest<span class="w"> </span>my_container.sif<span class="w"> </span>my_container.def
 </pre></div>
 </div>
 <p>Running the test command on a container built with this def file yields
 the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer test my_container.sif
-Container base is Ubuntu as expected.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">test</span><span class="w"> </span>my_container.sif
+<span class="go">Container base is Ubuntu as expected.</span>
 </pre></div>
 </div>
 <p>One common use of the <code class="docutils literal notranslate"><span class="pre">%test</span></code> section is to run a quick check that the
@@ -625,9 +625,9 @@ expect a locale to be set.</p>
 <p>After building this container, you can use a command like the following
 one to verify that the environment variables have been set appropriately
 at runtime:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec my_container.sif env | grep -E &#39;LISTEN_PORT|LC_ALL&#39;
-LISTEN_PORT=54321
-LC_ALL=C
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>my_container.sif<span class="w"> </span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;LISTEN_PORT|LC_ALL&#39;</span>
+<span class="go">LISTEN_PORT=54321</span>
+<span class="go">LC_ALL=C</span>
 </pre></div>
 </div>
 <p>To set a default value for a variable in the <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section,
@@ -689,14 +689,14 @@ above:</p>
 <p>Here, the netcat (<code class="docutils literal notranslate"><span class="pre">nc</span></code>) program is used to listen for TCP traffic on
 the port indicated by the <code class="docutils literal notranslate"><span class="pre">$LISTEN_PORT</span></code> variable (set in the
 <code class="docutils literal notranslate"><span class="pre">%environment</span></code> section, above). The script can be invoked as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer instance start my_container.sif instance1
-INFO:    instance started successfully
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>instance<span class="w"> </span>start<span class="w"> </span>my_container.sif<span class="w"> </span>instance1
+<span class="go">INFO:    instance started successfully</span>
 
-$ netstat -ln | grep 54321
-tcp        0      0 0.0.0.0:54321           0.0.0.0:*               LISTEN
+<span class="gp">$ </span>netstat<span class="w"> </span>-ln<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">54321</span>
+<span class="go">tcp        0      0 0.0.0.0:54321           0.0.0.0:*               LISTEN</span>
 
-$ apptainer instance stop instance1
-Stopping instance1 instance of /home/vagrant/my_container.sif (PID=19035)
+<span class="gp">$ </span>apptainer<span class="w"> </span>instance<span class="w"> </span>stop<span class="w"> </span>instance1
+<span class="go">Stopping instance1 instance of /home/vagrant/my_container.sif (PID=19035)</span>
 </pre></div>
 </div>
 </section>
@@ -728,14 +728,14 @@ the call to Apptainer). Thus, the runscript shell process ceases to
 exist, and only the process running within the container remains.</p>
 <p>Running the container built using this def file will yield the
 following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./my_container.sif
-Container was created Thu Dec  6 20:01:56 UTC 2018
-Arguments received:
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./my_container.sif
+<span class="go">Container was created Thu Dec  6 20:01:56 UTC 2018</span>
+<span class="go">Arguments received:</span>
 
-$ ./my_container.sif this that and the other
-Container was created Thu Dec  6 20:01:56 UTC 2018
-Arguments received: this that and the other
-this that and the other
+<span class="gp">$ </span>./my_container.sif<span class="w"> </span>this<span class="w"> </span>that<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>other
+<span class="go">Container was created Thu Dec  6 20:01:56 UTC 2018</span>
+<span class="go">Arguments received: this that and the other</span>
+<span class="go">this that and the other</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> scriptlet will run under <code class="docutils literal notranslate"><span class="pre">sh</span></code> or <code class="docutils literal notranslate"><span class="pre">bash</span></code> by default. You
@@ -779,20 +779,20 @@ value of <code class="docutils literal notranslate"><span class="pre">v0.0.1</sp
 value of <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World</span></code>.</p>
 <p>You can inspect the available labels on your image by running the
 following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer inspect my_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>inspect<span class="w"> </span>my_container.sif
 
-Author: myuser@example.com
-Version: v0.0.1
-MyLabel: Hello World
-org.label-schema.build-arch: amd64
-org.label-schema.build-date: Tuesday_1_March_2022_16:49:5_PST
-org.label-schema.schema-version: 1.0
-org.label-schema.usage: /.singularity.d/runscript.help
-org.label-schema.usage.apptainer.runscript.help: /.singularity.d/runscript.help
-org.label-schema.usage.apptainer.version: 1.0.0
-org.label-schema.usage.singularity.deffile.bootstrap: docker
-org.label-schema.usage.singularity.deffile.from: ubuntu:22.04
-org.label-schema.usage.singularity.deffile.stage: build
+<span class="go">Author: myuser@example.com</span>
+<span class="go">Version: v0.0.1</span>
+<span class="go">MyLabel: Hello World</span>
+<span class="go">org.label-schema.build-arch: amd64</span>
+<span class="go">org.label-schema.build-date: Tuesday_1_March_2022_16:49:5_PST</span>
+<span class="go">org.label-schema.schema-version: 1.0</span>
+<span class="go">org.label-schema.usage: /.singularity.d/runscript.help</span>
+<span class="go">org.label-schema.usage.apptainer.runscript.help: /.singularity.d/runscript.help</span>
+<span class="go">org.label-schema.usage.apptainer.version: 1.0.0</span>
+<span class="go">org.label-schema.usage.singularity.deffile.bootstrap: docker</span>
+<span class="go">org.label-schema.usage.singularity.deffile.from: ubuntu:22.04</span>
+<span class="go">org.label-schema.usage.singularity.deffile.stage: build</span>
 </pre></div>
 </div>
 <p>As you can see from this output, some labels are generated automatically
@@ -811,9 +811,9 @@ then be displayed using the <code class="docutils literal notranslate"><span cla
 </pre></div>
 </div>
 <p>After building the help can be displayed like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run-help my_container.sif
-    This is a demo container used to illustrate a def file that uses all
-    supported sections.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run-help<span class="w"> </span>my_container.sif
+<span class="go">    This is a demo container used to illustrate a def file that uses all</span>
+<span class="go">    supported sections.</span>
 </pre></div>
 </div>
 </section>
@@ -839,44 +839,44 @@ Stage: build
 <p>When building a container from this definition file, a concrete value for
 <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">some_text</span> <span class="pre">}}</span></code> can be passed via the <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> flag to the <code class="docutils literal notranslate"><span class="pre">build</span></code>
 command. This flag accepts a <code class="docutils literal notranslate"><span class="pre">varname=value</span></code> pair, as shown here:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --build-arg some_text=&quot;Hello world&quot; ./my_container.sif ./my_container.def
-INFO:    Starting build...
-Getting image source signatures
-Copying blob f4bb4e8dca02 skipped: already exists
-Copying config 2b7cc08dcd done   |
-Writing manifest to image destination
-2024/03/08 14:17:24  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
-INFO:    Adding runscript
-INFO:    Creating SIF file...
-[=====================================================================] 100 % 0s
-INFO:    Build complete: ./my_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">some_text</span><span class="o">=</span><span class="s2">&quot;Hello world&quot;</span><span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<span class="go">INFO:    Starting build...</span>
+<span class="go">Getting image source signatures</span>
+<span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
+<span class="go">Copying config 2b7cc08dcd done   |</span>
+<span class="go">Writing manifest to image destination</span>
+<span class="go">2024/03/08 14:17:24  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d</span>
+<span class="go">INFO:    Adding runscript</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================] 100 % 0s</span>
+<span class="go">INFO:    Build complete: ./my_container.sif</span>
 
-$ apptainer run ./my_container.sif
-Hello world
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>./my_container.sif
+<span class="go">Hello world</span>
 </pre></div>
 </div>
 <p>Alternatively, the <code class="docutils literal notranslate"><span class="pre">varname=value</span></code> assignments can be placed in a file, and
 the path to that file specified using the <code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code> flag to the
 <code class="docutils literal notranslate"><span class="pre">build</span></code> command, as shown here:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat &lt;&lt; EOF &gt; ./my_args_file.txt
-some_text=&quot;Hello again, world&quot;
-EOF
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>&lt;&lt;<span class="w"> </span>EOF<span class="w"> </span>&gt;<span class="w"> </span>./my_args_file.txt
+<span class="go">some_text=&quot;Hello again, world&quot;</span>
+<span class="go">EOF</span>
 
-$ apptainer build -F --build-arg-file ./my_args_file.txt ./my_container.sif ./my_container.def
-INFO:    Starting build...
-Getting image source signatures
-Copying blob f4bb4e8dca02 skipped: already exists
-Copying config 2b7cc08dcd done   |
-Writing manifest to image destination
-2024/03/08 14:17:24  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
-INFO:    Adding runscript
-INFO:    Creating SIF file...
-[=====================================================================]
-100 % 0s
-INFO:    Build complete: ./my_container.sif
+<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg-file<span class="w"> </span>./my_args_file.txt<span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<span class="go">INFO:    Starting build...</span>
+<span class="go">Getting image source signatures</span>
+<span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
+<span class="go">Copying config 2b7cc08dcd done   |</span>
+<span class="go">Writing manifest to image destination</span>
+<span class="go">2024/03/08 14:17:24  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d</span>
+<span class="go">INFO:    Adding runscript</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================]</span>
+<span class="go">100 % 0s</span>
+<span class="go">INFO:    Build complete: ./my_container.sif</span>
 
-$ apptainer run ./my_container.sif
-Hello again, world
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>./my_container.sif
+<span class="go">Hello again, world</span>
 </pre></div>
 </div>
 </section>
@@ -911,106 +911,106 @@ Stage: build
 </div>
 <p>To use this definition file, one can pass values for all the different variables
 using <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> flags:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build -F --build-arg file_contents=&quot;&#39;I am in a file&#39;&quot; --build-arg var_value1=&quot;&#39;I am in an env var&#39;&quot; --build-arg var_value2=&quot;&#39;I am also in an env var&#39;&quot; --build-arg some_text=&quot;&#39;I am just some text&#39;&quot; ./my_container.sif ./my_container.def
-INFO:    Starting build...
-Getting image source signatures
-Copying blob f4bb4e8dca02 skipped: already exists
-Copying config 2b7cc08dcd done   |
-Writing manifest to image destination
-2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
-INFO:    Running setup scriptlet
-+ echo I am in a file
-INFO:    Adding environment to container
-INFO:    Adding runscript
-INFO:    Creating SIF file...
-[=====================================================================]
-100 % 0s
-INFO:    Build complete: ./my_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">&quot;&#39;I am in a file&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value1</span><span class="o">=</span><span class="s2">&quot;&#39;I am in an env var&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value2</span><span class="o">=</span><span class="s2">&quot;&#39;I am also in an env var&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">some_text</span><span class="o">=</span><span class="s2">&quot;&#39;I am just some text&#39;&quot;</span><span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<span class="go">INFO:    Starting build...</span>
+<span class="go">Getting image source signatures</span>
+<span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
+<span class="go">Copying config 2b7cc08dcd done   |</span>
+<span class="go">Writing manifest to image destination</span>
+<span class="go">2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d</span>
+<span class="go">INFO:    Running setup scriptlet</span>
+<span class="go">+ echo I am in a file</span>
+<span class="go">INFO:    Adding environment to container</span>
+<span class="go">INFO:    Adding runscript</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================]</span>
+<span class="go">100 % 0s</span>
+<span class="go">INFO:    Build complete: ./my_container.sif</span>
 
-$ apptainer run ./my_container.sif
-file contents: I am in a file
---&gt; this should, if I&#39;m not mistaken, equal: I am in a file
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>./my_container.sif
+<span class="go">file contents: I am in a file</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in a file</span>
 
-env var: I am in an env var
---&gt; this should, if I&#39;m not mistaken, equal: I am in an env var
+<span class="go">env var: I am in an env var</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var</span>
 
-env var: I am also in an env var
---&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var
+<span class="go">env var: I am also in an env var</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var</span>
 
-and finally, here&#39;s some text: I am just some text
+<span class="go">and finally, here&#39;s some text: I am just some text</span>
 </pre></div>
 </div>
 <p>Or one can place the values for the different values in a file, and pass the
 path to that file using the <code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code> flag:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat &lt;&lt; EOF &gt; ./my_args_file.txt
-file_contents=&quot;I am in a file&quot;
-var_value1=&quot;I am in an env var&quot;
-var_value2=&quot;I am also in an env var&quot;
-some_text=&quot;I am just some text&quot;
-EOF
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>&lt;&lt;<span class="w"> </span>EOF<span class="w"> </span>&gt;<span class="w"> </span>./my_args_file.txt
+<span class="go">file_contents=&quot;I am in a file&quot;</span>
+<span class="go">var_value1=&quot;I am in an env var&quot;</span>
+<span class="go">var_value2=&quot;I am also in an env var&quot;</span>
+<span class="go">some_text=&quot;I am just some text&quot;</span>
+<span class="go">EOF</span>
 
-$ apptainer build -F --build-arg-file ./my_args_file.txt ./my_container.sif ./my_container.def
-INFO:    Starting build...
-Getting image source signatures
-Copying blob f4bb4e8dca02 skipped: already exists
-Copying config 2b7cc08dcd done   |
-Writing manifest to image destination
-2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
-INFO:    Running setup scriptlet
-+ echo I am in a file
-INFO:    Adding environment to container
-INFO:    Adding runscript
-INFO:    Creating SIF file...
-[=====================================================================]
-100 % 0s
-INFO:    Build complete: ./my_container.sif
+<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg-file<span class="w"> </span>./my_args_file.txt<span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<span class="go">INFO:    Starting build...</span>
+<span class="go">Getting image source signatures</span>
+<span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
+<span class="go">Copying config 2b7cc08dcd done   |</span>
+<span class="go">Writing manifest to image destination</span>
+<span class="go">2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d</span>
+<span class="go">INFO:    Running setup scriptlet</span>
+<span class="go">+ echo I am in a file</span>
+<span class="go">INFO:    Adding environment to container</span>
+<span class="go">INFO:    Adding runscript</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================]</span>
+<span class="go">100 % 0s</span>
+<span class="go">INFO:    Build complete: ./my_container.sif</span>
 
-$ apptainer run ./my_container.sif
-file contents: I am in a file
---&gt; this should, if I&#39;m not mistaken, equal: I am in a file
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>./my_container.sif
+<span class="go">file contents: I am in a file</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in a file</span>
 
-env var: I am in an env var
---&gt; this should, if I&#39;m not mistaken, equal: I am in an env var
+<span class="go">env var: I am in an env var</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var</span>
 
-env var: I am also in an env var
---&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var
+<span class="go">env var: I am also in an env var</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var</span>
 
-and finally, here&#39;s some text: I am just some text
+<span class="go">and finally, here&#39;s some text: I am just some text</span>
 </pre></div>
 </div>
 <p>Or one can use a combination of both strategies:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat &lt;&lt; EOF &gt; ./my_args_file.txt
-var_value1=&quot;I am in an env var&quot;
-some_text=&quot;I am just some text&quot;
-EOF
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>&lt;&lt;<span class="w"> </span>EOF<span class="w"> </span>&gt;<span class="w"> </span>./my_args_file.txt
+<span class="go">var_value1=&quot;I am in an env var&quot;</span>
+<span class="go">some_text=&quot;I am just some text&quot;</span>
+<span class="go">EOF</span>
 
-$ apptainer build -F --build-arg file_contents=&quot;&#39;I am in a file&#39;&quot; --build-arg var_value2=&quot;&#39;I am also in an env var&#39;&quot; --build-arg-file ./my_args_file.txt ./my_container.sif ./my_container.def
-INFO:    Starting build...
-Getting image source signatures
-Copying blob f4bb4e8dca02 skipped: already exists
-Copying config 2b7cc08dcd done   |
-Writing manifest to image destination
-2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
-INFO:    Running setup scriptlet
-+ echo I am in a file
-INFO:    Adding environment to container
-INFO:    Adding runscript
-INFO:    Creating SIF file...
-[=====================================================================]
-100 % 0s
-INFO:    Build complete: ./my_container.sif
+<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">&quot;&#39;I am in a file&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value2</span><span class="o">=</span><span class="s2">&quot;&#39;I am also in an env var&#39;&quot;</span><span class="w"> </span>--build-arg-file<span class="w"> </span>./my_args_file.txt<span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<span class="go">INFO:    Starting build...</span>
+<span class="go">Getting image source signatures</span>
+<span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
+<span class="go">Copying config 2b7cc08dcd done   |</span>
+<span class="go">Writing manifest to image destination</span>
+<span class="go">2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d</span>
+<span class="go">INFO:    Running setup scriptlet</span>
+<span class="go">+ echo I am in a file</span>
+<span class="go">INFO:    Adding environment to container</span>
+<span class="go">INFO:    Adding runscript</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================]</span>
+<span class="go">100 % 0s</span>
+<span class="go">INFO:    Build complete: ./my_container.sif</span>
 
-$ apptainer run ./my_container.sif
-file contents: I am in a file
---&gt; this should, if I&#39;m not mistaken, equal: I am in a file
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>./my_container.sif
+<span class="go">file contents: I am in a file</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in a file</span>
 
-env var: I am in an env var
---&gt; this should, if I&#39;m not mistaken, equal: I am in an env var
+<span class="go">env var: I am in an env var</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var</span>
 
-env var: I am also in an env var
---&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var
+<span class="go">env var: I am also in an env var</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var</span>
 
-and finally, here&#39;s some text: I am just some text
+<span class="go">and finally, here&#39;s some text: I am just some text</span>
 </pre></div>
 </div>
 </section>
@@ -1018,71 +1018,71 @@ and finally, here&#39;s some text: I am just some text
 <h3>Precedence among multiple value sources<a class="headerlink" href="#precedence-among-multiple-value-sources" title="Link to this heading"></a></h3>
 <p>In the event that an argument is passed via <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> more than once, the
 last occurrence will take precedence:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build -F --build-arg file_contents=&quot;&#39;I am in a file (1st time)&#39;&quot; --build-arg var_value2=&quot;&#39;I am also in an env var&#39;&quot; --build-arg file_contents=&quot;&#39;I am in a file (2nd time)&#39;&quot; --build-arg-file ./my_args_file.txt ./my_container.sif ./my_container.def
-INFO:    Starting build...
-Getting image source signatures
-Copying blob f4bb4e8dca02 skipped: already exists
-Copying config 2b7cc08dcd done   |
-Writing manifest to image destination
-2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
-INFO:    Running setup scriptlet
-+ echo &#39;I am in a file (2nd time)&#39;
-INFO:    Adding environment to container
-INFO:    Adding runscript
-INFO:    Creating SIF file...
-[=====================================================================]
-100 % 0s
-INFO:    Build complete: ./my_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">&quot;&#39;I am in a file (1st time)&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value2</span><span class="o">=</span><span class="s2">&quot;&#39;I am also in an env var&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">&quot;&#39;I am in a file (2nd time)&#39;&quot;</span><span class="w"> </span>--build-arg-file<span class="w"> </span>./my_args_file.txt<span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<span class="go">INFO:    Starting build...</span>
+<span class="go">Getting image source signatures</span>
+<span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
+<span class="go">Copying config 2b7cc08dcd done   |</span>
+<span class="go">Writing manifest to image destination</span>
+<span class="go">2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d</span>
+<span class="go">INFO:    Running setup scriptlet</span>
+<span class="go">+ echo &#39;I am in a file (2nd time)&#39;</span>
+<span class="go">INFO:    Adding environment to container</span>
+<span class="go">INFO:    Adding runscript</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================]</span>
+<span class="go">100 % 0s</span>
+<span class="go">INFO:    Build complete: ./my_container.sif</span>
 
-$ apptainer run ./my_container.sif
-file contents: I am in a file (2nd time)
---&gt; this should, if I&#39;m not mistaken, equal: I am in a file (2nd time)
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>./my_container.sif
+<span class="go">file contents: I am in a file (2nd time)</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in a file (2nd time)</span>
 
-env var: I am in an env var
---&gt; this should, if I&#39;m not mistaken, equal: I am in an env var
+<span class="go">env var: I am in an env var</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var</span>
 
-env var: I am also in an env var
---&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var
+<span class="go">env var: I am also in an env var</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var</span>
 
-and finally, here&#39;s some text: I am just some text
+<span class="go">and finally, here&#39;s some text: I am just some text</span>
 </pre></div>
 </div>
 <p>In the event that a variable is defined both in the file passed to
 <code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code> and via the command line using <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> flag, the value passed via the
 command line will take precedence:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat &lt;&lt; EOF &gt; ./my_args_file.txt
-var_value1=&quot;I am in an env var&quot;
-var_value2=&quot;I am also in an env var (from build arg file)&quot;
-some_text=&quot;I am just some text&quot;
-EOF
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>&lt;&lt;<span class="w"> </span>EOF<span class="w"> </span>&gt;<span class="w"> </span>./my_args_file.txt
+<span class="go">var_value1=&quot;I am in an env var&quot;</span>
+<span class="go">var_value2=&quot;I am also in an env var (from build arg file)&quot;</span>
+<span class="go">some_text=&quot;I am just some text&quot;</span>
+<span class="go">EOF</span>
 
-$ apptainer build -F --build-arg file_contents=&quot;&#39;I am in a file&#39;&quot; --build-arg var_value2=&quot;&#39;I am also in an env var (from command line)&#39;&quot; --build-arg-file ./my_args_file.txt ./my_container.sif ./my_container.def
-INFO:    Starting build...
-Getting image source signatures
-Copying blob f4bb4e8dca02 skipped: already exists
-Copying config 2b7cc08dcd done   |
-Writing manifest to image destination
-2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
-INFO:    Running setup scriptlet
-+ echo &#39;I am in a file&#39;
-INFO:    Adding environment to container
-INFO:    Adding runscript
-INFO:    Creating SIF file...
-[=====================================================================]
-100 % 0s
-INFO:    Build complete: ./my_container.sif
+<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">&quot;&#39;I am in a file&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value2</span><span class="o">=</span><span class="s2">&quot;&#39;I am also in an env var (from command line)&#39;&quot;</span><span class="w"> </span>--build-arg-file<span class="w"> </span>./my_args_file.txt<span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<span class="go">INFO:    Starting build...</span>
+<span class="go">Getting image source signatures</span>
+<span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
+<span class="go">Copying config 2b7cc08dcd done   |</span>
+<span class="go">Writing manifest to image destination</span>
+<span class="go">2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d</span>
+<span class="go">INFO:    Running setup scriptlet</span>
+<span class="go">+ echo &#39;I am in a file&#39;</span>
+<span class="go">INFO:    Adding environment to container</span>
+<span class="go">INFO:    Adding runscript</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================]</span>
+<span class="go">100 % 0s</span>
+<span class="go">INFO:    Build complete: ./my_container.sif</span>
 
-$ apptainer run ./my_container.sif
-file contents: I am in a file
---&gt; this should, if I&#39;m not mistaken, equal: I am in a file
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>./my_container.sif
+<span class="go">file contents: I am in a file</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in a file</span>
 
-env var: I am in an env var
---&gt; this should, if I&#39;m not mistaken, equal: I am in an env var
+<span class="go">env var: I am in an env var</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var</span>
 
-env var: I am also in an env var (from command line)
---&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var (from command line)
+<span class="go">env var: I am also in an env var (from command line)</span>
+<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var (from command line)</span>
 
-and finally, here&#39;s some text: I am just some text
+<span class="go">and finally, here&#39;s some text: I am just some text</span>
 </pre></div>
 </div>
 </section>
@@ -1100,8 +1100,8 @@ Stage: build
 <span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;And here is some more text:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_more_text<span class="w"> </span><span class="o">}}</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build -F --build-arg some_more_text=&quot;more more more&quot; ./my_container.sif ./my_container.def
-FATAL:   Unable to build from ./my_container.def: build var some_text is not defined through either --build-arg (--build-arg-file) or &#39;arguments&#39; section
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">some_more_text</span><span class="o">=</span><span class="s2">&quot;more more more&quot;</span><span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<span class="go">FATAL:   Unable to build from ./my_container.def: build var some_text is not defined through either --build-arg (--build-arg-file) or &#39;arguments&#39; section</span>
 </pre></div>
 </div>
 <p>However, definition files can provide default values for some or all variables
@@ -1119,22 +1119,22 @@ Stage: build
    some_more_text=&quot;Some more default text&quot;
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build -F --build-arg some_more_text=&quot;more more more&quot; ./my_container.sif ./my_container.def
-INFO:    Starting build...
-Getting image source signatures
-Copying blob f4bb4e8dca02 skipped: already exists
-Copying config 2b7cc08dcd done   |
-Writing manifest to image destination
-2024/03/08 14:52:53  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d
-INFO:    Adding runscript
-INFO:    Creating SIF file...
-[=====================================================================]
-100 % 0s
-INFO:    Build complete: ./my_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">some_more_text</span><span class="o">=</span><span class="s2">&quot;more more more&quot;</span><span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<span class="go">INFO:    Starting build...</span>
+<span class="go">Getting image source signatures</span>
+<span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
+<span class="go">Copying config 2b7cc08dcd done   |</span>
+<span class="go">Writing manifest to image destination</span>
+<span class="go">2024/03/08 14:52:53  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d</span>
+<span class="go">INFO:    Adding runscript</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================]</span>
+<span class="go">100 % 0s</span>
+<span class="go">INFO:    Build complete: ./my_container.sif</span>
 
-$ apptainer run ./my_container.sif
-Here is some text: Some default text
-And here is some more text: more more more
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>./my_container.sif
+<span class="go">Here is some text: Some default text</span>
+<span class="go">And here is some more text: more more more</span>
 </pre></div>
 </div>
 <p>Note that in the event of a variable having both a default value <em>and</em> a value
@@ -1285,25 +1285,25 @@ the files &amp; directories of other apps, be placed under the app-specific
 <code class="docutils literal notranslate"><span class="pre">/scif/apps/&lt;app-name&gt;</span></code> directory to avoid conflicts between different apps.</p>
 <p>Installing apps into modules using the <code class="docutils literal notranslate"><span class="pre">%app*</span></code> sections enables the
 <code class="docutils literal notranslate"><span class="pre">--app</span></code> option, allowing commands like the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">apptainer</span> <span class="n">run</span> <span class="o">--</span><span class="n">app</span> <span class="n">foo</span> <span class="n">my_container</span><span class="o">.</span><span class="n">sif</span>
-<span class="n">RUNNING</span> <span class="n">FOO</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">% </span>apptainer<span class="w"> </span>run<span class="w"> </span>--app<span class="w"> </span>foo<span class="w"> </span>my_container.sif
+<span class="go">RUNNING FOO</span>
 </pre></div>
 </div>
 <p>This runs a specific app, <code class="docutils literal notranslate"><span class="pre">foo</span></code>, from the multi-app container we
 built.</p>
 <p>You can also launch an app as a service using the <cite>instance start</cite> command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">apptainer</span> <span class="n">instance</span> <span class="n">start</span> <span class="o">--</span><span class="n">app</span> <span class="n">foo</span> <span class="n">my_container</span><span class="o">.</span><span class="n">sif</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">% </span>apptainer<span class="w"> </span>instance<span class="w"> </span>start<span class="w"> </span>--app<span class="w"> </span>foo<span class="w"> </span>my_container.sif
 </pre></div>
 </div>
 <p>The same environment variable, <code class="docutils literal notranslate"><span class="pre">$SOFTWARE</span></code> is defined for both apps in
 the def file above. You can execute the following command to search the
 list of active environment variables and <code class="docutils literal notranslate"><span class="pre">grep</span></code> to determine if the
 variable changes depending on the app we specify:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --app foo my_container.sif env | grep SOFTWARE
-SOFTWARE=foo
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--app<span class="w"> </span>foo<span class="w"> </span>my_container.sif<span class="w"> </span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>SOFTWARE
+<span class="go">SOFTWARE=foo</span>
 
-$ apptainer exec --app bar my_container.sif env | grep SOFTWARE
-SOFTWARE=bar
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--app<span class="w"> </span>bar<span class="w"> </span>my_container.sif<span class="w"> </span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>SOFTWARE
+<span class="go">SOFTWARE=bar</span>
 </pre></div>
 </div>
 </section>
