@@ -675,8 +675,10 @@ and the `lima "default" template <https://github.com/lima-vm/lima/blob/master/te
 for more details.
 
 By default, the host home directory is mounted as read-only in the guest,
-but there is also a shared writable directory mounted in ``/tmp/lima``
+so you need to add a shared writable directory mount if you want output
 that can be accessed both from the host and in the guest.
+
+Previously there was a mount in `/tmp/lima`, it was removed in Lima 2.0.
 
 **********************
  Running inside Docker
