@@ -249,24 +249,24 @@ runtimes.</p>
 <p>Here’s an example of using the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option and binding <code class="docutils literal notranslate"><span class="pre">/data</span></code>
 on the host to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> in the container (<code class="docutils literal notranslate"><span class="pre">/mnt</span></code> does not need to
 already exist in the container):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls /data
-bar  foo
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ls<span class="w"> </span>/data
+<span class="go">bar  foo</span>
 
-$ apptainer exec --bind /data:/mnt my_container.sif ls /mnt
-bar  foo
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--bind<span class="w"> </span>/data:/mnt<span class="w"> </span>my_container.sif<span class="w"> </span>ls<span class="w"> </span>/mnt
+<span class="go">bar  foo</span>
 </pre></div>
 </div>
 <p>You can bind multiple directories in a single command with this syntax:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --bind /opt,/data:/mnt my_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--bind<span class="w"> </span>/opt,/data:/mnt<span class="w"> </span>my_container.sif
 </pre></div>
 </div>
 <p>This will bind <code class="docutils literal notranslate"><span class="pre">/opt</span></code> on the host to <code class="docutils literal notranslate"><span class="pre">/opt</span></code> in the container and
 <code class="docutils literal notranslate"><span class="pre">/data</span></code> on the host to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> in the container.</p>
 <p>Using the environment variable instead of the command line argument,
 this would be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export APPTAINER_BINDPATH=&quot;/opt,/data:/mnt&quot;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINER_BINDPATH</span><span class="o">=</span><span class="s2">&quot;/opt,/data:/mnt&quot;</span>
 
-$ apptainer shell my_container.sif
+<span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>my_container.sif
 </pre></div>
 </div>
 <p>Using the environment variable <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BINDPATH</span></code>, you can bind paths
@@ -294,25 +294,25 @@ infer <code class="docutils literal notranslate"><span class="pre">type=bind</sp
 <p><code class="docutils literal notranslate"><span class="pre">src</span></code> or <code class="docutils literal notranslate"><span class="pre">source</span></code> can be used interchangeably. <code class="docutils literal notranslate"><span class="pre">dst</span></code>,
 <code class="docutils literal notranslate"><span class="pre">destination</span></code>, or <code class="docutils literal notranslate"><span class="pre">target</span></code> are also equivalent.</p>
 <p>To mount <code class="docutils literal notranslate"><span class="pre">data</span></code> on the host to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> inside the container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec \
-    --mount type=bind,src=/data,dst=/mnt \
-    my_container.sif ls /mnt
-bar  foo
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>/data,dst<span class="o">=</span>/mnt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>my_container.sif<span class="w"> </span>ls<span class="w"> </span>/mnt
+<span class="go">bar  foo</span>
 </pre></div>
 </div>
 <p>To mount the same directory read-only in the container, add the <code class="docutils literal notranslate"><span class="pre">ro</span></code>
 option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec \
-    --mount type=bind,source=/data,dest=/mnt,ro \
-    my_container.sif touch /mnt/test
-touch: cannot touch &#39;/mnt/test&#39;: Permission denied
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,source<span class="o">=</span>/data,dest<span class="o">=</span>/mnt,ro<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>my_container.sif<span class="w"> </span>touch<span class="w"> </span>/mnt/test
+<span class="go">touch: cannot touch &#39;/mnt/test&#39;: Permission denied</span>
 </pre></div>
 </div>
 <p>You can bind multiple directories in a single command with multiple
 <code class="docutils literal notranslate"><span class="pre">--mount</span></code> flags:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --mount type=bind,src=/opt,dst=/opt \
-                    --mount type=bind,src=/data,dst=/data \
-                    my_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>/opt,dst<span class="o">=</span>/opt<span class="w"> </span><span class="se">\</span>
+<span class="w">                    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>/data,dst<span class="o">=</span>/data<span class="w"> </span><span class="se">\</span>
+<span class="w">                    </span>my_container.sif
 </pre></div>
 </div>
 <p>This will bind <code class="docutils literal notranslate"><span class="pre">/opt</span></code> on the host to <code class="docutils literal notranslate"><span class="pre">/opt</span></code> in the container and
@@ -321,15 +321,15 @@ touch: cannot touch &#39;/mnt/test&#39;: Permission denied
 wrapping each field in double quotes if necessary characters.
 <code class="docutils literal notranslate"><span class="pre">--mount</span></code> allows bind mounting paths that are not possible with the
 <code class="docutils literal notranslate"><span class="pre">--bind</span></code> flag. For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Mount a path containing &#39;:&#39; (not possible with --bind)
-$ apptainer run \
-    --mount type=bind,src=/my:path,dst=/mnt \
-    mycontainer.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Mount<span class="w"> </span>a<span class="w"> </span>path<span class="w"> </span>containing<span class="w"> </span><span class="s1">&#39;:&#39;</span><span class="w"> </span><span class="o">(</span>not<span class="w"> </span>possible<span class="w"> </span>with<span class="w"> </span>--bind<span class="o">)</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>/my:path,dst<span class="o">=</span>/mnt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mycontainer.sif
 
-# Mount a path containing a &#39;,&#39;
-$ apptainer run \
-    --mount type=bind,&quot;src=/comma,dir&quot;,dst=/mnt \
-    mycontainer.sif
+<span class="gp"># </span>Mount<span class="w"> </span>a<span class="w"> </span>path<span class="w"> </span>containing<span class="w"> </span>a<span class="w"> </span><span class="s1">&#39;,&#39;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,<span class="s2">&quot;src=/comma,dir&quot;</span>,dst<span class="o">=</span>/mnt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mycontainer.sif
 </pre></div>
 </div>
 <p>Mount specifications are also read from then environment variable
@@ -359,11 +359,11 @@ create them.</p>
 <p>When starting a container, Apptainer allows you to mount your current
 working directory (<code class="docutils literal notranslate"><span class="pre">CWD</span></code>) without mounting your host <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory by
 using the <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> flag. This is equivalent to <code class="docutils literal notranslate"><span class="pre">--no-mount</span> <span class="pre">home</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --no-home my_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--no-home<span class="w"> </span>my_container.sif
 
--or-
+<span class="go">-or-</span>
 
-$ apptainer shell --no-mount home my_container.sif
+<span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--no-mount<span class="w"> </span>home<span class="w"> </span>my_container.sif
 </pre></div>
 </div>
 <p>Disabling the mount of <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> may be useful if your container image has files
@@ -372,7 +372,7 @@ at <code class="docutils literal notranslate"><span class="pre">$HOME</span></co
 <p class="admonition-title">Note</p>
 <p>If your current working directory is under <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>, and you do not want to
 mount it, you will need to disable both <code class="docutils literal notranslate"><span class="pre">cwd</span></code> and <code class="docutils literal notranslate"><span class="pre">home</span></code> mounts:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --no-mount home,cwd my_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--no-mount<span class="w"> </span>home,cwd<span class="w"> </span>my_container.sif
 </pre></div>
 </div>
 </div>
@@ -387,19 +387,19 @@ the container.</p>
 <p>If the container image includes files within <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>, the mounted temporary
 directory will hide them unless you also specify <code class="docutils literal notranslate"><span class="pre">--no-home</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-mount</span>
 <span class="pre">home</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --containall my_container.sif
-Apptainer&gt; ls -lah $HOME
-total 4K
-drwxr-xr-x    2 user group      60 Sep  1 11:45 .
-drwxr-xr-x    1 user group      60 Sep  1 11:44 ..
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--containall<span class="w"> </span>my_container.sif
+<span class="go">Apptainer&gt; ls -lah $HOME</span>
+<span class="go">total 4K</span>
+<span class="go">drwxr-xr-x    2 user group      60 Sep  1 11:45 .</span>
+<span class="go">drwxr-xr-x    1 user group      60 Sep  1 11:44 ..</span>
 
-$ apptainer shell --containall --no-home my_container.sif
-Apptainer&gt; ls -lah $HOME
-total 52K
-drwxr-xr-x    2 user group        60 Sep  1 11:45 .
-drwxr-xr-x    1 user group        60 Sep  1 11:44 ..
-drwxr-xr-x    1 user group     38672 Sep  1 11:44 mydata.csv
-drwxr-xr-x    1 user group     14235 Sep  1 11:44 myimage.jpg
+<span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--containall<span class="w"> </span>--no-home<span class="w"> </span>my_container.sif
+<span class="go">Apptainer&gt; ls -lah $HOME</span>
+<span class="go">total 52K</span>
+<span class="go">drwxr-xr-x    2 user group        60 Sep  1 11:45 .</span>
+<span class="go">drwxr-xr-x    1 user group        60 Sep  1 11:44 ..</span>
+<span class="go">drwxr-xr-x    1 user group     38672 Sep  1 11:44 mydata.csv</span>
+<span class="go">drwxr-xr-x    1 user group     14235 Sep  1 11:44 myimage.jpg</span>
 </pre></div>
 </div>
 </section>
@@ -412,10 +412,10 @@ be mounted using code that runs in userspace, rather than in the Linux
 Kernel. Unprivileged (non-root) users can mount filesystems that have
 FUSE drivers. For example, the <code class="docutils literal notranslate"><span class="pre">fuse-sshfs</span></code> package allows you to
 mount a remote computer’s filesystem to your local host, over ssh:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mount.fuse sshfs#ythel:/home/dave other_host/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mount.fuse<span class="w"> </span>sshfs#ythel:/home/dave<span class="w"> </span>other_host/
 
-# Now mounted to my local machine:
-$ ythel:/home/dave on /home/dave/other_host type fuse.sshfs (rw,nosuid,nodev,relatime,user_id=1000,group_id=1000)
+<span class="gp"># </span>Now<span class="w"> </span>mounted<span class="w"> </span>to<span class="w"> </span>my<span class="w"> </span><span class="nb">local</span><span class="w"> </span>machine:
+<span class="gp">$ </span>ythel:/home/dave<span class="w"> </span>on<span class="w"> </span>/home/dave/other_host<span class="w"> </span><span class="nb">type</span><span class="w"> </span>fuse.sshfs<span class="w"> </span><span class="o">(</span>rw,nosuid,nodev,relatime,user_id<span class="o">=</span><span class="m">1000</span>,group_id<span class="o">=</span><span class="m">1000</span><span class="o">)</span>
 </pre></div>
 </div>
 <p>Apptainer has a <code class="docutils literal notranslate"><span class="pre">--fusemount</span></code> option, which allows
@@ -436,7 +436,7 @@ commands you need inside your container.</p>
 <section id="fuse-mount-definitions">
 <h3>FUSE mount definitions<a class="headerlink" href="#fuse-mount-definitions" title="Link to this heading"></a></h3>
 <p>A fusemount definition for Apptainer consists of 3 parts:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">fusemount</span> <span class="o">&lt;</span><span class="nb">type</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">fuse</span> <span class="n">command</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">container</span> <span class="n">mountpoint</span><span class="o">&gt;</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--fusemount &lt;type&gt;:&lt;fuse command&gt; &lt;container mountpoint&gt;
 </pre></div>
 </div>
 <ul class="simple">
@@ -468,11 +468,11 @@ filesystem will be mounted in the container.</p></li>
 <p>To use a FUSE <code class="docutils literal notranslate"><span class="pre">sshfs</span></code> mount in a container, where the <code class="docutils literal notranslate"><span class="pre">fuse-sshfs</span></code>
 package has been installed on my host, I run with the <code class="docutils literal notranslate"><span class="pre">host</span></code> mount
 type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --fusemount &quot;host:sshfs server:/ /server&quot; docker://ubuntu
-Apptainer&gt; cat /etc/hostname
-localhost.localdomain
-Apptainer&gt; cat /server/etc/hostname
-server
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--fusemount<span class="w"> </span><span class="s2">&quot;host:sshfs server:/ /server&quot;</span><span class="w"> </span>docker://ubuntu
+<span class="go">Apptainer&gt; cat /etc/hostname</span>
+<span class="go">localhost.localdomain</span>
+<span class="go">Apptainer&gt; cat /server/etc/hostname</span>
+<span class="go">server</span>
 </pre></div>
 </div>
 </section>
@@ -480,11 +480,11 @@ server
 <h3>FUSE mount with a container executable<a class="headerlink" href="#fuse-mount-with-a-container-executable" title="Link to this heading"></a></h3>
 <p>If the FUSE driver / command that you want to use for the mount has been
 added to your container, you can use the <code class="docutils literal notranslate"><span class="pre">container</span></code> mount type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --fusemount &quot;container:sshfs server:/ /server&quot; sshfs.sif
-Apptainer&gt; cat /etc/hostname
-localhost.localdomain
-Apptainer&gt; cat /server/etc/hostname
-server
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--fusemount<span class="w"> </span><span class="s2">&quot;container:sshfs server:/ /server&quot;</span><span class="w"> </span>sshfs.sif
+<span class="go">Apptainer&gt; cat /etc/hostname</span>
+<span class="go">localhost.localdomain</span>
+<span class="go">Apptainer&gt; cat /server/etc/hostname</span>
+<span class="go">server</span>
 </pre></div>
 </div>
 </section>
@@ -503,12 +503,12 @@ that you can only use a read/write image in a single container. You
 cannot mount it to multiple container runs at the same time.</p>
 <p>To mount a directory from an image file, use the <code class="docutils literal notranslate"><span class="pre">-B/--bind</span></code> option
 and specify the bind in the format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">B</span> <span class="o">&lt;</span><span class="n">image</span><span class="o">-</span><span class="n">file</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">dest</span><span class="o">&gt;</span><span class="p">:</span><span class="n">image</span><span class="o">-</span><span class="n">src</span><span class="o">=&lt;</span><span class="n">source</span><span class="o">&gt;</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-B<span class="w"> </span>&lt;image-file&gt;:&lt;dest&gt;:image-src<span class="o">=</span>&lt;source&gt;
 </pre></div>
 </div>
 <p>Alternatively use the <code class="docutils literal notranslate"><span class="pre">--mount</span></code> option, and specify the bind in the
 format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">mount</span> <span class="nb">type</span><span class="o">=</span><span class="n">bind</span><span class="p">,</span><span class="n">src</span><span class="o">=&lt;</span><span class="n">image</span><span class="o">-</span><span class="n">file</span><span class="o">&gt;</span><span class="p">,</span><span class="n">dst</span><span class="o">=&lt;</span><span class="n">dest</span><span class="o">&gt;</span><span class="p">,</span><span class="n">image</span><span class="o">-</span><span class="n">src</span><span class="o">=&lt;</span><span class="n">source</span><span class="o">&gt;</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>&lt;image-file&gt;,dst<span class="o">=</span>&lt;dest&gt;,image-src<span class="o">=</span>&lt;source&gt;
 </pre></div>
 </div>
 <p>This will bind the <code class="docutils literal notranslate"><span class="pre">&lt;source&gt;</span></code> path inside <code class="docutils literal notranslate"><span class="pre">&lt;image-file&gt;</span></code> to
@@ -519,7 +519,7 @@ then the <code class="docutils literal notranslate"><span class="pre">&lt;image-
 <h3>Ext3 Image Files<a class="headerlink" href="#ext3-image-files" title="Link to this heading"></a></h3>
 <p>If you have a directory called <code class="docutils literal notranslate"><span class="pre">inputs/</span></code> that holds data files you
 wish to distribute in an image file that allows read/write:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an image file &#39;inputs.img&#39; of size 100MB and put the</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an image file &#39;inputs.img&#39; of size 100MB and put the</span>
 <span class="c1"># files inputs/ into it&#39;s root directory</span>
 $<span class="w"> </span>mkfs.ext3<span class="w"> </span>-d<span class="w"> </span>inputs/<span class="w"> </span>inputs.img<span class="w"> </span>100M
 mke2fs<span class="w"> </span><span class="m">1</span>.45.6<span class="w"> </span><span class="o">(</span><span class="m">20</span>-Mar-2020<span class="o">)</span>
@@ -554,7 +554,7 @@ $<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </
 <p>If you have a directory called <code class="docutils literal notranslate"><span class="pre">inputs/</span></code> that holds data files you
 wish to distribute in an image file that is read-only, and compressed,
 then the squashfs format is appropriate:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an image file &#39;inputs.squashfs&#39; and put the files from</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an image file &#39;inputs.squashfs&#39; and put the files from</span>
 <span class="c1"># inputs/ into it&#39;s root directory</span>
 $<span class="w"> </span>mksquashfs<span class="w"> </span>inputs/<span class="w"> </span>inputs.squashfs
 Parallel<span class="w"> </span>mksquashfs:<span class="w"> </span>Using<span class="w"> </span><span class="m">16</span><span class="w"> </span>processors

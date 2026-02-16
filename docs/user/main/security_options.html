@@ -166,22 +166,22 @@ This feature requires a setuid-root installation of Apptainer.</p>
 <p>To take advantage of this granted capability as a user, <code class="docutils literal notranslate"><span class="pre">pinger</span></code> must
 also request the capability when executing a container with the
 <code class="docutils literal notranslate"><span class="pre">--add-caps</span></code> flag like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW oras://ghcr.io/apptainer/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
-PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
-64 bytes from 8.8.8.8: icmp_seq=1 ttl=52 time=73.1 ms
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--add-caps<span class="w"> </span>CAP_NET_RAW<span class="w"> </span>oras://ghcr.io/apptainer/ubuntu_ping:v1.0<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span>.8.8.8
+<span class="go">PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.</span>
+<span class="go">64 bytes from 8.8.8.8: icmp_seq=1 ttl=52 time=73.1 ms</span>
 
---- 8.8.8.8 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 73.178/73.178/73.178/0.000 ms
+<span class="go">--- 8.8.8.8 ping statistics ---</span>
+<span class="go">1 packets transmitted, 1 received, 0% packet loss, time 0ms</span>
+<span class="go">rtt min/avg/max/mdev = 73.178/73.178/73.178/0.000 ms</span>
 </pre></div>
 </div>
 <p>If the admin decides that it is no longer necessary to allow the user
 <code class="docutils literal notranslate"><span class="pre">pinger</span></code> to open raw sockets within Apptainer containers, they can
 revoke the appropriate Linux capability and <code class="docutils literal notranslate"><span class="pre">pinger</span></code> will not be able
 to add that capability to their containers anymore:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --add-caps CAP_NET_RAW oras://ghcr.io/apptainer/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
-WARNING: not authorized to add capability: CAP_NET_RAW
-ping: socket: Operation not permitted
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--add-caps<span class="w"> </span>CAP_NET_RAW<span class="w"> </span>oras://ghcr.io/apptainer/ubuntu_ping:v1.0<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span>.8.8.8
+<span class="go">WARNING: not authorized to add capability: CAP_NET_RAW</span>
+<span class="go">ping: socket: Operation not permitted</span>
 </pre></div>
 </div>
 <p>Another scenario which is atypical of shared resource environments, but
@@ -195,18 +195,18 @@ sections of the admin docs for more information.</p>
 <p>Assuming the root user will execute containers with the <code class="docutils literal notranslate"><span class="pre">CAP_NET_RAW</span></code>
 capability by default, executing the same container <code class="docutils literal notranslate"><span class="pre">pinger</span></code> executed
 above works without the need to grant capabilities:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># apptainer exec oras://ghcr.io/apptainer/ubuntu_ping:v1.0 ping -c 1 8.8.8.8</span>
-<span class="n">PING</span> <span class="mf">8.8.8.8</span> <span class="p">(</span><span class="mf">8.8.8.8</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="nb">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="o">.</span>
-<span class="mi">64</span> <span class="nb">bytes</span> <span class="kn">from</span><span class="w"> </span><span class="mf">8.8.8.8</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">52</span> <span class="n">time</span><span class="o">=</span><span class="mf">59.6</span> <span class="n">ms</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>oras://ghcr.io/apptainer/ubuntu_ping:v1.0<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span>.8.8.8
+<span class="go">PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.</span>
+<span class="go">64 bytes from 8.8.8.8: icmp_seq=1 ttl=52 time=59.6 ms</span>
 
-<span class="o">---</span> <span class="mf">8.8.8.8</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
-<span class="mi">1</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">1</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span> <span class="n">time</span> <span class="mi">0</span><span class="n">ms</span>
-<span class="n">rtt</span> <span class="nb">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="nb">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">59.673</span><span class="o">/</span><span class="mf">59.673</span><span class="o">/</span><span class="mf">59.673</span><span class="o">/</span><span class="mf">0.000</span> <span class="n">ms</span>
+<span class="go">--- 8.8.8.8 ping statistics ---</span>
+<span class="go">1 packets transmitted, 1 received, 0% packet loss, time 0ms</span>
+<span class="go">rtt min/avg/max/mdev = 59.673/59.673/59.673/0.000 ms</span>
 </pre></div>
 </div>
 <p>Now we can manually drop the <code class="docutils literal notranslate"><span class="pre">CAP_NET_RAW</span></code> capability like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># apptainer exec --drop-caps CAP_NET_RAW oras://ghcr.io/apptainer/ubuntu_ping:v1.0 ping -c 1 8.8.8.8</span>
-<span class="n">ping</span><span class="p">:</span> <span class="n">socket</span><span class="p">:</span> <span class="n">Operation</span> <span class="ow">not</span> <span class="n">permitted</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--drop-caps<span class="w"> </span>CAP_NET_RAW<span class="w"> </span>oras://ghcr.io/apptainer/ubuntu_ping:v1.0<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span>.8.8.8
+<span class="go">ping: socket: Operation not permitted</span>
 </pre></div>
 </div>
 <p>And now the container will not have the ability to create new sockets,
@@ -245,7 +245,7 @@ binaries may allow a user to execute a command as a service account.</p>
 security precaution. But the root user can override this precaution and
 allow SetUID binaries to behave as expected within an Apptainer
 container with the <code class="docutils literal notranslate"><span class="pre">--allow-setuid</span></code> option like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell --allow-setuid some_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--allow-setuid<span class="w"> </span>some_container.sif
 </pre></div>
 </div>
 </section>
@@ -258,13 +258,13 @@ user by setting the <code class="docutils literal notranslate"><span class="pre"
 change is in effect, the root user can override the <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>
 file and enter the container with full capabilities using the
 <code class="docutils literal notranslate"><span class="pre">--keep-privs</span></code> option.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer exec --keep-privs docker://rockylinux:8 ping -c 1 8.8.8.8
-PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
-64 bytes from 8.8.8.8: icmp_seq=1 ttl=128 time=18.8 ms
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--keep-privs<span class="w"> </span>docker://rockylinux:8<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span>.8.8.8
+<span class="go">PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.</span>
+<span class="go">64 bytes from 8.8.8.8: icmp_seq=1 ttl=128 time=18.8 ms</span>
 
---- 8.8.8.8 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 18.838/18.838/18.838/0.000 ms
+<span class="go">--- 8.8.8.8 ping statistics ---</span>
+<span class="go">1 packets transmitted, 1 received, 0% packet loss, time 0ms</span>
+<span class="go">rtt min/avg/max/mdev = 18.838/18.838/18.838/0.000 ms</span>
 </pre></div>
 </div>
 </section>
@@ -275,8 +275,8 @@ the container. You may choose to drop specific capabilities when you
 initiate a container as root to enhance security.</p>
 <p>For instance, to drop the ability for the root user to open a raw socket
 inside the container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer exec --drop-caps CAP_NET_RAW docker://rockylinux:8 ping -c 1 8.8.8.8
-ping: socket: Operation not permitted
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--drop-caps<span class="w"> </span>CAP_NET_RAW<span class="w"> </span>docker://rockylinux:8<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span>.8.8.8
+<span class="go">ping: socket: Operation not permitted</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">drop-caps</span></code> option will also accept the case insensitive keyword
@@ -290,11 +290,11 @@ modules such as SELinux, AppArmor, and seccomp within your Apptainer
 container. You can also change the UID and GID of the user within the
 container at runtime.</p>
 <p>For instance:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo whoami
-root
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>whoami
+<span class="go">root</span>
 
-$ sudo apptainer exec --security uid:1000 my_container.sif whoami
-david
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--security<span class="w"> </span>uid:1000<span class="w"> </span>my_container.sif<span class="w"> </span>whoami
+<span class="go">david</span>
 </pre></div>
 </div>
 <p>To use seccomp to blacklist a command follow this procedure. (It is
@@ -307,27 +307,27 @@ installed with Apptainer, normally at
 <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/apptainer/seccomp-profiles/default.json</span></code>. For this
 example, we will use a much simpler configuration file to blacklist the
 <code class="docutils literal notranslate"><span class="pre">mkdir</span></code> command.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s2">&quot;defaultAction&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_ALLOW&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;archMap&quot;</span><span class="p">:</span> <span class="p">[</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;defaultAction&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_ALLOW&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;archMap&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="s2">&quot;architecture&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ARCH_X86_64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;subArchitectures&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="nt">&quot;architecture&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ARCH_X86_64&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;subArchitectures&quot;</span><span class="p">:</span> <span class="p">[</span>
                 <span class="s2">&quot;SCMP_ARCH_X86&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;SCMP_ARCH_X32&quot;</span>
             <span class="p">]</span>
         <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;syscalls&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nt">&quot;syscalls&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="nt">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span>
                 <span class="s2">&quot;mkdir&quot;</span>
             <span class="p">],</span>
-            <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_KILL&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;includes&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;excludes&quot;</span><span class="p">:</span> <span class="p">{}</span>
+            <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_KILL&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="nt">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;includes&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="nt">&quot;excludes&quot;</span><span class="p">:</span> <span class="p">{}</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -335,22 +335,22 @@ example, we will use a much simpler configuration file to blacklist the
 </div>
 <p>We’ll save the file at <code class="docutils literal notranslate"><span class="pre">/home/david/no_mkdir.json</span></code>. Then we can invoke
 the container like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer shell --security seccomp:/home/david/no_mkdir.json my_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--security<span class="w"> </span>seccomp:/home/david/no_mkdir.json<span class="w"> </span>my_container.sif
 
-Apptainer&gt; mkdir /tmp/foo
-Bad system call (core dumped)
+<span class="go">Apptainer&gt; mkdir /tmp/foo</span>
+<span class="go">Bad system call (core dumped)</span>
 </pre></div>
 </div>
 <p>Note that attempting to use the blacklisted <code class="docutils literal notranslate"><span class="pre">mkdir</span></code> command resulted
 in a core dump.</p>
 <p>The full list of arguments accepted by the <code class="docutils literal notranslate"><span class="pre">--security</span></code> option are as
 follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;seccomp:/usr/local/etc/apptainer/seccomp-profiles/default.json&quot;</span>
-<span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;apparmor:/usr/bin/man&quot;</span>
-<span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;selinux:context&quot;</span>
-<span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;uid:1000&quot;</span>
-<span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;gid:1000&quot;</span>
-<span class="o">--</span><span class="n">security</span><span class="o">=</span><span class="s2">&quot;gid:1000:1:0&quot;</span> <span class="p">(</span><span class="n">multiple</span> <span class="n">gids</span><span class="p">,</span> <span class="n">first</span> <span class="ow">is</span> <span class="n">always</span> <span class="n">the</span> <span class="n">primary</span> <span class="n">group</span><span class="p">)</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>--security<span class="o">=</span><span class="s2">&quot;seccomp:/usr/local/etc/apptainer/seccomp-profiles/default.json&quot;</span>
+--security<span class="o">=</span><span class="s2">&quot;apparmor:/usr/bin/man&quot;</span>
+--security<span class="o">=</span><span class="s2">&quot;selinux:context&quot;</span>
+--security<span class="o">=</span><span class="s2">&quot;uid:1000&quot;</span>
+--security<span class="o">=</span><span class="s2">&quot;gid:1000&quot;</span>
+--security<span class="o">=</span><span class="s2">&quot;gid:1000:1:0&quot;</span><span class="w"> </span><span class="o">(</span>multiple<span class="w"> </span>gids,<span class="w"> </span>first<span class="w"> </span>is<span class="w"> </span>always<span class="w"> </span>the<span class="w"> </span>primary<span class="w"> </span>group<span class="o">)</span>
 </pre></div>
 </div>
 </section>

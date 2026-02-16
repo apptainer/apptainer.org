@@ -202,9 +202,9 @@ be transferred to, and consumed by, a different user.</p></li>
 <code class="docutils literal notranslate"><span class="pre">--authfile</span> <span class="pre">&lt;path&gt;</span></code> flag, which specifies a custom file location for
 credential information to be added to (by <code class="docutils literal notranslate"><span class="pre">registry</span> <span class="pre">login</span></code>) or removed from
 (by <code class="docutils literal notranslate"><span class="pre">registry</span> <span class="pre">logout</span></code>):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer registry login -u myuser --authfile ./myauthfile docker://docker.io
-Password / Token:
-INFO:    Token stored in ./myauthfile
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>registry<span class="w"> </span>login<span class="w"> </span>-u<span class="w"> </span>myuser<span class="w"> </span>--authfile<span class="w"> </span>./myauthfile<span class="w"> </span>docker://docker.io
+<span class="go">Password / Token:</span>
+<span class="go">INFO:    Token stored in ./myauthfile</span>
 </pre></div>
 </div>
 <p>Once credentials have been added to a file, that file can be used in any of the
@@ -216,18 +216,18 @@ commands discussed above (<a class="reference external" href="cli/apptainer_pull
 <a class="reference external" href="cli/apptainer_run.html">run</a>,
 <a class="reference external" href="cli/apptainer_instance.html">instance</a>.),
 by passing them the same <code class="docutils literal notranslate"><span class="pre">--authfile</span> <span class="pre">&lt;path&gt;</span></code> flag:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --authfile myauthfile docker://placeforstuff/private1:latest
-INFO:    Converting OCI blobs to SIF format
-INFO:    Starting build...
-Getting image source signatures
-Copying blob 7264a8db6415 done   |
-Copying config 913cf3a39d done   |
-Writing manifest to image destination
-2023/09/28 13:15:46  info unpack layer: sha256:7264a8db6415046d36d16ba98b79778e18accee6ffa71850405994cffa9be7de
-INFO:    Creating SIF file...
-[=====================================================================]
-100 % 0s
-Apptainer&gt;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--authfile<span class="w"> </span>myauthfile<span class="w"> </span>docker://placeforstuff/private1:latest
+<span class="go">INFO:    Converting OCI blobs to SIF format</span>
+<span class="go">INFO:    Starting build...</span>
+<span class="go">Getting image source signatures</span>
+<span class="go">Copying blob 7264a8db6415 done   |</span>
+<span class="go">Copying config 913cf3a39d done   |</span>
+<span class="go">Writing manifest to image destination</span>
+<span class="go">2023/09/28 13:15:46  info unpack layer: sha256:7264a8db6415046d36d16ba98b79778e18accee6ffa71850405994cffa9be7de</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================]</span>
+<span class="go">100 % 0s</span>
+<span class="go">Apptainer&gt;</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -241,18 +241,18 @@ the <a class="reference internal" href="docker_and_oci.html#sec-docker-envvars">
 <p>Finally, note that logging in when the relevant credentials already exist, and
 logging out when the relevant credentials are already absent, are not considered
 errors:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer registry login -u myuser --authfile ./myauthfile docker://docker.io
-Password / Token:
-INFO:    Token stored in ./myauthfile
-$ apptainer registry login -u myuser --authfile ./myauthfile docker://docker.io
-Password / Token:
-INFO:    Token stored in ./myauthfile
-$ apptainer registry logout --authfile ./myauthfile docker://docker.io
-INFO:    Token removed from ./myauthfile
-INFO:    Logout succeeded
-$ apptainer registry logout --authfile ./myauthfile docker://docker.io
-WARNING: There is no existing login to registry &quot;docker.io&quot;.
-INFO:    Logout succeeded
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>registry<span class="w"> </span>login<span class="w"> </span>-u<span class="w"> </span>myuser<span class="w"> </span>--authfile<span class="w"> </span>./myauthfile<span class="w"> </span>docker://docker.io
+<span class="go">Password / Token:</span>
+<span class="go">INFO:    Token stored in ./myauthfile</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>registry<span class="w"> </span>login<span class="w"> </span>-u<span class="w"> </span>myuser<span class="w"> </span>--authfile<span class="w"> </span>./myauthfile<span class="w"> </span>docker://docker.io
+<span class="go">Password / Token:</span>
+<span class="go">INFO:    Token stored in ./myauthfile</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>registry<span class="w"> </span><span class="nb">logout</span><span class="w"> </span>--authfile<span class="w"> </span>./myauthfile<span class="w"> </span>docker://docker.io
+<span class="go">INFO:    Token removed from ./myauthfile</span>
+<span class="go">INFO:    Logout succeeded</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>registry<span class="w"> </span><span class="nb">logout</span><span class="w"> </span>--authfile<span class="w"> </span>./myauthfile<span class="w"> </span>docker://docker.io
+<span class="go">WARNING: There is no existing login to registry &quot;docker.io&quot;.</span>
+<span class="go">INFO:    Logout succeeded</span>
 </pre></div>
 </div>
 <section id="apptainer-authfile">
@@ -291,11 +291,11 @@ when pushing it.
 The most popular registries are <code class="docutils literal notranslate"><span class="pre">ghcr.io</span></code> and <code class="docutils literal notranslate"><span class="pre">docker.io</span></code> and they
 both support both OCI container protocols.</p>
 <p>Here are some examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://alpine:latest
-$ apptainer pull docker://ghcr.io/apptainer/apptainer
-$ apptainer pull oras://ghcr.io/apptainer/alpine
-$ apptainer run docker://alpine
-$ apptainer run oras://docker.io/davedykstra/lolcow
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://alpine:latest
+<span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://ghcr.io/apptainer/apptainer
+<span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>oras://ghcr.io/apptainer/alpine
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>oras://docker.io/davedykstra/lolcow
 </pre></div>
 </div>
 </section>

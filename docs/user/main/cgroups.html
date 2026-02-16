@@ -210,8 +210,8 @@ CLI are not yet available.</p>
 <p><code class="docutils literal notranslate"><span class="pre">--cpus</span></code> sets the number of CPUs, or fractional CPUs, that the container can
 use.  The minimum is <code class="docutils literal notranslate"><span class="pre">0.01</span></code> or one hundredth of a physical CPU. The maximum is
 the number of CPU cores on your system.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Limit container to 3.5 CPUs
-$ apptainer run --cpus 3.5 myfirstapp.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Limit<span class="w"> </span>container<span class="w"> </span>to<span class="w"> </span><span class="m">3</span>.5<span class="w"> </span>CPUs
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--cpus<span class="w"> </span><span class="m">3</span>.5<span class="w"> </span>myfirstapp.sif
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">--cpu-shares</span></code> sets a relative weight for a container’s access to the system’s
@@ -220,11 +220,11 @@ container A has 1024 cpu shares, and container B has 512 cpu shares, then
 container A will receive twice as much CPU time than container B, but <em>only when
 there is contention for CPUs</em>, i.e. the containers are able to consume more CPU
 time than is available.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Container A - twice as much CPU priority as container B
-$ apptainer run --cpu-shares 1024 myfirstapp.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Container<span class="w"> </span>A<span class="w"> </span>-<span class="w"> </span>twice<span class="w"> </span>as<span class="w"> </span>much<span class="w"> </span>CPU<span class="w"> </span>priority<span class="w"> </span>as<span class="w"> </span>container<span class="w"> </span>B
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--cpu-shares<span class="w"> </span><span class="m">1024</span><span class="w"> </span>myfirstapp.sif
 
-# Container A - half as much CPU priority as container A
-$ apptainer run --cpu-shares 512 mysecondapp.sif
+<span class="gp"># </span>Container<span class="w"> </span>A<span class="w"> </span>-<span class="w"> </span>half<span class="w"> </span>as<span class="w"> </span>much<span class="w"> </span>CPU<span class="w"> </span>priority<span class="w"> </span>as<span class="w"> </span>container<span class="w"> </span>A
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--cpu-shares<span class="w"> </span><span class="m">512</span><span class="w"> </span>mysecondapp.sif
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">--cpuset-cpus</span></code> specifies a list of physical CPU IDs on which a container can
@@ -232,11 +232,11 @@ run. For example, on a dual CPU system you might pin one container to the first
 12 cores on CPU 1, and a second container to the second 12 cores on CPU 2.</p>
 <p><code class="docutils literal notranslate"><span class="pre">--cpuset-mems</span></code> specifies a list of memory nodes the container can use. It
 should generally be set to the same value as <code class="docutils literal notranslate"><span class="pre">--cpuset-cpus</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Container A - first CPU
-$ apptainer run --cpuset-cpus 0-11 --cpuset-mems 0-11 myfirstapp.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Container<span class="w"> </span>A<span class="w"> </span>-<span class="w"> </span>first<span class="w"> </span>CPU
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--cpuset-cpus<span class="w"> </span><span class="m">0</span>-11<span class="w"> </span>--cpuset-mems<span class="w"> </span><span class="m">0</span>-11<span class="w"> </span>myfirstapp.sif
 
-# Container B - second CPU
-$ apptainer run --cpuset-cpus 12-23 --cpuset-mems 12-23 myfirstapp.sif
+<span class="gp"># </span>Container<span class="w"> </span>B<span class="w"> </span>-<span class="w"> </span>second<span class="w"> </span>CPU
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--cpuset-cpus<span class="w"> </span><span class="m">12</span>-23<span class="w"> </span>--cpuset-mems<span class="w"> </span><span class="m">12</span>-23<span class="w"> </span>myfirstapp.sif
 </pre></div>
 </div>
 </section>
@@ -246,16 +246,16 @@ $ apptainer run --cpuset-cpus 12-23 --cpuset-mems 12-23 myfirstapp.sif
 You can use suffixes such as <code class="docutils literal notranslate"><span class="pre">M</span></code> or <code class="docutils literal notranslate"><span class="pre">G</span></code> to specify megabytes or gigabytes.
 If the container tries to use more memory than its limit, the system will kill
 it.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Run a program that will use 10GB of RAM, with a 100MB limit
-$ apptainer exec --memory 100M memhog.sif memhog 10G
-.................................................Killed
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Run<span class="w"> </span>a<span class="w"> </span>program<span class="w"> </span>that<span class="w"> </span>will<span class="w"> </span>use<span class="w"> </span>10GB<span class="w"> </span>of<span class="w"> </span>RAM,<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>100MB<span class="w"> </span>limit
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--memory<span class="w"> </span>100M<span class="w"> </span>memhog.sif<span class="w"> </span>memhog<span class="w"> </span>10G
+<span class="go">.................................................Killed</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">--memory-reservation</span></code> sets a soft limit, which should be lower than the hard
 limit set with <code class="docutils literal notranslate"><span class="pre">--memory</span></code>. When there is contention for memory, the system
 will attempt to make sure the container doesn’t exceed the soft limit.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Kill my program if it exceeds 10G, but aim for 8G if there is contention
-$ apptainer exec --memory 10G --memory-reservation 8G myfirstapp.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Kill<span class="w"> </span>my<span class="w"> </span>program<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exceeds<span class="w"> </span>10G,<span class="w"> </span>but<span class="w"> </span>aim<span class="w"> </span><span class="k">for</span><span class="w"> </span>8G<span class="w"> </span><span class="k">if</span><span class="w"> </span>there<span class="w"> </span>is<span class="w"> </span>contention
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--memory<span class="w"> </span>10G<span class="w"> </span>--memory-reservation<span class="w"> </span>8G<span class="w"> </span>myfirstapp.sif
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">--memory-swap</span></code> sets the total amount of memory and swap space that a
@@ -263,17 +263,17 @@ container can use. You must set <code class="docutils literal notranslate"><span
 value of <code class="docutils literal notranslate"><span class="pre">-1</span></code> means <em>unlimited swap</em>. If <code class="docutils literal notranslate"><span class="pre">--memory-swap</span></code> is not set or is
 <code class="docutils literal notranslate"><span class="pre">0</span></code>, then the container can use an amount of swap up to the value of
 <code class="docutils literal notranslate"><span class="pre">--memory</span></code>. It’s easier to understand this flag with examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Run a container that can use up to 1G RAM, or swap if it is swapped out
-$ apptainer run --memory 1G myfirstapp.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Run<span class="w"> </span>a<span class="w"> </span>container<span class="w"> </span>that<span class="w"> </span>can<span class="w"> </span>use<span class="w"> </span>up<span class="w"> </span>to<span class="w"> </span>1G<span class="w"> </span>RAM,<span class="w"> </span>or<span class="w"> </span>swap<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>is<span class="w"> </span>swapped<span class="w"> </span>out
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--memory<span class="w"> </span>1G<span class="w"> </span>myfirstapp.sif
 
-# Run a container that can use up to 1G RAM, and no swap space
-$ apptainer run --memory 1G --memory-swap 1G myfirstapp.sif
+<span class="gp"># </span>Run<span class="w"> </span>a<span class="w"> </span>container<span class="w"> </span>that<span class="w"> </span>can<span class="w"> </span>use<span class="w"> </span>up<span class="w"> </span>to<span class="w"> </span>1G<span class="w"> </span>RAM,<span class="w"> </span>and<span class="w"> </span>no<span class="w"> </span>swap<span class="w"> </span>space
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--memory<span class="w"> </span>1G<span class="w"> </span>--memory-swap<span class="w"> </span>1G<span class="w"> </span>myfirstapp.sif
 
-# Run a container that can use up to 1G RAM, and unlimited swap space
-$ apptainer run --memory 1G --memory-swap -1 myfirstapp.sif
+<span class="gp"># </span>Run<span class="w"> </span>a<span class="w"> </span>container<span class="w"> </span>that<span class="w"> </span>can<span class="w"> </span>use<span class="w"> </span>up<span class="w"> </span>to<span class="w"> </span>1G<span class="w"> </span>RAM,<span class="w"> </span>and<span class="w"> </span>unlimited<span class="w"> </span>swap<span class="w"> </span>space
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--memory<span class="w"> </span>1G<span class="w"> </span>--memory-swap<span class="w"> </span>-1<span class="w"> </span>myfirstapp.sif
 
-# Run a container that can use up to 1G RAM, and 1G swap space
-$ apptainer run --memory 1G --memory-swap 2G myfirstapp.sif
+<span class="gp"># </span>Run<span class="w"> </span>a<span class="w"> </span>container<span class="w"> </span>that<span class="w"> </span>can<span class="w"> </span>use<span class="w"> </span>up<span class="w"> </span>to<span class="w"> </span>1G<span class="w"> </span>RAM,<span class="w"> </span>and<span class="w"> </span>1G<span class="w"> </span>swap<span class="w"> </span>space
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--memory<span class="w"> </span>1G<span class="w"> </span>--memory-swap<span class="w"> </span>2G<span class="w"> </span>myfirstapp.sif
 </pre></div>
 </div>
 </section>
@@ -291,20 +291,20 @@ and 1000, and will control how much I/O access a container recieves when there
 is contention for I/O with other containers. It may be useful to give high
 priority to a container that needs infrequent but time sensitive data access,
 running alongside an application that is continuously performing bulk reads.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Container A - ten times as much block IO priority as container B
-$ apptainer run --blkio-weight 1000 myfirstapp.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Container<span class="w"> </span>A<span class="w"> </span>-<span class="w"> </span>ten<span class="w"> </span><span class="nb">times</span><span class="w"> </span>as<span class="w"> </span>much<span class="w"> </span>block<span class="w"> </span>IO<span class="w"> </span>priority<span class="w"> </span>as<span class="w"> </span>container<span class="w"> </span>B
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--blkio-weight<span class="w"> </span><span class="m">1000</span><span class="w"> </span>myfirstapp.sif
 
-# Container A - ten times less block IO priority as container A
-$ apptainer run --blkio-weight 100 mysecondapp.sif
+<span class="gp"># </span>Container<span class="w"> </span>A<span class="w"> </span>-<span class="w"> </span>ten<span class="w"> </span><span class="nb">times</span><span class="w"> </span>less<span class="w"> </span>block<span class="w"> </span>IO<span class="w"> </span>priority<span class="w"> </span>as<span class="w"> </span>container<span class="w"> </span>A
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--blkio-weight<span class="w"> </span><span class="m">100</span><span class="w"> </span>mysecondapp.sif
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">--blkio-weight-device</span></code> sets a relative weight for the container when performing
 block I/O on a specific device. Specify the device and weight as <code class="docutils literal notranslate"><span class="pre">&lt;device</span> <span class="pre">path&gt;:weight</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Container A - ten times as much block IO priority as container B on disk /dev/sda
-$ apptainer run --blkio-weight-device /dev/sda:1000 myfirstapp.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Container<span class="w"> </span>A<span class="w"> </span>-<span class="w"> </span>ten<span class="w"> </span><span class="nb">times</span><span class="w"> </span>as<span class="w"> </span>much<span class="w"> </span>block<span class="w"> </span>IO<span class="w"> </span>priority<span class="w"> </span>as<span class="w"> </span>container<span class="w"> </span>B<span class="w"> </span>on<span class="w"> </span>disk<span class="w"> </span>/dev/sda
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--blkio-weight-device<span class="w"> </span>/dev/sda:1000<span class="w"> </span>myfirstapp.sif
 
-# Container A - ten times less block IO priority as container A on disk /dev/sda
-$ apptainer run --blkio-weight-device /dev/sda:100 mysecondapp.sif
+<span class="gp"># </span>Container<span class="w"> </span>A<span class="w"> </span>-<span class="w"> </span>ten<span class="w"> </span><span class="nb">times</span><span class="w"> </span>less<span class="w"> </span>block<span class="w"> </span>IO<span class="w"> </span>priority<span class="w"> </span>as<span class="w"> </span>container<span class="w"> </span>A<span class="w"> </span>on<span class="w"> </span>disk<span class="w"> </span>/dev/sda
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--blkio-weight-device<span class="w"> </span>/dev/sda:100<span class="w"> </span>mysecondapp.sif
 </pre></div>
 </div>
 </section>
@@ -325,7 +325,7 @@ eBPF programs that implement the requested access controls.</p>
 <p>To apply resource limits to a container, using the <code class="docutils literal notranslate"><span class="pre">--apply-cgroups</span></code>
 flag, which takes a path to a TOML file specifying the cgroups
 configuration to be applied:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --apply-cgroups /path/to/cgroups.toml my_container.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--apply-cgroups<span class="w"> </span>/path/to/cgroups.toml<span class="w"> </span>my_container.sif
 </pre></div>
 </div>
 <div class="admonition note">
@@ -341,8 +341,8 @@ specified in the <code class="docutils literal notranslate"><span class="pre">[c
 <p>This corresponds to a ratio versus other cgroups with cpu shares.
 Usually the default value is <code class="docutils literal notranslate"><span class="pre">1024</span></code>. That means if you want to allow
 to use 50% of a single CPU, you will set <code class="docutils literal notranslate"><span class="pre">512</span></code> as value.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">cpu</span><span class="p">]</span>
-    <span class="n">shares</span> <span class="o">=</span> <span class="mi">512</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[cpu]</span>
+<span class="w">    </span><span class="n">shares</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">512</span>
 </pre></div>
 </div>
 <p>A cgroup can get more than its share of CPU if there are enough idle CPU
@@ -356,17 +356,17 @@ contained processes can’t use more than the amount of CPU time set for
 the cgroup. <code class="docutils literal notranslate"><span class="pre">quota</span></code> allows you to configure the amount of CPU time
 that a cgroup can use per period. The default is 100ms (100000us). So if
 you want to limit amount of CPU time to 20ms during period of 100ms:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">cpu</span><span class="p">]</span>
-    <span class="n">period</span> <span class="o">=</span> <span class="mi">100000</span>
-    <span class="n">quota</span> <span class="o">=</span> <span class="mi">20000</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[cpu]</span>
+<span class="w">    </span><span class="n">period</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span>
+<span class="w">    </span><span class="n">quota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20000</span>
 </pre></div>
 </div>
 <p><strong>cpus/mems</strong></p>
 <p>You can also restrict access to specific CPUs (cores) and associated
 memory nodes by using <code class="docutils literal notranslate"><span class="pre">cpus/mems</span></code> fields:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">cpu</span><span class="p">]</span>
-    <span class="n">cpus</span> <span class="o">=</span> <span class="s2">&quot;0-1&quot;</span>
-    <span class="n">mems</span> <span class="o">=</span> <span class="s2">&quot;0-1&quot;</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[cpu]</span>
+<span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0-1&quot;</span>
+<span class="w">    </span><span class="n">mems</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0-1&quot;</span>
 </pre></div>
 </div>
 <p>Where the container has limited access to CPU 0 and CPU 1.</p>
@@ -381,25 +381,25 @@ memory nodes by using <code class="docutils literal notranslate"><span class="pr
 <p>To limit the amount of memory that your container uses to 500MB
 (524288000 bytes), set a <code class="docutils literal notranslate"><span class="pre">limit</span></code> value inside the <code class="docutils literal notranslate"><span class="pre">[memory]</span></code> section
 of your cgroups TOML file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">memory</span><span class="p">]</span>
-    <span class="n">limit</span> <span class="o">=</span> <span class="mi">524288000</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[memory]</span>
+<span class="w">    </span><span class="n">limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">524288000</span>
 </pre></div>
 </div>
 <p>Start your container, applying the toml file, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --apply-cgroups path/to/cgroups.toml docker://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--apply-cgroups<span class="w"> </span>path/to/cgroups.toml<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
 <p>After that, you can verify that the container is only using 500MB of
 memory. This example assumes that there is only one running container.
 If you are running multiple containers you will find multiple cgroups
 trees under the <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> directory.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># cgroups v1
-$ cat /sys/fs/cgroup/memory/apptainer/*/memory.limit_in_bytes
-  524288000
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>cgroups<span class="w"> </span>v1
+<span class="gp">$ </span>cat<span class="w"> </span>/sys/fs/cgroup/memory/apptainer/*/memory.limit_in_bytes
+<span class="go">  524288000</span>
 
-# cgroups v2 - note translation of memory.limit_in_bytes -&gt; memory.max
-$ cat /sys/fs/cgroup/apptainer/*/memory.max
-524288000
+<span class="gp"># </span>cgroups<span class="w"> </span>v2<span class="w"> </span>-<span class="w"> </span>note<span class="w"> </span>translation<span class="w"> </span>of<span class="w"> </span>memory.limit_in_bytes<span class="w"> </span>-&gt;<span class="w"> </span>memory.max
+<span class="gp">$ </span>cat<span class="w"> </span>/sys/fs/cgroup/apptainer/*/memory.max
+<span class="go">524288000</span>
 </pre></div>
 </div>
 </section>
@@ -407,9 +407,9 @@ $ cat /sys/fs/cgroup/apptainer/*/memory.max
 <h3>IO Limits<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <p>To control block device I/O, applying limits to competing container, use
 the <code class="docutils literal notranslate"><span class="pre">[blockIO]</span></code> section of the TOML file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">blockIO</span><span class="p">]</span>
-    <span class="n">weight</span> <span class="o">=</span> <span class="mi">1000</span>
-    <span class="n">leafWeight</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[blockIO]</span>
+<span class="w">    </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
+<span class="w">    </span><span class="n">leafWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">weight</span></code> and <code class="docutils literal notranslate"><span class="pre">leafWeight</span></code> accept values between <code class="docutils literal notranslate"><span class="pre">10</span></code> and <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p>
@@ -422,31 +422,31 @@ child cgroups.</p>
 for specific device major/minor numbers. For example, to override
 <code class="docutils literal notranslate"><span class="pre">weight/leafWeight</span></code> for <code class="docutils literal notranslate"><span class="pre">/dev/loop0</span></code> and <code class="docutils literal notranslate"><span class="pre">/dev/loop1</span></code> block
 devices, set limits for device major 7, minor 0 and 1:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">blockIO</span><span class="p">]</span>
-    <span class="p">[[</span><span class="n">blockIO</span><span class="o">.</span><span class="n">weightDevice</span><span class="p">]]</span>
-        <span class="n">major</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">minor</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">weight</span> <span class="o">=</span> <span class="mi">100</span>
-        <span class="n">leafWeight</span> <span class="o">=</span> <span class="mi">50</span>
-    <span class="p">[[</span><span class="n">blockIO</span><span class="o">.</span><span class="n">weightDevice</span><span class="p">]]</span>
-        <span class="n">major</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">minor</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">weight</span> <span class="o">=</span> <span class="mi">100</span>
-        <span class="n">leafWeight</span> <span class="o">=</span> <span class="mi">50</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[blockIO]</span>
+<span class="w">    </span><span class="k">[[blockIO.weightDevice]]</span>
+<span class="w">        </span><span class="n">major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span>
+<span class="w">        </span><span class="n">minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">        </span><span class="n">leafWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span>
+<span class="w">    </span><span class="k">[[blockIO.weightDevice]]</span>
+<span class="w">        </span><span class="n">major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span>
+<span class="w">        </span><span class="n">minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">        </span><span class="n">leafWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span>
 </pre></div>
 </div>
 <p>You can also limit the IO read/write rate to a specific absolute value,
 e.g. 16MB per second for the <code class="docutils literal notranslate"><span class="pre">/dev/loop0</span></code> block device. The <code class="docutils literal notranslate"><span class="pre">rate</span></code>
 is specified in bytes per second.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">blockIO</span><span class="p">]</span>
-    <span class="p">[[</span><span class="n">blockIO</span><span class="o">.</span><span class="n">throttleReadBpsDevice</span><span class="p">]]</span>
-        <span class="n">major</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">minor</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">rate</span> <span class="o">=</span> <span class="mi">16777216</span>
-    <span class="p">[[</span><span class="n">blockIO</span><span class="o">.</span><span class="n">throttleWriteBpsDevice</span><span class="p">]]</span>
-        <span class="n">major</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">minor</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">rate</span> <span class="o">=</span> <span class="mi">16777216</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[blockIO]</span>
+<span class="w">    </span><span class="k">[[blockIO.throttleReadBpsDevice]]</span>
+<span class="w">        </span><span class="n">major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span>
+<span class="w">        </span><span class="n">minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16777216</span>
+<span class="w">    </span><span class="k">[[blockIO.throttleWriteBpsDevice]]</span>
+<span class="w">        </span><span class="n">major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span>
+<span class="w">        </span><span class="n">minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16777216</span>
 </pre></div>
 </div>
 </section>
@@ -463,15 +463,15 @@ use device node major and minor numbers to create rules for specific
 devices or classes of device.</p>
 <p>In this example, a container is configured to only be able to read from
 or write to <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">devices</span><span class="p">]]</span>
-    <span class="n">access</span> <span class="o">=</span> <span class="s2">&quot;rwm&quot;</span>
-    <span class="n">allow</span> <span class="o">=</span> <span class="n">false</span>
-<span class="p">[[</span><span class="n">devices</span><span class="p">]]</span>
-    <span class="n">access</span> <span class="o">=</span> <span class="s2">&quot;rw&quot;</span>
-    <span class="n">allow</span> <span class="o">=</span> <span class="n">true</span>
-    <span class="n">major</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">minor</span> <span class="o">=</span> <span class="mi">3</span>
-    <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;c&quot;</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[[devices]]</span>
+<span class="w">    </span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rwm&quot;</span>
+<span class="w">    </span><span class="n">allow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="k">[[devices]]</span>
+<span class="w">    </span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rw&quot;</span>
+<span class="w">    </span><span class="n">allow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="n">major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">    </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;c&quot;</span>
 </pre></div>
 </div>
 </section>
@@ -504,7 +504,7 @@ privileges are required to create a cgroup.</p>
 <p>For example, assuming your system is configured correctly for
 unprivileged cgroup creation via systemd, you can limit the number of
 CPUs a container run is allowed to use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ systemd-run --user --scope -p AllowedCPUs=1,2 -- apptainer run mycontainer.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>systemd-run<span class="w"> </span>--user<span class="w"> </span>--scope<span class="w"> </span>-p<span class="w"> </span><span class="nv">AllowedCPUs</span><span class="o">=</span><span class="m">1</span>,2<span class="w"> </span>--<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif
 </pre></div>
 </div>
 <ul class="simple">

@@ -181,14 +181,14 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#docker-archive-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id30">Overview</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id31">Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id29">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id30">Keywords</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#scratch-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">scratch</span></code> bootstrap agent</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id32">Overview</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id33">Keywords</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id34">Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id32">Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id33">Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -927,7 +927,7 @@ one (e.g. bootstrap a RHEL 8 container from a RHEL 9 host).</p>
 or <code class="docutils literal notranslate"><span class="pre">dnf</span></code> installed on your system. It may seem counter-intuitive to install YUM
 or DNF on a system that uses a different package manager, but you can do so.
 For instance, on Ubuntu you can install it like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get update &amp;&amp; sudo apt-get install dnf
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>dnf
 </pre></div>
 </div>
 <p>When building a container as an unprivileged user using this bootstrap,
@@ -980,11 +980,11 @@ needs to properly complete the build.</p>
 <p>In order to use the <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> build module, you must have
 <code class="docutils literal notranslate"><span class="pre">debootstrap</span></code> installed on your system. On Ubuntu you can install it
 like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get update &amp;&amp; sudo apt-get install debootstrap
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>debootstrap
 </pre></div>
 </div>
 <p>On RHEL you can install it from the epel repos like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo dnf update &amp;&amp; sudo dnf install epel-release &amp;&amp; sudo dnf install debootstrap.noarch
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>dnf<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>epel-release<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>debootstrap.noarch
 </pre></div>
 </div>
 <p>When building a container as an unprivileged user using this bootstrap,
@@ -1113,8 +1113,8 @@ currently residing in the Docker daemon’s internal storage:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_HOST</span></code> or <code class="docutils literal notranslate"><span class="pre">DOCKER_HOST</span></code> environment variables may be
 set to instruct {Apptainer} to pull images from a Docker daemon that is not
 running at the default location. For example, when using a virtualized Docker you may be instructed to set <code class="docutils literal notranslate"><span class="pre">DOCKER_HOST</span></code> e.g.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">To</span> <span class="n">connect</span> <span class="n">the</span> <span class="n">Docker</span> <span class="n">client</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Docker</span> <span class="n">daemon</span><span class="p">,</span> <span class="n">please</span> <span class="nb">set</span>
-<span class="n">export</span> <span class="n">DOCKER_HOST</span><span class="o">=</span><span class="n">tcp</span><span class="p">:</span><span class="o">//</span><span class="mf">192.168.59.103</span><span class="p">:</span><span class="mi">2375</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>To connect the Docker client to the Docker daemon, please set
+export DOCKER_HOST=tcp://192.168.59.103:2375
 </pre></div>
 </div>
 </section>
@@ -1131,9 +1131,9 @@ written explicitly.</p>
 </section>
 </section>
 <section id="docker-archive-bootstrap-agent">
-<span id="id29"></span><h3><code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent<a class="headerlink" href="#docker-archive-bootstrap-agent" title="Link to this heading"></a></h3>
-<section id="id30">
-<h4>Overview<a class="headerlink" href="#id30" title="Link to this heading"></a></h4>
+<span id="docker-archive"></span><h3><code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent<a class="headerlink" href="#docker-archive-bootstrap-agent" title="Link to this heading"></a></h3>
+<section id="id29">
+<h4>Overview<a class="headerlink" href="#id29" title="Link to this heading"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> boostrap agent allows you to create a Apptainer image
 from a docker image stored in a <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">save</span></code> formatted tar file:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>save<span class="w"> </span>-o<span class="w"> </span>alpine.tar<span class="w"> </span>alpine:latest
@@ -1153,8 +1153,8 @@ from a docker image stored in a <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 </section>
-<section id="id31">
-<h4>Keywords<a class="headerlink" href="#id31" title="Link to this heading"></a></h4>
+<section id="id30">
+<h4>Keywords<a class="headerlink" href="#id30" title="Link to this heading"></a></h4>
 <p>In a definition file, the <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent requires the path
 to the tar file containing the image to be specified with the <code class="docutils literal notranslate"><span class="pre">From:</span></code> keyword.</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker-archive
@@ -1170,8 +1170,8 @@ container. You are then responsible for adding any and all executables,
 libraries etc. that are required. Starting with a scratch container can
 be useful when you are aiming to minimize container size, and have a
 simple application / static binaries.</p>
-<section id="id32">
-<h4>Overview<a class="headerlink" href="#id32" title="Link to this heading"></a></h4>
+<section id="id31">
+<h4>Overview<a class="headerlink" href="#id31" title="Link to this heading"></a></h4>
 <p>A minimal container providing a shell can be created by copying the
 <code class="docutils literal notranslate"><span class="pre">busybox</span></code> static binary into an empty scratch container:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
@@ -1191,26 +1191,26 @@ simple application / static binaries.</p>
 </pre></div>
 </div>
 <p>The resulting container provides a shell, and is 696KiB in size:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls -lah scratch.sif
--rwxr-xr-x. 1 dave dave 696K May 28 13:29 scratch.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ls<span class="w"> </span>-lah<span class="w"> </span>scratch.sif
+<span class="go">-rwxr-xr-x. 1 dave dave 696K May 28 13:29 scratch.sif</span>
 
-$ apptainer run scratch.sif
-WARNING: passwd file doesn&#39;t exist in container, not updating
-WARNING: group file doesn&#39;t exist in container, not updating
-Apptainer&gt; echo &quot;Hello from a 696KiB container&quot;
-Hello from a 696KiB container
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>scratch.sif
+<span class="go">WARNING: passwd file doesn&#39;t exist in container, not updating</span>
+<span class="go">WARNING: group file doesn&#39;t exist in container, not updating</span>
+<span class="go">Apptainer&gt; echo &quot;Hello from a 696KiB container&quot;</span>
+<span class="go">Hello from a 696KiB container</span>
 </pre></div>
 </div>
 </section>
-<section id="id33">
-<h4>Keywords<a class="headerlink" href="#id33" title="Link to this heading"></a></h4>
+<section id="id32">
+<h4>Keywords<a class="headerlink" href="#id32" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
 </pre></div>
 </div>
 <p>There are no additional keywords for the scratch bootstrap agent.</p>
 </section>
-<section id="id34">
-<h4>Notes<a class="headerlink" href="#id34" title="Link to this heading"></a></h4>
+<section id="id33">
+<h4>Notes<a class="headerlink" href="#id33" title="Link to this heading"></a></h4>
 <p>When building a container as an unprivileged user using this bootstrap,
 not all of the fakeroot modes work well.  See
 <a class="reference internal" href="fakeroot.html#build"><span class="std std-ref">Building container images</span></a> for details.</p>

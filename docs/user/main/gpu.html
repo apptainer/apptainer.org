@@ -224,50 +224,50 @@ supporting containers, that will use CUDA for processing. You can view
 the available versions on the <a class="reference external" href="https://hub.docker.com/r/tensorflow/tensorflow/tags">tags page on Docker Hub</a></p>
 <p>The container is large, so it’s best to build or pull the docker image
 to a SIF before you start working with it:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://tensorflow/tensorflow:latest-gpu
-...
-INFO:    Creating SIF file...
-[=====================================================================]
-100 % 0s
-INFO:    Build complete: tensorflow_latest-gpu.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://tensorflow/tensorflow:latest-gpu
+<span class="go">...</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================]</span>
+<span class="go">100 % 0s</span>
+<span class="go">INFO:    Build complete: tensorflow_latest-gpu.sif</span>
 </pre></div>
 </div>
 <p>Then run the container with GPU support:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --nv tensorflow_latest-gpu.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--nv<span class="w"> </span>tensorflow_latest-gpu.sif
 
-________                               _______________
-___  __/__________________________________  ____/__  /________      __
-__  /  _  _ \_  __ \_  ___/  __ \_  ___/_  /_   __  /_  __ \_ | /| / /
-_  /   /  __/  / / /(__  )/ /_/ /  /   _  __/   _  / / /_/ /_ |/ |/ /
-/_/    \___//_/ /_//____/ \____//_/    /_/      /_/  \____/____/|__/
+<span class="go">________                               _______________</span>
+<span class="go">___  __/__________________________________  ____/__  /________      __</span>
+<span class="go">__  /  _  _ \_  __ \_  ___/  __ \_  ___/_  /_   __  /_  __ \_ | /| / /</span>
+<span class="go">_  /   /  __/  / / /(__  )/ /_/ /  /   _  __/   _  / / /_/ /_ |/ |/ /</span>
+<span class="go">/_/    \___//_/ /_//____/ \____//_/    /_/      /_/  \____/____/|__/</span>
 
 
-You are running this container as user with ID 1000 and group 1000,
-which should map to the ID and group for your user on the Docker host. Great!
+<span class="go">You are running this container as user with ID 1000 and group 1000,</span>
+<span class="go">which should map to the ID and group for your user on the Docker host. Great!</span>
 
-Apptainer&gt;
+<span class="go">Apptainer&gt;</span>
 </pre></div>
 </div>
 <p>You can verify the GPU is available within the container by using the
 tensorflow <code class="docutils literal notranslate"><span class="pre">list_local_devices()</span></code> function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Apptainer</span><span class="o">&gt;</span> <span class="n">python</span>
-<span class="n">Python</span> <span class="mf">2.7.15</span><span class="o">+</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Jul</span>  <span class="mi">9</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">16</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">35</span><span class="p">)</span>
-<span class="p">[</span><span class="n">GCC</span> <span class="mf">7.4.0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux2</span>
-<span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.python.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">device_lib</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">device_lib</span><span class="o">.</span><span class="n">list_local_devices</span><span class="p">())</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.743600</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">cpu_feature_guard</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">Your</span> <span class="n">CPU</span> <span class="n">supports</span> <span class="n">instructions</span> <span class="n">that</span> <span class="n">this</span> <span class="n">TensorFlow</span> <span class="n">binary</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">compiled</span> <span class="n">to</span> <span class="n">use</span><span class="p">:</span> <span class="n">AVX2</span> <span class="n">FMA</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.784482</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">profile_utils</span><span class="o">/</span><span class="n">cpu_utils</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">94</span><span class="p">]</span> <span class="n">CPU</span> <span class="n">Frequency</span><span class="p">:</span> <span class="mi">3292620000</span> <span class="n">Hz</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.787911</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">xla</span><span class="o">/</span><span class="n">service</span><span class="o">/</span><span class="n">service</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">168</span><span class="p">]</span> <span class="n">XLA</span> <span class="n">service</span> <span class="mh">0x565246634360</span> <span class="n">executing</span> <span class="n">computations</span> <span class="n">on</span> <span class="n">platform</span> <span class="n">Host</span><span class="o">.</span> <span class="n">Devices</span><span class="p">:</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.787939</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">xla</span><span class="o">/</span><span class="n">service</span><span class="o">/</span><span class="n">service</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">175</span><span class="p">]</span>   <span class="n">StreamExecutor</span> <span class="n">device</span> <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Host</span><span class="p">,</span> <span class="n">Default</span> <span class="n">Version</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.798428</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">dso_loader</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">44</span><span class="p">]</span> <span class="n">Successfully</span> <span class="n">opened</span> <span class="n">dynamic</span> <span class="n">library</span> <span class="n">libcuda</span><span class="o">.</span><span class="n">so</span><span class="mf">.1</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.842683</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_gpu_executor</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1006</span><span class="p">]</span> <span class="n">successful</span> <span class="n">NUMA</span> <span class="n">node</span> <span class="n">read</span> <span class="kn">from</span><span class="w"> </span><span class="nn">SysFS</span> <span class="n">had</span> <span class="n">negative</span> <span class="n">value</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">but</span> <span class="n">there</span> <span class="n">must</span> <span class="n">be</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">NUMA</span> <span class="n">node</span><span class="p">,</span> <span class="n">so</span> <span class="n">returning</span> <span class="n">NUMA</span> <span class="n">node</span> <span class="n">zero</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.843252</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">xla</span><span class="o">/</span><span class="n">service</span><span class="o">/</span><span class="n">service</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">168</span><span class="p">]</span> <span class="n">XLA</span> <span class="n">service</span> <span class="mh">0x5652469263d0</span> <span class="n">executing</span> <span class="n">computations</span> <span class="n">on</span> <span class="n">platform</span> <span class="n">CUDA</span><span class="o">.</span> <span class="n">Devices</span><span class="p">:</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.843265</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">xla</span><span class="o">/</span><span class="n">service</span><span class="o">/</span><span class="n">service</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">175</span><span class="p">]</span>   <span class="n">StreamExecutor</span> <span class="n">device</span> <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">GeForce</span> <span class="n">GT</span> <span class="mi">730</span><span class="p">,</span> <span class="n">Compute</span> <span class="n">Capability</span> <span class="mf">3.5</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.843380</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_gpu_executor</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1006</span><span class="p">]</span> <span class="n">successful</span> <span class="n">NUMA</span> <span class="n">node</span> <span class="n">read</span> <span class="kn">from</span><span class="w"> </span><span class="nn">SysFS</span> <span class="n">had</span> <span class="n">negative</span> <span class="n">value</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">but</span> <span class="n">there</span> <span class="n">must</span> <span class="n">be</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">NUMA</span> <span class="n">node</span><span class="p">,</span> <span class="n">so</span> <span class="n">returning</span> <span class="n">NUMA</span> <span class="n">node</span> <span class="n">zero</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mf">09.843984</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">common_runtime</span><span class="o">/</span><span class="n">gpu</span><span class="o">/</span><span class="n">gpu_device</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1618</span><span class="p">]</span> <span class="n">Found</span> <span class="n">device</span> <span class="mi">0</span> <span class="k">with</span> <span class="n">properties</span><span class="p">:</span>
-<span class="n">name</span><span class="p">:</span> <span class="n">GeForce</span> <span class="n">GT</span> <span class="mi">730</span> <span class="n">major</span><span class="p">:</span> <span class="mi">3</span> <span class="n">minor</span><span class="p">:</span> <span class="mi">5</span> <span class="n">memoryClockRate</span><span class="p">(</span><span class="n">GHz</span><span class="p">):</span> <span class="mf">0.9015</span>
-<span class="o">...</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Apptainer&gt; python</span>
+<span class="go">Python 2.7.15+ (default, Jul  9 2019, 16:51:35)</span>
+<span class="go">[GCC 7.4.0] on linux2</span>
+<span class="go">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
+<span class="go">&gt;&gt;&gt; from tensorflow.python.client import device_lib</span>
+<span class="go">&gt;&gt;&gt; print(device_lib.list_local_devices())</span>
+<span class="go">2019-11-14 15:32:09.743600: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA</span>
+<span class="go">2019-11-14 15:32:09.784482: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3292620000 Hz</span>
+<span class="go">2019-11-14 15:32:09.787911: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x565246634360 executing computations on platform Host. Devices:</span>
+<span class="go">2019-11-14 15:32:09.787939: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version</span>
+<span class="go">2019-11-14 15:32:09.798428: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1</span>
+<span class="go">2019-11-14 15:32:09.842683: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:1006] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero</span>
+<span class="go">2019-11-14 15:32:09.843252: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5652469263d0 executing computations on platform CUDA. Devices:</span>
+<span class="go">2019-11-14 15:32:09.843265: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): GeForce GT 730, Compute Capability 3.5</span>
+<span class="go">2019-11-14 15:32:09.843380: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:1006] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero</span>
+<span class="go">2019-11-14 15:32:09.843984: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties:</span>
+<span class="go">name: GeForce GT 730 major: 3 minor: 5 memoryClockRate(GHz): 0.9015</span>
+<span class="go">...</span>
 </pre></div>
 </div>
 </section>
@@ -288,12 +288,12 @@ running the container, or <code class="docutils literal notranslate"><span class
 This variable will limit the GPU devices that CUDA programs see.</p>
 <p>E.g. to run the tensorflow container, but using only the first GPU in
 the host, we could do:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINERENV_CUDA_VISIBLE_DEVICES=0 apptainer run --nv tensorflow_latest-gpu.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">APPTAINERENV_CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>--nv<span class="w"> </span>tensorflow_latest-gpu.sif
 
-# or
+<span class="gp"># </span>or
 
-$ export APPTAINERENV_CUDA_VISIBLE_DEVICES=0
-$ apptainer run tensorflow_latest-gpu.sif
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINERENV_CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">0</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>tensorflow_latest-gpu.sif
 </pre></div>
 </div>
 </section>
@@ -369,48 +369,48 @@ GitHub issue</a></p></li>
 <p>Tensorflow can be run using <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> in a similar manner as the
 standard <code class="docutils literal notranslate"><span class="pre">--nv</span></code> binding approach when run unprivleged. Build the
 large container into a sandbox:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --sandbox tensorflow_latest-gpu docker://tensorflow/tensorflow:latest-gpu
-INFO:    Starting build...
-...
-INFO:    Creating sandbox directory...
-INFO:    Build complete: tensorflow_latest-gpu
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--sandbox<span class="w"> </span>tensorflow_latest-gpu<span class="w"> </span>docker://tensorflow/tensorflow:latest-gpu
+<span class="go">INFO:    Starting build...</span>
+<span class="go">...</span>
+<span class="go">INFO:    Creating sandbox directory...</span>
+<span class="go">INFO:    Build complete: tensorflow_latest-gpu</span>
 </pre></div>
 </div>
 <p>Then run the container with <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> GPU support:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --nvccli tensorflow_latest-gpu
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--nvccli<span class="w"> </span>tensorflow_latest-gpu
 
-________                               _______________
-___  __/__________________________________  ____/__  /________      __
-__  /  _  _ \_  __ \_  ___/  __ \_  ___/_  /_   __  /_  __ \_ | /| / /
-_  /   /  __/  / / /(__  )/ /_/ /  /   _  __/   _  / / /_/ /_ |/ |/ /
-/_/    \___//_/ /_//____/ \____//_/    /_/      /_/  \____/____/|__/
+<span class="go">________                               _______________</span>
+<span class="go">___  __/__________________________________  ____/__  /________      __</span>
+<span class="go">__  /  _  _ \_  __ \_  ___/  __ \_  ___/_  /_   __  /_  __ \_ | /| / /</span>
+<span class="go">_  /   /  __/  / / /(__  )/ /_/ /  /   _  __/   _  / / /_/ /_ |/ |/ /</span>
+<span class="go">/_/    \___//_/ /_//____/ \____//_/    /_/      /_/  \____/____/|__/</span>
 
 
-You are running this container as user with ID 1000 and group 1000,
-which should map to the ID and group for your user on the Docker host. Great!
+<span class="go">You are running this container as user with ID 1000 and group 1000,</span>
+<span class="go">which should map to the ID and group for your user on the Docker host. Great!</span>
 
-Apptainer&gt;
+<span class="go">Apptainer&gt;</span>
 </pre></div>
 </div>
 <p>You can verify the GPU is available within the container by using the
 tensorflow <code class="docutils literal notranslate"><span class="pre">list_local_devices()</span></code> function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Apptainer</span><span class="o">&gt;</span> <span class="n">python</span>
-<span class="n">Python</span> <span class="mf">2.7.15</span><span class="o">+</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Jul</span>  <span class="mi">9</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">16</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">35</span><span class="p">)</span>
-<span class="p">[</span><span class="n">GCC</span> <span class="mf">7.4.0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux2</span>
-<span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.python.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">device_lib</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">device_lib</span><span class="o">.</span><span class="n">list_local_devices</span><span class="p">())</span>
-<span class="o">...</span>
-<span class="n">device_type</span><span class="p">:</span> <span class="s2">&quot;GPU&quot;</span>
-<span class="n">memory_limit</span><span class="p">:</span> <span class="mi">14474280960</span>
-<span class="n">locality</span> <span class="p">{</span>
-  <span class="n">bus_id</span><span class="p">:</span> <span class="mi">1</span>
-  <span class="n">links</span> <span class="p">{</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-<span class="n">incarnation</span><span class="p">:</span> <span class="mi">13349913758992036690</span>
-<span class="n">physical_device_desc</span><span class="p">:</span> <span class="s2">&quot;device: 0, name: Tesla T4, pci bus id: 0000:00:1e.0, compute capability: 7.5&quot;</span>
-<span class="o">...</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Apptainer&gt; python</span>
+<span class="go">Python 2.7.15+ (default, Jul  9 2019, 16:51:35)</span>
+<span class="go">[GCC 7.4.0] on linux2</span>
+<span class="go">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
+<span class="go">&gt;&gt;&gt; from tensorflow.python.client import device_lib</span>
+<span class="go">&gt;&gt;&gt; print(device_lib.list_local_devices())</span>
+<span class="go">...</span>
+<span class="go">device_type: &quot;GPU&quot;</span>
+<span class="go">memory_limit: 14474280960</span>
+<span class="go">locality {</span>
+<span class="go">  bus_id: 1</span>
+<span class="go">  links {</span>
+<span class="go">  }</span>
+<span class="go">}</span>
+<span class="go">incarnation: 13349913758992036690</span>
+<span class="go">physical_device_desc: &quot;device: 0, name: Tesla T4, pci bus id: 0000:00:1e.0, compute capability: 7.5&quot;</span>
+<span class="go">...</span>
 </pre></div>
 </div>
 </section>
@@ -427,8 +427,8 @@ powerful GPU isolation is possible using the <code class="docutils literal notra
 devices are bound into the <code class="docutils literal notranslate"><span class="pre">/dev</span></code> tree in the container.</p>
 <p>For example, to pass only the 2nd and 3rd GPU into a container running
 on a system with 4 GPUs, run the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export NVIDIA_VISIBLE_DEVICES=1,2
-$ apptainer run -uwc --nvccli tensorflow_latest-gpu
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">NVIDIA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">1</span>,2
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>-uwc<span class="w"> </span>--nvccli<span class="w"> </span>tensorflow_latest-gpu
 </pre></div>
 </div>
 <p>Note that:</p>
@@ -445,16 +445,16 @@ system.</p></li>
 </ul>
 <p>If you use <code class="docutils literal notranslate"><span class="pre">--contain</span></code> without setting <code class="docutils literal notranslate"><span class="pre">NVIDIA_VISIBLE_DEVICES</span></code>, no
 GPUs will be available in the container, and a warning will be shown:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run -uwc --nvccli tensorflow_latest-gpu
-WARNING: When using nvidia-container-cli with --contain NVIDIA_VISIBLE_DEVICES
-must be set or no GPUs will be available in container.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>-uwc<span class="w"> </span>--nvccli<span class="w"> </span>tensorflow_latest-gpu
+<span class="go">WARNING: When using nvidia-container-cli with --contain NVIDIA_VISIBLE_DEVICES</span>
+<span class="go">must be set or no GPUs will be available in container.</span>
 </pre></div>
 </div>
 <p>To restore the behaviour of the standard GPU handling, set
 <code class="docutils literal notranslate"><span class="pre">NVIDIA_VISIBLE_DEVICES=0</span></code> when running with <code class="docutils literal notranslate"><span class="pre">--contain</span></code>.</p>
 <p>If your system contains Ampere or newer GPUs that support virtual MIG
 devices, you can specify MIG identifiers / UUIDs.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export NVIDIA_VISIBLE_DEVICES=MIG-GPU-5c89852c-d268-c3f3-1b07-005d5ae1dc3f/7/0
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">NVIDIA_VISIBLE_DEVICES</span><span class="o">=</span>MIG-GPU-5c89852c-d268-c3f3-1b07-005d5ae1dc3f/7/0
 </pre></div>
 </div>
 <p>Apptainer does not configure MIG partitions. It is expected that
@@ -535,34 +535,34 @@ supporting containers, that will use ROCm for processing. You can view
 the available versions on the <a class="reference external" href="https://hub.docker.com/r/rocm/tensorflow/tags">tags page on Docker Hub</a></p>
 <p>The container is large, so it’s best to build or pull the docker image
 to a SIF before you start working with it:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer pull docker://rocm/tensorflow:latest
-...
-INFO:    Creating SIF file...
-[=====================================================================]
-100 % 0s
-INFO:    Build complete: tensorflow_latest.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://rocm/tensorflow:latest
+<span class="go">...</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================]</span>
+<span class="go">100 % 0s</span>
+<span class="go">INFO:    Build complete: tensorflow_latest.sif</span>
 </pre></div>
 </div>
 <p>Then run the container with GPU support:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer run --rocm tensorflow_latest.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--rocm<span class="w"> </span>tensorflow_latest.sif
 </pre></div>
 </div>
 <p>You can verify the GPU is available within the container by using the
 tensorflow <code class="docutils literal notranslate"><span class="pre">list_local_devices()</span></code> function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Apptainer</span><span class="o">&gt;</span> <span class="n">ipython</span>
-<span class="n">Python</span> <span class="mf">3.5.2</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Jul</span> <span class="mi">10</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">11</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">48</span><span class="p">)</span>
-<span class="n">Type</span> <span class="s1">&#39;copyright&#39;</span><span class="p">,</span> <span class="s1">&#39;credits&#39;</span> <span class="ow">or</span> <span class="s1">&#39;license&#39;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span>
-<span class="n">IPython</span> <span class="mf">7.8.0</span> <span class="o">--</span> <span class="n">An</span> <span class="n">enhanced</span> <span class="n">Interactive</span> <span class="n">Python</span><span class="o">.</span> <span class="n">Type</span> <span class="s1">&#39;?&#39;</span> <span class="k">for</span> <span class="n">help</span><span class="o">.</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.python.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">device_lib</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">device_lib</span><span class="o">.</span><span class="n">list_local_devices</span><span class="p">())</span>
-<span class="o">...</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">14</span> <span class="mi">16</span><span class="p">:</span><span class="mi">33</span><span class="p">:</span><span class="mf">42.750509</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">common_runtime</span><span class="o">/</span><span class="n">gpu</span><span class="o">/</span><span class="n">gpu_device</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1651</span><span class="p">]</span> <span class="n">Found</span> <span class="n">device</span> <span class="mi">0</span> <span class="k">with</span> <span class="n">properties</span><span class="p">:</span>
-<span class="n">name</span><span class="p">:</span> <span class="n">Lexa</span> <span class="n">PRO</span> <span class="p">[</span><span class="n">Radeon</span> <span class="n">RX</span> <span class="mi">550</span><span class="o">/</span><span class="mi">550</span><span class="n">X</span><span class="p">]</span>
-<span class="n">AMDGPU</span> <span class="n">ISA</span><span class="p">:</span> <span class="n">gfx803</span>
-<span class="n">memoryClockRate</span> <span class="p">(</span><span class="n">GHz</span><span class="p">)</span> <span class="mf">1.183</span>
-<span class="n">pciBusID</span> <span class="mi">0000</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mf">00.0</span>
-<span class="o">...</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Apptainer&gt; ipython</span>
+<span class="go">Python 3.5.2 (default, Jul 10 2019, 11:58:48)</span>
+<span class="go">Type &#39;copyright&#39;, &#39;credits&#39; or &#39;license&#39; for more information</span>
+<span class="go">IPython 7.8.0 -- An enhanced Interactive Python. Type &#39;?&#39; for help.</span>
+<span class="go">&gt;&gt;&gt; from tensorflow.python.client import device_lib</span>
+<span class="go">...</span>
+<span class="go">&gt;&gt;&gt; print(device_lib.list_local_devices())</span>
+<span class="go">...</span>
+<span class="go">2019-11-14 16:33:42.750509: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1651] Found device 0 with properties:</span>
+<span class="go">name: Lexa PRO [Radeon RX 550/550X]</span>
+<span class="go">AMDGPU ISA: gfx803</span>
+<span class="go">memoryClockRate (GHz) 1.183</span>
+<span class="go">pciBusID 0000:09:00.0</span>
+<span class="go">...</span>
 </pre></div>
 </div>
 </section>
@@ -586,7 +586,7 @@ application ‘Blender’.</p>
 Blender as a graphical application that will make use of a local Radeon
 GPU for OpenCL compute using the container that has been published to
 the Sylabs library:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec --rocm --bind /etc/OpenCL library://sylabs/examples/blender blender
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--rocm<span class="w"> </span>--bind<span class="w"> </span>/etc/OpenCL<span class="w"> </span>library://sylabs/examples/blender<span class="w"> </span>blender
 </pre></div>
 </div>
 <p>Note the <em>exec</em> used as the <em>runscript</em> for this container is setup for

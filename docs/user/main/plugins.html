@@ -169,8 +169,8 @@ limitations of Go plugins.</p>
 <section id="using-plugins">
 <h2>Using Plugins<a class="headerlink" href="#using-plugins" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> command prints the currently installed plugins.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer plugin list
-There are no plugins installed.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>list
+<span class="go">There are no plugins installed.</span>
 </pre></div>
 </div>
 <p>Plugins are packaged and distributed as binaries encoded with the versatile
@@ -178,14 +178,14 @@ Singularity Image Format (SIF). However, plugin authors may also distribute the
 source code of their plugins. A plugin can be compiled from its source code with
 the <code class="docutils literal notranslate"><span class="pre">compile</span></code> command. A number of example plugins are included in the
 <code class="docutils literal notranslate"><span class="pre">examples/plugins</span></code> directory of the Apptainer source.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer plugin compile examples/plugins/cli-plugin/
-INFO:    Plugin built to: /home/dtrudg/Git/apptainer/examples/plugins/cli-plugin/cli-plugin.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>compile<span class="w"> </span>examples/plugins/cli-plugin/
+<span class="go">INFO:    Plugin built to: /home/dtrudg/Git/apptainer/examples/plugins/cli-plugin/cli-plugin.sif</span>
 </pre></div>
 </div>
 <p>Upon successful compilation, a SIF file will appear in the directory of the
 plugin’s source code.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls examples/plugins/cli-plugin/ | grep sif
-cli-plugin.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ls<span class="w"> </span>examples/plugins/cli-plugin/<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>sif
+<span class="go">cli-plugin.sif</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -199,43 +199,43 @@ previously existed, has been removed due to incompatible changes in Go 1.18.</p>
 <p>Every plugin encapsulates various information such as the plugin’s
 author, the plugin’s version, etc. To view this information about a
 plugin, use the <code class="docutils literal notranslate"><span class="pre">inspect</span></code> command.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer plugin inspect examples/plugins/cli-plugin/cli-plugin.sif
-Name: example.com/cli-plugin
-Description: This is a short example CLI plugin for Apptainer
-Author: Apptainer Team
-Version: 0.1.0
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>inspect<span class="w"> </span>examples/plugins/cli-plugin/cli-plugin.sif
+<span class="go">Name: example.com/cli-plugin</span>
+<span class="go">Description: This is a short example CLI plugin for Apptainer</span>
+<span class="go">Author: Apptainer Team</span>
+<span class="go">Version: 0.1.0</span>
 </pre></div>
 </div>
 <p>To install a plugin, use the <code class="docutils literal notranslate"><span class="pre">install</span></code> command. This operation
 requires root privilege.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer plugin install examples/plugins/cli-plugin/cli-plugin.sif
-$ apptainer plugin list
-ENABLED  NAME
-    yes  example.com/cli-plugin
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>install<span class="w"> </span>examples/plugins/cli-plugin/cli-plugin.sif
+<span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>list
+<span class="go">ENABLED  NAME</span>
+<span class="go">    yes  example.com/cli-plugin</span>
 </pre></div>
 </div>
 <p>After successful installation, the plugin will automatically be enabled.
 Any plugin can be disabled with the <code class="docutils literal notranslate"><span class="pre">disable</span></code> command and re-enabled
 with the <code class="docutils literal notranslate"><span class="pre">enable</span></code> command. Both of these operations require root
 privilege.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer plugin disable example.com/cli-plugin
-$ apptainer plugin list
-ENABLED  NAME
-     no  example.com/cli-plugin
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>disable<span class="w"> </span>example.com/cli-plugin
+<span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>list
+<span class="go">ENABLED  NAME</span>
+<span class="go">     no  example.com/cli-plugin</span>
 
-$ sudo apptainer plugin enable example.com/cli-plugin
-$ apptainer plugin list
-ENABLED  NAME
-    yes  example.com/cli-plugin
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>plugin<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>example.com/cli-plugin
+<span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>list
+<span class="go">ENABLED  NAME</span>
+<span class="go">    yes  example.com/cli-plugin</span>
 </pre></div>
 </div>
 <p>Finally, to uninstall a plugin, use the <code class="docutils literal notranslate"><span class="pre">uninstall</span></code> command. This
 operation requires root privilege.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer plugin uninstall example.com/cli-plugin
-Uninstalled plugin &quot;example.com/cli-plugin&quot;.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>uninstall<span class="w"> </span>example.com/cli-plugin
+<span class="go">Uninstalled plugin &quot;example.com/cli-plugin&quot;.</span>
 
-$ apptainer plugin list
-There are no plugins installed.
+<span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>list
+<span class="go">There are no plugins installed.</span>
 </pre></div>
 </div>
 </section>

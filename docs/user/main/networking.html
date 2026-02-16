@@ -152,14 +152,14 @@ See the <a class="reference external" href="https://apptainer.org/docs/admin/mai
 <h2><code class="docutils literal notranslate"><span class="pre">--dns</span></code><a class="headerlink" href="#dns" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--dns</span></code> option allows you to specify a comma separated list of DNS
 servers to add to the <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> file.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nslookup google.com | grep Server
-Server:             127.0.0.53
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>nslookup<span class="w"> </span>google.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Server
+<span class="go">Server:             127.0.0.53</span>
 
-$ sudo apptainer exec --dns 8.8.8.8 ubuntu.sif nslookup google.com | grep Server
-Server:             8.8.8.8
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--dns<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span>ubuntu.sif<span class="w"> </span>nslookup<span class="w"> </span>google.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Server
+<span class="go">Server:             8.8.8.8</span>
 
-$ sudo apptainer exec --dns 8.8.8.8 ubuntu.sif cat /etc/resolv.conf
-nameserver 8.8.8.8
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--dns<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span>ubuntu.sif<span class="w"> </span>cat<span class="w"> </span>/etc/resolv.conf
+<span class="go">nameserver 8.8.8.8</span>
 </pre></div>
 </div>
 </section>
@@ -167,11 +167,11 @@ nameserver 8.8.8.8
 <h2><code class="docutils literal notranslate"><span class="pre">--hostname</span></code><a class="headerlink" href="#hostname" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--hostname</span></code> option accepts a string argument to change the
 hostname within the container.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ hostname
-ubuntu
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>hostname
+<span class="go">ubuntu</span>
 
-$ sudo apptainer exec --hostname hal-9000 my_container.sif hostname
-hal-9000
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--hostname<span class="w"> </span>hal-9000<span class="w"> </span>my_container.sif<span class="w"> </span>hostname
+<span class="go">hal-9000</span>
 </pre></div>
 </div>
 </section>
@@ -185,21 +185,21 @@ listed in <code class="docutils literal notranslate"><span class="pre">allow</sp
 with <code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code> mode.</p>
 <p>For example, a network namespace can be created with the <code class="docutils literal notranslate"><span class="pre">ip</span></code> command on the
 host, and then a container started that will run within this namespace:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create an example named network namespace
-$ sudo ip netns add my-net
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Create<span class="w"> </span>an<span class="w"> </span>example<span class="w"> </span>named<span class="w"> </span>network<span class="w"> </span>namespace
+<span class="gp">$ </span>sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span>add<span class="w"> </span>my-net
 
-# Add a dummy network interface to the network namespace
-$ sudo ip netns exec my-net ip link add dummy0 type dummy
+<span class="gp"># </span>Add<span class="w"> </span>a<span class="w"> </span>dummy<span class="w"> </span>network<span class="w"> </span>interface<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>network<span class="w"> </span>namespace
+<span class="gp">$ </span>sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>my-net<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span>add<span class="w"> </span>dummy0<span class="w"> </span><span class="nb">type</span><span class="w"> </span>dummy
 
-# Run a container in the network namespace
-$ sudo apptainer run --netns-path /run/netns/my-net library://alpine
-INFO:    Using cached image
-Apptainer&gt; ip a
-1: lo: &lt;LOOPBACK&gt; mtu 65536 qdisc noop state DOWN qlen 1000
-   link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-2: dummy0: &lt;BROADCAST,NOARP&gt; mtu 1500 qdisc noop state DOWN qlen 1000
-   link/ether 92:5c:ab:ab:d3:d0 brd ff:ff:ff:ff:ff:ff
-Apptainer&gt;
+<span class="gp"># </span>Run<span class="w"> </span>a<span class="w"> </span>container<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>network<span class="w"> </span>namespace
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>--netns-path<span class="w"> </span>/run/netns/my-net<span class="w"> </span>library://alpine
+<span class="go">INFO:    Using cached image</span>
+<span class="go">Apptainer&gt; ip a</span>
+<span class="go">1: lo: &lt;LOOPBACK&gt; mtu 65536 qdisc noop state DOWN qlen 1000</span>
+<span class="go">   link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span>
+<span class="go">2: dummy0: &lt;BROADCAST,NOARP&gt; mtu 1500 qdisc noop state DOWN qlen 1000</span>
+<span class="go">   link/ether 92:5c:ab:ab:d3:d0 brd ff:ff:ff:ff:ff:ff</span>
+<span class="go">Apptainer&gt;</span>
 </pre></div>
 </div>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">a</span></code> command run inside the container shows the <code class="docutils literal notranslate"><span class="pre">dummy0</span></code>
@@ -221,11 +221,11 @@ in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</
 <p>Passing the <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag will cause the container to join a new
 network namespace when it initiates. A bridge interface is also set up by
 default.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ hostname -I
-10.0.2.15
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>hostname<span class="w"> </span>-I
+<span class="go">10.0.2.15</span>
 
-$ sudo apptainer exec --net my_container.sif hostname -I
-10.22.0.4
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--net<span class="w"> </span>my_container.sif<span class="w"> </span>hostname<span class="w"> </span>-I
+<span class="go">10.22.0.4</span>
 </pre></div>
 </div>
 </section>
@@ -234,14 +234,14 @@ $ sudo apptainer exec --net my_container.sif hostname -I
 <p>The <code class="docutils literal notranslate"><span class="pre">--network</span></code> option can only be invoked in combination with the
 <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag. It accepts a comma delimited string of network types.
 Each entry will bring up a dedicated interface inside container.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ hostname -I
-172.16.107.251 10.22.0.1
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>hostname<span class="w"> </span>-I
+<span class="go">172.16.107.251 10.22.0.1</span>
 
-$ sudo apptainer exec --net --network ptp ubuntu.sif hostname -I
-10.23.0.6
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--net<span class="w"> </span>--network<span class="w"> </span>ptp<span class="w"> </span>ubuntu.sif<span class="w"> </span>hostname<span class="w"> </span>-I
+<span class="go">10.23.0.6</span>
 
-$ sudo apptainer exec --net --network bridge,ptp ubuntu.sif hostname -I
-10.22.0.14 10.23.0.7
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--net<span class="w"> </span>--network<span class="w"> </span>bridge,ptp<span class="w"> </span>ubuntu.sif<span class="w"> </span>hostname<span class="w"> </span>-I
+<span class="go">10.22.0.14 10.23.0.7</span>
 </pre></div>
 </div>
 <p>When invoked, the <code class="docutils literal notranslate"><span class="pre">--network</span></code> option searches the apptainer
@@ -275,8 +275,8 @@ arguments to pass directly to the cni plugins. It must be used in
 conjunction with the <code class="docutils literal notranslate"><span class="pre">--net</span></code> flag.</p>
 <p>For instance, let’s say you want to start an <a class="reference external" href="https://www.nginx.com/">NGINX</a> server on port 80 inside of the container,
 but you want to map it to port 8080 outside of the container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer instance start --writable-tmpfs \
-    --net --network-args &quot;portmap=8080:80/tcp&quot; docker://nginx web2
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>instance<span class="w"> </span>start<span class="w"> </span>--writable-tmpfs<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--net<span class="w"> </span>--network-args<span class="w"> </span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span><span class="w"> </span>docker://nginx<span class="w"> </span>web2
 </pre></div>
 </div>
 <p>The above command will start the Docker Hub official NGINX image running
@@ -287,38 +287,38 @@ necessary when using the <code class="docutils literal notranslate"><span class=
 <code class="docutils literal notranslate"><span class="pre">portmap=8080:80/tcp</span></code> argument which will map port 80 inside of the
 container to 8080 on the host.</p>
 <p>Now we can start NGINX inside of the container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer exec instance://web2 nginx
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>instance://web2<span class="w"> </span>nginx
 </pre></div>
 </div>
 <p>And the <code class="docutils literal notranslate"><span class="pre">curl</span></code> command can be used to verify that NGINX is running on
 the host port 8080 as expected.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl localhost:8080
-10.22.0.1 - - [16/Oct/2018:09:34:25 -0400] &quot;GET / HTTP/1.1&quot; 200 612 &quot;-&quot; &quot;curl/7.58.0&quot; &quot;-&quot;
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;Welcome to nginx!&lt;/title&gt;
-&lt;style&gt;
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
-&lt;p&gt;If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.&lt;/p&gt;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>curl<span class="w"> </span>localhost:8080
+<span class="go">10.22.0.1 - - [16/Oct/2018:09:34:25 -0400] &quot;GET / HTTP/1.1&quot; 200 612 &quot;-&quot; &quot;curl/7.58.0&quot; &quot;-&quot;</span>
+<span class="go">&lt;!DOCTYPE html&gt;</span>
+<span class="go">&lt;html&gt;</span>
+<span class="go">&lt;head&gt;</span>
+<span class="go">&lt;title&gt;Welcome to nginx!&lt;/title&gt;</span>
+<span class="go">&lt;style&gt;</span>
+<span class="go">    body {</span>
+<span class="go">        width: 35em;</span>
+<span class="go">        margin: 0 auto;</span>
+<span class="go">        font-family: Tahoma, Verdana, Arial, sans-serif;</span>
+<span class="go">    }</span>
+<span class="go">&lt;/style&gt;</span>
+<span class="go">&lt;/head&gt;</span>
+<span class="go">&lt;body&gt;</span>
+<span class="go">&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;</span>
+<span class="go">&lt;p&gt;If you see this page, the nginx web server is successfully installed and</span>
+<span class="go">working. Further configuration is required.&lt;/p&gt;</span>
 
-&lt;p&gt;For online documentation and support please refer to
-&lt;a href=&quot;http://nginx.org/&quot;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
-Commercial support is available at
-&lt;a href=&quot;http://nginx.com/&quot;&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+<span class="go">&lt;p&gt;For online documentation and support please refer to</span>
+<span class="go">&lt;a href=&quot;http://nginx.org/&quot;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;</span>
+<span class="go">Commercial support is available at</span>
+<span class="go">&lt;a href=&quot;http://nginx.com/&quot;&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;</span>
 
-&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<span class="go">&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;</span>
+<span class="go">&lt;/body&gt;</span>
+<span class="go">&lt;/html&gt;</span>
 </pre></div>
 </div>
 <p>For more information about cni, check the <a class="reference external" href="https://github.com/containernetworking/cni/blob/master/SPEC.md">cni specification</a>.</p>
