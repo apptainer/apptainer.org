@@ -680,6 +680,41 @@ that can be accessed both from the host and in the guest.
 
 Previously there was a mount in `/tmp/lima`, it was removed in Lima 2.0.
 
+GPU Support
+-----------
+
+Lima supports using an Apple GPU from the Linux environment, with `krunkit <https://github.com/containers/krunkit>`_:
+
+.. code:: console
+
+    $ brew tap slp/krunkit
+    $ brew install krunkit
+    $ limactl start --vm-type=krunkit template:apptainer
+
+For now you need to install `mesa-vulkan-drivers` from the `mesa-krunkit <https://launchpad.net/~step22/+archive/ubuntu/mesa-krunkit>`_ PPA:
+
+.. code:: shell
+
+    sudo add-apt-repository ppa:step22/mesa-krunkit
+    sudo apt update
+    sudo apt install -y vulkan-tools mesa-vulkan-drivers=24*
+
+After that, you should have full access to ``/dev/dri`` also from the containers:
+
+.. code:: console
+
+    $ {command} run docker://quay.io/slopezpa/fedora-vgpu
+    Apptainer> vulkaninfo | grep GPU
+    'DISPLAY' environment variable not set... skipping surface info
+                    GPU id = 0 (Virtio-GPU Venus (Apple M1))
+                    GPU id = 1 (llvmpipe (LLVM 20.1.7, 128 bits))
+    GPU0:
+                    deviceType        = PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU
+                    deviceName        = Virtio-GPU Venus (Apple M1)
+    GPU1:
+
+You can run `llama.cpp <https://github.com/ggml-org/llama.cpp>`_. with ``docker://quay.io/slopezpa/fedora-vgpu-llama``
+
 **********************
  Running inside Docker
 **********************

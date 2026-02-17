@@ -93,7 +93,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#gpu-support">GPU Support</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">GPU Support</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#running-inside-docker">Running inside Docker</a></li>
@@ -690,6 +693,34 @@ for more details.</p>
 so you need to add a shared writable directory mount if you want output
 that can be accessed both from the host and in the guest.</p>
 <p>Previously there was a mount in <cite>/tmp/lima</cite>, it was removed in Lima 2.0.</p>
+<section id="id1">
+<h4>GPU Support<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<p>Lima supports using an Apple GPU from the Linux environment, with <a class="reference external" href="https://github.com/containers/krunkit">krunkit</a>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>tap<span class="w"> </span>slp/krunkit
+<span class="gp">$ </span>brew<span class="w"> </span>install<span class="w"> </span>krunkit
+<span class="gp">$ </span>limactl<span class="w"> </span>start<span class="w"> </span>--vm-type<span class="o">=</span>krunkit<span class="w"> </span>template:apptainer
+</pre></div>
+</div>
+<p>For now you need to install <cite>mesa-vulkan-drivers</cite> from the <a class="reference external" href="https://launchpad.net/~step22/+archive/ubuntu/mesa-krunkit">mesa-krunkit</a> PPA:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span>ppa:step22/mesa-krunkit
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>vulkan-tools<span class="w"> </span>mesa-vulkan-drivers<span class="o">=</span><span class="m">24</span>*
+</pre></div>
+</div>
+<p>After that, you should have full access to <code class="docutils literal notranslate"><span class="pre">/dev/dri</span></code> also from the containers:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://quay.io/slopezpa/fedora-vgpu
+<span class="go">Apptainer&gt; vulkaninfo | grep GPU</span>
+<span class="go">&#39;DISPLAY&#39; environment variable not set... skipping surface info</span>
+<span class="go">                GPU id = 0 (Virtio-GPU Venus (Apple M1))</span>
+<span class="go">                GPU id = 1 (llvmpipe (LLVM 20.1.7, 128 bits))</span>
+<span class="go">GPU0:</span>
+<span class="go">                deviceType        = PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU</span>
+<span class="go">                deviceName        = Virtio-GPU Venus (Apple M1)</span>
+<span class="go">GPU1:</span>
+</pre></div>
+</div>
+<p>You can run <a class="reference external" href="https://github.com/ggml-org/llama.cpp">llama.cpp</a>. with <code class="docutils literal notranslate"><span class="pre">docker://quay.io/slopezpa/fedora-vgpu-llama</span></code></p>
+</section>
 </section>
 </section>
 <section id="running-inside-docker">
