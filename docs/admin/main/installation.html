@@ -166,7 +166,10 @@ default, but system administrators must not disable it.  If system
 administrators do not want users to mount FUSE filesystems in the
 primary namespace, they can remove or not install the <code class="docutils literal notranslate"><span class="pre">fuse</span></code>
 package which contains the privileged <code class="docutils literal notranslate"><span class="pre">fusermount</span></code> program.
-Apptainer does not use <code class="docutils literal notranslate"><span class="pre">fusermount</span></code> in any mode.</p></li>
+Apptainer does not use <code class="docutils literal notranslate"><span class="pre">fusermount</span></code> in any mode.
+The bundled fuse programs do use the <code class="docutils literal notranslate"><span class="pre">fuse3</span></code> library, and
+apptainer setuid mode requires the version of that library
+package (called <code class="docutils literal notranslate"><span class="pre">fuse3-libs</span></code> on Enterprise Linux) to be &gt;= 3.3.0.</p></li>
 <li><p><strong>Unprivileged user namespaces</strong> - (minimum kernel &gt;=3.8, &gt;=4.18 recommended)
 Required to run containers without root or setuid privilege.
 The recommended minimum version is required for unprivileged FUSE mounts.</p></li>

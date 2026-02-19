@@ -42,6 +42,9 @@ Full functionality of {Project} requires that the kernel supports:
    primary namespace, they can remove or not install the ``fuse``
    package which contains the privileged ``fusermount`` program.
    {Project} does not use ``fusermount`` in any mode.
+   The bundled fuse programs do use the ``fuse3`` library, and
+   {command} setuid mode requires the version of that library 
+   package (called ``fuse3-libs`` on Enterprise Linux) to be >= 3.3.0.
 
 -  **Unprivileged user namespaces** - (minimum kernel >=3.8, >=4.18 recommended)
    Required to run containers without root or setuid privilege.
