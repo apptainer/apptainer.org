@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Installing Apptainer &mdash; Apptainer Admin Guide 1.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -18,8 +18,8 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=0ed52906"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="_static/copybutton.js?v=7cec7674"></script>
     <script src="_static/js/theme.js"></script>
@@ -163,7 +163,10 @@ default, but system administrators must not disable it.  If system
 administrators do not want users to mount FUSE filesystems in the
 primary namespace, they can remove or not install the <code class="docutils literal notranslate"><span class="pre">fuse</span></code>
 package which contains the privileged <code class="docutils literal notranslate"><span class="pre">fusermount</span></code> program.
-Apptainer does not use <code class="docutils literal notranslate"><span class="pre">fusermount</span></code> in any mode.</p></li>
+Apptainer does not use <code class="docutils literal notranslate"><span class="pre">fusermount</span></code> in any mode.
+The bundled fuse programs do use the <code class="docutils literal notranslate"><span class="pre">fuse3</span></code> library, and
+apptainer setuid mode requires the version of that library
+package (called <code class="docutils literal notranslate"><span class="pre">fuse3-libs</span></code> on Enterprise Linux) to be &gt;= 3.3.0.</p></li>
 <li><p><strong>Unprivileged user namespaces</strong> - (minimum kernel &gt;=3.8, &gt;=4.18 recommended)
 Required to run containers without root or setuid privilege.
 The recommended minimum version is required for unprivileged FUSE mounts.</p></li>
