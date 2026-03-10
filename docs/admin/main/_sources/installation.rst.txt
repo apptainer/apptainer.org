@@ -158,7 +158,8 @@ in all other cases.
 Fakeroot with uid/gid mapping on Network filesystems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When {Project} is run using the :ref:`fakeroot <fakeroot>` option and
+When {Project} is run using the :ref:`fakeroot <fakeroot>` option 
+(which is implied when doing builds) and
 mappings are available in ``/etc/subuid`` and ``/etc/subgid`` then uids / gids
 inside the container are mapped to different host uids / gids.
 

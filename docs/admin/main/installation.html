@@ -270,7 +270,8 @@ in all other cases.</p>
 </section>
 <section id="fakeroot-with-uid-gid-mapping-on-network-filesystems">
 <h5>Fakeroot with uid/gid mapping on Network filesystems<a class="headerlink" href="#fakeroot-with-uid-gid-mapping-on-network-filesystems" title="Link to this heading"></a></h5>
-<p>When Apptainer is run using the <a class="reference internal" href="user_namespace.html#fakeroot"><span class="std std-ref">fakeroot</span></a> option and
+<p>When Apptainer is run using the <a class="reference internal" href="user_namespace.html#fakeroot"><span class="std std-ref">fakeroot</span></a> option
+(which is implied when doing builds) and
 mappings are available in <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code> then uids / gids
 inside the container are mapped to different host uids / gids.</p>
 <p>Most local filesystems (ext4/xfs etc.) have no problem with this
