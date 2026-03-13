@@ -100,6 +100,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#running-inside-docker">Running inside Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-requirements">Optional Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#buildkit">BuildKit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ipfs">IPFS</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="singularity_migration.html">Migrating from Singularity</a></li>
@@ -178,6 +183,21 @@ Used for creating missing bind mount paths and for writable overlays.
 Kernel 5.11 enables support for overlays unprivileged, but whenever
 the kernel OverlayFS driver doesn’t work, fuse-overlayfs will be used
 instead.</p></li>
+</ul>
+<p>Optional functionality of Apptainer requires additional installation:</p>
+<ul class="simple">
+<li><p><strong>BuildKit</strong> - Required to build SIF files from Containerfiles,
+which is expecting the <code class="docutils literal notranslate"><span class="pre">BUILDKIT_HOST</span></code> environment variable
+to be set to a BuildKit daemon installation. It also requires
+the <code class="docutils literal notranslate"><span class="pre">buildctl</span></code> client program to be installed in the PATH.
+It is possible to use the <code class="docutils literal notranslate"><span class="pre">~/.ipfs/gateway</span></code> or <code class="docutils literal notranslate"><span class="pre">/etc/ipfs/gateway</span></code>
+configuration files, instead of using the environment variable.</p></li>
+<li><p><strong>IPFS</strong> - Required to download SIF files from <code class="docutils literal notranslate"><span class="pre">ipfs://</span></code>
+addresses, and needs an <code class="docutils literal notranslate"><span class="pre">IPFS_GATEWAY</span></code> environment variable
+to be to set with the address (URL) of an IPFS HTTP gateway.
+The <code class="docutils literal notranslate"><span class="pre">ipfs</span></code> client is required, in order to upload images.
+It is possible to use <code class="docutils literal notranslate"><span class="pre">~/.config/buildkit/buildkitd.toml</span></code> or
+<code class="docutils literal notranslate"><span class="pre">/etc/buildkit/buildkitd.toml</span></code> config files, instead of env var.</p></li>
 </ul>
 <p>Instructions to install without or with setuid privileges are below.
 Please make sure you are familiar with the discussion on
@@ -744,6 +764,39 @@ apptainer always needs.
 The second options enables the apptainer <code class="docutils literal notranslate"><span class="pre">-p/--pid</span></code> option (which is
 implied by <code class="docutils literal notranslate"><span class="pre">-C/--containall</span></code>).
 The third option is needed for unprivileged FUSE mounts.</p>
+</section>
+<section id="optional-requirements">
+<h2>Optional Requirements<a class="headerlink" href="#optional-requirements" title="Link to this heading"></a></h2>
+<section id="buildkit">
+<h3>BuildKit<a class="headerlink" href="#buildkit" title="Link to this heading"></a></h3>
+<p>Apptainer uses BuildKit to build SIF files from a Containerfile
+(also known as Dockerfile)</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">buildctl</span></code> client and <code class="docutils literal notranslate"><span class="pre">buildkitd</span></code> server (including <code class="docutils literal notranslate"><span class="pre">runc</span></code>)
+can be downloaded from the project page:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/moby/buildkit">BuildKit</a></p></li>
+</ul>
+<p>Running the daemon as rootless requires user namespaces, and the
+installation of <code class="docutils literal notranslate"><span class="pre">rootlesskit</span></code> from:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/rootless-containers/rootlesskit">RootlessKit</a></p></li>
+</ul>
+<p>Note: You don’t need to install BuildKit, in order to <a class="reference external" href="https://apptainer.org/docs/user/main/definition_files.html">build images</a>.</p>
+</section>
+<section id="ipfs">
+<h3>IPFS<a class="headerlink" href="#ipfs" title="Link to this heading"></a></h3>
+<p>Apptainer can pull images from an <code class="docutils literal notranslate"><span class="pre">ipfs://</span></code> address, by using
+a IPFS HTTP Gateway proxy.</p>
+<p>It can either use a public gateway, or a private gateway:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ipfs/rainbow">Rainbow</a></p></li>
+</ul>
+<p>In order to push/add images, the <code class="docutils literal notranslate"><span class="pre">ipfs</span></code> client is needed:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ipfs/kubo">Kubo</a></p></li>
+</ul>
+<p>Note: You don’t need to install IPFS, in order to <a class="reference external" href="https://apptainer.org/docs/user/main/registry.html">pull from ORAS</a>.</p>
+</section>
 </section>
 </section>
 

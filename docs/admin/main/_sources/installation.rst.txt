@@ -56,6 +56,22 @@ Full functionality of {Project} requires that the kernel supports:
    the kernel OverlayFS driver doesn't work, fuse-overlayfs will be used
    instead.
 
+Optional functionality of {Project} requires additional installation:
+
+-  **BuildKit** - Required to build SIF files from Containerfiles,
+   which is expecting the ``BUILDKIT_HOST`` environment variable
+   to be set to a BuildKit daemon installation. It also requires
+   the ``buildctl`` client program to be installed in the PATH.
+   It is possible to use the ``~/.ipfs/gateway`` or ``/etc/ipfs/gateway``
+   configuration files, instead of using the environment variable.
+
+-  **IPFS** - Required to download SIF files from ``ipfs://``
+   addresses, and needs an ``IPFS_GATEWAY`` environment variable
+   to be to set with the address (URL) of an IPFS HTTP gateway.
+   The ``ipfs`` client is required, in order to upload images.
+   It is possible to use ``~/.config/buildkit/buildkitd.toml`` or
+   ``/etc/buildkit/buildkitd.toml`` config files, instead of env var.
+
 Instructions to install without or with setuid privileges are below.
 Please make sure you are familiar with the discussion on
 `Setuid & User Namespaces <{userdocs}/security.html#setuid-user-namespaces>`_
@@ -743,3 +759,40 @@ The second options enables the {command} ``-p/--pid`` option (which is
 implied by ``-C/--containall``).
 The third option is needed for unprivileged FUSE mounts.
 
+**********************
+ Optional Requirements
+**********************
+
+BuildKit
+========
+
+{Project} uses BuildKit to build SIF files from a Containerfile
+(also known as Dockerfile)
+
+The ``buildctl`` client and ``buildkitd`` server (including ``runc``)
+can be downloaded from the project page:
+
+* `BuildKit <https://github.com/moby/buildkit>`_
+
+Running the daemon as rootless requires user namespaces, and the
+installation of ``rootlesskit`` from:
+
+* `RootlessKit <https://github.com/rootless-containers/rootlesskit>`_
+
+Note: You don't need to install BuildKit, in order to `build images <{userdocs}/definition_files.html>`_.
+
+IPFS
+====
+
+{Project} can pull images from an ``ipfs://`` address, by using
+a IPFS HTTP Gateway proxy.
+
+It can either use a public gateway, or a private gateway:
+
+* `Rainbow <https://github.com/ipfs/rainbow>`_
+
+In order to push/add images, the ``ipfs`` client is needed:
+
+* `Kubo <https://github.com/ipfs/kubo>`_
+
+Note: You don't need to install IPFS, in order to `pull from ORAS <{userdocs}/registry.html>`_.
