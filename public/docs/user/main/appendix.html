@@ -1111,7 +1111,7 @@ currently residing in the Docker daemon’s internal storage:</p>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">APPTAINER_DOCKER_HOST</span></code> or <code class="docutils literal notranslate"><span class="pre">DOCKER_HOST</span></code> environment variables may be
-set to instruct {Apptainer} to pull images from a Docker daemon that is not
+set to instruct Apptainer to pull images from a Docker daemon that is not
 running at the default location. For example, when using a virtualized Docker you may be instructed to set <code class="docutils literal notranslate"><span class="pre">DOCKER_HOST</span></code> e.g.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>To connect the Docker client to the Docker daemon, please set
 export DOCKER_HOST=tcp://192.168.59.103:2375
@@ -1134,7 +1134,7 @@ written explicitly.</p>
 <span id="docker-archive"></span><h3><code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent<a class="headerlink" href="#docker-archive-bootstrap-agent" title="Link to this heading"></a></h3>
 <section id="id29">
 <h4>Overview<a class="headerlink" href="#id29" title="Link to this heading"></a></h4>
-<p>The <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> boostrap agent allows you to create a Apptainer image
+<p>The <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent allows you to create a Apptainer image
 from a docker image stored in a <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">save</span></code> formatted tar file:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>save<span class="w"> </span>-o<span class="w"> </span>alpine.tar<span class="w"> </span>alpine:latest
 
