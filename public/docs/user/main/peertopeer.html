@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IPFS Peer-To-Peer (P2P) Clusters &mdash; Apptainer User Guide main documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a8da1a53"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/js/ga.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bind Paths and Mounts" href="bind_paths_and_mounts.html" />
+    <link rel="prev" title="Library API Registries" href="library_api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">IPFS Peer-To-Peer Clusters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#content-addressing">Content addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ipfs-kubo-cli">IPFS Kubo CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-ipfs">Using IPFS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced">Advanced</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#archives">Archives</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Instances - Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Limiting Container Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Application Checkpointing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apptainer User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">IPFS Peer-To-Peer (P2P) Clusters</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/peertopeer.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ipfs-peer-to-peer-p2p-clusters">
+<span id="peertopeer"></span><h1>IPFS Peer-To-Peer (P2P) Clusters<a class="headerlink" href="#ipfs-peer-to-peer-p2p-clusters" title="Link to this heading"></a></h1>
+<p>It is possible for users of Apptainer to use <a class="reference external" href="https://ipfs.tech/">IPFS</a> clusters as sources for their container
+images. This is done through an IPFS HTTP Gateway that
+fetches data from the IPFS network.</p>
+<p>There are both private and public IPFS Gateways. Check with your
+IPFS Cluster administrator to find out which gateway to use.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">IPFS_GATEWAY</span><span class="o">=</span>http://127.0.0.1:8080
+
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">IPFS_GATEWAY</span><span class="o">=</span>https://ipfs.io
+</pre></div>
+</div>
+<p>It can be configured in <code class="docutils literal notranslate"><span class="pre">~/.ipfs/gateway</span></code> or <code class="docutils literal notranslate"><span class="pre">/etc/ipfs/gateway</span></code>.</p>
+<p>A daemon on localhost will <em>automatically</em> be detected as a gateway.</p>
+<section id="content-addressing">
+<h2>Content addressing<a class="headerlink" href="#content-addressing" title="Link to this heading"></a></h2>
+<p>In IPFS, data is chunked into blocks, which are assigned a
+unique identifier called a <strong>Content Identifier (CID)</strong>.
+This means that the content is addressable by <em>what</em> it is,
+and not <em>where</em> it is stored like with a regular HTTP URL.</p>
+<p>A CID (version 1) is a long string in “<a class="reference external" href="https://multiformats.io/">multiformat</a>”:</p>
+<p><code class="docutils literal notranslate"><span class="pre">bafkreihdwdcefgh4dqkjv67uzcmw7ojee6xedzdetojuzjevtenxquvyku</span></code></p>
+<p>The parts of a CID can be inspected with the <a class="reference external" href="https://cid.ipfs.tech/#bafkreihdwdcefgh4dqkjv67uzcmw7ojee6xedzdetojuzjevtenxquvyku">CID Inspector</a>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>base32 - cidv1 - raw - (sha2-256 : 256 : E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855)``
+</pre></div>
+</div>
+<p>Note: There is an older CID version 0 as well,
+it is <strong>not</strong> supported by Apptainer.</p>
+</section>
+<section id="ipfs-kubo-cli">
+<h2>IPFS Kubo CLI<a class="headerlink" href="#ipfs-kubo-cli" title="Link to this heading"></a></h2>
+<p>To upload an image to IPFS, use <code class="docutils literal notranslate"><span class="pre">ipfs</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ipfs<span class="w"> </span>add<span class="w"> </span>--cid-version<span class="w"> </span><span class="m">1</span><span class="w"> </span>lolcow.sif
+<span class="go">added bafybeice667c6gxovimsb6gnk6vex7vhzluhkl5hjv4ac4lhilxn52c43m lolcow.sif</span>
+</pre></div>
+</div>
+<p>You can download as well, with <code class="docutils literal notranslate"><span class="pre">ipfs</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ipfs<span class="w"> </span>get<span class="w"> </span>bafybeice667c6gxovimsb6gnk6vex7vhzluhkl5hjv4ac4lhilxn52c43m<span class="w"> </span>-o<span class="w"> </span>lolcow.sif
+</pre></div>
+</div>
+</section>
+<section id="using-ipfs">
+<h2>Using IPFS<a class="headerlink" href="#using-ipfs" title="Link to this heading"></a></h2>
+<p>Running an image from IPFS is done like:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>ipfs://bafybeice667c6gxovimsb6gnk6vex7vhzluhkl5hjv4ac4lhilxn52c43m
+</pre></div>
+</div>
+<p>Or you can pull it to a regular file first:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>lolcow.sif<span class="w"> </span>ipfs://bafybeice667c6gxovimsb6gnk6vex7vhzluhkl5hjv4ac4lhilxn52c43m
+</pre></div>
+</div>
+</section>
+<section id="advanced">
+<h2>Advanced<a class="headerlink" href="#advanced" title="Link to this heading"></a></h2>
+<p>To make version 1 the default, instead of having to use a flag, you can run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ipfs<span class="w"> </span>config<span class="w"> </span>--json<span class="w"> </span>Import.CidVersion<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<p>You can wrap the image with a directory, to record the filename and details:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ipfs<span class="w"> </span>add<span class="w"> </span>-w<span class="w"> </span>lolcow.sif
+<span class="go">added bafybeice667c6gxovimsb6gnk6vex7vhzluhkl5hjv4ac4lhilxn52c43m lolcow.sif</span>
+<span class="go">added bafybeiacfjtqrksxw5udplhs3rpvd7dyeqe7thzompdip635ps7o6sbp4q</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>ipfs://bafybeiacfjtqrksxw5udplhs3rpvd7dyeqe7thzompdip635ps7o6sbp4q/lolcow.sif
+</pre></div>
+</div>
+<p>For testing purposes, you can run a local-only IPFS daemon without connecting it:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ipfs<span class="w"> </span>daemon<span class="w"> </span>--offline
+<span class="go">...</span>
+<span class="go">Swarm not listening, running in offline mode.</span>
+<span class="go">RPC API server listening on /ip4/127.0.0.1/tcp/5001</span>
+<span class="go">WebUI: http://127.0.0.1:5001/webui</span>
+<span class="go">Gateway server listening on /ip4/127.0.0.1/tcp/8080</span>
+<span class="go">Daemon is ready</span>
+</pre></div>
+</div>
+</section>
+<section id="archives">
+<h2>Archives<a class="headerlink" href="#archives" title="Link to this heading"></a></h2>
+<p>If you need to back up or transport content-addressed data using a non-IPFS
+medium, CID can be preserved with CAR files (similar to TAR, for data).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ipfs<span class="w"> </span>dag<span class="w"> </span><span class="nb">export</span><span class="w"> </span>bafybeice667c6gxovimsb6gnk6vex7vhzluhkl5hjv4ac4lhilxn52c43m<span class="w"> </span>&gt;lolcow.car
+
+<span class="gp">$ </span>ipfs<span class="w"> </span>dag<span class="w"> </span>import<span class="w"> </span>&lt;lolcow.car
+<span class="go">Pinned root  bafybeice667c6gxovimsb6gnk6vex7vhzluhkl5hjv4ac4lhilxn52c43m     success</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="library_api.html" class="btn btn-neutral float-left" title="Library API Registries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bind_paths_and_mounts.html" class="btn btn-neutral float-right" title="Bind Paths and Mounts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
