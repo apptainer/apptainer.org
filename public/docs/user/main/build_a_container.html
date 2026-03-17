@@ -60,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#creating-writable-sandbox-directories">Creating writable <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#converting-containers-from-one-format-to-another">Converting containers from one format to another</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-containers-from-apptainer-definition-files">Building containers from Apptainer definition files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-containers-from-dockerfile-with-buildkit">Building containers from Dockerfile with BuildKit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#alternative-compressors">Alternative compressors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-encrypted-containers">Building encrypted containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#build-options">Build options</a><ul>
@@ -297,6 +298,30 @@ to use it to build a SIF container:</p>
 </div>
 <p>You can do so with the following command.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>lolcow.sif<span class="w"> </span>lolcow.def
+</pre></div>
+</div>
+</section>
+<section id="building-containers-from-dockerfile-with-buildkit">
+<h2>Building containers from Dockerfile with BuildKit<a class="headerlink" href="#building-containers-from-dockerfile-with-buildkit" title="Link to this heading"></a></h2>
+<p>Apptainer can also build directly from an existing Dockerfile, by
+using an already running BuildKit daemon (or Docker daemon) process.
+For detailed information on Apptainer definition files vs Dockerfile,
+please see <a class="reference internal" href="docker_and_oci.html"><span class="doc">Docker and OCI</span></a>.
+Suppose you already have the following file called <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>,
+and you want to use it to build a SIF container:</p>
+<div class="highlight-Dockerfile notranslate"><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:20.04</span>
+
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>-y<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>cowsay<span class="w"> </span>lolcat
+
+<span class="k">ENV</span><span class="w"> </span><span class="nv">LC_ALL</span><span class="o">=</span>C<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">PATH</span><span class="o">=</span>/usr/games:<span class="nv">$PATH</span>
+
+<span class="k">CMD</span><span class="w"> </span>date<span class="w"> </span><span class="p">|</span><span class="w"> </span>cowsay<span class="w"> </span><span class="p">|</span><span class="w"> </span>lolcat
+</pre></div>
+</div>
+<p>You can do so with the following command.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>lolcow.sif<span class="w"> </span>dockerfile:.
 </pre></div>
 </div>
 </section>

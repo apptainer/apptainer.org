@@ -185,10 +185,15 @@
 <li class="toctree-l4"><a class="reference internal" href="#id30">Keywords</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#scratch-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">scratch</span></code> bootstrap agent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dockerfile-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">dockerfile</span></code> bootstrap agent</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id31">Overview</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id32">Keywords</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id33">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scratch-bootstrap-agent"><code class="docutils literal notranslate"><span class="pre">scratch</span></code> bootstrap agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id33">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id34">Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id35">Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -271,6 +276,9 @@ block device access during contention on a specific device.
 Must be supplied in <code class="docutils literal notranslate"><span class="pre">&lt;device</span> <span class="pre">path&gt;:weight</span></code> format. Default is unset.</p></li>
 <li><p><strong>APPTAINER_BOOT</strong>: Set to false by default, considers if executing
 <code class="docutils literal notranslate"><span class="pre">/sbin/init</span></code> when container boots (root only).</p></li>
+<li><p><strong>APPTAINER_BUILDKIT_HOST</strong>: Host address / socket to use when building images
+from a <code class="docutils literal notranslate"><span class="pre">buildkit</span></code> or <code class="docutils literal notranslate"><span class="pre">dockerfile</span></code> source. <code class="docutils literal notranslate"><span class="pre">BUILDKIT_HOST</span></code> without the
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_</span></code> prefix is also accepted.</p></li>
 </ol>
 </section>
 <section id="c">
@@ -1136,6 +1144,8 @@ written explicitly.</p>
 <h4>Overview<a class="headerlink" href="#id29" title="Link to this heading"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">docker-archive</span></code> bootstrap agent allows you to create a Apptainer image
 from a docker image stored in a <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">save</span></code> formatted tar file:</p>
+<p>The alternative bootstrap agent <code class="docutils literal notranslate"><span class="pre">oci-archive</span></code> can also be used with these,
+since Docker saves archives compatible with <em>both</em> formats (since version 25).</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>save<span class="w"> </span>-o<span class="w"> </span>alpine.tar<span class="w"> </span>alpine:latest
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker-archive:<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/alpine.tar
@@ -1163,6 +1173,66 @@ to the tar file containing the image to be specified with the <code class="docut
 </div>
 </section>
 </section>
+<section id="dockerfile-bootstrap-agent">
+<span id="dockerfile"></span><h3><code class="docutils literal notranslate"><span class="pre">dockerfile</span></code> bootstrap agent<a class="headerlink" href="#dockerfile-bootstrap-agent" title="Link to this heading"></a></h3>
+<section id="id31">
+<h4>Overview<a class="headerlink" href="#id31" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">dockerfile</span></code> bootstrap agent allows you to create a Apptainer image
+from a Dockerfile stored in a build context directory (which can be <code class="docutils literal notranslate"><span class="pre">.</span></code>):</p>
+<p>It is an alias for the <code class="docutils literal notranslate"><span class="pre">buildkit</span></code> bootstrap agent, since BuildKit is also
+known from the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">buildx</span></code> plugin that has replaced <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>Dockerfile
+<span class="go">FROM alpine</span>
+<span class="go">CMD [&quot;echo&quot;, &quot;Hello&quot;, &quot;World&quot;]</span>
+
+<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>hello-world.sif<span class="w"> </span>dockerfile:.
+<span class="go">INFO:    Starting build...</span>
+<span class="go">INFO:    Building OCI image...</span>
+<span class="go">[+] Building 1.6s (5/5) FINISHED</span>
+<span class="go"> =&gt; [internal] load build definition from Dockerfile</span>
+<span class="go"> =&gt; =&gt; transferring dockerfile: 80B</span>
+<span class="go"> =&gt; [internal] load metadata for docker.io/library/alpine:latest</span>
+<span class="go"> =&gt; [internal] load .dockerignore</span>
+<span class="go"> =&gt; =&gt; transferring context: 2B</span>
+<span class="go"> =&gt; CACHED [1/1] FROM docker.io/library/alpine:latest@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659</span>
+<span class="go"> =&gt; =&gt; resolve docker.io/library/alpine:latest@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659</span>
+<span class="go"> =&gt; exporting to oci image format</span>
+<span class="go"> =&gt; =&gt; exporting layers</span>
+<span class="go"> =&gt; =&gt; exporting manifest sha256:54abfa35ab6a349b9e10226b913f3f13733630dcdbc4338056aa63c4e499cc28</span>
+<span class="go"> =&gt; =&gt; exporting config sha256:92a056a793e53aac2acbdbe429709a76eaab586e634833866eca773d30236bd0</span>
+<span class="go"> =&gt; =&gt; sending tarball</span>
+<span class="go">INFO:    Extracting OCI image...</span>
+<span class="go">INFO:    Inserting Apptainer configuration...</span>
+<span class="go">INFO:    Creating SIF file...</span>
+<span class="go">[=====================================================================] 100 % 0s</span>
+<span class="go">INFO:    Build complete: hello-world.sif</span>
+
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>hello-world.sif
+<span class="go">Hello World</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">APPTAINER_BUILDKIT_HOST</span></code> or <code class="docutils literal notranslate"><span class="pre">BUILDKIT_HOST</span></code> environment variables may be
+set to instruct Apptainer to build images with a BuildKit daemon that is not
+running at the default location. For example, when using a rootless BuildKit daemon started with <code class="docutils literal notranslate"><span class="pre">rootlesskit</span> <span class="pre">buildkitd</span> <span class="pre">&amp;</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>export BUILDKIT_HOST=unix:///run/user/1000/buildkit/buildkitd.sock
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">DOCKER_BUILDKIT</span></code> and <code class="docutils literal notranslate"><span class="pre">DOCKER_HOST</span></code> environment variables may also be set to
+use an already existing Docker daemon <em>instead</em> of a BuildKit daemon, but some features like the build log will be missing.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>export DOCKER_BUILDKIT=1 DOCKER_HOST=unix:///run/user/1000/docker.sock
+</pre></div>
+</div>
+</section>
+<section id="id32">
+<h4>Keywords<a class="headerlink" href="#id32" title="Link to this heading"></a></h4>
+<p>In a definition file, the <code class="docutils literal notranslate"><span class="pre">dockerfile</span></code> bootstrap agent requires the path
+to the build context directory containing the Dockerfile to be specified with the <code class="docutils literal notranslate"><span class="pre">From:</span></code> keyword.</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: dockerfile
+<span class="k">From</span>: &lt;path-to-build-context&gt;
+</pre></div>
+</div>
+</section>
+</section>
 <section id="scratch-bootstrap-agent">
 <span id="scratch-agent"></span><h3><code class="docutils literal notranslate"><span class="pre">scratch</span></code> bootstrap agent<a class="headerlink" href="#scratch-bootstrap-agent" title="Link to this heading"></a></h3>
 <p>The scratch bootstrap agent allows you to start from a completely empty
@@ -1170,8 +1240,8 @@ container. You are then responsible for adding any and all executables,
 libraries etc. that are required. Starting with a scratch container can
 be useful when you are aiming to minimize container size, and have a
 simple application / static binaries.</p>
-<section id="id31">
-<h4>Overview<a class="headerlink" href="#id31" title="Link to this heading"></a></h4>
+<section id="id33">
+<h4>Overview<a class="headerlink" href="#id33" title="Link to this heading"></a></h4>
 <p>A minimal container providing a shell can be created by copying the
 <code class="docutils literal notranslate"><span class="pre">busybox</span></code> static binary into an empty scratch container:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
@@ -1202,15 +1272,15 @@ simple application / static binaries.</p>
 </pre></div>
 </div>
 </section>
-<section id="id32">
-<h4>Keywords<a class="headerlink" href="#id32" title="Link to this heading"></a></h4>
+<section id="id34">
+<h4>Keywords<a class="headerlink" href="#id34" title="Link to this heading"></a></h4>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: scratch
 </pre></div>
 </div>
 <p>There are no additional keywords for the scratch bootstrap agent.</p>
 </section>
-<section id="id33">
-<h4>Notes<a class="headerlink" href="#id33" title="Link to this heading"></a></h4>
+<section id="id35">
+<h4>Notes<a class="headerlink" href="#id35" title="Link to this heading"></a></h4>
 <p>When building a container as an unprivileged user using this bootstrap,
 not all of the fakeroot modes work well.  See
 <a class="reference internal" href="fakeroot.html#build"><span class="std std-ref">Building container images</span></a> for details.</p>
