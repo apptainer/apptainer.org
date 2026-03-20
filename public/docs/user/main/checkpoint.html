@@ -85,6 +85,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#self-contained-checkpointing-in-a-container">Self-Contained Checkpointing in a Container</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#building-the-container">Building the Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-and-checkpointing">Running and Checkpointing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restarting-from-a-checkpoint">Restarting from a Checkpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#starting-fresh">Starting Fresh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-exec-and-shell">Using Exec and Shell</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -312,6 +320,200 @@ checkpoint if we no longer need it to restart our application from this state:</
 <span class="go">INFO:    Stopping restarted-server instance of /home/ian/server.sif (PID=247679)</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>checkpoint<span class="w"> </span>delete<span class="w"> </span>example-checkpoint
 <span class="go">INFO:    Checkpoint &quot;example-checkpoint&quot; deleted.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="self-contained-checkpointing-in-a-container">
+<h2>Self-Contained Checkpointing in a Container<a class="headerlink" href="#self-contained-checkpointing-in-a-container" title="Link to this heading"></a></h2>
+<p>The built-in checkpoint feature described above requires a DMTCP
+installation on your host, glibc compatibility between host and container, and uses the
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">instance</span></code> workflow with <code class="docutils literal notranslate"><span class="pre">--dmtcp-launch</span></code> / <code class="docutils literal notranslate"><span class="pre">--dmtcp-restart</span></code>
+flags. An alternative approach is to install DMTCP directly inside the
+container so that the checkpointing software and application is fully containerized.</p>
+<p>This is useful for the following scenarios:</p>
+<ul class="simple">
+<li><p>The host does not have DMTCP installed or configured.</p></li>
+<li><p>Portability across different hosts or clusters is needed.</p></li>
+<li><p>Automatic periodic checkpointing is preferred over manual
+<code class="docutils literal notranslate"><span class="pre">checkpoint</span> <span class="pre">instance</span></code> commands.</p></li>
+<li><p>The simplicity of the <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run</span></code> workflow is preferred over instances.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This approach bypasses the built-in <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">checkpoint</span></code> command group
+entirely. Checkpointing and restarting are handled by the DMTCP installation
+inside the container, driven by the container’s <code class="docutils literal notranslate"><span class="pre">%runscript</span></code>.</p>
+</div>
+<section id="building-the-container">
+<h3>Building the Container<a class="headerlink" href="#building-the-container" title="Link to this heading"></a></h3>
+<p>The definition file below installs DMTCP from source and includes a small
+Python counter application as an example workload. The key piece is the
+<code class="docutils literal notranslate"><span class="pre">%runscript</span></code>, which automatically detects whether checkpoint files exist and
+either restarts from them or launches the application fresh under DMTCP.</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: rockylinux/rockylinux:<span class="m">10</span>
+
+<span class="gh">%post</span>
+<span class="w">    </span>dnf<span class="w"> </span>groupinstall<span class="w"> </span>-y<span class="w"> </span><span class="s2">&quot;Development Tools&quot;</span>
+<span class="w">    </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libatomic<span class="w"> </span>which
+
+<span class="w">    </span>git<span class="w"> </span>clone<span class="w"> </span>--branch<span class="o">=</span><span class="m">4</span>.1.0<span class="w"> </span>https://github.com/dmtcp/dmtcp.git
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>dmtcp
+<span class="w">    </span>./configure
+<span class="w">    </span>make
+<span class="w">    </span>make<span class="w"> </span>install
+
+<span class="w">    </span><span class="c1"># --- Replace this section with your own application ---</span>
+<span class="w">    </span>mkdir<span class="w"> </span>/app
+<span class="w">    </span>cat<span class="w"> </span>&gt;<span class="w"> </span>/app/server.py<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<span class="s">import time</span>
+
+<span class="s">counter = 0</span>
+<span class="s">while True:</span>
+<span class="s">    print(counter, flush=True)</span>
+<span class="s">    counter += 1</span>
+<span class="s">    time.sleep(1)</span>
+<span class="s">EOF</span>
+
+<span class="gh">%runscript</span>
+<span class="w">    </span><span class="nv">CKPT_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DMTCP_CHECKPOINT_DIR</span><span class="k">:-</span><span class="p">.</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">RESTART_SCRIPT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$CKPT_DIR</span><span class="s2">/dmtcp_restart_script.sh&quot;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESTART_SCRIPT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">exec</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESTART_SCRIPT</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="nb">exec</span><span class="w"> </span>dmtcp_launch<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--interval<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DMTCP_CHECKPOINT_INTERVAL</span><span class="k">:-</span><span class="nv">10</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--coord-port<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--ckpt-open-files<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>python3<span class="w"> </span>/app/server.py<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> logic works as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DMTCP_CHECKPOINT_DIR</span></code> — if set, DMTCP writes checkpoint files to that
+directory; otherwise it defaults to the current working directory (<code class="docutils literal notranslate"><span class="pre">.</span></code>).</p></li>
+<li><p>On startup the script checks for <code class="docutils literal notranslate"><span class="pre">dmtcp_restart_script.sh</span></code> in the
+checkpoint directory. If present, the application is restarted from the
+saved state. If absent, a fresh launch is performed under <code class="docutils literal notranslate"><span class="pre">dmtcp_launch</span></code>.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">dmtcp_launch</span></code> flags used here are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--interval</span></code> — seconds between automatic checkpoints. Controlled at
+runtime via the <code class="docutils literal notranslate"><span class="pre">DMTCP_CHECKPOINT_INTERVAL</span></code> environment variable
+(default: 10 seconds).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--coord-port</span> <span class="pre">0</span></code> — tells DMTCP to pick an available port for its
+coordinator, avoiding conflicts with other processes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--ckpt-open-files</span></code> — includes open file descriptors in the checkpoint
+image so that files in use are properly saved and restored.</p></li>
+</ul>
+<p>To adapt this for your own application, replace the <code class="docutils literal notranslate"><span class="pre">%post</span></code> application
+installation section and the <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">/app/server.py</span> <span class="pre">&quot;$&#64;&quot;</span></code> command in the
+<code class="docutils literal notranslate"><span class="pre">%runscript</span></code> with your own application and launch command.</p>
+<p>Build the container with:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>myapp.sif<span class="w"> </span>myapp.def
+</pre></div>
+</div>
+</section>
+<section id="running-and-checkpointing">
+<h3>Running and Checkpointing<a class="headerlink" href="#running-and-checkpointing" title="Link to this heading"></a></h3>
+<p>By default, DMTCP writes checkpoint files to the current working directory.
+It is recommended to create a dedicated directory so checkpoint data is easy
+to find and manage.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir<span class="w"> </span>ckpt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>ckpt
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>../myapp.sif
+<span class="go">0</span>
+<span class="go">1</span>
+<span class="go">2</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+<p>Checkpoints are created automatically at the interval configured in the
+definition file (every 10 seconds by default). You can override this at
+runtime:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">DMTCP_CHECKPOINT_INTERVAL</span><span class="o">=</span><span class="m">30</span><span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>../myapp.sif
+</pre></div>
+</div>
+<p>After a checkpoint interval elapses, interrupt the program with control-C
+and verify that checkpoint files have been written:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ls
+<span class="go">ckpt_python3_*.dmtcp  dmtcp_restart_script.sh  ...</span>
+</pre></div>
+</div>
+</section>
+<section id="restarting-from-a-checkpoint">
+<h3>Restarting from a Checkpoint<a class="headerlink" href="#restarting-from-a-checkpoint" title="Link to this heading"></a></h3>
+<p>To restart the application from its checkpointed state, run the container
+again from the same directory that contains the checkpoint files:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>ckpt
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>../myapp.sif
+<span class="go">10</span>
+<span class="go">11</span>
+<span class="go">12</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> detects <code class="docutils literal notranslate"><span class="pre">dmtcp_restart_script.sh</span></code> and automatically
+restarts the application from where it left off — the counter resumes from its
+checkpointed value. Subsequent checkpoints continue to update the files in the
+same directory.</p>
+</section>
+<section id="starting-fresh">
+<h3>Starting Fresh<a class="headerlink" href="#starting-fresh" title="Link to this heading"></a></h3>
+<p>To discard a previous checkpoint and start the application from scratch, either
+remove the checkpoint files:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rm<span class="w"> </span>-f<span class="w"> </span>ckpt_*.dmtcp<span class="w"> </span>dmtcp_restart_script.sh
+</pre></div>
+</div>
+<p>Or simply run the container from a different, empty directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir<span class="w"> </span>ckpt-new<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>ckpt-new
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>../myapp.sif
+<span class="go">0</span>
+<span class="go">1</span>
+<span class="go">2</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+</section>
+<section id="using-exec-and-shell">
+<h3>Using Exec and Shell<a class="headerlink" href="#using-exec-and-shell" title="Link to this heading"></a></h3>
+<p>The examples above all use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run</span></code>, which invokes the
+<code class="docutils literal notranslate"><span class="pre">%runscript</span></code> and its automatic launch/restart logic. You can also use
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">exec</span></code> and <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">shell</span></code> to work with DMTCP directly inside
+the container.</p>
+<p><strong>Launching with exec</strong></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">exec</span></code> to call <code class="docutils literal notranslate"><span class="pre">dmtcp_launch</span></code> directly, bypassing the
+<code class="docutils literal notranslate"><span class="pre">%runscript</span></code>. This is useful when you want to pass different flags or
+launch a different command than what the <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> provides:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir<span class="w"> </span>ckpt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>ckpt
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>../myapp.sif<span class="w"> </span>dmtcp_launch<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--interval<span class="w"> </span><span class="m">60</span><span class="w"> </span>--coord-port<span class="w"> </span><span class="m">0</span><span class="w"> </span>--ckpt-open-files<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>python3<span class="w"> </span>/app/server.py
+</pre></div>
+</div>
+<p><strong>Restarting with exec</strong></p>
+<p>Similarly, you can restart from a checkpoint by executing the restart script
+directly:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>ckpt
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>../myapp.sif<span class="w"> </span>./dmtcp_restart_script.sh
+<span class="go">10</span>
+<span class="go">11</span>
+<span class="go">12</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+<p><strong>Interactive debugging with shell</strong></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">shell</span></code> to open an interactive session inside the container.
+This is helpful for inspecting checkpoint files, testing DMTCP commands, or
+debugging:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>ckpt
+<span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>../myapp.sif
+<span class="go">&gt; ls ckpt_*.dmtcp</span>
+<span class="go">ckpt_python3_*.dmtcp</span>
+<span class="go">&gt; dmtcp_restart_script.sh --help</span>
+<span class="go">...</span>
 </pre></div>
 </div>
 </section>
