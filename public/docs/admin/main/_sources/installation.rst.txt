@@ -360,13 +360,13 @@ non-setuid installation:
 
 .. code:: console
 
-   $ sudo dnf install -y https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-{GitHubDownloadVersion}.x86_64.rpm
+   $ sudo dnf install -y https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-{GitHubDownloadVersion}-{GitHubDownloadRelease}.x86_64.rpm
 
 For the setuid installation do above command first and then this one:
 
 .. code:: console
 
-   $ sudo dnf install -y https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid-{GitHubDownloadVersion}.x86_64.rpm
+   $ sudo dnf install -y https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid-{GitHubDownloadVersion}-{GitHubDownloadRelease}.x86_64.rpm
 
 Install Debian packages
 ------------------------------
@@ -378,15 +378,15 @@ Pre-built Debian packages are only available on GitHub and only for the amd64 ar
     $ sudo apt update
     $ sudo apt install -y wget
     $ cd /tmp
-    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}_{InstallationVersion}_amd64.deb
-    $ sudo apt install -y ./{command}_{InstallationVersion}_amd64.deb
+    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}_{GitHubDownloadVersion}_amd64.deb
+    $ sudo apt install -y ./{command}_{GitHubDownloadVersion}_amd64.deb
 
 For the setuid installation do above commands first and then these:
 
 .. code:: console
 
-    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid_{InstallationVersion}_amd64.deb
-    $ sudo dpkg -i ./{command}-suid_{InstallationVersion}_amd64.deb
+    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid_{GitHubDownloadVersion}_amd64.deb
+    $ sudo dpkg -i ./{command}-suid_{GitHubDownloadVersion}_amd64.deb
 
 For Debian 13 do these commands instead 
 
@@ -395,15 +395,15 @@ For Debian 13 do these commands instead
     $ sudo apt update
     $ sudo apt install -y wget
     $ cd /tmp
-    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}_{InstallationVersion}-trixie+_amd64.deb
-    $ sudo apt install -y ./{command}_{InstallationVersion}-trixie+_amd64.deb
+    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}_{GitHubDownloadVersion}-trixie+_amd64.deb
+    $ sudo apt install -y ./{command}_{GitHubDownloadVersion}-trixie+_amd64.deb
 
 For the setuid installation do above commands first and then these:
 
 .. code:: console
 
-    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid_{InstallationVersion}-trixie+_amd64.deb
-    $ sudo dpkg -i ./{command}-suid_{InstallationVersion}-trixie+_amd64.deb
+    $ wget https://github.com/{orgrepo}/releases/download/v{InstallationVersion}/{command}-suid_{GitHubDownloadVersion}-trixie+_amd64.deb
+    $ sudo dpkg -i ./{command}-suid_{GitHubDownloadVersion}-trixie+_amd64.deb
 
 
 Install Ubuntu packages
