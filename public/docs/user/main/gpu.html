@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GPU Support (NVIDIA CUDA &amp; AMD ROCm) &mdash; Apptainer User Guide main documentation</title>
+  <title>GPU and other Device Support &mdash; Apptainer User Guide main documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -85,7 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">GPU Support</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GPU and other Device Support</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#nvidia-gpus-cuda-standard">NVIDIA GPUs &amp; CUDA (Standard)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example-tensorflow-gpu">Example - tensorflow-gpu</a></li>
@@ -108,6 +108,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#example-tensorflow-rocm">Example - tensorflow-rocm</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#intel-gaudi-hpu">Intel Gaudi HPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#container-device-interface-cdi">Container Device Interface (CDI)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#opencl-applications">OpenCL Applications</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example-blender-opencl">Example - Blender OpenCL</a></li>
 </ul>
@@ -140,7 +142,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">GPU Support (NVIDIA CUDA &amp; AMD ROCm)</li>
+      <li class="breadcrumb-item active">GPU and other Device Support</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/gpu.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -150,14 +152,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="gpu-support-nvidia-cuda-amd-rocm">
-<span id="gpu"></span><h1>GPU Support (NVIDIA CUDA &amp; AMD ROCm)<a class="headerlink" href="#gpu-support-nvidia-cuda-amd-rocm" title="Link to this heading"></a></h1>
+  <section id="gpu-and-other-device-support">
+<span id="gpu"></span><h1>GPU and other Device Support<a class="headerlink" href="#gpu-and-other-device-support" title="Link to this heading"></a></h1>
 <p>Apptainer natively supports running application containers that use
-NVIDIA’s CUDA GPU compute framework, or AMD’s ROCm solution. This allows
+GPUs or other accelerators.  It has specific support for
+NVIDIA’s CUDA GPU compute framework, AMD’s ROCm GPU solution, and
+Intel’s Gaudi HPU accelerators.
+In addition, it supports the Open Containers Initiative (OCI)
+Container Device Interface (CDI)
+generic method for making GPUs and other accelerator devices available
+inside containers; see the <a class="reference internal" href="#sec-cdi"><span class="std std-ref">CDI section</span></a> below for details.</p>
+<p>This hardware device support allows
 easy access to users of GPU-enabled machine learning frameworks such as
 TensorFlow, regardless of the host operating system. As long as the host
-has a driver and library installation for CUDA/ROCm, then it’s possible
-to e.g. run TensorFlow in an up-to-date Ubuntu 24.04 container, from an
+has a driver and library installation for a GPU, then it’s possible
+to e.g. run TensorFlow in a Ubuntu 24.04 container, from an
 older RHEL 8 host. However, note that since the libraries are bound in
 from the host, the libc version present in the container and on the host
 must not be too far apart or there will be libc mismatch errors.  Errors
@@ -168,13 +177,13 @@ than on the host.</p>
 used easily, with an additional bind option.</p>
 <p>Apptainer experimental support is provided to use
 Nvidia’s <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> tooling for GPU container setup. This
-functionality, accessible via the new <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> flag, improves
+functionality, accessible via the <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> flag, improves
 compatibility with OCI runtimes and exposes additional container
 configuration options.</p>
 <section id="nvidia-gpus-cuda-standard">
 <h2>NVIDIA GPUs &amp; CUDA (Standard)<a class="headerlink" href="#nvidia-gpus-cuda-standard" title="Link to this heading"></a></h2>
 <p>Commands that <code class="docutils literal notranslate"><span class="pre">run</span></code>, or otherwise execute containers (<code class="docutils literal notranslate"><span class="pre">shell</span></code>,
-<code class="docutils literal notranslate"><span class="pre">exec</span></code>) can take an <code class="docutils literal notranslate"><span class="pre">--nv</span></code> option, which will setup the container’s
+<code class="docutils literal notranslate"><span class="pre">exec</span></code>), can take an <code class="docutils literal notranslate"><span class="pre">--nv</span></code> option which will setup the container’s
 environment to use an NVIDIA GPU and the basic CUDA libraries to run a
 CUDA enabled application. The <code class="docutils literal notranslate"><span class="pre">--nv</span></code> flag will:</p>
 <ul class="simple">
@@ -496,7 +505,7 @@ be found in the container-toolkit guide:</p>
 <p>Apptainer has a <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> flag to support GPU compute with the
 ROCm framework using AMD Radeon GPU cards.</p>
 <p>Commands that <code class="docutils literal notranslate"><span class="pre">run</span></code>, or otherwise execute containers (<code class="docutils literal notranslate"><span class="pre">shell</span></code>,
-<code class="docutils literal notranslate"><span class="pre">exec</span></code>) can take an <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> option, which will setup the
+<code class="docutils literal notranslate"><span class="pre">exec</span></code>), can take an <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> option which will setup the
 container’s environment to use a Radeon GPU and the basic ROCm libraries
 to run a ROCm enabled application. The <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> flag will:</p>
 <ul class="simple">
@@ -567,6 +576,63 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 </pre></div>
 </div>
 </section>
+</section>
+<section id="intel-gaudi-hpu">
+<h2>Intel Gaudi HPU<a class="headerlink" href="#intel-gaudi-hpu" title="Link to this heading"></a></h2>
+<p>Intel Gaudi HPUs are another type of accelerator for AI workloads.
+The term “HPU” is not generic; it stands for “Habana Processing Unit”
+because it was designed by Habana labs.</p>
+<p>This accelerator does not require importing any host software, it only
+requires importing device files from <code class="docutils literal notranslate"><span class="pre">/dev</span></code>.  When Apptainer starts
+a container with default options, all of <code class="docutils literal notranslate"><span class="pre">/dev</span></code> on the host is
+normally made available inside the container, so nothing special needs
+to be done.  However, if the <code class="docutils literal notranslate"><span class="pre">--contain</span></code> option is used or the
+<code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">dev</span></code> configuration file option is set to <code class="docutils literal notranslate"><span class="pre">minimal</span></code>, most
+dev files are not imported into the container.  For that situation,
+an option <code class="docutils literal notranslate"><span class="pre">--intel-hpu</span></code> is made available to import the <code class="docutils literal notranslate"><span class="pre">/dev</span></code>
+files needed for the device.  If there are multiple HPU devices
+installed on the host, by default all such devices are imported,
+but if a subset is desired that can be specified with a
+<code class="docutils literal notranslate"><span class="pre">HABANA_VISIBLE_DEVICES</span></code> environment variable.  That should
+contain a comma-separated list of device IDs (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;1,2,3&quot;</span></code>)
+or <code class="docutils literal notranslate"><span class="pre">&quot;all&quot;</span></code>, which is the default.</p>
+</section>
+<section id="container-device-interface-cdi">
+<span id="sec-cdi"></span><h2>Container Device Interface (CDI)<a class="headerlink" href="#container-device-interface-cdi" title="Link to this heading"></a></h2>
+<p>Apptainer also supports a generic device definition method as defined
+by the Open Containers Initiative (OCI) standard called
+<a class="reference external" href="https://github.com/container-orchestrated-devices/container-device-interface">Container Device Interface (CDI)</a>.
+If a hardware device has a CDI definition file available, Apptainer and
+other container runtimes that support CDI can use it to import the
+device into containers.</p>
+<p>A CDI definition can be used by Apptainer’s “action” commands
+(<code class="docutils literal notranslate"><span class="pre">run</span></code> / <code class="docutils literal notranslate"><span class="pre">exec</span></code> / <code class="docutils literal notranslate"><span class="pre">shell</span></code>), with the <code class="docutils literal notranslate"><span class="pre">--device</span></code> option:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">device</span> <span class="n">strings</span>                <span class="n">fully</span><span class="o">-</span><span class="n">qualified</span> <span class="n">CDI</span> <span class="n">device</span> <span class="n">name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span>
+                                <span class="n">A</span> <span class="n">fully</span><span class="o">-</span><span class="n">qualified</span> <span class="n">CDI</span> <span class="n">device</span> <span class="n">name</span>
+                                <span class="n">consists</span> <span class="n">of</span> <span class="n">a</span> <span class="n">VENDOR</span><span class="p">,</span> <span class="n">CLASS</span><span class="p">,</span> <span class="ow">and</span>
+                                <span class="n">NAME</span><span class="p">,</span> <span class="n">which</span> <span class="n">are</span> <span class="n">combined</span> <span class="k">as</span> <span class="n">follows</span><span class="p">:</span>
+                                <span class="o">&lt;</span><span class="n">VENDOR</span><span class="o">&gt;/&lt;</span><span class="n">CLASS</span><span class="o">&gt;=&lt;</span><span class="n">NAME</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span>
+                                <span class="n">vendor</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">device</span><span class="o">=</span><span class="n">mydevice</span><span class="p">)</span><span class="o">.</span>
+                                <span class="n">Multiple</span> <span class="n">fully</span><span class="o">-</span><span class="n">qualified</span> <span class="n">CDI</span> <span class="n">device</span>
+                                <span class="n">names</span> <span class="n">can</span> <span class="n">be</span> <span class="n">given</span> <span class="k">as</span> <span class="n">a</span> <span class="n">comma</span>
+                                <span class="n">separated</span> <span class="nb">list</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>The device string needed for a particular device should be available
+from the provider of the CDI definition file.</p>
+<p>Apptainer uses a subset of the CDI specification that is most relevant
+to its containers: it bind mounts relevant <code class="docutils literal notranslate"><span class="pre">/dev</span></code> files (when it isn’t
+already importing all of <code class="docutils literal notranslate"><span class="pre">/dev</span></code>), bind mounts other files needed by the
+device, and imports environment variables relevant to the device.</p>
+<p>In addition, Apptainer provides a <code class="docutils literal notranslate"><span class="pre">--cdi-dirs</span></code> option which
+enables the user to override the default search directory for CDI definition
+files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">cdi</span><span class="o">-</span><span class="n">dirs</span> <span class="n">strings</span>              <span class="n">comma</span><span class="o">-</span><span class="n">separated</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">directories</span>
+                                <span class="ow">in</span> <span class="n">which</span> <span class="n">CDI</span> <span class="n">should</span> <span class="n">look</span> <span class="k">for</span> <span class="n">device</span>
+                                <span class="n">definition</span> <span class="n">JSON</span> <span class="n">files</span><span class="o">.</span> <span class="n">If</span> <span class="n">omitted</span><span class="p">,</span>
+                                <span class="n">default</span> <span class="n">will</span> <span class="n">be</span><span class="p">:</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">cdi</span><span class="p">,</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">cdi</span>
+</pre></div>
+</div>
 </section>
 <section id="opencl-applications">
 <h2>OpenCL Applications<a class="headerlink" href="#opencl-applications" title="Link to this heading"></a></h2>
