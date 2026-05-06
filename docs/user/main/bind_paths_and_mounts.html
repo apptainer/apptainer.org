@@ -578,14 +578,9 @@ $<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </
 <section id="sif-image-files">
 <h3>SIF Image Files<a class="headerlink" href="#sif-image-files" title="Link to this heading"></a></h3>
 <p>Advanced users may wish to create a standalone SIF image, which contains
-an <code class="docutils literal notranslate"><span class="pre">ext3</span></code> or <code class="docutils literal notranslate"><span class="pre">squashfs</span></code> data partition holding files, by using the
-<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">sif</span></code> commands similarly to the <a class="reference internal" href="persistent_overlays.html#overlay-sif"><span class="std std-ref">persistent overlays
-instructions</span></a>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Create<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>empty<span class="w"> </span>SIF<span class="w"> </span>file
-<span class="gp">$ </span>apptainer<span class="w"> </span>sif<span class="w"> </span>new<span class="w"> </span>inputs.sif
-
-<span class="gp"># </span>Add<span class="w"> </span>the<span class="w"> </span>squashfs<span class="w"> </span>data<span class="w"> </span>image<span class="w"> </span>from<span class="w"> </span>above<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>SIF
-<span class="gp">$ </span>apptainer<span class="w"> </span>sif<span class="w"> </span>add<span class="w"> </span>--datatype<span class="w"> </span><span class="m">4</span><span class="w"> </span>--partarch<span class="w"> </span><span class="m">2</span><span class="w"> </span>--partfs<span class="w"> </span><span class="m">1</span><span class="w"> </span>--parttype<span class="w"> </span><span class="m">3</span><span class="w"> </span>inputs.sif<span class="w"> </span>inputs.squashfs
+an <code class="docutils literal notranslate"><span class="pre">ext3</span></code> or <code class="docutils literal notranslate"><span class="pre">squashfs</span></code> data partition holding files:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Create<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>SIF<span class="w"> </span>file<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>data<span class="w"> </span>partition<span class="w"> </span>from<span class="w"> </span>above
+<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--data<span class="w"> </span>inputs.sif<span class="w"> </span>inputs.squashfs
 
 <span class="gp"># </span>Run<span class="w"> </span>Apptainer,<span class="w"> </span>binding<span class="w"> </span>data<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>SIF<span class="w"> </span>file
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>-B<span class="w"> </span>inputs.sif:/input-data:image-src<span class="o">=</span>/<span class="w"> </span>mycontainer.sif
@@ -596,6 +591,15 @@ instructions</span></a>:</p>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>inputs.sif,dst<span class="o">=</span>/input-data,image-src<span class="o">=</span>/<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>mycontainer.sif
+</pre></div>
+</div>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">sif</span></code> commands similarly to the <a class="reference internal" href="persistent_overlays.html#overlay-sif"><span class="std std-ref">persistent overlays
+instructions</span></a>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Create<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>empty<span class="w"> </span>SIF<span class="w"> </span>file
+<span class="gp">$ </span>apptainer<span class="w"> </span>sif<span class="w"> </span>new<span class="w"> </span>inputs.sif
+
+<span class="gp"># </span>Add<span class="w"> </span>the<span class="w"> </span>squashfs<span class="w"> </span>data<span class="w"> </span>image<span class="w"> </span>from<span class="w"> </span>above<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>SIF
+<span class="gp">$ </span>apptainer<span class="w"> </span>sif<span class="w"> </span>add<span class="w"> </span>--datatype<span class="w"> </span><span class="m">4</span><span class="w"> </span>--partarch<span class="w"> </span><span class="m">2</span><span class="w"> </span>--partfs<span class="w"> </span><span class="m">1</span><span class="w"> </span>--parttype<span class="w"> </span><span class="m">3</span><span class="w"> </span>inputs.sif<span class="w"> </span>inputs.squashfs
 </pre></div>
 </div>
 <p>If your bind source is a SIF then Apptainer will bind from the first

@@ -67,6 +67,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#build-arg"><code class="docutils literal notranslate"><span class="pre">--build-arg</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#build-arg-file"><code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#warn-unused-build-args"><code class="docutils literal notranslate"><span class="pre">--warn-unused-build-args</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data"><code class="docutils literal notranslate"><span class="pre">--data</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#encrypt"><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fakeroot"><code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#force"><code class="docutils literal notranslate"><span class="pre">--force</span></code></a></li>
@@ -412,6 +413,11 @@ via a file, which contains multiple <code class="docutils literal notranslate"><
 <p>By default, when users provide unused variables to the build process, fatal
 errors will return. This option makes the build process show warnings instead of
 returning fatal errors.</p>
+</section>
+<section id="data">
+<h3><code class="docutils literal notranslate"><span class="pre">--data</span></code><a class="headerlink" href="#data" title="Link to this heading"></a></h3>
+<p>Build image with data partition instead of regular system partition.</p>
+<p>This sets the partition type to “Data”, and avoids adding scripts.</p>
 </section>
 <section id="encrypt">
 <h3><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code><a class="headerlink" href="#encrypt" title="Link to this heading"></a></h3>

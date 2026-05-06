@@ -294,6 +294,13 @@ By default, when users provide unused variables to the build process, fatal
 errors will return. This option makes the build process show warnings instead of 
 returning fatal errors.
 
+``--data``
+==========
+
+Build image with data partition instead of regular system partition.
+
+This sets the partition type to "Data", and avoids adding scripts.
+
 ``--encrypt``
 =============
 

@@ -513,17 +513,12 @@ SIF Image Files
 ===============
 
 Advanced users may wish to create a standalone SIF image, which contains
-an ``ext3`` or ``squashfs`` data partition holding files, by using the
-``apptainer sif`` commands similarly to the :ref:`persistent overlays
-instructions <overlay-sif>`:
+an ``ext3`` or ``squashfs`` data partition holding files:
 
 .. code:: console
 
-   # Create a new empty SIF file
-   $ {command} sif new inputs.sif
-
-   # Add the squashfs data image from above to the SIF
-   $ {command} sif add --datatype 4 --partarch 2 --partfs 1 --parttype 3 inputs.sif inputs.squashfs
+   # Create a new SIF file with a data partition from above
+   $ {command} build --data inputs.sif inputs.squashfs
 
    # Run {Project}, binding data from the SIF file
    $ {command} run -B inputs.sif:/input-data:image-src=/ mycontainer.sif
@@ -534,6 +529,17 @@ instructions <overlay-sif>`:
    $ {command} run \
        --mount type=bind,src=inputs.sif,dst=/input-data,image-src=/ \
        mycontainer.sif
+
+You can also use the ``{command} sif`` commands similarly to the :ref:`persistent overlays
+instructions <overlay-sif>`:
+
+.. code:: console
+
+   # Create a new empty SIF file
+   $ {command} sif new inputs.sif
+
+   # Add the squashfs data image from above to the SIF
+   $ {command} sif add --datatype 4 --partarch 2 --partfs 1 --parttype 3 inputs.sif inputs.squashfs
 
 If your bind source is a SIF then {Project} will bind from the first
 data partition in the SIF, or you may specify an alternative descriptor
