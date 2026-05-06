@@ -291,6 +291,13 @@ Except that:</p>
 of the same name that has been set either inside the container image, or
 via <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> environment variables, or the <code class="docutils literal notranslate"><span class="pre">--env</span></code> and
 <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> flags.</p></li>
+<li><dl class="simple">
+<dt>Any variables listed in a <code class="docutils literal notranslate"><span class="pre">--no-env</span></code> flag will be explicitly</dt><dd><p>excluded from import from the host into the container.  If the
+flag is not set, a default list of variables to exclude may be set
+in an <code class="docutils literal notranslate"><span class="pre">APPTAINER_NOENV</span></code> environment variable</p>
+</dd>
+</dl>
+</li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">PS1</span></code> shell prompt is reset for a container specific prompt.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable will be modified to contain
 default values.</p></li>

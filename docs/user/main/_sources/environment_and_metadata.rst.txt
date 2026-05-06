@@ -156,6 +156,11 @@ Except that:
       via ``{ENVPREFIX}ENV_`` environment variables, or the ``--env`` and
       ``--env-file`` flags.
 
+   - Any variables listed in a ``--no-env`` flag will be explicitly
+      excluded from import from the host into the container.  If the
+      flag is not set, a default list of variables to exclude may be set
+      in an ``{ENVPREFIX}_NOENV`` environment variable
+
    -  The ``PS1`` shell prompt is reset for a container specific prompt.
 
    -  The ``PATH`` environment variable will be modified to contain
