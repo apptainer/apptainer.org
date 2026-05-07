@@ -39,11 +39,11 @@ below with their respective functionality.
 #. **{ENVPREFIX}_APPLY_CGROUPS**: Used to apply cgroups from an input
    file for container processes. (it requires root privileges)
 
-#. **{ENVPREFIX}_PULL_ARCH**: Set the architecture
-   (e.g. ``arm64``) of an image to pull from a ``library://`` or OCI source.
+#. **{ENVPREFIX}_ARCH**: Set the architecture
+   (e.g. ``arm64``) of a delete in a ``library://`` source.
    Defaults to the host architecture.
 
-#. **{ENVPREFIX}_AUTHFILE**: Specify a non-standard location for storing /
+#. **{ENVPREFIX}_AUTH_FILE**: Specify a non-standard location for storing /
    reading login credentials for OCI/Docker registries. See the
    :ref:`authfile documentation <sec:authfile>`.
 
@@ -70,6 +70,14 @@ below with their respective functionality.
 #. **{ENVPREFIX}_BUILDKIT_HOST**: Host address / socket to use when building images
    from a ``buildkit`` or ``dockerfile`` source. ``BUILDKIT_HOST`` without the
    ``{ENVPREFIX}_`` prefix is also accepted.
+
+#. **{ENVPREFIX}_BUILD_ARCH**: Set the architecture
+   (e.g. ``arm64``) to build for.
+   Defaults to the host architecture.
+
+#. **{ENVPREFIX}_BUILD_ARCH_VARIANT**: Set the architecture variant
+   (e.g. ``v8``) to build for.
+   Defaults to the variant of the host architecture.
 
 ``C``
 =====
@@ -119,11 +127,15 @@ below with their respective functionality.
 #. **{ENVPREFIX}_CPUSET_MEMS**: Specify a list or range of memory nodes
    available to the container. Default is unset.
 
-#. **{ENVPREFIX}_CWD** (deprecated **{ENVPREFIX}_PWD** and **{ENVPREFIX}_TARGET_PWD**): The initial
+#. **{ENVPREFIX}_CWD** or **{ENVPREFIX}_TARGET_CWD**
+   (deprecated **{ENVPREFIX}_PWD** and **{ENVPREFIX}_TARGET_PWD**): The initial
    working directory for payload process inside the container.
 
 ``D``
 =====
+
+#. **{ENVPREFIX}_DATA**: Build option to make an image with a data
+   partition instead of a system partition.
 
 #. **{ENVPREFIX}_DEBUG**: Enable debug output when set. Equivalent to ``-d /
    --debug``.
@@ -191,22 +203,32 @@ below with their respective functionality.
 
 #. **{ENVPREFIX}ENV_\***: Allows you to transpose variables into the
    container at runtime. You can see more in detail how to use this
-   variable in our :ref:`environment and metadata section
+   variable in the :ref:`environment and metadata section
    <environment-and-metadata>`.
+
+#. **{ENVPREFIX}ENV_APPEND_LD_LIBRARY_PATH**: Used to append directories
+   to the end of the ``$LD_LIBRARY_PATH`` environment variable. You can
+   see more in detail on how to use this variable in the
+   :ref:`environment from the host section <host-environment>`.
 
 #. **{ENVPREFIX}ENV_APPEND_PATH**: Used to append directories to the end
    of the ``$PATH`` environment variable. You can see more in detail on
-   how to use this variable in our :ref:`environment and metadata
+   how to use this variable in the :ref:`environment and metadata
    section <environment-and-metadata>`.
 
 #. **{ENVPREFIX}ENV_PATH**: A specified path to override the ``$PATH``
    environment variable within the container. You can see more in detail
-   on how to use this variable in our :ref:`environment and metadata
+   on how to use this variable in the :ref:`environment and metadata
    section <environment-and-metadata>`.
+
+#. **{ENVPREFIX}ENV_PREPEND_LD_LIBRARY_PATH**: Used to prepend directories
+   to the beginning of the ``$LD_LIBRARY_PATH`` environment variable.
+   You can see more in detail on how to use this variable in the
+   :ref:`environment from the host section <host-environment>`.
 
 #. **{ENVPREFIX}ENV_PREPEND_PATH**: Used to prepend directories to the
    beginning of ``$PATH`` environment variable. You can see more in
-   detail on how to use this variable in our :ref:`environment and
+   detail on how to use this variable in the :ref:`environment and
    metadata section <environment-and-metadata>`.
 
 ``F``
@@ -241,6 +263,9 @@ below with their respective functionality.
 =====
 
 #. **{ENVPREFIX}_IMAGE**: Filename of the container.
+
+#. **{ENVPREFIX}_INTEL_HPU**: Enable Intel(R) Gaudi accelerator
+   support while using a minimal /dev.
 
 ``J``
 =====
@@ -295,14 +320,15 @@ below with their respective functionality.
    Message levels are `Fatal=-4, Error=-3, Warn=-2, Log=-1, Info=1, 
    Verbose=2, Verbose2=3, Verbose3=4, Debug=5`.
 
+#. **{ENVPREFIX}_MKSQUASHFS_ARGS**: Extra arguments to pass to
+   mksquashfs when build creates SIF files.
+
 #. **{ENVPREFIX}_MOUNT**: To specify host to container mounts, using the
    syntax understood by the ``--mount`` flag. Multiple mounts should be
    separated by newline characters.
 
 ``N``
 =====
-
-#. **{ENVPREFIX}_NAME**: Specifies a custom image name.
 
 #. **{ENVPREFIX}_NETWORK**: Used to specify a desired network. If more
    than one parameters is used, addresses should be separated by commas,
@@ -312,11 +338,14 @@ below with their respective functionality.
 #. **{ENVPREFIX}_NETWORK_ARGS**: To specify the network arguments to
    pass to CNI plugins.
 
-#. **{ENVPREFIX}_NOCLEANUP**: To not clean up the bundle after a failed
-   build, this can be helpful for debugging. Default is set to false.
-
 #. **{ENVPREFIX}_NOCOLOR**: Print mesages without color output.
    Default is set to false unless stderr is not a terminal.
+
+#. **{ENVPREFIX}_NOENV**: List of environment variables to block from
+   import into a container from the host environment.
+
+#. **{ENVPREFIX}_NO_CLEANUP**: To not clean up the bundle after a failed
+   build, this can be helpful for debugging. Default is set to false.
 
 #. **{ENVPREFIX}_NO_HTTPS** and **{ENVPREFIX}_NOHTTPS**: Set to true to use HTTP
    (not HTTPS) to communicate with registry servers. Default is false.
@@ -370,14 +399,25 @@ below with their respective functionality.
 ``P``
 =====
 
-#. **{ENVPREFIX}_PULLDIR** and **{ENVPREFIX}_PULLFOLDER**: Specify destination
-   directory when pulling a container image.
-
 #. **{ENVPREFIX}_PID_FILE**: When starting an instance, write the instance PID
    to the specified file.
 
 #. **{ENVPREFIX}_PIDS_LIMIT**: Specify maximum number of processes that
    the container may spawn. Default is 0 (no limit).
+
+#. **{ENVPREFIX}_PULLDIR** and **{ENVPREFIX}_PULLFOLDER**: Specify destination
+   directory when pulling a container image.
+
+#. **{ENVPREFIX}_PULL_ARCH**: Set the architecture
+   (e.g. ``arm64``) of a pull from a ``library://`` or OCI source.
+   Defaults to the host architecture.
+
+#. **{ENVPREFIX}_PULL_ARCH_VARIANT**: Set the architecture variant
+   (e.g. ``v8``) to pull from a ``library://`` or OCI source.
+   Defaults to the variant of the host architecture.
+
+#. **{ENVPREFIX}_PULL_NAME**: Specifies a custom image name when
+   pulling.
 
 ``Q``
 =====
@@ -388,6 +428,10 @@ below with their respective functionality.
 ``R``
 =====
 
+#. **{ENVPREFIX}_REPRODUCIBLE**: Creates a reproducible build by using the
+   creation date of the source image.  If not set but ``$SOURCE_DATE_EPOCH``
+   is set, that will be used as the creation date.
+
 #. **{ENVPREFIX}_ROOTFS**: During a build ``{ENVPREFIX}_ROOTFS`` is set to the
    path of the rootfs for the container. It can be used within a definition file
    to manipulate the rootfs (e.g. from the ``%setup`` section).
@@ -396,6 +440,9 @@ below with their respective functionality.
    the container. Default is false.
 
 #. **{ENVPREFIX}_RUNSCRIPT**: Specifies the runscript of the image.
+
+#. **{ENVPREFIX}_RUNSCRIPT_TIMEOUT**: Set the maximum time that a
+   runscript is allowed to run (default 1 minute).
 
 ``S``
 =====
@@ -406,6 +453,10 @@ below with their respective functionality.
 #. **{ENVPREFIX}_SCRATCH** and **{ENVPREFIX}_SCRATCHDIR**: Used to
    include a scratch directory within the container that is linked to a
    temporary directory. (use -W to force location)
+
+#. **{ENVPREFIX}_SEARCH_ARCH**: Set the architecture
+   (e.g. ``arm64``) of a search for a container from a ``library://`` source.
+   Defaults to the host architecture.
 
 #. **{ENVPREFIX}_SECTION**: Set to specify a comma separated string of all
    the sections to be run from the deffile (setup, post, files,

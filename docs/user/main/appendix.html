@@ -253,10 +253,10 @@ images to a <code class="docutils literal notranslate"><span class="pre">library
 application to be run inside a container.</p></li>
 <li><p><strong>APPTAINER_APPLY_CGROUPS</strong>: Used to apply cgroups from an input
 file for container processes. (it requires root privileges)</p></li>
-<li><p><strong>APPTAINER_PULL_ARCH</strong>: Set the architecture
-(e.g. <code class="docutils literal notranslate"><span class="pre">arm64</span></code>) of an image to pull from a <code class="docutils literal notranslate"><span class="pre">library://</span></code> or OCI source.
+<li><p><strong>APPTAINER_ARCH</strong>: Set the architecture
+(e.g. <code class="docutils literal notranslate"><span class="pre">arm64</span></code>) of a delete in a <code class="docutils literal notranslate"><span class="pre">library://</span></code> source.
 Defaults to the host architecture.</p></li>
-<li><p><strong>APPTAINER_AUTHFILE</strong>: Specify a non-standard location for storing /
+<li><p><strong>APPTAINER_AUTH_FILE</strong>: Specify a non-standard location for storing /
 reading login credentials for OCI/Docker registries. See the
 <a class="reference internal" href="registry.html#sec-authfile"><span class="std std-ref">authfile documentation</span></a>.</p></li>
 </ol>
@@ -280,6 +280,12 @@ Must be supplied in <code class="docutils literal notranslate"><span class="pre"
 <li><p><strong>APPTAINER_BUILDKIT_HOST</strong>: Host address / socket to use when building images
 from a <code class="docutils literal notranslate"><span class="pre">buildkit</span></code> or <code class="docutils literal notranslate"><span class="pre">dockerfile</span></code> source. <code class="docutils literal notranslate"><span class="pre">BUILDKIT_HOST</span></code> without the
 <code class="docutils literal notranslate"><span class="pre">APPTAINER_</span></code> prefix is also accepted.</p></li>
+<li><p><strong>APPTAINER_BUILD_ARCH</strong>: Set the architecture
+(e.g. <code class="docutils literal notranslate"><span class="pre">arm64</span></code>) to build for.
+Defaults to the host architecture.</p></li>
+<li><p><strong>APPTAINER_BUILD_ARCH_VARIANT</strong>: Set the architecture variant
+(e.g. <code class="docutils literal notranslate"><span class="pre">v8</span></code>) to build for.
+Defaults to the variant of the host architecture.</p></li>
 </ol>
 </section>
 <section id="c">
@@ -316,13 +322,16 @@ to the container. Default is unset.</p></li>
 available to the container. Default is unset.</p></li>
 <li><p><strong>APPTAINER_CPUSET_MEMS</strong>: Specify a list or range of memory nodes
 available to the container. Default is unset.</p></li>
-<li><p><strong>APPTAINER_CWD</strong> (deprecated <strong>APPTAINER_PWD</strong> and <strong>APPTAINER_TARGET_PWD</strong>): The initial
+<li><p><strong>APPTAINER_CWD</strong> or <strong>APPTAINER_TARGET_CWD</strong>
+(deprecated <strong>APPTAINER_PWD</strong> and <strong>APPTAINER_TARGET_PWD</strong>): The initial
 working directory for payload process inside the container.</p></li>
 </ol>
 </section>
 <section id="d">
 <h3><code class="docutils literal notranslate"><span class="pre">D</span></code><a class="headerlink" href="#d" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
+<li><p><strong>APPTAINER_DATA</strong>: Build option to make an image with a data
+partition instead of a system partition.</p></li>
 <li><p><strong>APPTAINER_DEBUG</strong>: Enable debug output when set. Equivalent to <code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">/</span>
 <span class="pre">--debug</span></code>.</p></li>
 <li><p><strong>APPTAINER_DEFFILE</strong>: Shows the Apptainer recipe that was used
@@ -373,18 +382,26 @@ which <code class="docutils literal notranslate"><span class="pre">KEY=VAL</span
 at container startup.</p></li>
 <li><p><strong>APPTAINERENV_*</strong>: Allows you to transpose variables into the
 container at runtime. You can see more in detail how to use this
-variable in our <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">environment and metadata section</span></a>.</p></li>
+variable in the <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">environment and metadata section</span></a>.</p></li>
+<li><p><strong>APPTAINERENV_APPEND_LD_LIBRARY_PATH</strong>: Used to append directories
+to the end of the <code class="docutils literal notranslate"><span class="pre">$LD_LIBRARY_PATH</span></code> environment variable. You can
+see more in detail on how to use this variable in the
+<a class="reference internal" href="environment_and_metadata.html#host-environment"><span class="std std-ref">environment from the host section</span></a>.</p></li>
 <li><p><strong>APPTAINERENV_APPEND_PATH</strong>: Used to append directories to the end
 of the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> environment variable. You can see more in detail on
-how to use this variable in our <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">environment and metadata
+how to use this variable in the <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">environment and metadata
 section</span></a>.</p></li>
 <li><p><strong>APPTAINERENV_PATH</strong>: A specified path to override the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>
 environment variable within the container. You can see more in detail
-on how to use this variable in our <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">environment and metadata
+on how to use this variable in the <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">environment and metadata
 section</span></a>.</p></li>
+<li><p><strong>APPTAINERENV_PREPEND_LD_LIBRARY_PATH</strong>: Used to prepend directories
+to the beginning of the <code class="docutils literal notranslate"><span class="pre">$LD_LIBRARY_PATH</span></code> environment variable.
+You can see more in detail on how to use this variable in the
+<a class="reference internal" href="environment_and_metadata.html#host-environment"><span class="std std-ref">environment from the host section</span></a>.</p></li>
 <li><p><strong>APPTAINERENV_PREPEND_PATH</strong>: Used to prepend directories to the
 beginning of <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> environment variable. You can see more in
-detail on how to use this variable in our <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">environment and
+detail on how to use this variable in the <a class="reference internal" href="environment_and_metadata.html#environment-and-metadata"><span class="std std-ref">environment and
 metadata section</span></a>.</p></li>
 </ol>
 </section>
@@ -417,6 +434,8 @@ directory within the container.</p></li>
 <h3><code class="docutils literal notranslate"><span class="pre">I</span></code><a class="headerlink" href="#i" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>APPTAINER_IMAGE</strong>: Filename of the container.</p></li>
+<li><p><strong>APPTAINER_INTEL_HPU</strong>: Enable Intel(R) Gaudi accelerator
+support while using a minimal /dev.</p></li>
 </ol>
 </section>
 <section id="j">
@@ -465,6 +484,8 @@ container. Default is unset. Effect depends on <strong>APPTAINER_MEMORY</strong>
 <li><p><strong>APPTAINER_MESSAGELEVEL</strong>: Set numeric message level for output.
 Message levels are <cite>Fatal=-4, Error=-3, Warn=-2, Log=-1, Info=1,
 Verbose=2, Verbose2=3, Verbose3=4, Debug=5</cite>.</p></li>
+<li><p><strong>APPTAINER_MKSQUASHFS_ARGS</strong>: Extra arguments to pass to
+mksquashfs when build creates SIF files.</p></li>
 <li><p><strong>APPTAINER_MOUNT</strong>: To specify host to container mounts, using the
 syntax understood by the <code class="docutils literal notranslate"><span class="pre">--mount</span></code> flag. Multiple mounts should be
 separated by newline characters.</p></li>
@@ -473,17 +494,18 @@ separated by newline characters.</p></li>
 <section id="n">
 <h3><code class="docutils literal notranslate"><span class="pre">N</span></code><a class="headerlink" href="#n" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>APPTAINER_NAME</strong>: Specifies a custom image name.</p></li>
 <li><p><strong>APPTAINER_NETWORK</strong>: Used to specify a desired network. If more
 than one parameters is used, addresses should be separated by commas,
 where each network will bring up a dedicated interface inside the
 container.</p></li>
 <li><p><strong>APPTAINER_NETWORK_ARGS</strong>: To specify the network arguments to
 pass to CNI plugins.</p></li>
-<li><p><strong>APPTAINER_NOCLEANUP</strong>: To not clean up the bundle after a failed
-build, this can be helpful for debugging. Default is set to false.</p></li>
 <li><p><strong>APPTAINER_NOCOLOR</strong>: Print mesages without color output.
 Default is set to false unless stderr is not a terminal.</p></li>
+<li><p><strong>APPTAINER_NOENV</strong>: List of environment variables to block from
+import into a container from the host environment.</p></li>
+<li><p><strong>APPTAINER_NO_CLEANUP</strong>: To not clean up the bundle after a failed
+build, this can be helpful for debugging. Default is set to false.</p></li>
 <li><p><strong>APPTAINER_NO_HTTPS</strong> and <strong>APPTAINER_NOHTTPS</strong>: Set to true to use HTTP
 (not HTTPS) to communicate with registry servers. Default is false.</p></li>
 <li><p><strong>APPTAINER_NO_EVAL</strong>: Set to true in order to prevent Apptainer
@@ -526,12 +548,20 @@ or as read-only layer of container.</p></li>
 <section id="p">
 <h3><code class="docutils literal notranslate"><span class="pre">P</span></code><a class="headerlink" href="#p" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>APPTAINER_PULLDIR</strong> and <strong>APPTAINER_PULLFOLDER</strong>: Specify destination
-directory when pulling a container image.</p></li>
 <li><p><strong>APPTAINER_PID_FILE</strong>: When starting an instance, write the instance PID
 to the specified file.</p></li>
 <li><p><strong>APPTAINER_PIDS_LIMIT</strong>: Specify maximum number of processes that
 the container may spawn. Default is 0 (no limit).</p></li>
+<li><p><strong>APPTAINER_PULLDIR</strong> and <strong>APPTAINER_PULLFOLDER</strong>: Specify destination
+directory when pulling a container image.</p></li>
+<li><p><strong>APPTAINER_PULL_ARCH</strong>: Set the architecture
+(e.g. <code class="docutils literal notranslate"><span class="pre">arm64</span></code>) of a pull from a <code class="docutils literal notranslate"><span class="pre">library://</span></code> or OCI source.
+Defaults to the host architecture.</p></li>
+<li><p><strong>APPTAINER_PULL_ARCH_VARIANT</strong>: Set the architecture variant
+(e.g. <code class="docutils literal notranslate"><span class="pre">v8</span></code>) to pull from a <code class="docutils literal notranslate"><span class="pre">library://</span></code> or OCI source.
+Defaults to the variant of the host architecture.</p></li>
+<li><p><strong>APPTAINER_PULL_NAME</strong>: Specifies a custom image name when
+pulling.</p></li>
 </ol>
 </section>
 <section id="q">
@@ -544,12 +574,17 @@ Default is set to false.</p></li>
 <section id="r">
 <h3><code class="docutils literal notranslate"><span class="pre">R</span></code><a class="headerlink" href="#r" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
+<li><p><strong>APPTAINER_REPRODUCIBLE</strong>: Creates a reproducible build by using the
+creation date of the source image.  If not set but <code class="docutils literal notranslate"><span class="pre">$SOURCE_DATE_EPOCH</span></code>
+is set, that will be used as the creation date.</p></li>
 <li><p><strong>APPTAINER_ROOTFS</strong>: During a build <code class="docutils literal notranslate"><span class="pre">APPTAINER_ROOTFS</span></code> is set to the
 path of the rootfs for the container. It can be used within a definition file
 to manipulate the rootfs (e.g. from the <code class="docutils literal notranslate"><span class="pre">%setup</span></code> section).</p></li>
 <li><p><strong>APPTAINER_ROCM</strong>: Set to true to expose ROCm devices and libraries inside
 the container. Default is false.</p></li>
 <li><p><strong>APPTAINER_RUNSCRIPT</strong>: Specifies the runscript of the image.</p></li>
+<li><p><strong>APPTAINER_RUNSCRIPT_TIMEOUT</strong>: Set the maximum time that a
+runscript is allowed to run (default 1 minute).</p></li>
 </ol>
 </section>
 <section id="s">
@@ -560,6 +595,9 @@ should be a sandbox. Default is set to false.</p></li>
 <li><p><strong>APPTAINER_SCRATCH</strong> and <strong>APPTAINER_SCRATCHDIR</strong>: Used to
 include a scratch directory within the container that is linked to a
 temporary directory. (use -W to force location)</p></li>
+<li><p><strong>APPTAINER_SEARCH_ARCH</strong>: Set the architecture
+(e.g. <code class="docutils literal notranslate"><span class="pre">arm64</span></code>) of a search for a container from a <code class="docutils literal notranslate"><span class="pre">library://</span></code> source.
+Defaults to the host architecture.</p></li>
 <li><p><strong>APPTAINER_SECTION</strong>: Set to specify a comma separated string of all
 the sections to be run from the deffile (setup, post, files,
 environment, test, labels, none)</p></li>
