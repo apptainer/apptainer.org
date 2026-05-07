@@ -73,6 +73,13 @@ Multiple system mounts can be disabled by specifying them separated by commas:
 
    $ {command} run --no-mount tmp,sys,dev mycontainer.sif
 
+You can also disable the customized system configuration file
+``/etc/resolv.conf``:
+
+.. code:: console
+
+   $ {command} run --no-mount /etc/resolv.conf mycontainer.sif
+
 When the administrator has configured custom ``bind path`` entries in
 ``{command}.conf``, to mount specific paths into the container by default, you
 can disable them individually. To do this, specify the path(s) to disable with

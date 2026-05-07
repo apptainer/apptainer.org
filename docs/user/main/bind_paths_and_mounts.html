@@ -208,6 +208,11 @@ running, you can disable the <code class="docutils literal notranslate"><span cl
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-mount<span class="w"> </span>tmp,sys,dev<span class="w"> </span>mycontainer.sif
 </pre></div>
 </div>
+<p>You can also disable the customized system configuration file
+<code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-mount<span class="w"> </span>/etc/resolv.conf<span class="w"> </span>mycontainer.sif
+</pre></div>
+</div>
 <p>When the administrator has configured custom <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">path</span></code> entries in
 <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>, to mount specific paths into the container by default, you
 can disable them individually. To do this, specify the path(s) to disable with
