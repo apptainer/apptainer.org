@@ -6,18 +6,18 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build a Container &mdash; Apptainer User Guide 1.4 documentation</title>
+  <title>Build a Container &mdash; Apptainer User Guide 1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=0ed52906"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/documentation_options.js?v=aaadad1f"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -60,12 +60,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#creating-writable-sandbox-directories">Creating writable <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#converting-containers-from-one-format-to-another">Converting containers from one format to another</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-containers-from-apptainer-definition-files">Building containers from Apptainer definition files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-containers-from-dockerfile-with-buildkit">Building containers from Dockerfile with BuildKit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#alternative-compressors">Alternative compressors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-encrypted-containers">Building encrypted containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#build-options">Build options</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#build-arg"><code class="docutils literal notranslate"><span class="pre">--build-arg</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#build-arg-file"><code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#warn-unused-build-args"><code class="docutils literal notranslate"><span class="pre">--warn-unused-build-args</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data"><code class="docutils literal notranslate"><span class="pre">--data</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#encrypt"><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fakeroot"><code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#force"><code class="docutils literal notranslate"><span class="pre">--force</span></code></a></li>
@@ -75,6 +77,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#notest"><code class="docutils literal notranslate"><span class="pre">--notest</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#passphrase"><code class="docutils literal notranslate"><span class="pre">--passphrase</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pem-path"><code class="docutils literal notranslate"><span class="pre">--pem-path</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reproducible"><code class="docutils literal notranslate"><span class="pre">--reproducible</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sandbox"><code class="docutils literal notranslate"><span class="pre">--sandbox</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#section"><code class="docutils literal notranslate"><span class="pre">--section</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#update"><code class="docutils literal notranslate"><span class="pre">--update</span></code></a></li>
@@ -102,6 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peertopeer.html">IPFS Peer-To-Peer Clusters</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
@@ -119,7 +123,7 @@
 <li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU and other Device Support</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
@@ -148,7 +152,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Build a Container</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/apptainer-userdocs/blob/1.4/build_a_container.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/build_a_container.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -175,6 +179,7 @@ to create the container. It can be one of the following:</p>
 <ul class="simple">
 <li><p>URI beginning with <strong>docker://</strong> to build from Docker Hub</p></li>
 <li><p>URI beginning with <strong>oras://</strong> to build from an OCI registry that supports OCI Artifacts</p></li>
+<li><p>URI beginning with <strong>ipfs://</strong> to build from an IPFS cluster that supports CID images</p></li>
 <li><p>URI beginning with <strong>library://</strong> to build from the Container Library</p></li>
 <li><p>URI beginning with <strong>shub://</strong> to build from Singularity Hub</p></li>
 <li><p>path to an <strong>existing container</strong> on your local machine</p></li>
@@ -207,7 +212,7 @@ more details.</p>
 <h2>Downloading an existing container from Docker Hub<a class="headerlink" href="#downloading-an-existing-container-from-docker-hub" title="Link to this heading"></a></h2>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">build</span></code> to download layers from Docker Hub and assemble
 them into Apptainer containers.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build alpine.sif docker://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>alpine.sif<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
 </section>
@@ -217,11 +222,11 @@ them into Apptainer containers.</p>
 a container that matches the architecture of your host system. If you need to
 retrieve a container that does not have the same architecture as your host (e.g.
 an <code class="docutils literal notranslate"><span class="pre">arm64</span></code> container on an <code class="docutils literal notranslate"><span class="pre">amd64</span></code> host), you can use the <code class="docutils literal notranslate"><span class="pre">--arch</span></code> options.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --arch arm64 alpine.sif docker://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--arch<span class="w"> </span>arm64<span class="w"> </span>alpine.sif<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
 <p>Or to build an <code class="docutils literal notranslate"><span class="pre">arm32</span></code> container by using the <code class="docutils literal notranslate"><span class="pre">--arch-variant</span></code> option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --arch arm --arch-variant 7 alpine.sif docker://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--arch<span class="w"> </span>arm<span class="w"> </span>--arch-variant<span class="w"> </span><span class="m">7</span><span class="w"> </span>alpine.sif<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
 <p>See <a class="reference internal" href="docker_and_oci.html#specifying-an-architecture"><span class="std std-ref">Specifying an architecture</span></a> and <a class="reference internal" href="docker_and_oci.html#cpu-emulation"><span class="std std-ref">CPU emulation</span></a> for more details.</p>
@@ -232,7 +237,7 @@ an <code class="docutils literal notranslate"><span class="pre">arm64</span></co
 <a class="reference internal" href="endpoint.html#sec-managing-remote-endpoints"><span class="std std-ref">Managing Remote Endpoints</span></a>,
 you can use the build command to download a container from the Container
 Library.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build lolcow.sif library://lolcow
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>lolcow.sif<span class="w"> </span>library://lolcow
 </pre></div>
 </div>
 <p>The first argument (<code class="docutils literal notranslate"><span class="pre">lolcow.sif</span></code>) specifies the path and name for your
@@ -245,13 +250,13 @@ container in a writable format, use the <code class="docutils literal notranslat
 <span id="create-a-writable-container"></span><h2>Creating writable <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> directories<a class="headerlink" href="#creating-writable-sandbox-directories" title="Link to this heading"></a></h2>
 <p>If you want to create a container within a writable directory (called a
 <em>sandbox</em>) you can do so with the <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> option.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build --sandbox alpine/ docker://alpine
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--sandbox<span class="w"> </span>alpine/<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
 <p>The resulting directory operates just like a container in a SIF file. To
 make persistent changes within the sandbox container, use the
 <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag when you invoke your container.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer shell --writable alpine/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>--writable<span class="w"> </span>alpine/
 </pre></div>
 </div>
 </section>
@@ -262,7 +267,7 @@ target to build a new container. This allows you convert containers from
 one format to another. For example, if you had a sandbox container
 called <code class="docutils literal notranslate"><span class="pre">development/</span></code> and you wanted to convert it to a SIF container
 called <code class="docutils literal notranslate"><span class="pre">production.sif</span></code>, you could do so as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build production.sif development/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>production.sif<span class="w"> </span>development/
 </pre></div>
 </div>
 <p>Use care when converting a sandbox directory to the default SIF format.
@@ -296,7 +301,31 @@ to use it to build a SIF container:</p>
 </pre></div>
 </div>
 <p>You can do so with the following command.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer build lolcow.sif lolcow.def
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>lolcow.sif<span class="w"> </span>lolcow.def
+</pre></div>
+</div>
+</section>
+<section id="building-containers-from-dockerfile-with-buildkit">
+<h2>Building containers from Dockerfile with BuildKit<a class="headerlink" href="#building-containers-from-dockerfile-with-buildkit" title="Link to this heading"></a></h2>
+<p>Apptainer can also build directly from an existing Dockerfile, by
+using an already running BuildKit daemon (or Docker daemon) process.
+For detailed information on Apptainer definition files vs Dockerfile,
+please see <a class="reference internal" href="docker_and_oci.html"><span class="doc">Docker and OCI</span></a>.
+Suppose you already have the following file called <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>,
+and you want to use it to build a SIF container:</p>
+<div class="highlight-Dockerfile notranslate"><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:20.04</span>
+
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>-y<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>cowsay<span class="w"> </span>lolcat
+
+<span class="k">ENV</span><span class="w"> </span><span class="nv">LC_ALL</span><span class="o">=</span>C<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">PATH</span><span class="o">=</span>/usr/games:<span class="nv">$PATH</span>
+
+<span class="k">CMD</span><span class="w"> </span>date<span class="w"> </span><span class="p">|</span><span class="w"> </span>cowsay<span class="w"> </span><span class="p">|</span><span class="w"> </span>lolcat
+</pre></div>
+</div>
+<p>You can do so with the following command.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>lolcow.sif<span class="w"> </span>dockerfile:.
 </pre></div>
 </div>
 </section>
@@ -386,6 +415,11 @@ via a file, which contains multiple <code class="docutils literal notranslate"><
 errors will return. This option makes the build process show warnings instead of
 returning fatal errors.</p>
 </section>
+<section id="data">
+<h3><code class="docutils literal notranslate"><span class="pre">--data</span></code><a class="headerlink" href="#data" title="Link to this heading"></a></h3>
+<p>Build image with data partition instead of regular system partition.</p>
+<p>This sets the partition type to “Data”, and avoids adding scripts.</p>
+</section>
 <section id="encrypt">
 <h3><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code><a class="headerlink" href="#encrypt" title="Link to this heading"></a></h3>
 <p>Specifies that Apptainer should use a secret saved in either the
@@ -421,7 +455,7 @@ definition file as JSON.</p>
 <span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">--mksquashfs-args</span></code><a class="headerlink" href="#mksquashfs-args" title="Link to this heading"></a></h3>
 <p>Extra arguments to pass to <code class="docutils literal notranslate"><span class="pre">mksquashfs`</span></code> when creating SIF files.</p>
 <p>To show the available arguments, see the manual page or help:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mksquashfs -help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mksquashfs<span class="w"> </span>-help
 </pre></div>
 </div>
 <p>For instance, to limit the number of processors use <code class="docutils literal notranslate"><span class="pre">-processors</span></code>:</p>
@@ -443,7 +477,7 @@ definition file as JSON.</p>
 </pre></div>
 </div>
 <p>To show help about the options available for selected compressor:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mksquashfs squashfs-root out.squashfs -comp zstd -Xhelp
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mksquashfs<span class="w"> </span>squashfs-root<span class="w"> </span>out.squashfs<span class="w"> </span>-comp<span class="w"> </span>zstd<span class="w"> </span>-Xhelp
 </pre></div>
 </div>
 <p>Non-gzip squashfs compression might not work with some installations.
@@ -452,7 +486,7 @@ bundled recent version of mksquashfs that should have the maximum
 compressors enabled.  So you might want to explore the help on that
 version, for example by setting its directory early in your PATH like
 this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ PATH=$(apptainer buildcfg | sed -n &#39;s,^LIBEXECDIR=\(.*\),\1/apptainer/bin,p&#39;):$PATH
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">PATH</span><span class="o">=</span><span class="k">$(</span>apptainer<span class="w"> </span>buildcfg<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;s,^LIBEXECDIR=\(.*\),\1/apptainer/bin,p&#39;</span><span class="k">)</span>:<span class="nv">$PATH</span>
 </pre></div>
 </div>
 <p>Also note that by using non-default compression methods that the
@@ -480,6 +514,21 @@ container filesystem at build time. See <a class="reference internal" href="encr
 <h3><code class="docutils literal notranslate"><span class="pre">--pem-path</span></code><a class="headerlink" href="#pem-path" title="Link to this heading"></a></h3>
 <p>This flag allows you to pass the location of a public key to encrypt the
 container file system at build time. See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
+</section>
+<section id="reproducible">
+<h3><code class="docutils literal notranslate"><span class="pre">--reproducible</span></code><a class="headerlink" href="#reproducible" title="Link to this heading"></a></h3>
+<p>Use the “created” date of the source image, as the <code class="docutils literal notranslate"><span class="pre">SOURCE_DATE_EPOCH</span></code>.
+This causes the build to be reproducible (i.e. same output every time).</p>
+<p>See <a class="reference external" href="https://reproducible-builds.org/docs/source-date-epoch/">Reproducible Builds</a>
+for the definition of <code class="docutils literal notranslate"><span class="pre">SOURCE_DATE_EPOCH</span></code>. It also avoids adding a
+UUID to the SIF file, when used with Apptainer.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>use<span class="w"> </span>the<span class="w"> </span>modification<span class="w"> </span>date<span class="w"> </span>of<span class="w"> </span>a<span class="w"> </span>certain<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">SOURCE_DATE_EPOCH</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%s<span class="w"> </span>-r<span class="w"> </span>&lt;path&gt;<span class="k">)</span>
+
+<span class="gp"># </span>use<span class="w"> </span>the<span class="w"> </span>last<span class="w"> </span>commit<span class="w"> </span>date<span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span>certain<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">SOURCE_DATE_EPOCH</span><span class="o">=</span><span class="k">$(</span>git<span class="w"> </span>log<span class="w"> </span>-1<span class="w"> </span>--pretty<span class="o">=</span>%ct<span class="w"> </span>&lt;path&gt;<span class="k">)</span>
+</pre></div>
+</div>
 </section>
 <section id="sandbox">
 <h3><code class="docutils literal notranslate"><span class="pre">--sandbox</span></code><a class="headerlink" href="#sandbox" title="Link to this heading"></a></h3>

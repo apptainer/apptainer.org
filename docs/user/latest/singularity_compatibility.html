@@ -6,18 +6,18 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Singularity Compatibility &mdash; Apptainer User Guide 1.4 documentation</title>
+  <title>Singularity Compatibility &mdash; Apptainer User Guide 1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=0ed52906"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/documentation_options.js?v=aaadad1f"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peertopeer.html">IPFS Peer-To-Peer Clusters</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
@@ -90,7 +91,7 @@
 <li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU and other Device Support</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
@@ -119,7 +120,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Singularity Compatibility</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/apptainer-userdocs/blob/1.4/singularity_compatibility.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/singularity_compatibility.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -155,19 +156,19 @@ collaborating with colleagues that still use a Singularity installation.</p>
 as it is using the <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> prefix to command Apptainer to create an
 environment variable in the container with the name <code class="docutils literal notranslate"><span class="pre">FOO</span></code> and the value
 <code class="docutils literal notranslate"><span class="pre">BAR</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINERENV_FOO=BAR apptainer exec docker://alpine env
-[...]
-FOO=BAR
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">APPTAINERENV_FOO</span><span class="o">=</span>BAR<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://alpine<span class="w"> </span>env
+<span class="go">[...]</span>
+<span class="go">FOO=BAR</span>
 </pre></div>
 </div>
 <p>We can see from the <code class="docutils literal notranslate"><span class="pre">env</span></code> output that this environment variable was properly
 set inside the container.</p>
 <p>Next we can use the <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> prefix to do the same thing, but this
 time we wil have the intended value be <code class="docutils literal notranslate"><span class="pre">BAZ</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ SINGULARITYENV_FOO=BAZ apptainer exec  docker://alpine env
-WARNING: DEPRECATED USAGE: Forwarding SINGULARITYENV_FOO as environment variable will not be supported in the future, use APPTAINERENV_FOO instead
-[...]
-FOO=BAZ
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">SINGULARITYENV_FOO</span><span class="o">=</span>BAZ<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w">  </span>docker://alpine<span class="w"> </span>env
+<span class="go">WARNING: DEPRECATED USAGE: Forwarding SINGULARITYENV_FOO as environment variable will not be supported in the future, use APPTAINERENV_FOO instead</span>
+<span class="go">[...]</span>
+<span class="go">FOO=BAZ</span>
 </pre></div>
 </div>
 <p>Notice that we have a warning for <code class="docutils literal notranslate"><span class="pre">DEPRECATED</span> <span class="pre">USAGE</span></code> when doing so. This is
@@ -175,10 +176,10 @@ because a future version of Apptainer may stop supporting environment variable
 compatibility once it is past this current period of transition.</p>
 <p>Finally, if both are set, the value set by the <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> variable will
 take priority over the <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> variable.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ APPTAINERENV_FOO=BAR SINGULARITYENV_FOO=BAZ apptainer exec iqube_latest.sif env
-WARNING: Skipping environment variable [SINGULARITYENV_FOO=BAZ], FOO is already overridden with different value [BAR]
-[...]
-FOO=BAR
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">APPTAINERENV_FOO</span><span class="o">=</span>BAR<span class="w"> </span><span class="nv">SINGULARITYENV_FOO</span><span class="o">=</span>BAZ<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>iqube_latest.sif<span class="w"> </span>env
+<span class="go">WARNING: Skipping environment variable [SINGULARITYENV_FOO=BAZ], FOO is already overridden with different value [BAR]</span>
+<span class="go">[...]</span>
+<span class="go">FOO=BAR</span>
 </pre></div>
 </div>
 <p>In this case a warning is emitted to let the user know that two variables were
@@ -194,10 +195,10 @@ installations will include a symlink to the <code class="docutils literal notran
 has taken place. Below is an example of running the <code class="docutils literal notranslate"><span class="pre">version</span></code> command using
 either program name and getting the same output because we are running the same
 underlying binary:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer --version
-apptainer version 1.4.5
-$ singularity --version
-apptainer version 1.4.5
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>--version
+<span class="go">apptainer version 1.5.0</span>
+<span class="gp">$ </span>singularity<span class="w"> </span>--version
+<span class="go">apptainer version 1.5.0</span>
 </pre></div>
 </div>
 </section>
@@ -217,23 +218,23 @@ The following data will be migrated if it is found:</p>
 <li><p>Singularity Private PGP keyring</p></li>
 </ul>
 <p>Below we can see example output from when user configuration is being migrated:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine echo
-INFO:    Detected Singularity user configuration directory
-INFO:    Detected Singularity remote configuration, migrating...
-INFO:    Detected Singularity docker configuration, migrating...
-INFO:    Detected public Singularity pgp keyring, migrating...
-INFO:    Detected private Singularity pgp keyring, migrating...
-INFO:    Converting OCI blobs to SIF format
-INFO:    Starting build...
-[...]
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span>
+<span class="go">INFO:    Detected Singularity user configuration directory</span>
+<span class="go">INFO:    Detected Singularity remote configuration, migrating...</span>
+<span class="go">INFO:    Detected Singularity docker configuration, migrating...</span>
+<span class="go">INFO:    Detected public Singularity pgp keyring, migrating...</span>
+<span class="go">INFO:    Detected private Singularity pgp keyring, migrating...</span>
+<span class="go">INFO:    Converting OCI blobs to SIF format</span>
+<span class="go">INFO:    Starting build...</span>
+<span class="go">[...]</span>
 </pre></div>
 </div>
 <p>We can also see that subsequent use of Apptainer will not perform this
 migration again:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer exec docker://alpine echo
-WARNING: /usr/local/etc/singularity/ exists, migration to apptainer by system administrator is not complete
-INFO:    Using cached SIF image
-[...]
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span>
+<span class="go">WARNING: /usr/local/etc/singularity/ exists, migration to apptainer by system administrator is not complete</span>
+<span class="go">INFO:    Using cached SIF image</span>
+<span class="go">[...]</span>
 </pre></div>
 </div>
 <div class="admonition note">

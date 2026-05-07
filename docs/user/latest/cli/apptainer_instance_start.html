@@ -6,18 +6,18 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>apptainer instance start &mdash; Apptainer User Guide 1.4 documentation</title>
+  <title>apptainer instance start &mdash; Apptainer User Guide 1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=0ed52906"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/documentation_options.js?v=aaadad1f"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/js/ga.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../keyserver.html">Keyserver Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../registry.html">OCI Registries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library_api.html">Library API Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../peertopeer.html">IPFS Peer-To-Peer Clusters</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
@@ -84,7 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mpi.html">Apptainer and MPI applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gpu.html">GPU Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gpu.html">GPU and other Device Support</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
@@ -221,7 +222,7 @@
           <li class="breadcrumb-item"><a href="../cli.html">Command Line Interface</a></li>
       <li class="breadcrumb-item active">apptainer instance start</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/apptainer-userdocs/blob/1.4/cli/apptainer_instance_start.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/cli/apptainer_instance_start.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -263,6 +264,7 @@ pass arguments to startscript.</p>
 <dt>oras://*            A SIF container hosted on an OCI registry that supports</dt><dd><p>the OCI Registry As Storage (ORAS) specification.</p>
 </dd>
 </dl>
+<p>ipfs://*            A SIF image from an IPFS cluster, using a HTTP gateway.</p>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">instance</span> <span class="n">start</span> <span class="p">[</span><span class="n">start</span> <span class="n">options</span><span class="o">...</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">container</span> <span class="n">path</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">instance</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">startscript</span> <span class="n">args</span><span class="o">...</span><span class="p">]</span>
 </pre></div>
@@ -320,6 +322,7 @@ Stopping /tmp/my-sql.sif mysql
 -h, --help                          help for start
 -H, --home string                   a home directory specification.  spec can either be a src path or src:dest pair.  src is the source path of the home directory outside the container and dest overrides the home directory within the container. (default &quot;/home/runner&quot;)
     --hostname string               set container hostname
+    --intel-hpu                     enable Intel(R) Gaudi accelerator support while using a minimal /dev
 -i, --ipc                           run container in a new IPC namespace
     --keep-privs                    let root user keep privileges in container (root only)
     --memory string                 Memory limit in bytes
@@ -330,12 +333,13 @@ Stopping /tmp/my-sql.sif mysql
     --netns-path string             join the network namespace at the specified path (as root, or if permitted in apptainer.conf)
     --network string                specify desired network type separated by commas, each network will bring up a dedicated interface inside container
     --network-args strings          specify network arguments to pass to CNI plugins
+    --no-env strings                list of environment variables to block from import into container from host environment
     --no-eval                       do not shell evaluate env vars or OCI container CMD/ENTRYPOINT/ARGS
     --no-home                       do NOT mount users home directory if /home is not the current working directory
     --no-https                      use http instead of https for docker:// oras:// and library://&lt;hostname&gt;/... URIs
     --no-init                       do NOT start shim process with --pid
     --no-mount strings              disable one or more &#39;mount xxx&#39; options set in apptainer.conf and/or specify absolute destination path to disable a bind path entry, or &#39;bind-paths&#39; to disable all bind path entries.
-    --no-privs                      drop all privileges from root user in container)
+    --no-privs                      drop all privileges from root user in container
     --no-umask                      do not propagate umask to the container, set default 0022 umask
     --nv                            enable Nvidia support
     --nvccli                        use nvidia-container-cli for GPU setup (experimental)
@@ -362,7 +366,7 @@ Stopping /tmp/my-sql.sif mysql
 <ul class="simple">
 <li><p><a class="reference internal" href="apptainer_instance.html#apptainer-instance"><span class="std std-ref">apptainer instance</span></a>         - Manage containers running as services</p></li>
 </ul>
-<p><em>Auto generated by spf13/cobra on 2-Dec-2025</em></p>
+<p><em>Auto generated by spf13/cobra on 7-May-2026</em></p>
 </section>
 </section>
 

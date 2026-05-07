@@ -27,6 +27,7 @@ to create the container. It can be one of the following:
 
 -  URI beginning with **docker://** to build from Docker Hub
 -  URI beginning with **oras://** to build from an OCI registry that supports OCI Artifacts
+-  URI beginning with **ipfs://** to build from an IPFS cluster that supports CID images
 -  URI beginning with **library://** to build from the Container Library
 -  URI beginning with **shub://** to build from Singularity Hub
 -  path to an **existing container** on your local machine
@@ -62,7 +63,7 @@ Downloading an existing container from Docker Hub
 You can use ``build`` to download layers from Docker Hub and assemble
 them into {Project} containers.
 
-.. code::
+.. code:: console
 
    $ {command} build alpine.sif docker://alpine
 
@@ -75,13 +76,13 @@ a container that matches the architecture of your host system. If you need to
 retrieve a container that does not have the same architecture as your host (e.g.
 an ``arm64`` container on an ``amd64`` host), you can use the ``--arch`` options.
 
-.. code::
+.. code:: console
 
    $ {command} build --arch arm64 alpine.sif docker://alpine
 
 Or to build an ``arm32`` container by using the ``--arch-variant`` option:
 
-.. code::
+.. code:: console
 
    $ {command} build --arch arm --arch-variant 7 alpine.sif docker://alpine
 
@@ -96,7 +97,7 @@ If you have set up a library remote endpoint as described in
 you can use the build command to download a container from the Container
 Library.
 
-.. code::
+.. code:: console
 
    $ {command} build lolcow.sif library://lolcow
 
@@ -115,7 +116,7 @@ Creating writable ``--sandbox`` directories
 If you want to create a container within a writable directory (called a
 *sandbox*) you can do so with the ``--sandbox`` option.
 
-.. code::
+.. code:: console
 
    $ {command} build --sandbox alpine/ docker://alpine
 
@@ -123,7 +124,7 @@ The resulting directory operates just like a container in a SIF file. To
 make persistent changes within the sandbox container, use the
 ``--writable`` flag when you invoke your container.
 
-.. code::
+.. code:: console
 
    $ {command} shell --writable alpine/
 
@@ -137,7 +138,7 @@ one format to another. For example, if you had a sandbox container
 called ``development/`` and you wanted to convert it to a SIF container
 called ``production.sif``, you could do so as follows:
 
-.. code::
+.. code:: console
 
    $ {command} build production.sif development/
 
@@ -177,9 +178,38 @@ to use it to build a SIF container:
 
 You can do so with the following command.
 
-.. code::
+.. code:: console
 
    $ {command} build lolcow.sif lolcow.def
+
+*************************************************
+Building containers from Dockerfile with BuildKit
+*************************************************
+
+{Project} can also build directly from an existing Dockerfile, by
+using an already running BuildKit daemon (or Docker daemon) process.
+For detailed information on {Project} definition files vs Dockerfile,
+please see :doc:`Docker and OCI <docker_and_oci>`.
+Suppose you already have the following file called ``Dockerfile``,
+and you want to use it to build a SIF container:
+
+.. code:: Dockerfile
+
+   FROM ubuntu:20.04
+
+   RUN apt-get -y update && \
+       apt-get -y install cowsay lolcat
+
+   ENV LC_ALL=C \
+       PATH=/usr/games:$PATH
+
+   CMD date | cowsay | lolcat
+
+You can do so with the following command.
+
+.. code:: console
+
+   $ {command} build lolcow.sif dockerfile:.
 
 ***********************
 Alternative compressors
@@ -264,6 +294,13 @@ By default, when users provide unused variables to the build process, fatal
 errors will return. This option makes the build process show warnings instead of 
 returning fatal errors.
 
+``--data``
+==========
+
+Build image with data partition instead of regular system partition.
+
+This sets the partition type to "Data", and avoids adding scripts.
+
 ``--encrypt``
 =============
 
@@ -309,7 +346,7 @@ Extra arguments to pass to ``mksquashfs``` when creating SIF files.
 
 To show the available arguments, see the manual page or help:
 
-.. code::
+.. code:: console
 
     $ mksquashfs -help
 
@@ -337,7 +374,7 @@ You might also be interested in the compressors and their options:
 
 To show help about the options available for selected compressor:
 
-.. code::
+.. code:: console
 
     $ mksquashfs squashfs-root out.squashfs -comp zstd -Xhelp
 
@@ -348,7 +385,7 @@ compressors enabled.  So you might want to explore the help on that
 version, for example by setting its directory early in your PATH like
 this:
 
-.. code::
+.. code:: console
 
     $ PATH=$({command} buildcfg | sed -n 's,^LIBEXECDIR=\(.*\),\1/{command}/bin,p'):$PATH
 
@@ -382,6 +419,24 @@ container filesystem at build time. See :ref:`encrypted containers
 This flag allows you to pass the location of a public key to encrypt the
 container file system at build time. See :ref:`encrypted containers
 <encryption>` for more details.
+
+``--reproducible``
+==================
+
+Use the "created" date of the source image, as the ``SOURCE_DATE_EPOCH``.
+This causes the build to be reproducible (i.e. same output every time).
+
+See `Reproducible Builds <https://reproducible-builds.org/docs/source-date-epoch/>`_
+for the definition of ``SOURCE_DATE_EPOCH``. It also avoids adding a
+UUID to the SIF file, when used with {Project}.
+
+.. code:: console
+
+   # use the modification date of a certain file or directory
+   $ export SOURCE_DATE_EPOCH=$(date +%s -r <path>)
+
+   # use the last commit date for a certain file or directory
+   $ export SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct <path>)
 
 ``--sandbox``
 =============

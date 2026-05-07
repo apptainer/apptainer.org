@@ -6,18 +6,18 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>apptainer exec &mdash; Apptainer User Guide 1.4 documentation</title>
+  <title>apptainer exec &mdash; Apptainer User Guide 1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=0ed52906"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/documentation_options.js?v=aaadad1f"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/js/ga.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../keyserver.html">Keyserver Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../registry.html">OCI Registries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library_api.html">Library API Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../peertopeer.html">IPFS Peer-To-Peer Clusters</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
@@ -84,7 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mpi.html">Apptainer and MPI applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gpu.html">GPU Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gpu.html">GPU and other Device Support</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
@@ -221,7 +222,7 @@
           <li class="breadcrumb-item"><a href="../cli.html">Command Line Interface</a></li>
       <li class="breadcrumb-item active">apptainer exec</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/apptainer-userdocs/blob/1.4/cli/apptainer_exec.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/cli/apptainer_exec.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -258,6 +259,7 @@
 <dt>oras://*            A SIF container hosted on an OCI registry that supports</dt><dd><p>the OCI Registry As Storage (ORAS) specification.</p>
 </dd>
 </dl>
+<p>ipfs://*            A SIF image from an IPFS cluster, using a HTTP gateway.</p>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">exec</span> <span class="p">[</span><span class="n">exec</span> <span class="n">options</span><span class="o">...</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">container</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span>
 </pre></div>
@@ -284,6 +286,7 @@ $ apptainer exec library://centos cat /etc/os-release
 -B, --bind stringArray              a user-bind path specification.  spec has the format src[:dest[:opts]], where src and dest are outside and inside paths.  If dest is not given, it is set equal to src.  Mount options (&#39;opts&#39;) may be specified as &#39;ro&#39; (read-only) or &#39;rw&#39; (read/write, which is the default). Multiple bind paths can be given by a comma separated list.
     --blkio-weight int              Block IO relative weight in range 10-1000, 0 to disable
     --blkio-weight-device strings   Device specific block IO relative weight
+    --cdi-dirs strings              comma-separated list of directories in which CDI should look for device definition JSON files. If omitted, default will be: /etc/cdi,/var/run/cdi
 -e, --cleanenv                      clean environment before running container
     --compat                        apply settings for increased OCI/Docker compatibility. Infers --containall, --no-init, --no-umask, --no-eval, --writable-tmpfs.
 -c, --contain                       use minimal /dev and empty other directories (e.g. /tmp and $HOME) instead of sharing filesystems from your host
@@ -293,6 +296,7 @@ $ apptainer exec library://centos cat /etc/os-release
     --cpuset-cpus string            List of host CPUs available to container
     --cpuset-mems string            List of host memory nodes available to container
     --cwd string                    initial working directory for payload process inside the container (synonym for --pwd)
+    --device strings                fully-qualified CDI device name(s). A fully-qualified CDI device name consists of a VENDOR, CLASS, and NAME, which are combined as follows: &lt;VENDOR&gt;/&lt;CLASS&gt;=&lt;NAME&gt; (e.g. vendor.com/device=mydevice). Multiple fully-qualified CDI device names can be given as a comma separated list.
     --disable-cache                 do not use or create cache
     --dns string                    list of DNS server separated by commas to add in resolv.conf
     --docker-host string            specify a custom Docker daemon host
@@ -305,6 +309,7 @@ $ apptainer exec library://centos cat /etc/os-release
 -h, --help                          help for exec
 -H, --home string                   a home directory specification.  spec can either be a src path or src:dest pair.  src is the source path of the home directory outside the container and dest overrides the home directory within the container. (default &quot;/home/runner&quot;)
     --hostname string               set container hostname
+    --intel-hpu                     enable Intel(R) Gaudi accelerator support while using a minimal /dev
 -i, --ipc                           run container in a new IPC namespace
     --keep-privs                    let root user keep privileges in container (root only)
     --memory string                 Memory limit in bytes
@@ -315,13 +320,14 @@ $ apptainer exec library://centos cat /etc/os-release
     --netns-path string             join the network namespace at the specified path (as root, or if permitted in apptainer.conf)
     --network string                specify desired network type separated by commas, each network will bring up a dedicated interface inside container
     --network-args strings          specify network arguments to pass to CNI plugins
+    --no-env strings                list of environment variables to block from import into container from host environment
     --no-eval                       do not shell evaluate env vars or OCI container CMD/ENTRYPOINT/ARGS
     --no-home                       do NOT mount users home directory if /home is not the current working directory
     --no-https                      use http instead of https for docker:// oras:// and library://&lt;hostname&gt;/... URIs
     --no-init                       do NOT start shim process with --pid
     --no-mount strings              disable one or more &#39;mount xxx&#39; options set in apptainer.conf and/or specify absolute destination path to disable a bind path entry, or &#39;bind-paths&#39; to disable all bind path entries.
     --no-pid                        do not run container in a new PID namespace
-    --no-privs                      drop all privileges from root user in container)
+    --no-privs                      drop all privileges from root user in container
     --no-umask                      do not propagate umask to the container, set default 0022 umask
     --nv                            enable Nvidia support
     --nvccli                        use nvidia-container-cli for GPU setup (experimental)
@@ -351,7 +357,7 @@ $ apptainer exec library://centos cat /etc/os-release
 </ul>
 <p>Linux container platform optimized for High Performance Computing (HPC) and
 Enterprise Performance Computing (EPC)</p>
-<p><em>Auto generated by spf13/cobra on 2-Dec-2025</em></p>
+<p><em>Auto generated by spf13/cobra on 7-May-2026</em></p>
 </section>
 </section>
 

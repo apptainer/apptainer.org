@@ -1,15 +1,23 @@
 .. _gpu:
 
-####################################
-GPU Support (NVIDIA CUDA & AMD ROCm)
-####################################
+############################
+GPU and other Device Support
+############################
 
 {Project} natively supports running application containers that use
-NVIDIA's CUDA GPU compute framework, or AMD's ROCm solution. This allows
+GPUs or other accelerators.  It has specific support for
+NVIDIA's CUDA GPU compute framework, AMD's ROCm GPU solution, and
+Intel's Gaudi HPU accelerators.
+In addition, it supports the Open Containers Initiative (OCI)
+Container Device Interface (CDI)
+generic method for making GPUs and other accelerator devices available
+inside containers; see the :ref:`CDI section <sec:cdi>` below for details.
+
+This hardware device support allows
 easy access to users of GPU-enabled machine learning frameworks such as
 TensorFlow, regardless of the host operating system. As long as the host
-has a driver and library installation for CUDA/ROCm, then it's possible
-to e.g. run TensorFlow in an up-to-date Ubuntu 24.04 container, from an
+has a driver and library installation for a GPU, then it's possible
+to e.g. run TensorFlow in a Ubuntu 24.04 container, from an
 older RHEL 8 host. However, note that since the libraries are bound in
 from the host, the libc version present in the container and on the host
 must not be too far apart or there will be libc mismatch errors.  Errors
@@ -22,7 +30,7 @@ used easily, with an additional bind option.
 
 {Project} experimental support is provided to use
 Nvidia's ``nvidia-container-cli`` tooling for GPU container setup. This
-functionality, accessible via the new ``--nvccli`` flag, improves
+functionality, accessible via the ``--nvccli`` flag, improves
 compatibility with OCI runtimes and exposes additional container
 configuration options.
 
@@ -31,7 +39,7 @@ NVIDIA GPUs & CUDA (Standard)
 *****************************
 
 Commands that ``run``, or otherwise execute containers (``shell``,
-``exec``) can take an ``--nv`` option, which will setup the container's
+``exec``), can take an ``--nv`` option which will setup the container's
 environment to use an NVIDIA GPU and the basic CUDA libraries to run a
 CUDA enabled application. The ``--nv`` flag will:
 
@@ -44,7 +52,9 @@ CUDA enabled application. The ``--nv`` flag will:
 
 -  Set the ``LD_LIBRARY_PATH`` inside the container so that the bound-in
    version of the CUDA libraries are used by applications run inside the
-   container.
+   container.  Under most conditions if the same libraries are inside
+   the container, they will take precedence; see
+   :ref:`Environment From the Host <host-environment>`.
 
 Requirements
 ============
@@ -93,7 +103,7 @@ the available versions on the `tags page on Docker Hub
 The container is large, so it's best to build or pull the docker image
 to a SIF before you start working with it:
 
-.. code::
+.. code:: console
 
    $ {command} pull docker://tensorflow/tensorflow:latest-gpu
    ...
@@ -104,7 +114,7 @@ to a SIF before you start working with it:
 
 Then run the container with GPU support:
 
-.. code::
+.. code:: console
 
    $ {command} run --nv tensorflow_latest-gpu.sif
 
@@ -123,7 +133,7 @@ Then run the container with GPU support:
 You can verify the GPU is available within the container by using the
 tensorflow ``list_local_devices()`` function:
 
-.. code::
+.. code:: console
 
    {Project}> python
    Python 2.7.15+ (default, Jul  9 2019, 16:51:35)
@@ -166,7 +176,7 @@ This variable will limit the GPU devices that CUDA programs see.
 E.g. to run the tensorflow container, but using only the first GPU in
 the host, we could do:
 
-.. code::
+.. code:: console
 
    $ {ENVPREFIX}ENV_CUDA_VISIBLE_DEVICES=0 {command} run --nv tensorflow_latest-gpu.sif
 
@@ -255,7 +265,7 @@ Tensorflow can be run using ``--nvccli`` in a similar manner as the
 standard ``--nv`` binding approach when run unprivleged. Build the
 large container into a sandbox:
 
-.. code::
+.. code:: console
 
    $ {command} build --sandbox tensorflow_latest-gpu docker://tensorflow/tensorflow:latest-gpu
    INFO:    Starting build...
@@ -265,7 +275,7 @@ large container into a sandbox:
 
 Then run the container with ``nvidia-container-cli`` GPU support:
 
-.. code::
+.. code:: console
 
    $ {command} run --nvccli tensorflow_latest-gpu
 
@@ -284,7 +294,7 @@ Then run the container with ``nvidia-container-cli`` GPU support:
 You can verify the GPU is available within the container by using the
 tensorflow ``list_local_devices()`` function:
 
-.. code::
+.. code:: console
 
    {Project}> python
    Python 2.7.15+ (default, Jul  9 2019, 16:51:35)
@@ -321,7 +331,7 @@ devices are bound into the ``/dev`` tree in the container.
 For example, to pass only the 2nd and 3rd GPU into a container running
 on a system with 4 GPUs, run the following:
 
-.. code::
+.. code:: console
 
    $ export NVIDIA_VISIBLE_DEVICES=1,2
    $ {command} run -uwc --nvccli tensorflow_latest-gpu
@@ -344,7 +354,7 @@ Note that:
 If you use ``--contain`` without setting ``NVIDIA_VISIBLE_DEVICES``, no
 GPUs will be available in the container, and a warning will be shown:
 
-.. code::
+.. code:: console
 
    $ {command} run -uwc --nvccli tensorflow_latest-gpu
    WARNING: When using nvidia-container-cli with --contain NVIDIA_VISIBLE_DEVICES
@@ -356,7 +366,7 @@ To restore the behaviour of the standard GPU handling, set
 If your system contains Ampere or newer GPUs that support virtual MIG
 devices, you can specify MIG identifiers / UUIDs.
 
-.. code::
+.. code:: console
 
    $ export NVIDIA_VISIBLE_DEVICES=MIG-GPU-5c89852c-d268-c3f3-1b07-005d5ae1dc3f/7/0
 
@@ -404,7 +414,7 @@ AMD GPUs & ROCm
 ROCm framework using AMD Radeon GPU cards.
 
 Commands that ``run``, or otherwise execute containers (``shell``,
-``exec``) can take an ``--rocm`` option, which will setup the
+``exec``), can take an ``--rocm`` option which will setup the
 container's environment to use a Radeon GPU and the basic ROCm libraries
 to run a ROCm enabled application. The ``--rocm`` flag will:
 
@@ -416,8 +426,10 @@ to run a ROCm enabled application. The ``--rocm`` flag will:
    kernel GPU driver on the host.
 
 -  Set the ``LD_LIBRARY_PATH`` inside the container so that the bound-in
-   version of the ROCm libraries are used by application run inside the
-   container.
+   version of the ROCm libraries are used by applications run inside the
+   container.  Under most conditions if the same libraries are inside
+   the container, they will take precedence; see
+   :ref:`Environment From the Host <host-environment>`.
 
 Requirements
 ============
@@ -454,7 +466,7 @@ the available versions on the `tags page on Docker Hub
 The container is large, so it's best to build or pull the docker image
 to a SIF before you start working with it:
 
-.. code::
+.. code:: console
 
    $ {command} pull docker://rocm/tensorflow:latest
    ...
@@ -465,14 +477,14 @@ to a SIF before you start working with it:
 
 Then run the container with GPU support:
 
-.. code::
+.. code:: console
 
    $ {command} run --rocm tensorflow_latest.sif
 
 You can verify the GPU is available within the container by using the
 tensorflow ``list_local_devices()`` function:
 
-.. code::
+.. code:: console
 
    {Project}> ipython
    Python 3.5.2 (default, Jul 10 2019, 11:58:48)
@@ -488,6 +500,77 @@ tensorflow ``list_local_devices()`` function:
    memoryClockRate (GHz) 1.183
    pciBusID 0000:09:00.0
    ...
+
+***************
+Intel Gaudi HPU
+***************
+
+Intel Gaudi HPUs are another type of accelerator for AI workloads.
+The term "HPU" is not generic; it stands for "Habana Processing Unit"
+because it was designed by Habana labs.
+
+This accelerator does not require importing any host software, it only
+requires importing device files from ``/dev``.  When {Project} starts
+a container with default options, all of ``/dev`` on the host is
+normally made available inside the container, so nothing special needs
+to be done.  However, if the ``--contain`` option is used or the
+``mount dev`` configuration file option is set to ``minimal``, most
+dev files are not imported into the container.  For that situation,
+an option ``--intel-hpu`` is made available to import the ``/dev``
+files needed for the device.  If there are multiple HPU devices
+installed on the host, by default all such devices are imported,
+but if a subset is desired that can be specified with a
+``HABANA_VISIBLE_DEVICES`` environment variable.  That should
+contain a comma-separated list of device IDs (e.g., ``"1,2,3"``)
+or ``"all"``, which is the default.
+
+.. _sec:cdi:
+
+********************************
+Container Device Interface (CDI)
+********************************
+
+{Project} also supports a generic device definition method as defined
+by the Open Containers Initiative (OCI) standard called
+`Container Device Interface (CDI)
+<https://github.com/container-orchestrated-devices/container-device-interface>`__.
+If a hardware device has a CDI definition file available, {Project} and
+other container runtimes that support CDI can use it to import the
+device into containers.
+
+A CDI definition can be used by {Project}'s "action" commands
+(``run`` / ``exec`` / ``shell``), with the ``--device`` option:
+
+.. code::
+
+  --device strings                fully-qualified CDI device name(s).
+                                  A fully-qualified CDI device name
+                                  consists of a VENDOR, CLASS, and
+                                  NAME, which are combined as follows:
+                                  <VENDOR>/<CLASS>=<NAME> (e.g.
+                                  vendor.com/device=mydevice).
+                                  Multiple fully-qualified CDI device
+                                  names can be given as a comma
+                                  separated list.
+
+The device string needed for a particular device should be available
+from the provider of the CDI definition file.
+
+{Project} uses a subset of the CDI specification that is most relevant
+to its containers: it bind mounts relevant ``/dev`` files (when it isn't
+already importing all of ``/dev``), bind mounts other files needed by the
+device, and imports environment variables relevant to the device.
+
+In addition, {Project} provides a ``--cdi-dirs`` option which
+enables the user to override the default search directory for CDI definition
+files:
+
+.. code::
+
+  --cdi-dirs strings              comma-separated list of directories
+                                  in which CDI should look for device
+                                  definition JSON files. If omitted,
+                                  default will be: /etc/cdi,/var/run/cdi
 
 *******************
 OpenCL Applications
@@ -515,7 +598,7 @@ Blender as a graphical application that will make use of a local Radeon
 GPU for OpenCL compute using the container that has been published to
 the Sylabs library:
 
-.. code::
+.. code:: console
 
    $ {command} exec --rocm --bind /etc/OpenCL library://sylabs/examples/blender blender
 

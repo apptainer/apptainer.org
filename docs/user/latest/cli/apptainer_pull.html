@@ -6,18 +6,18 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>apptainer pull &mdash; Apptainer User Guide 1.4 documentation</title>
+  <title>apptainer pull &mdash; Apptainer User Guide 1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=0ed52906"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/documentation_options.js?v=aaadad1f"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/js/ga.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../keyserver.html">Keyserver Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../registry.html">OCI Registries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library_api.html">Library API Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../peertopeer.html">IPFS Peer-To-Peer Clusters</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
@@ -84,7 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mpi.html">Apptainer and MPI applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gpu.html">GPU Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gpu.html">GPU and other Device Support</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
@@ -221,7 +222,7 @@
           <li class="breadcrumb-item"><a href="../cli.html">Command Line Interface</a></li>
       <li class="breadcrumb-item active">apptainer pull</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/apptainer-userdocs/blob/1.4/cli/apptainer_pull.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/cli/apptainer_pull.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -246,6 +247,8 @@ URI. Supported URIs include:</p>
 </dd>
 <dt>oras: Pull a SIF image from an OCI registry that supports ORAS.</dt><dd><p>oras://registry/namespace/image:tag</p>
 </dd>
+<dt>ipfs: Pull a SIF image from an IPFS cluster, using a HTTP gateway.</dt><dd><p>ipfs://cid</p>
+</dd>
 <dt>http, https: Pull an image using the http(s?) protocol</dt><dd><p><a class="reference external" href="https://example.com/alpine.sif">https://example.com/alpine.sif</a></p>
 </dd>
 </dl>
@@ -268,6 +271,9 @@ $ apptainer pull apptainer-images.sif shub://vsoch/apptainer-images
 
 From supporting OCI registry (e.g. Azure Container Registry)
 $ apptainer pull image.sif oras://&lt;username&gt;.azurecr.io/namespace/image:tag
+
+From available IPFS cluster (using a local HTTP IPFS gateway)
+$ apptainer pull lolcow.sif ipfs://bafybeice667c6gxovimsb6gnk6vex7vhzluhkl5hjv4ac4lhilxn52c43m
 </pre></div>
 </div>
 </section>
@@ -285,6 +291,7 @@ $ apptainer pull image.sif oras://&lt;username&gt;.azurecr.io/namespace/image:ta
     <span class="o">--</span><span class="n">library</span> <span class="n">string</span>        <span class="n">download</span> <span class="n">images</span> <span class="kn">from</span><span class="w"> </span><span class="nn">the</span> <span class="n">provided</span> <span class="n">library</span>
     <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cleanup</span>            <span class="n">do</span> <span class="n">NOT</span> <span class="n">clean</span> <span class="n">up</span> <span class="n">bundle</span> <span class="n">after</span> <span class="n">failed</span> <span class="n">build</span><span class="p">,</span> <span class="n">can</span> <span class="n">be</span> <span class="n">helpful</span> <span class="k">for</span> <span class="n">debugging</span>
     <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">https</span>              <span class="n">use</span> <span class="n">http</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">https</span> <span class="k">for</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span> <span class="n">oras</span><span class="p">:</span><span class="o">//</span> <span class="ow">and</span> <span class="n">library</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">hostname</span><span class="o">&gt;/...</span> <span class="n">URIs</span>
+    <span class="o">--</span><span class="n">reproducible</span>          <span class="n">creates</span> <span class="n">a</span> <span class="n">reproducible</span> <span class="n">build</span> <span class="n">by</span> <span class="n">using</span> <span class="n">the</span> <span class="n">creation</span> <span class="n">date</span> <span class="n">of</span> <span class="n">the</span> <span class="n">source</span> <span class="n">image</span>
     <span class="o">--</span><span class="n">sandbox</span>               <span class="n">pull</span> <span class="n">image</span> <span class="k">as</span> <span class="n">sandbox</span> <span class="nb">format</span> <span class="p">(</span><span class="n">chroot</span> <span class="n">directory</span> <span class="n">structure</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -296,7 +303,7 @@ $ apptainer pull image.sif oras://&lt;username&gt;.azurecr.io/namespace/image:ta
 </ul>
 <p>Linux container platform optimized for High Performance Computing (HPC) and
 Enterprise Performance Computing (EPC)</p>
-<p><em>Auto generated by spf13/cobra on 2-Dec-2025</em></p>
+<p><em>Auto generated by spf13/cobra on 7-May-2026</em></p>
 </section>
 </section>
 

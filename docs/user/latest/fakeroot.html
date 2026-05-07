@@ -6,18 +6,18 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fakeroot feature &mdash; Apptainer User Guide 1.4 documentation</title>
+  <title>Fakeroot feature &mdash; Apptainer User Guide 1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=0ed52906"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/documentation_options.js?v=aaadad1f"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -87,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peertopeer.html">IPFS Peer-To-Peer Clusters</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
@@ -104,7 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU and other Device Support</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
@@ -133,7 +134,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Fakeroot feature</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/apptainer-userdocs/blob/1.4/fakeroot.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/fakeroot.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -157,7 +158,7 @@ This is also commonly referred to as “rootless mode” and is the
 method used for example by Podman.
 This mode requires user namespaces to be enabled.
 It is the most complete emulation but it requires administrator setup
-as described in the <a class="reference external" href="https://apptainer.org/docs/admin/1.4/user_namespace.html#rootless-fakeroot-feature">admin guide</a>.
+as described in the <a class="reference external" href="https://apptainer.org/docs/admin/main/user_namespace.html#rootless-fakeroot-feature">admin guide</a>.
 It also requires some elevated privilege assistance on the host as described
 there, which means that it will not be able to run nested inside another
 container that disallows elevating privileges, as Apptainer does.
@@ -185,7 +186,7 @@ bound in from the host so if the host libc library is a newer version
 than the corresponding library in the container the
 fakeroot command can fail with errors about missing GLIBC versions.
 If that situation happens the easiest solution may be to use the
-<a class="reference external" href="https://apptainer.org/docs/admin/1.4/installation.html#install-from-pre-built-packages">install-unprivileged.sh script</a>
+<a class="reference external" href="https://apptainer.org/docs/admin/main/installation.html#install-from-pre-built-packages">install-unprivileged.sh script</a>
 to install Apptainer because it downloads a fakeroot command
 built with as old a libc as possible.
 Otherwise you can also try using the <code class="docutils literal notranslate"><span class="pre">--ignore-fakeroot-command</span></code>
@@ -343,28 +344,28 @@ created may not be writable by the creating user.</p>
 <section id="build-from-a-definition-file">
 <h4>Build from a definition file:<a class="headerlink" href="#build-from-a-definition-file" title="Link to this heading"></a></h4>
 <p>(fakeroot is implied)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">build</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="k">def</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>build<span class="w"> </span>/tmp/test.sif<span class="w"> </span>/tmp/test.def
 </pre></div>
 </div>
 </section>
 <section id="add-package-to-a-writable-overlay">
 <h4>Add package to a writable overlay<a class="headerlink" href="#add-package-to-a-writable-overlay" title="Link to this heading"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">overlay</span>
-<span class="n">apptainer</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">overlay</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">overlay</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sif</span> <span class="n">dnf</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">openssh</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>/tmp/test.overlay
+apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--fakeroot<span class="w"> </span>--overlay<span class="w"> </span>/tmp/test.overlay<span class="w"> </span>/tmp/test.sif<span class="w"> </span>dnf<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>openssh
 </pre></div>
 </div>
 </section>
 <section id="ping-from-container">
 <h4>Ping from container:<a class="headerlink" href="#ping-from-container" title="Link to this heading"></a></h4>
 <p>(when the Network conditions above are met)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">exec</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">alpine</span> <span class="n">ping</span> <span class="o">-</span><span class="n">c1</span> <span class="mf">8.8.8.8</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--fakeroot<span class="w"> </span>--net<span class="w"> </span>docker://alpine<span class="w"> </span>ping<span class="w"> </span>-c1<span class="w"> </span><span class="m">8</span>.8.8.8
 </pre></div>
 </div>
 </section>
 <section id="http-server">
 <h4>HTTP server:<a class="headerlink" href="#http-server" title="Link to this heading"></a></h4>
 <p>(when the Network conditions above are met)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">run</span> <span class="o">--</span><span class="n">fakeroot</span> <span class="o">--</span><span class="n">net</span> <span class="o">--</span><span class="n">network</span><span class="o">-</span><span class="n">args</span><span class="o">=</span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span> <span class="o">-</span><span class="n">w</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">nginx</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span>--fakeroot<span class="w"> </span>--net<span class="w"> </span>--network-args<span class="o">=</span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span><span class="w"> </span>-w<span class="w"> </span>docker://nginx
 </pre></div>
 </div>
 </section>
@@ -398,15 +399,15 @@ containing this for a RHEL-derived container:</p>
 </pre></div>
 </div>
 <p>or this for an alpine container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Bootstrap</span><span class="p">:</span> <span class="n">docker</span>
-<span class="n">From</span><span class="p">:</span> <span class="n">alpine</span><span class="p">:</span><span class="n">latest</span>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: alpine:latest
 
-<span class="o">%</span><span class="n">post</span>
-    <span class="n">apk</span> <span class="n">update</span>
-    <span class="n">apk</span> <span class="n">add</span> <span class="n">fakeroot</span>
-    <span class="n">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="mi">1</span> <span class="n">fakeroot</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;</span>
-        <span class="n">apk</span> <span class="n">add</span> <span class="n">squid</span>
-    <span class="s1">&#39;</span>
+<span class="gh">%post</span>
+<span class="w">    </span>apk<span class="w"> </span>update
+<span class="w">    </span>apk<span class="w"> </span>add<span class="w"> </span>fakeroot
+<span class="w">    </span><span class="nv">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>fakeroot<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">        apk add squid</span>
+<span class="s1">    &#39;</span>
 </pre></div>
 </div>
 <p>then build with</p>

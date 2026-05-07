@@ -6,18 +6,18 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plugins &mdash; Apptainer User Guide 1.4 documentation</title>
+  <title>Plugins &mdash; Apptainer User Guide 1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=0ed52906"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/documentation_options.js?v=aaadad1f"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/js/ga.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peertopeer.html">IPFS Peer-To-Peer Clusters</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
@@ -90,7 +91,7 @@
 <li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU and other Device Support</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
@@ -119,7 +120,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Plugins</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/apptainer/apptainer-userdocs/blob/1.4/plugins.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/plugins.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -169,8 +170,8 @@ limitations of Go plugins.</p>
 <section id="using-plugins">
 <h2>Using Plugins<a class="headerlink" href="#using-plugins" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> command prints the currently installed plugins.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer plugin list
-There are no plugins installed.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>list
+<span class="go">There are no plugins installed.</span>
 </pre></div>
 </div>
 <p>Plugins are packaged and distributed as binaries encoded with the versatile
@@ -178,14 +179,14 @@ Singularity Image Format (SIF). However, plugin authors may also distribute the
 source code of their plugins. A plugin can be compiled from its source code with
 the <code class="docutils literal notranslate"><span class="pre">compile</span></code> command. A number of example plugins are included in the
 <code class="docutils literal notranslate"><span class="pre">examples/plugins</span></code> directory of the Apptainer source.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer plugin compile examples/plugins/cli-plugin/
-INFO:    Plugin built to: /home/dtrudg/Git/apptainer/examples/plugins/cli-plugin/cli-plugin.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>compile<span class="w"> </span>examples/plugins/cli-plugin/
+<span class="go">INFO:    Plugin built to: /home/dtrudg/Git/apptainer/examples/plugins/cli-plugin/cli-plugin.sif</span>
 </pre></div>
 </div>
 <p>Upon successful compilation, a SIF file will appear in the directory of the
 plugin’s source code.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls examples/plugins/cli-plugin/ | grep sif
-cli-plugin.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ls<span class="w"> </span>examples/plugins/cli-plugin/<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>sif
+<span class="go">cli-plugin.sif</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -199,43 +200,43 @@ previously existed, has been removed due to incompatible changes in Go 1.18.</p>
 <p>Every plugin encapsulates various information such as the plugin’s
 author, the plugin’s version, etc. To view this information about a
 plugin, use the <code class="docutils literal notranslate"><span class="pre">inspect</span></code> command.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apptainer plugin inspect examples/plugins/cli-plugin/cli-plugin.sif
-Name: example.com/cli-plugin
-Description: This is a short example CLI plugin for Apptainer
-Author: Apptainer Team
-Version: 0.1.0
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>inspect<span class="w"> </span>examples/plugins/cli-plugin/cli-plugin.sif
+<span class="go">Name: example.com/cli-plugin</span>
+<span class="go">Description: This is a short example CLI plugin for Apptainer</span>
+<span class="go">Author: Apptainer Team</span>
+<span class="go">Version: 0.1.0</span>
 </pre></div>
 </div>
 <p>To install a plugin, use the <code class="docutils literal notranslate"><span class="pre">install</span></code> command. This operation
 requires root privilege.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer plugin install examples/plugins/cli-plugin/cli-plugin.sif
-$ apptainer plugin list
-ENABLED  NAME
-    yes  example.com/cli-plugin
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>install<span class="w"> </span>examples/plugins/cli-plugin/cli-plugin.sif
+<span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>list
+<span class="go">ENABLED  NAME</span>
+<span class="go">    yes  example.com/cli-plugin</span>
 </pre></div>
 </div>
 <p>After successful installation, the plugin will automatically be enabled.
 Any plugin can be disabled with the <code class="docutils literal notranslate"><span class="pre">disable</span></code> command and re-enabled
 with the <code class="docutils literal notranslate"><span class="pre">enable</span></code> command. Both of these operations require root
 privilege.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer plugin disable example.com/cli-plugin
-$ apptainer plugin list
-ENABLED  NAME
-     no  example.com/cli-plugin
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>disable<span class="w"> </span>example.com/cli-plugin
+<span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>list
+<span class="go">ENABLED  NAME</span>
+<span class="go">     no  example.com/cli-plugin</span>
 
-$ sudo apptainer plugin enable example.com/cli-plugin
-$ apptainer plugin list
-ENABLED  NAME
-    yes  example.com/cli-plugin
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>plugin<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>example.com/cli-plugin
+<span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>list
+<span class="go">ENABLED  NAME</span>
+<span class="go">    yes  example.com/cli-plugin</span>
 </pre></div>
 </div>
 <p>Finally, to uninstall a plugin, use the <code class="docutils literal notranslate"><span class="pre">uninstall</span></code> command. This
 operation requires root privilege.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apptainer plugin uninstall example.com/cli-plugin
-Uninstalled plugin &quot;example.com/cli-plugin&quot;.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>uninstall<span class="w"> </span>example.com/cli-plugin
+<span class="go">Uninstalled plugin &quot;example.com/cli-plugin&quot;.</span>
 
-$ apptainer plugin list
-There are no plugins installed.
+<span class="gp">$ </span>apptainer<span class="w"> </span>plugin<span class="w"> </span>list
+<span class="go">There are no plugins installed.</span>
 </pre></div>
 </div>
 </section>
@@ -244,7 +245,7 @@ There are no plugins installed.
 <p>Developers interested in writing Apptainer plugins can get started
 by reading the <a class="reference external" href="https://godoc.org/github.com/apptainer/apptainer/pkg/plugin">Go documentation</a> for the
 plugin package.</p>
-<p>Example plugins can be found in the Apptainer <a class="reference external" href="https://github.com/apptainer/apptainer/tree/release-1.4/examples/plugins">source code</a>.</p>
+<p>Example plugins can be found in the Apptainer <a class="reference external" href="https://github.com/apptainer/apptainer/tree/main/examples/plugins">source code</a>.</p>
 </section>
 </section>
 
