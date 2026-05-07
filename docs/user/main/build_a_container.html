@@ -77,6 +77,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#notest"><code class="docutils literal notranslate"><span class="pre">--notest</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#passphrase"><code class="docutils literal notranslate"><span class="pre">--passphrase</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pem-path"><code class="docutils literal notranslate"><span class="pre">--pem-path</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reproducible"><code class="docutils literal notranslate"><span class="pre">--reproducible</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sandbox"><code class="docutils literal notranslate"><span class="pre">--sandbox</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#section"><code class="docutils literal notranslate"><span class="pre">--section</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#update"><code class="docutils literal notranslate"><span class="pre">--update</span></code></a></li>
@@ -513,6 +514,21 @@ container filesystem at build time. See <a class="reference internal" href="encr
 <h3><code class="docutils literal notranslate"><span class="pre">--pem-path</span></code><a class="headerlink" href="#pem-path" title="Link to this heading"></a></h3>
 <p>This flag allows you to pass the location of a public key to encrypt the
 container file system at build time. See <a class="reference internal" href="encryption.html#encryption"><span class="std std-ref">encrypted containers</span></a> for more details.</p>
+</section>
+<section id="reproducible">
+<h3><code class="docutils literal notranslate"><span class="pre">--reproducible</span></code><a class="headerlink" href="#reproducible" title="Link to this heading"></a></h3>
+<p>Use the “created” date of the source image, as the <code class="docutils literal notranslate"><span class="pre">SOURCE_DATE_EPOCH</span></code>.
+This causes the build to be reproducible (i.e. same output every time).</p>
+<p>See <a class="reference external" href="https://reproducible-builds.org/docs/source-date-epoch/">Reproducible Builds</a>
+for the definition of <code class="docutils literal notranslate"><span class="pre">SOURCE_DATE_EPOCH</span></code>. It also avoids adding a
+UUID to the SIF file, when used with Apptainer.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>use<span class="w"> </span>the<span class="w"> </span>modification<span class="w"> </span>date<span class="w"> </span>of<span class="w"> </span>a<span class="w"> </span>certain<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">SOURCE_DATE_EPOCH</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%s<span class="w"> </span>-r<span class="w"> </span>&lt;path&gt;<span class="k">)</span>
+
+<span class="gp"># </span>use<span class="w"> </span>the<span class="w"> </span>last<span class="w"> </span>commit<span class="w"> </span>date<span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span>certain<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">SOURCE_DATE_EPOCH</span><span class="o">=</span><span class="k">$(</span>git<span class="w"> </span>log<span class="w"> </span>-1<span class="w"> </span>--pretty<span class="o">=</span>%ct<span class="w"> </span>&lt;path&gt;<span class="k">)</span>
+</pre></div>
+</div>
 </section>
 <section id="sandbox">
 <h3><code class="docutils literal notranslate"><span class="pre">--sandbox</span></code><a class="headerlink" href="#sandbox" title="Link to this heading"></a></h3>

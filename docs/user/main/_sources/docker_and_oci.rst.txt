@@ -715,6 +715,9 @@ use ``Bootstrap: docker-daemon``, and a ``From: <REPOSITORY>:TAG`` line:
    Bootstrap: docker-daemon
    From: sylabsio/lolcow:latest
 
+To use the "created" date of the input image also for the output image, you
+can use the ``--reproducible`` flag or the ``APPTAINER_REPRODUCIBLE`` env var.
+
 Containers in Docker Archive Files
 ----------------------------------
 

@@ -143,6 +143,8 @@ Variables set in the ``%post`` section through
 ``${ENVPREFIX}_ENVIRONMENT`` take precedence over those added via
 ``%environment``.
 
+.. _host-environment:
+
 *************************
 Environment From the Host
 *************************
@@ -156,19 +158,36 @@ Except that:
       via ``{ENVPREFIX}ENV_`` environment variables, or the ``--env`` and
       ``--env-file`` flags.
 
-   - Any variables listed in a ``--no-env`` flag will be explicitly
+   -  Any variables listed in a ``--no-env`` flag will be explicitly
       excluded from import from the host into the container.  If the
       flag is not set, a default list of variables to exclude may be set
-      in an ``{ENVPREFIX}_NOENV`` environment variable
+      in an ``{ENVPREFIX}_NOENV`` environment variable.
 
    -  The ``PS1`` shell prompt is reset for a container specific prompt.
 
    -  The ``PATH`` environment variable will be modified to contain
       default values.
 
-   -  The ``LD_LIBRARY_PATH`` is modified to a default
-      ``/.singularity.d/libs``, that will include NVIDIA / ROCm
-      libraries if applicable.
+   -  The ``LD_LIBRARY_PATH`` environment variable is not imported from the
+      host.  If it is not set by another means mentioned above, and if the
+      container is based on glibc, and if it is to be modified for
+      one of the following reasons, it will first be set to the default
+      value used by the executable loader inside the container.  After that
+      the following modifications will be applied:
+
+      - If ``PREPEND_LD_LIBRARY_PATH`` is set inside the container, it is
+        prepended to ``LD_LIBRARY_PATH`` separated by a colon.
+
+      - If ``APPEND_LD_LIBRARY_PATH`` is set inside the container, it is
+        appended to ``LD_LIBRARY_PATH`` separated by a colon.
+
+      - If one of the NVIDIA / ROCm options are specified, their libraries
+        are bound in from the host into ``/.singularity.d/libs`` and that
+        directory is appended to ``LD_LIBRARY_PATH`` separated by a colon.
+        This means that if the same libraries are installed in the 
+        container, they will take precedence over those imported from
+        the host.  To make the imported host libraries take precedence,
+        set ``PREPEND_LD_LIBRARY_PATH=/.singularity.d/libs``.
 
 .. note::
 

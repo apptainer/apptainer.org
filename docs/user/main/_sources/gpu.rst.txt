@@ -52,7 +52,9 @@ CUDA enabled application. The ``--nv`` flag will:
 
 -  Set the ``LD_LIBRARY_PATH`` inside the container so that the bound-in
    version of the CUDA libraries are used by applications run inside the
-   container.
+   container.  Under most conditions if the same libraries are inside
+   the container, they will take precedence; see
+   :ref:`Environment From the Host <host-environment>`.
 
 Requirements
 ============
@@ -424,8 +426,10 @@ to run a ROCm enabled application. The ``--rocm`` flag will:
    kernel GPU driver on the host.
 
 -  Set the ``LD_LIBRARY_PATH`` inside the container so that the bound-in
-   version of the ROCm libraries are used by application run inside the
-   container.
+   version of the ROCm libraries are used by applications run inside the
+   container.  Under most conditions if the same libraries are inside
+   the container, they will take precedence; see
+   :ref:`Environment From the Host <host-environment>`.
 
 Requirements
 ============

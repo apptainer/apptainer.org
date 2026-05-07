@@ -281,7 +281,7 @@ runtime.</p>
 </section>
 </section>
 <section id="environment-from-the-host">
-<h2>Environment From the Host<a class="headerlink" href="#environment-from-the-host" title="Link to this heading"></a></h2>
+<span id="host-environment"></span><h2>Environment From the Host<a class="headerlink" href="#environment-from-the-host" title="Link to this heading"></a></h2>
 <p>If you have environment variables set outside of your container, on the
 host, then by default they will be available inside the container.
 Except that:</p>
@@ -291,19 +291,33 @@ Except that:</p>
 of the same name that has been set either inside the container image, or
 via <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> environment variables, or the <code class="docutils literal notranslate"><span class="pre">--env</span></code> and
 <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> flags.</p></li>
-<li><dl class="simple">
-<dt>Any variables listed in a <code class="docutils literal notranslate"><span class="pre">--no-env</span></code> flag will be explicitly</dt><dd><p>excluded from import from the host into the container.  If the
+<li><p>Any variables listed in a <code class="docutils literal notranslate"><span class="pre">--no-env</span></code> flag will be explicitly
+excluded from import from the host into the container.  If the
 flag is not set, a default list of variables to exclude may be set
-in an <code class="docutils literal notranslate"><span class="pre">APPTAINER_NOENV</span></code> environment variable</p>
-</dd>
-</dl>
-</li>
+in an <code class="docutils literal notranslate"><span class="pre">APPTAINER_NOENV</span></code> environment variable.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">PS1</span></code> shell prompt is reset for a container specific prompt.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable will be modified to contain
 default values.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> is modified to a default
-<code class="docutils literal notranslate"><span class="pre">/.singularity.d/libs</span></code>, that will include NVIDIA / ROCm
-libraries if applicable.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> environment variable is not imported from the
+host.  If it is not set by another means mentioned above, and if the
+container is based on glibc, and if it is to be modified for
+one of the following reasons, it will first be set to the default
+value used by the executable loader inside the container.  After that
+the following modifications will be applied:</p>
+<ul>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">PREPEND_LD_LIBRARY_PATH</span></code> is set inside the container, it is
+prepended to <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> separated by a colon.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">APPEND_LD_LIBRARY_PATH</span></code> is set inside the container, it is
+appended to <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> separated by a colon.</p></li>
+<li><p>If one of the NVIDIA / ROCm options are specified, their libraries
+are bound in from the host into <code class="docutils literal notranslate"><span class="pre">/.singularity.d/libs</span></code> and that
+directory is appended to <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> separated by a colon.
+This means that if the same libraries are installed in the
+container, they will take precedence over those imported from
+the host.  To make the imported host libraries take precedence,
+set <code class="docutils literal notranslate"><span class="pre">PREPEND_LD_LIBRARY_PATH=/.singularity.d/libs</span></code>.</p></li>
+</ul>
+</li>
 </ul>
 </div></blockquote>
 <div class="admonition note">

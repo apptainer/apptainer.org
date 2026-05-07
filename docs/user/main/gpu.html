@@ -194,7 +194,9 @@ container, so that they are available to the container, and match the
 kernel GPU driver on the host.</p></li>
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> inside the container so that the bound-in
 version of the CUDA libraries are used by applications run inside the
-container.</p></li>
+container.  Under most conditions if the same libraries are inside
+the container, they will take precedence; see
+<a class="reference internal" href="environment_and_metadata.html#host-environment"><span class="std std-ref">Environment From the Host</span></a>.</p></li>
 </ul>
 <section id="requirements">
 <h3>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h3>
@@ -515,8 +517,10 @@ container, so that the GPU cards in the host are accessible.</p></li>
 container, so that they are available to the container, and match the
 kernel GPU driver on the host.</p></li>
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> inside the container so that the bound-in
-version of the ROCm libraries are used by application run inside the
-container.</p></li>
+version of the ROCm libraries are used by applications run inside the
+container.  Under most conditions if the same libraries are inside
+the container, they will take precedence; see
+<a class="reference internal" href="environment_and_metadata.html#host-environment"><span class="std std-ref">Environment From the Host</span></a>.</p></li>
 </ul>
 <section id="id2">
 <h3>Requirements<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>

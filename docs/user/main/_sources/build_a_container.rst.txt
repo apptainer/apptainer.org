@@ -420,6 +420,24 @@ This flag allows you to pass the location of a public key to encrypt the
 container file system at build time. See :ref:`encrypted containers
 <encryption>` for more details.
 
+``--reproducible``
+==================
+
+Use the "created" date of the source image, as the ``SOURCE_DATE_EPOCH``.
+This causes the build to be reproducible (i.e. same output every time).
+
+See `Reproducible Builds <https://reproducible-builds.org/docs/source-date-epoch/>`_
+for the definition of ``SOURCE_DATE_EPOCH``. It also avoids adding a
+UUID to the SIF file, when used with {Project}.
+
+.. code:: console
+
+   # use the modification date of a certain file or directory
+   $ export SOURCE_DATE_EPOCH=$(date +%s -r <path>)
+
+   # use the last commit date for a certain file or directory
+   $ export SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct <path>)
+
 ``--sandbox``
 =============
 
