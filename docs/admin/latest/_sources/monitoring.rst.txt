@@ -28,7 +28,7 @@ Usage
 First, the administrator needs to enable the monitoring feature inside {Project} by editing ``apptainer.conf``.
 Simply changing the value of ``allow monitoring`` to ``yes``.
 
-.. code::
+.. code:: linuxconfig
 
     # ALLOW MONITORING: [BOOL]
     # DEFAULT: no
@@ -38,9 +38,9 @@ Simply changing the value of ``allow monitoring`` to ``yes``.
 
 Then the administrator starts the Apptheus
 
-.. code::
+.. code:: shell
 
-   sudo apptheus --trust.path=/usr/local/libexec/apptainer/bin/starter;/usr/local/libexec/apptainer/bin/starter-suid
+    sudo apptheus --trust.path=/usr/local/libexec/apptainer/bin/starter;/usr/local/libexec/apptainer/bin/starter-suid
 
 .. note::
 
@@ -48,10 +48,9 @@ Then the administrator starts the Apptheus
 
 Prometheus can read the container's metrics via the local http address, by default ``localhost:9091/metrics``.
 
-.. code::
+.. code:: console
 
-    curl locahost:9091/metrics
-
+    $ curl locahost:9091/metrics
     # HELP apptheus_build_info A metric with a constant '1' value labeled by version, revision, branch, goversion from which apptheus was built, and the goos and goarch for the build.
     # TYPE apptheus_build_info gauge
     apptheus_build_info{branch="",goarch="arm64",goos="linux",goversion="go1.21.1",revision="284ead0316031c8c08e2081f0468ad83bfb82e20",tags="unknown",version=""} 1

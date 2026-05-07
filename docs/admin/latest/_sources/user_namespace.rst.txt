@@ -174,7 +174,7 @@ these files, but it is important to understand how they work.
 
 For user ``foo`` an entry in ``/etc/subuid`` might be:
 
-.. code::
+.. code:: text
 
    foo:100000:65536
 
@@ -184,7 +184,7 @@ that can be used by ``foo`` in a user namespace uid mapping, and
 
 Same for ``/etc/subgid``:
 
-.. code::
+.. code:: text
 
    foo:100000:65536
 
@@ -209,7 +209,7 @@ Same for ``/etc/subgid``:
 So if you want to add another user ``bar``, ``/etc/subuid`` and
 ``/etc/subgid`` will look like:
 
-.. code::
+.. code:: text
 
    foo:100000:65536
    bar:165536:65536
@@ -322,7 +322,7 @@ Use the ``-a/--add <user>`` option to ``config fakeroot`` to create new
 mapping entries so that ``<user>`` can use the fakeroot feature of
 {Project}:
 
-.. code::
+.. code:: console
 
    $ sudo {command} config fakeroot --add dave
 
@@ -354,7 +354,7 @@ Use the ``-r/--remove <user>`` option to ``config fakeroot`` to
 completely remove mapping entries. The ``<user>`` will no longer be able
 to use the fakeroot feature of {Project}:
 
-.. code::
+.. code:: console
 
    $ sudo {command} config fakeroot --remove dave
 
@@ -372,7 +372,7 @@ useful to disable fakeroot for a user, but ensure the subuid/subgid
 range assigned to them is reserved, and not re-assigned to a different
 user.
 
-.. code::
+.. code:: console
 
    # Disable dave
    $ sudo {command} config fakeroot --disable dave
@@ -408,6 +408,6 @@ with the subordinate user and group ids.
 In addition, the client machines need to have a line like the following in
 ``/etc/nsswitch.conf``:
 
-.. code::
+.. code:: linuxconfig
 
     subid: sss
