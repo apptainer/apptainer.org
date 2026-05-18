@@ -496,6 +496,16 @@ packages, or using the `multiarch/qemu-user-static
    Running this container with sudo will modify system configuration files, and
    register binaries on the host.
 
+.. note::
+
+   The "multiarch" image above is only available for amd64, if you are running on
+   arm64 you can use `tonistiigi/binfmt <https://github.com/tonistiigi/binfmt>`__
+   container instead, to the same effect (it is also using qemu-user-static):
+
+.. code:: console
+
+   $ sudo {command} run docker://tonistiigi/binfmt --install all
+
 It is now possible to run containers for other architectures:
 
 .. code:: console

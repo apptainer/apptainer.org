@@ -610,6 +610,15 @@ packages, or using the <a class="reference external" href="https://github.com/mu
 <p>Running this container with sudo will modify system configuration files, and
 register binaries on the host.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The “multiarch” image above is only available for amd64, if you are running on
+arm64 you can use <a class="reference external" href="https://github.com/tonistiigi/binfmt">tonistiigi/binfmt</a>
+container instead, to the same effect (it is also using qemu-user-static):</p>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://tonistiigi/binfmt<span class="w"> </span>--install<span class="w"> </span>all
+</pre></div>
+</div>
 <p>It is now possible to run containers for other architectures:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>The<span class="w"> </span>host<span class="w"> </span>system<span class="w"> </span>is<span class="w"> </span>an<span class="w"> </span>AMD64<span class="w"> </span>/<span class="w"> </span>x86_64<span class="w"> </span>machine
 <span class="gp">$ </span>uname<span class="w"> </span>-m
