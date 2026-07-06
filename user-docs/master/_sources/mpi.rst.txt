@@ -263,7 +263,7 @@ Using --sharens mode
 ====================
 
 By default in unprivileged user namespace mode each {command} command runs in its own user namespace.
-This causes problems for MPI runs, as observed :ref:`in this issue <mpi-issue>`. The new ``--sharens`` flag will 
+This causes problems for MPI runs, as observed :ref:`in this issue <mpi-issue>`. The ``--sharens`` flag will 
 move all spawned processes into the same user namespace, similar to what is done with {Project} SUID mode. 
 
 .. code:: shell
