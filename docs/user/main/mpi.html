@@ -380,7 +380,7 @@ a workaround, for example:</p>
 <section id="using-sharens-mode">
 <h3>Using –sharens mode<a class="headerlink" href="#using-sharens-mode" title="Link to this heading"></a></h3>
 <p>By default in unprivileged user namespace mode each apptainer command runs in its own user namespace.
-This causes problems for MPI runs, as observed <a class="reference internal" href="#mpi-issue"><span class="std std-ref">in this issue</span></a>. The new <code class="docutils literal notranslate"><span class="pre">--sharens</span></code> flag will
+This causes problems for MPI runs, as observed <a class="reference internal" href="#mpi-issue"><span class="std std-ref">in this issue</span></a>. The <code class="docutils literal notranslate"><span class="pre">--sharens</span></code> flag will
 move all spawned processes into the same user namespace, similar to what is done with Apptainer SUID mode.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">2</span><span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--sharens<span class="w"> </span><span class="nv">$MY_CONTAINER</span><span class="w"> </span>./a.out
 </pre></div>
