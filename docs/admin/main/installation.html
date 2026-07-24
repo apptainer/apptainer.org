@@ -94,7 +94,16 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">GPU Support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Lima</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#id3">GPU Support</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#apple-container">Apple container</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#shell-integration-optional">Shell integration (optional)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -698,6 +707,15 @@ approach (<code class="docutils literal notranslate"><span class="pre">--nv</spa
 </section>
 <section id="mac">
 <h3>Mac<a class="headerlink" href="#mac" title="Link to this heading"></a></h3>
+<p>Apptainer runs on macOS in two ways, both booting a persistent Linux VM that
+mounts your home directory automatically. <a class="reference external" href="https://lima-vm.io">Lima</a> is the
+established option. It works on both Apple Silicon and Intel Macs, using Apple’s
+native virtualization on Apple Silicon and falling back to QEMU on Intel
+hardware. Apple’s <code class="docutils literal notranslate"><span class="pre">container</span></code> tool is a newer, Apple Silicon only alternative
+that provides the same kind of always-on Linux environment. Both approaches are
+described below.</p>
+<section id="id1">
+<h4>Lima<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
 <p>Apptainer is available via <a class="reference external" href="https://lima-vm.io">Lima</a> (installable with <a class="reference external" href="https://brew.sh">Homebrew</a> or manually)</p>
 <p>Lima launches Linux machines with automatic file sharing and port forwarding.
 It uses native virtualization support provided by macOS Virtualization.Framework,
@@ -717,8 +735,8 @@ for more details.</p>
 so you need to add a shared writable directory mount if you want output
 that can be accessed both from the host and in the guest.</p>
 <p>Previously there was a mount in <cite>/tmp/lima</cite>, it was removed in Lima 2.0.</p>
-<section id="id1">
-<h4>GPU Support<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<section id="id3">
+<h5>GPU Support<a class="headerlink" href="#id3" title="Link to this heading"></a></h5>
 <p>Lima supports using an Apple GPU from the Linux environment, with <a class="reference external" href="https://github.com/containers/krunkit">krunkit</a>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>tap<span class="w"> </span>slp/krunkit
 <span class="gp">$ </span>brew<span class="w"> </span>install<span class="w"> </span>krunkit
@@ -744,6 +762,155 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 </pre></div>
 </div>
 <p>You can run <a class="reference external" href="https://github.com/ggml-org/llama.cpp">llama.cpp</a>. with <code class="docutils literal notranslate"><span class="pre">docker://quay.io/slopezpa/fedora-vgpu-llama</span></code></p>
+</section>
+</section>
+<section id="apple-container">
+<h4>Apple container<a class="headerlink" href="#apple-container" title="Link to this heading"></a></h4>
+<p>As an alternative to Lima, you can run Apptainer on macOS using Apple’s
+<a class="reference external" href="https://github.com/apple/container/blob/main/docs/container-machine.md">container machine</a> tool.
+Your Mac home directory is automatically mounted read-write inside the VM at the same path,
+so SIF files and project directories work transparently from both the host and the guest.</p>
+<p>This requires macOS 26 or later on Apple Silicon, with the Apple <code class="docutils literal notranslate"><span class="pre">container</span></code>
+tool installed from the <code class="docutils literal notranslate"><span class="pre">.pkg</span></code> release.</p>
+<section id="setup">
+<h5>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h5>
+<p>Download and install the <code class="docutils literal notranslate"><span class="pre">.pkg</span></code> from the <a class="reference external" href="https://github.com/apple/container/releases">container releases page</a>, then start the system:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>container<span class="w"> </span>system<span class="w"> </span>start
+</pre></div>
+</div>
+<p>Build the machine image from your container definition file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>container<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>local/apptainer-rocky:latest<span class="w"> </span>.
+</pre></div>
+</div>
+<p>As an example, the following <code class="docutils literal notranslate"><span class="pre">Containerfile</span></code> builds a minimal Rocky Linux 9 image with Apptainer installed:</p>
+<div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">docker.io/rockylinux/rockylinux:9</span>
+
+<span class="k">RUN</span><span class="w"> </span>dnf<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>epel-release<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>dnf<span class="w"> </span>swap<span class="w"> </span>-y<span class="w"> </span>curl-minimal<span class="w"> </span>curl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>dnf<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>systemd<span class="w"> </span>systemd-libs<span class="w"> </span>dbus<span class="w"> </span>sudo<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>ca-certificates<span class="w"> </span>wget<span class="w"> </span>procps-ng<span class="w"> </span>vim-minimal<span class="w"> </span>man-db<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>iproute<span class="w"> </span>iputils<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>apptainer<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>squashfs-tools<span class="w"> </span>squashfuse<span class="w"> </span>fuse-overlayfs<span class="w"> </span>fuse3<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>libseccomp<span class="w"> </span>shadow-utils<span class="w"> </span>cryptsetup<span class="w"> </span>openssl<span class="w"> </span>fakeroot<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>dnf<span class="w"> </span>clean<span class="w"> </span>all
+
+<span class="c"># Apple already grants your primary user passwordless sudo; uncomment for others.</span>
+<span class="c"># RUN echo &#39;ALL ALL=(ALL:ALL) NOPASSWD: ALL&#39; &gt; /etc/sudoers.d/nopasswd &amp;&amp; \</span>
+<span class="c">#    chmod 0440 /etc/sudoers.d/nopasswd</span>
+
+<span class="c"># /dev/fuse is root-only by default; unprivileged Apptainer mounts need it writable.</span>
+<span class="k">RUN</span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/udev/rules.d<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;KERNEL==&quot;fuse&quot;, MODE=&quot;0666&quot;&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/udev/rules.d/99-fuse.rules<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;[Unit]\nDescription=Fix /dev/fuse permissions\nDefaultDependencies=no\nAfter=systemd-udevd.service\n\n[Service]\nType=oneshot\nExecStart=/usr/bin/chmod 0666 /dev/fuse\n\n[Install]\nWantedBy=sysinit.target\n&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/systemd/system/fix-fuse-perms.service<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>fix-fuse-perms.service
+
+<span class="k">RUN</span><span class="w"> </span>&gt;/etc/machine-id<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/lib/dbus<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>&gt;/var/lib/dbus/machine-id
+
+<span class="k">RUN</span><span class="w"> </span>systemctl<span class="w"> </span>set-default<span class="w"> </span>multi-user.target<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>systemctl<span class="w"> </span>mask<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>dev-hugepages.mount<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>sys-fs-fuse-connections.mount<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>systemd-update-utmp.service<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>systemd-tmpfiles-setup.service<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>console-getty.service<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>getty@.service<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>systemd-logind.service
+
+<span class="k">STOPSIGNAL</span><span class="w"> </span><span class="s">SIGRTMIN+3</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/sbin/init&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Create the machine:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>container<span class="w"> </span>machine<span class="w"> </span>create<span class="w"> </span>local/apptainer-rocky:latest<span class="w"> </span>--name<span class="w"> </span>apptainer
+</pre></div>
+</div>
+<p>Then test it:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>container<span class="w"> </span>machine<span class="w"> </span>run<span class="w"> </span>-n<span class="w"> </span>apptainer<span class="w"> </span>--<span class="w"> </span>apptainer<span class="w"> </span>--version
+<span class="gp">$ </span>container<span class="w"> </span>machine<span class="w"> </span>run<span class="w"> </span>-n<span class="w"> </span>apptainer<span class="w"> </span>--<span class="w"> </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://rockylinux/rockylinux:9
+<span class="gp">$ </span>container<span class="w"> </span>machine<span class="w"> </span>run<span class="w"> </span>-n<span class="w"> </span>apptainer<span class="w"> </span>--<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>rockylinux_9.sif<span class="w"> </span>cat<span class="w"> </span>/etc/os-release
+</pre></div>
+</div>
+</section>
+<section id="shell-integration-optional">
+<h5>Shell integration (optional)<a class="headerlink" href="#shell-integration-optional" title="Link to this heading"></a></h5>
+<p>To make <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> and <code class="docutils literal notranslate"><span class="pre">./app.sif</span></code> work directly from your Mac terminal,
+you can add wrapper functions to your shell. These examples use zsh, the macOS
+default shell.</p>
+<p>Add the wrapper functions:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>&gt;<span class="w"> </span>~/.apptainer-machine.zsh<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">APPTAINER_MACHINE=&quot;${APPTAINER_MACHINE:-apptainer}&quot;</span>
+
+<span class="s">apptainer() {</span>
+<span class="s">  local APPTAINER_BINDPATH=&quot;$APPTAINER_BINDPATH&quot;</span>
+<span class="s">  if [ -n &quot;$APPTAINER_BINDPATH&quot; ]; then</span>
+<span class="s">    APPTAINER_BINDPATH=&quot;$APPTAINER_BINDPATH,&quot;</span>
+<span class="s">  fi</span>
+<span class="s">  APPTAINER_BINDPATH=&quot;$APPTAINER_BINDPATH$HOME&quot;</span>
+<span class="s">  command container machine run -n &quot;$APPTAINER_MACHINE&quot; -e &quot;APPTAINER_BINDPATH=$APPTAINER_BINDPATH&quot; -- apptainer &quot;$@&quot;</span>
+<span class="s">}</span>
+
+<span class="s">singularity() {</span>
+<span class="s">  apptainer &quot;$@&quot;</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p>Add this line to the bottom of your <code class="docutils literal notranslate"><span class="pre">~/.zshrc</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[ -f ~/.apptainer-machine.zsh ] &amp;&amp; . ~/.apptainer-machine.zsh&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
+</pre></div>
+</div>
+<p>Then reload your shell with <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">~/.zshrc</span></code>.</p>
+<p>SIF files contain a <code class="docutils literal notranslate"><span class="pre">#!/usr/bin/env</span> <span class="pre">run-singularity</span></code> shebang. To make
+<code class="docutils literal notranslate"><span class="pre">./app.sif</span></code> executable directly, create a shim that routes it through the
+container machine:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.local/bin
+
+cat<span class="w"> </span>&gt;<span class="w"> </span>~/.local/bin/run-singularity<span class="w"> </span><span class="s">&lt;&lt; &#39;SHIM&#39;</span>
+<span class="s">#!/bin/sh</span>
+<span class="s">. ~/.apptainer-machine.zsh</span>
+<span class="s">apptainer run &quot;$@&quot;</span>
+<span class="s">SHIM</span>
+chmod<span class="w"> </span>+x<span class="w"> </span>~/.local/bin/run-singularity
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">~/.local/bin</span></code> isn’t already in your <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, add it in <code class="docutils literal notranslate"><span class="pre">~/.zshrc</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>With that in place, these work from anywhere under your home directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://rockylinux/rockylinux:9
+<span class="gp">$ </span>./rockylinux_9.sif<span class="w"> </span>cat<span class="w"> </span>/etc/rocky-release
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting">
+<h5>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h5>
+<p><strong>DNS resolution fails during build or inside containers.</strong> If containers
+can’t resolve hostnames (for example <code class="docutils literal notranslate"><span class="pre">Could</span> <span class="pre">not</span> <span class="pre">resolve</span> <span class="pre">host:</span>
+<span class="pre">mirrors.rockylinux.org</span></code>), something other than the macOS <code class="docutils literal notranslate"><span class="pre">mDNSResponder</span></code> is
+likely bound to port 53. Common culprits are dnsmasq, dnscrypt-proxy, Mullvad
+VPN, or other VPN software. This is a <a class="reference external" href="https://github.com/apple/container/issues/283">known issue</a> with Apple’s container tool.
+Check what is on port 53:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>lsof<span class="w"> </span>-i<span class="w"> </span>:53
+</pre></div>
+</div>
+<p>If you see anything other than <code class="docutils literal notranslate"><span class="pre">mDNSResponder</span></code>, stop or uninstall the
+conflicting service and reboot. A reboot is required because <code class="docutils literal notranslate"><span class="pre">mDNSResponder</span></code>
+won’t reclaim port 53 until the system reinitializes (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">killall</span> <span class="pre">-HUP</span>
+<span class="pre">mDNSResponder</span></code> alone is not sufficient). After rebooting, run <code class="docutils literal notranslate"><span class="pre">container</span>
+<span class="pre">system</span> <span class="pre">start</span></code> again.</p>
+<p><strong>First container machine run fails with “Operation not supported by
+device”.</strong> This is normal on the very first boot after <code class="docutils literal notranslate"><span class="pre">container</span> <span class="pre">machine</span>
+<span class="pre">create</span></code>. The machine needs a moment to provision your user account. Wait a
+few seconds and try again.</p>
+<p><strong>“Could not remove bundle: errSymlink is not user-visible” after apptainer
+pull.</strong> This is cosmetic and safe to ignore. The SIF file is already built
+successfully. The error happens during temp directory cleanup when Apptainer
+encounters symlinks on the virtiofs mount.</p>
+</section>
 </section>
 </section>
 </section>
