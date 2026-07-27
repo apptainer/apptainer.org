@@ -733,20 +733,19 @@ and the <a class="reference external" href="https://github.com/lima-vm/lima/blob
 for more details.</p>
 <p>By default, the host home directory is mounted as read-only in the guest,
 so you need to add a shared writable directory mount if you want output
-that can be accessed both from the host and in the guest.</p>
-<p>Previously there was a mount in <cite>/tmp/lima</cite>, it was removed in Lima 2.0.</p>
+that can be accessed both from the host and in the guest (see <code class="docutils literal notranslate"><span class="pre">--mount</span></code>).
+If you want to mount it as read-write, use the flag: <code class="docutils literal notranslate"><span class="pre">--mount-writable</span></code>.</p>
+<p>To run Apptainer from the host, you can use the <code class="docutils literal notranslate"><span class="pre">apptainer.lima</span></code> wrapper.
+For easier access, you can alias or symlink it to the <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> command.</p>
+<p>See the <a class="reference external" href="https://github.com/apptainer/apptainer/blob/main/scripts/run-singularity">“run-singularity” script</a>
+for running SIF files.</p>
 <section id="id3">
 <h5>GPU Support<a class="headerlink" href="#id3" title="Link to this heading"></a></h5>
 <p>Lima supports using an Apple GPU from the Linux environment, with <a class="reference external" href="https://github.com/containers/krunkit">krunkit</a>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>tap<span class="w"> </span>slp/krunkit
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>tap<span class="w"> </span>libkrun/krun
+<span class="gp">$ </span>brew<span class="w"> </span>trust<span class="w"> </span>libkrun/krun
 <span class="gp">$ </span>brew<span class="w"> </span>install<span class="w"> </span>krunkit
 <span class="gp">$ </span>limactl<span class="w"> </span>start<span class="w"> </span>--vm-type<span class="o">=</span>krunkit<span class="w"> </span>template:apptainer
-</pre></div>
-</div>
-<p>For now you need to install <cite>mesa-vulkan-drivers</cite> from the <a class="reference external" href="https://launchpad.net/~step22/+archive/ubuntu/mesa-krunkit">mesa-krunkit</a> PPA:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span>ppa:step22/mesa-krunkit
-sudo<span class="w"> </span>apt<span class="w"> </span>update
-sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>vulkan-tools<span class="w"> </span>mesa-vulkan-drivers<span class="o">=</span><span class="m">24</span>*
 </pre></div>
 </div>
 <p>After that, you should have full access to <code class="docutils literal notranslate"><span class="pre">/dev/dri</span></code> also from the containers:</p>
