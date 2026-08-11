@@ -55,6 +55,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Build a container</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#downloading-an-existing-container-from-docker-hub">Downloading an existing container from Docker Hub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reusing-existing-containers-from-docker-or-podman">Reusing existing containers from Docker or Podman</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#specifying-an-architecture">Specifying an architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#downloading-an-existing-container-from-a-library-api-registry">Downloading an existing container from a Library API Registry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-writable-sandbox-directories">Creating writable <code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> directories</a></li>
@@ -177,7 +178,10 @@ as output.</p>
 <p>The type of target given determines the method that <code class="docutils literal notranslate"><span class="pre">build</span></code> will use
 to create the container. It can be one of the following:</p>
 <ul class="simple">
-<li><p>URI beginning with <strong>docker://</strong> to build from Docker Hub</p></li>
+<li><p>URI beginning with <strong>docker://</strong> to build from Docker Hub and other OCI Image registries</p></li>
+<li><p>URI beginning with <strong>docker-daemon:</strong> to build from a running Docker daemon</p></li>
+<li><p>URI beginning with <strong>docker-archive:</strong> to build from a saved Docker image</p></li>
+<li><p>URI beginning with <strong>dockerfile:</strong> to build from a Dockerfile directory</p></li>
 <li><p>URI beginning with <strong>oras://</strong> to build from an OCI registry that supports OCI Artifacts</p></li>
 <li><p>URI beginning with <strong>ipfs://</strong> to build from an IPFS cluster that supports CID images</p></li>
 <li><p>URI beginning with <strong>library://</strong> to build from the Container Library</p></li>
@@ -215,6 +219,26 @@ them into Apptainer containers.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>alpine.sif<span class="w"> </span>docker://alpine
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use other registries, not only Docker Hub (also known as <code class="docutils literal notranslate"><span class="pre">docker.io</span></code>)</p>
+<p>See the <a class="reference internal" href="registry.html#registry"><span class="std std-ref">OCI Image Registries</span></a> section in this guide, e.g.
+<code class="docutils literal notranslate"><span class="pre">quay.io</span></code> or <code class="docutils literal notranslate"><span class="pre">ghcr.io</span></code>.</p>
+</div>
+</section>
+<section id="reusing-existing-containers-from-docker-or-podman">
+<h2>Reusing existing containers from Docker or Podman<a class="headerlink" href="#reusing-existing-containers-from-docker-or-podman" title="Link to this heading"></a></h2>
+<p>You can use containers that already exist in a local daemon or in a
+local file.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>alpine.sif<span class="w"> </span>docker-daemon:alpine:latest
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="docker_and_oci.html#containers-cached-by-the-docker-daemon"><span class="std std-ref">Containers Cached by the Docker Daemon</span></a> for more details.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>image<span class="w"> </span>save<span class="w"> </span>alpine<span class="w"> </span>--output<span class="w"> </span>alpine.tar
+<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>alpine.sif<span class="w"> </span>docker-archive:alpine.tar
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="docker_and_oci.html#containers-in-docker-archive-files"><span class="std std-ref">Containers in Docker Archive Files</span></a> for more details.</p>
 </section>
 <section id="specifying-an-architecture">
 <h2>Specifying an architecture<a class="headerlink" href="#specifying-an-architecture" title="Link to this heading"></a></h2>
