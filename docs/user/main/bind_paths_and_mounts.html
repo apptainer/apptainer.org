@@ -235,8 +235,8 @@ you will be able to request your own bind paths within your container.</p>
 <p>The Apptainer action commands (<code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">exec</span></code>, <code class="docutils literal notranslate"><span class="pre">shell</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">start</span></code>) will accept the <code class="docutils literal notranslate"><span class="pre">--bind/-B</span></code> command-line option to
 specify bind paths, and will also honor the <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BIND</span></code> and
-<code class="docutils literal notranslate"><span class="pre">$APPTAINER_BINDPATH</span></code> environment variables (in that order).
-The argument for this
+<code class="docutils literal notranslate"><span class="pre">$APPTAINER_BINDPATH</span></code> environment variables (in that order).</p>
+<p>The argument for this
 option is a comma-delimited string of bind path specifications in the
 format <code class="docutils literal notranslate"><span class="pre">src[:dest[:opts]]</span></code>, where <code class="docutils literal notranslate"><span class="pre">src</span></code> and <code class="docutils literal notranslate"><span class="pre">dest</span></code> are paths
 outside and inside of the container respectively. If <code class="docutils literal notranslate"><span class="pre">dest</span></code> is not
@@ -274,23 +274,31 @@ this would be:</p>
 <span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>my_container.sif
 </pre></div>
 </div>
-<p>Using the environment variable <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BINDPATH</span></code>, you can bind paths
-even when you are running your container as an executable file with a
-runscript. If you bind many directories into your Apptainer
-containers and they don’t change, you could even benefit by setting this
-variable in your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file.</p>
+<p>Using the environment variables, you can bind paths even when you are
+running your container as an executable file with a runscript. If you
+bind many directories into your Apptainer containers and they don’t
+change, you could even benefit by setting one of these variables in your
+<code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Inside an Apptainer container all the paths that were bound in are set
 in the <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BIND</span></code> variable.  That means they will be
 automatically bound in again by default if another apptainer command is
-run nested inside the first container.  You can change that variable
-if you choose before that point, but if you want to avoid interfering
-with nested containers it’s better to use <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BINDPATH</span></code>.</p>
+run nested inside the first container.</p>
+<p>Only <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BIND</span></code> is set inside the container, so
+<code class="docutils literal notranslate"><span class="pre">$APPTAINER_BINDPATH</span></code> is the easier of the two to use there.  Both
+variables are read and the paths from them are combined, so adding to
+<code class="docutils literal notranslate"><span class="pre">$APPTAINER_BINDPATH</span></code> leaves the inherited list alone.  Edit
+<code class="docutils literal notranslate"><span class="pre">$APPTAINER_BIND</span></code> when you want to change what a nested apptainer
+command inherits.  Outside of a container the two are interchangeable.</p>
+<p>Paths bound in through either variable are still passed on to nested
+containers.  To bind a path without passing it on, use <code class="docutils literal notranslate"><span class="pre">--mount</span></code>
+with the <code class="docutils literal notranslate"><span class="pre">nonested</span></code> option (see
+<a class="reference internal" href="#sec-mount-examples"><span class="std std-ref">–mount Examples</span></a> below).</p>
 </div>
 </section>
 <section id="mount-examples">
-<h3><code class="docutils literal notranslate"><span class="pre">--mount</span></code> Examples<a class="headerlink" href="#mount-examples" title="Link to this heading"></a></h3>
+<span id="sec-mount-examples"></span><h3><code class="docutils literal notranslate"><span class="pre">--mount</span></code> Examples<a class="headerlink" href="#mount-examples" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">--mount</span></code> flag takes a mount specification in the format
 <code class="docutils literal notranslate"><span class="pre">type=bind,src=&lt;source&gt;,dst=&lt;dest&gt;</span></code>. Additional options can be
 specified, comma delimited.</p>
@@ -340,6 +348,16 @@ wrapping each field in double quotes if necessary characters.
 <p>Mount specifications are also read from then environment variable
 <code class="docutils literal notranslate"><span class="pre">$APPTAINER_MOUNT</span></code>. Multiple bind mounts set via this environment
 variable should be separated by newlines (<code class="docutils literal notranslate"><span class="pre">\n</span></code>).</p>
+<p>To prevent a <code class="docutils literal notranslate"><span class="pre">--mount</span></code> bind from being propagated to nested containers
+via <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BIND</span></code>, add the <code class="docutils literal notranslate"><span class="pre">nonested</span></code> flag:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>/data,dst<span class="o">=</span>/mnt,nonested<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>my_container.sif<span class="w"> </span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>APPTAINER_BIND
+</pre></div>
+</div>
+<p>The mount will still be applied inside the container, but its
+destination will not appear in the <code class="docutils literal notranslate"><span class="pre">$APPTAINER_BIND</span></code> variable,
+so nested apptainer commands will not inherit it.</p>
 </section>
 <section id="using-bind-or-mount-with-the-writable-flag">
 <h3>Using <code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> with the <code class="docutils literal notranslate"><span class="pre">--writable</span></code> flag<a class="headerlink" href="#using-bind-or-mount-with-the-writable-flag" title="Link to this heading"></a></h3>
