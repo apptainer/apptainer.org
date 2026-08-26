@@ -135,7 +135,13 @@ confirm the steps necessary to ‘enable unprivileged user namespace
 creation’.
 In general, the parameter <code class="docutils literal notranslate"><span class="pre">user.max_usernamespaces</span></code> has to be non-zero,
 and additionally on Debian the parameter <code class="docutils literal notranslate"><span class="pre">kernel.unprivileged_userns_clone</span></code>
-needs to be non-zero.</p>
+needs to be non-zero.
+Ubuntu 24.04 and later disables user namespaces with apparmor by
+default, enabling it only with packages that are installed as root and
+set up with an apparmor configuration file.
+To allow unprivileged installations of Apptainer there that needs to be
+disabled for the whole system by setting
+<code class="docutils literal notranslate"><span class="pre">kernel.apparmor_restrict_unprivileged_userns</span></code> to zero.</p>
 </section>
 <section id="disabling-network-namespaces">
 <h2>Disabling network namespaces<a class="headerlink" href="#disabling-network-namespaces" title="Link to this heading"></a></h2>
@@ -148,7 +154,7 @@ when possible in order to substantially reduce the risk profile
 and need for urgent updates when vulnerabilities are announced.</p>
 <p>Network namespaces can be disabled on most Linux-based systems
 like this:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;user.max_net_namespaces = 0&quot;</span><span class="w"> </span><span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"user.max_net_namespaces = 0"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>&gt;/etc/sysctl.d/90-max_net_namespaces.conf
 sysctl<span class="w"> </span>-p<span class="w"> </span>/etc/sysctl.d/90-max_net_namespaces.conf
 </pre></div>
@@ -173,7 +179,7 @@ This can be turned off for each service through a
 <code class="docutils literal notranslate"><span class="pre">systemd-hostnamed</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/systemd/system
 mkdir<span class="w"> </span>-p<span class="w"> </span>systemd-hostnamed.service.d
-<span class="o">(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[Service]&quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PrivateNetwork=no&quot;</span><span class="o">)</span><span class="w"> </span><span class="se">\</span>
+<span class="o">(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"[Service]"</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"PrivateNetwork=no"</span><span class="o">)</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>&gt;systemd-hostnamed.service.d/no-private-network.conf
 </pre></div>
 </div>

@@ -45,6 +45,12 @@ creation'.
 In general, the parameter ``user.max_usernamespaces`` has to be non-zero,
 and additionally on Debian the parameter ``kernel.unprivileged_userns_clone``
 needs to be non-zero.
+Ubuntu 24.04 and later disables user namespaces with apparmor by
+default, enabling it only with packages that are installed as root and
+set up with an apparmor configuration file.
+To allow unprivileged installations of {Project} there that needs to be
+disabled for the whole system by setting
+``kernel.apparmor_restrict_unprivileged_userns`` to zero.
 
 ******************************
  Disabling network namespaces

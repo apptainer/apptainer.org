@@ -553,26 +553,26 @@ only be modified by an administrator.</p>
 <p>In this example we will changing the <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">path</span></code> option described
 above. First we can see the current list of bind paths set within our
 system configuration:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">&quot;bind path&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">"bind path"</span>
 <span class="go">/etc/localtime,/etc/hosts</span>
 </pre></div>
 </div>
 <p>Now we can add a new path and verify it was successfully added:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--set<span class="w"> </span><span class="s2">&quot;bind path&quot;</span><span class="w"> </span>/etc/resolv.conf
-<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">&quot;bind path&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--set<span class="w"> </span><span class="s2">"bind path"</span><span class="w"> </span>/etc/resolv.conf
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">"bind path"</span>
 <span class="go">/etc/resolv.conf,/etc/localtime,/etc/hosts</span>
 </pre></div>
 </div>
 <p>From here we can remove a path with:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--unset<span class="w"> </span><span class="s2">&quot;bind path&quot;</span><span class="w"> </span>/etc/localtime
-<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">&quot;bind path&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--unset<span class="w"> </span><span class="s2">"bind path"</span><span class="w"> </span>/etc/localtime
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">"bind path"</span>
 <span class="go">/etc/resolv.conf,/etc/hosts</span>
 </pre></div>
 </div>
 <p>If we want to reset the option to the default at installation, then we
 can reset it with:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--reset<span class="w"> </span><span class="s2">&quot;bind path&quot;</span>
-<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">&quot;bind path&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--reset<span class="w"> </span><span class="s2">"bind path"</span>
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">"bind path"</span>
 <span class="go">/etc/localtime,/etc/hosts</span>
 </pre></div>
 </div>
@@ -582,7 +582,7 @@ conjunction with the above commands. Instead of writing to the
 configuration file, it will output what would have been written to the
 configuration file if the command had been run without the <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code>
 option:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--dry-run<span class="w"> </span>--set<span class="w"> </span><span class="s2">&quot;bind path&quot;</span><span class="w"> </span>/etc/resolv.conf
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--dry-run<span class="w"> </span>--set<span class="w"> </span><span class="s2">"bind path"</span><span class="w"> </span>/etc/resolv.conf
 <span class="gp"># </span>APPTAINER.CONF
 <span class="gp"># </span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>global<span class="w"> </span>configuration<span class="w"> </span>file<span class="w"> </span><span class="k">for</span><span class="w"> </span>Apptainer.<span class="w"> </span>This<span class="w"> </span>file<span class="w"> </span>controls
 <span class="go">[...]</span>
@@ -597,7 +597,7 @@ option:</p>
 <span class="go">bind path = /etc/localtime</span>
 <span class="go">bind path = /etc/hosts</span>
 <span class="go">[...]</span>
-<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">&quot;bind path&quot;</span>
+<span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>config<span class="w"> </span>global<span class="w"> </span>--get<span class="w"> </span><span class="s2">"bind path"</span>
 <span class="go">/etc/localtime,/etc/hosts</span>
 </pre></div>
 </div>
@@ -695,8 +695,8 @@ you want to limit amount of CPU time to 20ms during period of 100ms:</p>
 <p>You can also restrict access to specific CPUs (cores) and associated
 memory nodes by using <code class="docutils literal notranslate"><span class="pre">cpus/mems</span></code> fields:</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[cpu]</span>
-<span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0-1&quot;</span>
-<span class="w">    </span><span class="n">mems</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0-1&quot;</span>
+<span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0-1"</span>
+<span class="w">    </span><span class="n">mems</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0-1"</span>
 </pre></div>
 </div>
 <p>Where container has limited access to CPU 0 and CPU 1.</p>
@@ -790,10 +790,10 @@ types (squashfs/extfs/dir) via the <code class="docutils literal notranslate"><s
 <span class="pre">container</span></code> settings.</p>
 </div>
 <div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span><span class="s">[[execgroup]]</span>
-  tagname <span class="s">= &quot;group2&quot;</span>
-  mode <span class="s">= &quot;whitelist&quot;</span>
-  dirpath <span class="s">= &quot;/tmp/containers&quot;</span>
-  keyfp <span class="s">= [&quot;7064B1D6EFF01B1262FED3F03581D99FE87EAFD1&quot;]</span>
+  tagname <span class="s">= "group2"</span>
+  mode <span class="s">= "whitelist"</span>
+  dirpath <span class="s">= "/tmp/containers"</span>
+  keyfp <span class="s">= ["7064B1D6EFF01B1262FED3F03581D99FE87EAFD1"]</span>
 </pre></div>
 </div>
 <p>Only the containers running from and signed with above-mentioned path
@@ -1032,13 +1032,13 @@ like to use a Library API registry.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">remote</span></code> command group with the <code class="docutils literal notranslate"><span class="pre">--global</span></code> flag to create a
 system-wide remote endpoint:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--global<span class="w"> </span>company-remote<span class="w"> </span>https://enterprise.example.com
-<span class="go">INFO:    Remote &quot;company-remote&quot; added.</span>
+<span class="go">INFO:    Remote "company-remote" added.</span>
 <span class="go">INFO:    Global option detected. Will not automatically log into remote.</span>
 </pre></div>
 </div>
 <p>Conversely, to remove a system-wide endpoint:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>remove<span class="w"> </span>--global<span class="w"> </span>company-remote
-<span class="go">INFO:    Remote &quot;company-remote&quot; removed.</span>
+<span class="go">INFO:    Remote "company-remote" removed.</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1055,7 +1055,7 @@ endpoint themselves.</p>
 remote the only usable remote for the system by using the
 <code class="docutils literal notranslate"><span class="pre">--exclusive</span></code> flag:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>use<span class="w"> </span>--exclusive<span class="w"> </span>company-remote
-<span class="go">INFO:    Remote &quot;company-remote&quot; now in use.</span>
+<span class="go">INFO:    Remote "company-remote" now in use.</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>list
 <span class="go">Cloud Services Endpoints</span>
 <span class="go">========================</span>
@@ -1081,7 +1081,7 @@ remote the only usable remote for the system by using the
 service discovery file over an insecure HTTP connection only, it can be
 added by specifying the <code class="docutils literal notranslate"><span class="pre">--insecure</span></code> flag:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--global<span class="w"> </span>--insecure<span class="w"> </span><span class="nb">test</span><span class="w"> </span>http://test.example.com
-<span class="go">INFO:    Remote &quot;test&quot; added.</span>
+<span class="go">INFO:    Remote "test" added.</span>
 <span class="go">INFO:    Global option detected. Will not automatically log into remote.</span>
 </pre></div>
 </div>
@@ -1106,10 +1106,10 @@ these are the commands to restore the library behavior from before
 Apptainer, where using the <code class="docutils literal notranslate"><span class="pre">library://</span></code> URI would download from the
 Sylabs Cloud anonymously:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--global<span class="w"> </span>SylabsCloud<span class="w"> </span>cloud.sycloud.io
-<span class="go">INFO:    Remote &quot;SylabsCloud&quot; added.</span>
+<span class="go">INFO:    Remote "SylabsCloud" added.</span>
 <span class="go">INFO:    Global option detected. Will not automatically log into remote.</span>
 <span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>use<span class="w"> </span>--global<span class="w"> </span>SylabsCloud
-<span class="go">INFO:    Remote &quot;SylabsCloud&quot; now in use.</span>
+<span class="go">INFO:    Remote "SylabsCloud" now in use.</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>list
 <span class="go">Cloud Services Endpoints</span>
 <span class="go">========================</span>
@@ -1163,20 +1163,20 @@ searching <code class="docutils literal notranslate"><span class="pre">$PATH</sp
 <span class="c1"># In shared environments you should ensure that permissions on these files</span>
 <span class="c1"># exclude writing by non-privileged users.</span>
 <span class="nt">bins</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;dmtcp_command&quot;</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;dmtcp_discover_rm&quot;</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;dmtcp_launch&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"dmtcp_command"</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"dmtcp_discover_rm"</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"dmtcp_launch"</span>
 <span class="nn">...</span>
 </pre></div>
 </div>
 <p>Libraries are specified as an array under the <code class="docutils literal notranslate"><span class="pre">libs</span></code> key and should be
 specified without version information, i.e.
 <code class="docutils literal notranslate"><span class="pre">libname.so</span></code>, and are resolved using <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># List libraries to bind into the container here. Library names must end in &quot;.so&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># List libraries to bind into the container here. Library names must end in ".so"</span>
 <span class="nt">libs</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;libdmtcp_alloc.so&quot;</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;libdmtcp_dl.so&quot;</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;libdmtcp_modify-env.so&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"libdmtcp_alloc.so"</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"libdmtcp_dl.so"</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"libdmtcp_modify-env.so"</span>
 <span class="nn">...</span>
 </pre></div>
 </div>
@@ -1197,9 +1197,9 @@ one of those files will cause Apptainer to read from
 <code class="docutils literal notranslate"><span class="pre">docker-registry.example.edu</span></code> whenever it would otherwise read
 from <code class="docutils literal notranslate"><span class="pre">docker.io</span></code>:</p>
 <div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span><span class="s">[[registry]]</span>
-location<span class="s">=&quot;docker.io&quot;</span>
+location<span class="s">="docker.io"</span>
 <span class="s">[[registry.mirror]]</span>
-location<span class="s">=&quot;docker-registry.example.edu&quot;</span>
+location<span class="s">="docker-registry.example.edu"</span>
 </pre></div>
 </div>
 <p>Users may also put the configuration in their own
