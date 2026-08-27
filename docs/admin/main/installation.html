@@ -92,8 +92,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Lima</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#id3">GPU Support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Lima</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#id4">GPU Support</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#apple-container">Apple container</a><ul>
@@ -159,7 +159,7 @@ bare-metal or inside a Virtual Machine.
 It can even often be run nested inside another Apptainer container
 or inside some other container system.</p>
 <section id="system-requirements">
-<h3>System Requirements<a class="headerlink" href="#system-requirements" title="Link to this heading"></a></h3>
+<span id="id1"></span><h3>System Requirements<a class="headerlink" href="#system-requirements" title="Link to this heading"></a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This is a long section; navigation of this page is done most
@@ -401,7 +401,8 @@ image.</p>
 <p>A script is available to make a relocatable unprivileged binary installation
 of Apptainer, including all dependencies that are not normally installed
 on Linux systems.  The script works on current Red Hat Enterprise Linux-derived
-systems, Fedora, SUSE/OpenSUSE, Debian, and Ubuntu.</p>
+systems, Fedora, SUSE/OpenSUSE, Debian, and Ubuntu, assuming the
+<a class="reference internal" href="#system-requirements"><span class="std std-ref">System Requirements</span></a> described above are met.</p>
 <p>This is the easiest way to use it:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>curl<span class="w"> </span>-s<span class="w"> </span>https://raw.githubusercontent.com/apptainer/apptainer/main/tools/install-unprivileged.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>bash<span class="w"> </span>-s<span class="w"> </span>-<span class="w"> </span>install-dir
@@ -712,8 +713,8 @@ native virtualization on Apple Silicon and falling back to QEMU on Intel
 hardware. Apple’s <code class="docutils literal notranslate"><span class="pre">container</span></code> tool is a newer, Apple Silicon only alternative
 that provides the same kind of always-on Linux environment. Both approaches are
 described below.</p>
-<section id="id1">
-<h4>Lima<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<section id="id2">
+<h4>Lima<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
 <p>Apptainer is available via <a class="reference external" href="https://lima-vm.io">Lima</a> (installable with <a class="reference external" href="https://brew.sh">Homebrew</a> or manually)</p>
 <p>Lima launches Linux machines with automatic file sharing and port forwarding.
 It uses native virtualization support provided by macOS Virtualization.Framework,
@@ -737,8 +738,8 @@ If you want to mount it as read-write, use the flag: <code class="docutils liter
 For easier access, you can alias or symlink it to the <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> command.</p>
 <p>See the <a class="reference external" href="https://github.com/apptainer/apptainer/blob/main/scripts/run-singularity">“run-singularity” script</a>
 for running SIF files.</p>
-<section id="id3">
-<h5>GPU Support<a class="headerlink" href="#id3" title="Link to this heading"></a></h5>
+<section id="id4">
+<h5>GPU Support<a class="headerlink" href="#id4" title="Link to this heading"></a></h5>
 <p>Lima supports using an Apple GPU from the Linux environment, with <a class="reference external" href="https://github.com/containers/krunkit">krunkit</a>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>tap<span class="w"> </span>libkrun/krun
 <span class="gp">$ </span>brew<span class="w"> </span>trust<span class="w"> </span>libkrun/krun
@@ -919,7 +920,8 @@ some non-default options.</p>
 That enables apptainer to run in both unprivileged mode and in suid
 mode.</p>
 <p>Apptainer unprivileged mode can also be used inside docker without
-enabling docker privileged mode, using these additional docker options:</p>
+enabling docker privileged mode, using these additional docker options
+at least on RHEL-based hosts:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>--security-opt<span class="w"> </span><span class="nv">seccomp</span><span class="o">=</span>unconfined<span class="w"> </span>--security-opt<span class="w"> </span><span class="nv">systempaths</span><span class="o">=</span>unconfined<span class="w"> </span>--device<span class="w"> </span>/dev/fuse
 </pre></div>
 </div>
@@ -928,6 +930,11 @@ apptainer always needs.
 The second options enables the apptainer <code class="docutils literal notranslate"><span class="pre">-p/--pid</span></code> option (which is
 implied by <code class="docutils literal notranslate"><span class="pre">-C/--containall</span></code>).
 The third option is needed for unprivileged FUSE mounts.</p>
+<p>On Debian-based hosts, replace <code class="docutils literal notranslate"><span class="pre">seccomp=unconfined</span></code> with
+<code class="docutils literal notranslate"><span class="pre">apparmor=unconfined</span></code>.  For Ubuntu 24.04 and later the apparmor
+restriction on unprivileged user namespaces also needs to be disabled on
+the host as described in
+<a class="reference internal" href="user_namespace.html#userns-requirements"><span class="std std-ref">User Namespace Requirements</span></a>.</p>
 </section>
 <section id="optional-requirements">
 <h2>Optional Requirements<a class="headerlink" href="#optional-requirements" title="Link to this heading"></a></h2>
