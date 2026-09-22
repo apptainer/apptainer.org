@@ -327,7 +327,7 @@ Install from pre-built packages
 ===============================
 
 Prebuilt packages are available for released versions of {Project} on
-a variety of host operating systems.
+a variety of host operating systems and architectures.
 
 Install RPM from EPEL or Fedora
 -------------------------------
