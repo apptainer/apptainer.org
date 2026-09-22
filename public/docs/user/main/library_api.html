@@ -179,7 +179,7 @@ a version tag to that container, like so:</p>
 <p>To set a description against the container image as you push it, use the
 <cite>-D</cite> flag introduced in Apptainer 3.7. This provides an alternative
 to setting the description via the web interface:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>push<span class="w"> </span>-D<span class="w"> </span><span class="s2">&quot;My alpine 3.11 container&quot;</span><span class="w"> </span>alpine_3.11.sif<span class="w"> </span>library://myuser/examples/alpine:3.11
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>push<span class="w"> </span>-D<span class="w"> </span><span class="s2">"My alpine 3.11 container"</span><span class="w"> </span>alpine_3.11.sif<span class="w"> </span>library://myuser/examples/alpine:3.11
 <span class="go">2.7MiB / 2.7MiB [=========================================================================] 100 % 1.1 MiB/s 0s</span>
 
 <span class="go">Library storage: using 13.24 MiB out of 11.00 GiB quota (0.1% used)</span>
@@ -257,7 +257,7 @@ This will search a library for container images matching <code class="docutils l
 <h3>Using the CLI Search<a class="headerlink" href="#using-the-cli-search" title="Link to this heading"></a></h3>
 <p>Here is an example of searching a library for <code class="docutils literal notranslate"><span class="pre">centos</span></code>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apptainer search centos</span>
-<span class="go">Found 72 container images for amd64 matching &quot;centos&quot;:</span>
+<span class="go">Found 72 container images for amd64 matching "centos":</span>
 
 <span class="go">    library://dcsouthwick/iotools/centos7:latest</span>
 
@@ -289,7 +289,7 @@ image with 3 tags, <code class="docutils literal notranslate"><span class="pre">
 current system. To e.g. search for <code class="docutils literal notranslate"><span class="pre">arm64</span></code> containers from an
 <code class="docutils literal notranslate"><span class="pre">amd64</span></code> machine you can use the <code class="docutils literal notranslate"><span class="pre">--arch</span></code> flag:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apptainer search --arch arm64 alpine</span>
-<span class="go">Found 5 container images for arm64 matching &quot;alpine&quot;:</span>
+<span class="go">Found 5 container images for arm64 matching "alpine":</span>
 
 <span class="go">    library://dtrudg-sylabs-2/multiarch/alpine:latest</span>
 
@@ -306,7 +306,7 @@ current system. To e.g. search for <code class="docutils literal notranslate"><s
 <p>You can also limit results to only signed containers with the
 <code class="docutils literal notranslate"><span class="pre">--signed</span></code> flag:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apptainer search --signed alpine</span>
-<span class="go">Found 45 container images for amd64 matching &quot;alpine&quot;:</span>
+<span class="go">Found 45 container images for amd64 matching "alpine":</span>
 
 <span class="go">    library://deep/default/alpine:latest,1.0.1</span>
 <span class="go">            Signed by: 8883491F4268F173C6E5DC49EDECE4F3F38D871E</span>
@@ -337,7 +337,7 @@ current system. To e.g. search for <code class="docutils literal notranslate"><s
 <span class="k">from</span>: ubuntu:<span class="m">22.04</span>
 
 <span class="gh">%runscript</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello world from ubuntu container!&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"hello world from ubuntu container!"</span>
 </pre></div>
 </div>
 <p>Now, to build the container, use the <code class="docutils literal notranslate"><span class="pre">--remote</span></code> flag, and without

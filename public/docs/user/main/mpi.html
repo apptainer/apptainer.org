@@ -223,23 +223,23 @@ simple Hello World:</p>
 
 <span class="w">        </span><span class="n">rc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI_Init</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rc</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">MPI_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">fprintf</span><span class="w"> </span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MPI_Init() failed&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="n">fprintf</span><span class="w"> </span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">"MPI_Init() failed"</span><span class="p">);</span>
 <span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_FAILURE</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="n">rc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI_Comm_size</span><span class="w"> </span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rc</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">MPI_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">fprintf</span><span class="w"> </span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MPI_Comm_size() failed&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="n">fprintf</span><span class="w"> </span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">"MPI_Comm_size() failed"</span><span class="p">);</span>
 <span class="w">                </span><span class="k">goto</span><span class="w"> </span><span class="n">exit_with_error</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="n">rc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI_Comm_rank</span><span class="w"> </span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">myrank</span><span class="p">);</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rc</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">MPI_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">fprintf</span><span class="w"> </span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MPI_Comm_rank() failed&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="n">fprintf</span><span class="w"> </span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">"MPI_Comm_rank() failed"</span><span class="p">);</span>
 <span class="w">                </span><span class="k">goto</span><span class="w"> </span><span class="n">exit_with_error</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="n">fprintf</span><span class="w"> </span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello, I am rank %d/%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">myrank</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="w"> </span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="w"> </span><span class="s">"Hello, I am rank %d/%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">myrank</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
 
 <span class="w">        </span><span class="n">MPI_Finalize</span><span class="p">();</span>
 
@@ -275,21 +275,21 @@ example can be used:</p>
 <span class="gh">%environment</span>
 <span class="w">    </span><span class="c1"># Point to MPICH binaries, libraries man pages</span>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPICH_DIR</span><span class="o">=</span>/opt/mpich
-<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MPICH_DIR</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MPICH_DIR</span><span class="s2">/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$MPICH_DIR</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$MPICH_DIR</span><span class="s2">/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">"</span>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MANPATH</span><span class="o">=</span><span class="nv">$MPICH_DIR</span>/share/man:<span class="nv">$MANPATH</span>
 
 <span class="gh">%post</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Installing required packages...&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Installing required packages..."</span>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive
 <span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wget<span class="w"> </span>git<span class="w"> </span>bash<span class="w"> </span>gcc<span class="w"> </span>gfortran<span class="w"> </span>g++<span class="w"> </span>make<span class="w"> </span>python3-dev
 
 <span class="w">    </span><span class="c1"># Information about the version of MPICH to use</span>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPICH_VERSION</span><span class="o">=</span><span class="m">4</span>.1.1
-<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPICH_URL</span><span class="o">=</span><span class="s2">&quot;http://www.mpich.org/static/downloads/</span><span class="nv">$MPICH_VERSION</span><span class="s2">/mpich-</span><span class="nv">$MPICH_VERSION</span><span class="s2">.tar.gz&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPICH_URL</span><span class="o">=</span><span class="s2">"http://www.mpich.org/static/downloads/</span><span class="nv">$MPICH_VERSION</span><span class="s2">/mpich-</span><span class="nv">$MPICH_VERSION</span><span class="s2">.tar.gz"</span>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPICH_DIR</span><span class="o">=</span>/opt/mpich
 
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Installing MPICH...&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Installing MPICH..."</span>
 <span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/tmp/mpich
 <span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt
 <span class="w">    </span><span class="c1"># Download</span>
@@ -301,7 +301,7 @@ example can be used:</p>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$MPICH_DIR</span>/bin:<span class="nv">$PATH</span>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$MPICH_DIR</span>/lib:<span class="nv">$LD_LIBRARY_PATH</span>
 
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Compiling the MPI application...&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Compiling the MPI application..."</span>
 <span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/opt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>mpicc<span class="w"> </span>-o<span class="w"> </span>mpitest<span class="w"> </span>mpitest.c
 </pre></div>
 </div>
@@ -328,18 +328,18 @@ details.</p>
 <span class="gh">%environment</span>
 <span class="w">    </span><span class="c1"># Point to OMPI binaries, libraries, man pages</span>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">OMPI_DIR</span><span class="o">=</span>/opt/ompi
-<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OMPI_DIR</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OMPI_DIR</span><span class="s2">/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MANPATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OMPI_DIR</span><span class="s2">/share/man:</span><span class="nv">$MANPATH</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OMPI_DIR</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OMPI_DIR</span><span class="s2">/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MANPATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OMPI_DIR</span><span class="s2">/share/man:</span><span class="nv">$MANPATH</span><span class="s2">"</span>
 
 <span class="gh">%post</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Installing required packages...&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Installing required packages..."</span>
 <span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wget<span class="w"> </span>git<span class="w"> </span>bash<span class="w"> </span>gcc<span class="w"> </span>gfortran<span class="w"> </span>g++<span class="w"> </span>make<span class="w"> </span>file<span class="w"> </span>bzip2
 
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Installing Open MPI&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Installing Open MPI"</span>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">OMPI_DIR</span><span class="o">=</span>/opt/ompi
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">OMPI_VERSION</span><span class="o">=</span><span class="m">4</span>.1.5
-<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">OMPI_URL</span><span class="o">=</span><span class="s2">&quot;https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-</span><span class="nv">$OMPI_VERSION</span><span class="s2">.tar.bz2&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">OMPI_URL</span><span class="o">=</span><span class="s2">"https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-</span><span class="nv">$OMPI_VERSION</span><span class="s2">.tar.bz2"</span>
 <span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/tmp/ompi
 <span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt
 <span class="w">    </span><span class="c1"># Download</span>
@@ -351,7 +351,7 @@ details.</p>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$OMPI_DIR</span>/bin:<span class="nv">$PATH</span>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$OMPI_DIR</span>/lib:<span class="nv">$LD_LIBRARY_PATH</span>
 
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Compiling the MPI application...&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Compiling the MPI application..."</span>
 <span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/opt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>mpicc<span class="w"> </span>-o<span class="w"> </span>mpitest<span class="w"> </span>mpitest.c
 </pre></div>
 </div>
@@ -484,8 +484,8 @@ program, which in this case has been compiled on the host to
 <span class="w">      </span>/tmp/mpitest<span class="w"> </span>/opt/mpitest
 
 <span class="gh">%environment</span>
-<span class="w">      </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MPI_DIR</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
-<span class="w">      </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MPI_DIR</span><span class="s2">/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$MPI_DIR</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
+<span class="w">      </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$MPI_DIR</span><span class="s2">/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">"</span>
 </pre></div>
 </div>
 <p>In this example, the application <code class="docutils literal notranslate"><span class="pre">mpitest</span></code> is copied from the host
@@ -504,15 +504,15 @@ the MPI installation is bound in.</p>
 systems that have a version-compatible MPI installation, but under
 different installation paths. You can also hard code the MPI path in the
 definition file if you wish.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPI_DIR</span><span class="o">=</span><span class="s2">&quot;&lt;PATH/TO/HOST/MPI/DIRECTORY&gt;&quot;</span>
-<span class="gp">$ </span>mpirun<span class="w"> </span>-n<span class="w"> </span>&lt;NUMBER_OF_RANKS&gt;<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--bind<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MPI_DIR</span><span class="s2">&quot;</span><span class="w"> </span>&lt;PATH/TO/MY/IMAGE&gt;<span class="w"> </span>&lt;/PATH/TO/BINARY/WITHIN/CONTAINER&gt;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPI_DIR</span><span class="o">=</span><span class="s2">"&lt;PATH/TO/HOST/MPI/DIRECTORY&gt;"</span>
+<span class="gp">$ </span>mpirun<span class="w"> </span>-n<span class="w"> </span>&lt;NUMBER_OF_RANKS&gt;<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--bind<span class="w"> </span><span class="s2">"</span><span class="nv">$MPI_DIR</span><span class="s2">"</span><span class="w"> </span>&lt;PATH/TO/MY/IMAGE&gt;<span class="w"> </span>&lt;/PATH/TO/BINARY/WITHIN/CONTAINER&gt;
 </pre></div>
 </div>
 <p>On an example system we may be using an Open MPI installation at
 <code class="docutils literal notranslate"><span class="pre">/cm/shared/apps/openmpi/gcc/64/4.0.5/</span></code>. This means that the commands
 to run the container in bind mode are:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPI_DIR</span><span class="o">=</span><span class="s2">&quot;/cm/shared/apps/openmpi/gcc/64/4.0.5&quot;</span>
-<span class="gp">$ </span>mpirun<span class="w"> </span>-n<span class="w"> </span><span class="m">8</span><span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--bind<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MPI_DIR</span><span class="s2">&quot;</span><span class="w"> </span>bind.sif<span class="w"> </span>/opt/mpitest
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">MPI_DIR</span><span class="o">=</span><span class="s2">"/cm/shared/apps/openmpi/gcc/64/4.0.5"</span>
+<span class="gp">$ </span>mpirun<span class="w"> </span>-n<span class="w"> </span><span class="m">8</span><span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--bind<span class="w"> </span><span class="s2">"</span><span class="nv">$MPI_DIR</span><span class="s2">"</span><span class="w"> </span>bind.sif<span class="w"> </span>/opt/mpitest
 <span class="go">Hello, I am rank 1/8</span>
 <span class="go">Hello, I am rank 2/8</span>
 <span class="go">Hello, I am rank 0/8</span>

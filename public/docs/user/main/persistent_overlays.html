@@ -200,7 +200,7 @@ user.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>/tmp/nginx.sif<span class="w"> </span>docker://nginx
 <span class="go">...</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>overlay<span class="w"> </span>create<span class="w"> </span>--size<span class="w"> </span><span class="m">1024</span><span class="w"> </span>--create-dir<span class="w"> </span>/var/cache/nginx<span class="w"> </span>/tmp/nginx_overlay.img
-<span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;test&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--overlay<span class="w"> </span>/tmp/nginx_overlay.img<span class="w"> </span>/tmp/nginx.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;cat &gt; /var/cache/nginx/test&quot;</span>
+<span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"test"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--overlay<span class="w"> </span>/tmp/nginx_overlay.img<span class="w"> </span>/tmp/nginx.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">"cat &gt; /var/cache/nginx/test"</span>
 </pre></div>
 </div>
 <section id="sparse-overlay-images">
@@ -306,7 +306,7 @@ were using a writable container.</p>
 changes will be gone.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>ubuntu.sif
 <span class="go">Apptainer&gt; ls /data</span>
-<span class="go">ls: cannot access &#39;data&#39;: No such file or directory</span>
+<span class="go">ls: cannot access 'data': No such file or directory</span>
 <span class="go">Apptainer&gt; which vim</span>
 </pre></div>
 </div>
@@ -322,7 +322,7 @@ and no longer needs to use <code class="docutils literal notranslate"><span clas
 <span class="go">Apptainer&gt; which vim</span>
 <span class="go">/usr/bin/vim</span>
 <span class="go">Apptainer&gt; touch /usr/bin/myfile</span>
-<span class="go">touch: cannot touch &#39;/usr/bin/more&#39;: Read-only file system</span>
+<span class="go">touch: cannot touch '/usr/bin/more': Read-only file system</span>
 </pre></div>
 </div>
 </section>
@@ -349,7 +349,7 @@ user.</p>
 <p>So for example:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>/tmp/nginx.sif<span class="w"> </span>docker://nginx
 <span class="gp">$ </span>apptainer<span class="w"> </span>overlay<span class="w"> </span>create<span class="w"> </span>--size<span class="w"> </span><span class="m">1024</span><span class="w"> </span>--create-dir<span class="w"> </span>/var/cache/nginx<span class="w"> </span>/tmp/nginx.sif
-<span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;test&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>/tmp/nginx.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;cat &gt; /var/cache/nginx/test&quot;</span>
+<span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"test"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>/tmp/nginx.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">"cat &gt; /var/cache/nginx/test"</span>
 </pre></div>
 </div>
 <section id="embed-an-overlay-image-in-sif">

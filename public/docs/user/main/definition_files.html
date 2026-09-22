@@ -324,22 +324,22 @@ Stage: build
 <span class="gh">%post</span>
 <span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>netcat
 <span class="w">    </span><span class="nv">NOW</span><span class="o">=</span><span class="sb">`</span>date<span class="sb">`</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export NOW=\&quot;</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">\&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$APPTAINER_ENVIRONMENT</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"export NOW=\"</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">\""</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$APPTAINER_ENVIRONMENT</span>
 
 <span class="gh">%runscript</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Container was created </span><span class="nv">$NOW</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Arguments received: </span><span class="nv">$*</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">exec</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Container was created </span><span class="nv">$NOW</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Arguments received: </span><span class="nv">$*</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">exec</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
 
 <span class="gh">%startscript</span>
 <span class="w">    </span>nc<span class="w"> </span>-lp<span class="w"> </span><span class="nv">$LISTEN_PORT</span>
 
 <span class="gh">%test</span>
-<span class="w">    </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="nv">NAME</span><span class="o">=</span><span class="se">\&quot;</span>Ubuntu<span class="se">\&quot;</span><span class="w"> </span>/etc/os-release
+<span class="w">    </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="nv">NAME</span><span class="o">=</span><span class="se">\"</span>Ubuntu<span class="se">\"</span><span class="w"> </span>/etc/os-release
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$?</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Container base is Ubuntu as expected.&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Container base is Ubuntu as expected."</span>
 <span class="w">    </span><span class="k">else</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Container base is not Ubuntu.&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Container base is not Ubuntu."</span>
 <span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="w">    </span><span class="k">fi</span>
 
@@ -462,7 +462,7 @@ build you should use the <a class="reference internal" href="#sec-templating"><s
 <span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>netcat
 
 <span class="w">    </span><span class="nv">NOW</span><span class="o">=</span><span class="sb">`</span>date<span class="sb">`</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export NOW=\&quot;</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">\&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$APPTAINER_ENVIRONMENT</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"export NOW=\"</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">\""</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$APPTAINER_ENVIRONMENT</span>
 </pre></div>
 </div>
 <p>This <code class="docutils literal notranslate"><span class="pre">%post</span></code> scriptlet uses the Ubuntu package manager <code class="docutils literal notranslate"><span class="pre">apt</span></code> to
@@ -511,11 +511,11 @@ can also execute this scriptlet through the container itself, using the
 <code class="docutils literal notranslate"><span class="pre">test</span></code> command.</p>
 <p>Consider the <code class="docutils literal notranslate"><span class="pre">%test</span></code> section from the example definition file above:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%test</span>
-<span class="w">    </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="nv">NAME</span><span class="o">=</span><span class="se">\&quot;</span>Ubuntu<span class="se">\&quot;</span><span class="w"> </span>/etc/os-release
+<span class="w">    </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="nv">NAME</span><span class="o">=</span><span class="se">\"</span>Ubuntu<span class="se">\"</span><span class="w"> </span>/etc/os-release
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$?</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Container base is Ubuntu as expected.&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Container base is Ubuntu as expected."</span>
 <span class="w">    </span><span class="k">else</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Container base is not Ubuntu.&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Container base is not Ubuntu."</span>
 <span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="w">    </span><span class="k">fi</span>
 </pre></div>
@@ -543,7 +543,7 @@ programs you installed in the container are indeed present.</p>
 list of packages passed to <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span></code> in the <code class="docutils literal notranslate"><span class="pre">%post</span></code> section:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%post</span>
 <span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>netcat<span class="w"> </span>samtools
-<span class="w">    </span><span class="nv">NOW</span><span class="o">=</span><span class="sb">`</span>date<span class="sb">`</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export NOW=\&quot;</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">\&quot;&quot;</span><span class="w"> </span>&gt;&gt;
+<span class="w">    </span><span class="nv">NOW</span><span class="o">=</span><span class="sb">`</span>date<span class="sb">`</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"export NOW=\"</span><span class="si">${</span><span class="nv">NOW</span><span class="si">}</span><span class="s2">\""</span><span class="w"> </span>&gt;&gt;
 <span class="w">    </span><span class="nv">$APPTAINER__ENVIRONMENT</span>
 </pre></div>
 </div>
@@ -551,7 +551,7 @@ list of packages passed to <code class="docutils literal notranslate"><span clas
 might decide to test that it can be run by writing the following in the
 <code class="docutils literal notranslate"><span class="pre">%test</span></code> section:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%test</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;Looking for samtools...&#39;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">'Looking for samtools...'</span>
 <span class="w">    </span>samtools
 </pre></div>
 </div>
@@ -572,8 +572,8 @@ in this case.</p>
 we do this by running <code class="docutils literal notranslate"><span class="pre">grep</span></code> on the output and checking that the
 version number begins with “1”:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%test</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;Looking for samtools...&#39;</span>
-<span class="w">    </span><span class="o">(</span><span class="w"> </span>samtools<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">&#39;samtools 1&#39;</span><span class="w"> </span><span class="o">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;Success!&#39;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">'Looking for samtools...'</span>
+<span class="w">    </span><span class="o">(</span><span class="w"> </span>samtools<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">'samtools 1'</span><span class="w"> </span><span class="o">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">'Success!'</span>
 </pre></div>
 </div>
 <p>Because the <code class="docutils literal notranslate"><span class="pre">%test</span></code> section is a shell scriptlet, complex tests are
@@ -585,7 +585,7 @@ hashbang (<code class="docutils literal notranslate"><span class="pre">#!</span>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%test</span>
 <span class="w">   </span><span class="c1">#!/bin/zsh</span>
 
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>readlink<span class="w"> </span>/proc/<span class="nv">$$</span>/exe<span class="k">)</span><span class="s2"> is our shell&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>readlink<span class="w"> </span>/proc/<span class="nv">$$</span>/exe<span class="k">)</span><span class="s2"> is our shell"</span>
 </pre></div>
 </div>
 <p>In the <code class="docutils literal notranslate"><span class="pre">%test</span></code> section above, the <code class="docutils literal notranslate"><span class="pre">#!/bin/zsh</span></code> means that the test
@@ -627,7 +627,7 @@ expect a locale to be set.</p>
 <p>After building this container, you can use a command like the following
 one to verify that the environment variables have been set appropriately
 at runtime:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>my_container.sif<span class="w"> </span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;LISTEN_PORT|LC_ALL&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>my_container.sif<span class="w"> </span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'LISTEN_PORT|LC_ALL'</span>
 <span class="go">LISTEN_PORT=54321</span>
 <span class="go">LC_ALL=C</span>
 </pre></div>
@@ -636,7 +636,7 @@ at runtime:</p>
 but adopt the value of a host environment variable if it is set, use
 the following syntax:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%environment</span>
-<span class="w">   </span><span class="nb">export</span><span class="w"> </span><span class="nv">FOO</span><span class="o">=</span><span class="si">${</span><span class="nv">FOO</span><span class="k">:-</span><span class="s1">&#39;default&#39;</span><span class="si">}</span>
+<span class="w">   </span><span class="nb">export</span><span class="w"> </span><span class="nv">FOO</span><span class="o">=</span><span class="si">${</span><span class="nv">FOO</span><span class="k">:-</span><span class="s1">'default'</span><span class="si">}</span>
 </pre></div>
 </div>
 <p>The value of <code class="docutils literal notranslate"><span class="pre">FOO</span></code> in the container will take the value of <code class="docutils literal notranslate"><span class="pre">FOO</span></code> on
@@ -714,9 +714,9 @@ your runscript.</p>
 <p>Consider the <code class="docutils literal notranslate"><span class="pre">%runscript</span></code> section from the example definition file
 above:</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%runscript</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Container was created </span><span class="nv">$NOW</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Arguments received: </span><span class="nv">$*</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">exec</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Container was created </span><span class="nv">$NOW</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Arguments received: </span><span class="nv">$*</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">exec</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
 </pre></div>
 </div>
 <p>In this runscript, the time that the container was created is echoed via
@@ -746,7 +746,7 @@ hashbang (<code class="docutils literal notranslate"><span class="pre">#!</span>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="gh">%runscript</span>
 <span class="w">   </span><span class="c1">#!/bin/zsh</span>
 
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>readlink<span class="w"> </span>/proc/<span class="nv">$$</span>/exe<span class="k">)</span><span class="s2"> is our shell&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>readlink<span class="w"> </span>/proc/<span class="nv">$$</span>/exe<span class="k">)</span><span class="s2"> is our shell"</span>
 </pre></div>
 </div>
 <p>Just like in the <a class="reference internal" href="#def-test-section"><code class="docutils literal notranslate"><span class="pre">%test</span></code> section</a>, the <code class="docutils literal notranslate"><span class="pre">#!/bin/zsh</span></code> means that the
@@ -841,7 +841,7 @@ Stage: build
 <p>When building a container from this definition file, a concrete value for
 <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">some_text</span> <span class="pre">}}</span></code> can be passed via the <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> flag to the <code class="docutils literal notranslate"><span class="pre">build</span></code>
 command. This flag accepts a <code class="docutils literal notranslate"><span class="pre">varname=value</span></code> pair, as shown here:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">some_text</span><span class="o">=</span><span class="s2">&quot;Hello world&quot;</span><span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">some_text</span><span class="o">=</span><span class="s2">"Hello world"</span><span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
 <span class="go">INFO:    Starting build...</span>
 <span class="go">Getting image source signatures</span>
 <span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
@@ -861,7 +861,7 @@ command. This flag accepts a <code class="docutils literal notranslate"><span cl
 the path to that file specified using the <code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code> flag to the
 <code class="docutils literal notranslate"><span class="pre">build</span></code> command, as shown here:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>&lt;&lt;<span class="w"> </span>EOF<span class="w"> </span>&gt;<span class="w"> </span>./my_args_file.txt
-<span class="go">some_text=&quot;Hello again, world&quot;</span>
+<span class="go">some_text="Hello again, world"</span>
 <span class="go">EOF</span>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg-file<span class="w"> </span>./my_args_file.txt<span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
@@ -899,21 +899,21 @@ Stage: build
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">CUSTOM_VAR_TWO</span><span class="o">={{</span><span class="w"> </span>var_value2<span class="w"> </span><span class="o">}}</span>
 
 <span class="gh">%runscript</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;file contents:&quot;</span><span class="w"> </span><span class="sb">`</span>cat<span class="w"> </span>/tmp/test_file<span class="sb">`</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--&gt; this should, if I&#39;m not mistaken, equal:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>file_contents<span class="w"> </span><span class="o">}}</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;env var: </span><span class="si">${</span><span class="nv">CUSTOM_VAR_ONE</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--&gt; this should, if I&#39;m not mistaken, equal:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>var_value1<span class="w"> </span><span class="o">}}</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;env var: </span><span class="si">${</span><span class="nv">CUSTOM_VAR_TWO</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--&gt; this should, if I&#39;m not mistaken, equal:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>var_value2<span class="w"> </span><span class="o">}}</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;and finally, here&#39;s some text:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_text<span class="o">}}</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"file contents:"</span><span class="w"> </span><span class="sb">`</span>cat<span class="w"> </span>/tmp/test_file<span class="sb">`</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"--&gt; this should, if I'm not mistaken, equal:"</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>file_contents<span class="w"> </span><span class="o">}}</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">""</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"env var: </span><span class="si">${</span><span class="nv">CUSTOM_VAR_ONE</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"--&gt; this should, if I'm not mistaken, equal:"</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>var_value1<span class="w"> </span><span class="o">}}</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">""</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"env var: </span><span class="si">${</span><span class="nv">CUSTOM_VAR_TWO</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"--&gt; this should, if I'm not mistaken, equal:"</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>var_value2<span class="w"> </span><span class="o">}}</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">""</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"and finally, here's some text:"</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_text<span class="o">}}</span>
 </pre></div>
 </div>
 <p>To use this definition file, one can pass values for all the different variables
 using <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> flags:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">&quot;&#39;I am in a file&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value1</span><span class="o">=</span><span class="s2">&quot;&#39;I am in an env var&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value2</span><span class="o">=</span><span class="s2">&quot;&#39;I am also in an env var&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">some_text</span><span class="o">=</span><span class="s2">&quot;&#39;I am just some text&#39;&quot;</span><span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">"'I am in a file'"</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value1</span><span class="o">=</span><span class="s2">"'I am in an env var'"</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value2</span><span class="o">=</span><span class="s2">"'I am also in an env var'"</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">some_text</span><span class="o">=</span><span class="s2">"'I am just some text'"</span><span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
 <span class="go">INFO:    Starting build...</span>
 <span class="go">Getting image source signatures</span>
 <span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
@@ -931,24 +931,24 @@ using <code class="docutils literal notranslate"><span class="pre">--build-arg</
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>./my_container.sif
 <span class="go">file contents: I am in a file</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in a file</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am in a file</span>
 
 <span class="go">env var: I am in an env var</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am in an env var</span>
 
 <span class="go">env var: I am also in an env var</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am also in an env var</span>
 
-<span class="go">and finally, here&#39;s some text: I am just some text</span>
+<span class="go">and finally, here's some text: I am just some text</span>
 </pre></div>
 </div>
 <p>Or one can place the values for the different values in a file, and pass the
 path to that file using the <code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code> flag:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>&lt;&lt;<span class="w"> </span>EOF<span class="w"> </span>&gt;<span class="w"> </span>./my_args_file.txt
-<span class="go">file_contents=&quot;I am in a file&quot;</span>
-<span class="go">var_value1=&quot;I am in an env var&quot;</span>
-<span class="go">var_value2=&quot;I am also in an env var&quot;</span>
-<span class="go">some_text=&quot;I am just some text&quot;</span>
+<span class="go">file_contents="I am in a file"</span>
+<span class="go">var_value1="I am in an env var"</span>
+<span class="go">var_value2="I am also in an env var"</span>
+<span class="go">some_text="I am just some text"</span>
 <span class="go">EOF</span>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg-file<span class="w"> </span>./my_args_file.txt<span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
@@ -969,24 +969,24 @@ path to that file using the <code class="docutils literal notranslate"><span cla
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>./my_container.sif
 <span class="go">file contents: I am in a file</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in a file</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am in a file</span>
 
 <span class="go">env var: I am in an env var</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am in an env var</span>
 
 <span class="go">env var: I am also in an env var</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am also in an env var</span>
 
-<span class="go">and finally, here&#39;s some text: I am just some text</span>
+<span class="go">and finally, here's some text: I am just some text</span>
 </pre></div>
 </div>
 <p>Or one can use a combination of both strategies:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>&lt;&lt;<span class="w"> </span>EOF<span class="w"> </span>&gt;<span class="w"> </span>./my_args_file.txt
-<span class="go">var_value1=&quot;I am in an env var&quot;</span>
-<span class="go">some_text=&quot;I am just some text&quot;</span>
+<span class="go">var_value1="I am in an env var"</span>
+<span class="go">some_text="I am just some text"</span>
 <span class="go">EOF</span>
 
-<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">&quot;&#39;I am in a file&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value2</span><span class="o">=</span><span class="s2">&quot;&#39;I am also in an env var&#39;&quot;</span><span class="w"> </span>--build-arg-file<span class="w"> </span>./my_args_file.txt<span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">"'I am in a file'"</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value2</span><span class="o">=</span><span class="s2">"'I am also in an env var'"</span><span class="w"> </span>--build-arg-file<span class="w"> </span>./my_args_file.txt<span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
 <span class="go">INFO:    Starting build...</span>
 <span class="go">Getting image source signatures</span>
 <span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
@@ -1004,15 +1004,15 @@ path to that file using the <code class="docutils literal notranslate"><span cla
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>./my_container.sif
 <span class="go">file contents: I am in a file</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in a file</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am in a file</span>
 
 <span class="go">env var: I am in an env var</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am in an env var</span>
 
 <span class="go">env var: I am also in an env var</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am also in an env var</span>
 
-<span class="go">and finally, here&#39;s some text: I am just some text</span>
+<span class="go">and finally, here's some text: I am just some text</span>
 </pre></div>
 </div>
 </section>
@@ -1020,7 +1020,7 @@ path to that file using the <code class="docutils literal notranslate"><span cla
 <h3>Precedence among multiple value sources<a class="headerlink" href="#precedence-among-multiple-value-sources" title="Link to this heading"></a></h3>
 <p>In the event that an argument is passed via <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> more than once, the
 last occurrence will take precedence:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">&quot;&#39;I am in a file (1st time)&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value2</span><span class="o">=</span><span class="s2">&quot;&#39;I am also in an env var&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">&quot;&#39;I am in a file (2nd time)&#39;&quot;</span><span class="w"> </span>--build-arg-file<span class="w"> </span>./my_args_file.txt<span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">"'I am in a file (1st time)'"</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value2</span><span class="o">=</span><span class="s2">"'I am also in an env var'"</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">"'I am in a file (2nd time)'"</span><span class="w"> </span>--build-arg-file<span class="w"> </span>./my_args_file.txt<span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
 <span class="go">INFO:    Starting build...</span>
 <span class="go">Getting image source signatures</span>
 <span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
@@ -1028,7 +1028,7 @@ last occurrence will take precedence:</p>
 <span class="go">Writing manifest to image destination</span>
 <span class="go">2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d</span>
 <span class="go">INFO:    Running setup scriptlet</span>
-<span class="go">+ echo &#39;I am in a file (2nd time)&#39;</span>
+<span class="go">+ echo 'I am in a file (2nd time)'</span>
 <span class="go">INFO:    Adding environment to container</span>
 <span class="go">INFO:    Adding runscript</span>
 <span class="go">INFO:    Creating SIF file...</span>
@@ -1038,27 +1038,27 @@ last occurrence will take precedence:</p>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>./my_container.sif
 <span class="go">file contents: I am in a file (2nd time)</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in a file (2nd time)</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am in a file (2nd time)</span>
 
 <span class="go">env var: I am in an env var</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am in an env var</span>
 
 <span class="go">env var: I am also in an env var</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am also in an env var</span>
 
-<span class="go">and finally, here&#39;s some text: I am just some text</span>
+<span class="go">and finally, here's some text: I am just some text</span>
 </pre></div>
 </div>
 <p>In the event that a variable is defined both in the file passed to
 <code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code> and via the command line using <code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> flag, the value passed via the
 command line will take precedence:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>&lt;&lt;<span class="w"> </span>EOF<span class="w"> </span>&gt;<span class="w"> </span>./my_args_file.txt
-<span class="go">var_value1=&quot;I am in an env var&quot;</span>
-<span class="go">var_value2=&quot;I am also in an env var (from build arg file)&quot;</span>
-<span class="go">some_text=&quot;I am just some text&quot;</span>
+<span class="go">var_value1="I am in an env var"</span>
+<span class="go">var_value2="I am also in an env var (from build arg file)"</span>
+<span class="go">some_text="I am just some text"</span>
 <span class="go">EOF</span>
 
-<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">&quot;&#39;I am in a file&#39;&quot;</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value2</span><span class="o">=</span><span class="s2">&quot;&#39;I am also in an env var (from command line)&#39;&quot;</span><span class="w"> </span>--build-arg-file<span class="w"> </span>./my_args_file.txt<span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">file_contents</span><span class="o">=</span><span class="s2">"'I am in a file'"</span><span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">var_value2</span><span class="o">=</span><span class="s2">"'I am also in an env var (from command line)'"</span><span class="w"> </span>--build-arg-file<span class="w"> </span>./my_args_file.txt<span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
 <span class="go">INFO:    Starting build...</span>
 <span class="go">Getting image source signatures</span>
 <span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
@@ -1066,7 +1066,7 @@ command line will take precedence:</p>
 <span class="go">Writing manifest to image destination</span>
 <span class="go">2024/03/08 14:42:15  info unpack layer: sha256:f4bb4e8dca02be491b4f72d2ef2127a64ce49c48d0d9c0a0fcaffa625067679d</span>
 <span class="go">INFO:    Running setup scriptlet</span>
-<span class="go">+ echo &#39;I am in a file&#39;</span>
+<span class="go">+ echo 'I am in a file'</span>
 <span class="go">INFO:    Adding environment to container</span>
 <span class="go">INFO:    Adding runscript</span>
 <span class="go">INFO:    Creating SIF file...</span>
@@ -1076,15 +1076,15 @@ command line will take precedence:</p>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>./my_container.sif
 <span class="go">file contents: I am in a file</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in a file</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am in a file</span>
 
 <span class="go">env var: I am in an env var</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am in an env var</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am in an env var</span>
 
 <span class="go">env var: I am also in an env var (from command line)</span>
-<span class="go">--&gt; this should, if I&#39;m not mistaken, equal: I am also in an env var (from command line)</span>
+<span class="go">--&gt; this should, if I'm not mistaken, equal: I am also in an env var (from command line)</span>
 
-<span class="go">and finally, here&#39;s some text: I am just some text</span>
+<span class="go">and finally, here's some text: I am just some text</span>
 </pre></div>
 </div>
 </section>
@@ -1098,12 +1098,12 @@ Apptainer will generate an error:</p>
 Stage: build
 
 <span class="gh">%runscript</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Here is some text:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_text<span class="w"> </span><span class="o">}}</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;And here is some more text:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_more_text<span class="w"> </span><span class="o">}}</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Here is some text:"</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_text<span class="w"> </span><span class="o">}}</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"And here is some more text:"</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_more_text<span class="w"> </span><span class="o">}}</span>
 </pre></div>
 </div>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">some_more_text</span><span class="o">=</span><span class="s2">&quot;more more more&quot;</span><span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
-<span class="go">FATAL:   Unable to build from ./my_container.def: build var some_text is not defined through either --build-arg (--build-arg-file) or &#39;arguments&#39; section</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">some_more_text</span><span class="o">=</span><span class="s2">"more more more"</span><span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<span class="go">FATAL:   Unable to build from ./my_container.def: build var some_text is not defined through either --build-arg (--build-arg-file) or 'arguments' section</span>
 </pre></div>
 </div>
 <p>However, definition files can provide default values for some or all variables
@@ -1113,15 +1113,15 @@ using the <code class="docutils literal notranslate"><span class="pre">%argument
 Stage: build
 
 <span class="gh">%runscript</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Here is some text:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_text<span class="w"> </span><span class="o">}}</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;And here is some more text:&quot;</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_more_text<span class="w"> </span><span class="o">}}</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Here is some text:"</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_text<span class="w"> </span><span class="o">}}</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"And here is some more text:"</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>some_more_text<span class="w"> </span><span class="o">}}</span>
 
 <span class="err">%</span>arguments
-   some_text=&quot;Some default text&quot;
-   some_more_text=&quot;Some more default text&quot;
+   some_text="Some default text"
+   some_more_text="Some more default text"
 </pre></div>
 </div>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">some_more_text</span><span class="o">=</span><span class="s2">&quot;more more more&quot;</span><span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>-F<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">some_more_text</span><span class="o">=</span><span class="s2">"more more more"</span><span class="w"> </span>./my_container.sif<span class="w"> </span>./my_container.def
 <span class="go">INFO:    Starting build...</span>
 <span class="go">Getting image source signatures</span>
 <span class="go">Copying blob f4bb4e8dca02 skipped: already exists</span>
@@ -1157,17 +1157,17 @@ Stage: devel
 
 <span class="gh">%post</span>
 <span class="w">  </span><span class="c1"># prep environment</span>
-<span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/go/bin:/usr/local/go/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">HOME</span><span class="o">=</span><span class="s2">&quot;/root&quot;</span>
+<span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"/go/bin:/usr/local/go/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
+<span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">HOME</span><span class="o">=</span><span class="s2">"/root"</span>
 <span class="w">  </span><span class="nb">cd</span><span class="w"> </span>/root
 
 <span class="w">  </span><span class="c1"># insert source code, could also be copied from the host with %files</span>
 <span class="w">  </span>cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; hello.go</span>
 <span class="s">  package main</span>
-<span class="s">  import &quot;fmt&quot;</span>
+<span class="s">  import "fmt"</span>
 
 <span class="s">  func main() {</span>
-<span class="s">    fmt.Printf(&quot;Hello World!\n&quot;)</span>
+<span class="s">    fmt.Printf("Hello World!\n")</span>
 <span class="s">  }</span>
 <span class="s">EOF</span>
 
@@ -1225,17 +1225,17 @@ the same container using SCIF modules:</p>
 
 <span class="gh">%environment</span>
 <span class="w">    </span><span class="nv">GLOBAL</span><span class="o">=</span>variables
-<span class="w">    </span><span class="nv">AVAILABLE</span><span class="o">=</span><span class="s2">&quot;to all apps&quot;</span>
+<span class="w">    </span><span class="nv">AVAILABLE</span><span class="o">=</span><span class="s2">"to all apps"</span>
 
 <span class="c1">##############################</span>
 <span class="c1"># foo</span>
 <span class="c1">##############################</span>
 
 <span class="gh">%apprun</span><span class="w"> </span>foo
-<span class="w">    </span><span class="nb">exec</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;RUNNING FOO&quot;</span>
+<span class="w">    </span><span class="nb">exec</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"RUNNING FOO"</span>
 
 <span class="err">%</span>appstart foo
-    exec echo &quot;STARTING FOO&quot;
+    exec echo "STARTING FOO"
 
 <span class="gh">%applabels</span><span class="w"> </span>foo
 <span class="w">    </span>BESTAPP<span class="w"> </span>FOO
@@ -1264,10 +1264,10 @@ the same container using SCIF modules:</p>
 <span class="w">    </span>touch<span class="w"> </span>bar.exec
 
 <span class="gh">%apprun</span><span class="w"> </span>bar
-<span class="w">    </span><span class="nb">exec</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;RUNNING BAR&quot;</span>
+<span class="w">    </span><span class="nb">exec</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"RUNNING BAR"</span>
 
 <span class="err">%</span>appstart bar
-    exec echo &quot;STARTING BAR&quot;
+    exec echo "STARTING BAR"
 
 <span class="gh">%appenv</span><span class="w"> </span>bar
 <span class="w">    </span><span class="nv">SOFTWARE</span><span class="o">=</span>bar

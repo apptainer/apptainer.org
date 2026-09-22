@@ -392,7 +392,7 @@ just include the <code class="docutils literal notranslate"><span class="pre">qu
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>python_3.7.sif
 <span class="go">Python 3.7.12 (default, Sep 24 2021, 11:48:27)</span>
 <span class="go">[GCC 8.3.0] on linux</span>
-<span class="go">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
+<span class="go">Type "help", "copyright", "credits" or "license" for more information.</span>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
@@ -594,7 +594,7 @@ ARM CPU variants are supported.</p>
 <p>If you try to run a container that does not match the host CPU architecture, it
 will likely fail:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>ppc64le.sif
-<span class="go">FATAL:   While checking image: could not open image ppc64le.sif: the image&#39;s architecture (ppc64le) could not run on the host&#39;s (amd64)</span>
+<span class="go">FATAL:   While checking image: could not open image ppc64le.sif: the image's architecture (ppc64le) could not run on the host's (amd64)</span>
 </pre></div>
 </div>
 <p>However, Apptainer is able to make use of CPU emulation with QEMU, and the Linux
@@ -992,7 +992,7 @@ are set in the container:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Set<span class="w"> </span>a<span class="w"> </span>host<span class="w"> </span>variable
 <span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">HOST_VAR</span><span class="o">=</span><span class="m">123</span>
 <span class="gp"># </span>Set<span class="w"> </span>a<span class="w"> </span>container<span class="w"> </span>environment<span class="w"> </span>variable
-<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="s2">&quot;APPTAINERENV_FORCE_VAR=&quot;</span><span class="m">123</span><span class="s2">&quot;</span>
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="s2">"APPTAINERENV_FORCE_VAR="</span><span class="m">123</span><span class="s2">"</span>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>VAR
 <span class="go">FORCE_VAR=123</span>
@@ -1038,7 +1038,7 @@ explictly escape environment variables.</p></li>
 container startup, so that they will take the same value as with a Docker/OCI
 runtime:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Set<span class="w"> </span>an<span class="w"> </span>environment<span class="w"> </span>variable<span class="w"> </span>that<span class="w"> </span>would<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>date<span class="sb">`</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>evaluated
-<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINER_MYVAR</span><span class="o">=</span><span class="s1">&#39;$(date)&#39;</span>
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINER_MYVAR</span><span class="o">=</span><span class="s1">'$(date)'</span>
 
 <span class="gp"># </span>Default<span class="w"> </span>behavior
 <span class="gp"># </span>MYVAR<span class="w"> </span>was<span class="w"> </span>evaluated<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>container,<span class="w"> </span>and<span class="w"> </span>is<span class="w"> </span><span class="nb">set</span><span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>output<span class="w"> </span>of<span class="w"> </span><span class="sb">`</span>date<span class="sb">`</span>
@@ -1099,7 +1099,7 @@ warnings when started as an instance, or if run with <code class="docutils liter
 around this, use the <code class="docutils literal notranslate"><span class="pre">--no-init</span></code> flag to disable the shim:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--pid<span class="w"> </span>tini_example.sif
 <span class="go">[WARN  tini (2690)] Tini is not running as PID 1 .</span>
-<span class="go">Zombie processes will not be re-parented to Tini, so zombie reaping won&#39;t work.</span>
+<span class="go">Zombie processes will not be re-parented to Tini, so zombie reaping won't work.</span>
 <span class="go">To fix the problem, run Tini as PID 1.</span>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--pid<span class="w"> </span>--no-init<span class="w"> </span>tini_example.sif
@@ -1157,26 +1157,26 @@ and <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</spa
 this script mirrors Docker as closely as possible.</p>
 <p>If the Docker container only has an <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> - that <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>
 is run, with any arguments appended:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span><span class="nv">ENTRYPOINT</span><span class="o">=</span><span class="s2">&quot;date&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span><span class="nv">ENTRYPOINT</span><span class="o">=</span><span class="s2">"date"</span>
 
-<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">&#39;date&#39;</span>
+<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">'date'</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif
 <span class="go">Wed 06 Oct 2021 02:42:54 PM CDT</span>
 
-<span class="gp"># </span>Runs<span class="w"> </span><span class="err">&#39;</span>date<span class="w"> </span>--utc<span class="sb">`</span>
+<span class="gp"># </span>Runs<span class="w"> </span><span class="err">'</span>date<span class="w"> </span>--utc<span class="sb">`</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif<span class="w"> </span>--utc
 <span class="go">Wed 06 Oct 2021 07:44:27 PM UTC</span>
 </pre></div>
 </div>
 <p>If the Docker container only has a <code class="docutils literal notranslate"><span class="pre">CMD</span></code> - the <code class="docutils literal notranslate"><span class="pre">CMD</span></code> is run, or is
 <em>replaced</em> with any arguments:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span><span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;date&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span><span class="nv">CMD</span><span class="o">=</span><span class="s2">"date"</span>
 
-<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">&#39;date&#39;</span>
+<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">'date'</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif
 <span class="go">Wed 06 Oct 2021 02:45:39 PM CDT</span>
 
-<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">&#39;echo hello&#39;</span>
+<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">'echo hello'</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>hello
 <span class="go">hello</span>
 </pre></div>
@@ -1184,14 +1184,14 @@ is run, with any arguments appended:</p>
 <p>If the Docker container has a <code class="docutils literal notranslate"><span class="pre">CMD</span></code> <em>and</em> <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>, then we run
 <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> with either <code class="docutils literal notranslate"><span class="pre">CMD</span></code> as default arguments, or replaced
 with any user supplied arguments:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span><span class="nv">ENTRYPOINT</span><span class="o">=</span><span class="s2">&quot;date&quot;</span>
-<span class="gp"># </span><span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;--utc&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span><span class="nv">ENTRYPOINT</span><span class="o">=</span><span class="s2">"date"</span>
+<span class="gp"># </span><span class="nv">CMD</span><span class="o">=</span><span class="s2">"--utc"</span>
 
-<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">&#39;date --utc&#39;</span>
+<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">'date --utc'</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif
 <span class="go">Wed 06 Oct 2021 07:48:43 PM UTC</span>
 
-<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">&#39;date -R&#39;</span>
+<span class="gp"># </span>Runs<span class="w"> </span><span class="s1">'date -R'</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif<span class="w"> </span>-R
 <span class="go">Wed, 06 Oct 2021 14:49:07 -0500</span>
 </pre></div>
@@ -1208,15 +1208,15 @@ code that may be evaluated.</p>
 source, with Apptainer 1.1.0 or later, the <code class="docutils literal notranslate"><span class="pre">--no-eval</span></code> flag will prevent
 this extra evaluation so that arguments are handled in a compatible manner:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>docker/OCI<span class="w"> </span>behavior
-<span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"\$HOSTNAME"</span>
 <span class="gp">$</span>HOSTNAME
 
 <span class="gp"># </span>Apptainer<span class="w"> </span>default
-<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"\$HOSTNAME"</span>
 <span class="go">p700</span>
 
 <span class="gp"># </span>Apptainer<span class="w"> </span>with<span class="w"> </span>--no-eval
-<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-eval<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-eval<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"\$HOSTNAME"</span>
 <span class="gp">$</span>HOSTNAME
 </pre></div>
 </div>
@@ -1231,13 +1231,13 @@ that is built into the container.</p>
 <p>To avoid evaluation without <code class="docutils literal notranslate"><span class="pre">--no-eval</span></code>, and when using containers built
 earlier than Apptainer 1.1.0, you will need to add an extra level of shell
 escaping to arguments on the command line:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"\$HOSTNAME"</span>
 <span class="gp">$</span>HOSTNAME
 
-<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"\$HOSTNAME"</span>
 <span class="go">p700</span>
 
-<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\\\$HOSTNAME&quot;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"\\\$HOSTNAME"</span>
 <span class="gp">$</span>HOSTNAME
 </pre></div>
 </div>

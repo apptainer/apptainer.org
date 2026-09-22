@@ -308,26 +308,26 @@ installed with Apptainer, normally at
 example, we will use a much simpler configuration file to blacklist the
 <code class="docutils literal notranslate"><span class="pre">mkdir</span></code> command.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;defaultAction&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_ALLOW&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;archMap&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nt">"defaultAction"</span><span class="p">:</span> <span class="s2">"SCMP_ACT_ALLOW"</span><span class="p">,</span>
+    <span class="nt">"archMap"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="nt">&quot;architecture&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ARCH_X86_64&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;subArchitectures&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&quot;SCMP_ARCH_X86&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;SCMP_ARCH_X32&quot;</span>
+            <span class="nt">"architecture"</span><span class="p">:</span> <span class="s2">"SCMP_ARCH_X86_64"</span><span class="p">,</span>
+            <span class="nt">"subArchitectures"</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">"SCMP_ARCH_X86"</span><span class="p">,</span>
+                <span class="s2">"SCMP_ARCH_X32"</span>
             <span class="p">]</span>
         <span class="p">}</span>
     <span class="p">],</span>
-    <span class="nt">&quot;syscalls&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nt">"syscalls"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="nt">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&quot;mkdir&quot;</span>
+            <span class="nt">"names"</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">"mkdir"</span>
             <span class="p">],</span>
-            <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_KILL&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="nt">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;includes&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="nt">&quot;excludes&quot;</span><span class="p">:</span> <span class="p">{}</span>
+            <span class="nt">"action"</span><span class="p">:</span> <span class="s2">"SCMP_ACT_KILL"</span><span class="p">,</span>
+            <span class="nt">"args"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="nt">"comment"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="nt">"includes"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="nt">"excludes"</span><span class="p">:</span> <span class="p">{}</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -345,12 +345,12 @@ the container like so:</p>
 in a core dump.</p>
 <p>The full list of arguments accepted by the <code class="docutils literal notranslate"><span class="pre">--security</span></code> option are as
 follows:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>--security<span class="o">=</span><span class="s2">&quot;seccomp:/usr/local/etc/apptainer/seccomp-profiles/default.json&quot;</span>
---security<span class="o">=</span><span class="s2">&quot;apparmor:/usr/bin/man&quot;</span>
---security<span class="o">=</span><span class="s2">&quot;selinux:context&quot;</span>
---security<span class="o">=</span><span class="s2">&quot;uid:1000&quot;</span>
---security<span class="o">=</span><span class="s2">&quot;gid:1000&quot;</span>
---security<span class="o">=</span><span class="s2">&quot;gid:1000:1:0&quot;</span><span class="w"> </span><span class="o">(</span>multiple<span class="w"> </span>gids,<span class="w"> </span>first<span class="w"> </span>is<span class="w"> </span>always<span class="w"> </span>the<span class="w"> </span>primary<span class="w"> </span>group<span class="o">)</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>--security<span class="o">=</span><span class="s2">"seccomp:/usr/local/etc/apptainer/seccomp-profiles/default.json"</span>
+--security<span class="o">=</span><span class="s2">"apparmor:/usr/bin/man"</span>
+--security<span class="o">=</span><span class="s2">"selinux:context"</span>
+--security<span class="o">=</span><span class="s2">"uid:1000"</span>
+--security<span class="o">=</span><span class="s2">"gid:1000"</span>
+--security<span class="o">=</span><span class="s2">"gid:1000:1:0"</span><span class="w"> </span><span class="o">(</span>multiple<span class="w"> </span>gids,<span class="w"> </span>first<span class="w"> </span>is<span class="w"> </span>always<span class="w"> </span>the<span class="w"> </span>primary<span class="w"> </span>group<span class="o">)</span>
 </pre></div>
 </div>
 </section>

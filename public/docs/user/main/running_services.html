@@ -231,7 +231,7 @@ repeated.</p>
 </pre></div>
 </div>
 <p>You can filter the instance list by supplying a pattern:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>instance<span class="w"> </span>list<span class="w"> </span><span class="s1">&#39;*2&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>instance<span class="w"> </span>list<span class="w"> </span><span class="s1">'*2'</span>
 <span class="go">INSTANCE NAME    PID      IP              IMAGE</span>
 <span class="go">instance2        22443                    /home/dave/instances/alpine_latest.sif</span>
 </pre></div>
@@ -281,7 +281,7 @@ container, against a running instance:</p>
 <p>If you have multiple instances running and you want to stop all of them,
 you can do so with a wildcard or the –all flag. The following three
 commands are identical.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>instance<span class="w"> </span>stop<span class="w"> </span><span class="s1">&#39;*&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>instance<span class="w"> </span>stop<span class="w"> </span><span class="s1">'*'</span>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>instance<span class="w"> </span>stop<span class="w"> </span>--all
 
@@ -342,9 +342,9 @@ being hosted by NGINX.</p>
 <span class="go">working. Further configuration is required.&lt;/p&gt;</span>
 
 <span class="go">&lt;p&gt;For online documentation and support please refer to</span>
-<span class="go">&lt;a href=&quot;http://nginx.org/&quot;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;</span>
+<span class="go">&lt;a href="http://nginx.org/"&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;</span>
 <span class="go">Commercial support is available at</span>
-<span class="go">&lt;a href=&quot;http://nginx.com/&quot;&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;</span>
+<span class="go">&lt;a href="http://nginx.com/"&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;</span>
 
 <span class="go">&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;</span>
 <span class="go">&lt;/body&gt;</span>
@@ -513,7 +513,7 @@ running:</p>
 <span class="go">[nodemon] to restart at any time, enter `rs`</span>
 <span class="go">[nodemon] watching: /pdf_server/src/**/*</span>
 <span class="go">[nodemon] starting `node src/index.js`</span>
-<span class="go">2023-02-01T11:14:58.185Z - info: [app.js] ALLOW_HTTP=true, unsafe requests are allowed. Don&#39;t use this in production.</span>
+<span class="go">2023-02-01T11:14:58.185Z - info: [app.js] ALLOW_HTTP=true, unsafe requests are allowed. Don't use this in production.</span>
 <span class="go">2023-02-01T11:14:58.187Z - info: [app.js] ALLOW_URLS set! Allowed urls patterns are:</span>
 <span class="go">2023-02-01T11:14:58.187Z - info: [app.js] Using CORS options: origin=*, methods=[GET, POST, PUT, DELETE, OPTIONS, HEAD, PATCH]</span>
 <span class="go">2023-02-01T11:14:58.206Z - warn: [router.js] Warning: no authentication required to use the API</span>
@@ -564,7 +564,7 @@ apptainer instance, cgroups are found in
 <span class="pre">apptainer-30443</span></code>
 the $CGROUPPATH is <code class="docutils literal notranslate"><span class="pre">user.slice/user-1000.slice/user&#64;1000.service/user.slice/</span></code>.
 The final perf command would look something like:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>perf<span class="w"> </span>-a<span class="w"> </span>-e<span class="w"> </span>cache-misses<span class="w"> </span>--cgroup<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CGROUPPATH</span><span class="s2">/apptainer-</span><span class="nv">$INSTANCEID</span><span class="s2">&quot;</span><span class="w"> </span>--<span class="w"> </span>sleep<span class="w"> </span><span class="m">10</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>perf<span class="w"> </span>-a<span class="w"> </span>-e<span class="w"> </span>cache-misses<span class="w"> </span>--cgroup<span class="w"> </span><span class="s2">"</span><span class="nv">$CGROUPPATH</span><span class="s2">/apptainer-</span><span class="nv">$INSTANCEID</span><span class="s2">"</span><span class="w"> </span>--<span class="w"> </span>sleep<span class="w"> </span><span class="m">10</span>
 </pre></div>
 </div>
 <div class="admonition note">
