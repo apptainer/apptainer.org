@@ -256,7 +256,7 @@ key:</p>
 
 <span class="go">WARNING: No default remote in use, falling back to default keyserver: https://keys.openpgp.org</span>
 <span class="go">INFO:    Key server response: Upload successful. This is a new key, a welcome email has been sent.</span>
-<span class="go">public key &#39;8232570480B868E1473AEEB03DBCBA1EE9D661E5&#39; pushed to server successfully</span>
+<span class="go">public key '8232570480B868E1473AEEB03DBCBA1EE9D661E5' pushed to server successfully</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -472,9 +472,9 @@ you want to use them to carry out the commands below, first, carry out the
 following commands:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/apptainer/apptainer.git
 
-<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">KEYD</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">/apptainer/test/keys&quot;</span>
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">KEYD</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">/apptainer/test/keys"</span>
 
-<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">CERTD</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">/apptainer/test/certs&quot;</span>
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">CERTD</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">/apptainer/test/certs"</span>
 </pre></div>
 </div>
 <p>Information on creating PEM files can be found in the <span class="xref std std-ref">encrypted container
@@ -485,8 +485,8 @@ documented <a class="reference external" href="https://github.com/apptainer/appt
 <p>To sign a container using a private key in PEM format, provide the private key
 material to the <code class="docutils literal notranslate"><span class="pre">sign</span></code> command using the <code class="docutils literal notranslate"><span class="pre">--key</span></code> flag.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>sign<span class="w"> </span>--key<span class="w"> </span><span class="nv">$KEYD</span>/rsa-private.pem<span class="w"> </span>lolcow.sif
-<span class="go">INFO:    Signing image with key material from &#39;rsa_pri.pem&#39;</span>
-<span class="go">INFO:    Signature created and applied to image &#39;lolcow.sif&#39;</span>
+<span class="go">INFO:    Signing image with key material from 'rsa_pri.pem'</span>
+<span class="go">INFO:    Signature created and applied to image 'lolcow.sif'</span>
 </pre></div>
 </div>
 <p>The DSSE signature descriptor can now be seen by inspecting the SIF file:</p>
@@ -502,7 +502,7 @@ material to the <code class="docutils literal notranslate"><span class="pre">sig
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>sif<span class="w"> </span>dump<span class="w"> </span><span class="m">5</span><span class="w"> </span>lolcow.sif<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
 <span class="go">{</span>
-<span class="go">&quot;payloadType&quot;: &quot;application/vnd.apptainer.sif-metadata+json&quot;,</span>
+<span class="go">"payloadType": "application/vnd.apptainer.sif-metadata+json",</span>
 <span class="go">...</span>
 </pre></div>
 </div>
@@ -521,7 +521,7 @@ present.</p>
 <p>To verify a container using a PEM public key directly, provide the key material
 to the <code class="docutils literal notranslate"><span class="pre">verify</span></code> command using the <code class="docutils literal notranslate"><span class="pre">key</span></code> flag:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>verify<span class="w"> </span>--key<span class="w"> </span><span class="nv">$KEYD</span>/rsa-public.pem<span class="w"> </span>lolcow.sif
-<span class="go">INFO:    Verifying image with key material from &#39;rsa_pub.pem&#39;</span>
+<span class="go">INFO:    Verifying image with key material from 'rsa_pub.pem'</span>
 <span class="go">Objects verified:</span>
 <span class="go">ID  |GROUP   |LINK    |TYPE</span>
 <span class="go">------------------------------------------------</span>
@@ -529,7 +529,7 @@ to the <code class="docutils literal notranslate"><span class="pre">verify</span
 <span class="go">2   |1       |NONE    |JSON.Generic</span>
 <span class="go">3   |1       |NONE    |JSON.Generic</span>
 <span class="go">4   |1       |NONE    |FS</span>
-<span class="go">INFO:    Verified signature(s) from image &#39;lolcow.sif&#39;</span>
+<span class="go">INFO:    Verified signature(s) from image 'lolcow.sif'</span>
 </pre></div>
 </div>
 </section>

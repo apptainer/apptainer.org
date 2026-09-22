@@ -243,7 +243,7 @@ of a definition file to set a container environment variable:</p>
 <span class="k">From</span>: alpine
 
 <span class="gh">%environment</span>
-<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MYVAR</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MYVAR</span><span class="o">=</span><span class="s2">"Hello"</span>
 
 <span class="gh">%runscript</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$MYVAR</span>
@@ -328,11 +328,11 @@ variable support <a class="reference internal" href="singularity_compatibility.h
 the value from the host, use <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code> or the <code class="docutils literal notranslate"><span class="pre">--env</span></code> flag. For
 example, to force <code class="docutils literal notranslate"><span class="pre">MYVAR</span></code> in the container to take the value of <code class="docutils literal notranslate"><span class="pre">MYVAR</span></code> on
 the host:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINERENV_MYVAR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MYVAR</span><span class="s2">&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINERENV_MYVAR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$MYVAR</span><span class="s2">"</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>mycontainer.sif
 
 <span class="gp"># </span>or
-<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--env<span class="w"> </span><span class="s2">&quot;MYVAR=</span><span class="nv">$MYVAR</span><span class="s2">&quot;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--env<span class="w"> </span><span class="s2">"MYVAR=</span><span class="nv">$MYVAR</span><span class="s2">"</span>
 </pre></div>
 </div>
 <p>If you <em>do not want</em> the host environment variables to pass into the
@@ -344,7 +344,7 @@ environment variables for correct operation of most software.</p>
 <span class="go">LANG=C</span>
 <span class="go">LD_LIBRARY_PATH=/.singularity.d/libs</span>
 <span class="go">PATH=/startpath:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span>
-<span class="go">PROMPT_COMMAND=PS1=&quot;Apptainer&gt; &quot;; unset PROMPT_COMMAND</span>
+<span class="go">PROMPT_COMMAND=PS1="Apptainer&gt; "; unset PROMPT_COMMAND</span>
 <span class="go">PS1=Apptainer&gt;</span>
 <span class="go">PWD=/home/dave/doc-tesrts</span>
 <span class="go">APPTAINER_COMMAND=exec</span>
@@ -416,10 +416,10 @@ variables include special characters.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> option lets you provide one or more files that contain
 environment variables as <code class="docutils literal notranslate"><span class="pre">NAME=VALUE</span></code> pairs, e.g.:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>myenvs
-<span class="go">MYVAR=&quot;Hello from a file&quot;</span>
+<span class="go">MYVAR="Hello from a file"</span>
 
 <span class="gp">$ </span>cat<span class="w"> </span>myenvs2
-<span class="go">MYVAR=&quot;Hello from a file 2&quot;</span>
+<span class="go">MYVAR="Hello from a file 2"</span>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--env-file<span class="w"> </span>myenvs<span class="w"> </span>--env-file<span class="w"> </span>myenvs2<span class="w"> </span>env.sif
 <span class="go">Hello from a file 2</span>
@@ -442,7 +442,7 @@ the environment variable <code class="docutils literal notranslate"><span class=
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>env.sif
 <span class="go">Hello</span>
 
-<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINERENV_MYVAR</span><span class="o">=</span><span class="s2">&quot;Overridden&quot;</span>
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINERENV_MYVAR</span><span class="o">=</span><span class="s2">"Overridden"</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>env.sif
 <span class="go">Overridden</span>
 </pre></div>
@@ -472,11 +472,11 @@ container, you can do so with <code class="docutils literal notranslate"><span c
 <p>If you set a variable on your host called <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_APPEND_PATH</span></code>
 then its value will be appended (added to the end) of the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>
 variable in the container.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>env.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo $PATH&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>env.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">'echo $PATH'</span>
 <span class="go">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span>
 
-<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINERENV_APPEND_PATH</span><span class="o">=</span><span class="s2">&quot;/endpath&quot;</span>
-<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>env.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo $PATH&#39;</span>
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINERENV_APPEND_PATH</span><span class="o">=</span><span class="s2">"/endpath"</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>env.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">'echo $PATH'</span>
 <span class="go">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/endpath</span>
 </pre></div>
 </div>
@@ -485,11 +485,11 @@ variable in the container.</p>
 <p>If you set a variable on your host called
 <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_PREPEND_PATH</span></code> then its value will be prepended (added
 to the start) of the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable in the container.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>env.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo $PATH&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>env.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">'echo $PATH'</span>
 <span class="go">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span>
 
-<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINERENV_PREPEND_PATH</span><span class="o">=</span><span class="s2">&quot;/startpath&quot;</span>
-<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>env.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo $PATH&#39;</span>
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINERENV_PREPEND_PATH</span><span class="o">=</span><span class="s2">"/startpath"</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>env.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">'echo $PATH'</span>
 <span class="go">/startpath:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span>
 </pre></div>
 </div>
@@ -518,7 +518,7 @@ additional escape characters and/or quoting.</p></li>
 container startup, so that they will take the same value as with a Docker/OCI
 runtime:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Set<span class="w"> </span>an<span class="w"> </span>environment<span class="w"> </span>variable<span class="w"> </span>that<span class="w"> </span>would<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>date<span class="sb">`</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>evaluated
-<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINER_MYVAR</span><span class="o">=</span><span class="s1">&#39;$(date)&#39;</span>
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINER_MYVAR</span><span class="o">=</span><span class="s1">'$(date)'</span>
 
 <span class="gp"># </span>Default<span class="w"> </span>behavior
 <span class="gp"># </span>MYVAR<span class="w"> </span>was<span class="w"> </span>evaluated<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>container,<span class="w"> </span>and<span class="w"> </span>is<span class="w"> </span><span class="nb">set</span><span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>output<span class="w"> </span>of<span class="w"> </span><span class="sb">`</span>date<span class="sb">`</span>
@@ -540,7 +540,7 @@ other Docker/OCI compatibility flags. See <a class="reference internal" href="do
 the host, use double quotes around the variable, so that it is
 processed by the host shell before the value is passed to
 Apptainer. For example:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span>--env<span class="w"> </span><span class="s2">&quot;MYHOST=</span><span class="nv">$HOSTNAME</span><span class="s2">&quot;</span><span class="w"> </span>mycontainer.sif
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span>--env<span class="w"> </span><span class="s2">"MYHOST=</span><span class="nv">$HOSTNAME</span><span class="s2">"</span><span class="w"> </span>mycontainer.sif
 </pre></div>
 </div>
 <p>This will set the <code class="docutils literal notranslate"><span class="pre">MYHOST</span></code> environment variable inside the container
@@ -561,7 +561,7 @@ variable inside the container, you should escape the <code class="docutils liter
 value. Instead it will be substituted inside the container.</p>
 <p>For example, to create an environment variable <code class="docutils literal notranslate"><span class="pre">MYPATH</span></code>, with the
 same value as <code class="docutils literal notranslate"><span class="pre">PATH</span></code> in the container (not the host’s <code class="docutils literal notranslate"><span class="pre">PATH</span></code>):</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span>--env<span class="w"> </span><span class="s2">&quot;MYPATH=\$PATH&quot;</span><span class="w"> </span>mycontainer.sif
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span>--env<span class="w"> </span><span class="s2">"MYPATH=\$PATH"</span><span class="w"> </span>mycontainer.sif
 </pre></div>
 </div>
 <p>You can also use this approach to append or prepend to variables that
@@ -576,7 +576,7 @@ handling for <code class="docutils literal notranslate"><span class="pre">PATH</
 verbatim, it must be quoted and escaped appropriately. For example, if
 you need to set a path containing a literal <code class="docutils literal notranslate"><span class="pre">$LIB</span></code> for the
 <code class="docutils literal notranslate"><span class="pre">LD_PRELOAD</span></code> environment variable:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span>--env<span class="o">=</span><span class="s2">&quot;LD_PRELOAD=/foo/bar/\\\$LIB/baz.so&quot;</span><span class="w"> </span>mycontainer.sif
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span>--env<span class="o">=</span><span class="s2">"LD_PRELOAD=/foo/bar/\\\$LIB/baz.so"</span><span class="w"> </span>mycontainer.sif
 </pre></div>
 </div>
 <p>This will result in <code class="docutils literal notranslate"><span class="pre">LD_PRELOAD</span></code> having the value
@@ -586,7 +586,7 @@ processing within Apptainer will consume the third <code class="docutils literal
 escapes the literal <code class="docutils literal notranslate"><span class="pre">$</span></code>.</p>
 <p>You can also use single quotes on the command line, to avoid one
 level of escaping:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span>--env<span class="o">=</span><span class="s1">&#39;LD_PRELOAD=/foo/bar/\$LIB/baz.so&#39;</span><span class="w"> </span>mycontainer.sif
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span>--env<span class="o">=</span><span class="s1">'LD_PRELOAD=/foo/bar/\$LIB/baz.so'</span><span class="w"> </span>mycontainer.sif
 </pre></div>
 </div>
 </section>
@@ -716,8 +716,8 @@ file defined by the <code class="docutils literal notranslate"><span class="pre"
 
 <span class="c1"># We can now also set labels to a value at build time</span>
 <span class="gh">%post</span>
-<span class="w">  </span><span class="nv">VAL</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>myprog<span class="w"> </span>--version<span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;my.label </span><span class="nv">$VAL</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$APPTAINER_LABELS</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">VAL</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>myprog<span class="w"> </span>--version<span class="k">)</span><span class="s2">"</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"my.label </span><span class="nv">$VAL</span><span class="s2">"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$APPTAINER_LABELS</span><span class="s2">"</span>
 </pre></div>
 </div>
 <p>Labels must be added to the file one per line, in a <code class="docutils literal notranslate"><span class="pre">NAME</span> <span class="pre">VALUE</span></code>
@@ -768,14 +768,14 @@ used to build the container.</p>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span>JUP_PORT<span class="w"> </span>JUP_IPNAME
 
 <span class="gh">%startscript</span>
-<span class="w">    </span><span class="nv">PORT</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JUP_PORT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nv">PORT</span><span class="o">=</span><span class="s2">&quot;--port=</span><span class="si">${</span><span class="nv">JUP_PORT</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">PORT</span><span class="o">=</span><span class="s2">""</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$JUP_PORT</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">PORT</span><span class="o">=</span><span class="s2">"--port=</span><span class="si">${</span><span class="nv">JUP_PORT</span><span class="si">}</span><span class="s2">"</span>
 <span class="w">    </span><span class="k">fi</span>
 
-<span class="w">    </span><span class="nv">IPNAME</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JUP_IPNAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nv">IPNAME</span><span class="o">=</span><span class="s2">&quot;--ip=</span><span class="si">${</span><span class="nv">JUP_IPNAME</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">IPNAME</span><span class="o">=</span><span class="s2">""</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$JUP_IPNAME</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">IPNAME</span><span class="o">=</span><span class="s2">"--ip=</span><span class="si">${</span><span class="nv">JUP_IPNAME</span><span class="si">}</span><span class="s2">"</span>
 <span class="w">    </span><span class="k">fi</span>
 
 <span class="w">    </span><span class="nb">exec</span><span class="w"> </span>jupyter<span class="w"> </span>notebook<span class="w"> </span>--allow-root<span class="w"> </span><span class="si">${</span><span class="nv">PORT</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">IPNAME</span><span class="si">}</span>
@@ -786,7 +786,7 @@ used to build the container.</p>
 <span class="w">    </span>touch<span class="w"> </span>.condarc
 
 <span class="gh">%post</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export RANDOM=123456&#39;</span><span class="w"> </span>&gt;&gt;<span class="nv">$APPTAINER_ENVIRONMENT</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">'export RANDOM=123456'</span><span class="w"> </span>&gt;&gt;<span class="nv">$APPTAINER_ENVIRONMENT</span>
 <span class="w">    </span><span class="c1">#Installing all dependencies</span>
 <span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>-y<span class="w"> </span>upgrade
 <span class="w">    </span>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
@@ -822,28 +822,28 @@ used to build the container.</p>
 </div>
 <p>And the output would look like:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
-<span class="nv">OCI_ENTRYPOINT</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<span class="nv">OCI_CMD</span><span class="o">=</span><span class="s2">&quot;bash&quot;</span>
+<span class="nv">OCI_ENTRYPOINT</span><span class="o">=</span><span class="s2">""</span>
+<span class="nv">OCI_CMD</span><span class="o">=</span><span class="s2">"bash"</span>
 <span class="c1"># ENTRYPOINT only - run entrypoint plus args</span>
-<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OCI_CMD</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">"</span><span class="nv">$OCI_CMD</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">"</span>
 <span class="k">fi</span>
 
 <span class="c1"># CMD only - run CMD or override with args</span>
-<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OCI_CMD</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$OCI_CMD</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">"</span><span class="nv">$OCI_ENTRYPOINT</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
 <span class="k">else</span>
-<span class="w">    </span><span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">"</span>
 <span class="k">fi</span>
 <span class="k">fi</span>
 
 <span class="c1"># ENTRYPOINT and CMD - run ENTRYPOINT with CMD as default args</span>
 <span class="c1"># override with user provided args</span>
 <span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="nv">$@</span><span class="s2">"</span>
 <span class="k">else</span>
-<span class="w">    </span><span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">SINGULARITY_OCI_RUN</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">OCI_ENTRYPOINT</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">OCI_CMD</span><span class="si">}</span><span class="s2">"</span>
 <span class="k">fi</span>
 
 <span class="nb">exec</span><span class="w"> </span><span class="nv">$SINGULARITY_OCI_RUN</span>
@@ -901,21 +901,21 @@ format.</p>
 </div>
 <p>And the output would look like:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-        <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="nt">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="nt">&quot;labels&quot;</span><span class="p">:</span> <span class="p">{</span>
-                                <span class="nt">&quot;my.label&quot;</span><span class="p">:</span> <span class="s2">&quot;version 1.2.3&quot;</span><span class="p">,</span>
-                                <span class="nt">&quot;OWNER&quot;</span><span class="p">:</span> <span class="s2">&quot;Joana&quot;</span><span class="p">,</span>
-                                <span class="nt">&quot;org.label-schema.build-arch&quot;</span><span class="p">:</span> <span class="s2">&quot;amd64&quot;</span><span class="p">,</span>
-                                <span class="nt">&quot;org.label-schema.build-date&quot;</span><span class="p">:</span> <span class="s2">&quot;Thursday_12_November_2020_10:51:59_CST&quot;</span><span class="p">,</span>
-                                <span class="nt">&quot;org.label-schema.schema-version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-                                <span class="nt">&quot;org.label-schema.usage.singularity.deffile.bootstrap&quot;</span><span class="p">:</span> <span class="s2">&quot;docker&quot;</span><span class="p">,</span>
-                                <span class="nt">&quot;org.label-schema.usage.singularity.deffile.from&quot;</span><span class="p">:</span> <span class="s2">&quot;ubuntu:latest&quot;</span><span class="p">,</span>
-                                <span class="nt">&quot;org.label-schema.usage.singularity.version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.7.0-rc.1&quot;</span>
+        <span class="nt">"data"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">"attributes"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="nt">"labels"</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="nt">"my.label"</span><span class="p">:</span> <span class="s2">"version 1.2.3"</span><span class="p">,</span>
+                                <span class="nt">"OWNER"</span><span class="p">:</span> <span class="s2">"Joana"</span><span class="p">,</span>
+                                <span class="nt">"org.label-schema.build-arch"</span><span class="p">:</span> <span class="s2">"amd64"</span><span class="p">,</span>
+                                <span class="nt">"org.label-schema.build-date"</span><span class="p">:</span> <span class="s2">"Thursday_12_November_2020_10:51:59_CST"</span><span class="p">,</span>
+                                <span class="nt">"org.label-schema.schema-version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+                                <span class="nt">"org.label-schema.usage.singularity.deffile.bootstrap"</span><span class="p">:</span> <span class="s2">"docker"</span><span class="p">,</span>
+                                <span class="nt">"org.label-schema.usage.singularity.deffile.from"</span><span class="p">:</span> <span class="s2">"ubuntu:latest"</span><span class="p">,</span>
+                                <span class="nt">"org.label-schema.usage.singularity.version"</span><span class="p">:</span> <span class="s2">"3.7.0-rc.1"</span>
                         <span class="p">}</span>
                 <span class="p">}</span>
         <span class="p">},</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;container&quot;</span>
+        <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"container"</span>
 <span class="p">}</span>
 </pre></div>
 </div>

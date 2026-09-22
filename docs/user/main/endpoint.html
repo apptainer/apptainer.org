@@ -196,7 +196,7 @@ is the current default remote endpoint.</p>
 hosted at enterprise.example.com:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>myremote<span class="w"> </span>https://enterprise.example.com
 
-<span class="go">INFO:    Remote &quot;myremote&quot; added.</span>
+<span class="go">INFO:    Remote "myremote" added.</span>
 <span class="go">Generate an access token at https://enterprise.example.com/auth/tokens, and paste it here.</span>
 <span class="go">Token entered will be hidden for security.</span>
 <span class="go">Access Token:</span>
@@ -211,7 +211,7 @@ system), an administrative user should run:</p>
 
 <span class="gp"># </span>example...
 <span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--global<span class="w"> </span>company-remote<span class="w"> </span>https://enterprise7.example.com
-<span class="go">INFO:    Remote &quot;company-remote&quot; added.</span>
+<span class="go">INFO:    Remote "company-remote" added.</span>
 <span class="go">INFO:    Global option detected. Will not automatically log into remote.</span>
 </pre></div>
 </div>
@@ -276,7 +276,7 @@ endpoint:</p>
 over an insecure HTTP connection, it can be added by specifying
 the <code class="docutils literal notranslate"><span class="pre">--insecure</span></code> flag:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--global<span class="w"> </span>--insecure<span class="w"> </span><span class="nb">test</span><span class="w"> </span>http://test.example.com
-<span class="go">INFO:    Remote &quot;test&quot; added.</span>
+<span class="go">INFO:    Remote "test" added.</span>
 <span class="go">INFO:    Global option detected. Will not automatically log into remote.</span>
 </pre></div>
 </div>
@@ -305,7 +305,7 @@ column in the output of <code class="docutils literal notranslate"><span class="
 <span class="go">test            test.example.com                   ✓                    ✓</span>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>use<span class="w"> </span>myremote
-<span class="go">INFO:    Remote &quot;myremote&quot; now in use.</span>
+<span class="go">INFO:    Remote "myremote" now in use.</span>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>list
 <span class="go">Cloud Services Endpoints</span>
@@ -326,7 +326,7 @@ This behavior can be suppressed by passing the <code class="docutils literal not
 <code class="docutils literal notranslate"><span class="pre">remote</span> <span class="pre">add</span></code> command, which will then add a new remote endpoint but leave the
 default endpoint unchanged:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"> $ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--no-default<span class="w"> </span>myotherremote<span class="w"> </span>https://enterprise2.example.com
-<span class="go"> INFO:    Remote &quot;myotherremote&quot; added.</span>
+<span class="go"> INFO:    Remote "myotherremote" added.</span>
 <span class="go"> Generate an access token at https://enterprise2.example.com/auth/tokens, and paste it here.</span>
 <span class="go"> Token entered will be hidden for security.</span>
 <span class="go"> Access Token:</span>
@@ -344,7 +344,7 @@ default endpoint unchanged:</p>
 <p>An administrator can make a remote
 the only usable remote for the system, using the <code class="docutils literal notranslate"><span class="pre">--exclusive</span></code> flag:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>remote<span class="w"> </span>use<span class="w"> </span>--exclusive<span class="w"> </span>company-remote
-<span class="go">INFO:    Remote &quot;company-remote&quot; now in use.</span>
+<span class="go">INFO:    Remote "company-remote" now in use.</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>list
 <span class="go">Cloud Services Endpoints</span>
 <span class="go">========================</span>
@@ -390,9 +390,9 @@ these are the commands to restore the library
 behavior from before Apptainer, where using the <code class="docutils literal notranslate"><span class="pre">library://</span></code> URI would
 download from the Sylabs Cloud anonymously:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--no-login<span class="w"> </span>SylabsCloud<span class="w"> </span>cloud.sycloud.io
-<span class="go">INFO:    Remote &quot;SylabsCloud&quot; added.</span>
+<span class="go">INFO:    Remote "SylabsCloud" added.</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>use<span class="w"> </span>SylabsCloud
-<span class="go">INFO:    Remote &quot;SylabsCloud&quot; now in use.</span>
+<span class="go">INFO:    Remote "SylabsCloud" now in use.</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>list
 <span class="go">Cloud Services Endpoints</span>
 <span class="go">========================</span>

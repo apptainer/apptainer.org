@@ -269,7 +269,7 @@ already exist in the container):</p>
 <code class="docutils literal notranslate"><span class="pre">/data</span></code> on the host to <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> in the container.</p>
 <p>Using the environment variable instead of the command line argument,
 this would be:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINER_BINDPATH</span><span class="o">=</span><span class="s2">&quot;/opt,/data:/mnt&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINER_BINDPATH</span><span class="o">=</span><span class="s2">"/opt,/data:/mnt"</span>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>shell<span class="w"> </span>my_container.sif
 </pre></div>
@@ -318,7 +318,7 @@ option:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,source<span class="o">=</span>/data,dest<span class="o">=</span>/mnt,ro<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>my_container.sif<span class="w"> </span>touch<span class="w"> </span>/mnt/test
-<span class="go">touch: cannot touch &#39;/mnt/test&#39;: Permission denied</span>
+<span class="go">touch: cannot touch '/mnt/test': Permission denied</span>
 </pre></div>
 </div>
 <p>You can bind multiple directories in a single command with multiple
@@ -334,14 +334,14 @@ option:</p>
 wrapping each field in double quotes if necessary characters.
 <code class="docutils literal notranslate"><span class="pre">--mount</span></code> allows bind mounting paths that are not possible with the
 <code class="docutils literal notranslate"><span class="pre">--bind</span></code> flag. For example:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Mount<span class="w"> </span>a<span class="w"> </span>path<span class="w"> </span>containing<span class="w"> </span><span class="s1">&#39;:&#39;</span><span class="w"> </span><span class="o">(</span>not<span class="w"> </span>possible<span class="w"> </span>with<span class="w"> </span>--bind<span class="o">)</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Mount<span class="w"> </span>a<span class="w"> </span>path<span class="w"> </span>containing<span class="w"> </span><span class="s1">':'</span><span class="w"> </span><span class="o">(</span>not<span class="w"> </span>possible<span class="w"> </span>with<span class="w"> </span>--bind<span class="o">)</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>/my:path,dst<span class="o">=</span>/mnt<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>mycontainer.sif
 
-<span class="gp"># </span>Mount<span class="w"> </span>a<span class="w"> </span>path<span class="w"> </span>containing<span class="w"> </span>a<span class="w"> </span><span class="s1">&#39;,&#39;</span>
+<span class="gp"># </span>Mount<span class="w"> </span>a<span class="w"> </span>path<span class="w"> </span>containing<span class="w"> </span>a<span class="w"> </span><span class="s1">','</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,<span class="s2">&quot;src=/comma,dir&quot;</span>,dst<span class="o">=</span>/mnt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,<span class="s2">"src=/comma,dir"</span>,dst<span class="o">=</span>/mnt<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>mycontainer.sif
 </pre></div>
 </div>
@@ -491,7 +491,7 @@ filesystem will be mounted in the container.</p></li>
 <p>To use a FUSE <code class="docutils literal notranslate"><span class="pre">sshfs</span></code> mount in a container, where the <code class="docutils literal notranslate"><span class="pre">fuse-sshfs</span></code>
 package has been installed on my host, I run with the <code class="docutils literal notranslate"><span class="pre">host</span></code> mount
 type:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--fusemount<span class="w"> </span><span class="s2">&quot;host:sshfs server:/ /server&quot;</span><span class="w"> </span>docker://ubuntu
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--fusemount<span class="w"> </span><span class="s2">"host:sshfs server:/ /server"</span><span class="w"> </span>docker://ubuntu
 <span class="go">Apptainer&gt; cat /etc/hostname</span>
 <span class="go">localhost.localdomain</span>
 <span class="go">Apptainer&gt; cat /server/etc/hostname</span>
@@ -503,7 +503,7 @@ type:</p>
 <h3>FUSE mount with a container executable<a class="headerlink" href="#fuse-mount-with-a-container-executable" title="Link to this heading"></a></h3>
 <p>If the FUSE driver / command that you want to use for the mount has been
 added to your container, you can use the <code class="docutils literal notranslate"><span class="pre">container</span></code> mount type:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--fusemount<span class="w"> </span><span class="s2">&quot;container:sshfs server:/ /server&quot;</span><span class="w"> </span>sshfs.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--fusemount<span class="w"> </span><span class="s2">"container:sshfs server:/ /server"</span><span class="w"> </span>sshfs.sif
 <span class="go">Apptainer&gt; cat /etc/hostname</span>
 <span class="go">localhost.localdomain</span>
 <span class="go">Apptainer&gt; cat /server/etc/hostname</span>
@@ -542,8 +542,8 @@ then the <code class="docutils literal notranslate"><span class="pre">&lt;image-
 <h3>Ext3 Image Files<a class="headerlink" href="#ext3-image-files" title="Link to this heading"></a></h3>
 <p>If you have a directory called <code class="docutils literal notranslate"><span class="pre">inputs/</span></code> that holds data files you
 wish to distribute in an image file that allows read/write:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an image file &#39;inputs.img&#39; of size 100MB and put the</span>
-<span class="c1"># files inputs/ into it&#39;s root directory</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an image file 'inputs.img' of size 100MB and put the</span>
+<span class="c1"># files inputs/ into it's root directory</span>
 $<span class="w"> </span>mkfs.ext3<span class="w"> </span>-d<span class="w"> </span>inputs/<span class="w"> </span>inputs.img<span class="w"> </span>100M
 mke2fs<span class="w"> </span><span class="m">1</span>.45.6<span class="w"> </span><span class="o">(</span><span class="m">20</span>-Mar-2020<span class="o">)</span>
 Creating<span class="w"> </span>regular<span class="w"> </span>file<span class="w"> </span>inputs.img
@@ -558,7 +558,7 @@ Creating<span class="w"> </span>journal<span class="w"> </span><span class="o">(
 Copying<span class="w"> </span>files<span class="w"> </span>into<span class="w"> </span>the<span class="w"> </span>device:<span class="w"> </span><span class="k">done</span>
 Writing<span class="w"> </span>superblocks<span class="w"> </span>and<span class="w"> </span>filesystem<span class="w"> </span>accounting<span class="w"> </span>information:<span class="w"> </span><span class="k">done</span>
 
-<span class="c1"># Run Apptainer, mounting my input data to &#39;/input-data&#39; in</span>
+<span class="c1"># Run Apptainer, mounting my input data to '/input-data' in</span>
 <span class="c1"># the container.</span>
 $<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>-B<span class="w"> </span>inputs.img:/input-data:image-src<span class="o">=</span>/<span class="w"> </span>mycontainer.sif
 Apptainer&gt;<span class="w"> </span>ls<span class="w"> </span>/input-data
@@ -577,14 +577,14 @@ $<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </
 <p>If you have a directory called <code class="docutils literal notranslate"><span class="pre">inputs/</span></code> that holds data files you
 wish to distribute in an image file that is read-only, and compressed,
 then the squashfs format is appropriate:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an image file &#39;inputs.squashfs&#39; and put the files from</span>
-<span class="c1"># inputs/ into it&#39;s root directory</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an image file 'inputs.squashfs' and put the files from</span>
+<span class="c1"># inputs/ into it's root directory</span>
 $<span class="w"> </span>mksquashfs<span class="w"> </span>inputs/<span class="w"> </span>inputs.squashfs
 Parallel<span class="w"> </span>mksquashfs:<span class="w"> </span>Using<span class="w"> </span><span class="m">16</span><span class="w"> </span>processors
 Creating<span class="w"> </span><span class="m">4</span>.0<span class="w"> </span>filesystem<span class="w"> </span>on<span class="w"> </span>inputs.squashfs,<span class="w"> </span>block<span class="w"> </span>size<span class="w"> </span><span class="m">131072</span>.
 ...
 
-<span class="c1"># Run Apptainer, mounting my input data to &#39;/input-data&#39; in</span>
+<span class="c1"># Run Apptainer, mounting my input data to '/input-data' in</span>
 <span class="c1"># the container.</span>
 $<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>-B<span class="w"> </span>inputs.squashfs:/input-data:image-src<span class="o">=</span>/<span class="w"> </span>mycontainer.sif
 Apptainer&gt;<span class="w"> </span>ls<span class="w"> </span>/input-data/
