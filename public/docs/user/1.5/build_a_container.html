@@ -510,7 +510,7 @@ bundled recent version of mksquashfs that should have the maximum
 compressors enabled.  So you might want to explore the help on that
 version, for example by setting its directory early in your PATH like
 this:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">PATH</span><span class="o">=</span><span class="k">$(</span>apptainer<span class="w"> </span>buildcfg<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;s,^LIBEXECDIR=\(.*\),\1/apptainer/bin,p&#39;</span><span class="k">)</span>:<span class="nv">$PATH</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">PATH</span><span class="o">=</span><span class="k">$(</span>apptainer<span class="w"> </span>buildcfg<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'s,^LIBEXECDIR=\(.*\),\1/apptainer/bin,p'</span><span class="k">)</span>:<span class="nv">$PATH</span>
 </pre></div>
 </div>
 <p>Also note that by using non-default compression methods that the

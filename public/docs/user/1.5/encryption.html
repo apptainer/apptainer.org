@@ -334,7 +334,7 @@ the secret private key.</p>
 with the <code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code> command, and then create a PEM file with a few
 specific flags like so:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Generate<span class="w"> </span>a<span class="w"> </span>key<span class="w"> </span>pair
-<span class="gp">$ </span>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>rsa<span class="w"> </span>-b<span class="w"> </span><span class="m">4096</span><span class="w"> </span>-m<span class="w"> </span>pem<span class="w"> </span>-N<span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="gp">$ </span>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>rsa<span class="w"> </span>-b<span class="w"> </span><span class="m">4096</span><span class="w"> </span>-m<span class="w"> </span>pem<span class="w"> </span>-N<span class="w"> </span><span class="s1">''</span>
 <span class="go">Generating public/private rsa key pair.</span>
 <span class="go">Enter file in which to save the key (/home/vagrant/.ssh/id_rsa): rsa</span>
 <span class="go">[snip...]</span>
@@ -433,7 +433,7 @@ the sections above.</p>
 </section>
 <section id="running-with-a-passphrase-in-an-environment-variable">
 <h4>Running with a passphrase in an environment variable<a class="headerlink" href="#running-with-a-passphrase-in-an-environment-variable" title="Link to this heading"></a></h4>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">APPTAINER_ENCRYPTION_PASSPHRASE</span><span class="o">=</span><span class="s2">&quot;secret&quot;</span><span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>encrypted.sif
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">APPTAINER_ENCRYPTION_PASSPHRASE</span><span class="o">=</span><span class="s2">"secret"</span><span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>encrypted.sif
 </pre></div>
 </div>
 <p>While this example shows how an environment variable can be used to set
