@@ -365,7 +365,7 @@ apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </
 <section id="http-server">
 <h4>HTTP server:<a class="headerlink" href="#http-server" title="Link to this heading"></a></h4>
 <p>(when the Network conditions above are met)</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span>--fakeroot<span class="w"> </span>--net<span class="w"> </span>--network-args<span class="o">=</span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span><span class="w"> </span>-w<span class="w"> </span>docker://nginx
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span>--fakeroot<span class="w"> </span>--net<span class="w"> </span>--network-args<span class="o">=</span><span class="s2">"portmap=8080:80/tcp"</span><span class="w"> </span>-w<span class="w"> </span>docker://nginx
 </pre></div>
 </div>
 </section>
@@ -393,9 +393,9 @@ containing this for a RHEL-derived container:</p>
 <span class="gh">%post</span>
 <span class="w">    </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>epel-release
 <span class="w">    </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fakeroot
-<span class="w">    </span><span class="nv">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>fakeroot<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
+<span class="w">    </span><span class="nv">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>fakeroot<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">'</span>
 <span class="s1">        dnf install -y openssh</span>
-<span class="s1">    &#39;</span>
+<span class="s1">    '</span>
 </pre></div>
 </div>
 <p>or this for an alpine container:</p>
@@ -405,9 +405,9 @@ containing this for a RHEL-derived container:</p>
 <span class="gh">%post</span>
 <span class="w">    </span>apk<span class="w"> </span>update
 <span class="w">    </span>apk<span class="w"> </span>add<span class="w"> </span>fakeroot
-<span class="w">    </span><span class="nv">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>fakeroot<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
+<span class="w">    </span><span class="nv">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>fakeroot<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">'</span>
 <span class="s1">        apk add squid</span>
-<span class="s1">    &#39;</span>
+<span class="s1">    '</span>
 </pre></div>
 </div>
 <p>then build with</p>
@@ -439,10 +439,10 @@ on top of that.</p>
 <span class="k">From</span>: ubuntu+fakeroot.sif
 
 <span class="gh">%post</span>
-<span class="w">    </span><span class="nv">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>fakeroot<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
+<span class="w">    </span><span class="nv">FAKEROOTDONTTRYCHOWN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>fakeroot<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">'</span>
 <span class="s1">        apt update</span>
 <span class="s1">        apt install -y openssh</span>
-<span class="s1">    &#39;</span>
+<span class="s1">    '</span>
 </pre></div>
 </div>
 <p>and build with</p>

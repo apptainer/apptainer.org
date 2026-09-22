@@ -260,574 +260,574 @@ corresponding to the OCI mounted <code class="docutils literal notranslate"><spa
 detailed as follows via <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">cat</span> <span class="pre">/var/tmp/busybox/config.json</span> <span class="pre">|</span>
 <span class="pre">jq</span></code>:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;ociVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1-dev&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;process&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;uid&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="nt">&quot;gid&quot;</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="nt">"ociVersion"</span><span class="p">:</span> <span class="s2">"1.0.1-dev"</span><span class="p">,</span>
+  <span class="nt">"process"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">"user"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"uid"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="nt">"gid"</span><span class="p">:</span> <span class="mi">0</span>
     <span class="p">},</span>
-    <span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;/.singularity.d/actions/run&quot;</span>
+    <span class="nt">"args"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"/.singularity.d/actions/run"</span>
     <span class="p">],</span>
-    <span class="nt">&quot;env&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;TERM=xterm&quot;</span>
+    <span class="nt">"env"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span><span class="p">,</span>
+      <span class="s2">"TERM=xterm"</span>
     <span class="p">],</span>
-    <span class="nt">&quot;cwd&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;capabilities&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;bounding&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;CAP_CHOWN&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_DAC_OVERRIDE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_FSETID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_FOWNER&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_MKNOD&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_NET_RAW&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETGID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETUID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETFCAP&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETPCAP&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_NET_BIND_SERVICE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SYS_CHROOT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_KILL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_AUDIT_WRITE&quot;</span>
+    <span class="nt">"cwd"</span><span class="p">:</span> <span class="s2">"/"</span><span class="p">,</span>
+    <span class="nt">"capabilities"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"bounding"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"CAP_CHOWN"</span><span class="p">,</span>
+        <span class="s2">"CAP_DAC_OVERRIDE"</span><span class="p">,</span>
+        <span class="s2">"CAP_FSETID"</span><span class="p">,</span>
+        <span class="s2">"CAP_FOWNER"</span><span class="p">,</span>
+        <span class="s2">"CAP_MKNOD"</span><span class="p">,</span>
+        <span class="s2">"CAP_NET_RAW"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETGID"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETUID"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETFCAP"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETPCAP"</span><span class="p">,</span>
+        <span class="s2">"CAP_NET_BIND_SERVICE"</span><span class="p">,</span>
+        <span class="s2">"CAP_SYS_CHROOT"</span><span class="p">,</span>
+        <span class="s2">"CAP_KILL"</span><span class="p">,</span>
+        <span class="s2">"CAP_AUDIT_WRITE"</span>
       <span class="p">],</span>
-      <span class="nt">&quot;effective&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;CAP_CHOWN&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_DAC_OVERRIDE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_FSETID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_FOWNER&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_MKNOD&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_NET_RAW&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETGID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETUID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETFCAP&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETPCAP&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_NET_BIND_SERVICE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SYS_CHROOT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_KILL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_AUDIT_WRITE&quot;</span>
+      <span class="nt">"effective"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"CAP_CHOWN"</span><span class="p">,</span>
+        <span class="s2">"CAP_DAC_OVERRIDE"</span><span class="p">,</span>
+        <span class="s2">"CAP_FSETID"</span><span class="p">,</span>
+        <span class="s2">"CAP_FOWNER"</span><span class="p">,</span>
+        <span class="s2">"CAP_MKNOD"</span><span class="p">,</span>
+        <span class="s2">"CAP_NET_RAW"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETGID"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETUID"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETFCAP"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETPCAP"</span><span class="p">,</span>
+        <span class="s2">"CAP_NET_BIND_SERVICE"</span><span class="p">,</span>
+        <span class="s2">"CAP_SYS_CHROOT"</span><span class="p">,</span>
+        <span class="s2">"CAP_KILL"</span><span class="p">,</span>
+        <span class="s2">"CAP_AUDIT_WRITE"</span>
       <span class="p">],</span>
-      <span class="nt">&quot;inheritable&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;CAP_CHOWN&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_DAC_OVERRIDE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_FSETID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_FOWNER&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_MKNOD&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_NET_RAW&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETGID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETUID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETFCAP&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETPCAP&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_NET_BIND_SERVICE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SYS_CHROOT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_KILL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_AUDIT_WRITE&quot;</span>
+      <span class="nt">"inheritable"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"CAP_CHOWN"</span><span class="p">,</span>
+        <span class="s2">"CAP_DAC_OVERRIDE"</span><span class="p">,</span>
+        <span class="s2">"CAP_FSETID"</span><span class="p">,</span>
+        <span class="s2">"CAP_FOWNER"</span><span class="p">,</span>
+        <span class="s2">"CAP_MKNOD"</span><span class="p">,</span>
+        <span class="s2">"CAP_NET_RAW"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETGID"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETUID"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETFCAP"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETPCAP"</span><span class="p">,</span>
+        <span class="s2">"CAP_NET_BIND_SERVICE"</span><span class="p">,</span>
+        <span class="s2">"CAP_SYS_CHROOT"</span><span class="p">,</span>
+        <span class="s2">"CAP_KILL"</span><span class="p">,</span>
+        <span class="s2">"CAP_AUDIT_WRITE"</span>
       <span class="p">],</span>
-      <span class="nt">&quot;permitted&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;CAP_CHOWN&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_DAC_OVERRIDE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_FSETID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_FOWNER&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_MKNOD&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_NET_RAW&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETGID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETUID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETFCAP&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETPCAP&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_NET_BIND_SERVICE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SYS_CHROOT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_KILL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_AUDIT_WRITE&quot;</span>
+      <span class="nt">"permitted"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"CAP_CHOWN"</span><span class="p">,</span>
+        <span class="s2">"CAP_DAC_OVERRIDE"</span><span class="p">,</span>
+        <span class="s2">"CAP_FSETID"</span><span class="p">,</span>
+        <span class="s2">"CAP_FOWNER"</span><span class="p">,</span>
+        <span class="s2">"CAP_MKNOD"</span><span class="p">,</span>
+        <span class="s2">"CAP_NET_RAW"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETGID"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETUID"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETFCAP"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETPCAP"</span><span class="p">,</span>
+        <span class="s2">"CAP_NET_BIND_SERVICE"</span><span class="p">,</span>
+        <span class="s2">"CAP_SYS_CHROOT"</span><span class="p">,</span>
+        <span class="s2">"CAP_KILL"</span><span class="p">,</span>
+        <span class="s2">"CAP_AUDIT_WRITE"</span>
       <span class="p">],</span>
-      <span class="nt">&quot;ambient&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;CAP_CHOWN&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_DAC_OVERRIDE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_FSETID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_FOWNER&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_MKNOD&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_NET_RAW&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETGID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETUID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETFCAP&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SETPCAP&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_NET_BIND_SERVICE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_SYS_CHROOT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_KILL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CAP_AUDIT_WRITE&quot;</span>
+      <span class="nt">"ambient"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"CAP_CHOWN"</span><span class="p">,</span>
+        <span class="s2">"CAP_DAC_OVERRIDE"</span><span class="p">,</span>
+        <span class="s2">"CAP_FSETID"</span><span class="p">,</span>
+        <span class="s2">"CAP_FOWNER"</span><span class="p">,</span>
+        <span class="s2">"CAP_MKNOD"</span><span class="p">,</span>
+        <span class="s2">"CAP_NET_RAW"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETGID"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETUID"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETFCAP"</span><span class="p">,</span>
+        <span class="s2">"CAP_SETPCAP"</span><span class="p">,</span>
+        <span class="s2">"CAP_NET_BIND_SERVICE"</span><span class="p">,</span>
+        <span class="s2">"CAP_SYS_CHROOT"</span><span class="p">,</span>
+        <span class="s2">"CAP_KILL"</span><span class="p">,</span>
+        <span class="s2">"CAP_AUDIT_WRITE"</span>
       <span class="p">]</span>
     <span class="p">},</span>
-    <span class="nt">&quot;rlimits&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nt">"rlimits"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;RLIMIT_NOFILE&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;hard&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
-        <span class="nt">&quot;soft&quot;</span><span class="p">:</span> <span class="mi">1024</span>
+        <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"RLIMIT_NOFILE"</span><span class="p">,</span>
+        <span class="nt">"hard"</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+        <span class="nt">"soft"</span><span class="p">:</span> <span class="mi">1024</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">},</span>
-  <span class="nt">&quot;root&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/var/tmp/busybox/rootfs&quot;</span>
+  <span class="nt">"root"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">"path"</span><span class="p">:</span> <span class="s2">"/var/tmp/busybox/rootfs"</span>
   <span class="p">},</span>
-  <span class="nt">&quot;hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;mrsdalloway&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;mounts&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="nt">"hostname"</span><span class="p">:</span> <span class="s2">"mrsdalloway"</span><span class="p">,</span>
+  <span class="nt">"mounts"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;/proc&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;proc&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;proc&quot;</span>
+      <span class="nt">"destination"</span><span class="p">:</span> <span class="s2">"/proc"</span><span class="p">,</span>
+      <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"proc"</span><span class="p">,</span>
+      <span class="nt">"source"</span><span class="p">:</span> <span class="s2">"proc"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;/dev&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;tmpfs&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;tmpfs&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;nosuid&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;strictatime&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;mode=755&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;size=65536k&quot;</span>
+      <span class="nt">"destination"</span><span class="p">:</span> <span class="s2">"/dev"</span><span class="p">,</span>
+      <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"tmpfs"</span><span class="p">,</span>
+      <span class="nt">"source"</span><span class="p">:</span> <span class="s2">"tmpfs"</span><span class="p">,</span>
+      <span class="nt">"options"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"nosuid"</span><span class="p">,</span>
+        <span class="s2">"strictatime"</span><span class="p">,</span>
+        <span class="s2">"mode=755"</span><span class="p">,</span>
+        <span class="s2">"size=65536k"</span>
       <span class="p">]</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;/dev/pts&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;devpts&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;devpts&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;nosuid&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;noexec&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;newinstance&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ptmxmode=0666&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;mode=0620&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;gid=5&quot;</span>
+      <span class="nt">"destination"</span><span class="p">:</span> <span class="s2">"/dev/pts"</span><span class="p">,</span>
+      <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"devpts"</span><span class="p">,</span>
+      <span class="nt">"source"</span><span class="p">:</span> <span class="s2">"devpts"</span><span class="p">,</span>
+      <span class="nt">"options"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"nosuid"</span><span class="p">,</span>
+        <span class="s2">"noexec"</span><span class="p">,</span>
+        <span class="s2">"newinstance"</span><span class="p">,</span>
+        <span class="s2">"ptmxmode=0666"</span><span class="p">,</span>
+        <span class="s2">"mode=0620"</span><span class="p">,</span>
+        <span class="s2">"gid=5"</span>
       <span class="p">]</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;/dev/shm&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;tmpfs&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;shm&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;nosuid&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;noexec&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;nodev&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;mode=1777&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;size=65536k&quot;</span>
+      <span class="nt">"destination"</span><span class="p">:</span> <span class="s2">"/dev/shm"</span><span class="p">,</span>
+      <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"tmpfs"</span><span class="p">,</span>
+      <span class="nt">"source"</span><span class="p">:</span> <span class="s2">"shm"</span><span class="p">,</span>
+      <span class="nt">"options"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"nosuid"</span><span class="p">,</span>
+        <span class="s2">"noexec"</span><span class="p">,</span>
+        <span class="s2">"nodev"</span><span class="p">,</span>
+        <span class="s2">"mode=1777"</span><span class="p">,</span>
+        <span class="s2">"size=65536k"</span>
       <span class="p">]</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;/dev/mqueue&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mqueue&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;mqueue&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;nosuid&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;noexec&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;nodev&quot;</span>
+      <span class="nt">"destination"</span><span class="p">:</span> <span class="s2">"/dev/mqueue"</span><span class="p">,</span>
+      <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"mqueue"</span><span class="p">,</span>
+      <span class="nt">"source"</span><span class="p">:</span> <span class="s2">"mqueue"</span><span class="p">,</span>
+      <span class="nt">"options"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"nosuid"</span><span class="p">,</span>
+        <span class="s2">"noexec"</span><span class="p">,</span>
+        <span class="s2">"nodev"</span>
       <span class="p">]</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;/sys&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;sysfs&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;sysfs&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;nosuid&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;noexec&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;nodev&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ro&quot;</span>
+      <span class="nt">"destination"</span><span class="p">:</span> <span class="s2">"/sys"</span><span class="p">,</span>
+      <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"sysfs"</span><span class="p">,</span>
+      <span class="nt">"source"</span><span class="p">:</span> <span class="s2">"sysfs"</span><span class="p">,</span>
+      <span class="nt">"options"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"nosuid"</span><span class="p">,</span>
+        <span class="s2">"noexec"</span><span class="p">,</span>
+        <span class="s2">"nodev"</span><span class="p">,</span>
+        <span class="s2">"ro"</span>
       <span class="p">]</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="nt">&quot;linux&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;resources&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;devices&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="nt">"linux"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">"resources"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"devices"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="nt">&quot;allow&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-          <span class="nt">&quot;access&quot;</span><span class="p">:</span> <span class="s2">&quot;rwm&quot;</span>
+          <span class="nt">"allow"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="nt">"access"</span><span class="p">:</span> <span class="s2">"rwm"</span>
         <span class="p">}</span>
       <span class="p">]</span>
     <span class="p">},</span>
-    <span class="nt">&quot;namespaces&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nt">"namespaces"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;pid&quot;</span>
+        <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"pid"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;network&quot;</span>
+        <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"network"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ipc&quot;</span>
+        <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"ipc"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;uts&quot;</span>
+        <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"uts"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mount&quot;</span>
+        <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"mount"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="nt">&quot;seccomp&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;defaultAction&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_ERRNO&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;architectures&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;SCMP_ARCH_X86_64&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;SCMP_ARCH_X86&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;SCMP_ARCH_X32&quot;</span>
+    <span class="nt">"seccomp"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"defaultAction"</span><span class="p">:</span> <span class="s2">"SCMP_ACT_ERRNO"</span><span class="p">,</span>
+      <span class="nt">"architectures"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"SCMP_ARCH_X86_64"</span><span class="p">,</span>
+        <span class="s2">"SCMP_ARCH_X86"</span><span class="p">,</span>
+        <span class="s2">"SCMP_ARCH_X32"</span>
       <span class="p">],</span>
-      <span class="nt">&quot;syscalls&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="nt">"syscalls"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="nt">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;accept&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;accept4&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;access&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;alarm&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;bind&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;brk&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;capget&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;capset&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;chdir&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;chmod&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;chown&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;chown32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;clock_getres&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;clock_gettime&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;clock_nanosleep&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;close&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;connect&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;copy_file_range&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;creat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dup&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dup2&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dup3&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;epoll_create&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;epoll_create1&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;epoll_ctl&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;epoll_ctl_old&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;epoll_pwait&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;epoll_wait&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;epoll_wait_old&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;eventfd&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;eventfd2&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;execve&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;execveat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;exit&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;exit_group&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;faccessat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fadvise64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fadvise64_64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fallocate&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fanotify_mark&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fchdir&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fchmod&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fchmodat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fchown&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fchown32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fchownat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fcntl&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fcntl64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fdatasync&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fgetxattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;flistxattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;flock&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fork&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fremovexattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fsetxattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fstat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fstat64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fstatat64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fstatfs&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fstatfs64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;fsync&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ftruncate&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ftruncate64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;futex&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;futimesat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getcpu&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getcwd&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getdents&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getdents64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getegid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getegid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geteuid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geteuid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getgid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getgid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getgroups&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getgroups32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getitimer&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getpeername&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getpgid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getpgrp&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getpid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getppid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getpriority&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getrandom&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getresgid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getresgid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getresuid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getresuid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getrlimit&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;get_robust_list&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getrusage&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getsid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getsockname&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getsockopt&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;get_thread_area&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;gettid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;gettimeofday&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getuid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getuid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;getxattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;inotify_add_watch&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;inotify_init&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;inotify_init1&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;inotify_rm_watch&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;io_cancel&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ioctl&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;io_destroy&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;io_getevents&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ioprio_get&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ioprio_set&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;io_setup&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;io_submit&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ipc&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;kill&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;lchown&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;lchown32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;lgetxattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;link&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;linkat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;listen&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;listxattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;llistxattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;_llseek&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;lremovexattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;lseek&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;lsetxattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;lstat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;lstat64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;madvise&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;memfd_create&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mincore&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mkdir&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mkdirat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mknod&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mknodat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mlock&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mlock2&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mlockall&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mmap&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mmap2&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mprotect&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mq_getsetattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mq_notify&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mq_open&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mq_timedreceive&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mq_timedsend&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mq_unlink&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mremap&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;msgctl&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;msgget&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;msgrcv&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;msgsnd&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;msync&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;munlock&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;munlockall&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;munmap&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;nanosleep&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;newfstatat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;_newselect&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;open&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;openat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;pause&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;pipe&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;pipe2&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;poll&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ppoll&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;prctl&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;pread64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;preadv&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;prlimit64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;pselect6&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;pwrite64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;pwritev&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;read&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readahead&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readlink&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readlinkat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readv&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;recv&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;recvfrom&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;recvmmsg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;recvmsg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;remap_file_pages&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;removexattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;rename&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;renameat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;renameat2&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;restart_syscall&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;rmdir&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;rt_sigaction&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;rt_sigpending&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;rt_sigprocmask&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;rt_sigqueueinfo&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;rt_sigreturn&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;rt_sigsuspend&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;rt_sigtimedwait&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;rt_tgsigqueueinfo&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sched_getaffinity&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sched_getattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sched_getparam&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sched_get_priority_max&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sched_get_priority_min&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sched_getscheduler&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sched_rr_get_interval&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sched_setaffinity&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sched_setattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sched_setparam&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sched_setscheduler&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sched_yield&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;seccomp&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;select&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;semctl&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;semget&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;semop&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;semtimedop&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;send&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sendfile&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sendfile64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sendmmsg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sendmsg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sendto&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setfsgid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setfsgid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setfsuid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setfsuid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setgid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setgid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setgroups&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setgroups32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setitimer&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setpgid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setpriority&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setregid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setregid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setresgid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setresgid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setresuid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setresuid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setreuid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setreuid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setrlimit&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;set_robust_list&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setsid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setsockopt&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;set_thread_area&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;set_tid_address&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setuid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setuid32&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;setxattr&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;shmat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;shmctl&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;shmdt&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;shmget&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;shutdown&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sigaltstack&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;signalfd&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;signalfd4&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sigreturn&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;socket&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;socketcall&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;socketpair&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;splice&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;stat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;stat64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;statfs&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;statfs64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;symlink&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;symlinkat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sync&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sync_file_range&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;syncfs&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sysinfo&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;syslog&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;tee&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;tgkill&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;time&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;timer_create&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;timer_delete&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;timerfd_create&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;timerfd_gettime&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;timerfd_settime&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;timer_getoverrun&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;timer_gettime&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;timer_settime&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;times&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;tkill&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;truncate&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;truncate64&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ugetrlimit&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;umask&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;uname&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;unlink&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;unlinkat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;utime&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;utimensat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;utimes&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;vfork&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;vmsplice&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;wait4&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;waitid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;waitpid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;write&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;writev&quot;</span>
+          <span class="nt">"names"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"accept"</span><span class="p">,</span>
+            <span class="s2">"accept4"</span><span class="p">,</span>
+            <span class="s2">"access"</span><span class="p">,</span>
+            <span class="s2">"alarm"</span><span class="p">,</span>
+            <span class="s2">"bind"</span><span class="p">,</span>
+            <span class="s2">"brk"</span><span class="p">,</span>
+            <span class="s2">"capget"</span><span class="p">,</span>
+            <span class="s2">"capset"</span><span class="p">,</span>
+            <span class="s2">"chdir"</span><span class="p">,</span>
+            <span class="s2">"chmod"</span><span class="p">,</span>
+            <span class="s2">"chown"</span><span class="p">,</span>
+            <span class="s2">"chown32"</span><span class="p">,</span>
+            <span class="s2">"clock_getres"</span><span class="p">,</span>
+            <span class="s2">"clock_gettime"</span><span class="p">,</span>
+            <span class="s2">"clock_nanosleep"</span><span class="p">,</span>
+            <span class="s2">"close"</span><span class="p">,</span>
+            <span class="s2">"connect"</span><span class="p">,</span>
+            <span class="s2">"copy_file_range"</span><span class="p">,</span>
+            <span class="s2">"creat"</span><span class="p">,</span>
+            <span class="s2">"dup"</span><span class="p">,</span>
+            <span class="s2">"dup2"</span><span class="p">,</span>
+            <span class="s2">"dup3"</span><span class="p">,</span>
+            <span class="s2">"epoll_create"</span><span class="p">,</span>
+            <span class="s2">"epoll_create1"</span><span class="p">,</span>
+            <span class="s2">"epoll_ctl"</span><span class="p">,</span>
+            <span class="s2">"epoll_ctl_old"</span><span class="p">,</span>
+            <span class="s2">"epoll_pwait"</span><span class="p">,</span>
+            <span class="s2">"epoll_wait"</span><span class="p">,</span>
+            <span class="s2">"epoll_wait_old"</span><span class="p">,</span>
+            <span class="s2">"eventfd"</span><span class="p">,</span>
+            <span class="s2">"eventfd2"</span><span class="p">,</span>
+            <span class="s2">"execve"</span><span class="p">,</span>
+            <span class="s2">"execveat"</span><span class="p">,</span>
+            <span class="s2">"exit"</span><span class="p">,</span>
+            <span class="s2">"exit_group"</span><span class="p">,</span>
+            <span class="s2">"faccessat"</span><span class="p">,</span>
+            <span class="s2">"fadvise64"</span><span class="p">,</span>
+            <span class="s2">"fadvise64_64"</span><span class="p">,</span>
+            <span class="s2">"fallocate"</span><span class="p">,</span>
+            <span class="s2">"fanotify_mark"</span><span class="p">,</span>
+            <span class="s2">"fchdir"</span><span class="p">,</span>
+            <span class="s2">"fchmod"</span><span class="p">,</span>
+            <span class="s2">"fchmodat"</span><span class="p">,</span>
+            <span class="s2">"fchown"</span><span class="p">,</span>
+            <span class="s2">"fchown32"</span><span class="p">,</span>
+            <span class="s2">"fchownat"</span><span class="p">,</span>
+            <span class="s2">"fcntl"</span><span class="p">,</span>
+            <span class="s2">"fcntl64"</span><span class="p">,</span>
+            <span class="s2">"fdatasync"</span><span class="p">,</span>
+            <span class="s2">"fgetxattr"</span><span class="p">,</span>
+            <span class="s2">"flistxattr"</span><span class="p">,</span>
+            <span class="s2">"flock"</span><span class="p">,</span>
+            <span class="s2">"fork"</span><span class="p">,</span>
+            <span class="s2">"fremovexattr"</span><span class="p">,</span>
+            <span class="s2">"fsetxattr"</span><span class="p">,</span>
+            <span class="s2">"fstat"</span><span class="p">,</span>
+            <span class="s2">"fstat64"</span><span class="p">,</span>
+            <span class="s2">"fstatat64"</span><span class="p">,</span>
+            <span class="s2">"fstatfs"</span><span class="p">,</span>
+            <span class="s2">"fstatfs64"</span><span class="p">,</span>
+            <span class="s2">"fsync"</span><span class="p">,</span>
+            <span class="s2">"ftruncate"</span><span class="p">,</span>
+            <span class="s2">"ftruncate64"</span><span class="p">,</span>
+            <span class="s2">"futex"</span><span class="p">,</span>
+            <span class="s2">"futimesat"</span><span class="p">,</span>
+            <span class="s2">"getcpu"</span><span class="p">,</span>
+            <span class="s2">"getcwd"</span><span class="p">,</span>
+            <span class="s2">"getdents"</span><span class="p">,</span>
+            <span class="s2">"getdents64"</span><span class="p">,</span>
+            <span class="s2">"getegid"</span><span class="p">,</span>
+            <span class="s2">"getegid32"</span><span class="p">,</span>
+            <span class="s2">"geteuid"</span><span class="p">,</span>
+            <span class="s2">"geteuid32"</span><span class="p">,</span>
+            <span class="s2">"getgid"</span><span class="p">,</span>
+            <span class="s2">"getgid32"</span><span class="p">,</span>
+            <span class="s2">"getgroups"</span><span class="p">,</span>
+            <span class="s2">"getgroups32"</span><span class="p">,</span>
+            <span class="s2">"getitimer"</span><span class="p">,</span>
+            <span class="s2">"getpeername"</span><span class="p">,</span>
+            <span class="s2">"getpgid"</span><span class="p">,</span>
+            <span class="s2">"getpgrp"</span><span class="p">,</span>
+            <span class="s2">"getpid"</span><span class="p">,</span>
+            <span class="s2">"getppid"</span><span class="p">,</span>
+            <span class="s2">"getpriority"</span><span class="p">,</span>
+            <span class="s2">"getrandom"</span><span class="p">,</span>
+            <span class="s2">"getresgid"</span><span class="p">,</span>
+            <span class="s2">"getresgid32"</span><span class="p">,</span>
+            <span class="s2">"getresuid"</span><span class="p">,</span>
+            <span class="s2">"getresuid32"</span><span class="p">,</span>
+            <span class="s2">"getrlimit"</span><span class="p">,</span>
+            <span class="s2">"get_robust_list"</span><span class="p">,</span>
+            <span class="s2">"getrusage"</span><span class="p">,</span>
+            <span class="s2">"getsid"</span><span class="p">,</span>
+            <span class="s2">"getsockname"</span><span class="p">,</span>
+            <span class="s2">"getsockopt"</span><span class="p">,</span>
+            <span class="s2">"get_thread_area"</span><span class="p">,</span>
+            <span class="s2">"gettid"</span><span class="p">,</span>
+            <span class="s2">"gettimeofday"</span><span class="p">,</span>
+            <span class="s2">"getuid"</span><span class="p">,</span>
+            <span class="s2">"getuid32"</span><span class="p">,</span>
+            <span class="s2">"getxattr"</span><span class="p">,</span>
+            <span class="s2">"inotify_add_watch"</span><span class="p">,</span>
+            <span class="s2">"inotify_init"</span><span class="p">,</span>
+            <span class="s2">"inotify_init1"</span><span class="p">,</span>
+            <span class="s2">"inotify_rm_watch"</span><span class="p">,</span>
+            <span class="s2">"io_cancel"</span><span class="p">,</span>
+            <span class="s2">"ioctl"</span><span class="p">,</span>
+            <span class="s2">"io_destroy"</span><span class="p">,</span>
+            <span class="s2">"io_getevents"</span><span class="p">,</span>
+            <span class="s2">"ioprio_get"</span><span class="p">,</span>
+            <span class="s2">"ioprio_set"</span><span class="p">,</span>
+            <span class="s2">"io_setup"</span><span class="p">,</span>
+            <span class="s2">"io_submit"</span><span class="p">,</span>
+            <span class="s2">"ipc"</span><span class="p">,</span>
+            <span class="s2">"kill"</span><span class="p">,</span>
+            <span class="s2">"lchown"</span><span class="p">,</span>
+            <span class="s2">"lchown32"</span><span class="p">,</span>
+            <span class="s2">"lgetxattr"</span><span class="p">,</span>
+            <span class="s2">"link"</span><span class="p">,</span>
+            <span class="s2">"linkat"</span><span class="p">,</span>
+            <span class="s2">"listen"</span><span class="p">,</span>
+            <span class="s2">"listxattr"</span><span class="p">,</span>
+            <span class="s2">"llistxattr"</span><span class="p">,</span>
+            <span class="s2">"_llseek"</span><span class="p">,</span>
+            <span class="s2">"lremovexattr"</span><span class="p">,</span>
+            <span class="s2">"lseek"</span><span class="p">,</span>
+            <span class="s2">"lsetxattr"</span><span class="p">,</span>
+            <span class="s2">"lstat"</span><span class="p">,</span>
+            <span class="s2">"lstat64"</span><span class="p">,</span>
+            <span class="s2">"madvise"</span><span class="p">,</span>
+            <span class="s2">"memfd_create"</span><span class="p">,</span>
+            <span class="s2">"mincore"</span><span class="p">,</span>
+            <span class="s2">"mkdir"</span><span class="p">,</span>
+            <span class="s2">"mkdirat"</span><span class="p">,</span>
+            <span class="s2">"mknod"</span><span class="p">,</span>
+            <span class="s2">"mknodat"</span><span class="p">,</span>
+            <span class="s2">"mlock"</span><span class="p">,</span>
+            <span class="s2">"mlock2"</span><span class="p">,</span>
+            <span class="s2">"mlockall"</span><span class="p">,</span>
+            <span class="s2">"mmap"</span><span class="p">,</span>
+            <span class="s2">"mmap2"</span><span class="p">,</span>
+            <span class="s2">"mprotect"</span><span class="p">,</span>
+            <span class="s2">"mq_getsetattr"</span><span class="p">,</span>
+            <span class="s2">"mq_notify"</span><span class="p">,</span>
+            <span class="s2">"mq_open"</span><span class="p">,</span>
+            <span class="s2">"mq_timedreceive"</span><span class="p">,</span>
+            <span class="s2">"mq_timedsend"</span><span class="p">,</span>
+            <span class="s2">"mq_unlink"</span><span class="p">,</span>
+            <span class="s2">"mremap"</span><span class="p">,</span>
+            <span class="s2">"msgctl"</span><span class="p">,</span>
+            <span class="s2">"msgget"</span><span class="p">,</span>
+            <span class="s2">"msgrcv"</span><span class="p">,</span>
+            <span class="s2">"msgsnd"</span><span class="p">,</span>
+            <span class="s2">"msync"</span><span class="p">,</span>
+            <span class="s2">"munlock"</span><span class="p">,</span>
+            <span class="s2">"munlockall"</span><span class="p">,</span>
+            <span class="s2">"munmap"</span><span class="p">,</span>
+            <span class="s2">"nanosleep"</span><span class="p">,</span>
+            <span class="s2">"newfstatat"</span><span class="p">,</span>
+            <span class="s2">"_newselect"</span><span class="p">,</span>
+            <span class="s2">"open"</span><span class="p">,</span>
+            <span class="s2">"openat"</span><span class="p">,</span>
+            <span class="s2">"pause"</span><span class="p">,</span>
+            <span class="s2">"pipe"</span><span class="p">,</span>
+            <span class="s2">"pipe2"</span><span class="p">,</span>
+            <span class="s2">"poll"</span><span class="p">,</span>
+            <span class="s2">"ppoll"</span><span class="p">,</span>
+            <span class="s2">"prctl"</span><span class="p">,</span>
+            <span class="s2">"pread64"</span><span class="p">,</span>
+            <span class="s2">"preadv"</span><span class="p">,</span>
+            <span class="s2">"prlimit64"</span><span class="p">,</span>
+            <span class="s2">"pselect6"</span><span class="p">,</span>
+            <span class="s2">"pwrite64"</span><span class="p">,</span>
+            <span class="s2">"pwritev"</span><span class="p">,</span>
+            <span class="s2">"read"</span><span class="p">,</span>
+            <span class="s2">"readahead"</span><span class="p">,</span>
+            <span class="s2">"readlink"</span><span class="p">,</span>
+            <span class="s2">"readlinkat"</span><span class="p">,</span>
+            <span class="s2">"readv"</span><span class="p">,</span>
+            <span class="s2">"recv"</span><span class="p">,</span>
+            <span class="s2">"recvfrom"</span><span class="p">,</span>
+            <span class="s2">"recvmmsg"</span><span class="p">,</span>
+            <span class="s2">"recvmsg"</span><span class="p">,</span>
+            <span class="s2">"remap_file_pages"</span><span class="p">,</span>
+            <span class="s2">"removexattr"</span><span class="p">,</span>
+            <span class="s2">"rename"</span><span class="p">,</span>
+            <span class="s2">"renameat"</span><span class="p">,</span>
+            <span class="s2">"renameat2"</span><span class="p">,</span>
+            <span class="s2">"restart_syscall"</span><span class="p">,</span>
+            <span class="s2">"rmdir"</span><span class="p">,</span>
+            <span class="s2">"rt_sigaction"</span><span class="p">,</span>
+            <span class="s2">"rt_sigpending"</span><span class="p">,</span>
+            <span class="s2">"rt_sigprocmask"</span><span class="p">,</span>
+            <span class="s2">"rt_sigqueueinfo"</span><span class="p">,</span>
+            <span class="s2">"rt_sigreturn"</span><span class="p">,</span>
+            <span class="s2">"rt_sigsuspend"</span><span class="p">,</span>
+            <span class="s2">"rt_sigtimedwait"</span><span class="p">,</span>
+            <span class="s2">"rt_tgsigqueueinfo"</span><span class="p">,</span>
+            <span class="s2">"sched_getaffinity"</span><span class="p">,</span>
+            <span class="s2">"sched_getattr"</span><span class="p">,</span>
+            <span class="s2">"sched_getparam"</span><span class="p">,</span>
+            <span class="s2">"sched_get_priority_max"</span><span class="p">,</span>
+            <span class="s2">"sched_get_priority_min"</span><span class="p">,</span>
+            <span class="s2">"sched_getscheduler"</span><span class="p">,</span>
+            <span class="s2">"sched_rr_get_interval"</span><span class="p">,</span>
+            <span class="s2">"sched_setaffinity"</span><span class="p">,</span>
+            <span class="s2">"sched_setattr"</span><span class="p">,</span>
+            <span class="s2">"sched_setparam"</span><span class="p">,</span>
+            <span class="s2">"sched_setscheduler"</span><span class="p">,</span>
+            <span class="s2">"sched_yield"</span><span class="p">,</span>
+            <span class="s2">"seccomp"</span><span class="p">,</span>
+            <span class="s2">"select"</span><span class="p">,</span>
+            <span class="s2">"semctl"</span><span class="p">,</span>
+            <span class="s2">"semget"</span><span class="p">,</span>
+            <span class="s2">"semop"</span><span class="p">,</span>
+            <span class="s2">"semtimedop"</span><span class="p">,</span>
+            <span class="s2">"send"</span><span class="p">,</span>
+            <span class="s2">"sendfile"</span><span class="p">,</span>
+            <span class="s2">"sendfile64"</span><span class="p">,</span>
+            <span class="s2">"sendmmsg"</span><span class="p">,</span>
+            <span class="s2">"sendmsg"</span><span class="p">,</span>
+            <span class="s2">"sendto"</span><span class="p">,</span>
+            <span class="s2">"setfsgid"</span><span class="p">,</span>
+            <span class="s2">"setfsgid32"</span><span class="p">,</span>
+            <span class="s2">"setfsuid"</span><span class="p">,</span>
+            <span class="s2">"setfsuid32"</span><span class="p">,</span>
+            <span class="s2">"setgid"</span><span class="p">,</span>
+            <span class="s2">"setgid32"</span><span class="p">,</span>
+            <span class="s2">"setgroups"</span><span class="p">,</span>
+            <span class="s2">"setgroups32"</span><span class="p">,</span>
+            <span class="s2">"setitimer"</span><span class="p">,</span>
+            <span class="s2">"setpgid"</span><span class="p">,</span>
+            <span class="s2">"setpriority"</span><span class="p">,</span>
+            <span class="s2">"setregid"</span><span class="p">,</span>
+            <span class="s2">"setregid32"</span><span class="p">,</span>
+            <span class="s2">"setresgid"</span><span class="p">,</span>
+            <span class="s2">"setresgid32"</span><span class="p">,</span>
+            <span class="s2">"setresuid"</span><span class="p">,</span>
+            <span class="s2">"setresuid32"</span><span class="p">,</span>
+            <span class="s2">"setreuid"</span><span class="p">,</span>
+            <span class="s2">"setreuid32"</span><span class="p">,</span>
+            <span class="s2">"setrlimit"</span><span class="p">,</span>
+            <span class="s2">"set_robust_list"</span><span class="p">,</span>
+            <span class="s2">"setsid"</span><span class="p">,</span>
+            <span class="s2">"setsockopt"</span><span class="p">,</span>
+            <span class="s2">"set_thread_area"</span><span class="p">,</span>
+            <span class="s2">"set_tid_address"</span><span class="p">,</span>
+            <span class="s2">"setuid"</span><span class="p">,</span>
+            <span class="s2">"setuid32"</span><span class="p">,</span>
+            <span class="s2">"setxattr"</span><span class="p">,</span>
+            <span class="s2">"shmat"</span><span class="p">,</span>
+            <span class="s2">"shmctl"</span><span class="p">,</span>
+            <span class="s2">"shmdt"</span><span class="p">,</span>
+            <span class="s2">"shmget"</span><span class="p">,</span>
+            <span class="s2">"shutdown"</span><span class="p">,</span>
+            <span class="s2">"sigaltstack"</span><span class="p">,</span>
+            <span class="s2">"signalfd"</span><span class="p">,</span>
+            <span class="s2">"signalfd4"</span><span class="p">,</span>
+            <span class="s2">"sigreturn"</span><span class="p">,</span>
+            <span class="s2">"socket"</span><span class="p">,</span>
+            <span class="s2">"socketcall"</span><span class="p">,</span>
+            <span class="s2">"socketpair"</span><span class="p">,</span>
+            <span class="s2">"splice"</span><span class="p">,</span>
+            <span class="s2">"stat"</span><span class="p">,</span>
+            <span class="s2">"stat64"</span><span class="p">,</span>
+            <span class="s2">"statfs"</span><span class="p">,</span>
+            <span class="s2">"statfs64"</span><span class="p">,</span>
+            <span class="s2">"symlink"</span><span class="p">,</span>
+            <span class="s2">"symlinkat"</span><span class="p">,</span>
+            <span class="s2">"sync"</span><span class="p">,</span>
+            <span class="s2">"sync_file_range"</span><span class="p">,</span>
+            <span class="s2">"syncfs"</span><span class="p">,</span>
+            <span class="s2">"sysinfo"</span><span class="p">,</span>
+            <span class="s2">"syslog"</span><span class="p">,</span>
+            <span class="s2">"tee"</span><span class="p">,</span>
+            <span class="s2">"tgkill"</span><span class="p">,</span>
+            <span class="s2">"time"</span><span class="p">,</span>
+            <span class="s2">"timer_create"</span><span class="p">,</span>
+            <span class="s2">"timer_delete"</span><span class="p">,</span>
+            <span class="s2">"timerfd_create"</span><span class="p">,</span>
+            <span class="s2">"timerfd_gettime"</span><span class="p">,</span>
+            <span class="s2">"timerfd_settime"</span><span class="p">,</span>
+            <span class="s2">"timer_getoverrun"</span><span class="p">,</span>
+            <span class="s2">"timer_gettime"</span><span class="p">,</span>
+            <span class="s2">"timer_settime"</span><span class="p">,</span>
+            <span class="s2">"times"</span><span class="p">,</span>
+            <span class="s2">"tkill"</span><span class="p">,</span>
+            <span class="s2">"truncate"</span><span class="p">,</span>
+            <span class="s2">"truncate64"</span><span class="p">,</span>
+            <span class="s2">"ugetrlimit"</span><span class="p">,</span>
+            <span class="s2">"umask"</span><span class="p">,</span>
+            <span class="s2">"uname"</span><span class="p">,</span>
+            <span class="s2">"unlink"</span><span class="p">,</span>
+            <span class="s2">"unlinkat"</span><span class="p">,</span>
+            <span class="s2">"utime"</span><span class="p">,</span>
+            <span class="s2">"utimensat"</span><span class="p">,</span>
+            <span class="s2">"utimes"</span><span class="p">,</span>
+            <span class="s2">"vfork"</span><span class="p">,</span>
+            <span class="s2">"vmsplice"</span><span class="p">,</span>
+            <span class="s2">"wait4"</span><span class="p">,</span>
+            <span class="s2">"waitid"</span><span class="p">,</span>
+            <span class="s2">"waitpid"</span><span class="p">,</span>
+            <span class="s2">"write"</span><span class="p">,</span>
+            <span class="s2">"writev"</span>
           <span class="p">],</span>
-          <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_ALLOW&quot;</span>
+          <span class="nt">"action"</span><span class="p">:</span> <span class="s2">"SCMP_ACT_ALLOW"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="nt">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;personality&quot;</span>
+          <span class="nt">"names"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"personality"</span>
           <span class="p">],</span>
-          <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_ALLOW&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="nt">"action"</span><span class="p">:</span> <span class="s2">"SCMP_ACT_ALLOW"</span><span class="p">,</span>
+          <span class="nt">"args"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="nt">&quot;index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_CMP_EQ&quot;</span>
+              <span class="nt">"index"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="nt">"value"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="nt">"op"</span><span class="p">:</span> <span class="s2">"SCMP_CMP_EQ"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="nt">&quot;index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-              <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_CMP_EQ&quot;</span>
+              <span class="nt">"index"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="nt">"value"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+              <span class="nt">"op"</span><span class="p">:</span> <span class="s2">"SCMP_CMP_EQ"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="nt">&quot;index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="mi">4294967295</span><span class="p">,</span>
-              <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_CMP_EQ&quot;</span>
+              <span class="nt">"index"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="nt">"value"</span><span class="p">:</span> <span class="mi">4294967295</span><span class="p">,</span>
+              <span class="nt">"op"</span><span class="p">:</span> <span class="s2">"SCMP_CMP_EQ"</span>
             <span class="p">}</span>
           <span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="nt">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;chroot&quot;</span>
+          <span class="nt">"names"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"chroot"</span>
           <span class="p">],</span>
-          <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_ALLOW&quot;</span>
+          <span class="nt">"action"</span><span class="p">:</span> <span class="s2">"SCMP_ACT_ALLOW"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="nt">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;clone&quot;</span>
+          <span class="nt">"names"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"clone"</span>
           <span class="p">],</span>
-          <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_ALLOW&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="nt">"action"</span><span class="p">:</span> <span class="s2">"SCMP_ACT_ALLOW"</span><span class="p">,</span>
+          <span class="nt">"args"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="nt">&quot;index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="mi">2080505856</span><span class="p">,</span>
-              <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_CMP_MASKED_EQ&quot;</span>
+              <span class="nt">"index"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="nt">"value"</span><span class="p">:</span> <span class="mi">2080505856</span><span class="p">,</span>
+              <span class="nt">"op"</span><span class="p">:</span> <span class="s2">"SCMP_CMP_MASKED_EQ"</span>
             <span class="p">}</span>
           <span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="nt">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;arch_prctl&quot;</span>
+          <span class="nt">"names"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"arch_prctl"</span>
           <span class="p">],</span>
-          <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_ALLOW&quot;</span>
+          <span class="nt">"action"</span><span class="p">:</span> <span class="s2">"SCMP_ACT_ALLOW"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="nt">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;modify_ldt&quot;</span>
+          <span class="nt">"names"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"modify_ldt"</span>
           <span class="p">],</span>
-          <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;SCMP_ACT_ALLOW&quot;</span>
+          <span class="nt">"action"</span><span class="p">:</span> <span class="s2">"SCMP_ACT_ALLOW"</span>
         <span class="p">}</span>
       <span class="p">]</span>
     <span class="p">}</span>
@@ -838,7 +838,7 @@ detailed as follows via <code class="docutils literal notranslate"><span class="
 <p>Furthermore, and through use of <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">cat</span>
 <span class="pre">/var/tmp/busybox/config.json</span> <span class="pre">|</span> <span class="pre">jq</span> <span class="pre">[.root.path]</span></code>, the property</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-        <span class="s2">&quot;/var/tmp/busybox/rootfs&quot;</span>
+        <span class="s2">"/var/tmp/busybox/rootfs"</span>
 <span class="p">]</span>
 </pre></div>
 </div>
@@ -867,7 +867,7 @@ process. When invoked via Apptainer, sub-properties such as
 </ul>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
   <span class="p">[</span>
-    <span class="s2">&quot;/.singularity.d/actions/run&quot;</span>
+    <span class="s2">"/.singularity.d/actions/run"</span>
   <span class="p">]</span>
 <span class="p">]</span>
 </pre></div>
@@ -923,14 +923,14 @@ invocation requests.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">state</span></code> of the container instance can be determined via <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">sudo</span>
 <span class="pre">apptainer</span> <span class="pre">oci</span> <span class="pre">state</span> <span class="pre">busybox1</span></code>:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="nt">&quot;ociVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1-dev&quot;</span><span class="p">,</span>
-<span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;busybox1&quot;</span><span class="p">,</span>
-<span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;created&quot;</span><span class="p">,</span>
-<span class="nt">&quot;pid&quot;</span><span class="p">:</span> <span class="mi">6578</span><span class="p">,</span>
-<span class="nt">&quot;bundle&quot;</span><span class="p">:</span> <span class="s2">&quot;/var/tmp/busybox&quot;</span><span class="p">,</span>
-<span class="nt">&quot;createdAt&quot;</span><span class="p">:</span> <span class="mi">1554389921452964253</span><span class="p">,</span>
-<span class="nt">&quot;attachSocket&quot;</span><span class="p">:</span> <span class="s2">&quot;/var/run/apptainer/instances/root/busybox1/attach.sock&quot;</span><span class="p">,</span>
-<span class="nt">&quot;controlSocket&quot;</span><span class="p">:</span> <span class="s2">&quot;/var/run/apptainer/instances/root/busybox1/control.sock&quot;</span>
+<span class="nt">"ociVersion"</span><span class="p">:</span> <span class="s2">"1.0.1-dev"</span><span class="p">,</span>
+<span class="nt">"id"</span><span class="p">:</span> <span class="s2">"busybox1"</span><span class="p">,</span>
+<span class="nt">"status"</span><span class="p">:</span> <span class="s2">"created"</span><span class="p">,</span>
+<span class="nt">"pid"</span><span class="p">:</span> <span class="mi">6578</span><span class="p">,</span>
+<span class="nt">"bundle"</span><span class="p">:</span> <span class="s2">"/var/tmp/busybox"</span><span class="p">,</span>
+<span class="nt">"createdAt"</span><span class="p">:</span> <span class="mi">1554389921452964253</span><span class="p">,</span>
+<span class="nt">"attachSocket"</span><span class="p">:</span> <span class="s2">"/var/run/apptainer/instances/root/busybox1/attach.sock"</span><span class="p">,</span>
+<span class="nt">"controlSocket"</span><span class="p">:</span> <span class="s2">"/var/run/apptainer/instances/root/busybox1/control.sock"</span>
 <span class="p">}</span>
 </pre></div>
 </div>

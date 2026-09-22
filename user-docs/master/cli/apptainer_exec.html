@@ -238,28 +238,29 @@
 <blockquote>
 <div><p>apptainer exec supports the following formats:</p>
 <dl class="simple">
-<dt><a href="#id2"><span class="problematic" id="id3">*</span></a>.sif               Singularity Image Format (SIF). Native to Singularity</dt><dd><p>(3.0+) and Apptainer (v1.0.0+)</p>
+<dt>.sif - Singularity Image Format (SIF)</dt><dd><p>Native to Singularity 3.0+ and all Apptainer versions.</p>
+</dd>
+<dt>.sqsh - SquashFS format</dt><dd><p>Native to Singularity 2.4+ and &lt; 3.0.</p>
+</dd>
+<dt>.img - ext3 format</dt><dd><p>Native to Singularity versions &lt; 2.4.</p>
+</dd>
+<dt>directory/ - sandbox format</dt><dd><p>Directory containing a valid root file system and optionally Apptainer
+meta-data.</p>
+</dd>
+<dt>instance://</dt><dd><p>A local running instance of a container.  See the instance command group.</p>
+</dd>
+<dt>library://</dt><dd><p>A SIF container hosted on a Library (no library enabled by default).</p>
+</dd>
+<dt>docker://</dt><dd><p>A Docker/OCI container hosted on Docker Hub or another OCI registry.</p>
+</dd>
+<dt>shub://</dt><dd><p>A container hosted on Singularity Hub.</p>
+</dd>
+<dt>oras://</dt><dd><p>A SIF container hosted on an OCI registry that supports the OCI Registry
+As Storage (ORAS) specification.</p>
+</dd>
+<dt>ipfs://</dt><dd><p>A SIF image from an IPFS cluster, using a HTTP gateway.</p>
 </dd>
 </dl>
-<p><a href="#id4"><span class="problematic" id="id5">*</span></a>.sqsh              SquashFS format.  Native to Singularity 2.4+</p>
-<p><a href="#id6"><span class="problematic" id="id7">*</span></a>.img               ext3 format. Native to Singularity versions &lt; 2.4.</p>
-<dl class="simple">
-<dt>directory/          sandbox format. Directory containing a valid root file</dt><dd><p>system and optionally Apptainer meta-data.</p>
-</dd>
-<dt>instance://*        A local running instance of a container. (See the instance</dt><dd><p>command group.)</p>
-</dd>
-</dl>
-<p>library://*         A SIF container hosted on a Library (no default)</p>
-<dl class="simple">
-<dt>docker://*          A Docker/OCI container hosted on Docker Hub or another</dt><dd><p>OCI registry.</p>
-</dd>
-</dl>
-<p>shub://*            A container hosted on Singularity Hub.</p>
-<dl class="simple">
-<dt>oras://*            A SIF container hosted on an OCI registry that supports</dt><dd><p>the OCI Registry As Storage (ORAS) specification.</p>
-</dd>
-</dl>
-<p>ipfs://*            A SIF image from an IPFS cluster, using a HTTP gateway.</p>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apptainer</span> <span class="n">exec</span> <span class="p">[</span><span class="n">exec</span> <span class="n">options</span><span class="o">...</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">container</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span>
 </pre></div>
@@ -283,10 +284,10 @@ $ apptainer exec library://centos cat /etc/os-release
     --app string                    set an application to run inside a container
     --apply-cgroups string          apply cgroups from file for container processes (root only)
     --authfile string               Docker-style authentication file to use for writing/reading OCI registry credentials
--B, --bind stringArray              a user-bind path specification.  spec has the format src[:dest[:opts]], where src and dest are outside and inside paths.  If dest is not given, it is set equal to src.  Mount options (&#39;opts&#39;) may be specified as &#39;ro&#39; (read-only) or &#39;rw&#39; (read/write, which is the default). Multiple bind paths can be given by a comma separated list.
+-B, --bind stringArray              a user-bind path specification.  spec has the format src[:dest[:opts]], where src and dest are outside and inside paths.  If dest is not given, it is set equal to src.  Mount options ('opts') may be specified as 'ro' (read-only) or 'rw' (read/write, which is the default). Multiple bind paths can be given by a comma separated list.
     --blkio-weight int              Block IO relative weight in range 10-1000, 0 to disable
     --blkio-weight-device strings   Device specific block IO relative weight
-    --cdi-dirs strings              comma-separated list of directories in which CDI should look for device definition JSON files. If omitted, default will be: /etc/cdi,/var/run/cdi
+    --cdi-dirs strings              comma-separated list of directories in which CDI should look for device definition JSON files. If omitted and not set in apptainer.conf, default will be: /etc/cdi,/var/run/cdi. Not allowed in suid mode by non-root users.
 -e, --cleanenv                      clean environment before running container
     --compat                        apply settings for increased OCI/Docker compatibility. Infers --containall, --no-init, --no-umask, --no-eval, --writable-tmpfs.
 -c, --contain                       use minimal /dev and empty other directories (e.g. /tmp and $HOME) instead of sharing filesystems from your host
@@ -305,9 +306,9 @@ $ apptainer exec library://centos cat /etc/os-release
     --env stringToString            pass environment variable to contained process (default [])
     --env-file strings              pass environment variables from file to contained process
 -f, --fakeroot                      run container with the appearance of running as root
-    --fusemount strings             A FUSE filesystem mount specification of the form &#39;&lt;type&gt;:&lt;fuse command&gt; &lt;mountpoint&gt;&#39; - where &lt;type&gt; is &#39;container&#39; or &#39;host&#39;, specifying where the mount will be performed (&#39;container-daemon&#39; or &#39;host-daemon&#39; will run the FUSE process detached). &lt;fuse command&gt; is the path to the FUSE executable, plus options for the mount. &lt;mountpoint&gt; is the location in the container to which the FUSE mount will be attached. E.g. &#39;container:sshfs 10.0.0.1:/ /sshfs&#39;. Implies --pid.
+    --fusemount strings             A FUSE filesystem mount specification of the form '&lt;type&gt;:&lt;fuse command&gt; &lt;mountpoint&gt;' - where &lt;type&gt; is 'container' or 'host', specifying where the mount will be performed ('container-daemon' or 'host-daemon' will run the FUSE process detached). &lt;fuse command&gt; is the path to the FUSE executable, plus options for the mount. &lt;mountpoint&gt; is the location in the container to which the FUSE mount will be attached. E.g. 'container:sshfs 10.0.0.1:/ /sshfs'. Implies --pid.
 -h, --help                          help for exec
--H, --home string                   a home directory specification.  spec can either be a src path or src:dest pair.  src is the source path of the home directory outside the container and dest overrides the home directory within the container. (default &quot;/home/runner&quot;)
+-H, --home string                   a home directory specification.  spec can either be a src path or src:dest pair.  src is the source path of the home directory outside the container and dest overrides the home directory within the container. (default "/home/runner")
     --hostname string               set container hostname
     --intel-hpu                     enable Intel(R) Gaudi accelerator support while using a minimal /dev
 -i, --ipc                           run container in a new IPC namespace
@@ -315,7 +316,7 @@ $ apptainer exec library://centos cat /etc/os-release
     --memory string                 Memory limit in bytes
     --memory-reservation string     Memory soft limit in bytes
     --memory-swap string            Swap limit, use -1 for unlimited swap
-    --mount stringArray             a mount specification e.g. &#39;type=bind,source=/opt,destination=/hostopt&#39;.  The &#39;nonested&#39; flag prevents the mount from being passed to nested containers via APPTAINER_BIND.
+    --mount stringArray             a mount specification e.g. 'type=bind,src=/opt,dst=/hostopt'.
 -n, --net                           run container in a new network namespace (sets up a bridge network interface by default)
     --netns-path string             join the network namespace at the specified path (as root, or if permitted in apptainer.conf)
     --network string                specify desired network type separated by commas, each network will bring up a dedicated interface inside container
@@ -325,7 +326,7 @@ $ apptainer exec library://centos cat /etc/os-release
     --no-home                       do NOT mount users home directory if /home is not the current working directory
     --no-https                      use http instead of https for docker:// oras:// and library://&lt;hostname&gt;/... URIs
     --no-init                       do NOT start shim process with --pid
-    --no-mount strings              disable one or more &#39;mount xxx&#39; options set in apptainer.conf and/or specify absolute destination path to disable a bind path entry, or &#39;bind-paths&#39; to disable all bind path entries.
+    --no-mount strings              disable one or more 'mount xxx' options set in apptainer.conf and/or specify absolute destination path to disable a bind path entry, or 'bind-paths' to disable all bind path entries.
     --no-pid                        do not run container in a new PID namespace
     --no-privs                      drop all privileges from root user in container
     --no-umask                      do not propagate umask to the container, set default 0022 umask
@@ -357,7 +358,7 @@ $ apptainer exec library://centos cat /etc/os-release
 </ul>
 <p>Linux container platform optimized for High Performance Computing (HPC) and
 Enterprise Performance Computing (EPC)</p>
-<p><em>Auto generated by spf13/cobra on 11-Aug-2026</em></p>
+<p><em>Auto generated by spf13/cobra on 22-Sep-2026</em></p>
 </section>
 </section>
 

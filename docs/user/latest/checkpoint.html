@@ -225,19 +225,19 @@ state has been successfully restored upon restart.</p>
 
 <span class="s">count = 0</span>
 
-<span class="s">parser = argparse.ArgumentParser(description=&#39;Optional app description&#39;)</span>
-<span class="s">parser.add_argument(&#39;port&#39;, type=int, help=&#39;A required integer port argument&#39;)</span>
+<span class="s">parser = argparse.ArgumentParser(description='Optional app description')</span>
+<span class="s">parser.add_argument('port', type=int, help='A required integer port argument')</span>
 <span class="s">args = parser.parse_args()</span>
 
 <span class="s">class Handler(socketserver.BaseRequestHandler):</span>
 <span class="s">    def handle(self):</span>
 <span class="s">        global count</span>
 <span class="s">        count += 1</span>
-<span class="s">        response = bytes(&quot;request:{}\n&quot;.format(count), &quot;ascii&quot;)</span>
+<span class="s">        response = bytes("request:{}\n".format(count), "ascii")</span>
 <span class="s">        self.request.sendall(response)</span>
 
-<span class="s">if __name__ == &quot;__main__&quot;:</span>
-<span class="s">    with socketserver.TCPServer((&#39;&#39;, args.port), Handler) as server:</span>
+<span class="s">if __name__ == "__main__":</span>
+<span class="s">    with socketserver.TCPServer(('', args.port), Handler) as server:</span>
 <span class="s">        server.allow_reuse_address = True</span>
 <span class="s">        server.serve_forever()</span>
 <span class="s">EOF</span>
@@ -255,7 +255,7 @@ command group. This initializes a location in your user home directory for
 Apptainer to store state related to DMTCP and the checkpoint images it will
 generate.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>checkpoint<span class="w"> </span>create<span class="w"> </span>example-checkpoint
-<span class="go">INFO:    Checkpoint &quot;example-checkpoint&quot; created.</span>
+<span class="go">INFO:    Checkpoint "example-checkpoint" created.</span>
 </pre></div>
 </div>
 <p>Now we can start an instance of our application with the <code class="docutils literal notranslate"><span class="pre">--dmtcp-launch</span></code> flag
@@ -281,7 +281,7 @@ count is <code class="docutils literal notranslate"><span class="pre">2</span></
 <code class="docutils literal notranslate"><span class="pre">checkpoint</span> <span class="pre">instance</span></code> command and reference the instance via the
 <code class="docutils literal notranslate"><span class="pre">instance://</span></code> URI format:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>checkpoint<span class="w"> </span>instance<span class="w"> </span>server
-<span class="go">INFO:    Using checkpoint &quot;example-checkpoint&quot;</span>
+<span class="go">INFO:    Using checkpoint "example-checkpoint"</span>
 </pre></div>
 </div>
 <p>Now that we have checkpointed the state of our application, we can safely
@@ -319,7 +319,7 @@ checkpoint if we no longer need it to restart our application from this state:</
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>instance<span class="w"> </span>stop<span class="w"> </span>restarted-server
 <span class="go">INFO:    Stopping restarted-server instance of /home/ian/server.sif (PID=247679)</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>checkpoint<span class="w"> </span>delete<span class="w"> </span>example-checkpoint
-<span class="go">INFO:    Checkpoint &quot;example-checkpoint&quot; deleted.</span>
+<span class="go">INFO:    Checkpoint "example-checkpoint" deleted.</span>
 </pre></div>
 </div>
 </section>
@@ -355,7 +355,7 @@ either restarts from them or launches the application fresh under DMTCP.</p>
 <span class="k">From</span>: rockylinux/rockylinux:<span class="m">10</span>
 
 <span class="gh">%post</span>
-<span class="w">    </span>dnf<span class="w"> </span>groupinstall<span class="w"> </span>-y<span class="w"> </span><span class="s2">&quot;Development Tools&quot;</span>
+<span class="w">    </span>dnf<span class="w"> </span>groupinstall<span class="w"> </span>-y<span class="w"> </span><span class="s2">"Development Tools"</span>
 <span class="w">    </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libatomic<span class="w"> </span>which
 
 <span class="w">    </span>git<span class="w"> </span>clone<span class="w"> </span>--branch<span class="o">=</span><span class="m">4</span>.1.0<span class="w"> </span>https://github.com/dmtcp/dmtcp.git
@@ -377,17 +377,17 @@ either restarts from them or launches the application fresh under DMTCP.</p>
 <span class="s">EOF</span>
 
 <span class="gh">%runscript</span>
-<span class="w">    </span><span class="nv">CKPT_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DMTCP_CHECKPOINT_DIR</span><span class="k">:-</span><span class="p">.</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nv">RESTART_SCRIPT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$CKPT_DIR</span><span class="s2">/dmtcp_restart_script.sh&quot;</span>
+<span class="w">    </span><span class="nv">CKPT_DIR</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">DMTCP_CHECKPOINT_DIR</span><span class="k">:-</span><span class="p">.</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">    </span><span class="nv">RESTART_SCRIPT</span><span class="o">=</span><span class="s2">"</span><span class="nv">$CKPT_DIR</span><span class="s2">/dmtcp_restart_script.sh"</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESTART_SCRIPT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nb">exec</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESTART_SCRIPT</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$RESTART_SCRIPT</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">exec</span><span class="w"> </span><span class="s2">"</span><span class="nv">$RESTART_SCRIPT</span><span class="s2">"</span>
 <span class="w">    </span><span class="k">else</span>
 <span class="w">        </span><span class="nb">exec</span><span class="w"> </span>dmtcp_launch<span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>--interval<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DMTCP_CHECKPOINT_INTERVAL</span><span class="k">:-</span><span class="nv">10</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--interval<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DMTCP_CHECKPOINT_INTERVAL</span><span class="k">:-</span><span class="nv">10</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">            </span>--coord-port<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
 <span class="w">            </span>--ckpt-open-files<span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>python3<span class="w"> </span>/app/server.py<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="w">            </span>python3<span class="w"> </span>/app/server.py<span class="w"> </span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
 <span class="w">    </span><span class="k">fi</span>
 </pre></div>
 </div>

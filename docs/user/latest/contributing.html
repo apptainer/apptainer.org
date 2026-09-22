@@ -231,14 +231,14 @@ which adds a <code class="docutils literal notranslate"><span class="pre">Signed
 <a class="reference external" href="https://developercertificate.org">Developer Certificate of Origin</a>.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>add<span class="w"> </span>file-changed1<span class="w"> </span>file-changed2...
 
-<span class="gp">$ </span>git<span class="w"> </span>commit<span class="w"> </span>-s<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;what changed?&quot;</span>
+<span class="gp">$ </span>git<span class="w"> </span>commit<span class="w"> </span>-s<span class="w"> </span>-m<span class="w"> </span><span class="s2">"what changed?"</span>
 </pre></div>
 </div>
 <p>This commit message is important - it should describe exactly the
 changes that you have made. Good commit messages read like so:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>commit<span class="w"> </span>-s<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;changed function getConfig in functions.go to output csv to fix #2&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>commit<span class="w"> </span>-s<span class="w"> </span>-m<span class="w"> </span><span class="s2">"changed function getConfig in functions.go to output csv to fix #2"</span>
 
-<span class="gp">$ </span>git<span class="w"> </span>commit<span class="w"> </span>-s<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;updated docs about shell to close #10&quot;</span>
+<span class="gp">$ </span>git<span class="w"> </span>commit<span class="w"> </span>-s<span class="w"> </span>-m<span class="w"> </span><span class="s2">"updated docs about shell to close #10"</span>
 </pre></div>
 </div>
 <p>The tags <code class="docutils literal notranslate"><span class="pre">close</span> <span class="pre">#10</span></code> and <code class="docutils literal notranslate"><span class="pre">fix</span> <span class="pre">#2</span></code> are referencing issues that are
@@ -280,7 +280,7 @@ your branch and they will update the Pull Request.</p>
 repository at that moment. As you work, your branch may become out of
 date as others merge changes into the upstream main. In the event that
 you need to update a branch, you will need to follow the next steps:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/apptainer/apptainer.git<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="c1"># to add a new remote named &quot;upstream&quot; \</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/apptainer/apptainer.git<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="c1"># to add a new remote named "upstream" \</span>
 <span class="w">    </span>git<span class="w"> </span>checkout<span class="w"> </span>main<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="c1"># or another branch to be updated \</span>
 <span class="w">    </span>git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>main<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="c1"># to update your fork \</span>

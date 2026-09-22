@@ -1222,7 +1222,7 @@ from a Dockerfile stored in a build context directory (which can be <code class=
 known from the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">buildx</span></code> plugin that has replaced <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span></code>.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>Dockerfile
 <span class="go">FROM alpine</span>
-<span class="go">CMD [&quot;echo&quot;, &quot;Hello&quot;, &quot;World&quot;]</span>
+<span class="go">CMD ["echo", "Hello", "World"]</span>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>hello-world.sif<span class="w"> </span>dockerfile:.
 <span class="go">INFO:    Starting build...</span>
@@ -1304,9 +1304,9 @@ simple application / static binaries.</p>
 <span class="go">-rwxr-xr-x. 1 dave dave 696K May 28 13:29 scratch.sif</span>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>scratch.sif
-<span class="go">WARNING: passwd file doesn&#39;t exist in container, not updating</span>
-<span class="go">WARNING: group file doesn&#39;t exist in container, not updating</span>
-<span class="go">Apptainer&gt; echo &quot;Hello from a 696KiB container&quot;</span>
+<span class="go">WARNING: passwd file doesn't exist in container, not updating</span>
+<span class="go">WARNING: group file doesn't exist in container, not updating</span>
+<span class="go">Apptainer&gt; echo "Hello from a 696KiB container"</span>
 <span class="go">Hello from a 696KiB container</span>
 </pre></div>
 </div>

@@ -277,7 +277,7 @@ conjunction with the <code class="docutils literal notranslate"><span class="pre
 <p>For instance, let’s say you want to start an <a class="reference external" href="https://www.nginx.com/">NGINX</a> server on port 80 inside of the container,
 but you want to map it to port 8080 outside of the container:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>instance<span class="w"> </span>start<span class="w"> </span>--writable-tmpfs<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--net<span class="w"> </span>--network-args<span class="w"> </span><span class="s2">&quot;portmap=8080:80/tcp&quot;</span><span class="w"> </span>docker://nginx<span class="w"> </span>web2
+<span class="w">    </span>--net<span class="w"> </span>--network-args<span class="w"> </span><span class="s2">"portmap=8080:80/tcp"</span><span class="w"> </span>docker://nginx<span class="w"> </span>web2
 </pre></div>
 </div>
 <p>The above command will start the Docker Hub official NGINX image running
@@ -294,7 +294,7 @@ container to 8080 on the host.</p>
 <p>And the <code class="docutils literal notranslate"><span class="pre">curl</span></code> command can be used to verify that NGINX is running on
 the host port 8080 as expected.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>curl<span class="w"> </span>localhost:8080
-<span class="go">10.22.0.1 - - [16/Oct/2018:09:34:25 -0400] &quot;GET / HTTP/1.1&quot; 200 612 &quot;-&quot; &quot;curl/7.58.0&quot; &quot;-&quot;</span>
+<span class="go">10.22.0.1 - - [16/Oct/2018:09:34:25 -0400] "GET / HTTP/1.1" 200 612 "-" "curl/7.58.0" "-"</span>
 <span class="go">&lt;!DOCTYPE html&gt;</span>
 <span class="go">&lt;html&gt;</span>
 <span class="go">&lt;head&gt;</span>
@@ -313,9 +313,9 @@ the host port 8080 as expected.</p>
 <span class="go">working. Further configuration is required.&lt;/p&gt;</span>
 
 <span class="go">&lt;p&gt;For online documentation and support please refer to</span>
-<span class="go">&lt;a href=&quot;http://nginx.org/&quot;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;</span>
+<span class="go">&lt;a href="http://nginx.org/"&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;</span>
 <span class="go">Commercial support is available at</span>
-<span class="go">&lt;a href=&quot;http://nginx.com/&quot;&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;</span>
+<span class="go">&lt;a href="http://nginx.com/"&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;</span>
 
 <span class="go">&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;</span>
 <span class="go">&lt;/body&gt;</span>

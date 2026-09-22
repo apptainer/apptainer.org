@@ -265,7 +265,7 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Apptainer&gt; python</span>
 <span class="go">Python 2.7.15+ (default, Jul  9 2019, 16:51:35)</span>
 <span class="go">[GCC 7.4.0] on linux2</span>
-<span class="go">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
+<span class="go">Type "help", "copyright", "credits" or "license" for more information.</span>
 <span class="go">&gt;&gt;&gt; from tensorflow.python.client import device_lib</span>
 <span class="go">&gt;&gt;&gt; print(device_lib.list_local_devices())</span>
 <span class="go">2019-11-14 15:32:09.743600: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA</span>
@@ -409,11 +409,11 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Apptainer&gt; python</span>
 <span class="go">Python 2.7.15+ (default, Jul  9 2019, 16:51:35)</span>
 <span class="go">[GCC 7.4.0] on linux2</span>
-<span class="go">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
+<span class="go">Type "help", "copyright", "credits" or "license" for more information.</span>
 <span class="go">&gt;&gt;&gt; from tensorflow.python.client import device_lib</span>
 <span class="go">&gt;&gt;&gt; print(device_lib.list_local_devices())</span>
 <span class="go">...</span>
-<span class="go">device_type: &quot;GPU&quot;</span>
+<span class="go">device_type: "GPU"</span>
 <span class="go">memory_limit: 14474280960</span>
 <span class="go">locality {</span>
 <span class="go">  bus_id: 1</span>
@@ -421,7 +421,7 @@ tensorflow <code class="docutils literal notranslate"><span class="pre">list_loc
 <span class="go">  }</span>
 <span class="go">}</span>
 <span class="go">incarnation: 13349913758992036690</span>
-<span class="go">physical_device_desc: &quot;device: 0, name: Tesla T4, pci bus id: 0000:00:1e.0, compute capability: 7.5&quot;</span>
+<span class="go">physical_device_desc: "device: 0, name: Tesla T4, pci bus id: 0000:00:1e.0, compute capability: 7.5"</span>
 <span class="go">...</span>
 </pre></div>
 </div>
@@ -565,8 +565,8 @@ to a SIF before you start working with it:</p>
 tensorflow <code class="docutils literal notranslate"><span class="pre">list_local_devices()</span></code> function:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Apptainer&gt; ipython</span>
 <span class="go">Python 3.5.2 (default, Jul 10 2019, 11:58:48)</span>
-<span class="go">Type &#39;copyright&#39;, &#39;credits&#39; or &#39;license&#39; for more information</span>
-<span class="go">IPython 7.8.0 -- An enhanced Interactive Python. Type &#39;?&#39; for help.</span>
+<span class="go">Type 'copyright', 'credits' or 'license' for more information</span>
+<span class="go">IPython 7.8.0 -- An enhanced Interactive Python. Type '?' for help.</span>
 <span class="go">&gt;&gt;&gt; from tensorflow.python.client import device_lib</span>
 <span class="go">...</span>
 <span class="go">&gt;&gt;&gt; print(device_lib.list_local_devices())</span>

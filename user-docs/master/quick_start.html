@@ -195,7 +195,7 @@ subcommands as follows:</p>
 <span class="go">      --build-config    use configuration needed for building containers</span>
 <span class="go">  -c, --config string   specify a configuration file (for root or</span>
 <span class="go">                        unprivileged installation only) (default</span>
-<span class="go">                        &quot;/etc/apptainer/apptainer.conf&quot;)</span>
+<span class="go">                        "/etc/apptainer/apptainer.conf")</span>
 <span class="go">  -d, --debug           print debugging information (highest verbosity)</span>
 <span class="go">  -h, --help            help for apptainer</span>
 <span class="go">      --nocolor         print without color output (default False)</span>
@@ -257,7 +257,7 @@ subcommands as follows:</p>
 <span class="go">  within a SIF image.</span>
 
 <span class="go">  Key material can be provided via PEM-encoded file, or via the PGP keyring. To</span>
-<span class="go">  manage the PGP keyring, see &#39;apptainer help key&#39;.</span>
+<span class="go">  manage the PGP keyring, see 'apptainer help key'.</span>
 
 <span class="go">Options:</span>
 <span class="go">  -a, --all                                verify all objects</span>
@@ -314,7 +314,7 @@ follows:</p>
 <p>Container authors might also write help docs specific to a container, or
 for an internal module called an “app”. If those help docs exist for a
 particular container, you can view them as follows:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>inspect<span class="w"> </span>--helpfile<span class="w"> </span>container.sif<span class="w">  </span><span class="c1"># See the container&#39;s help, if provided</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>inspect<span class="w"> </span>--helpfile<span class="w"> </span>container.sif<span class="w">  </span><span class="c1"># See the container's help, if provided</span>
 
 <span class="gp">$ </span>apptainer<span class="w"> </span>inspect<span class="w"> </span>--helpfile<span class="w"> </span>--app<span class="o">=</span>foo<span class="w"> </span>foo.sif<span class="w">  </span><span class="c1"># See the help for the app foo, if provided</span>
 </pre></div>
@@ -404,7 +404,7 @@ program within the <code class="docutils literal notranslate"><span class="pre">
 <p><code class="docutils literal notranslate"><span class="pre">exec</span></code> also works with the <code class="docutils literal notranslate"><span class="pre">docker://</span></code>, <code class="docutils literal notranslate"><span class="pre">oras://</span></code>, and <code class="docutils literal notranslate"><span class="pre">library://</span></code>
 URIs. This creates an ephemeral container that executes a
 command and disappears.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://ghcr.io/apptainer/lolcow<span class="w"> </span>cowsay<span class="w"> </span><span class="s1">&#39;Fresh from the internet&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://ghcr.io/apptainer/lolcow<span class="w"> </span>cowsay<span class="w"> </span><span class="s1">'Fresh from the internet'</span>
 <span class="go"> _________________________</span>
 <span class="go">&lt; Fresh from the internet &gt;</span>
 <span class="go"> -------------------------</span>
@@ -465,7 +465,7 @@ disappears.</p>
 them. For example, the default runscript of the <code class="docutils literal notranslate"><span class="pre">docker://alpine</span></code>
 container passes any arguments to a shell. We can ask the container
 to run <code class="docutils literal notranslate"><span class="pre">echo</span></code> command in this shell as follows:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"hello"</span>
 
 <span class="go">hello</span>
 </pre></div>
@@ -474,13 +474,13 @@ to run <code class="docutils literal notranslate"><span class="pre">echo</span><
 can behave slightly differently than in Docker/OCI runtimes, if they
 contain expressions that have special meaning to the shell. Here is an
 illustrative example:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"\$HOSTNAME"</span>
 <span class="gp">$</span>HOSTNAME
 
-<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"\$HOSTNAME"</span>
 <span class="go">p700</span>
 
-<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\\\$HOSTNAME&quot;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"\\\$HOSTNAME"</span>
 <span class="gp">$</span>HOSTNAME
 </pre></div>
 </div>
@@ -488,10 +488,10 @@ illustrative example:</p>
 quoting of arguments.</p>
 <p>Unlike the <code class="docutils literal notranslate"><span class="pre">run</span></code> command, the <code class="docutils literal notranslate"><span class="pre">exec</span></code> command does behave in the same
 manner as Docker/OCI, because it calls the specified executable directly:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$HOSTNAME&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"\$HOSTNAME"</span>
 <span class="gp">$</span>HOSTNAME
 
-<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\\\$HOSTNAME&quot;</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docker://alpine<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"\\\$HOSTNAME"</span>
 <span class="go">\$HOSTNAME</span>
 </pre></div>
 </div>
@@ -501,7 +501,7 @@ manner as Docker/OCI, because it calls the specified executable directly:</p>
 <section id="working-with-files">
 <h2>Working with Files<a class="headerlink" href="#working-with-files" title="Link to this heading"></a></h2>
 <p>Files on the host are reachable from within the container:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello from inside the container&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$HOME</span>/hostfile.txt
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Hello from inside the container"</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$HOME</span>/hostfile.txt
 
 <span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>lolcow_latest.sif<span class="w"> </span>cat<span class="w"> </span><span class="nv">$HOME</span>/hostfile.txt
 
@@ -516,7 +516,7 @@ container.</p>
 with the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option. In the following example, the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory
 on the host system is bind mounted to the <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> directory inside the
 container.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Drink milk (and never eat hamburgers).&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/data/cow_advice.txt
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Drink milk (and never eat hamburgers)."</span><span class="w"> </span>&gt;<span class="w"> </span>/data/cow_advice.txt
 
 <span class="gp">$ </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--bind<span class="w"> </span>/data:/mnt<span class="w"> </span>lolcow_latest.sif<span class="w"> </span>cat<span class="w"> </span>/mnt/cow_advice.txt
 <span class="go">Drink milk (and never eat hamburgers).</span>
