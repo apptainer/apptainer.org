@@ -98,6 +98,11 @@ point to the directory of the host's ``ldconfig`` before the
 I.E., ``/sbin`` should be before any Nix or Guix
 related path or the user's PATH.
 
+On a NixOS or Guix host itself, where the GPU driver libraries are not
+in any ``ld.so`` cache, set ``gpu library path`` in ``{command}.conf``
+to the directories holding them instead; see
+:ref:`GPU Options <gpu_options>`.
+
 Filesystem support / limitations
 --------------------------------
 
