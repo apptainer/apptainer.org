@@ -196,6 +196,17 @@ version of the CUDA libraries are used by applications run inside the
 container.  Under most conditions if the same libraries are inside
 the container, they will take precedence; see
 <a class="reference internal" href="environment_and_metadata.html#host-environment"><span class="std std-ref">Environment From the Host</span></a>.</p></li>
+<li><p>Bind the parts of the driver that programs load by their path instead
+of by name, the GBM backend and the X server modules, together with
+the driver’s configuration files for EGL, Vulkan and OpenCL. With
+these, graphics work as well as compute: a Wayland compositor, an X
+server, or an OpenGL, Vulkan or OpenCL application inside the
+container runs on the GPU.</p></li>
+<li><p>Ensure that the <code class="docutils literal notranslate"><span class="pre">/dev/dri/</span></code> device entries are available inside the
+container, also with <code class="docutils literal notranslate"><span class="pre">--contain</span></code>, because they are what GBM, EGL
+and an X server open on the GPU. Device nodes that the host is
+missing, such as <code class="docutils literal notranslate"><span class="pre">/dev/nvidia-modeset</span></code>, are created first through
+the driver’s <code class="docutils literal notranslate"><span class="pre">nvidia-modprobe</span></code> helper when it is available.</p></li>
 </ul>
 <section id="requirements">
 <h3>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h3>
@@ -218,9 +229,10 @@ are often outdated which can lead to problems running applications
 compiled for the latest versions of CUDA.</p>
 <p>Apptainer will find the NVIDIA/CUDA libraries on your host using the
 list of libraries in the configuration file
-<code class="docutils literal notranslate"><span class="pre">etc/apptainer/nvbliblist</span></code>, and resolving paths through the
-<code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> cache. At time of release this list is appropriate for the
-latest stable CUDA version. It can be modified by the administrator to
+<code class="docutils literal notranslate"><span class="pre">etc/apptainer/nvliblist.conf</span></code>, resolving paths through the
+<code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> cache and the <code class="docutils literal notranslate"><span class="pre">gpu</span> <span class="pre">library</span> <span class="pre">path</span></code> directories set in
+<code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>. This list is intended to support most versions of
+CUDA and related drivers. It can be modified by the administrator to
 add additional libraries if necessary. See the admin guide for more
 details.</p>
 </section>
@@ -354,6 +366,11 @@ container, e.g. compute, graphics, and display functionality.</p></li>
 <li><p>Configuration via the same environment variables that are in use with
 OCI containers.</p></li>
 </ul>
+<p><code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> also binds the entries of <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> that
+<code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> does not stage itself, such as the GBM backend,
+the X server modules and the EGL platform libraries, and the
+<code class="docutils literal notranslate"><span class="pre">/dev/dri/</span></code> device entries of the selected GPUs, so that graphics work
+in the same way as with <code class="docutils literal notranslate"><span class="pre">--nv</span></code>.</p>
 <section id="requirements-limitations">
 <h3>Requirements &amp; Limitations<a class="headerlink" href="#requirements-limitations" title="Link to this heading"></a></h3>
 <ul class="simple">
@@ -485,8 +502,8 @@ are mounted in the container, to support different requirements. The
 default value under Apptainer is <code class="docutils literal notranslate"><span class="pre">compute,utility</span></code>, which will
 provide CUDA functionality and basic utilities such as
 <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code>. Other options include <code class="docutils literal notranslate"><span class="pre">graphics</span></code> for OpenGL/Vulkan
-support, <code class="docutils literal notranslate"><span class="pre">video</span></code> for the codecs SDK, and <code class="docutils literal notranslate"><span class="pre">display</span></code> to use X11
-from a container.</p></li>
+support, <code class="docutils literal notranslate"><span class="pre">video</span></code> for the codecs SDK, <code class="docutils literal notranslate"><span class="pre">display</span></code> to use X11 from a
+container, and <code class="docutils literal notranslate"><span class="pre">all</span></code> for every capability at once.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">NVIDIA_REQUIRE_*</span></code> variables allow specifying requirements, which
 will be checked by <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> prior to starting the
 container. Constraints can be set on <code class="docutils literal notranslate"><span class="pre">cuda</span></code>, <code class="docutils literal notranslate"><span class="pre">driver</span></code>, <code class="docutils literal notranslate"><span class="pre">arch</span></code>,
