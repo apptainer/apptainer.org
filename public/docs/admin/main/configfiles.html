@@ -456,7 +456,7 @@ groups directives. This restriction only applies when Apptainer is
 running in SUID mode and the user is non-root.</p>
 </section>
 <section id="gpu-options">
-<h3>GPU Options<a class="headerlink" href="#gpu-options" title="Link to this heading"></a></h3>
+<span id="id1"></span><h3>GPU Options<a class="headerlink" href="#gpu-options" title="Link to this heading"></a></h3>
 <p>Apptainer provides integration with GPUs in order to facilitate GPU
 based workloads seamlessly. Both options listed below are particularly
 useful in GPU only environments. For more information on using GPUs with
@@ -467,6 +467,20 @@ implicitly added.</p>
 <p><code class="docutils literal notranslate"><span class="pre">always</span> <span class="pre">use</span> <span class="pre">rocm</span></code>: Enabling this option will cause every action
 command (<code class="docutils literal notranslate"><span class="pre">exec/shell/run/instance</span></code>) to be executed with the <code class="docutils literal notranslate"><span class="pre">--rocm</span></code>
 option implicitly added.</p>
+<p><code class="docutils literal notranslate"><span class="pre">gpu</span> <span class="pre">library</span> <span class="pre">path</span></code>: A comma separated list of directories to search
+for the GPU driver libraries named in <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> and
+<code class="docutils literal notranslate"><span class="pre">rocmliblist.conf</span></code> when binding them into a container with <code class="docutils literal notranslate"><span class="pre">--nv</span></code> or
+<code class="docutils literal notranslate"><span class="pre">--rocm</span></code>. These directories are searched before the <code class="docutils literal notranslate"><span class="pre">ld.so</span></code> cache
+reported by <code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">-p</span></code>, and they work without it. Set this option
+on systems where the driver libraries are not in the <code class="docutils literal notranslate"><span class="pre">ld.so</span></code> cache, or
+where <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> is not available at all, such as NixOS or Guix. If it
+is not set and <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> cannot be run, no host GPU libraries are
+found. List the directories holding the 32-bit libraries used by
+<code class="docutils literal notranslate"><span class="pre">--compat32</span></code> alongside the 64-bit ones; libraries are picked by
+architecture, not by the directory they are found in. The modules and
+the non-library files named in <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> are also looked for
+relative to these directories, as described in
+<a class="reference internal" href="#gpu-liblist-format"><span class="std std-ref">GPU liblist format</span></a>.</p>
 </section>
 <section id="supplemental-filesystems">
 <h3>Supplemental Filesystems<a class="headerlink" href="#supplemental-filesystems" title="Link to this heading"></a></h3>
@@ -606,7 +620,7 @@ bind paths of the system.</p>
 </section>
 </section>
 <section id="cgroups-toml">
-<span id="id3"></span><h2>cgroups.toml<a class="headerlink" href="#cgroups-toml" title="Link to this heading"></a></h2>
+<span id="id4"></span><h2>cgroups.toml<a class="headerlink" href="#cgroups-toml" title="Link to this heading"></a></h2>
 <p>The cgroups (control groups) functionality of the Linux kernel allows
 you to limit and meter the resources used by a process, or group of
 processes. Using cgroups you can limit memory and CPU usage. You can
@@ -830,7 +844,7 @@ stored in the file <code class="docutils literal notranslate"><span class="pre">
 </section>
 </section>
 <section id="gpu-library-configuration">
-<span id="id4"></span><h2>GPU Library Configuration<a class="headerlink" href="#gpu-library-configuration" title="Link to this heading"></a></h2>
+<span id="id5"></span><h2>GPU Library Configuration<a class="headerlink" href="#gpu-library-configuration" title="Link to this heading"></a></h2>
 <p>When a container includes a GPU enabled application, Apptainer (with
 the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> or <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> options) can properly inject the required
 Nvidia or AMD GPU driver libraries into the container, to match the
@@ -844,16 +858,25 @@ usage information is discussed in the <a class="reference external" href="https:
 section of the user guide.</p>
 <section id="nvidia-gpus-cuda">
 <h3>NVIDIA GPUs / CUDA<a class="headerlink" href="#nvidia-gpus-cuda" title="Link to this heading"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> configuration file is used to specify libraries
-, executables and non-library files that need to be injected into the
-container when running Apptainer with the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> Nvidia GPU support option.
-The provided <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> is suitable for CUDA 11, but may need to be
-modified if you need to include additional libraries, or further libraries are
-added to newer versions of the Nvidia driver/CUDA distribution.</p>
-<p>When adding new entries to <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> use the bare filename of
-executables, and the <code class="docutils literal notranslate"><span class="pre">xxxx.so</span></code> form of libraries. Libraries are
-resolved via <code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">-p</span></code>, executables are found by searching
-<code class="docutils literal notranslate"><span class="pre">$PATH</span></code>, and non-library file paths should be full absolute paths.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> configuration file lists the libraries,
+executables, modules and non-library files to inject into the container
+when running Apptainer with the <code class="docutils literal notranslate"><span class="pre">--nv</span></code> NVIDIA GPU support option. The
+provided <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> is intended to support most versions of the
+NVIDIA driver and CUDA, for both compute and graphics. It may need to be
+modified to include additional files, or files added by newer versions
+of the NVIDIA driver or CUDA distribution.</p>
+<p>Each entry of <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> is one of four kinds: the bare filename
+of an executable, found by searching <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>; a library in the
+<code class="docutils literal notranslate"><span class="pre">xxxx.so</span></code> form, resolved via <code class="docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">-p</span></code> and the
+<code class="docutils literal notranslate"><span class="pre">gpu</span> <span class="pre">library</span> <span class="pre">path</span></code> directories; a module, given as its path relative
+to a library directory, such as <code class="docutils literal notranslate"><span class="pre">gbm/nvidia-drm_gbm.so</span></code>; or a
+non-library file, given as a full absolute path. Modules are driver
+files that a program loads by their path instead of by name, so the
+<code class="docutils literal notranslate"><span class="pre">ld.so</span></code> cache does not list them, and they are looked for next to
+every library directory. A non-library file is bound from the same path
+on the host, or from under the prefix of a <code class="docutils literal notranslate"><span class="pre">gpu</span> <span class="pre">library</span> <span class="pre">path</span></code>
+directory. See <a class="reference internal" href="#gpu-liblist-format"><span class="std std-ref">GPU liblist format</span></a> for the
+details of each kind.</p>
 <section id="experimental-nvidia-container-cli-support">
 <h4>Experimental nvidia-container-cli Support<a class="headerlink" href="#experimental-nvidia-container-cli-support" title="Link to this heading"></a></h4>
 <p>The <a class="reference external" href="https://github.com/NVIDIA/libnvidia-container">nvidia-container-cli</a> tool is Nvidia’s
@@ -867,6 +890,11 @@ mode in a SUID installation of Apptainer, it can only be used unprivileged.
 The operations performed by <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> are broadly similar to
 those which Apptainer carries out when setting up a GPU container
 from <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> stages the driver’s own libraries, and
+Apptainer leaves those to it. The entries of <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> that the
+tool does not stage, such as the modules, the configuration files and
+the EGL platform libraries, are bound with <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> in the same way
+as with <code class="docutils literal notranslate"><span class="pre">--nv</span></code>.</p>
 </section>
 </section>
 <section id="amd-radeon-gpus-rocm">
@@ -883,10 +911,11 @@ resolved via <code class="docutils literal notranslate"><span class="pre">ldconf
 <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p>
 </section>
 <section id="gpu-liblist-format">
-<h3>GPU liblist format<a class="headerlink" href="#gpu-liblist-format" title="Link to this heading"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> and <code class="docutils literal notranslate"><span class="pre">rocmliblist</span></code> files list the basename of
-executables and libraries to be bound into the container, without path
-information.</p>
+<span id="id6"></span><h3>GPU liblist format<a class="headerlink" href="#gpu-liblist-format" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> and <code class="docutils literal notranslate"><span class="pre">rocmliblist.conf</span></code> files list the
+executables and libraries to bind into the container, without path
+information. <code class="docutils literal notranslate"><span class="pre">nvliblist.conf</span></code> also lists the modules and the
+non-library files that the graphics stack needs.</p>
 <p>Binaries are found by searching <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>:</p>
 <div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span><span class="c"># put binaries here</span>
 <span class="c"># In shared environments you should ensure that permissions on these files</span>
@@ -896,16 +925,54 @@ rocminfo
 </pre></div>
 </div>
 <p>Libraries should be specified without version information, i.e.
-<code class="docutils literal notranslate"><span class="pre">libname.so</span></code>, and are resolved using <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">libname.so</span></code>, and are resolved using <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> and the
+<code class="docutils literal notranslate"><span class="pre">gpu</span> <span class="pre">library</span> <span class="pre">path</span></code> directories. They are bound into the container’s
+library directory, <code class="docutils literal notranslate"><span class="pre">/.singularity.d/libs</span></code>, which is added to
+<code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code>.</p>
 <div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span><span class="c"># put libs here (must end in .so)</span>
 libamd_comgr<span class="s">.so</span>
 libcomgr<span class="s">.so</span>
 libCXLActivityLogger<span class="s">.so</span>
 </pre></div>
 </div>
+<p>Modules are driver files that a program loads by their path instead of
+by name, so the <code class="docutils literal notranslate"><span class="pre">ld.so</span></code> cache never lists them. They are the GBM
+backend that Mesa’s <code class="docutils literal notranslate"><span class="pre">libgbm</span></code> loads, and the X server’s driver and GLX
+modules. A module is given as its path relative to a library directory,
+ending in <code class="docutils literal notranslate"><span class="pre">.so</span></code>. It is looked for under that path next to every
+library directory, and next to the parent of each library directory,
+because Debian keeps <code class="docutils literal notranslate"><span class="pre">/usr/lib/xorg/modules</span></code> beside
+<code class="docutils literal notranslate"><span class="pre">/usr/lib/&lt;multiarch&gt;</span></code>. A module is bound twice: at its host path,
+where an X server or <code class="docutils literal notranslate"><span class="pre">libgbm</span></code> laid out like the host looks for it, and
+at the same relative path under <code class="docutils literal notranslate"><span class="pre">/.singularity.d/libs</span></code>.
+<code class="docutils literal notranslate"><span class="pre">GBM_BACKENDS_PATH</span></code> is set in the container so that the bound GBM
+backend is found before the container’s own.</p>
+<div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span><span class="c"># put the modules that a program opens by path rather than by name here, as</span>
+<span class="c"># their path relative to a library directory (must end in .so)</span>
+gbm<span class="s">/nvidia-drm_gbm.so</span>
+xorg<span class="s">/modules/drivers/nvidia_drv.so</span>
+xorg<span class="s">/modules/extensions/libglxserver_nvidia.so</span>
+</pre></div>
+</div>
+<p>Non-library files are the EGL, Vulkan and OpenCL configuration files and
+the X server configuration snippets. They are given as absolute paths. A
+file is bound at that path from the host. When the driver is installed
+under the prefix of a <code class="docutils literal notranslate"><span class="pre">gpu</span> <span class="pre">library</span> <span class="pre">path</span></code> directory, the file is taken
+from under that prefix instead: <code class="docutils literal notranslate"><span class="pre">/usr/share/x</span></code> is found as
+<code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;/share/x</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/x</span></code> as <code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;/etc/x</span></code>. List every
+location that a loader reads, under both <code class="docutils literal notranslate"><span class="pre">/etc</span></code> and <code class="docutils literal notranslate"><span class="pre">/usr/share</span></code>, as
+the provided file does.</p>
+<div class="highlight-linuxconfig notranslate"><div class="highlight"><pre><span></span><span class="c"># put non-library file paths here (must be absolute path)</span>
+<span class="s">/etc/OpenCL/vendors/nvidia.icd</span>
+<span class="s">/usr/share/glvnd/egl_vendor.d/10_nvidia.json</span>
+<span class="s">/etc/glvnd/egl_vendor.d/10_nvidia.json</span>
+<span class="s">/usr/share/vulkan/icd.d/nvidia_icd.json</span>
+</pre></div>
+</div>
 <p>If you receive warnings that binaries or libraries are not found, ensure
 that they are in a system path (binaries), or available in paths
-configured in <code class="docutils literal notranslate"><span class="pre">/etc/ld.so.conf</span></code> (libraries).</p>
+configured in <code class="docutils literal notranslate"><span class="pre">/etc/ld.so.conf</span></code> or in <code class="docutils literal notranslate"><span class="pre">gpu</span> <span class="pre">library</span> <span class="pre">path</span></code>
+(libraries).</p>
 </section>
 </section>
 <section id="capability-json">

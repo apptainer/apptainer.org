@@ -226,6 +226,10 @@ point to the directory of the host’s <code class="docutils literal notranslate
 <code class="docutils literal notranslate"><span class="pre">$PATH:</span></code> which is replaced by the user’s PATH.
 I.E., <code class="docutils literal notranslate"><span class="pre">/sbin</span></code> should be before any Nix or Guix
 related path or the user’s PATH.</p>
+<p>On a NixOS or Guix host itself, where the GPU driver libraries are not
+in any <code class="docutils literal notranslate"><span class="pre">ld.so</span></code> cache, set <code class="docutils literal notranslate"><span class="pre">gpu</span> <span class="pre">library</span> <span class="pre">path</span></code> in <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>
+to the directories holding them instead; see
+<a class="reference internal" href="configfiles.html#gpu-options"><span class="std std-ref">GPU Options</span></a>.</p>
 </section>
 <section id="filesystem-support-limitations">
 <h4>Filesystem support / limitations<a class="headerlink" href="#filesystem-support-limitations" title="Link to this heading"></a></h4>
