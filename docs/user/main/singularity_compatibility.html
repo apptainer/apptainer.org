@@ -163,7 +163,7 @@ environment variable in the container with the name <code class="docutils litera
 <p>We can see from the <code class="docutils literal notranslate"><span class="pre">env</span></code> output that this environment variable was properly
 set inside the container.</p>
 <p>Next we can use the <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_</span></code> prefix to do the same thing, but this
-time we wil have the intended value be <code class="docutils literal notranslate"><span class="pre">BAZ</span></code>:</p>
+time we will have the intended value be <code class="docutils literal notranslate"><span class="pre">BAZ</span></code>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">SINGULARITYENV_FOO</span><span class="o">=</span>BAZ<span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w">  </span>docker://alpine<span class="w"> </span>env
 <span class="go">WARNING: DEPRECATED USAGE: Forwarding SINGULARITYENV_FOO as environment variable will not be supported in the future, use APPTAINERENV_FOO instead</span>
 <span class="go">[...]</span>

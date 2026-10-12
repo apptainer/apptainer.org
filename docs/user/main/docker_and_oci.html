@@ -599,7 +599,7 @@ will likely fail:</p>
 </div>
 <p>However, Apptainer is able to make use of CPU emulation with QEMU, and the Linux
 kernel’s binfmt_misc mechanism, to run containers that do not match the host CPU.</p>
-<p>An adminstrator can configure emulation support by installing distribution
+<p>An administrator can configure emulation support by installing distribution
 packages, or using the <a class="reference external" href="https://github.com/multiarch/qemu-user-static">multiarch/qemu-user-static</a> container from Docker Hub:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://multiarch/qemu-user-static<span class="w"> </span>--reset<span class="w"> </span>-p<span class="w"> </span>yes
 </pre></div>
@@ -1031,7 +1031,7 @@ variables. To avoid the extra evaluation of variables that Apptainer
 performs you can:</p>
 <ul class="simple">
 <li><p>Follow the instructions in the <a class="reference internal" href="environment_and_metadata.html#escaping-environment"><span class="std std-ref">Escaping and Evaluation of Environment Variables</span></a> section to
-explictly escape environment variables.</p></li>
+explicitly escape environment variables.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">--no-eval</span></code> flag.</p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">--no-eval</span></code> prevents Apptainer from evaluating environment variables on
