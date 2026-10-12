@@ -226,6 +226,8 @@ the <code class="docutils literal notranslate"><span class="pre">--no-mount</spa
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--no-mount<span class="w"> </span>bind-paths<span class="w"> </span>mycontainer.sif
 </pre></div>
 </div>
+<p>Notably, <code class="docutils literal notranslate"><span class="pre">--no-mount</span> <span class="pre">bind-paths</span></code> also disables <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> despite
+it is being configured via <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">resolv_conf</span></code>.</p>
 </section>
 </section>
 <section id="user-defined-bind-paths">
