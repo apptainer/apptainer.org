@@ -373,7 +373,7 @@ apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </
 <span id="fakeroot-inside-def"></span><h3>Using fakeroot command inside definition file:<a class="headerlink" href="#using-fakeroot-command-inside-definition-file" title="Link to this heading"></a></h3>
 <p>When using fakeroot mode 3 above, where user namespaces are
 available but /etc/subuid mapping is not set up, and you are trying
-to build a container for an operating sytem with an older glibc
+to build a container for an operating system with an older glibc
 library than the host or for a target operating system like alpine
 that does not include glibc, this more advanced technique may help.</p>
 <p>First, use the apptainer build <code class="docutils literal notranslate"><span class="pre">--ignore-fakeroot-command</span></code> option
