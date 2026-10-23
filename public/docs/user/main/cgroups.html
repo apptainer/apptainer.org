@@ -208,7 +208,7 @@ CLI are not yet available.</p>
 <section id="cpu-limits">
 <h3>CPU Limits<a class="headerlink" href="#cpu-limits" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">--cpus</span></code> sets the number of CPUs, or fractional CPUs, that the container can
-use.  The minimum is <code class="docutils literal notranslate"><span class="pre">0.01</span></code> or one hundredth of a physical CPU. The maximum is
+use.  The minimum is <code class="docutils literal notranslate"><span class="pre">0.01</span></code> or one hundredth of a CPU. The maximum is
 the number of CPU cores on your system.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Limit<span class="w"> </span>container<span class="w"> </span>to<span class="w"> </span><span class="m">3</span>.5<span class="w"> </span>CPUs
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--cpus<span class="w"> </span><span class="m">3</span>.5<span class="w"> </span>myfirstapp.sif
@@ -227,7 +227,7 @@ time than is available.</p>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--cpu-shares<span class="w"> </span><span class="m">512</span><span class="w"> </span>mysecondapp.sif
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">--cpuset-cpus</span></code> specifies a list of physical CPU IDs on which a container can
+<p><code class="docutils literal notranslate"><span class="pre">--cpuset-cpus</span></code> specifies a list of CPU IDs on which a container can
 run. For example, on a dual CPU system you might pin one container to the first
 12 cores on CPU 1, and a second container to the second 12 cores on CPU 2.</p>
 <p><code class="docutils literal notranslate"><span class="pre">--cpuset-mems</span></code> specifies a list of memory nodes the container can use. It
