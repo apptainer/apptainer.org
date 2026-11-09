@@ -87,6 +87,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">GPU and other Device Support</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#nvidia-gpus-cuda-standard">NVIDIA GPUs &amp; CUDA (Standard)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bit-support-compat32">32-bit Support (<code class="docutils literal notranslate"><span class="pre">--compat32</span></code>)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example-tensorflow-gpu">Example - tensorflow-gpu</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#multiple-gpus">Multiple GPUs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
@@ -227,6 +228,22 @@ drivers and CUDA packages directly from the NVIDIA website. Linux
 distributions may provide NVIDIA drivers and CUDA libraries, but they
 are often outdated which can lead to problems running applications
 compiled for the latest versions of CUDA.</p>
+</section>
+<section id="bit-support-compat32">
+<h3>32-bit Support (<code class="docutils literal notranslate"><span class="pre">--compat32</span></code>)<a class="headerlink" href="#bit-support-compat32" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">--compat32</span></code> option, used together with a GPU option such as
+<code class="docutils literal notranslate"><span class="pre">--nv</span></code> or <code class="docutils literal notranslate"><span class="pre">--rocm</span></code>, additionally binds the host’s 32-bit GPU driver
+libraries into <code class="docutils literal notranslate"><span class="pre">/.singularity.d/libs32</span></code> in the container, and adds that
+directory to <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code>. Those 32-bit libraries are kept separate
+from the 64-bit ones in <code class="docutils literal notranslate"><span class="pre">/.singularity.d/libs</span></code> because they have the same
+names, but graphical applications such as Windows programs running under Wine
+need both at once. With <code class="docutils literal notranslate"><span class="pre">--nvccli</span></code>, <code class="docutils literal notranslate"><span class="pre">--compat32</span></code> instead adds the
+<code class="docutils literal notranslate"><span class="pre">compat32</span></code> driver capability to <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--nv<span class="w"> </span>--compat32<span class="w"> </span>mycontainer.sif
+</pre></div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">NVIDIA_DRIVER_CAPABILITIES=compat32</span></code> implies <code class="docutils literal notranslate"><span class="pre">--compat32</span></code> as well.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--compat32</span></code> is also used with <code class="docutils literal notranslate"><span class="pre">--rocm</span></code> for 32-bit ROCm libraries.</p>
 <p>Apptainer will find the NVIDIA/CUDA libraries on your host using the
 list of libraries in the configuration file
 <code class="docutils literal notranslate"><span class="pre">etc/apptainer/nvliblist.conf</span></code>, resolving paths through the
@@ -503,7 +520,9 @@ default value under Apptainer is <code class="docutils literal notranslate"><spa
 provide CUDA functionality and basic utilities such as
 <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code>. Other options include <code class="docutils literal notranslate"><span class="pre">graphics</span></code> for OpenGL/Vulkan
 support, <code class="docutils literal notranslate"><span class="pre">video</span></code> for the codecs SDK, <code class="docutils literal notranslate"><span class="pre">display</span></code> to use X11 from a
-container, and <code class="docutils literal notranslate"><span class="pre">all</span></code> for every capability at once.</p></li>
+container, and <code class="docutils literal notranslate"><span class="pre">all</span></code> for every capability at once.
+The <code class="docutils literal notranslate"><span class="pre">compat32</span></code> capability (equivalent to <code class="docutils literal notranslate"><span class="pre">--compat32</span></code>) is supported
+as well.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">NVIDIA_REQUIRE_*</span></code> variables allow specifying requirements, which
 will be checked by <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> prior to starting the
 container. Constraints can be set on <code class="docutils literal notranslate"><span class="pre">cuda</span></code>, <code class="docutils literal notranslate"><span class="pre">driver</span></code>, <code class="docutils literal notranslate"><span class="pre">arch</span></code>,
