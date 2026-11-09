@@ -326,6 +326,12 @@ mode, with the following types:
    When set to ``no``, fuse2fs will be used instead.
    For security reasons this defaults to ``no``.
 
+``sync writable extfs``: When set to ``yes``, writable ext3 (overlay) image
+mounts are made with the ``sync`` mount option, so that writes to the overlay
+are flushed to storage each time rather than left in the page cache. This can
+improve durability of the data held in writable overlays, at the cost of
+performance. This defaults to ``no``.
+
 Networking Options
 ==================
 
