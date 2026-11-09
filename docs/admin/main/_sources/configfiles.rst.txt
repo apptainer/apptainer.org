@@ -1225,33 +1225,9 @@ build ``--remote`` option, but {Project} does not support that.
 Instead, it supports
 `unprivileged local builds <{userdocs}/fakeroot.html#build>`_.
 
-If you would still like to have the previous default for all users,
-these are the commands to restore the library behavior from before
-{Project}, where using the ``library://`` URI would download from the
-Sylabs Cloud anonymously:
-
-.. code:: console
-
-   $ sudo {command} remote add --global SylabsCloud cloud.sycloud.io
-   INFO:    Remote "SylabsCloud" added.
-   INFO:    Global option detected. Will not automatically log into remote.
-   $ sudo {command} remote use --global SylabsCloud
-   INFO:    Remote "SylabsCloud" now in use.
-   $ {command} remote list
-   Cloud Services Endpoints
-   ========================
-
-   NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE
-   DefaultRemote  cloud.apptainer.org  NO      YES     NO
-   SylabsCloud    cloud.sycloud.io     YES     YES     NO
-
-   Keyservers
-   ==========
-
-   URI                                 GLOBAL  INSECURE  ORDER
-   https://keys.production.sycloud.io  YES     NO        1*
-
-   * Active cloud services keyserver
+This documentation section used to show how to restore the configuration
+to connect to the Sylabs Cloud service, but that shut down in October 2026
+so there's no reason for it anymore.
 
 Additional Information
 ----------------------
