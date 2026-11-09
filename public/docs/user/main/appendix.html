@@ -952,6 +952,14 @@ variable in the <code class="docutils literal notranslate"><span class="pre">Mir
 <p>The MirrorURL keyword is mandatory. It specifies the URI to use as a
 mirror to download the OS. If you define the <code class="docutils literal notranslate"><span class="pre">OSVersion</span></code> keyword, then
 you can use it in the URI as in the example above.</p>
+<p>In addition to <code class="docutils literal notranslate"><span class="pre">%{OSVERSION}</span></code>, the <code class="docutils literal notranslate"><span class="pre">%{BUILDARCH}</span></code> macro resolves to the
+architecture of the image currently being built. This is useful when the
+mirror’s layout is organized by architecture, so the same definition file
+can be used to build for different architectures (for example when using
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">build</span> <span class="pre">--arch</span></code>), without hard-coding the architecture path:</p>
+<div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">MirrorURL</span>: http://repo.almalinux.org/almalinux/%{OSVERSION}/BaseOS/%{BUILDARCH}/
+</pre></div>
+</div>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Include</span>: dnf
 </pre></div>
 </div>
@@ -1124,6 +1132,9 @@ module to use.</p>
 <p>The OSVersion keyword is optional. It specifies the OS version you would
 like to use. It is only required if you have specified a %{OSVERSION}
 variable in the <code class="docutils literal notranslate"><span class="pre">MirrorURL</span></code> keyword.</p>
+<p>As with the <code class="docutils literal notranslate"><span class="pre">yum</span></code> / <code class="docutils literal notranslate"><span class="pre">dnf</span></code> module, the <code class="docutils literal notranslate"><span class="pre">%{BUILDARCH}</span></code> macro resolves
+to the architecture of the image being built, so it can be used in the
+<code class="docutils literal notranslate"><span class="pre">MirrorURL</span></code> in place of a hard-coded architecture path.</p>
 <div class="highlight-apptainer notranslate"><div class="highlight"><pre><span></span><span class="k">Include</span>: somepackage
 </pre></div>
 </div>
