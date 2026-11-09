@@ -385,33 +385,9 @@ makes it unnecessary.
 The remote endpoint was also formerly used for builds using the
 build <code class="docutils literal notranslate"><span class="pre">--remote</span></code> option, but Apptainer does not support that.
 Instead, it supports <a class="reference internal" href="fakeroot.html#build"><span class="std std-ref">unprivileged local builds</span></a>.</p>
-<p>If you would still like to have the previous default,
-these are the commands to restore the library
-behavior from before Apptainer, where using the <code class="docutils literal notranslate"><span class="pre">library://</span></code> URI would
-download from the Sylabs Cloud anonymously:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--no-login<span class="w"> </span>SylabsCloud<span class="w"> </span>cloud.sycloud.io
-<span class="go">INFO:    Remote "SylabsCloud" added.</span>
-<span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>use<span class="w"> </span>SylabsCloud
-<span class="go">INFO:    Remote "SylabsCloud" now in use.</span>
-<span class="gp">$ </span>apptainer<span class="w"> </span>remote<span class="w"> </span>list
-<span class="go">Cloud Services Endpoints</span>
-<span class="go">========================</span>
-
-<span class="go">NAME           URI                  ACTIVE  GLOBAL  EXCLUSIVE</span>
-<span class="go">DefaultRemote  cloud.apptainer.org  NO      YES     NO</span>
-<span class="go">SylabsCloud    cloud.sycloud.io     YES     NO      NO</span>
-
-<span class="go">Keyservers</span>
-<span class="go">==========</span>
-
-<span class="go">URI                                 GLOBAL  INSECURE  ORDER</span>
-<span class="go">https://keys.production.sycloud.io  YES     NO        1*</span>
-
-<span class="go">* Active cloud services keyserver</span>
-</pre></div>
-</div>
-<p>To set the defaults system-wide see the corresponding section in the
-<a class="reference external" href="https://apptainer.org/docs/admin/main/configfiles.html#restoring-pre-apptainer-library-behavior">admin guide</a>.</p>
+<p>This documentation section used to show how to restore the configuration
+to connect to the Sylabs Cloud service, but that shut down in October 2026
+so there’s no reason for it anymore.</p>
 </section>
 </section>
 <section id="keyserver-configurations">
