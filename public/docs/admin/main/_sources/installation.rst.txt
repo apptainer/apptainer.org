@@ -74,6 +74,15 @@ Optional functionality of {Project} requires additional installation:
    It is possible to use ``~/.config/buildkit/buildkitd.toml`` or
    ``/etc/buildkit/buildkitd.toml`` config files, instead of env var.
 
+-  **Archive mounts** - Required to mount archive files
+   (``tar``, ``tar.gz``, etc.) with the ``archive-src`` option on a
+   ``--bind`` or ``--mount`` specification. A FUSE-based archiver such
+   as ``ratarmount``, ``fuse-archive``, or ``archivemount`` must be
+   available in the ``binary path`` of ``{command}.conf``.
+   ``archivemount-ng`` is bundled with {Project}; you may prefer
+   ``ratarmount`` for better performance, though it requires Python
+   and additional libraries to be installed separately.
+
 Instructions to install without or with setuid privileges are below.
 Please make sure you are familiar with the discussion on
 `Setuid & User Namespaces <{userdocs}/security.html#setuid-user-namespaces>`_

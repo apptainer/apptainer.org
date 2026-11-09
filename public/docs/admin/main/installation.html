@@ -205,6 +205,14 @@ to be to set with the address (URL) of an IPFS HTTP gateway.
 The <code class="docutils literal notranslate"><span class="pre">ipfs</span></code> client is required, in order to upload images.
 It is possible to use <code class="docutils literal notranslate"><span class="pre">~/.config/buildkit/buildkitd.toml</span></code> or
 <code class="docutils literal notranslate"><span class="pre">/etc/buildkit/buildkitd.toml</span></code> config files, instead of env var.</p></li>
+<li><p><strong>Archive mounts</strong> - Required to mount archive files
+(<code class="docutils literal notranslate"><span class="pre">tar</span></code>, <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code>, etc.) with the <code class="docutils literal notranslate"><span class="pre">archive-src</span></code> option on a
+<code class="docutils literal notranslate"><span class="pre">--bind</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> specification. A FUSE-based archiver such
+as <code class="docutils literal notranslate"><span class="pre">ratarmount</span></code>, <code class="docutils literal notranslate"><span class="pre">fuse-archive</span></code>, or <code class="docutils literal notranslate"><span class="pre">archivemount</span></code> must be
+available in the <code class="docutils literal notranslate"><span class="pre">binary</span> <span class="pre">path</span></code> of <code class="docutils literal notranslate"><span class="pre">apptainer.conf</span></code>.
+<code class="docutils literal notranslate"><span class="pre">archivemount-ng</span></code> is bundled with Apptainer; you may prefer
+<code class="docutils literal notranslate"><span class="pre">ratarmount</span></code> for better performance, though it requires Python
+and additional libraries to be installed separately.</p></li>
 </ul>
 <p>Instructions to install without or with setuid privileges are below.
 Please make sure you are familiar with the discussion on
