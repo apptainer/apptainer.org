@@ -99,6 +99,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#sif-image-files">SIF Image Files</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#archive-mounts">Archive Mounts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#performance-caveats">Performance caveats</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
@@ -521,7 +525,9 @@ image file into a container. This may be useful if you want to
 distribute directories containing a large number of data files as a
 single image file.</p>
 <p>You can mount from image files in ext3 format, squashfs format, or SIF
-format.</p>
+format. You can also mount from archive files (tar, tar.gz, and related
+formats) using the <code class="docutils literal notranslate"><span class="pre">archive-src</span></code> option described in
+<a class="reference internal" href="#archive-mounts"><span class="std std-ref">Archive Mounts</span></a>.</p>
 <p>The ext3 image file format allows you to mount it into the container
 read/write and make changes, while the other formats are read-only. Note
 that you can only use a read/write image in a single container. You
@@ -600,7 +606,7 @@ $<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </
 </div>
 </section>
 <section id="sif-image-files">
-<h3>SIF Image Files<a class="headerlink" href="#sif-image-files" title="Link to this heading"></a></h3>
+<span id="sec-sif-image-files"></span><h3>SIF Image Files<a class="headerlink" href="#sif-image-files" title="Link to this heading"></a></h3>
 <p>Advanced users may wish to create a standalone SIF image, which contains
 an <code class="docutils literal notranslate"><span class="pre">ext3</span></code> or <code class="docutils literal notranslate"><span class="pre">squashfs</span></code> data partition holding files:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Create<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>SIF<span class="w"> </span>file<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>data<span class="w"> </span>partition<span class="w"> </span>from<span class="w"> </span>above
@@ -629,6 +635,94 @@ instructions</span></a>:</p>
 <p>If your bind source is a SIF then Apptainer will bind from the first
 data partition in the SIF, or you may specify an alternative descriptor
 by ID with the additional option <code class="docutils literal notranslate"><span class="pre">id=n</span></code>, where n is the descriptor ID.</p>
+</section>
+</section>
+<section id="archive-mounts">
+<span id="id3"></span><h2>Archive Mounts<a class="headerlink" href="#archive-mounts" title="Link to this heading"></a></h2>
+<p>Similar to mounting a directory from an image file (above), you can mount
+a directory contained in an archive file into a container, using the
+<code class="docutils literal notranslate"><span class="pre">archive-src</span></code> option in place of <code class="docutils literal notranslate"><span class="pre">image-src</span></code>. This supports tar and
+compressed tar archives (<code class="docutils literal notranslate"><span class="pre">.tar</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.xz</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.zst</span></code>,
+<code class="docutils literal notranslate"><span class="pre">.tar.lzo</span></code>), and requires a FUSE-based archiver to be installed – for
+example <code class="docutils literal notranslate"><span class="pre">ratarmount</span></code>, <code class="docutils literal notranslate"><span class="pre">fuse-archive</span></code>, or <code class="docutils literal notranslate"><span class="pre">archivemount</span></code>. Apptainer
+bundles <code class="docutils literal notranslate"><span class="pre">archivemount-ng</span></code>; you may prefer to install <code class="docutils literal notranslate"><span class="pre">ratarmount</span></code>
+because it has better performance.</p>
+<p>To mount a directory from an archive file, use the <code class="docutils literal notranslate"><span class="pre">-B/--bind</span></code> option and
+specify the bind in the format:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-B<span class="w"> </span>&lt;archive-file&gt;:&lt;dest&gt;:archive-src<span class="o">=</span>&lt;source&gt;
+</pre></div>
+</div>
+<p>Alternatively use the <code class="docutils literal notranslate"><span class="pre">--mount</span></code> option, and specify the bind in the
+format:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>&lt;archive-file&gt;,dst<span class="o">=</span>&lt;dest&gt;,archive-src<span class="o">=</span>&lt;source&gt;
+</pre></div>
+</div>
+<p>This will bind the <code class="docutils literal notranslate"><span class="pre">&lt;source&gt;</span></code> path inside the archive to <code class="docutils literal notranslate"><span class="pre">&lt;dest&gt;</span></code> in
+the container. If you do not add <code class="docutils literal notranslate"><span class="pre">:archive-src=&lt;source&gt;</span></code>, the root of the
+archive is bound to <code class="docutils literal notranslate"><span class="pre">&lt;dest&gt;</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Bind<span class="w"> </span>the<span class="w"> </span>archive<span class="err">'</span>s<span class="w"> </span>/inputs<span class="w"> </span>directory<span class="w"> </span>to<span class="w"> </span>/input-data<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>container
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>-B<span class="w"> </span>data.tgz:/input-data:archive-src<span class="o">=</span>/inputs<span class="w"> </span>mycontainer.sif
+
+<span class="gp"># </span>Or<span class="w"> </span>with<span class="w"> </span>--mount<span class="w"> </span>instead<span class="w"> </span>of<span class="w"> </span>-B
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>data.tgz,dst<span class="o">=</span>/input-data,archive-src<span class="o">=</span>/inputs<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mycontainer.sif
+</pre></div>
+</div>
+<p>Archive mounts are read-only.</p>
+<section id="performance-caveats">
+<h3>Performance caveats<a class="headerlink" href="#performance-caveats" title="Link to this heading"></a></h3>
+<p>Because the archive contents are read through a FUSE archiver, every file
+access passes through userspace, and – for a compressed archive – the
+data is decompressed on the fly. As a result, performance is very
+sensitive to the archiver you use, the compression format, and the access
+pattern, and can be unusably slow in the following common cases:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p><strong>Many small, randomly accessed files.</strong> Workloads that stat, open,
+or read large numbers of small files – build systems, package
+managers, <code class="docutils literal notranslate"><span class="pre">find</span></code> or <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-r</span></code>, or reading many small data files –
+pay the FUSE round-trip and (re)compression cost on every access.
+This is the most frequent cause of an unusably slow archive mount.</p></li>
+<li><p><strong>Compressed archives under random access.</strong> The data must be
+decompressed from the archive as it is read, so reaching a member far
+from the start – especially in <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code>, which has no seekable
+index – may require scanning and decompressing the data before it.
+Plain <code class="docutils literal notranslate"><span class="pre">.tar</span></code> avoids this, and <code class="docutils literal notranslate"><span class="pre">.tar.xz</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.zst</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">.tar.lzo</span></code> can be indexed for faster random access.</p></li>
+<li><p><strong>Highly parallel readers.</strong> Many archivers (including the bundled
+<code class="docutils literal notranslate"><span class="pre">archivemount-ng</span></code>) do not parallelize reads well, so workloads that
+issue many concurrent reads (MPI, <code class="docutils literal notranslate"><span class="pre">xargs</span> <span class="pre">-P</span></code>, parallel builds) can
+saturate the single FUSE daemon.</p></li>
+</ul>
+</div>
+<p>For the best performance, use <code class="docutils literal notranslate"><span class="pre">ratarmount</span></code> as the archiver, prefer an
+uncompressed <code class="docutils literal notranslate"><span class="pre">.tar</span></code> or an indexable <code class="docutils literal notranslate"><span class="pre">.tar.xz</span></code> / <code class="docutils literal notranslate"><span class="pre">.tar.zst</span></code> /
+<code class="docutils literal notranslate"><span class="pre">.tar.lzo</span></code> over <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> for random access, and read large files
+sequentially. An archive mount is at its best for a few large files read
+in sequence; if your workload is dominated by many small, randomly
+accessed files, bind-mounting a real filesystem or a pre-extracted
+directory will be far faster than mounting an archive.</p>
+<p>If you want to keep distributing your data as a single bundled file –
+but need the performance of a real filesystem – convert the archive
+into a SIF with a data partition. <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">build</span> <span class="pre">--data</span></code> accepts a
+<code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> (or <code class="docutils literal notranslate"><span class="pre">.tar</span></code>) directly, extracting it into a data partition
+(squashfs). This is still served over FUSE, but a squashfs image is
+indexed, seekable, and block-addressable, so the FUSE driver can
+satisfy random and small reads directly rather than scanning and
+decompressing the whole archive – which is what makes an archive mount
+slow. You therefore avoid the caveats above (especially for random or
+small-file access) at no cost to distribution:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a compressed tar archive to a SIF data image</span>
+$<span class="w"> </span>apptainer<span class="w"> </span>build<span class="w"> </span>--data<span class="w"> </span>inputs.sif<span class="w"> </span>inputs.tar.gz
+
+<span class="c1"># Run Apptainer, mounting the data to '/input-data' in the container</span>
+$<span class="w"> </span>apptainer<span class="w"> </span>run<span class="w"> </span>-B<span class="w"> </span>inputs.sif:/input-data:image-src<span class="o">=</span>/inputs<span class="w"> </span>mycontainer.sif
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="#sec-sif-image-files"><span class="std std-ref">SIF Image Files</span></a> for details on using a
+SIF data partition as a mount source.</p>
 </section>
 </section>
 </section>
