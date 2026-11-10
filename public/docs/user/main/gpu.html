@@ -109,7 +109,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#intel-gaudi-hpu">Intel Gaudi HPU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#container-device-interface-cdi">Container Device Interface (CDI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#container-device-interface-cdi">Container Device Interface (CDI)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cdi-device-hooks">CDI device hooks</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#opencl-applications">OpenCL Applications</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example-blender-opencl">Example - Blender OpenCL</a></li>
 </ul>
@@ -662,7 +665,9 @@ from the provider of the CDI definition file.</p>
 <p>Apptainer uses a subset of the CDI specification that is most relevant
 to its containers: it bind mounts relevant <code class="docutils literal notranslate"><span class="pre">/dev</span></code> files (when it isn’t
 already importing all of <code class="docutils literal notranslate"><span class="pre">/dev</span></code>), bind mounts other files needed by the
-device, and imports environment variables relevant to the device.</p>
+device, imports environment variables relevant to the device, and runs
+the <code class="docutils literal notranslate"><span class="pre">createRuntime</span></code> / <code class="docutils literal notranslate"><span class="pre">createContainer</span></code> device hooks declared in the
+specification; see <a class="reference internal" href="#sec-cdi-hooks"><span class="std std-ref">CDI device hooks</span></a>.</p>
 <p>In addition, Apptainer provides a <code class="docutils literal notranslate"><span class="pre">--cdi-dirs</span></code> option which
 enables the user to override the default search directory for CDI definition
 files:</p>
@@ -672,6 +677,17 @@ files:</p>
                                 <span class="n">default</span> <span class="n">will</span> <span class="n">be</span><span class="p">:</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">cdi</span><span class="p">,</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">cdi</span>
 </pre></div>
 </div>
+<section id="cdi-device-hooks">
+<span id="sec-cdi-hooks"></span><h3>CDI device hooks<a class="headerlink" href="#cdi-device-hooks" title="Link to this heading"></a></h3>
+<p>A CDI device specification may declare <code class="docutils literal notranslate"><span class="pre">createRuntime</span></code> and
+<code class="docutils literal notranslate"><span class="pre">createContainer</span></code> hooks. Apptainer runs those hooks – after the
+container’s mounts are in place and before the namespace is entered –
+the way an OCI runtime does, when running without setuid. A device whose
+spec declares hooks causes <code class="docutils literal notranslate"><span class="pre">--writable-tmpfs</span></code> to be implied (as
+<code class="docutils literal notranslate"><span class="pre">--nvccli</span></code> already does), since the hooks write into the container root.
+In the setuid flow Apptainer does not run the hooks and warns rather,
+because in that path it does not run <code class="docutils literal notranslate"><span class="pre">nvidia-container-cli</span></code> either.</p>
+</section>
 </section>
 <section id="opencl-applications">
 <h2>OpenCL Applications<a class="headerlink" href="#opencl-applications" title="Link to this heading"></a></h2>
