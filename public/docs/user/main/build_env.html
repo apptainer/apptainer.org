@@ -328,6 +328,8 @@ SIF image.</p>
 However, Apptainer will respect the environment variable <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>, and
 both of these locations can be overridden by setting the environment
 variable <code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> is on a <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> (in-memory) filesystem, the default
+temporary location is <code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code> instead.</p>
 <p>The temporary directory used during a build must be on a filesystem that has
 enough space to hold the entire container image, uncompressed, including any
 temporary files that are created and later removed in the course of the build.
