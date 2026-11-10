@@ -349,7 +349,7 @@ user.</p>
 <p>So for example:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>/tmp/nginx.sif<span class="w"> </span>docker://nginx
 <span class="gp">$ </span>apptainer<span class="w"> </span>overlay<span class="w"> </span>create<span class="w"> </span>--size<span class="w"> </span><span class="m">1024</span><span class="w"> </span>--create-dir<span class="w"> </span>/var/cache/nginx<span class="w"> </span>/tmp/nginx.sif
-<span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"test"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>/tmp/nginx.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">"cat &gt; /var/cache/nginx/test"</span>
+<span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"test"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--writable<span class="w"> </span>/tmp/nginx.sif<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">"cat &gt; /var/cache/nginx/test"</span>
 </pre></div>
 </div>
 <section id="embed-an-overlay-image-in-sif">
