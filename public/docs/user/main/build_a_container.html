@@ -442,6 +442,23 @@ returning fatal errors.</p>
 <h3><code class="docutils literal notranslate"><span class="pre">--data</span></code><a class="headerlink" href="#data" title="Link to this heading"></a></h3>
 <p>Build image with data partition instead of regular system partition.</p>
 <p>This sets the partition type to “Data”, and avoids adding scripts.</p>
+<p>The source can be a <code class="docutils literal notranslate"><span class="pre">.squashfs</span></code> file, an <code class="docutils literal notranslate"><span class="pre">.ext3</span></code> file, or a tar
+archive (<code class="docutils literal notranslate"><span class="pre">.tar</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.xz</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.zst</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.lzo</span></code>).
+For tar archives the decompression is done on the fly, and for uncompressed
+<code class="docutils literal notranslate"><span class="pre">.tar</span></code> input several files may be concatenated on standard input (for
+example via <code class="docutils literal notranslate"><span class="pre">cat</span></code>, <code class="docutils literal notranslate"><span class="pre">zcat</span></code>, <code class="docutils literal notranslate"><span class="pre">xzcat</span></code>, <code class="docutils literal notranslate"><span class="pre">zstdcat</span></code> or <code class="docutils literal notranslate"><span class="pre">lzop</span> <span class="pre">-dc</span></code>) or
+passed with <code class="docutils literal notranslate"><span class="pre">-</span></code> as the source. Local files show a progress bar while they
+are read.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>build<span class="w"> </span>a<span class="w"> </span>data<span class="w"> </span>partition<span class="w"> </span>from<span class="w"> </span>a<span class="w"> </span>squashfs<span class="w"> </span>file
+<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--data<span class="w"> </span>inputs.sif<span class="w"> </span>inputs.squashfs
+
+<span class="gp"># </span>build<span class="w"> </span>a<span class="w"> </span>data<span class="w"> </span>partition<span class="w"> </span>from<span class="w"> </span>a<span class="w"> </span>compressed<span class="w"> </span>tar<span class="w"> </span>archive
+<span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--data<span class="w"> </span>inputs.sif<span class="w"> </span>inputs.tar.gz
+
+<span class="gp"># </span>build<span class="w"> </span>a<span class="w"> </span>data<span class="w"> </span>partition<span class="w"> </span>from<span class="w"> </span>a<span class="w"> </span>tar<span class="w"> </span>archive<span class="w"> </span>passed<span class="w"> </span>on<span class="w"> </span>standard<span class="w"> </span>input
+<span class="gp">$ </span>tar<span class="w"> </span>-I<span class="w"> </span>zstd<span class="w"> </span>-cf<span class="w"> </span>-<span class="w"> </span>inputs/<span class="w"> </span><span class="p">|</span><span class="w"> </span>apptainer<span class="w"> </span>build<span class="w"> </span>--data<span class="w"> </span>inputs.sif<span class="w"> </span>-
+</pre></div>
+</div>
 </section>
 <section id="encrypt">
 <h3><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code><a class="headerlink" href="#encrypt" title="Link to this heading"></a></h3>
