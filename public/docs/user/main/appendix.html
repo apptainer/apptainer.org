@@ -70,6 +70,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overlay_containers.html">Overlay Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_services.html">Instances - Running Services</a></li>
 <li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
@@ -263,6 +264,11 @@ reading login credentials for OCI/Docker registries. See the
 <section id="b">
 <h3><code class="docutils literal notranslate"><span class="pre">B</span></code><a class="headerlink" href="#b" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
+<li><p><strong>APPTAINER_BASEPATH</strong>: Comma-separated list of paths to search for
+the base image of an overlay-only image built with
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">build</span> <span class="pre">--overlay</span></code>, so it can be combined with the overlay
+automatically at run time. Equivalent to the <code class="docutils literal notranslate"><span class="pre">--basepath</span></code> action
+option; see <a class="reference internal" href="overlay_containers.html#sec-basepath"><span class="std std-ref">–basepath</span></a>.</p></li>
 <li><p><strong>APPTAINER_BIND</strong> and <strong>APPTAINER_BINDPATH</strong>: Comma separated
 string <code class="docutils literal notranslate"><span class="pre">source:&lt;dest&gt;</span></code> list of paths to bind between the host and
 the container.  Both are read and the paths from them are combined,
