@@ -68,6 +68,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#build-arg-file"><code class="docutils literal notranslate"><span class="pre">--build-arg-file</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#warn-unused-build-args"><code class="docutils literal notranslate"><span class="pre">--warn-unused-build-args</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#data"><code class="docutils literal notranslate"><span class="pre">--data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overlay"><code class="docutils literal notranslate"><span class="pre">--overlay</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#encrypt"><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fakeroot"><code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#force"><code class="docutils literal notranslate"><span class="pre">--force</span></code></a></li>
@@ -109,6 +110,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overlay_containers.html">Overlay Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_services.html">Instances - Running Services</a></li>
 <li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
@@ -459,6 +461,14 @@ are read.</p>
 <span class="gp">$ </span>tar<span class="w"> </span>-I<span class="w"> </span>zstd<span class="w"> </span>-cf<span class="w"> </span>-<span class="w"> </span>inputs/<span class="w"> </span><span class="p">|</span><span class="w"> </span>apptainer<span class="w"> </span>build<span class="w"> </span>--data<span class="w"> </span>inputs.sif<span class="w"> </span>-
 </pre></div>
 </div>
+</section>
+<section id="overlay">
+<h3><code class="docutils literal notranslate"><span class="pre">--overlay</span></code><a class="headerlink" href="#overlay" title="Link to this heading"></a></h3>
+<p>Build an overlay (thin) image containing only the files added, changed,
+or removed relative to a base image. See the <a class="reference internal" href="overlay_containers.html#id1"><span class="std std-ref">Overlay Containers</span></a> page for how to build an overlay, and to locate its base
+image at run time with the <code class="docutils literal notranslate"><span class="pre">--basepath</span></code> action option (or the
+<code class="docutils literal notranslate"><span class="pre">APPTAINER_BASEPATH</span></code> environment variable), including the registry and
+image-name placeholders.</p>
 </section>
 <section id="encrypt">
 <h3><code class="docutils literal notranslate"><span class="pre">--encrypt</span></code><a class="headerlink" href="#encrypt" title="Link to this heading"></a></h3>

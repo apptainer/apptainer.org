@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overlay Containers &mdash; Apptainer User Guide main documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a8da1a53"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/js/ga.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Persistent Overlays" href="persistent_overlays.html" />
+    <link rel="prev" title="Bind Paths and Mounts" href="bind_paths_and_mounts.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Apptainer User Guide
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Apptainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security in Apptainer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_a_container.html">Build a container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definition_files.html">The Definition File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_env.html">Build Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fakeroot.html">Fakeroot feature</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signNverify.html">Sign and Verify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_commands.html">Key management commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encryption.html">Encrypted Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="endpoint.html">Remote Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyserver.html">Keyserver Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">OCI Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_api.html">Library API Registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peertopeer.html">IPFS Peer-To-Peer Clusters</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bind_paths_and_mounts.html">Bind Paths and Mounts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overlay Containers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#building-with-build-overlay">Building with <code class="docutils literal notranslate"><span class="pre">build</span> <span class="pre">--overlay</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#finding-the-base-with-basepath">Finding the base with <code class="docutils literal notranslate"><span class="pre">--basepath</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#local-base-images">Local base images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#remote-base-images">Remote base images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#placeholders">Placeholders</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="persistent_overlays.html">Persistent Overlays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_services.html">Instances - Running Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_and_metadata.html">Environment and Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_options.html">Security Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Network Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgroups.html">Limiting Container Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Application Checkpointing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="singularity_compatibility.html">Singularity Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_and_oci.html">Support for Docker / OCI Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oci_runtime.html">OCI Runtime Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Apptainer and MPI applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU and other Device Support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apptainer User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Overlay Containers</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/apptainer/apptainer-userdocs/blob/main/overlay_containers.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="overlay-containers">
+<h1>Overlay Containers<a class="headerlink" href="#overlay-containers" title="Link to this heading"></a></h1>
+<p id="id1">An <em>overlay</em> (or <em>thin</em>) image is built from a <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">definition file</span></a> with the <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">build</span> <span class="pre">--overlay</span></code> option. It
+contains only the files added, changed, or removed relative to a base
+image, rather than a full copy of it. Because the resulting image is small,
+many thin images can be derived from one shared base.</p>
+<p>This page describes how to build such an image with <code class="docutils literal notranslate"><span class="pre">build</span> <span class="pre">--overlay</span></code>, and
+how to combine it with its base image at run time with the <code class="docutils literal notranslate"><span class="pre">--basepath</span></code>
+action option (or the <code class="docutils literal notranslate"><span class="pre">APPTAINER_BASEPATH</span></code> environment variable). It is a
+separate feature to <a class="reference internal" href="persistent_overlays.html#id1"><span class="std std-ref">persistent overlays</span></a>, which
+attach a user-managed ext3 image to any container.</p>
+<section id="building-with-build-overlay">
+<h2>Building with <code class="docutils literal notranslate"><span class="pre">build</span> <span class="pre">--overlay</span></code><a class="headerlink" href="#building-with-build-overlay" title="Link to this heading"></a></h2>
+<p>Build an overlay image, containing only the files added, changed, or
+removed relative to a base image. It requires a <a class="reference internal" href="definition_files.html#definition-files"><span class="std std-ref">definition file</span></a> that uses a <code class="docutils literal notranslate"><span class="pre">localimage</span></code>, <code class="docutils literal notranslate"><span class="pre">docker</span></code>, or <code class="docutils literal notranslate"><span class="pre">oras</span></code>
+bootstrap as its base.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--overlay<span class="w"> </span>my-overlay.sif<span class="w"> </span>my-def.def
+</pre></div>
+</div>
+<p>When the image is built, a hash of the base image and its original
+reference are stored in the overlay image’s metadata. These are used at
+run time by the <code class="docutils literal notranslate"><span class="pre">--basepath</span></code> action option to find the base image and
+combine it with the overlay automatically.</p>
+<p>By default the result is a SIF file with an overlay partition in it; add the
+<code class="docutils literal notranslate"><span class="pre">--sandbox</span></code> option to build a sandbox instead. The base image itself cannot
+be a sandbox, because a sandbox has no hash of its own.  (It may have
+been the case that a base image sandbox came from a source with a hash
+and that hash is stored in the sandbox metadata, but there’s no way to
+know whether or not it had been modified afterward.)</p>
+<p>An overlay SIF file can be converted to a sandbox the same way as an
+ordinary SIF file, using <cite>apptainer build –sandbox</cite>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--sandbox<span class="w"> </span>my-overlay-sandbox<span class="w"> </span>my-overlay.sif
+</pre></div>
+</div>
+<p>There is, however, a limitation not present when a sandbox is built
+directly from a definition file: if the definition file changed the
+owner or group of any file, then <code class="docutils literal notranslate"><span class="pre">/etc/subuid</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/subgid</span></code>
+fakeroot mode needs to be enabled.  That’s because the fakeroot
+command mode interferes with some special files that overlayfs uses,
+so it is disallowed during the extraction.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">--writable</span></code> with an overlay image is not supported, even if it
+is a sandbox.</p>
+</section>
+<section id="finding-the-base-with-basepath">
+<span id="sec-basepath"></span><h2>Finding the base with <code class="docutils literal notranslate"><span class="pre">--basepath</span></code><a class="headerlink" href="#finding-the-base-with-basepath" title="Link to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">--basepath</span></code> exec/run/shell option (or the <code class="docutils literal notranslate"><span class="pre">APPTAINER_BASEPATH</span></code>
+environment variable) to tell Apptainer where to find the base image of an
+overlay image built with <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">build</span> <span class="pre">--overlay</span></code>, so it can be
+combined with the overlay.  The option takes a comma-separated list of
+paths to search.  Base images may be local, or the last entry may
+be an <code class="docutils literal notranslate"><span class="pre">oras://</span></code> or <code class="docutils literal notranslate"><span class="pre">docker://</span></code> image reference; if so it must use
+the same transport as the original base.  The two different types are
+described in more detail below.</p>
+<p>The behaviour depends on the bootstrap of the base image used when the overlay
+was built:</p>
+<ul class="simple">
+<li><p>If the base was a <code class="docutils literal notranslate"><span class="pre">localimage</span></code>, then <code class="docutils literal notranslate"><span class="pre">--basepath</span></code> is required.</p></li>
+<li><p>If the base was an <code class="docutils literal notranslate"><span class="pre">oras</span></code> image, then the default is <code class="docutils literal notranslate"><span class="pre">oras://</span></code>
+(which means “the same registry and image the original base came from”).</p></li>
+<li><p>If the base was a <code class="docutils literal notranslate"><span class="pre">docker</span></code> image, then the default is <code class="docutils literal notranslate"><span class="pre">docker://</span></code>.</p></li>
+</ul>
+<section id="local-base-images">
+<h3>Local base images<a class="headerlink" href="#local-base-images" title="Link to this heading"></a></h3>
+<p>If an entry in the basepath list is a SIF file or a sandbox directory,
+it is used directly, regardless of its name, although the hash must match.
+Otherwise, if the entry is a directory, it is searched for a base image
+matching the hash recorded in the overlay’s metadata. Within that
+directory Apptainer looks for:</p>
+<ul class="simple">
+<li><p>a file or directory directly named after the hash, and</p></li>
+<li><p>a file or directory named after the hash, within a subdirectory named with
+the first two characters of the hash (a <em>fan-out</em> layout, useful for
+distributing a large number of base images),</p></li>
+</ul>
+<p>It also tries each hash with and without the hash type prefix (typically
+<code class="docutils literal notranslate"><span class="pre">sha256:</span></code>), for example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--overlay<span class="w"> </span>my-overlay.sif<span class="w"> </span>my-def.def
+<span class="gp">$ </span>ls<span class="w"> </span>/srv/overlay-bases
+<span class="go">1a  sha256:1a2b3c4d...</span>
+<span class="gp">$ </span>ls<span class="w"> </span>/srv/overlay-bases/1a
+<span class="go">2b3c4d...</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--basepath<span class="w"> </span>/srv/overlay-bases<span class="w"> </span>my-overlay.sif
+</pre></div>
+</div>
+</section>
+<section id="remote-base-images">
+<h3>Remote base images<a class="headerlink" href="#remote-base-images" title="Link to this heading"></a></h3>
+<p>When the last entry in the basepath list is an <code class="docutils literal notranslate"><span class="pre">oras://</span></code> or <code class="docutils literal notranslate"><span class="pre">docker://</span></code>
+image reference, it must use the same transport as the original base.
+Each part of the reference may be left to its default, taken from the
+overlay’s metadata, or given a new value. A missing registry and/or
+image name is taken from the default, and the version is inferred from
+the hash recorded in the overlay’s metadata.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Use<span class="w"> </span>the<span class="w"> </span>default<span class="w"> </span>registry,<span class="w"> </span>image,<span class="w"> </span>and<span class="w"> </span><span class="nb">hash</span><span class="w"> </span><span class="o">(</span>same<span class="w"> </span><span class="nb">source</span><span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>build<span class="o">)</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--basepath<span class="w"> </span>oras://ghcr.io/someuser/mybase<span class="w"> </span>my-overlay.sif
+
+<span class="gp"># </span>Use<span class="w"> </span>multiple<span class="w"> </span>search<span class="w"> </span>paths<span class="w"> </span>--<span class="w"> </span><span class="nb">local</span><span class="w"> </span>first,<span class="w"> </span><span class="k">then</span><span class="w"> </span>original<span class="w"> </span>registry
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--basepath<span class="w"> </span>/opt/bases,oras://<span class="w"> </span>my-overlay.sif
+</pre></div>
+</div>
+</section>
+<section id="placeholders">
+<h3>Placeholders<a class="headerlink" href="#placeholders" title="Link to this heading"></a></h3>
+<p>Within the remote reference you may use placeholder values in place of the
+default registry name or image name.  Substituting the placeholder for a
+part causes that part to be taken from the default recorded in the
+overlay’s metadata:</p>
+<ul class="simple">
+<li><p>A registry of <code class="docutils literal notranslate"><span class="pre">-.-</span></code> refers to the original registry.</p></li>
+<li><p>A image name of <code class="docutils literal notranslate"><span class="pre">-</span></code> refers to the original image name.
+(Note that image names usually include a slash in them; if they don’t,
+a <code class="docutils literal notranslate"><span class="pre">library/</span></code> prefix is implied.)</p></li>
+</ul>
+<p>So for example <code class="docutils literal notranslate"><span class="pre">oras://</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">oras://-.-/-</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>These<span class="w"> </span>are<span class="w"> </span>all<span class="w"> </span>equivalent,<span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>default<span class="w"> </span>registry,<span class="w"> </span>image,<span class="w"> </span>and<span class="w"> </span><span class="nb">hash</span>
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>my-overlay.sif
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--basepath<span class="w"> </span>oras://<span class="w"> </span>my-overlay.sif
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--basepath<span class="w"> </span>oras://-.-/-<span class="w"> </span>my-overlay.sif
+</pre></div>
+</div>
+<p>To override only the registry and keep the default image name by using <code class="docutils literal notranslate"><span class="pre">-</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--basepath<span class="w"> </span>oras://other.registry/-<span class="w"> </span>my-overlay.sif
+</pre></div>
+</div>
+<p>To override only the image name and leave the registry at its default:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--basepath<span class="w"> </span>oras://-.-/someuser/someimage<span class="w"> </span>my-overlay.sif
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bind_paths_and_mounts.html" class="btn btn-neutral float-left" title="Bind Paths and Mounts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="persistent_overlays.html" class="btn btn-neutral float-right" title="Persistent Overlays" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+    <br>
+    &copy; Contributors to the Apptainer project, established as Apptainer a Series of LF Projects LLC
+    <br>
+    &copy; 2017-2022, Sylabs Inc
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
