@@ -70,6 +70,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#docker-vs-oras"><code class="docutils literal notranslate"><span class="pre">docker://</span></code> vs <code class="docutils literal notranslate"><span class="pre">oras://</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-oras-registries">Working with ORAS Registries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#push">Push</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pushing-a-multi-architecture-image">Pushing a multi-architecture image</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#search">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delete">Delete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tag">Tag</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#registry-mirrors">Registry mirrors</a></li>
 </ul>
 </li>
@@ -291,13 +301,95 @@ when pushing it.
 The most popular registries are <code class="docutils literal notranslate"><span class="pre">ghcr.io</span></code> and <code class="docutils literal notranslate"><span class="pre">docker.io</span></code> and they
 both support both OCI container protocols.</p>
 <p>Here are some examples:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://alpine:latest
-<span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://ghcr.io/apptainer/apptainer
-<span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>oras://ghcr.io/apptainer/alpine
-<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine
-<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>oras://docker.io/davedykstra/lolcow
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">  $ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://alpine:latest
+<span class="gp">  $ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://ghcr.io/apptainer/apptainer
+<span class="gp">  $ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>oras://ghcr.io/apptainer/alpine
+<span class="gp">  $ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine
+<span class="gp">  $ </span>apptainer<span class="w"> </span>run<span class="w"> </span>oras://docker.io/davedykstra/lolcow
+
+<span class="go">.. _registry-working-with-oras-registries:</span>
 </pre></div>
 </div>
+</section>
+<section id="working-with-oras-registries">
+<h2>Working with ORAS Registries<a class="headerlink" href="#working-with-oras-registries" title="Link to this heading"></a></h2>
+<p>Apptainer can store SIF images in OCI/Docker registries using the
+<code class="docutils literal notranslate"><span class="pre">oras://</span></code> protocol, and it understands a number of registry-specific
+operations in addition to <code class="docutils literal notranslate"><span class="pre">pull</span></code> and <code class="docutils literal notranslate"><span class="pre">push</span></code>.</p>
+<section id="push">
+<h3>Push<a class="headerlink" href="#push" title="Link to this heading"></a></h3>
+<p>A single SIF image can be pushed to an <code class="docutils literal notranslate"><span class="pre">oras://</span></code> URI with <code class="docutils literal notranslate"><span class="pre">apptainer</span>
+<span class="pre">push</span></code>. If the image already has a description and/or annotations, they are
+recorded in the pushed image. To set or override them at push time, use the
+<code class="docutils literal notranslate"><span class="pre">--description</span></code> and <code class="docutils literal notranslate"><span class="pre">--annotation</span></code> options (<code class="docutils literal notranslate"><span class="pre">--annotation</span></code> accepts
+multiple <code class="docutils literal notranslate"><span class="pre">key=value</span></code> pairs):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>push<span class="w"> </span>--description<span class="w"> </span><span class="s2">"A Python image"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--annotation<span class="w"> </span><span class="nv">team</span><span class="o">=</span>data<span class="w"> </span>--annotation<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">2</span>.3<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>myimage.sif<span class="w"> </span>oras://ghcr.io/myuser/myimage:2.3
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--description</span></code> flag sets the
+<code class="docutils literal notranslate"><span class="pre">org.opencontainers.image.description</span></code> annotation; each <code class="docutils literal notranslate"><span class="pre">--annotation</span></code>
+adds a further annotation. These options are available when pushing
+<code class="docutils literal notranslate"><span class="pre">library://</span></code> and <code class="docutils literal notranslate"><span class="pre">oras://</span></code> images (annotations are
+<code class="docutils literal notranslate"><span class="pre">oras://</span></code> only).</p>
+<p>Apptainer automatically records the <code class="docutils literal notranslate"><span class="pre">org.opencontainers.image.created</span></code>
+annotation from the SIF’s creation time, and the architecture of the image
+(from the SIF’s partition metadata) into the pushed manifest, which is
+also what allows multi-architecture images to be grouped together in an
+image index.</p>
+<section id="pushing-a-multi-architecture-image">
+<h4>Pushing a multi-architecture image<a class="headerlink" href="#pushing-a-multi-architecture-image" title="Link to this heading"></a></h4>
+<p>If you have SIF images built for different architectures, you can push them
+together in a single <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">push</span></code> to the same <code class="docutils literal notranslate"><span class="pre">oras://</span></code> URI.
+Apptainer groups them into a single OCI image index (one manifest per
+architecture), rather than overwriting the previous one. This mirrors the
+usual way that multi-architecture images are published to a registry.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Push both architecture variants to the same reference; they are</span>
+<span class="c1"># combined into a single image index.</span>
+$<span class="w"> </span>apptainer<span class="w"> </span>push<span class="w"> </span>myimage-amd64.sif<span class="w"> </span>myimage-arm64.sif<span class="w"> </span>oras://ghcr.io/myuser/myimage:2.3
+</pre></div>
+</div>
+<p>Multi-architecture push is only supported for <code class="docutils literal notranslate"><span class="pre">oras://</span></code> destinations (the
+<code class="docutils literal notranslate"><span class="pre">library://</span></code> transport does not allow multiple files).</p>
+</section>
+</section>
+<section id="search">
+<h3>Search<a class="headerlink" href="#search" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">search</span></code> command can list images in an <code class="docutils literal notranslate"><span class="pre">oras://</span></code> registry
+(repository). It lists the available images and tags; it does not search
+image descriptions. You may restrict the results to a given architecture:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>search<span class="w"> </span>oras://ghcr.io/myuser
+<span class="gp">$ </span>apptainer<span class="w"> </span>search<span class="w"> </span>--arch<span class="w"> </span>arm64<span class="w"> </span>oras://ghcr.io/myuser/myimage
+</pre></div>
+</div>
+</section>
+<section id="delete">
+<h3>Delete<a class="headerlink" href="#delete" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">delete</span></code> command removes an image from an <code class="docutils literal notranslate"><span class="pre">oras://</span></code>
+registry. Deletion is subject to the capabilities of the registry; not all
+registries support deleting images or manifests.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>delete<span class="w"> </span>--arch<span class="w"> </span>amd64<span class="w"> </span>oras://ghcr.io/myuser/myimage:2.3
+<span class="go">Do you really want to remove the image? [N/y] y</span>
+</pre></div>
+</div>
+</section>
+<section id="tag">
+<h3>Tag<a class="headerlink" href="#tag" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">tag</span></code> command creates an additional tag pointing at an
+image (or image index) that already exists in an <code class="docutils literal notranslate"><span class="pre">oras://</span></code> registry. This
+avoids having to push an extra copy to add a new tag:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>tag<span class="w"> </span>oras://ghcr.io/myuser/myimage:2.3<span class="w"> </span>stable
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Images pushed to a registry with the <code class="docutils literal notranslate"><span class="pre">oras://</span></code> protocol must be pulled
+using the same protocol. A registry may therefore hold the same logical
+container under both <code class="docutils literal notranslate"><span class="pre">docker://</span></code> and <code class="docutils literal notranslate"><span class="pre">oras://</span></code> names, and Apptainer
+treats these as separate images.</p>
+</div>
+</section>
 </section>
 <section id="registry-mirrors">
 <h2>Registry mirrors<a class="headerlink" href="#registry-mirrors" title="Link to this heading"></a></h2>
