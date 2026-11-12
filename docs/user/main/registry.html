@@ -302,18 +302,16 @@ when pushing it.
 The most popular registries are <code class="docutils literal notranslate"><span class="pre">ghcr.io</span></code> and <code class="docutils literal notranslate"><span class="pre">docker.io</span></code> and they
 both support both OCI container protocols.</p>
 <p>Here are some examples:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">  $ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://alpine:latest
-<span class="gp">  $ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://ghcr.io/apptainer/apptainer
-<span class="gp">  $ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>oras://ghcr.io/apptainer/alpine
-<span class="gp">  $ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine
-<span class="gp">  $ </span>apptainer<span class="w"> </span>run<span class="w"> </span>oras://docker.io/davedykstra/lolcow
-
-<span class="go">.. _registry-working-with-oras-registries:</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://alpine:latest
+<span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>docker://ghcr.io/apptainer/apptainer
+<span class="gp">$ </span>apptainer<span class="w"> </span>pull<span class="w"> </span>oras://ghcr.io/apptainer/alpine
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>docker://alpine
+<span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>oras://docker.io/davedykstra/lolcow
 </pre></div>
 </div>
 </section>
 <section id="working-with-oras-registries">
-<h2>Working with ORAS Registries<a class="headerlink" href="#working-with-oras-registries" title="Link to this heading"></a></h2>
+<span id="registry-working-with-oras-registries"></span><h2>Working with ORAS Registries<a class="headerlink" href="#working-with-oras-registries" title="Link to this heading"></a></h2>
 <p>Apptainer can store SIF images in OCI/Docker registries using the
 <code class="docutils literal notranslate"><span class="pre">oras://</span></code> protocol, and it understands a number of registry-specific
 operations in addition to <code class="docutils literal notranslate"><span class="pre">pull</span></code> and <code class="docutils literal notranslate"><span class="pre">push</span></code>.</p>
