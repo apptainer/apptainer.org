@@ -150,8 +150,9 @@ bootstrap as its base.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apptainer<span class="w"> </span>build<span class="w"> </span>--overlay<span class="w"> </span>my-overlay.sif<span class="w"> </span>my-def.def
 </pre></div>
 </div>
-<p>When the image is built, a hash of the base image and its original
-reference are stored in the overlay image’s metadata. These are used at
+<p>When the image is built, the original source of the base image along
+with a hash or hashes related to it are stored in the overlay image’s
+metadata.  These are used at
 run time by the <code class="docutils literal notranslate"><span class="pre">--basepath</span></code> action option to find the base image and
 combine it with the overlay automatically.</p>
 <p>By default the result is a SIF file with an overlay partition in it; add the
@@ -197,7 +198,7 @@ was built:</p>
 <p>If an entry in the basepath list is a SIF file or a sandbox directory,
 it is used directly, regardless of its name, although the hash must match.
 Otherwise, if the entry is a directory, it is searched for a base image
-matching the hash recorded in the overlay’s metadata. Within that
+matching a hash recorded in the overlay’s metadata. Within that
 directory Apptainer looks for:</p>
 <ul class="simple">
 <li><p>a file or directory directly named after the hash, and</p></li>
@@ -215,6 +216,18 @@ distributing a large number of base images),</p></li>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--basepath<span class="w"> </span>/srv/overlay-bases<span class="w"> </span>my-overlay.sif
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the original source was a localimage SIF, the hash searched for is
+the hash of the SIF itself.  If it was a <code class="docutils literal notranslate"><span class="pre">docker</span></code> or <code class="docutils literal notranslate"><span class="pre">oras</span></code>
+bootstrap, it’s a little more complicated because the hash that can
+be used to pull the specific version can actually refer to multiple
+different containers of different variants, such as different
+architectures.  For that reason a second hash is also recorded that
+references only the final container that was pulled.  That second
+hash is used to search first through each basepath directory, and if
+it is not found then the first hash is also searched for.</p>
+</div>
 </section>
 <section id="remote-base-images">
 <h3>Remote base images<a class="headerlink" href="#remote-base-images" title="Link to this heading"></a></h3>
@@ -223,7 +236,7 @@ image reference, it must use the same transport as the original base.
 Each part of the reference may be left to its default, taken from the
 overlay’s metadata, or given a new value. A missing registry and/or
 image name is taken from the default, and the version is inferred from
-the hash recorded in the overlay’s metadata.</p>
+one of the hashes recorded in the overlay’s metadata.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Use<span class="w"> </span>the<span class="w"> </span>default<span class="w"> </span>registry,<span class="w"> </span>image,<span class="w"> </span>and<span class="w"> </span><span class="nb">hash</span><span class="w"> </span><span class="o">(</span>same<span class="w"> </span><span class="nb">source</span><span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>build<span class="o">)</span>
 <span class="gp">$ </span>apptainer<span class="w"> </span>run<span class="w"> </span>--basepath<span class="w"> </span>oras://ghcr.io/someuser/mybase<span class="w"> </span>my-overlay.sif
 
